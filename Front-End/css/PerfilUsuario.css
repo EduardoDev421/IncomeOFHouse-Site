@@ -1,0 +1,184 @@
+/* Conteúdo do Perfil do Usuário */
+
+.perfil {
+    display: flex;
+    width: 100%;
+    margin: 100px;
+    border-radius: 20px;
+    background: #fff;
+}
+
+.menu-lateral{
+    width: 100%;
+    max-width: 270px;
+    background: #575757;
+    padding: 35px 0;
+    min-height: 80px;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.menu-lateral ul{
+    list-style: none;
+}
+
+.menu-lateral li{
+    margin-bottom: 15px;
+}
+
+.menu-lateral a{
+    display: block;
+    padding: 15px 20px;
+    color: #222;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: .3s;
+}
+
+.menu-lateral a:hover{
+    color: black;
+}
+.menu-lateral a.ativo{
+    color: #fff;
+}
+
+
+.conteudo-perfil{
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.titulo-perfil h1{
+    font-size: 30px;
+    color: #333333
+}
+
+.titulo-perfil p{
+    font-size: 20px;
+    color: #555555;
+}
+
+/* ============================
+   CONTEÚDO
+============================ */
+
+.conteudo-perfil{
+    flex: 1;
+    padding: 40px;
+}
+
+.titulo-perfil{
+    margin-bottom: 20px;
+}
+
+.titulo-perfil h1{
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.titulo-perfil p{
+    font-size: 16px;
+    color: #555;
+}
+
+/* ============================
+   CABEÇALHO
+============================ */
+
+.cabecalho-perfil{
+    display: grid;
+    grid-template-columns: 120px 1fr 170px;
+    gap: 20px;
+
+    background: #d8d8d8;
+    border: 1px solid #555;
+    border-radius: 4px;
+
+    padding: 15px;
+}
+
+.foto img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border:1px solid #555;
+}
+
+.dados-usuario h2{
+    margin-bottom:5px;
+    font-size:20px;
+}
+
+.dados-usuario span{
+    display:block;
+    font-weight:bold;
+    color:#555;
+    margin-bottom:5px;
+}
+
+.dados-usuario p{
+    line-height:1.5;
+    color:#222;
+}
+
+.acoes{
+    display:flex;
+    justify-content:flex-end;
+    align-items:flex-start;
+}
+
+.acoes button{
+    width:150px;
+    height:40px;
+    background:#fff;
+    border:1px solid #444;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+/* ============================
+   CARD
+============================ */
+
+.card-informacoes{
+    margin-top:15px;
+    padding:25px;
+
+    border:1px solid #555;
+    border-radius:4px;
+    background:#fff;
+}
+
+.card-informacoes h2{
+    margin-bottom:35px;
+    text-transform:lowercase;
+}
+
+/* ============================
+   INFORMAÇÕES
+============================ */
+
+.informacoes{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    row-gap:25px;
+}
+
+.item{
+    display:contents;
+}
+
+.item span{
+    font-weight:bold;
+    color:#444;
+}
+
+.item strong{
+    font-weight:600;
+    color:#444;
+}

@@ -20,10 +20,10 @@ main{
 /* Linha */
 .Linha{
     position: absolute;
-    top: 80%;
+    top: 50%;
     width: 100%;
     height: 120px;
-    background: #3b3b3b;
+    background: #262626;
 }
 /* ================================================= */
 /* Menu */
@@ -72,6 +72,7 @@ main{
 .hero p{
     color: #555;
     font-size: 18px;
+    line-height: 1.5;
     margin-bottom: 20px;
 }
 

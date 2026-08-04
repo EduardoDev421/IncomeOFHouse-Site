@@ -52,16 +52,17 @@ main{
 /* Linha Atras do Sobre*/
 .Linha{
     position: absolute;
+    justify-content: center;
     top: 50%;
     width: 100%;
     height: 120px;
-    background: #3b3b3b;
+    background: #262626;
 }
-
 /* ================================================= */
 /* Sobre */
 
 .Container-Sobre{
+    position: relative;
     display: flex;
     justify-content: center;
 }
