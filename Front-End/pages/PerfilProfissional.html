@@ -4,8 +4,9 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+    <link rel="stylesheet" href="../css/PerfilProfissional.css">
    <link rel="stylesheet" href="../css/style.css">
-   <title>Perfil do Profissional</title>
+   <title>Pagina do Perfil do Usuário</title>
 </head>
 <body>
    <header class="topo">
@@ -16,12 +17,85 @@
          <a href="../index.html">Início</a>
          <a href="../pages/Plantas.html">Plantas</a>
          <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html" class="ativo">Sobre</a>
+         <a href="../pages/Sobre.html">Sobre</a>
       </nav>
    </header>
-         <main>
+         <main class="container">
 
+                <!-- Menu lateral -->
+                <aside class="menu-lateral">
+                    <ul>
+                        <li><a href="../pages/PerfilUsuario.html" class="ativo">Meu Perfil</a></li>
+                        <li><a href="../pages/MeusEndereços.html">Meus Endereços</a></li>
+                        <li><a href="../pages/MeusPedidos.html">Meus Pedidos</a></li>
+                        <li><a href="../pages/MeusProfissionais.html">Meus Profissionais Favoritos</a></li>
+                        <li><a href="../pages/ProjetosSalvos.html">Projetos Salvos</a></li>
+                        <li><a href="../pages/Mensagem.html">Mensagens</a></li>
+                        <li><a href="../pages/Configurações.html">Configurações</a></li>
+                        <li><a href="../index.html">Sair</a></li>
+                    </ul>
+                </aside>
 
+                <!-- Conteúdo -->
+                <section class="conteudo">
+                        <h1>Meu Perfil</h1>
+                        <p>Gerencie suas informações pessoais e preferências.</p>
+
+                        <!-- Cabeçalho -->
+                        <div class="conteudo-perfil">
+                            <div class="foto">
+                                <img src="img/perfil.png" alt="Foto do usuário">
+                            </div>
+
+                              <div class="dados-usuario">
+                                 <h2>Nome do Usuário</h2>
+                                 <p>profissao do profissional</p>
+                              </div>
+
+                              <div class="acoes">
+                                 <button>Editar Perfil</button>
+                              </div>
+                              <div class="informacoesGerais">
+                                 <div class="Avaliações">
+                                    <div>
+                                       <img>
+                                    </div>
+                                    <div class="">
+                                       <h2>Sobre mim</h2>
+                                       <p>descrição do profissional</p>
+                                    </div>
+                                 </div>
+                                 <div class="informacoes">
+                                    <h2>Resumo Profissional</h2>
+                                       <div class="item">
+                                          <h3>membro desde</h3>
+                                          <p>Janeiro/2022</p>
+                                       </div>
+
+                                       <div class="item">
+                                          <h3>projetos concluidos</h3>
+                                          <p>156</p>
+                                       </div>
+
+                                       <div class="item">
+                                          <h3>clientes aendidos</h3>
+                                          <p>98+</p>
+                                       </div>
+
+                                       <div class="item">
+                                          <h3>taxa de reposta </h3>
+                                          <p>98%</p>
+                                       </div>
+
+                                       <div class="item">
+                                          <h3>tempo media de resposta</h3>
+                                          <p>1h 30m</p>
+                                       </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                </section>
          </main>
    <footer class="rodapé">
       <p>©IncomeOfHouses.Todos os direitos reservados.</p>

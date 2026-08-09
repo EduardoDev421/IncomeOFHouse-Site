@@ -4,6 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+    <link rel="stylesheet" href="../css/perfilusuario.css">
    <link rel="stylesheet" href="../css/style.css">
    <title>Pagina do Perfil do Usuário</title>
 </head>
@@ -16,16 +17,16 @@
          <a href="../index.html">Início</a>
          <a href="../pages/Plantas.html">Plantas</a>
          <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html" class="ativo">Sobre</a>
+         <a href="../pages/Sobre.html">Sobre</a>
       </nav>
    </header>
-         <main class="perfil">
+         <main class="container">
 
                 <!-- Menu lateral -->
                 <aside class="menu-lateral">
                     <ul>
                         <li><a href="../pages/PerfilUsuario.html" class="ativo">Meu Perfil</a></li>
-                        <li><a href="../pages/MeusEnderecos.html">Meus Endereços</a></li>
+                        <li><a href="../pages/MeusEndereços.html">Meus Endereços</a></li>
                         <li><a href="../pages/MeusPedidos.html">Meus Pedidos</a></li>
                         <li><a href="../pages/MeusProfissionais.html">Meus Profissionais Favoritos</a></li>
                         <li><a href="../pages/ProjetosSalvos.html">Projetos Salvos</a></li>
@@ -36,75 +37,67 @@
                 </aside>
 
                 <!-- Conteúdo -->
-                <section class="conteudo-perfil">
-
-                    <div class="titulo-perfil">
+                <section class="conteudo">
                         <h1>Meu Perfil</h1>
                         <p>Gerencie suas informações pessoais e preferências.</p>
-                    </div>
 
-                    <!-- Cabeçalho -->
-                    <div class="cabecalho-perfil">
+                        <!-- Cabeçalho -->
+                        <div class="conteudo-perfil">
+                            <div class="foto">
+                                <img src="img/perfil.png" alt="Foto do usuário">
+                            </div>
 
-                        <div class="foto">
-                            <img src="img/perfil.png" alt="Foto do usuário">
+                            <div class="dados-usuario">
+                                <h2>Nome do Usuário</h2>
+
+                                <p>
+                                    Descriçao do usuario.
+                                </p>
+                            </div>
+
+                            <div class="acoes">
+                                <button>Editar Perfil</button>
+                            </div>
+
+                            <!-- Informações -->
+                            <div class="card-informacoes">
+
+                                <h2>Informações Pessoais</h2>
+
+                                <div class="informacoes">
+
+                                    <div class="item">
+                                        <span>Nome Completo</span>
+                                        <strong>Nome Sobrenome</strong>
+                                    </div>
+
+                                    <div class="item">
+                                        <span>Data de Nascimento</span>
+                                        <strong>00/00/0000</strong>
+                                    </div>
+
+                                    <div class="item">
+                                        <span>CPF</span>
+                                        <strong>000.000.000-00</strong>
+                                    </div>
+
+                                    <div class="item">
+                                        <span>E-mail</span>
+                                        <strong>email@gmail.com</strong>
+                                    </div>
+
+                                    <div class="item">
+                                        <span>Telefone</span>
+                                        <strong>(00) 00000-0000</strong>
+                                    </div>
+
+                                    <div class="item">
+                                        <span>Senha</span>
+                                        <strong>••••••••••</strong>
+                                    </div>
+                            </div>
                         </div>
-
-                        <div class="dados-usuario">
-                            <h2>Nome do Usuário</h2>
-
-                            <p>
-                                Descriçao do usuario.
-                            </p>
-                        </div>
-
-                        <div class="acoes">
-                            <button>Editar Perfil</button>
-                        </div>
-
-                    </div>
-
-                    <!-- Informações -->
-                    <div class="card-informacoes">
-
-                        <h2>Informações Pessoais</h2>
-
-                        <div class="informacoes">
-
-                            <div class="item">
-                                <span>Nome Completo</span>
-                                <strong>Nome Sobrenome</strong>
-                            </div>
-
-                            <div class="item">
-                                <span>Data de Nascimento</span>
-                                <strong>00/00/0000</strong>
-                            </div>
-
-                            <div class="item">
-                                <span>CPF</span>
-                                <strong>000.000.000-00</strong>
-                            </div>
-
-                            <div class="item">
-                                <span>E-mail</span>
-                                <strong>email@gmail.com</strong>
-                            </div>
-
-                            <div class="item">
-                                <span>Telefone</span>
-                                <strong>(00) 00000-0000</strong>
-                            </div>
-
-                            <div class="item">
-                                <span>Senha</span>
-                                <strong>••••••••••</strong>
-                            </div>
-
-                        </div>
-
-                    </div>
-            </section>
+                </section>
          </main>
    <footer class="rodapé">
       <p>©IncomeOfHouses.Todos os direitos reservados.</p>
