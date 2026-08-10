@@ -1,4 +1,4 @@
-const container = document.querySelector(".cards-profissionais");
+const container = document.querySelector(".cards");
 
 fetch("../data/profissionais.json")
     .then(resposta => resposta.json())

@@ -1,36 +1,128 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-   <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina de Publicação de Plantas</title>
-</head>
-<body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
-      </div>
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html" class="ativo">Sobre</a>
-      </nav>
-      <div class="iconelogin">
-         <img src="" alt="iconeLogin" href="../pages/Login.html"  class="iconelogin">
-      </div>
-   </header>
-         <main>
-            <section>
-            </section>
+<html lang="pt-BR">
 
-         </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Planta</title>
+
+    <link rel="stylesheet" href="../css/PublicarPlanta.css">
+</head>
+
+<body>
+
+    <header class="topo">
+
+        <div class="logo">
+            <img src="" alt="Logo Income Of Houses">
+        </div>
+
+        <nav class="menu">
+            <a href="../index.html">Início</a>
+            <a href="Plantas.html">Plantas</a>
+            <a href="Profissionais.html">Profissionais</a>
+            <a href="Sobre.html">Sobre</a>
+        </nav>
+
+        <div class="iconelogin">
+            <img src="" alt="Login">
+        </div>
+
+    </header>
+
+    <main>
+
+        <section class="publicar-planta">
+
+            <h1>Publicar Nova Planta</h1>
+
+            <p>
+                Preencha as informações abaixo para cadastrar uma nova planta.
+            </p>
+
+            <form id="formPublicarPlanta">
+
+                <div class="campo">
+                    <label for="titulo">Título da Planta</label>
+                    <input
+                        type="text"
+                        id="titulo"
+                        placeholder="Ex.: Casa Moderna com 3 Quartos"
+                        required>
+                </div>
+
+                <div class="campo">
+                    <label for="descricao">Descrição</label>
+
+                    <textarea
+                        id="descricao"
+                        rows="6"
+                        placeholder="Descreva sua planta..."
+                        required></textarea>
+                </div>
+
+                <div class="campo">
+                    <label for="categoria">Categoria</label>
+
+                    <select id="categoria" required>
+                        <option value="">Selecione</option>
+                        <option>Casa</option>
+                        <option>Sobrado</option>
+                        <option>Apartamento</option>
+                        <option>Chácara</option>
+                        <option>Comercial</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="quartos">Quantidade de Quartos</label>
+                    <input type="number" id="quartos" min="1" required>
+                </div>
+
+                <div class="campo">
+                    <label for="banheiros">Quantidade de Banheiros</label>
+                    <input type="number" id="banheiros" min="1" required>
+                </div>
+
+                <div class="campo">
+                    <label for="garagem">Vagas na Garagem</label>
+                    <input type="number" id="garagem" min="0" required>
+                </div>
+
+                <div class="campo">
+                    <label for="area">Área Construída (m²)</label>
+                    <input type="number" id="area" required>
+                </div>
+
+                <div class="campo">
+                    <label for="preco">Preço (R$)</label>
+                    <input type="number" id="preco" required>
+                </div>
+
+                <div class="campo">
+                    <label for="imagem">Imagem da Planta</label>
+                    <input type="file" id="imagem" accept="image/*">
+                </div>
+
+                <button type="submit">
+                    Publicar Planta
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer class="rodapé">
+        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+
+        <a href="TermosUso.html">Termos de Uso</a>
+        <a href="PoliticaPrivacidade.html">Política de Privacidade</a>
+    </footer>
+
+    <script src="../js/publicarPlanta.js"></script>
+
 </body>
+
 </html>

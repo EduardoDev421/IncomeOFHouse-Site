@@ -11,10 +11,10 @@
 .filtros{
     width:100%;
     color: #333;
-    max-width: 900px;
+    max-width: 800px;
     background:#fff;
     margin-top: 100px;
-    padding:40px 50px;
+    padding: 40px 50px;
     border-radius:10px;
 }
 

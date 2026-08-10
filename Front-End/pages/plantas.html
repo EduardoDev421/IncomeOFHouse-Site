@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,91 +8,103 @@
     <link rel="stylesheet" href="../css/Plantas.css">
    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
-      </div>
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html" class="ativo">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html">Sobre</a>
-      </nav>
-      <div class="iconelogin">
-         <img src="" alt="iconeLogin" href="../pages/Login.html"  class="iconelogin">
-      </div>
-   </header>
+
+    <header class="topo">
+        <div class="logo">
+            <img src="" alt="Logo Income of Houses">
+        </div>
+
+        <nav class="menu">
+            <a href="../index.html">Início</a>
+            <a href="../pages/Plantas.html" class="ativo">Plantas</a>
+            <a href="../pages/Profissionais.html">Profissionais</a>
+            <a href="../pages/Sobre.html">Sobre</a>
+        </nav>
+
+        <div class="iconelogin">
+            <img src="" alt="Ícone Login" class="iconelogin">
+        </div>
+    </header>
+
     <main class="pagina-plantas">
-        <section class="filtros">
 
-            <h1>Encontre o projeto perfeito para você</h1>
+        <section>
+            <div class="filtros">
 
-            <div class="linha-filtros">
+                <h1>Encontre o projeto perfeito para você</h1>
 
-                <div class="campo">
-                    <label for="tipo">Tipo</label>
-                    <select id="tipo">
-                        <option value="">Todos</option>
-                        <option value="Casa Térrea">Casa Térrea</option>
-                        <option value="Sobrado">Sobrado</option>
-                        <option value="Moderno">Moderno</option>
-                    </select>
+                <div class="linha-filtros">
+
+                    <div class="campo">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo">
+                            <option value="">Todos</option>
+                            <option value="Casa Térrea">Casa Térrea</option>
+                            <option value="Sobrado">Sobrado</option>
+                            <option value="Moderno">Moderno</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="quartos">Quartos</label>
+                        <select id="quartos">
+                            <option value="">Todos</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4+</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="garagem">Garagem</label>
+                        <select id="garagem">
+                            <option value="">Todos</option>
+                            <option value="1 vaga">1 vaga</option>
+                            <option value="2 vagas">2 vagas</option>
+                            <option value="3 vagas">3 vagas</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="estilo">Estilo</label>
+                        <select id="estilo">
+                            <option value="">Todos</option>
+                            <option value="Moderno">Moderno</option>
+                            <option value="Clássico">Clássico</option>
+                            <option value="Minimalista">Minimalista</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="area">Área</label>
+                        <select id="area">
+                            <option value="">Todos</option>
+                            <option value="80 m²">80 m²</option>
+                            <option value="120 m²">120 m²</option>
+                            <option value="180 m²">180 m²</option>
+                        </select>
+                    </div>
+
+                    <button id="btnPesquisar">Pesquisar</button>
+
                 </div>
-
-                <div class="campo">
-                    <label for="quartos">Quartos</label>
-                    <select id="quartos">
-                        <option value="">Todos</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4+</option>
-                    </select>
-                </div>
-
-                <div class="campo">
-                    <label for="garagem">Garagem</label>
-                    <select id="garagem">
-                        <option value="">Todos</option>
-                        <option value="1 vaga">1 vaga</option>
-                        <option value="2 vagas">2 vagas</option>
-                        <option value="3 vagas">3 vagas</option>
-                    </select>
-                </div>
-
-                <div class="campo">
-                    <label for="estilo">Estilo</label>
-                    <select id="estilo">
-                        <option value="">Todos</option>
-                        <option value="Moderno">Moderno</option>
-                        <option value="Clássico">Clássico</option>
-                        <option value="Minimalista">Minimalista</option>
-                    </select>
-                </div>
-
-                <div class="campo">
-                    <label for="area">Área</label>
-                    <select id="area">
-                        <option value="">Todos</option>
-                        <option value="80 m²">80 m²</option>
-                        <option value="120 m²">120 m²</option>
-                        <option value="180 m²">180 m²</option>
-                    </select>
-                </div>
-
-                <button id="btnPesquisar">Pesquisar</button>
-
             </div>
 
-
-        <div class="cards-plantas"></div>
+            <div class="cards-plantas"></div>
         </section>
 
     </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+
+    <footer class="rodapé">
+        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+        <a href="../pages/TermosUso.html">Termos de Uso</a>
+        <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+    </footer>
+
+    <script src="../js/plantas.js"></script>
+
 </body>
+
 </html>
