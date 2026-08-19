@@ -1,66 +1,319 @@
-
-/* ================================================= */
-/* Linha */
-.Linha{
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    height: 120px;
-    background: #262626;
-}
-/* ================================================= */
-/* Index */
-
-.hero {
-    text-align: center;
-    padding: 60px 20px;
+/* Configuração Geral */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.hero h1 {
-    font-size: 36px;
-    color: #f5f5f5f5;
+html {
+    scroll-behavior: smooth;
 }
 
-.hero p{
-    color: #555;
-    font-size: 18px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-/* Cards */
-
-.container-cards{
-    position: relative;
-    width:80%;
-    margin:60px auto;
+body {
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
+    background: #0b0b0b;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* ================================================= */
+/* BackGround do Menu */
+.topo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    padding: 0 6%;
+    z-index: 10;
+    background: rgba(10, 10, 10, 0.25); /* reduzi de 0.55 pra 0.25 — teste esse valor */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(8px);
+}
+
+/* Logo */
+
+.logo{
+    width: 100%;
+    background:  transparent;
+}
+
+.logo a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 100%;
+    max-width: 70px;
+    height: auto;
+    margin-left: 30px;
+}
+
+/* Menu */
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 7px;
+    transition: 0.3s ease;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #d4af6a;
+}
+
+.menu a.ativo {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+/* Icone Login */
+.iconelogin{
+    margin-left: auto;
+}
+
+.iconelogin a{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.iconelogin a:hover{
+    color: #d4af6a;
+}
+
+.iconelogin img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+/* ================================================= */
+/* Fundo Home */
+
+.BackGound{
+    position: relative;
+    min-height: 100vh;
+    background-image: url("../img/BackgroundFundo.png");
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.Home {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 160px;
+}
+
+.overlay{
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Home */
+.Container{
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 100px;
+    padding-left: 5%;
+}
+ 
+/* Limita a largura do texto em vez de cortar a tela ao meio com padding-right */
+.Container h1,
+.Container p {
+    max-width: 620px;
+}
+
+.Container h1{
+    margin-bottom: 25px;
+    color: #f5f5f5;
+    font-size: clamp(5px, 6vw, 50px);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -2px;
+}
+
+.Container h1 span {
+    color: #d4af6a;
+}
+
+.Container p {
+    margin-bottom: 30px;
+    color: #d2d2d2;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.BtnCriar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 25px;
+    margin-right: 10px;
+    color: #111111;
+    background: #d4af6a;
+    border: 1px solid #d4af6a;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.3s ease;
+}
+
+.BtnCriar:hover {
+    background: #e2c07b;
+    border-color: #e2c07b;
+    transform: translateY(-2px);
+}
+
+.BtnLogar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 25px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.BtnLogar:hover {
+    color: #d4af6a;
+    border-color: #d4af6a;
+    background: rgba(212, 175, 106, 0.08);
+    transform: translateY(-2px);
+}
+
+.Destaques {
+    position: absolute;
+    z-index: 3;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1150px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
-.card{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
+.Destaque {
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding: 20px;
+    background: rgba(10, 10, 10, 0.72);
+    border: 1px solid rgba(212, 175, 106, 0.18);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease;
 }
 
-.card img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-    background:#ececec;
+.Destaque:hover {
+    transform: translateY(-5px);
+    background: rgba(15, 15, 15, 0.88);
+    border-color: rgba(212, 175, 106, 0.45);
 }
 
-.card h2{
-    text-align: center;
-    margin:15px;
-    font-size:20px;
+.DestaqueIcone {
+    min-width: 48px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.card p{
-    margin:0 15px 20px;
-    color:#555;
-    text-align: center;
-    font-size:15px;
-    line-height:22px;
+.DestaqueIcone img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+}
+
+.DestaqueContainer {
+    flex: 1;
+}
+
+.DestaqueContainer h2 {
+    margin-bottom: 7px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.DestaqueContainer p {
+    color: #aaaaaa;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ================================================= */
+/* Rodapé */
+
+.rodape {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 6%;
+    background: #080808;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    color: #888888;
+    font-size: 13px;
+}
+
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555555;
+}
+
+.rodape a {
+    color: #d4af6a;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.rodape a:hover {
+    color: #e2c07b;
 }

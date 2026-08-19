@@ -3,52 +3,133 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+   <meta name="description" content="IncomeofHouses - Quem somos">
+   <link rel="stylesheet" href="../css/Index.css">
    <link rel="stylesheet" href="../css/Sobre.css">
-   <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina de Sobre</title>
+   <title>Sobre - Income of Houses</title>
 </head>
-
 <body>
    <header class="topo">
       <div class="logo">
-         <img src="" alt="Logo Income of Houses">
+         <a href="../index.html">
+            <img src="../img/Logo.png" alt="Logo Income of Houses">
+         </a>
       </div>
       <nav class="menu">
          <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html" class="ativo">Sobre</a>
+         <a href="./Plantas.html">Plantas</a>
+         <a href="./Profissionais.html">Profissionais</a>
+         <a href="./Sobre.html" class="ativo">Sobre</a>
       </nav>
       <div class="iconelogin">
-         <img src="" alt="iconeLogin" href="../pages/Login.html"  class="iconelogin">
+         <a href="./Login.html">
+            <img src="../img/iconeLogin.png" alt="iconeLogin">
+            Login
+         </a>
       </div>
    </header>
-         <!-- Conteúdo Sobre -->   
-         <main>
-            <section>
-               <div class="Container-Sobre">
-                  <div class="Linha"></div>
-                  <div class="Sobre">
-                     <h2>Quem Somos nós?</h2>
-                     <p>
-                        A Income Of Houses é uma plataforma dedica a conectar
-                        pessoas à natureza. Oferecemos uma seleçã de plantas 
-                        qualidade e reunimos profissionais especializados em paisagismo e
-                        jardinagem para transformar ambientes com praticidade, confiança e excelência.
-                        Nosso compromisso é proporcionar uma experiência simples, segura e inspiradora,
-                        ajudando você a criar espaços mais verdes,
-                        acolhedores e cheias de vida.
-                     </p>
+
+   <main class="PaginaSobre">
+      <section class="QuemSomos">
+         <div class="QuemSomosTexto">
+            <span class="Etiqueta">Sobre nós</span>
+            <h1>Quem Somos<span> nós?</span></h1>
+            <p>
+               A Income Of Houses é uma plataforma dedicada a conectar pessoas à natureza.
+               Oferecemos uma seleção de plantas de alta qualidade e reunimos profissionais
+               especializados em paisagismo e jardinagem para transformar ambientes com
+               praticidade, confiança e excelência.
+            </p>
+            <p>
+               Nosso compromisso é proporcionar uma experiência simples, segura e inspiradora,
+               ajudando você a criar espaços mais verdes, acolhedores e cheios de vida.
+            </p>
+         </div>
+
+         <div class="QuemSomosImagem">
+            <img src="../img/CasaSobre.jpg" alt="Casa moderna">
+
+            <div class="EstatisticasCard">
+               <div class="Estatistica">
+                  <div class="EstatisticaIcone">
+                     <img src="../img/iconeProfissionais.png" alt="">
+                  </div>
+                  <div>
+                     <strong>+500</strong>
+                     <span>Profissionais cadastrados</span>
                   </div>
                </div>
-            </section>
-         </main>
 
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+               <div class="Estatistica">
+                  <div class="EstatisticaIcone">
+                     <img src="../img/iconePlantas.png" alt="">
+                  </div>
+                  <div>
+                     <strong>+1200</strong>
+                     <span>Plantas disponíveis</span>
+                  </div>
+               </div>
+
+               <div class="Estatistica">
+                  <div class="EstatisticaIcone">
+                     <img src="../img/iconeProjetos.png" alt="">
+                  </div>
+                  <div>
+                     <strong>+3000</strong>
+                     <span>Projetos realizados</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <section class="NossosValores">
+         <span class="Etiqueta">Nossos valores</span>
+         <h2>O que nos move</h2>
+
+         <div class="ValoresGrid">
+            <div class="ValorCard">
+               <div class="ValorIcone">
+                  <img src="../img/iconeConfianca.png" alt="">
+               </div>
+               <h3>Confiança</h3>
+               <p>Garantimos segurança em cada etapa, conectando você aos melhores profissionais.</p>
+            </div>
+
+            <div class="ValorCard">
+               <div class="ValorIcone">
+                  <img src="../img/iconeSustentabilidade.png" alt="">
+               </div>
+               <h3>Sustentabilidade</h3>
+               <p>Incentivamos práticas que valorizam a natureza e o futuro do planeta.</p>
+            </div>
+
+            <div class="ValorCard">
+               <div class="ValorIcone">
+                  <img src="../img/iconeQualidade.png" alt="">
+               </div>
+               <h3>Qualidade</h3>
+               <p>Trabalhamos com excelência para entregar o melhor em cada detalhe.</p>
+            </div>
+
+            <div class="ValorCard">
+               <div class="ValorIcone">
+                  <img src="../img/iconePaixao.png" alt="">
+               </div>
+               <h3>Paixão</h3>
+               <p>Somos movidos pelo amor ao design, à natureza e às boas conexões.</p>
+            </div>
+         </div>
+      </section>
+   </main>
+
+    <footer class="rodape">
+        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+        <div class="RodapeLinks">
+            <a href="../pages/TermosUso.html">Termos de Uso</a>
+            <span>|</span>
+            <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+        </div>
+    </footer>
 </body>
 </html>

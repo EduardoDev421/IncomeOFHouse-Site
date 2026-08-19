@@ -4,107 +4,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plantas</title>
+    <meta name="description" content="IncomeofHouses - Encontre o projeto perfeito para você">
+    <title>Plantas - Income of Houses</title>
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/Plantas.css">
-   <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 
     <header class="topo">
         <div class="logo">
-            <img src="" alt="Logo Income of Houses">
+            <a href="../index.html">
+                <img src="../img/Logo.png" alt="Logo Income of Houses">
+            </a>
         </div>
 
         <nav class="menu">
             <a href="../index.html">Início</a>
             <a href="../pages/Plantas.html" class="ativo">Plantas</a>
             <a href="../pages/Profissionais.html">Profissionais</a>
-            <a href="../pages/Sobre.html">Sobre</a>
+            <a href="../pages/Sobre.html">Sobre Nós</a>
         </nav>
 
         <div class="iconelogin">
-            <img src="" alt="Ícone Login" class="iconelogin">
+            <a href="../pages/Login.html">
+                <img src="" alt="Ícone Login">
+            </a>
         </div>
     </header>
 
-    <main class="pagina-plantas">
+    <main class="PaginaPlantas">
 
-        <section>
-            <div class="filtros">
+        <section class="HeroPlantas">
+            <div class="HeroPlantasOverlay"></div>
 
-                <h1>Encontre o projeto perfeito para você</h1>
-
-                <div class="linha-filtros">
-
-                    <div class="campo">
-                        <label for="tipo">Tipo</label>
-                        <select id="tipo">
-                            <option value="">Todos</option>
-                            <option value="Casa Térrea">Casa Térrea</option>
-                            <option value="Sobrado">Sobrado</option>
-                            <option value="Moderno">Moderno</option>
-                        </select>
-                    </div>
-
-                    <div class="campo">
-                        <label for="quartos">Quartos</label>
-                        <select id="quartos">
-                            <option value="">Todos</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4+</option>
-                        </select>
-                    </div>
-
-                    <div class="campo">
-                        <label for="garagem">Garagem</label>
-                        <select id="garagem">
-                            <option value="">Todos</option>
-                            <option value="1 vaga">1 vaga</option>
-                            <option value="2 vagas">2 vagas</option>
-                            <option value="3 vagas">3 vagas</option>
-                        </select>
-                    </div>
-
-                    <div class="campo">
-                        <label for="estilo">Estilo</label>
-                        <select id="estilo">
-                            <option value="">Todos</option>
-                            <option value="Moderno">Moderno</option>
-                            <option value="Clássico">Clássico</option>
-                            <option value="Minimalista">Minimalista</option>
-                        </select>
-                    </div>
-
-                    <div class="campo">
-                        <label for="area">Área</label>
-                        <select id="area">
-                            <option value="">Todos</option>
-                            <option value="80 m²">80 m²</option>
-                            <option value="120 m²">120 m²</option>
-                            <option value="180 m²">180 m²</option>
-                        </select>
-                    </div>
-
-                    <button id="btnPesquisar">Pesquisar</button>
-
-                </div>
+            <div class="HeroPlantasConteudo">
+                <span class="Etiqueta">Plantas</span>
+                <h1>Encontre o projeto <br> perfeito para você</h1>
+                <p>Explore nossa coleção de plantas arquitetônicas e filtre por suas preferências para encontrar o projeto ideal.</p>
             </div>
-
-            <div class="cards-plantas"></div>
         </section>
+
+        <section class="FiltrosCard">
+            <div class="FiltrosGrid">
+
+                <div class="Campo">
+                    <label for="tipo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /></svg>
+                        Projetos
+                    </label>
+                    <select id="tipo">
+                        <option value="">Todos os projetos</option>
+                        <option value="Casa Térrea">Casa Térrea</option>
+                        <option value="Sobrado">Sobrado</option>
+                        <option value="Moderno">Moderno</option>
+                    </select>
+                </div>
+
+                <div class="Campo">
+                    <label for="quartos">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 18v-6a3 3 0 013-3h12a3 3 0 013 3v6" /><path d="M3 18h18" /><path d="M7 12V9a2 2 0 012-2h6a2 2 0 012 2v3" /></svg>
+                        Quartos
+                    </label>
+                    <select id="quartos">
+                        <option value="">Todos</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4+</option>
+                    </select>
+                </div>
+
+                <div class="Campo">
+                    <label for="garagem">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 17h14M5 17a2 2 0 01-2-2v-2l2-5h14l2 5v2a2 2 0 01-2 2M5 17v2a1 1 0 001 1h1a1 1 0 001-1v-2m10 0v2a1 1 0 001 1h1a1 1 0 001-1v-2" /><circle cx="7.5" cy="14.5" r="1" /><circle cx="16.5" cy="14.5" r="1" /></svg>
+                        Garagens
+                    </label>
+                    <select id="garagem">
+                        <option value="">Todas</option>
+                        <option value="1">1 vaga</option>
+                        <option value="2">2 vagas</option>
+                        <option value="3">3 vagas</option>
+                    </select>
+                </div>
+
+                <div class="Campo">
+                    <label for="area">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20L20 4M4 20h6M4 20v-6M20 4h-6M20 4v6" /></svg>
+                        Área do terreno
+                    </label>
+                    <select id="area">
+                        <option value="">Todas as áreas</option>
+                        <option value="80">80 m²</option>
+                        <option value="120">120 m²</option>
+                        <option value="180">180 m²</option>
+                    </select>
+                </div>
+
+                <div class="Campo">
+                    <label for="estilo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9" /><circle cx="9" cy="9" r="1" /><circle cx="15" cy="9" r="1" /><circle cx="9" cy="15" r="1" /><path d="M12 12a3 3 0 003 3h1a2 2 0 000-4 2 2 0 01-2-2 3 3 0 00-2-2" /></svg>
+                        Estilo
+                    </label>
+                    <select id="estilo">
+                        <option value="">Todos os estilos</option>
+                        <option value="Moderno">Moderno</option>
+                        <option value="Clássico">Clássico</option>
+                        <option value="Minimalista">Minimalista</option>
+                    </select>
+                </div>
+
+                <button id="btnPesquisar" class="BtnPesquisar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4-4" /></svg>
+                    Pesquisar
+                </button>
+
+            </div>
+        </section>
+
+        <section class="CardsGrid" id="cardsPlantas">
+
+            <article class="CardPlanta">
+                <div class="CardPlantaImagem">
+                    <img src="" alt="Casa Horizonte">
+                    <button class="CardFavorito" aria-label="Favoritar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.6-10-9.2C0.3 8 2 4.5 5.6 4A5 5 0 0112 6.5 5 5 0 0118.4 4C22 4.5 23.7 8 22 11.8 19.5 16.4 12 21 12 21z" /></svg>
+                    </button>
+                </div>
+                <div class="CardPlantaConteudo">
+                    <h3>Casa Horizonte</h3>
+                    <div class="CardPlantaSpecs">
+                        <span>3 Quartos</span>
+                        <span>2 Banheiros</span>
+                        <span>2 Garagens</span>
+                    </div>
+                    <a href="#" class="BtnDetalhes">Detalhes</a>
+                </div>
+            </article>
+
+        </section>
+
+        <nav class="Paginacao" aria-label="Paginação">
+            <button class="PaginacaoBtn" aria-label="Página anterior">‹</button>
+            <button class="PaginacaoBtn ativo">1</button>
+            <button class="PaginacaoBtn">2</button>
+            <button class="PaginacaoBtn">3</button>
+            <button class="PaginacaoBtn">4</button>
+            <button class="PaginacaoBtn">5</button>
+            <button class="PaginacaoBtn" aria-label="Próxima página">›</button>
+        </nav>
 
     </main>
 
-    <footer class="rodapé">
+    <footer class="rodape">
         <p>©IncomeOfHouses. Todos os direitos reservados.</p>
-        <a href="../pages/TermosUso.html">Termos de Uso</a>
-        <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+        <div class="RodapeLinks">
+            <a href="../pages/TermosUso.html">Termos de Uso</a>
+            <span>|</span>
+            <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+        </div>
     </footer>
 
     <script src="../js/plantas.js"></script>
 
 </body>
-
 </html>

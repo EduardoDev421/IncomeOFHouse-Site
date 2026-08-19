@@ -5,13 +5,14 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
    <link rel="stylesheet" href="../Front-End/css/Index.css">
-   <link rel="stylesheet" href="../Front-End/css/style.css">
    <title>Pagina Principal</title>
 </head>
 <body>
    <header class="topo">
       <div class="logo">
-         <img src="" alt="Logo Income of Houses">
+         <a href="./index.html">
+            <img src="../Front-End/img/Logo.png" alt="Logo Income of Houses">
+         </a>
       </div>
       <nav class="menu">
          <a href="../Front-End/index.html" class="ativo">Início</a>
@@ -20,58 +21,85 @@
          <a href="../Front-End/pages/Sobre.html">Sobre</a>
       </nav>
       <div class="iconelogin">
-         <img src="" alt="iconeLogin" href="../Front-End/pages/Login.html"  class="iconelogin">
+         <a href="../Front-End/pages/Login.html">
+            <img src="" alt="iconeLogin" href="../Front-End/pages/Login.html"  class="iconelogin">
+         </a>
       </div>
    </header>
-      <main>
-         <section>
-            <div class="Linha"></div>
-            <div class="hero">
-               <div class="hero-content">
-                  <h1>Income of Houses</h1>
-                  <p>Descubra a planta ideal para transformar seu sonho em realidade. <br>
-                     Navegue por uma coleção de projetos arquitetônicos, encontre profissionais especializados e <br>
-                     tenha acesso a soluções para construir com mais praticidade e confiança.
-                  </p>
-               </div>
-            </div>
+      <main class="BackGound">
+         <section class="Home">
 
-            <div class="destaques">
-               <div class="container-cards">
-                  <article class="card">
-                     <div class="img-card">
-                        <img>
-                     </div>
-                        <h2>Diversos Projetos</h2>
-                        <p>Encontre plantas para casas pequenas, médias e grandes.</p>
-                  </article>
+               <div class="overlay"></div>
 
-                  <article class="card">
-                     <div class="img-card">
-                        <img>
-                     </div>
-                        <h2>Profissionais Especializados</h2>
-                        <p> Encontre arquitetos e profissionais para desenvolver seu projeto.</p>
-                  </article>
+                  <div class="Container">
+                     <h1>
+                        PLANEJE. <br>
+                        PROJETE. <br>
+                        <span> REALIZE. </span>
+                     </h1>
 
-                  <article class="card">
-                     <div class="img-card">
-                        <img>
-                     </div>
-                        <h2>Profissionais Certificados</h2>
-                        <p>Conecte-se com profissionais experientes
-                           para criar jardins e espaços únicos.
-                        </p>
-                  </article>
+                     <p> 
+                        Encontre as melhores plantas e profissionais <br> 
+                        para transformar seu sonho em realidade
+                     </p>
 
-               </div>
-            </div>
+                     <a href="../Front-End/pages/Cadastro.html"
+                        class="BtnCriar">
+                        Crie sua Conta
+                     </a>
+
+                     <a href="../Front-End/pages/Login.html"
+                        class="BtnLogar">
+                        Entre em sua Conta
+                     </a>
+                  </div>
+
+                  <div class="Destaques">
+                     <article class="Destaque">
+
+                        <div class="DestaqueIcone">
+                           <img src="" alt="iconeDiversosProjetos">
+                        </div>
+
+                        <div class="DestaqueContainer">
+                           <h2>Diversos Projetos</h2>
+                           <p>Encontre plantas para casas pequenas,médias e grandes.</p>
+                        </div>
+                     </article>
+
+                     <article class="Destaque">
+                        
+                        <div class="DestaqueIcone">
+                           <img src="" alt="iconeDiversosProjetos">
+                        </div>
+
+                        <div class="DestaqueContainer">
+                           <h2>Profissionais Especializados</h2>
+                           <p>Encontre arquitetos e profissionais para desenvolver seu projeto.</p>
+                        </div>
+                     </article>
+
+                     <article class="Destaque">
+                        
+                        <div class="DestaqueIcone">
+                           <img src="" alt="iconeDiversosProjetos">
+                        </div>
+
+                        <div class="DestaqueContainer">
+                           <h2>Profissionais Certificados</h2>
+                           <p>Conecte-se com profissionais experientes para criar projetos e espaços únicos.</p>
+                        </div>
+                     </article>
+                  </div>
          </section>
       </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../Front-End/pages/TermosUso.html">Termos de Uso</a>
-      <a href="../Front-End/pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+    <footer class="rodape">
+        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+        <div class="RodapeLinks">
+            <a href="../pages/TermosUso.html">Termos de Uso</a>
+            <span>|</span>
+            <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+        </div>
+    </footer>
 </body>
 </html>
