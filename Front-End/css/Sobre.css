@@ -1,5 +1,3 @@
-
-
 .PaginaSobre {
     flex: 1;
     background: #0b0b0b;
@@ -129,7 +127,7 @@
     background: #0f0f0f;
 }
 
-.NossosValores .Etiqueta {
+.Etiqueta {
     display: inline-flex;
     align-items: center;
     gap: 12px;
@@ -141,8 +139,8 @@
     margin-bottom: 14px;
 }
 
-.NossosValores .Etiqueta::before,
-.NossosValores .Etiqueta::after {
+.Etiqueta::before,
+.Etiqueta::after {
     content: "";
     width: 40px;
     height: 1px;

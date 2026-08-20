@@ -2,123 +2,178 @@
 <html lang="pt-br">
 
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-   <link rel="stylesheet" href="../css/Profissionais.css">
-   <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina dos Profissionais</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+    <link rel="stylesheet" href="../css/Profissionais.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Pagina dos Profissionais</title>
 </head>
+
 <body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
-      </div>
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html" class="ativo">Profissionais</a>
-         <a href="../pages/Sobre.html">Sobre</a>
-      </nav>
-      <div class="iconelogin">
-         <img src="" alt="iconeLogin" href="../pages/Login.html"  class="iconelogin">
-      </div>
-   </header>
-    <main>
-        <section>
-            <div class="pagina-profissionais">
-                <div class="filtros">
-                    <h1>Encontre um profissional entre os nossos melhores</h1>
+    <header class="topo">
+        <div class="logo">
+            <img src="" alt="Logo Income of Houses">
+        </div>
+        <nav class="menu">
+            <a href="../index.html">Início</a>
+            <a href="../pages/Plantas.html">Plantas</a>
+            <a href="../pages/Profissionais.html" class="ativo">Profissionais</a>
+            <a href="../pages/Sobre.html">Sobre</a>
+        </nav>
+        <div class="iconelogin">
+            <img src="" alt="iconeLogin" href="../pages/Login.html" class="iconelogin">
+        </div>
+    </header>
+    <main class="PaginaProfissionais">
 
-                        <div class="linha-filtros">
+        <section class="HeroProfissionais">
+            <div class="HeroProfissionaisOverlay"></div>
 
-                            <div class="campo">
-                                <label for="profissao">Profissão</label>
-                                <select id="profissao">
-                                    <option value="">Todas</option>
-                                    <option value="Arquiteto">Arquiteto</option>
-                                    <option value="Arquiteta">Arquiteta</option>
-                                    <option value="Engenheiro Civil">Engenheiro Civil</option>
-                                    <option value="Designer de Interiores">Designer de Interiores</option>
-                                    <option value="Paisagista">Paisagista</option>
-                                </select>
-                            </div>
-
-                            <div class="campo">
-                                <label for="estado">Estado:</label>
-                                <Select type="text" id="estado" name="estado">
-                                    <option value="">Todas</option>
-                                    <option value="AC">Acre</option>
-                                    <option value="AL">Alagoas</option>
-                                    <option value="AP">Amapá</option>
-                                    <option value="AM">Amazonas</option>
-                                    <option value="BA">Bahia</option>
-                                    <option value="CE">Ceará</option>
-                                    <option value="DF">Distrito Federal</option>
-                                    <option value="ES">Espírito Santo</option>
-                                    <option value="GO">Goiás</option>
-                                    <option value="MA">Maranhão</option>
-                                    <option value="MT">Mato Grosso</option>
-                                    <option value="MS">Mato Grosso do Sul</option>
-                                    <option value="MG">Minas Gerais</option>
-                                    <option value="PA">Pará</option>
-                                    <option value="PB">Paraíba</option>
-                                    <option value="PR">Paraná</option>
-                                    <option value="PE">Pernambuco</option>
-                                    <option value="PI">Piauí</option>
-                                    <option value="RJ">Rio de Janeiro</option>
-                                    <option value="RN">Rio Grande do Norte</option>
-                                    <option value="RS">Rio Grande do Sul</option>
-                                    <option value="RO">Rondônia</option>
-                                    <option value="RR">Roraima</option>
-                                    <option value="SC">Santa Catarina</option>
-                                    <option value="SP">São Paulo</option>
-                                    <option value="SE">Sergipe</option>
-                                    <option value="TO">Tocantins</option>
-                                </Select>
-                            </div>
-
-                            <div class="campo">
-                                <label for="experiencia">Experiência</label>
-                                <select id="experiencia">
-                                    <option value="">Todas</option>
-                                    <option value="8 anos">8 anos</option>
-                                    <option value="9 anos">9 anos</option>
-                                    <option value="10 anos">10 anos</option>
-                                    <option value="12 anos">12 anos</option>
-                                    <option value="15 anos">15 anwos</option>
-                                    <option value="18 anos">18 anos</option>
-                                </select>
-                            </div>
-
-                            <div class="campo">
-                                <label for="avaliacao">Avaliação</label>
-                                <select id="avaliacao">
-                                    <option value="">Todas</option>
-                                    <option value="5">5.0</option>
-                                    <option value="4.9">4.9</option>
-                                    <option value="4.8">4.8</option>
-                                    <option value="4.7">4.7</option>
-                                </select>
-                            </div>
-                    </div>
-                    <div class="BotaoPesquisar">
-                        <button id="btnPesquisarProfissional">
-                            Pesquisar
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cards"> 
-                
+            <div class="HeroProfissionaisConteudo">
+                <span class="Etiqueta">Profissionais</span>
+                <h1> Encontre um Profissional<br> que combine perfeitamente com seu estilo</h1>
+                <p>Navegue e encontre o profissional perfeito para seu projeto</p>
             </div>
         </section>
+
+        <section class="FiltrosCard">
+            <div class="FiltrosGrid">
+
+                <div class="Campo">
+                    <label for="profissao">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <circle cx="12" cy="8" r="3" />
+                            <path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7" /> Profissão
+                        </svg>
+                    </label>
+                    <select id="profissao">
+                        <option value="">Todas</option>
+                        <option value="Arquiteto">Arquiteto</option>
+                        <option value="Arquiteta">Arquiteta</option>
+                        <option value="Engenheiro Civil">Engenheiro Civil</option>
+                        <option value="Designer de Interiores">Designer de Interiores</option>
+                        <option value="Paisagista">Paisagista</option>
+                    </select>
+                </div>
+
+                <div class="Campo">
+                    <label for="Estado">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z" />
+                            <circle cx="12" cy="10" r="2.5" /> Estado
+                        </svg>
+                    </label>
+                    <Select id="estado">
+                        <option value="">Todas</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </Select>
+                </div>
+
+                <div class="Campo">
+                    <label for="Experiência">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 7v5l3 2" /> Experiencia
+                        </svg>
+                    </label>
+                    <select id="experiencia">
+                        <option value="">Todas</option>
+                        <option value="8 anos">8 anos</option>
+                        <option value="9 anos">9 anos</option>
+                        <option value="10 anos">10 anos</option>
+                        <option value="12 anos">12 anos</option>
+                        <option value="15 anos">15 anos</option>
+                        <option value="18 anos">18 anos</option>
+                    </select>
+                </div>
+
+                <div class="Campo">
+                    <label for="avaliacao">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z" /> avaliacao
+                        </svg>
+                    </label>
+                    <select id="avaliacao">
+                        <option value="">Todas</option>
+                        <option value="5">5.0</option>
+                        <option value="4.9">4.9</option>
+                        <option value="4.8">4.8</option>
+                        <option value="4.7">4.7</option>
+                    </select>
+                </div>
+
+                <button id="btnPesquisar" class="BtnPesquisar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4-4" /></svg>
+                    Pesquisar
+                </button>
+            </div>
+        </section>
+
+        <section class="CardsGrid" id="CardsProfissionais">
+            <article class="CardProfissional">
+                <div class="ProfissionalImg">
+                    <img src="" alt="">
+                    <button class="CardFavorito" aria-label="Favoritar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.6-10-9.2C0.3 8 2 4.5 5.6 4A5 5 0 0112 6.5 5 5 0 0118.4 4C22 4.5 23.7 8 22 11.8 19.5 16.4 12 21 12 21z" /></svg>
+                    </button>
+                </div>
+                <div class="CardProfissionalConteudo">
+                    <h3>Nome do Profissional</h3>
+                    <div class="CardProfissionalSpecs">
+                        <span>engenheiro Civil</span>
+                        <span>Amazonas</span>
+                        <span>15 anos</span>
+                        <span>5.0 estrelas</span>
+                    </div>
+                    <a href="../pages/DetalheProfissional.html" class="BtnDetalhes"> Detalhes</a>
+                </div>
+            </article>
+        </section>
+
+        <nav class="Paginacao" aria-label="Paginação">
+            <button class="PaginacaoBtn" aria-label="Página anterior">‹</button>
+            <button class="PaginacaoBtn ativo">1</button>
+            <button class="PaginacaoBtn">2</button>
+            <button class="PaginacaoBtn">3</button>
+            <button class="PaginacaoBtn">4</button>
+            <button class="PaginacaoBtn">5</button>
+            <button class="PaginacaoBtn" aria-label="Próxima página">›</button>
+        </nav>
     </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+    <footer class="rodape">
+        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+        <div class="RodapeLinks">
+            <a href="../pages/TermosUso.html">Termos de Uso</a>
+            <span>|</span>
+            <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+        </div>
+    </footer>
 </body>
 </html>

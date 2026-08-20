@@ -1,83 +1,436 @@
+/* Configuração Geral */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0b0b0b;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* ================================================= */
+/* BackGround do Menu */
+.topo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    padding: 0 6%;
+    z-index: 10;
+    background: rgba(10, 10, 10, 0.25); /* reduzi de 0.55 pra 0.25 — teste esse valor */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(8px);
+}
+
+/* Logo */
+
+.logo{
+    width: 100%;
+    background:  transparent;
+}
+
+.logo a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 100%;
+    max-width: 70px;
+    height: auto;
+    margin-left: 30px;
+}
+
+/* Menu */
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 7px;
+    transition: 0.3s ease;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #d4af6a;
+}
+
+.menu a.ativo {
+    color: #d4af6a;
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    background: rgba(212, 175, 106, 0.08);
+}
+
+/* BackGround da Pagina*/
+.PaginaProfissionais {
+    flex: 1;
+    background: #0b0b0b;
+}
+
+
+/* Pagina Profissionais*/
+.HeroProfissionais {
+    position: relative;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    padding: 50px 6% 40px;
+    background-image: url("../img/HeroPlantas.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.HeroProfissionaisOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #0b0b0b 35%, rgba(11, 11, 11, 0.55) 65%, rgba(11, 11, 11, 0.15) 100%);
+    z-index: 1;
+}
+
+.HeroProfissionaisConteudo {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+}
+
+.Etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #d4af6a;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.HeroProfissionaisConteudo h1 {
+    color: #f5f5f5;
+    font-size: clamp(28px, 3.2vw, 38px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    position: relative;
+    padding-bottom: 14px;
+}
+
+.HeroProfissionaisConteudo h1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 46px;
+    height: 3px;
+    background: #d4af6a;
+    border-radius: 2px;
+}
+
+.HeroProfissionaisConteudo p {
+    color: #c7c7c7;
+    font-size: 14px;
+    line-height: 1.7;
+}
 
 /* ================================================= */
-/* Profissionais */
+/* Card de filtros */
 
-/* Filtros */
-.pagina-profissionais{
-    display:flex;
-    justify-content: center;
+.FiltrosCard {
+    position: relative;
+    z-index: 3;
+    width: 90%;
+    max-width: 1300px;
+    margin: -30px auto 50px;
+    padding: 26px 30px;
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
-.filtros{
-    width:100%;
-    max-width: 800px;
-    background:#fff;
-    margin-top: 100px;
-    padding:40px 50px;
-    border-radius:10px;
-}
-
-.filtros h1{
-    text-align:center;
-    margin-bottom:25px;
-    color: #333;
-    font-size:30px;
-}
-
-.linha-filtros{
+.FiltrosGrid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-    margin-top: 20px;
-    align-items: end;
+    grid-template-columns: repeat(2, 2fr);
+    gap: 22px 30px;
 }
 
-.campo{
-    width: 100%;
-    display:flex;
-    flex-direction:column;
+.Campo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.campo label{
-    margin-bottom:8px;
-    font-weight:bold;
-    font-size:14px;
-}
-
-.campo select{
-    height:40px;
-    border:1px solid #999;
-    border-radius:8px;
-    padding-left:10px;
+.Campo label {
+    display: flex;
     align-items: center;
+    gap: 8px;
+    color: #e6e6e6;
+    font-size: 13px;
+    font-weight: 600;
 }
 
-.linha-filtros button{
+.Campo label svg {
+    width: 16px;
+    height: 16px;
+    color: #d4af6a;
+}
+
+.Campo select {
     width: 100%;
-    height: 50px;
-    background: #555;
-    color: #fff;
-    font-size: 15px;
-    font-weight: bold;
+    padding: 12px 14px;
+    color: #e6e6e6;
+    background: #0e0e0e;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.Campo select:hover,
+.Campo select:focus {
+    border-color: rgba(212, 175, 106, 0.5);
+    outline: none;
+}
+
+.BtnPesquisar {
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 50px;
+    color: #111111;
+    background: #d4af6a;
     border: none;
     border-radius: 8px;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
 
-.BotaoPesquisar {
+.BtnPesquisar svg {
+    width: 17px;
+    height: 17px;
+}
+
+.BtnPesquisar:hover {
+    background: #e2c07b;
+    transform: translateY(-2px);
+}
+
+/* ================================================= */
+/* Grid de cards */
+
+.CardsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto 40px;
+}
+
+.CardProfissional {
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.CardProfissional:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 175, 106, 0.35);
+}
+
+.ProfissionalImg{
+    position: relative;
+    width: 100%;
+    height: 210px;
+}
+
+.ProfissionalImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #1c1c1c;
+}
+
+.CardFavorito {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background: rgba(10, 10, 10, 0.6);
+    border: none;
+    border-radius: 50%;
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.CardFavorito svg {
+    width: 17px;
+    height: 17px;
+}
+
+.CardFavorito:hover {
+    color: #d4af6a;
+    background: rgba(10, 10, 10, 0.85);
+}
+
+.CardProfissionalConteudo {
+    padding: 18px 20px 20px;
+}
+
+.CardProfissionalConteudo h3 {
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.CardProfissionalSpecs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.CardProfissionalSpecs span {
+    color: #a3a3a3;
+    font-size: 12.5px;
+}
+
+.BtnDetalhes {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    text-align: center;
+    color: #d4af6a;
+    background: rgba(212, 175, 106, 0.08);
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.BtnDetalhes:hover {
+    background: #d4af6a;
+    color: #111111;
+}
+
+/* ================================================= */
+/* Paginação */
+
+.Paginacao {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 10px auto 60px;
 }
 
-.BotaoPesquisar button{
-    width: 100%;
-    height: 50px;
-    background: #555;
-    color: #fff;
-    font-size: 15px;
-    font-weight: bold;
-    border: none;
+.PaginacaoBtn {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #cccccc;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
-    font-weight: bold;
-    margin-top: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.PaginacaoBtn:hover {
+    border-color: rgba(212, 175, 106, 0.5);
+    color: #d4af6a;
+}
+
+.PaginacaoBtn.ativo {
+    color: #111111;
+    background: #d4af6a;
+    border-color: #d4af6a;
+}
+
+/* ================================================= */
+/* Rodapé */
+
+.rodape {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 6%;
+    background: #080808;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    color: #888888;
+    font-size: 13px;
+}
+
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555555;
+}
+
+.rodape a {
+    color: #d4af6a;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.rodape a:hover {
+    color: #e2c07b;
 }
