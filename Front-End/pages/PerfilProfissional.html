@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-    <link rel="stylesheet" href="../css/PerfilProfissional.css">
-   <link rel="stylesheet" href="../css/style.css">
+   <link rel="stylesheet" href="../css/PerfilProfissional.css">
    <title>Pagina do Perfil do Profissional</title>
 </head>
 
@@ -13,97 +13,199 @@
 
    <header class="topo">
       <div class="logo">
-         <img src="" alt="Logo Income of Houses">
+         <a href="../index.html">
+            <img src="../img/Logo.png" alt="Logo Income of Houses">
+         </a>
       </div>
       <nav class="menu">
          <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html">Sobre</a>
+         <a href="./Plantas.html">Plantas</a>
+         <a href="./Profissionais.html">Profissionais</a>
+         <a href="./Sobre.html">Sobre Nós</a>
       </nav>
    </header>
-         <main class="container">
+   <main class="BackGround">
+      <section class="container">
+      <!-- Menu lateral -->
+      <aside class="menu-lateral">
+         <ul>
+            <li class="ativo">
+               <a href="../pages/PerfilProfissional.html">
+                  <img src="../img/icones/IconePerfil.svg" alt="">
+                  <span>Meu Perfil</span>
+               </a>
+            </li>
+            <li>
+               <a href="../pages/MeusEndereços.html">
+                  <img src="../img/icones/IconeEndereco.svg" alt="">
+                  <span>Meus Endereços</span>
+               </a>
+            </li>
+            <li>
+               <a href="../pages/MeuPortfolio.html">
+                  <img src="../img/icones/iconePortfolio.svg" alt="">
+                  <span>Meu Portfolio</span>
+               </a>
+            </li>
+            <li>
+               <a href="../pages/publicarPlanta.html">
+                  <img src="../img/icones/IconePublicarPlantas.svg" alt="">
+                  <span>Publicar Plantas</span>
+               </a>
+            </li>
+            <li>
+               <a href="../pages/Projetos.html">
+                  <img src="../img/icones/IconeProjetos.svg" alt="">
+                  <span>Projetos</span>
+               </a>
+            </li>
+            <li>
+               <a href="../pages/Avaliações.html">
+                  <img src="../img/icones/IconeAvaliacoes.svg" alt="">
+                  <span>Avaliações</span>
+               </a>
+            </li>
+            <li>
+               <a href="../pages/Mensagem.html">
+                  <img src="../img/icones/IconeMensagem.svg" alt="">
+                  <span>Mensagem</span>
+               </a>
+            </li>
+            <li>
+               <a href="../pages/Configurações.html">
+                  <img src="../img/icones/IconeConfiguracao.svg" alt="">
+                  <span>Configurações</span>
+               </a>
+            </li>
+            <li>
+               <a href="../index.html">
+                  <img src="../img/icones/IconeSair.svg" alt="">
+                  <span>Sair</span>
+               </a>
+            </li>
+         </ul>
+      </aside>
 
-                <!-- Menu lateral -->
-                <aside class="menu-lateral">
-                    <ul>
-                        <li><a href="../pages/PerfilProfissional.html" class="ativo">Meu Perfil</a></li>
-                        <li><a href="../pages/MeusEndereços.html">Meus Endereços</a></li>
-                        <li><a href="../pages/MeuPortfolio.html">Meu Portfolio</a></li>
-                        <li><a href="../pages/publicarPlanta.html">Publicar Plantas</a></li>
-                        <li><a href="../pages/Projetos.html">Projetos</a></li>
-                        <li><a href="../pages/Avaliações.html">Avaliações</a></li>
-                        <li><a href="../pages/Mensagem.html">Mensagem</a></li>
-                        <li><a href="../pages/Configurações.html">Configurações</a></li>
-                        <li><a href="../index.html">Sair</a></li>
-                    </ul>
-                </aside>
+      <!-- Conteúdo -->
+      <section class="conteudo">
+         <div class="Inicio">
+            <div>
+               <h1>Meu Perfil</h1>
+               <p>Gerencie suas informações pessoais e preferências.</p>
+            </div>
 
-                <!-- Conteúdo -->
-                <section class="conteudo">
-                        <h1>Meu Perfil</h1>
-                        <p>Gerencie suas informações pessoais e preferências.</p>
+            <div class="EditarPerfil">
+                  <button class="editar-perfil">
+                     <svg viewBox="0 0 24 24">
+                        <path d="M12 20H21"></path>
+                        <path d="M16.5 3.5C17.3 2.7 18.7 2.7 19.5 3.5C20.3 4.3 20.3 5.7 19.5 6.5L7 19L3 20L4 16L16.5 3.5Z"></path>
+                     </svg> Editar Perfil
+                  </button>
+            </div>
+         </div>
+         <!-- Cabeçalho -->
+         <div class="conteudo-perfil">
+            <div class="Perfil">
+               <div class="foto">
+                  <div class="foto-placeholder">
+                     <img src="../img/icones/IconePerfil.svg">
+                  </div>
+                  <button class="editar-foto">
+                     Editar Foto
+                  </button>
+               </div>
 
-                        <!-- Cabeçalho -->
-                        <div class="conteudo-perfil">
-                            <div class="foto">
-                                <img src="img/perfil.png" alt="Foto do usuário">
-                            </div>
+               <div class="dados-usuario">
+                  <h2>Nome do Usuário</h2>
+                  <p>profissao do profissional</p>
+               </div>
+            </div>
 
-                              <div class="dados-usuario">
-                                 <h2>Nome do Usuário</h2>
-                                 <p>profissao do profissional</p>
-                              </div>
+            <div class="informacoesGerais">
+               <div class="Sobre">
+                  <div>
+                     <div>
+                        <img>
+                     </div>
 
-                              <div class="acoes">
-                                 <button>Editar Perfil</button>
-                              </div>
-                              <div class="informacoesGerais">
-                                 <div class="Avaliações">
-                                    <div>
-                                       <img>
-                                    </div>
-                                    <div class="">
-                                       <h2>Sobre mim</h2>
-                                       <p>descrição do profissional</p>
-                                    </div>
-                                 </div>
-                                 <div class="informacoes">
-                                    <h2>Resumo Profissional</h2>
-                                       <div class="item">
-                                          <h3>membro desde</h3>
-                                          <p>Janeiro/2022</p>
-                                       </div>
+                     <div>
+                        <h2>Sobre mim</h2>
+                        <p>descrição do profissional</p>
+                     </div>
+                  </div>
+               </div>
 
-                                       <div class="item">
-                                          <h3>projetos concluidos</h3>
-                                          <p>156</p>
-                                       </div>
+               <div class="informacoes">
+                  <div class="ContainerItem">
+                     <div class="separador">
+                        <div class="icone">
+                           <img src="../img/icones/IconeResumoProfissional.svg" alt="">
+                        </div>
+                        <div>
+                           <div class="titulo">
+                              <h2>Resumo Profissional</h2>
+                           </div>
 
-                                       <div class="item">
-                                          <h3>clientes aendidos</h3>
-                                          <p>98+</p>
-                                       </div>
-
-                                       <div class="item">
-                                          <h3>taxa de reposta </h3>
-                                          <p>98%</p>
-                                       </div>
-
-                                       <div class="item">
-                                          <h3>tempo media de resposta</h3>
-                                          <p>1h 30m</p>
-                                       </div>
-                                 </div>
-                              </div>
+                           <div class="item">
+                              <span>membro desde</span>
+                              <span class="BolaSepara">•</span>
+                              <span>Janeiro/2022</span>
                            </div>
                         </div>
-                </section>
-         </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+                     </div>
+                  </div>
+                  <div class="Separacao">
+                     <div class="icone">
+                        <img src="../img/icones/IconeProjetosConcluidos.svg" alt="">
+                     </div>
+                     <div class="item">
+                        <h3>projetos concluidos</h3>
+                        <p>156</p>
+                     </div>
+                  </div>
+
+                  <div class="Separacao">
+                     <div class="icone">
+                        <img src="../img/icones/IconeClientesAtendidos.svg" alt="">
+                     </div>
+                     <div class="item">
+                        <h3>clientes atendidos</h3>
+                        <p>98+</p>
+                     </div>
+                  </div>
+                  <div class="Separacao">
+                     <div class="icone">
+                        <img src="../img/icones/IconeTaxaRespostas.svg" alt="">
+                     </div>
+                     <div class="item">
+                        <h3>taxa de reposta </h3>
+                        <p>98%</p>
+                     </div>
+                  </div>
+                  <div class="Separacao">
+                     <div class="icone">
+                        <img src="../img/icones/IconeTempo.svg" alt="">
+                     </div>
+                     <div class="item">
+                        <h3>tempo media de resposta</h3>
+                        <p>1h 30m</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         </div>
+      </section>
+      </section>
+   </main>
+   <footer class="rodape">
+      <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+      <div class="RodapeLinks">
+         <a href="../pages/TermosUso.html">Termos de Uso</a>
+         <span>|</span>
+         <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+      </div>
    </footer>
-   </body>
+</body>
+
 </html>

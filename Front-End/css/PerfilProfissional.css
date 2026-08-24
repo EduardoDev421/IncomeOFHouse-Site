@@ -1,181 +1,456 @@
-/* =================================
-   CONTEÚDO DO PERFIL
-================================= */
-.menu-lateral {
-    width: 145px;
-    min-height: 415px;
-    background-color: #555555;
-    border-radius: 3px;
-    padding: 15px 15px;
+/* Configuração Geral */
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-.menu-lateral ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+html {
+    scroll-behavior: smooth;
 }
 
-.menu-lateral li {
-    margin: 0 0 25px 0;
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0b0b0b;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* ================================================= */
+/* BackGround do Menu */
+.topo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    padding: 0 6%;
+    z-index: 10;
+    background: rgba(10, 10, 10, 0.25); /* reduzi de 0.55 pra 0.25 — teste esse valor */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(8px);
 }
 
-.menu-lateral a {
-    display: block;
-    color: #111111;
+/* Logo */
+
+.logo{
+    width: 100%;
+    background:  transparent;
+}
+
+.logo a{
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    line-height: 1.4;
 }
 
-.menu-lateral a.ativo {
+.logo img {
+    width: 100%;
+    max-width: 70px;
+    height: auto;
+    margin-left: 30px;
+}
+
+/* Menu */
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu a {
     color: #ffffff;
-    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 7px;
+    transition: 0.3s ease;
 }
 
-.menu-lateral a:hover {
-    color: #ffffff;
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #d4af6a;
 }
 
+.menu a.ativo {
+    color: #d4af6a;
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    background: rgba(212, 175, 106, 0.08);
+}
+
+/* Pagina PerfilProfissinal */
+
+.BackGround{
+    position: relative;
+    background-image: url("../img/BackgroundFundo.png");
+    background-size: cover;
+    background-position: center;
+}
 
 .container {
     display: flex;
-    margin: 35px auto;
+    justify-content: center;
+    flex-direction: row;
+    margin: 100px auto;
+}
+
+.menu-lateral {
+    width: 200px;
+    background-color: #111112;
+    border: 1px solid #29292b;
+    border-radius: 12px;
+    padding: 12px;
     box-sizing: border-box;
-    background-color: #ffffff;
-    border-radius: 10px;
 }
 
 
-/* =================================
-   TÍTULO
-================================= */
-
-.conteudo {
-    padding: 10px;
+/* LISTA */
+.menu-lateral ul {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
-.conteudo h1 {
-    margin: 0 0 5px;
-    font-family: Arial, sans-serif;
-    font-size: 22px;
-    font-weight: 500;
-    color: #222;
+
+/* ITENS */
+.menu-lateral li {
+    width: 100%;
+    padding: 0;
+    list-style: none;
 }
 
-.conteudo p {
-    margin: 0 0 12px;
-    font-family: Arial, sans-serif;
+
+/* LINK */
+.menu-lateral li a{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #EEEEEE;
+    background-color: #1C1C1E;
+    border: 1px solid #1C1C1E;
     font-size: 12px;
-    color: #555;
+    gap: 10px;
 }
 
+/* ÍCONES */
+.menu-lateral li a img {
+    width: 18px;
+    height: 18px;
+}
 
-/* =================================
-   BLOCO PRINCIPAL DO PERFIL
-================================= */
+.menu-lateral li.ativo a {
+    background-color: #1C1C1E;
+    border: 1px solid #59431f;
+    color: #D4A63A;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
 
-.conteudo-perfil {
-    display: grid;
-    grid-template-columns: 70px 1fr auto;
-    grid-template-rows: auto auto;
-    column-gap: 18px;
+.menu-lateral li:hover a {
+    background-color: #302718;
+    border: 1px solid #59431f;
+    color: #D4A63A;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.menu-lateral li:last-child {
+    margin-top: 5px;
+    padding-top: 8px;
+    border-top: 1px solid #292929;
+}
+
+/* Container */
+
+.conteudo{
+    display: flex;
+    flex-direction: column;
+    padding: 13px 10px;
+    background-color: #111111;
+    border-radius: 10px;
+    border: 2px solid #29292b;
+}
+
+.conteudo h1{
+    font-size: 20px;
+
+}
+
+.conteudo p{
+    font-size: 13px;
+}
+
+.conteudo h1,p{
+    margin-right: 25px;
+}
+
+.EditarPerfil button{
+    background-color: #292929;
+    color: #EEEEEE;
     padding: 10px;
-    background-color: #f5f4f1;
-    border: 1px solid #aaa;
-    border-radius: 3px;
-    box-sizing: border-box;
+    gap: 8px;
+    border: 1px solid #D4A63A;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.EditarPerfil button:hover{
+    background-color: #302718;
+    border: 1px solid #D4A63A;
+    color: #D4A63A;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.Inicio{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* Container Perfil */
+.conteudo-perfil:last-child {
+    margin-top: 5px;
+    padding-top: 8px;
+    border-top: 1px solid #D4A63A;
+}
+
+.conteudo-perfil{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.Perfil{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .foto {
-    width: 66px;
-    height: 66px;
-    border: 1px solid #777;
-    background-color: #ddd;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #171717;
+    border: 1px dashed #F5A623;
+    border-radius: 14px;
+    padding: 10px;
+    width: 100px;
+    height: 100px;
 }
 
-.foto img {
+.foto-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 50px;
+    height: 50px;
+}
+
+.foto-placeholder img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
 }
 
-.dados-usuario {
-    align-self: center;
+.foto-label {
+    color: #D4A63A;
+    font-size: 13px;
 }
 
-.dados-usuario h2 {
-    margin: 0 0 3px;
-    font-family: Arial, sans-serif;
-    font-size: 17px;
-    font-weight: bold;
-    color: #222;
-}
-
-.dados-usuario p {
-    margin: 0;
-    max-width: 400px;
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    line-height: 1.4;
-    color: #555;
-}
-
-.acoes {
+.editar-perfil{
     display: flex;
     align-items: center;
-}
-
-.acoes button {
-    width: 85px;
-    height: 25px;
-    border: 1px solid #777;
-    border-radius: 2px;
-    background-color: #ffffff;
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    color: #333;
+    background: transparent;
+    border: 1px solid #F5A623;
+    color: #F5A623;
+    padding: 10px 10px;
+    border-radius: 20px;
+    font-size: 13px;
     cursor: pointer;
 }
 
-.acoes button:hover {
-    background-color: #888;
-    color: #fff;
+.editar-perfil svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
-.informacoesGerais {
+.editar-perfil:hover {
+    background-color: #F5A62320;
+}
+
+.editar-foto {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: 1px solid #F5A623;
+    color: #F5A623;
+    padding: 8px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.editar-foto:hover {
+    background-color: #F5A62320;
+}
+
+/* Informações */
+.informacoesGerais{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.Sobre {
+    border:  1px solid #D4A63A;
+    background-color: #292929;
+    border-radius: 10px;
+    padding: 100px; 
+}
+
+.informacoes{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ContainerItem {
+    display: flex;
+    flex-direction: column;
+    background-color: #171717;
+    border: 1px solid #363636;
+    border-radius: 14px;
+    padding: 16px 20px;
+}
+
+.separador{
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-.Avaliações {
-    background-color: #fff;
-    border: 1px solid #333;
-    border-radius: 10px;
-    margin-top: 10px;
-    padding: 30px 60px;
+.ContainerItem .titulo {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
 }
 
-.Avaliações h2{
-    color: #555;
+
+.ContainerItem img {
+    width: 100%;
+    max-width: 50px;
+    height: 35px;
 }
 
-.informacoes {
-    border: 1px solid #333;
-    border-radius: 10px;
-    background-color: #fff;
-    margin-top: 10px;
-    margin-right: 10px;
+.ContainerItem h2 {
+    color: #F5F5F5;
+    font-size: 16px;
+    margin: 0;
+}
+
+.ContainerItem .item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #B0B0B0;
+    font-size: 13px;
+}
+
+.ContainerItem .BolaSepara {
+    color: #D4A63A;
+}
+
+.Separacao{ 
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: #171717;
+    border: 1px solid #363636;
+    border-radius: 14px;
+    padding: 8px 20px;
     gap: 10px;
 }
 
-.item{
-    background-color: #888;
-    font-size: 10px;
+.Separacao .titulo {
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+
+.Separacao img {
+    width: 100%;
+    max-width: 50px;
+    height: 35px;
+}
+
+.Separacao h3 {
+    color: #F5F5F5;
+    font-size: 16px;
+    margin: 0;
+}
+
+.Separacao .item {
+    gap: 6px;
+    color: #B0B0B0;
+    font-size: 13px;
+}
+/* ================================================= */
+/* Rodapé */
+.rodape {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 6%;
+    background: #080808;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    color: #888888;
+    font-size: 13px;
+}
+
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555555;
+}
+
+.rodape a {
+    color: #d4af6a;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.rodape a:hover {
+    color: #e2c07b;
 }

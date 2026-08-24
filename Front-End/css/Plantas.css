@@ -89,8 +89,8 @@ body {
 }
 
 .iconelogin img {
-    width: 22px;
-    height: 22px;
+    max-width: 50px;
+    height: 50px;
     object-fit: contain;
 }
 
@@ -104,16 +104,12 @@ body {
 
 /* ================================================= */
 /* Hero */
-
 .HeroPlantas {
     position: relative;
     min-height: 260px;
     display: flex;
     align-items: center;
     padding: 50px 6% 40px;
-    background-image: url("../img/HeroPlantas.jpg");
-    background-size: cover;
-    background-position: center;
 }
 
 .HeroPlantasOverlay {
@@ -126,24 +122,32 @@ body {
 .HeroPlantasConteudo {
     position: relative;
     z-index: 2;
-    max-width: 560px;
+    max-width: 1200px;
 }
 
 .Etiqueta {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     color: #d4af6a;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+}
+
+.Etiqueta::before,
+.Etiqueta::after {
+    content: "";
+    width: 40px;
+    height: 1px;
+    background: rgba(212, 175, 106, 0.5);
 }
 
 .HeroPlantasConteudo h1 {
     color: #f5f5f5;
-    font-size: clamp(28px, 3.2vw, 38px);
+    font-size: 10;
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: -0.5px;
@@ -344,7 +348,7 @@ body {
 
 .CardPlantaSpecs {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
     gap: 14px;
     margin-bottom: 18px;
 }

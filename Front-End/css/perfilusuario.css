@@ -1,182 +1,330 @@
-/* Conteúdo do Perfil do Usuário */
+/* Configuração Geral */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0b0b0b;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* ================================================= */
+/* BackGround do Menu */
+.topo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    padding: 0 6%;
+    z-index: 10;
+    background: rgba(10, 10, 10, 0.25); /* reduzi de 0.55 pra 0.25 — teste esse valor */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(8px);
+}
+
+/* Logo */
+
+.logo{
+    width: 100%;
+    background:  transparent;
+}
+
+.logo a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 100%;
+    max-width: 70px;
+    height: auto;
+    margin-left: 30px;
+}
+
+/* Menu */
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 7px;
+    transition: 0.3s ease;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #d4af6a;
+}
+
+.menu a.ativo {
+    color: #d4af6a;
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    background: rgba(212, 175, 106, 0.08);
+}
+
+/* Pagina PerfilProfissinal */
+
+.BackGround{
+    position: relative;
+    background-image: url("../img/BackgroundFundo.png");
+    background-size: cover;
+    background-position: center;
+}
 
 .container {
     display: flex;
-    width: 100%;
-    margin: 100px;
-    border-radius: 20px;
-    background: #fff;
+    justify-content: center;
+    flex-direction: row;
+    margin: 100px auto;
 }
 
-.menu-lateral{
-    width: 100%;
-    max-width: 270px;
-    background: #575757;
-    padding: 35px 0;
-    min-height: 80px;
-    border-radius: 10px 0px 0px 10px;
+.menu-lateral {
+    width: 200px;
+    background-color: #111112;
+    border: 1px solid #29292b;
+    border-radius: 12px;
+    padding: 12px;
+    box-sizing: border-box;
 }
 
-.menu-lateral ul{
+
+/* LISTA */
+.menu-lateral ul {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 0;
+    margin: 0;
     list-style: none;
 }
 
-.menu-lateral li{
-    margin-bottom: 15px;
+
+/* ITENS */
+.menu-lateral li {
+    width: 100%;
+    padding: 0;
+    list-style: none;
 }
 
-.menu-lateral a{
-    display: block;
-    padding: 15px 20px;
-    color: #222;
+
+/* LINK */
+.menu-lateral li a{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 6px;
     text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    transition: .3s;
+    color: #EEEEEE;
+    background-color: #1C1C1E;
+    border: 1px solid #1C1C1E;
+    font-size: 12px;
+    gap: 10px;
 }
 
-.menu-lateral a:hover{
-    color: black;
-}
-.menu-lateral a.ativo{
-    color: #fff;
+/* ÍCONES */
+.menu-lateral li a img {
+    width: 18px;
+    height: 18px;
 }
 
+.menu-lateral li.ativo a {
+    background-color: #1C1C1E;
+    border: 1px solid #59431f;
+    color: #D4A63A;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
 
-.conteudo-perfil{
-    margin-left: 50px;
+.menu-lateral li:hover a {
+    background-color: #302718;
+    border: 1px solid #59431f;
+    color: #D4A63A;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.menu-lateral li:last-child {
+    margin-top: 5px;
+    padding-top: 8px;
+    border-top: 1px solid #292929;
+}
+
+/* Container */
+
+.conteudo{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 13px 10px;
+    background-color: #111111;
+    border-radius: 10px;
+    border: 2px solid #29292b;
 }
 
-
 .conteudo h1{
-    font-size: 30px;
-    color: #333333
+    font-size: 20px;
+
 }
 
 .conteudo p{
-    font-size: 20px;
-    color: #555555;
+    font-size: 13px;
 }
 
-/* ============================
-   CONTEÚDO
-============================ */
-
-.conteudo-perfil{
-    flex: 1;
-    padding: 40px;
+.conteudo h1,p{
+    margin-right: 1px;
 }
 
-.dados-usuario{
-    margin-bottom: 20px;
+.EditarPerfil button{
+    background-color: #292929;
+    color: #EEEEEE;
+    padding: 10px;
+    gap: 8px;
+    border: 1px solid #D4A63A;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.dados-usuario h1{
-    font-size: 28px;
-    margin-bottom: 8px;
-    color: #222;
+.EditarPerfil button:hover{
+    background-color: #302718;
+    border: 1px solid #D4A63A;
+    color: #D4A63A;
+    padding: 10px;
+    border-radius: 8px;
 }
 
-.dados-usuario p{
-    font-size: 16px;
-    color: #555;
+.editar-perfil{
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: 1px solid #F5A623;
+    color: #F5A623;
+    padding: 10px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
 }
 
-/* ============================
-   CABEÇALHO
-============================ */
+.editar-perfil svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
 
-.conteudo-perfil{
-    display: grid;
-    grid-template-columns: 120px 1fr 170px;
-    gap: 20px;
-    background: #d8d8d8;
-    border: 1px solid #555;
-    border-radius: 4px;
-    padding: 15px;
+.editar-perfil:hover {
+    background-color: #F5A62320;
+}
+
+.Inicio{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.conteudo-perfil {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #D4A63A;
 }
 
 .foto img{
-    width:120px;
-    height:120px;
-    object-fit:cover;
-    border:1px solid #555;
+    width: 100%;
+    width: 80px;
+    height: 80px;
+    background-color: #171717;
+    border: 1px dashed #F5A623;
+    border-radius: 30px;
+}
+
+.dados-usuario{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
 }
 
 .dados-usuario h2{
-    margin-bottom:5px;
-    font-size:20px;
-}
-
-.dados-usuario span{
-    display:block;
-    font-weight:bold;
-    color:#555;
-    margin-bottom:5px;
+    font-size: 20px;
 }
 
 .dados-usuario p{
-    line-height:1.5;
-    color:#222;
+    font-size: 10px;
 }
 
-.acoes{
-    display:flex;
-    justify-content:flex-end;
-    align-items:flex-start;
+.cardsInfo {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }
 
-.acoes button{
-    width:150px;
-    height:40px;
-    background:#fff;
-    border:1px solid #444;
-    border-radius:4px;
-    cursor:pointer;
+.cardInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #171717;
+    border: 1px solid #292929;
+    border-radius: 10px;
 }
 
-/* ============================
-   CARD
-============================ */
-
-.card-informacoes{
-    margin-top:15px;
-    padding:25px; 
-    
-    border:1px solid #555;
-    border-radius:4px;
-    background:#fff;
+/* ================================================= */
+/* Rodapé */
+.rodape {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 6%;
+    background: #080808;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    color: #888888;
+    font-size: 13px;
 }
 
-.card-informacoes h2{
-    margin-bottom:35px;
-    text-transform:lowercase;
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555555;
 }
 
-/* ============================
-   INFORMAÇÕES
-============================ */
-
-.informacoes{
-    display:grid;
-    grid-template-columns:220px 1fr;
-    row-gap:25px;
+.rodape a {
+    color: #d4af6a;
+    text-decoration: none;
+    transition: 0.3s ease;
 }
 
-.item{
-    display:contents;
-}
-
-.item span{
-    font-weight:bold;
-    color:#444;
-}
-
-.item strong{
-    font-weight:600;
-    color:#444;
+.rodape a:hover {
+    color: #e2c07b;
 }

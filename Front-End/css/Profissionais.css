@@ -48,7 +48,7 @@ body {
 }
 
 .logo img {
-    width: 100%;
+
     max-width: 70px;
     height: auto;
     margin-left: 30px;
@@ -86,6 +86,31 @@ body {
     background: rgba(212, 175, 106, 0.08);
 }
 
+/* Icone Login */
+.iconelogin{
+    margin-left: auto;
+}
+
+.iconelogin a{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.iconelogin a:hover{
+    color: #d4af6a;
+}
+
+.iconelogin img {
+    max-width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
 /* BackGround da Pagina*/
 .PaginaProfissionais {
     flex: 1;
@@ -99,10 +124,7 @@ body {
     min-height: 260px;
     display: flex;
     align-items: center;
-    padding: 50px 6% 40px;
-    background-image: url("../img/HeroPlantas.jpg");
-    background-size: cover;
-    background-position: center;
+    padding: 120px  6% 40px;
 }
 
 .HeroProfissionaisOverlay {
@@ -121,18 +143,26 @@ body {
 .Etiqueta {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     color: #d4af6a;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+}
+
+.Etiqueta::before,
+.Etiqueta::after {
+    content: "";
+    width: 40px;
+    height: 1px;
+    background: rgba(212, 175, 106, 0.5);
 }
 
 .HeroProfissionaisConteudo h1 {
     color: #f5f5f5;
-    font-size: clamp(28px, 3.2vw, 38px);
+    font-size: 10;
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: -0.5px;
@@ -332,8 +362,8 @@ body {
 
 .CardProfissionalSpecs {
     display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
+    flex-direction: row;
+    gap: 15px;
     margin-bottom: 18px;
 }
 
