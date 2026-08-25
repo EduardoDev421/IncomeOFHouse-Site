@@ -195,12 +195,12 @@ body {
 }
 
 .conteudo h1,p{
-    margin-right: 25px;
+    margin-right: 25px;  
 }
 
 .EditarPerfil button{
     background-color: #292929;
-    color: #EEEEEE;
+    color: #D4A63A;
     padding: 10px;
     gap: 8px;
     border: 1px solid #D4A63A;

@@ -180,6 +180,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 13px 10px;
+    gap: 15px;
     background-color: #111111;
     border-radius: 10px;
     border: 2px solid #29292b;
@@ -194,13 +195,9 @@ body {
     font-size: 13px;
 }
 
-.conteudo h1,p{
-    margin-right: 1px;
-}
-
 .EditarPerfil button{
     background-color: #292929;
-    color: #EEEEEE;
+    color: #D4A63A;
     padding: 10px;
     gap: 8px;
     border: 1px solid #D4A63A;
@@ -261,25 +258,46 @@ body {
 
 .foto img{
     width: 100%;
-    width: 80px;
-    height: 80px;
+    width: 130px;
+    height: 130px;
     background-color: #171717;
     border: 1px dashed #F5A623;
-    border-radius: 30px;
+    border-radius: 100px;
 }
 
 .dados-usuario{
     display: flex;
     flex-direction: column;
+    margin: 10px 5px;
     padding: 5px;
+    gap: 3px;
 }
 
 .dados-usuario h2{
-    font-size: 20px;
+    font-size: 25px;
+    margin-bottom: 5px;
 }
 
 .dados-usuario p{
-    font-size: 10px;
+    font-size: 12px;
+}
+
+.membro-desde{
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.membro-desde img{
+    width: 100%;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    color: #D4A63A;
+}
+
+.membro-desde {
+    margin-top: 20px;
 }
 
 .cardsInfo {
@@ -289,12 +307,95 @@ body {
 }
 
 .cardInfo{
+    width: 120px;
+    height: 130px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #171717;
     border: 1px solid #292929;
     border-radius: 10px;
+}
+
+.cardInfo img{
+    width: 100%;
+    width: 25px;
+    height: 25px;
+    border-radius: 10px;
+}
+
+.cardInfo h2{
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.cardInfo p{
+    font-size: 13px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.informacao {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.card-informacoes {
+    background-color: #171717;
+    border: 2px solid #292929;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 15px;
+    gap: 10px;
+}
+
+.card-informacoes h2{
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.informacoes {
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 25px 1fr;
+    align-items: center;
+    width: 100%;
+    padding: 15px 0;
+    border-top: 2px solid #292929;;
+    border-bottom: 2px solid #292929;
+}
+
+.item img {
+    width: 20px;
+    height: 20px;
+}
+
+.item-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.item-text span {
+    font-size: 13px;
+    color: #999;
+}
+
+.item-text strong {
+    font-size: 15px;
+    color: #fff;
 }
 
 /* ================================================= */
