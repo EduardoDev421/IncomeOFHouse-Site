@@ -398,6 +398,98 @@ body {
     color: #fff;
 }
 
+.card-Atividades{
+    background-color: #171717;
+    border: 2px solid #292929;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 15px;
+}
+
+.TextAtividades {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    border-bottom: 2px solid #292929;
+}
+
+.TextAtividades h2 {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.atividades{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.atividade {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 20px 0;
+    border-top: 2px solid #292929;
+}
+
+.atividade:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+
+.AtividadeDetalhe {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1;
+}
+
+.AtividadeDetalhe span{
+    font-size: 15px;
+    color: #fff;
+}
+
+.atividade img{
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.atividade strong {
+    font-size: 13px;
+    color: #999;
+}
+
+.AtividadeDetalhe p {
+    font-size: 10px;
+    color: #999;
+}
+
+.BtnAtividadesDetalhes{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.BtnAtividadesDetalhes a{
+    background-color: #292929;
+    border: 1px solid #D4A63A;
+    border-radius: 8px;
+    text-decoration: none;
+    padding: 10px 100px;
+    color: #D4A63A;
+    font-size: 13px;
+}
+
 /* ================================================= */
 /* Rodapé */
 .rodape {
