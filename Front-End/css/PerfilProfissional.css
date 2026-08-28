@@ -423,8 +423,10 @@ body {
     color: #B0B0B0;
     font-size: 13px;
 }
+
 /* ================================================= */
 /* Rodapé */
+
 .rodape {
     width: 100%;
     display: flex;
@@ -436,6 +438,7 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     color: #888888;
     font-size: 13px;
+    border-top: 1px solid #D4A63A;
 }
 
 .RodapeLinks {
@@ -443,6 +446,7 @@ body {
     align-items: center;
     gap: 10px;
     color: #555555;
+
 }
 
 .rodape a {

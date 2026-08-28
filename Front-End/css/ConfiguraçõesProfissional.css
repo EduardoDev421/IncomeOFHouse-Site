@@ -1,0 +1,230 @@
+/* Configuração Geral */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0b0b0b;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* ================================================= */
+/* BackGround do Menu */
+.topo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    padding: 0 6%;
+    z-index: 10;
+    background: rgba(10, 10, 10, 0.25); /* reduzi de 0.55 pra 0.25 — teste esse valor */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(8px);
+}
+
+/* Logo */
+
+.logo{
+    width: 100%;
+    background:  transparent;
+}
+
+.logo a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 100%;
+    max-width: 70px;
+    height: auto;
+    margin-left: 30px;
+}
+
+/* Menu */
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 7px;
+    transition: 0.3s ease;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #d4af6a;
+}
+
+.menu a.ativo {
+    color: #d4af6a;
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    background: rgba(212, 175, 106, 0.08);
+}
+
+/* Icone Login */
+.iconelogin{
+    margin-left: auto;
+}
+
+.iconelogin a{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.iconelogin a:hover{
+    color: #d4af6a;
+}
+
+.iconelogin img {
+    max-width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/* ================================================= */
+/* Fundo Home */
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: 100px;
+}
+.menu-lateral {
+    width: 200px;
+    background-color: #111112;
+    border: 1px solid #29292b;
+    border-radius: 12px;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+
+/* LISTA */
+.menu-lateral ul {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+
+/* ITENS */
+.menu-lateral li {
+    width: 100%;
+    padding: 0;
+    list-style: none;
+}
+
+
+/* LINK */
+.menu-lateral li a{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #EEEEEE;
+    background-color: #1C1C1E;
+    border: 1px solid #1C1C1E;
+    font-size: 12px;
+    gap: 10px;
+}
+
+/* ÍCONES */
+.menu-lateral li a img {
+    width: 18px;
+    height: 18px;
+}
+
+.menu-lateral li.ativo a {
+    background-color: #1C1C1E;
+    border: 1px solid #59431f;
+    color: #D4A63A;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.menu-lateral li:hover a {
+    background-color: #302718;
+    border: 1px solid #59431f;
+    color: #D4A63A;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.menu-lateral li:last-child {
+    margin-top: 5px;
+    padding-top: 8px;
+    border-top: 1px solid #292929;
+}
+
+
+
+/* ================================================= */
+/* Rodapé */
+
+.rodape {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 6%;
+    background: #080808;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    color: #888888;
+    font-size: 13px;
+    border-top: 1px solid #D4A63A;
+}
+
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555555;
+
+}
+
+.rodape a {
+    color: #d4af6a;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.rodape a:hover {
+    color: #e2c07b;
+}
