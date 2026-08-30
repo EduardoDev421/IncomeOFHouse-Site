@@ -1,0 +1,32 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Tampa -->
+    <path d="M4 7H20"
+          stroke="#D4A63A"
+          stroke-width="1.5"
+          stroke-linecap="round"/>
+
+    <!-- Alça -->
+    <path d="M9 7V4H15V7"
+          stroke="#D4A63A"
+          stroke-width="1.5"
+          stroke-linejoin="round"/>
+
+    <!-- Lixeira -->
+    <path d="M6 7L7 20H17L18 7"
+          stroke="#D4A63A"
+          stroke-width="1.5"
+          stroke-linejoin="round"/>
+
+    <!-- Linhas -->
+    <path d="M10 10.5V16.5"
+          stroke="#D4A63A"
+          stroke-width="1.3"
+          stroke-linecap="round"/>
+
+    <path d="M14 10.5V16.5"
+          stroke="#D4A63A"
+          stroke-width="1.3"
+          stroke-linecap="round"/>
+</svg>

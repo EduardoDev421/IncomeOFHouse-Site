@@ -12,7 +12,7 @@
 <body>
    <header class="topo">
       <div class="logo">
-         <img src="" alt="Logo Income of Houses">
+         <img src="../img/Logo.png" alt="Logo Income of Houses">
       </div>
       <nav class="menu">
          <a href="../index.html">Início</a>
@@ -21,12 +21,12 @@
          <a href="../pages/Sobre.html">Sobre</a>
       </nav>
    </header>
-   <main>
+   <main class="BackGround">
       <section class="container">
          <!-- Menu lateral -->
          <aside class="menu-lateral">
             <ul>
-               <li class="ativo">
+               <li>
                   <a href="../pages/perfilUsuario.html">
                      <img src="../img/icones/IconePerfil.svg" alt="">
                      <span>Meu Perfil</span>
@@ -62,7 +62,7 @@
                      <span>Mensagem</span>
                   </a>
                </li>
-               <li>
+               <li class="ativo">
                   <a href="../pages/ConfiguraçõesUsuario.html">
                      <img src="../img/icones/IconeConfiguracao.svg" alt="">
                      <span>Configurações</span>
@@ -79,16 +79,17 @@
 
          <!-- Conteúdo -->
          <section class="conteudo">
-            <h2> Configurações</h2>
-            <p> Gerencie as configurações da sua conta e preferencias</p>
+            <h1> Configurações</h1>
+            <h4> Gerencie as configurações da sua conta e preferencias</p>
 
             <div class="Config">
                <div class="Segurança">
-                  <img src="" alt="">
-                  <h2>Segurança da Conta</h2>
-
+                  <div class="Titulosegurança">
+                     <img src="../img/icones/IconeSegurança.svg">
+                     <h2>Segurança da Conta</h2>
+                  </div>
                   <div class="seguranças">
-                     <img src="" alt="">
+                     <img src="../img/icones/IconeSenha.svg">
                      <div class="SegurançaText">
                         <h3> Alterar Senha</h3>
                         <p> Atualize sua senha de acesso</p>
@@ -98,7 +99,7 @@
                   </div>
 
                   <div class="seguranças">
-                     <img src="" alt="">
+                     <img src="../img/icones/IconeAutentificação.svg">
                      <div class="SegurançaText">
                         <h3>Autenticação em duas etapas</h3>
                         <p>Aumente a segurança da sua conta</p>
@@ -108,7 +109,7 @@
                   </div>
 
                   <div class="seguranças">
-                     <img src="" alt="">
+                     <img src="../img/icones/IconeDispositivos.svg">
                      <div class="SegurançaText">
                         <h3>Dispositivos conectados</h3>
                         <p>Gerencie dispositivos e sessões ativas</p>
@@ -119,72 +120,75 @@
                </div>
 
                <div class="notificação">
-                  <img src="" alt="">
-                  <h2>Notificações</h2>
-
+                  <div class="TituloNotificações">
+                     <img src="../img/icones/Iconenotificação.svg">
+                     <h2>Notificações</h2>
+                  </div>
                   <div class="notificações">
-                     <img src="" alt="">
+                     <img src="../img/icones/IconeEmail.svg">
                      <div class="notificaçõesText">
                         <h3>Notificações por E-mail</h3>
                         <p>Receber notificações por E-mail</p>
                      </div>
 
-                     <label class="switch">
+                     <label class="toggle">
                         <input type="checkbox" checked>
                         <span class="slider"></span>
                      </label>
                   </div>
 
                   <div class="notificações">
-                     <img src="" alt="">
+                     <img src="../img/icones/iconeNotificaçãoPush.svg">
                      <div class="notificaçõesText">
                         <h3>Notificações Push</h3>
                         <p>Receber notificações no navegador</p>
                      </div>
 
-                     <label class="switch">
+                     <label class="toggle">
                         <input type="checkbox" checked>
                         <span class="slider"></span>
                      </label>
                   </div>
 
                   <div class="notificações">
-                     <img src="" alt="">
+                     <img src="../img/icones/IconeNovidades.svg" alt="">
                      <div class="notificaçõesText">
                         <h3>Novidades e Atualizações</h3>
                         <p>Receber novidades da plataforma</p>
                      </div>
 
-                     <label class="switch">
+                     <label class="toggle">
                         <input type="checkbox" checked>
                         <span class="slider"></span>
                      </label>
                   </div>
                </div>
                <div class="Personalização">
-                  <img src="" alt="">
-                  <h2>Personalização</h2>
-                  <div class="Personalizações">
-                     <img src="" alt="">
-                     <div class="PersonalizaçõesText">
-                        <h3>Tema da plataforma</h3>
-                        <p>Escolha entre temas claro ou escuro</p>
+                  <div class="TituloPersonalização">
+                     <img src="../img/icones/iconePersonalização.svg">
+                     <h2>Personalização</h2>
+                  </div>
+                     <div class="Personalizações">
+                        <img src="../img/icones/iconeTema.svg">
+                        <div class="PersonalizaçõesText">
+                           <h3>Tema da plataforma</h3>
+                           <p>Escolha entre temas claro ou escuro</p>
+                        </div>
+
+                        <select id="tema" class="seletor">
+                           <option value="">Escuro</option>
+                           <option value="Casa Térrea">Claro</option>
+                        </select>
                      </div>
 
-                     <select id="tema">
-                        <option value="">Escuro</option>
-                        <option value="Casa Térrea">Claro</option>
-                     </select>
-                  </div>
-
-                  <div>
-                     <img src="" alt="">
+                  <div class="Personalizações">
+                     <img src="../img/icones/IconeIdiomas.svg">
                      <div class="PersonalizaçõesText">
                         <h3>Idioma</h3>
                         <p>Selecione o idioma da plataforma</p>
                      </div>
 
-                     <select id="tema">
+                     <select id="idioma" class="seletor">
                         <option value="pt-br">Português (Brasil)</option>
                         <option value="en">English</option>
                         <option value="es">Español</option>
@@ -196,14 +200,14 @@
                      </select>
                   </div>
 
-                  <div>
-                     <img src="" alt="">
+                  <div class="Personalizações">
+                     <img src="../img/icones/IconeMoeda.svg">
                      <div class="PersonalizaçõesText">
                         <h3>Moeda</h3>
                         <p>Escolha a moeda para visualização</p>
                      </div>
 
-                     <select id="tema">
+                     <select id="moeda" class="seletor">
                         <option value="BRL">BRL - R$</option>
                         <option value="USD">USD - $</option>
                         <option value="EUR">EUR - €</option>
@@ -216,84 +220,79 @@
 
                </div>
                <div class="privacidade">
-                  <img src="" alt="">
+                  <div class="TituloPrivacidade">
+                  <img src="../img/icones/IconePrivacidade.svg">
                   <h2>Privacidade</h2>
-
+                  </div>   
                   <div class="privacidades">
-                     <img src="" alt="">
+                     <img src="../img/icones/iconePerfilView.svg" alt="">
                      <div class="privacidadesText">
                         <h3>Quem pode ver seu perfil</h3>
                         <p>Gerenciar a visibilidade do seu perfil</p>
                      </div>
 
-                     <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider"></span>
-                     </label>
+                     <span class="seta">></span>
                   </div>
 
                   <div class="privacidades">
-                     <img src="" alt="">
+                     <img src="../img/icones/IconeDadosPermissões.svg">
                      <div class="privacidadesText">
                         <h3>Dados e permissões</h3>
                         <p>Gerencie seus dados e permissoões</p>
                      </div>
 
-                     <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider"></span>
-                     </label>
+                     <span class="seta">></span>
                   </div>
 
                   <div class="privacidades">
-                     <img src="" alt="">
+                     <img src="../img/icones/IconeLixeira.svg">
                      <div class="privacidadesText">
                         <h3>Excluir conta</h3>
                         <p>Excluir sua conta permanentemente</p>
                      </div>
 
-                     <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider"></span>
-                     </label>
-                  </div>
-               </div>
-               <div class="CentralAjudas">
-                  <img src="" alt="">
-                  <h2>Central de Ajuda</h2>
-
-                  <div class="CentralAjuda">
-                     <img src="" alt="">
-                     <div class="CentralAjudaText">
-                        <h3>Perguntas frequentes</h3>
-                        <p>Encotre respostas para dúvidas comuns</p>
-                     </div>
-
-                     <input type="checkbox" checked>
-                     <span class="slider"></span>
-                  </div>
-
-                  <div class="CentralAjuda">
-                     <div class="CentralAjudaText">
-                        <h3>Fale conosco</h3>
-                        <p>Entre em contato com nosso suporte</p>
-                     </div>
-
-                     <input type="checkbox" checked>
-                     <span class="slider"></span>
-                  </div>
-
-                  <div class="CentralAjuda">
-                     <div class="CentralAjudaText">
-                        <h3></h3>
-                        <p></p>
-                     </div>
-
-                     <input type="checkbox" checked>
-                     <span class="slider"></span>
+                     <span class="seta">></span>
                   </div>
                </div>
             </div>
+
+            <div class="CentralAjuda">
+               <div class="TituloCentralAjuda">
+                     <img src="../img/icones/IconePergunta.svg" alt="">
+                     <h2>Central de Ajuda</h2>
+               </div>
+               <div class="CentralAjudasCard">
+                     <div class="CentralAjudas">
+                        <img src="../img/icones/IconePerguntasRespostas.svg">
+                        <div class="CentralAjudasText">
+                           <h3>Perguntas frequentes</h3>
+                           <p>Encotre respostas para dúvidas comuns</p>
+                        </div>
+
+                        <span class="seta">></span>
+                     </div>
+
+                     <div class="CentralAjudas">
+                        <img src="../img/icones/IconeFaleConosco.svg">
+                        <div class="CentralAjudasText">
+                           <h3>Fale conosco</h3>
+                           <p>Entre em contato com nosso suporte</p>
+                        </div>
+
+                        <span class="seta">></span>
+                     </div>
+
+                     <div class="CentralAjudaU">
+                        <img src="../img/icones/IconeTutorial.svg">
+                        <div class="CentralAjudasText">
+                           <h3>Tutoriais para profissionais</h3>
+                           <p>Aprenda a usar a plataforma</p>
+                        </div>
+
+                     <span class="seta">></span>
+                  </div>
+               </div>
+               </div>
          </section>
       </section>
    </main>
