@@ -1,0 +1,24 @@
+<svg
+    width="32"
+    height="32"
+    viewBox="0 0 32 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    <!-- Pasta -->
+    <path
+        d="M4.5 9.5C4.5 8.4 5.4 7.5 6.5 7.5H12L14.5 10H25.5C26.6 10 27.5 10.9 27.5 12V23C27.5 24.1 26.6 25 25.5 25H6.5C5.4 25 4.5 24.1 4.5 23V9.5Z"
+        stroke="#C89B5A"
+        stroke-width="1.8"
+        stroke-linejoin="round"
+    />
+
+    <!-- Check de projeto concluído -->
+    <path
+        d="M10.5 17L14 20.5L21.5 13"
+        stroke="#C89B5A"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    />
+</svg>

@@ -1,0 +1,55 @@
+<svg
+    width="32"
+    height="32"
+    viewBox="0 0 32 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    <!-- Pessoa principal -->
+    <circle
+        cx="16"
+        cy="9"
+        r="4"
+        stroke="#D4AF6A"
+        stroke-width="1.5"
+    />
+
+    <path
+        d="M9 27C9 21.5 11.8 18 16 18C20.2 18 23 21.5 23 27"
+        stroke="#D4AF6A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+    />
+
+    <!-- Pessoa esquerda -->
+    <circle
+        cx="7"
+        cy="12"
+        r="2.5"
+        stroke="#D4AF6A"
+        stroke-width="1.5"
+    />
+
+    <path
+        d="M2.5 25C2.8 21.2 4.5 19.5 7 19.5"
+        stroke="#D4AF6A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+    />
+
+    <!-- Pessoa direita -->
+    <circle
+        cx="25"
+        cy="12"
+        r="2.5"
+        stroke="#D4AF6A"
+        stroke-width="1.5"
+    />
+
+    <path
+        d="M29.5 25C29.2 21.2 27.5 19.5 25 19.5"
+        stroke="#D4AF6A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+    />
+</svg>
