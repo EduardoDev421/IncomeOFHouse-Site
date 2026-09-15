@@ -1,0 +1,684 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   font-family: Arial, Helvetica, sans-serif;
+   background: #0B0B0C;
+   color: #F5F5F5;
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.topo {
+   width: 100%;
+   height: 82px;
+   background: rgba(11, 11, 12, 0.97);
+   border-bottom: 1px solid #80631c;
+
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   padding: 0 7%;
+
+   position: relative;
+   z-index: 10;
+}
+
+
+/* LOGO */
+
+.logo a {
+   display: flex;
+   align-items: center;
+   text-decoration: none;
+   color: white;
+}
+
+.logo-casa {
+   color: #D4A72C;
+   font-size: 46px;
+   line-height: 1;
+   margin-right: 10px;
+}
+
+.logo-texto {
+   display: flex;
+   flex-direction: column;
+   letter-spacing: 2px;
+}
+
+.logo-texto span {
+   font-size: 13px;
+   color: #F5F5F5;
+}
+
+.logo-texto strong {
+   font-size: 19px;
+   color: #D4A72C;
+   letter-spacing: 4px;
+}
+
+
+/* MENU */
+
+.menu {
+   display: flex;
+   align-items: center;
+   gap: 55px;
+}
+
+.menu a {
+   color: #D4D4D8;
+   text-decoration: none;
+   font-size: 15px;
+   transition: 0.3s;
+}
+
+.menu a:hover {
+   color: #D4A72C;
+}
+
+
+/* ÍCONE USUÁRIO */
+
+.icone-usuario {
+   color: #D4A72C;
+   font-size: 32px;
+   cursor: pointer;
+}
+
+
+/* =========================
+   FUNDO PRINCIPAL
+========================= */
+
+main {
+   flex: 1;
+
+   position: relative;
+
+   /*
+   IMAGEM DE FUNDO
+   Coloque casa.jpg dentro da pasta img
+   */
+
+   background-image:
+      linear-gradient(
+         rgba(5, 5, 6, 0.72),
+         rgba(5, 5, 6, 0.92)
+      ),
+      url("../img/casa.png");
+
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+
+   overflow: hidden;
+}
+
+
+/* EFEITO ESCURO NAS BORDAS */
+
+main::after {
+   content: "";
+
+   position: absolute;
+
+   top: 0;
+   left: 0;
+
+   width: 100%;
+   height: 100%;
+
+   background:
+      radial-gradient(
+         circle at center,
+         transparent 20%,
+         rgba(0, 0, 0, 0.35) 100%
+      );
+
+   pointer-events: none;
+}
+
+
+/* EFEITO DE PLANTA ARQUITETÔNICA */
+
+main::before {
+   content: "";
+
+   position: absolute;
+
+   width: 100%;
+   height: 100%;
+
+   background-image:
+      linear-gradient(
+         90deg,
+         transparent 49.5%,
+         rgba(212, 167, 44, 0.035) 50%,
+         transparent 50.5%
+      ),
+      linear-gradient(
+         transparent 49.5%,
+         rgba(212, 167, 44, 0.035) 50%,
+         transparent 50.5%
+      );
+
+   background-size: 100px 100px;
+
+   opacity: 0.4;
+
+   pointer-events: none;
+
+   z-index: 1;
+}
+
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.conteudo {
+   width: 90%;
+   max-width: 1350px;
+
+   min-height: 680px;
+
+   margin: auto;
+
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   gap: 70px;
+
+   position: relative;
+
+   z-index: 3;
+}
+
+
+/* =========================
+   APRESENTAÇÃO ESQUERDA
+========================= */
+
+.apresentacao {
+   width: 52%;
+
+   padding-left: 30px;
+}
+
+.pequeno-titulo {
+   color: #D4A72C;
+
+   font-size: 13px;
+
+   letter-spacing: 4px;
+
+   margin-bottom: 20px;
+}
+
+.apresentacao h1 {
+   font-size: 56px;
+
+   line-height: 1.08;
+
+   font-weight: 500;
+
+   max-width: 650px;
+
+   margin-bottom: 25px;
+}
+
+.apresentacao h1 span {
+   display: block;
+
+   color: #D4A72C;
+}
+
+.descricao {
+   color: #D4D4D8;
+
+   font-size: 18px;
+
+   line-height: 1.7;
+
+   max-width: 570px;
+}
+
+
+/* =========================
+   DIFERENCIAIS
+========================= */
+
+.diferenciais {
+   display: flex;
+
+   gap: 45px;
+
+   margin-top: 50px;
+}
+
+.diferencial {
+   text-align: center;
+
+   min-width: 85px;
+}
+
+.diferencial .icone {
+   display: block;
+
+   color: #D4A72C;
+
+   font-size: 36px;
+
+   margin-bottom: 12px;
+}
+
+.diferencial p {
+   color: #E4E4E7;
+
+   font-size: 13px;
+
+   line-height: 1.4;
+}
+
+
+/* =========================
+   CARD DE SENHA
+========================= */
+
+.Container-Senha {
+   width: 480px;
+
+   background: rgba(21, 21, 21, 0.96);
+
+   border: 1px solid #B58B24;
+
+   border-radius: 16px;
+
+   padding: 45px;
+
+   box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.7),
+      0 0 40px rgba(212, 167, 44, 0.08);
+}
+
+
+/* =========================
+   LOGO DO CARD
+========================= */
+
+.logo-card {
+   display: flex;
+
+   justify-content: center;
+   align-items: center;
+
+   margin-bottom: 28px;
+}
+
+.logo-card .logo-casa {
+   font-size: 40px;
+}
+
+.logo-card .logo-texto span {
+   font-size: 11px;
+}
+
+.logo-card .logo-texto strong {
+   font-size: 16px;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+.bloco-auth h2 {
+   text-align: center;
+
+   font-size: 30px;
+
+   margin-bottom: 12px;
+
+   color: #F5F5F5;
+}
+
+
+/* TEXTO DO CARD */
+
+.texto-card {
+   text-align: center;
+
+   color: #A1A1AA;
+
+   font-size: 14px;
+
+   line-height: 1.6;
+
+   margin-bottom: 35px;
+}
+
+
+/* =========================
+   CAMPO
+========================= */
+
+.Campo {
+   margin-bottom: 25px;
+}
+
+.Campo label {
+   display: block;
+
+   color: #F5F5F5;
+
+   font-size: 14px;
+
+   margin-bottom: 9px;
+}
+
+
+/* INPUT */
+
+.campo-input {
+   height: 52px;
+
+   display: flex;
+
+   align-items: center;
+
+   background: #0B0B0C;
+
+   border: 1px solid #454549;
+
+   border-radius: 8px;
+
+   transition: 0.3s;
+}
+
+.campo-input:focus-within {
+   border-color: #D4A72C;
+
+   box-shadow:
+      0 0 12px rgba(212, 167, 44, 0.15);
+}
+
+
+/* ÍCONE DO INPUT */
+
+.icone-campo {
+   color: #D4A72C;
+
+   font-size: 19px;
+
+   margin-left: 15px;
+}
+
+
+/* INPUT */
+
+.campo-input input {
+   width: 100%;
+
+   height: 100%;
+
+   border: none;
+
+   outline: none;
+
+   background: transparent;
+
+   color: #F5F5F5;
+
+   padding: 0 15px;
+
+   font-size: 14px;
+}
+
+.campo-input input::placeholder {
+   color: #71717A;
+}
+
+
+/* =========================
+   BOTÃO
+========================= */
+
+.FormSenha button {
+   width: 100%;
+
+   height: 54px;
+
+   border: none;
+
+   border-radius: 8px;
+
+   background: #D4A72C;
+
+   color: #0B0B0C;
+
+   font-size: 16px;
+
+   font-weight: bold;
+
+   cursor: pointer;
+
+   transition: 0.3s;
+
+   box-shadow:
+      0 5px 20px rgba(212, 167, 44, 0.2);
+}
+
+.FormSenha button span {
+   margin-right: 8px;
+
+   font-size: 19px;
+}
+
+.FormSenha button:hover {
+   background: #F2C94C;
+
+   transform: translateY(-2px);
+
+   box-shadow:
+      0 8px 25px rgba(212, 167, 44, 0.35);
+}
+
+
+/* =========================
+   DIVISOR
+========================= */
+
+.divisor {
+   display: flex;
+
+   align-items: center;
+
+   gap: 15px;
+
+   margin: 30px 0;
+}
+
+.divisor span {
+   height: 1px;
+
+   background: #3F3F46;
+
+   flex: 1;
+}
+
+.divisor p {
+   color: #71717A;
+
+   font-size: 13px;
+}
+
+
+/* =========================
+   VOLTAR PARA LOGIN
+========================= */
+
+.voltar-login {
+   text-align: center;
+}
+
+.voltar-login p {
+   color: #A1A1AA;
+
+   font-size: 14px;
+}
+
+.voltar-login a {
+   color: #D4A72C;
+
+   text-decoration: none;
+
+   font-weight: bold;
+
+   margin-left: 5px;
+}
+
+.voltar-login a:hover {
+   color: #F2C94C;
+
+   text-decoration: underline;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.rodapé {
+   min-height: 70px;
+
+   border-top: 1px solid #80631c;
+
+   background: #0B0B0C;
+
+   padding: 0 7%;
+
+   display: flex;
+
+   align-items: center;
+
+   justify-content: space-between;
+
+   color: #A1A1AA;
+
+   font-size: 14px;
+}
+
+.links-footer {
+   display: flex;
+
+   gap: 20px;
+
+   align-items: center;
+}
+
+.links-footer a {
+   color: #D4D4D8;
+
+   text-decoration: none;
+}
+
+.links-footer a:hover {
+   color: #D4A72C;
+}
+
+.links-footer span {
+   color: #80631c;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+   .conteudo {
+      justify-content: center;
+   }
+
+   .apresentacao {
+      display: none;
+   }
+
+   .Container-Senha {
+      width: 480px;
+   }
+
+   .menu {
+      gap: 25px;
+   }
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 650px) {
+
+   .topo {
+      height: 70px;
+
+      padding: 0 20px;
+   }
+
+   .menu {
+      display: none;
+   }
+
+   .icone-usuario {
+      font-size: 28px;
+   }
+
+   .conteudo {
+      width: 100%;
+
+      min-height: 650px;
+
+      padding: 30px 20px;
+   }
+
+   .Container-Senha {
+      width: 100%;
+
+      padding: 30px 25px;
+   }
+
+   .bloco-auth h2 {
+      font-size: 25px;
+   }
+
+   .rodapé {
+      padding: 20px;
+
+      flex-direction: column;
+
+      gap: 15px;
+
+      text-align: center;
+   }
+
+   .links-footer {
+      flex-wrap: wrap;
+
+      justify-content: center;
+   }
+}

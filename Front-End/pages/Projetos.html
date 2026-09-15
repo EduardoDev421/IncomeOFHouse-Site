@@ -1,32 +1,647 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-   <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina de Projetos</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Income Of Houses - Projetos"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/Projetos.css"
+    >
+
+    <title>Projetos - Income Of Houses</title>
+
 </head>
+
+
 <body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
-      </div>
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html" class="ativo">Sobre</a>
-      </nav>
-   </header>
-         <main>
 
 
-         </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+    <!-- =====================================================
+         HEADER PRINCIPAL
+    ====================================================== -->
+
+    <header class="topo">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <a href="../index.html">
+
+                <div class="logo-casa">
+                    ⌂
+                </div>
+
+                <div class="logo-texto">
+
+                    <span>
+                        INCOME OF
+                    </span>
+
+                    <strong>
+                        HOUSES
+                    </strong>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="menu">
+
+            <a href="../index.html">
+                Início
+            </a>
+
+            <a href="Plantas.html">
+                Plantas
+            </a>
+
+            <a href="Profissionais.html">
+                Profissionais
+            </a>
+
+            <a href="Sobre.html">
+                Sobre
+            </a>
+
+        </nav>
+
+
+        <!-- LOGIN -->
+
+        <a
+            href="Login.html"
+            class="login"
+        >
+
+            <span class="icone-login">
+                ♙
+            </span>
+
+        </a>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main class="conteudo">
+
+
+        <h1 class="titulo-pagina">
+            Projetos
+        </h1>
+
+
+
+        <!-- =================================================
+             ÁREA DE FILTROS
+        ================================================== -->
+
+        <section class="filtros">
+
+            <h2>
+                Encontre o projeto perfeito para você
+            </h2>
+
+
+            <div class="filtros-grid">
+
+
+                <!-- PROJETOS -->
+
+                <div class="campo">
+
+                    <label for="projetos">
+                        Projetos
+                    </label>
+
+                    <select id="projetos">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="casa">
+                            Casa
+                        </option>
+
+                        <option value="sobrado">
+                            Sobrado
+                        </option>
+
+                        <option value="apartamento">
+                            Apartamento
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- QUARTOS -->
+
+                <div class="campo">
+
+                    <label for="quartos">
+                        Quartos
+                    </label>
+
+                    <select id="quartos">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="1">
+                            1 quarto
+                        </option>
+
+                        <option value="2">
+                            2 quartos
+                        </option>
+
+                        <option value="3">
+                            3 quartos
+                        </option>
+
+                        <option value="4">
+                            4 quartos
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- GARAGENS -->
+
+                <div class="campo">
+
+                    <label for="garagens">
+                        Garagens
+                    </label>
+
+                    <select id="garagens">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="1">
+                            1 vaga
+                        </option>
+
+                        <option value="2">
+                            2 vagas
+                        </option>
+
+                        <option value="3">
+                            3 vagas
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ÁREA DO TERRENO -->
+
+                <div class="campo">
+
+                    <label for="area">
+                        Área do terreno
+                    </label>
+
+                    <select id="area">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="100">
+                            Até 100m²
+                        </option>
+
+                        <option value="200">
+                            101m² - 200m²
+                        </option>
+
+                        <option value="300">
+                            201m² - 300m²
+                        </option>
+
+                        <option value="400">
+                            Acima de 300m²
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ESTILO -->
+
+                <div class="campo">
+
+                    <label for="estilo">
+                        Estilo
+                    </label>
+
+                    <select id="estilo">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="moderno">
+                            Moderno
+                        </option>
+
+                        <option value="classico">
+                            Clássico
+                        </option>
+
+                        <option value="minimalista">
+                            Minimalista
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- BOTÃO -->
+
+                <div class="campo campo-botao">
+
+                    <button type="button">
+                        🔍 &nbsp; Pesquisar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PROJETOS ACEITOS
+        ================================================== -->
+
+        <div class="titulo-aceitos">
+            Projetos aceitos
+        </div>
+
+
+
+        <!-- =================================================
+             GRID DE PROJETOS
+        ================================================== -->
+
+        <section class="grid-projetos">
+
+
+            <!-- PROJETO 1 -->
+
+            <article class="card-projeto">
+
+                <div class="imagem-projeto">
+
+                    <span>
+                        🖼
+                    </span>
+
+                </div>
+
+                <div class="informacoes-projeto">
+
+                    <h3>
+                        Projeto 1
+                    </h3>
+
+                    <a
+                        href="detalhes-profissional.html"
+                        class="botao-detalhes"
+                    >
+                        Detalhes
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJETO 2 -->
+
+            <article class="card-projeto">
+
+                <div class="imagem-projeto">
+
+                    <span>
+                        🖼
+                    </span>
+
+                </div>
+
+                <div class="informacoes-projeto">
+
+                    <h3>
+                        Projeto 2
+                    </h3>
+
+                    <a
+                        href="detalhes-profissional.html"
+                        class="botao-detalhes"
+                    >
+                        Detalhes
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJETO 3 -->
+
+            <article class="card-projeto">
+
+                <div class="imagem-projeto">
+
+                    <span>
+                        🖼
+                    </span>
+
+                </div>
+
+                <div class="informacoes-projeto">
+
+                    <h3>
+                        Projeto 3
+                    </h3>
+
+                    <a
+                        href="detalhes-profissional.html"
+                        class="botao-detalhes"
+                    >
+                        Detalhes
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJETO 4 -->
+
+            <article class="card-projeto">
+
+                <div class="imagem-projeto">
+
+                    <span>
+                        🖼
+                    </span>
+
+                </div>
+
+                <div class="informacoes-projeto">
+
+                    <h3>
+                        Projeto 4
+                    </h3>
+
+                    <a
+                        href="detalhes-profissional.html"
+                        class="botao-detalhes"
+                    >
+                        Detalhes
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJETO 5 -->
+
+            <article class="card-projeto">
+
+                <div class="imagem-projeto">
+
+                    <span>
+                        🖼
+                    </span>
+
+                </div>
+
+                <div class="informacoes-projeto">
+
+                    <h3>
+                        Projeto 5
+                    </h3>
+
+                    <a
+                        href="detalhes-profissional.html"
+                        class="botao-detalhes"
+                    >
+                        Detalhes
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJETO 6 -->
+
+            <article class="card-projeto">
+
+                <div class="imagem-projeto">
+
+                    <span>
+                        🖼
+                    </span>
+
+                </div>
+
+                <div class="informacoes-projeto">
+
+                    <h3>
+                        Projeto 6
+                    </h3>
+
+                    <a
+                        href="detalhes-profissional.html"
+                        class="botao-detalhes"
+                    >
+                        Detalhes
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJETO 7 -->
+
+            <article class="card-projeto">
+
+                <div class="imagem-projeto">
+
+                    <span>
+                        🖼
+                    </span>
+
+                </div>
+
+                <div class="informacoes-projeto">
+
+                    <h3>
+                        Projeto 7
+                    </h3>
+
+                    <a
+                        href="detalhes-profissional.html"
+                        class="botao-detalhes"
+                    >
+                        Detalhes
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJETO 8 -->
+
+            <article class="card-projeto">
+
+                <div class="imagem-projeto">
+
+                    <span>
+                        🖼
+                    </span>
+
+                </div>
+
+                <div class="informacoes-projeto">
+
+                    <h3>
+                        Projeto 8
+                    </h3>
+
+                    <a
+                        href="detalhes-profissional.html"
+                        class="botao-detalhes"
+                    >
+                        Detalhes
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJETO 9 -->
+
+            <article class="card-projeto">
+
+                <div class="imagem-projeto">
+
+                    <span>
+                        🖼
+                    </span>
+
+                </div>
+
+                <div class="informacoes-projeto">
+
+                    <h3>
+                        Projeto 9
+                    </h3>
+
+                    <a
+                        href="detalhes-profissional.html"
+                        class="botao-detalhes"
+                    >
+                        Detalhes
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="rodapé">
+
+        <p>
+            © IncomeOfHouses. Todos os direitos reservados.
+        </p>
+
+        <div class="links-footer">
+
+            <a href="TermosUso.html">
+                Termos de Uso
+            </a>
+
+            <span>
+                |
+            </span>
+
+            <a href="PoliticaPrivacidade.html">
+                Política de Privacidade
+            </a>
+
+        </div>
+
+    </footer>
+
+
 </body>
+
 </html>

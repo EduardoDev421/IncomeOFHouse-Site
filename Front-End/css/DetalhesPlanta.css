@@ -1,0 +1,744 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #2d2d2d;
+
+    color: #102c43;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.topo {
+    width: 100%;
+    height: 74px;
+
+    background: #0b0b0c;
+
+    border-bottom: 1px solid #80631c;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo a {
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+}
+
+.logo-casa {
+    color: #d4a72c;
+
+    font-size: 38px;
+
+    margin-right: 8px;
+}
+
+.logo-texto {
+    display: flex;
+    flex-direction: column;
+
+    letter-spacing: 2px;
+}
+
+.logo-texto span {
+    color: #f5f5f5;
+
+    font-size: 11px;
+}
+
+.logo-texto strong {
+    color: #d4a72c;
+
+    font-size: 17px;
+
+    letter-spacing: 3px;
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+.menu {
+    display: flex;
+    align-items: center;
+
+    gap: 45px;
+}
+
+.menu a {
+    color: #d4d4d8;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    padding: 9px 15px;
+
+    border: 1px solid transparent;
+
+    border-radius: 6px;
+
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #d4a72c;
+}
+
+.menu a.ativo {
+    color: #d4a72c;
+
+    border-color: #80631c;
+
+    background: rgba(212, 167, 44, 0.05);
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.login {
+    color: #d4a72c;
+
+    text-decoration: none;
+}
+
+.icone-login {
+    width: 32px;
+    height: 32px;
+
+    border: 2px solid #d4a72c;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =====================================================
+   ÁREA PRINCIPAL
+===================================================== */
+
+.detalhes {
+    flex: 1;
+
+    width: 100%;
+
+    padding: 45px 60px;
+
+    background: #2d2d2d;
+}
+
+
+/* =====================================================
+   CARD PRINCIPAL
+===================================================== */
+
+.card-detalhes {
+    width: 100%;
+
+    max-width: 980px;
+
+    min-height: 357px;
+
+    margin: 0 auto;
+
+    padding: 40px 64px;
+
+    background: #d5edf8;
+
+    border: 2px solid #587a9d;
+
+    border-radius: 15px;
+
+    display: grid;
+
+    grid-template-columns: 303px 1fr;
+
+    gap: 30px;
+}
+
+
+/* =====================================================
+   IMAGEM DA PLANTA
+===================================================== */
+
+.imagem-planta {
+    width: 303px;
+    height: 283px;
+
+    border: 1px solid #7892a8;
+
+    background: #cfe7f2;
+
+    overflow: hidden;
+}
+
+.imagem-planta img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =====================================================
+   INFORMAÇÕES
+===================================================== */
+
+.info-planta {
+    color: #102c43;
+}
+
+.info-planta h1 {
+    font-size: 32px;
+
+    line-height: 1.1;
+
+    margin-bottom: 10px;
+}
+
+.info-planta h2 {
+    font-size: 20px;
+
+    margin-bottom: 14px;
+}
+
+.descricao {
+    font-size: 16px;
+
+    line-height: 1.48;
+
+    margin-bottom: 8px;
+}
+
+
+/* =====================================================
+   CARACTERÍSTICAS
+===================================================== */
+
+.caracteristicas {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    background: rgba(183, 211, 224, 0.8);
+
+    border: 1px solid #587a8f;
+
+    border-radius: 4px;
+
+    padding: 7px 12px;
+}
+
+.item {
+    min-height: 43px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item h3 {
+    color: #102c43;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.item p {
+    color: #38566b;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   BOTÃO PRINCIPAL
+===================================================== */
+
+.info-planta button {
+    margin-top: 14px;
+
+    width: 145px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    background: #587586;
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.info-planta button:hover {
+    background: #3f6172;
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   PARTE INFERIOR
+===================================================== */
+
+.parte-inferior {
+    width: 100%;
+
+    max-width: 980px;
+
+    margin: 33px auto 0;
+
+    display: grid;
+
+    grid-template-columns: 1.55fr 1fr;
+
+    gap: 50px;
+}
+
+
+/* =====================================================
+   CARDS INFERIORES
+===================================================== */
+
+.card-avaliacao,
+.card-orcamento {
+    min-height: 261px;
+
+    padding: 25px 26px;
+
+    background: #bdd5e1;
+
+    border: 1px solid #587a8f;
+
+    border-radius: 4px;
+
+    position: relative;
+}
+
+
+/* =====================================================
+   TÍTULOS
+===================================================== */
+
+.card-avaliacao h2,
+.card-orcamento h2 {
+    color: #28445a;
+
+    font-size: 21px;
+
+    margin-bottom: 11px;
+}
+
+
+/* =====================================================
+   AVALIAÇÃO
+===================================================== */
+
+.nota {
+    display: block;
+
+    color: #111f2c;
+
+    font-size: 22px;
+
+    margin-bottom: 2px;
+}
+
+.estrelas {
+    color: #173b55;
+
+    font-size: 25px;
+
+    letter-spacing: 2px;
+
+    line-height: 1;
+
+    margin-bottom: 8px;
+}
+
+.quantidade {
+    color: #102c43;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   LINK DE COMENTÁRIOS
+===================================================== */
+
+.ver-comentarios {
+    position: absolute;
+
+    top: 126px;
+
+    right: 34px;
+
+    color: #28445a;
+
+    font-size: 9px;
+
+    text-decoration: none;
+}
+
+.ver-comentarios:hover {
+    text-decoration: underline;
+}
+
+
+/* =====================================================
+   COMENTÁRIO
+===================================================== */
+
+.comentario {
+    width: 100%;
+
+    height: 81px;
+
+    margin-top: 8px;
+
+    padding: 14px 16px;
+
+    background: #d5edf8;
+
+    border-radius: 4px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.comentario img {
+    width: 52px;
+    height: 48px;
+
+    object-fit: cover;
+
+    border: 1px solid #587a8f;
+}
+
+.comentario div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.comentario strong {
+    color: #102c43;
+
+    font-size: 14px;
+}
+
+.comentario span {
+    color: #5a7182;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   ORÇAMENTO
+===================================================== */
+
+.card-orcamento h2 {
+    margin-bottom: 8px;
+}
+
+.card-orcamento > p {
+    color: #466276;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    max-width: 300px;
+
+    margin-bottom: 21px;
+}
+
+.card-orcamento h3 {
+    color: #28445a;
+
+    font-size: 15px;
+
+    margin-bottom: 12px;
+}
+
+.card-orcamento > span {
+    color: #557083;
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   BOTÃO ORÇAMENTO
+===================================================== */
+
+.card-orcamento button {
+    position: absolute;
+
+    right: 12px;
+
+    bottom: 23px;
+
+    width: 96px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    background: #587586;
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.card-orcamento button:hover {
+    background: #3f6172;
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.rodapé {
+    min-height: 65px;
+
+    background: #0b0b0c;
+
+    border-top: 1px solid #80631c;
+
+    padding: 15px 7%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    color: #a1a1aa;
+
+    font-size: 13px;
+}
+
+.links-footer {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.links-footer a {
+    color: #d4d4d8;
+
+    text-decoration: none;
+}
+
+.links-footer a:hover {
+    color: #d4a72c;
+}
+
+.links-footer span {
+    color: #80631c;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .detalhes {
+        padding: 30px;
+    }
+
+    .card-detalhes {
+        padding: 30px;
+
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+    .imagem-planta {
+        width: 100%;
+        max-width: 400px;
+
+        margin: 0 auto;
+    }
+
+    .parte-inferior {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media (max-width: 550px) {
+
+    .topo {
+        height: 70px;
+
+        padding: 0 20px;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .detalhes {
+        padding: 15px;
+    }
+
+    .card-detalhes {
+        padding: 20px;
+
+        border-radius: 10px;
+    }
+
+    .info-planta h1 {
+        font-size: 27px;
+    }
+
+    .info-planta h2 {
+        font-size: 18px;
+    }
+
+    .descricao {
+        font-size: 14px;
+    }
+
+    .caracteristicas {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 8px;
+    }
+
+    .info-planta button {
+        width: 100%;
+    }
+
+    .card-avaliacao,
+    .card-orcamento {
+        padding: 20px;
+    }
+
+    .ver-comentarios {
+        position: static;
+
+        display: block;
+
+        text-align: right;
+
+        margin-top: 8px;
+    }
+
+    .comentario {
+        margin-top: 10px;
+    }
+
+    .card-orcamento {
+        min-height: 280px;
+    }
+
+    .card-orcamento button {
+        position: static;
+
+        display: block;
+
+        width: 100%;
+
+        margin-top: 30px;
+    }
+
+    .rodapé {
+        flex-direction: column;
+
+        gap: 12px;
+
+        text-align: center;
+
+        padding: 18px 20px;
+    }
+
+    .links-footer {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+}

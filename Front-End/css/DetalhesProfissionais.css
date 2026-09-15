@@ -1,0 +1,801 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #0B0B0C;
+    color: #F5F5F5;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.topo {
+    width: 100%;
+    height: 74px;
+
+    background: #0B0B0C;
+
+    border-bottom: 1px solid #80631c;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    position: relative;
+    z-index: 10;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo a {
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+}
+
+.logo-casa {
+    color: #D4A72C;
+
+    font-size: 38px;
+    line-height: 1;
+
+    margin-right: 8px;
+}
+
+.logo-texto {
+    display: flex;
+    flex-direction: column;
+
+    letter-spacing: 2px;
+}
+
+.logo-texto span {
+    color: #F5F5F5;
+
+    font-size: 11px;
+}
+
+.logo-texto strong {
+    color: #D4A72C;
+
+    font-size: 17px;
+
+    letter-spacing: 3px;
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+.menu {
+    display: flex;
+    align-items: center;
+
+    gap: 45px;
+}
+
+.menu a {
+    color: #D4D4D8;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    padding: 9px 15px;
+
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    transition: 0.3s ease;
+}
+
+.menu a:hover {
+    color: #D4A72C;
+}
+
+.menu a.ativo {
+    color: #D4A72C;
+
+    border: 1px solid #80631c;
+
+    background: rgba(212, 167, 44, 0.05);
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.login {
+    color: #D4A72C;
+
+    text-decoration: none;
+}
+
+.icone-login {
+    width: 32px;
+    height: 32px;
+
+    border: 2px solid #D4A72C;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+===================================================== */
+
+.detalhes-profissional {
+    position: relative;
+
+    flex: 1;
+
+    width: 100%;
+
+    padding: 55px 7% 60px;
+
+    background-color: #0B0B0C;
+
+    background-image:
+        linear-gradient(
+            rgba(5, 5, 6, 0.72),
+            rgba(5, 5, 6, 0.92)
+        ),
+        url("../img/detalhes-profissional.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   EFEITO ESCURO
+===================================================== */
+
+.detalhes-profissional::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 20%,
+            rgba(0, 0, 0, 0.55) 100%
+        );
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =====================================================
+   PERFIL
+===================================================== */
+
+.perfil-profissional {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: 0 auto 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 55px;
+}
+
+
+/* =====================================================
+   IMAGEM DO PROFISSIONAL
+===================================================== */
+
+.imagem-profissional {
+    width: 370px;
+    height: 330px;
+
+    flex-shrink: 0;
+
+    background: #111113;
+
+    border: 1px solid #80631c;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.45);
+}
+
+.imagem-profissional img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =====================================================
+   INFORMAÇÕES DO PROFISSIONAL
+===================================================== */
+
+.informacoes-profissional {
+    flex: 1;
+}
+
+.informacoes-profissional h1 {
+    color: #F5F5F5;
+
+    font-size: 46px;
+
+    font-weight: 700;
+
+    line-height: 1.1;
+
+    margin-bottom: 8px;
+}
+
+.informacoes-profissional h1 span {
+    color: #D4A72C;
+}
+
+.profissao {
+    color: #D4D4D8;
+
+    font-size: 22px;
+
+    font-weight: 400;
+
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   AVALIAÇÃO
+===================================================== */
+
+.avaliacao {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 28px;
+}
+
+.estrela {
+    color: #F2C94C;
+
+    font-size: 28px;
+}
+
+.avaliacao strong {
+    color: #F5F5F5;
+
+    font-size: 24px;
+}
+
+.avaliacao small {
+    color: #A1A1AA;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   DADOS
+===================================================== */
+
+.dados {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 90px;
+
+    margin-bottom: 25px;
+}
+
+.dado h3 {
+    color: #F5F5F5;
+
+    font-size: 18px;
+
+    margin-bottom: 7px;
+}
+
+.dado p {
+    color: #A1A1AA;
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   DESCRIÇÃO
+===================================================== */
+
+.descricao {
+    max-width: 650px;
+
+    color: #D4D4D8;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.informacoes {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: 1.5fr 1fr;
+
+    gap: 30px;
+}
+
+.card-avaliacoes,
+.card-orcamento {
+    position: relative;
+
+    background: rgba(11, 11, 12, 0.94);
+
+    border: 1px solid #80631c;
+
+    border-radius: 8px;
+
+    padding: 28px;
+
+    min-height: 285px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =====================================================
+   TÍTULOS DOS CARDS
+===================================================== */
+
+.card-avaliacoes h2,
+.card-orcamento h2 {
+    color: #F5F5F5;
+
+    font-size: 27px;
+
+    margin-bottom: 14px;
+}
+
+
+/* =====================================================
+   NOTA GERAL
+===================================================== */
+
+.nota-geral strong {
+    display: block;
+
+    color: #F2C94C;
+
+    font-size: 32px;
+
+    margin-bottom: 4px;
+}
+
+.estrelas {
+    color: #F2C94C;
+
+    font-size: 25px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 5px;
+}
+
+.nota-geral small {
+    color: #A1A1AA;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   LINK DE AVALIAÇÕES
+===================================================== */
+
+.ver-avaliacoes {
+    display: block;
+
+    text-align: right;
+
+    margin-top: -25px;
+
+    color: #D4A72C;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.3s ease;
+}
+
+.ver-avaliacoes:hover {
+    color: #F2C94C;
+}
+
+
+/* =====================================================
+   COMENTÁRIO
+===================================================== */
+
+.comentario {
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    margin-top: 22px;
+
+    padding: 15px;
+
+    border: 1px solid #3F3F46;
+
+    border-radius: 7px;
+
+    background: rgba(21, 21, 21, 0.85);
+}
+
+.comentario img {
+    width: 55px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+.comentario h4 {
+    color: #F5F5F5;
+
+    font-size: 16px;
+
+    margin-bottom: 5px;
+}
+
+.comentario p {
+    color: #A1A1AA;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   ORÇAMENTO
+===================================================== */
+
+.card-orcamento h2 {
+    margin-bottom: 10px;
+}
+
+.card-orcamento > p {
+    color: #A1A1AA;
+
+    font-size: 16px;
+
+    line-height: 1.5;
+}
+
+.card-orcamento .texto-orcamento {
+    max-width: 380px;
+
+    margin-bottom: 25px;
+}
+
+.card-orcamento h3 {
+    color: #F5F5F5;
+
+    font-size: 18px;
+
+    margin-bottom: 7px;
+}
+
+
+/* =====================================================
+   BOTÃO SOLICITAR
+===================================================== */
+
+.card-orcamento button {
+    position: absolute;
+
+    right: 28px;
+    bottom: 25px;
+
+    width: 130px;
+    height: 52px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #D4A72C;
+
+    color: #0B0B0C;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.card-orcamento button:hover {
+    background: #F2C94C;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(212, 167, 44, 0.30);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.rodapé {
+    min-height: 65px;
+
+    background: #0B0B0C;
+
+    border-top: 1px solid #80631c;
+
+    padding: 15px 7%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    color: #A1A1AA;
+
+    font-size: 13px;
+}
+
+.links-footer {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.links-footer a {
+    color: #D4D4D8;
+
+    text-decoration: none;
+
+    transition: 0.3s ease;
+}
+
+.links-footer a:hover {
+    color: #D4A72C;
+}
+
+.links-footer span {
+    color: #80631c;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .topo {
+        padding: 0 5%;
+    }
+
+    .menu {
+        gap: 15px;
+    }
+
+    .detalhes-profissional {
+        padding: 40px 5% 50px;
+    }
+
+    .perfil-profissional {
+        gap: 30px;
+    }
+
+    .imagem-profissional {
+        width: 320px;
+        height: 300px;
+    }
+
+    .informacoes-profissional h1 {
+        font-size: 38px;
+    }
+
+    .dados {
+        gap: 45px;
+    }
+
+    .informacoes {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .topo {
+        height: 70px;
+
+        padding: 0 20px;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .logo-casa {
+        font-size: 32px;
+    }
+
+    .logo-texto strong {
+        font-size: 15px;
+    }
+
+    .detalhes-profissional {
+        padding: 30px 20px 40px;
+    }
+
+    .perfil-profissional {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 25px;
+    }
+
+    .imagem-profissional {
+        width: 100%;
+        height: 280px;
+    }
+
+    .informacoes-profissional h1 {
+        font-size: 34px;
+    }
+
+    .profissao {
+        font-size: 20px;
+    }
+
+    .dados {
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+    .informacoes {
+        grid-template-columns: 1fr;
+    }
+
+    .card-avaliacoes,
+    .card-orcamento {
+        padding: 22px;
+    }
+
+    .ver-avaliacoes {
+        margin-top: 15px;
+
+        text-align: left;
+    }
+
+    .card-orcamento {
+        min-height: 300px;
+    }
+
+    .card-orcamento button {
+        position: static;
+
+        width: 100%;
+
+        margin-top: 25px;
+    }
+
+    .rodapé {
+        padding: 18px 20px;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        text-align: center;
+    }
+
+    .links-footer {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+}

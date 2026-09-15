@@ -1,0 +1,564 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: #ffffff;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.58),
+            rgba(0, 0, 0, 0.72)
+        ),
+        url("../img/fundo-casa.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.topo {
+    width: 100%;
+
+    height: 75px;
+
+    background: #080808;
+
+    border-bottom: 1px solid #b99620;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 7%;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo a {
+    display: flex;
+
+    align-items: center;
+
+    text-decoration: none;
+}
+
+.logo-casa {
+    color: #d8ad27;
+
+    font-size: 31px;
+
+    line-height: 1;
+
+    margin-right: 10px;
+}
+
+.logo-texto {
+    display: flex;
+
+    flex-direction: column;
+
+    letter-spacing: 1px;
+}
+
+.logo-texto span {
+    color: #ffffff;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+.logo-texto strong {
+    color: #d8ad27;
+
+    font-size: 16px;
+
+    letter-spacing: 3px;
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+.menu {
+    display: flex;
+
+    align-items: center;
+
+    gap: 50px;
+}
+
+.menu a {
+    color: #eeeeee;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: 0.2s;
+}
+
+.menu a:hover {
+    color: #d8ad27;
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.login {
+    color: #d8ad27;
+
+    text-decoration: none;
+}
+
+.icone-login {
+    width: 28px;
+
+    height: 28px;
+
+    border: 2px solid #d8ad27;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.conteudo {
+    flex: 1;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding: 64px 20px;
+}
+
+
+/* =====================================================
+   PAINEL
+===================================================== */
+
+.painel {
+    width: 100%;
+
+    max-width: 850px;
+
+    min-height: 550px;
+
+    display: grid;
+
+    grid-template-columns: 205px 1fr;
+
+    overflow: hidden;
+
+    background: rgba(15, 15, 15, 0.94);
+
+    border: 1px solid #806817;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.65);
+}
+
+
+/* =====================================================
+   BARRA LATERAL
+===================================================== */
+
+.barra-lateral {
+    background: rgba(25, 25, 25, 0.96);
+
+    padding: 30px 23px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    border-right: 1px solid #4c401c;
+}
+
+.barra-lateral a {
+    color: #bdbdbd;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    line-height: 1.4;
+
+    padding: 9px 0;
+
+    margin-bottom: 10px;
+
+    transition: 0.2s;
+}
+
+.barra-lateral a:hover {
+    color: #d8ad27;
+}
+
+.barra-lateral a.selecionado {
+    color: #d8ad27;
+}
+
+
+/* =====================================================
+   ÁREA PRINCIPAL
+===================================================== */
+
+.area-principal {
+    padding: 38px 28px;
+
+    background: rgba(17, 17, 17, 0.95);
+}
+
+.area-principal h1 {
+    color: #ffffff;
+
+    font-size: 22px;
+
+    margin-bottom: 8px;
+}
+
+.area-principal h2 {
+    color: #bdbdbd;
+
+    font-size: 13px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   CAIXA DOS PROJETOS
+===================================================== */
+
+.caixa-projetos {
+    width: 100%;
+
+    min-height: 420px;
+
+    background: #171717;
+
+    border: 1px solid #555555;
+
+    border-radius: 5px;
+
+    padding: 20px 12px;
+}
+
+.caixa-projetos > h3 {
+    color: #ffffff;
+
+    font-size: 18px;
+
+    margin: 0 0 28px 18px;
+}
+
+
+/* =====================================================
+   PROJETO
+===================================================== */
+
+.projeto {
+    width: 100%;
+
+    min-height: 100px;
+
+    padding: 18px;
+
+    background: #101010;
+
+    border: 1px solid #4e4e4e;
+
+    border-radius: 5px;
+
+    margin-bottom: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    transition: 0.2s;
+}
+
+.projeto:hover {
+    border-color: #d8ad27;
+
+    background: #141414;
+}
+
+.projeto h4 {
+    color: #ffffff;
+
+    font-size: 19px;
+
+    margin-bottom: 14px;
+}
+
+.projeto p {
+    color: #aaaaaa;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   BOTÃO
+===================================================== */
+
+.botao-projeto {
+    width: 130px;
+
+    height: 36px;
+
+    border: 1px solid #d8ad27;
+
+    border-radius: 5px;
+
+    background: #d8ad27;
+
+    color: #080808;
+
+    text-decoration: none;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+
+    flex-shrink: 0;
+}
+
+.botao-projeto:hover {
+    background: #f0c93d;
+
+    border-color: #f0c93d;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.rodapé {
+    min-height: 65px;
+
+    background: #080808;
+
+    border-top: 1px solid #5b4a19;
+
+    color: #aaaaaa;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 15px 7%;
+
+    font-size: 12px;
+}
+
+.links-footer {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.links-footer a {
+    color: #dddddd;
+
+    text-decoration: none;
+}
+
+.links-footer a:hover {
+    color: #d8ad27;
+}
+
+.links-footer span {
+    color: #62531f;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .topo {
+        padding: 0 30px;
+    }
+
+    .menu {
+        gap: 25px;
+    }
+
+    .conteudo {
+        padding: 40px 25px;
+    }
+
+    .painel {
+        max-width: 100%;
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .topo {
+        height: 70px;
+
+        padding: 0 20px;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .logo-texto strong {
+        font-size: 14px;
+    }
+
+    .conteudo {
+        padding: 20px 15px;
+    }
+
+    .painel {
+        display: block;
+
+        min-height: auto;
+
+        border-radius: 10px;
+    }
+
+    .barra-lateral {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 5px;
+
+        padding: 20px;
+
+        border-right: none;
+
+        border-bottom: 1px solid #4c401c;
+    }
+
+    .barra-lateral a {
+        margin-bottom: 5px;
+    }
+
+    .area-principal {
+        padding: 25px 18px;
+    }
+
+    .caixa-projetos {
+        min-height: auto;
+
+        padding-bottom: 20px;
+    }
+
+    .projeto {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .botao-projeto {
+        width: 100%;
+    }
+
+    .rodapé {
+        flex-direction: column;
+
+        gap: 12px;
+
+        text-align: center;
+
+        padding: 18px 20px;
+    }
+
+    .links-footer {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+}
