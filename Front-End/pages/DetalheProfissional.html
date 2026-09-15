@@ -1,120 +1,316 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-   <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina do Detalhe do Profissional</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Income Of Houses - Detalhes do profissional">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/DetalhesProfissionais.css">
+
+    <title>Profissional - Income Of Houses</title>
 </head>
+
 <body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
-      </div>
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html" class="ativo">Sobre</a>
-      </nav>
-      <div class="iconelogin">
-         <img src="" alt="iconeLogin" href="../pages/Login.html"  class="iconelogin">
-      </div>
-   </header>
-         <main class="detalhes-profissional">
 
-            <!-- Perfil -->
-            <section class="perfil-profissional">
+    <!-- =========================
+         HEADER
+    ========================== -->
 
-               <div class="imagem-profissional">
-                     <img src="img/profissional.jpg" alt="Foto do profissional">
-               </div>
+    <header class="topo">
 
-               <div class="informacoes-profissional">
+        <!-- LOGO -->
+        <div class="logo">
 
-                     <h1>Nome do Profissional</h1>
+            <a href="../index.html">
 
-                     <span class="profissao">Arquiteto</span>
+                <div class="logo-casa">
+                    ⌂
+                </div>
 
-                     <div class="avaliacao">
-                        <span class="estrela">★</span>
-                        <strong>0,0</strong>
-                        <small>(000 avaliações)</small>
-                     </div>
+                <div class="logo-texto">
+                    <span>INCOME OF</span>
+                    <strong>HOUSES</strong>
+                </div>
 
-                     <div class="dados">
-                        <div>
-                           <h3>Cidade</h3>
-                           <p>Brasília - DF</p>
-                        </div>
+            </a>
 
-                        <div>
-                           <h3>Tempo de Experiência</h3>
-                           <p>8 anos</p>
-                        </div>
-                     </div>
+        </div>
 
-                     <p class="descricao">
-                        Descriçao do Profissional
-                     </p>
 
-               </div>
+        <!-- MENU -->
+        <nav class="menu">
 
-            </section>
+            <a href="../index.html">
+                Início
+            </a>
 
-            <section class="informacoes">
+            <a href="Plantas.html">
+                Plantas
+            </a>
 
-               <article class="card-avaliacoes">
+            <a href="Profissionais.html" class="ativo">
+                Profissionais
+            </a>
 
-                     <h2>Avaliações dos Clientes</h2>
+            <a href="Sobre.html">
+                Sobre Nós
+            </a>
 
-                     <div class="nota-geral">
-                        <strong>0,0</strong>
+        </nav>
 
-                        <div class="estrelas">
-                           ★ ☆ ☆ ☆ ☆
-                        </div>
 
-                        <small>(000 avaliações)</small>
-                     </div>
+        <!-- LOGIN -->
+        <a href="Login.html" class="login" aria-label="Login">
 
-                     <a href="../pages/Comentarios.html">Ver todas as avaliações</a>
+            <span class="icone-login">
+                ◯
+            </span>
 
-                     <div class="comentario">
+        </a>
 
-                        <img src="img/usuario.png" alt="Cliente">
+    </header>
 
-                        <div>
-                           <h4>Nome do Cliente</h4>
-                           <p>Comentário...</p>
-                        </div>
 
-                     </div>
+    <!-- =========================
+         CONTEÚDO PRINCIPAL
+    ========================== -->
 
-               </article>
+    <main class="detalhes-profissional">
 
-               <aside class="card-orcamento">
 
-                     <h2>Solicitar Orçamento</h2>
+        <!-- =========================
+             PERFIL
+        ========================== -->
 
-                     <p>
-                        Descreva seu projeto e receba um orçamento personalizado.
-                     </p>
+        <section class="perfil-profissional">
 
-                     <h3>Formas de Pagamento</h3>
 
-                     <p>PIX, Boleto e Cartão de Crédito</p>
+            <!-- FOTO -->
+            <div class="imagem-profissional">
 
-                     <button type="summit">Solicitar</button>
+                <img
+                    src="../img/profissional.jpg"
+                    alt="Foto do profissional"
+                >
 
-               </aside>
-            </section>
-         </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+            </div>
+
+
+            <!-- INFORMAÇÕES -->
+            <div class="informacoes-profissional">
+
+                <h1>
+                    Nome do
+                    <span>Profissional</span>
+                </h1>
+
+
+                <h2 class="profissao">
+                    Arquiteto
+                </h2>
+
+
+                <!-- AVALIAÇÃO -->
+                <div class="avaliacao">
+
+                    <span class="estrela">
+                        ★
+                    </span>
+
+                    <strong>
+                        0,0
+                    </strong>
+
+                    <small>
+                        (000 avaliações)
+                    </small>
+
+                </div>
+
+
+                <!-- DADOS -->
+                <div class="dados">
+
+                    <div class="dado">
+
+                        <h3>
+                            Cidade
+                        </h3>
+
+                        <p>
+                            Brasília - DF
+                        </p>
+
+                    </div>
+
+
+                    <div class="dado">
+
+                        <h3>
+                            Tempo de Experiência
+                        </h3>
+
+                        <p>
+                            8 anos
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIÇÃO -->
+                <p class="descricao">
+                    Profissional especializado em projetos
+                    arquitetônicos modernos e residenciais.
+                    Trabalha com soluções personalizadas,
+                    buscando unir sofisticação, funcionalidade
+                    e qualidade em cada projeto.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CARDS INFERIORES
+        ========================== -->
+
+        <section class="informacoes">
+
+
+            <!-- =========================
+                 AVALIAÇÕES
+            ========================== -->
+
+            <article class="card-avaliacoes">
+
+                <h2>
+                    Avaliação do Cliente
+                </h2>
+
+
+                <div class="nota-geral">
+
+                    <strong>
+                        0,0
+                    </strong>
+
+                    <div class="estrelas">
+                        ☆ ☆ ☆ ☆ ☆
+                    </div>
+
+                    <small>
+                        (000 avaliações)
+                    </small>
+
+                </div>
+
+
+                <a
+                    href="Comentarios.html"
+                    class="ver-avaliacoes"
+                >
+                    Ver mais Comentários →
+                </a>
+
+
+                <!-- COMENTÁRIO -->
+                <div class="comentario">
+
+                    <img
+                        src="../img/usuario.png"
+                        alt="Foto do cliente"
+                    >
+
+                    <div>
+
+                        <h4>
+                            Nome do Cliente
+                        </h4>
+
+                        <p>
+                            Comentário do cliente...
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =========================
+                 ORÇAMENTO
+            ========================== -->
+
+            <aside class="card-orcamento">
+
+                <h2>
+                    Solicitar Orçamento
+                </h2>
+
+
+                <p class="texto-orcamento">
+                    Descreva seu projeto e receba um
+                    orçamento personalizado.
+                </p>
+
+
+                <h3>
+                    Formas de Pagamento
+                </h3>
+
+
+                <p>
+                    PIX, Boleto e Cartão de Crédito
+                </p>
+
+
+                <button type="button">
+                    Solicitar
+                </button>
+
+            </aside>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="rodapé">
+
+        <p>
+            © IncomeOfHouses. Todos os direitos reservados.
+        </p>
+
+
+        <div class="links-footer">
+
+            <a href="TermosUso.html">
+                Termos de Uso
+            </a>
+
+            <span>|</span>
+
+            <a href="PoliticaPrivacidade.html">
+                Política de Privacidade
+            </a>
+
+        </div>
+
+    </footer>
+
+
 </body>
+
 </html>

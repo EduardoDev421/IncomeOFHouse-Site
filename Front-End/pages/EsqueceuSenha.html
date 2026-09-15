@@ -1,50 +1,201 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+
+   <meta name="description" content="IncomeofHouses - Recuperação de senha">
+
    <link rel="stylesheet" href="../css/EsqueceuSenha.css">
    <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina de Esqueceu Senha</title>
+
+   <title>Esqueceu a senha - Income Of Houses</title>
 </head>
+
 <body>
+
+   <!-- HEADER -->
    <header class="topo">
+
       <div class="logo">
-         <img src="" alt="Logo Income of Houses">
+         <a href="../index.html">
+            <span class="logo-casa">⌂</span>
+
+            <div class="logo-texto">
+               <span>INCOME OF</span>
+               <strong>HOUSES</strong>
+            </div>
+         </a>
       </div>
+
       <nav class="menu">
          <a href="../index.html">Início</a>
          <a href="../pages/Plantas.html">Plantas</a>
          <a href="../pages/Profissionais.html">Profissionais</a>
          <a href="../pages/Sobre.html">Sobre</a>
       </nav>
+
+      <div class="icone-usuario">
+         <span>♙</span>
+      </div>
+
    </header>
-         <main>
-            <div class="Linha"></div>
-            <section>
-               <div class="Container-Senha">
-                  <div class="bloco-auth">
 
-                     <h1>Esqueceu sua senha?</h1>
-                     <p>Digite seu email para receber instruções de recuperação de senha.</p>
 
-                     <form class="FormSenha" action="" method="post">
-                        <div class="Campo">
-                           <label for="email">Email:</label>
-                           <input type="email" id="email" name="email" placeholder="Digite seu email">
-                        </div>
+   <!-- CONTEÚDO -->
+   <main>
 
-                        <button type="submit">Enviar</button>
-                     </form>
-                  </div>
+      <div class="conteudo">
+
+         <!-- LADO ESQUERDO -->
+         <section class="apresentacao">
+
+            <p class="pequeno-titulo">INCOME OF HOUSES</p>
+
+            <h1>
+               Seu próximo projeto
+               <span>começa aqui.</span>
+            </h1>
+
+            <p class="descricao">
+               Recupere o acesso à sua conta e continue
+               explorando projetos e profissionais.
+            </p>
+
+            <div class="diferenciais">
+
+               <div class="diferencial">
+                  <span class="icone">⌂</span>
+                  <p>Arquitetura</p>
                </div>
-            </section>
-         </main>
+
+               <div class="diferencial">
+                  <span class="icone">⌑</span>
+                  <p>Engenharia</p>
+               </div>
+
+               <div class="diferencial">
+                  <span class="icone">□</span>
+                  <p>Design de<br>Interiores</p>
+               </div>
+
+               <div class="diferencial">
+                  <span class="icone">♧</span>
+                  <p>Paisagismo</p>
+               </div>
+
+            </div>
+
+         </section>
+
+
+         <!-- CARD DE RECUPERAÇÃO -->
+         <section class="Container-Senha">
+
+            <div class="bloco-auth">
+
+               <div class="logo-card">
+
+                  <span class="logo-casa">⌂</span>
+
+                  <div class="logo-texto">
+                     <span>INCOME OF</span>
+                     <strong>HOUSES</strong>
+                  </div>
+
+               </div>
+
+               <h2>Esqueceu sua senha?</h2>
+
+               <p class="texto-card">
+                  Digite seu e-mail para receber instruções
+                  de recuperação de senha.
+               </p>
+
+
+               <form class="FormSenha" action="" method="post">
+
+                  <div class="Campo">
+
+                     <label for="email">E-mail</label>
+
+                     <div class="campo-input">
+
+                        <span class="icone-campo">✉</span>
+
+                        <input
+                           type="email"
+                           id="email"
+                           name="email"
+                           placeholder="Digite seu e-mail"
+                           required
+                        >
+
+                     </div>
+
+                  </div>
+
+
+                  <button type="submit">
+
+                     <span>↗</span>
+
+                     Enviar instruções
+
+                  </button>
+
+               </form>
+
+
+               <div class="divisor">
+                  <span></span>
+                  <p>ou</p>
+                  <span></span>
+               </div>
+
+
+               <div class="voltar-login">
+
+                  <p>
+                     Lembrou sua senha?
+                     <a href="../pages/Login.html">Entrar</a>
+                  </p>
+
+               </div>
+
+            </div>
+
+         </section>
+
+      </div>
+
+   </main>
+
+
+   <!-- FOOTER -->
    <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+
+      <p>
+         © IncomeOfHouses. Todos os direitos reservados.
+      </p>
+
+      <div class="links-footer">
+
+         <a href="../pages/TermosUso.html">
+            Termos de Uso
+         </a>
+
+         <span>|</span>
+
+         <a href="../pages/PoliticaPrivacidade.html">
+            Política de Privacidade
+         </a>
+
+      </div>
+
    </footer>
+
 </body>
+
 </html>
