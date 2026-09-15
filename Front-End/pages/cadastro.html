@@ -1,69 +1,306 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-   <link rel="stylesheet" href="../css/Cadastro.css">
-   <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina do Cadastro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Income Of Houses - Cadastro de usuários">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/Cadastro.css">
+
+    <title>Cadastro | Income Of Houses</title>
 </head>
+
 <body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
-      </div>
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html">Sobre</a>
-      </nav>
-   </header>
-         <main class="Container-Auth">
-            <div class="Linha"></div>
-            <section class="bloco-auth">
-               
-               <h1>Cadastre-se</h1>
-               <form class="formCadastro">
-                  <div class="Campo">
-                     <label for="nomeCadastro">Nome:</label>
-                     <input type="text" id="nomeCadastro" placeholder="Digite seu nome" required>
 
-                     <label for="emailCadastro">Email:</label>
-                     <input type="text" id="emailCadastro" placeholder="Digite seu e-mail" required>
+    <!-- HEADER -->
+    <header class="topo">
 
-                     <label for="cpfCadastro">Cpf:</label>
-                     <input type="number" id="cpfCadastro" placeholder="Digite seu cpf" required>
+        <div class="logo">
+            <img src="../img/logo.png" alt="Logo Income Of Houses">
+        </div>
 
-                     <label for="telefoneCadastro">Telefone:</label>
-                     <input type="number" id="telefoneCadastro" placeholder="Digite seu telefone" required>
+        <nav class="menu">
+            <a href="../index.html">Início</a>
+            <a href="../pages/Plantas.html">Plantas</a>
+            <a href="../pages/Profissionais.html">Profissionais</a>
+            <a href="../pages/Sobre.html">Sobre Nós</a>
+        </nav>
 
-                     <label for="datanascCadastro">Data de Nascimento:</label>
-                     <input type="date" id="datanascCadastro" placeholder="Digite sua data de nascimento" required>
+        <div class="usuario">
+            <a href="../pages/Login.html">♙</a>
+        </div>
 
-                     <label for="senhaCadastro">Senha:</label>
-                     <input type="password" id="senhaCadastro" placeholder="Crie sua senha" required>
+    </header>
 
-                     <label for="confirmaSenha">Confirmar Senha:</label>
-                     <input type="password" id="confirmaSenha" placeholder="Confirmar sua Senha" required>
 
-                        <div class="FimCampo">
-                           <div class="Links">
-                              <a href="../pages/Login.html">Já possuo um Cadastro?</a>
-                              <a href="../pages/CadastrarProfissionais.html">Sou um Profissional.</a>
-                           </div>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="Container-Auth">
 
-                           <button>Cadastrar</button>
+        <!-- LADO ESQUERDO -->
+        <section class="apresentacao">
+
+            <div class="texto-apresentacao">
+
+                <span class="detalhe">
+                    INCOME OF HOUSES
+                </span>
+
+                <h1>
+                    Seu próximo projeto<br>
+                    <strong>começa aqui.</strong>
+                </h1>
+
+                <p>
+                    Cadastre-se para encontrar profissionais,
+                    descobrir projetos e transformar suas ideias
+                    em realidade.
+                </p>
+
+
+                <!-- DIFERENCIAIS -->
+                <div class="diferenciais">
+
+                    <div class="item-diferencial">
+                        <span>⌂</span>
+                        <p>Arquitetura</p>
+                    </div>
+
+                    <div class="item-diferencial">
+                        <span>⚙</span>
+                        <p>Engenharia</p>
+                    </div>
+
+                    <div class="item-diferencial">
+                        <span>▣</span>
+                        <p>Design de Interiores</p>
+                    </div>
+
+                    <div class="item-diferencial">
+                        <span>♧</span>
+                        <p>Paisagismo</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CARD DE CADASTRO -->
+        <section class="bloco-auth">
+
+            <!-- LOGO -->
+            <div class="logo-card">
+
+                <span>⌂</span>
+
+                <p>
+                    INCOME<br>
+                    <strong>OF HOUSES</strong>
+                </p>
+
+            </div>
+
+
+            <!-- TÍTULO -->
+            <h2>Crie sua conta</h2>
+
+            <p class="subtitulo">
+                Faça seu cadastro e comece a explorar
+                projetos e profissionais.
+            </p>
+
+
+            <!-- FORMULÁRIO -->
+            <form class="formCadastro">
+
+                <div class="Campo">
+
+                    <!-- NOME -->
+                    <label for="nomeCadastro">
+                        Nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomeCadastro"
+                        name="nome"
+                        placeholder="Digite seu nome"
+                        required
+                    >
+
+
+                    <!-- E-MAIL -->
+                    <label for="emailCadastro">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="emailCadastro"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        required
+                    >
+
+
+                    <!-- CPF -->
+                    <label for="cpfCadastro">
+                        CPF
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cpfCadastro"
+                        name="cpf"
+                        placeholder="Digite seu CPF"
+                        maxlength="14"
+                        required
+                    >
+
+
+                    <!-- TELEFONE -->
+                    <label for="telefoneCadastro">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefoneCadastro"
+                        name="telefone"
+                        placeholder="Digite seu telefone"
+                        required
+                    >
+
+
+                    <!-- DATA DE NASCIMENTO -->
+                    <label for="datanascCadastro">
+                        Data de nascimento
+                    </label>
+
+                    <input
+                        type="date"
+                        id="datanascCadastro"
+                        name="dataNascimento"
+                        required
+                    >
+
+
+                    <!-- SENHAS -->
+                    <div class="linha-senhas">
+
+                        <div>
+
+                            <label for="senhaCadastro">
+                                Senha
+                            </label>
+
+                            <input
+                                type="password"
+                                id="senhaCadastro"
+                                name="senha"
+                                placeholder="Crie uma senha"
+                                required
+                            >
+
                         </div>
-                  </div>
-               </form>
-            </section>
-         </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+
+
+                        <div>
+
+                            <label for="confirmaSenha">
+                                Confirmar senha
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmaSenha"
+                                name="confirmarSenha"
+                                placeholder="Confirme sua senha"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOTÃO -->
+                    <button
+                        type="submit"
+                        class="btn-cadastrar"
+                    >
+                        Cadastrar →
+                    </button>
+
+
+                    <!-- DIVISOR -->
+                    <div class="divisor">
+
+                        <span></span>
+
+                        <p>ou</p>
+
+                        <span></span>
+
+                    </div>
+
+
+                    <!-- LINKS -->
+                    <div class="Links">
+
+                        <p>
+                            Já possui uma conta?
+                            <a href="../pages/Login.html">
+                                Entrar
+                            </a>
+                        </p>
+
+                        <a
+                            class="profissional"
+                            href="../pages/CadastrarProfissionais.html"
+                        >
+                            Quero me cadastrar como profissional
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="rodapé">
+
+        <p>
+            © IncomeOfHouses. Todos os direitos reservados.
+        </p>
+
+        <div class="links-footer">
+
+            <a href="../pages/TermosUso.html">
+                Termos de Uso
+            </a>
+
+            <span>|</span>
+
+            <a href="../pages/PoliticaPrivacidade.html">
+                Política de Privacidade
+            </a>
+
+        </div>
+
+    </footer>
+
 </body>
+
 </html>

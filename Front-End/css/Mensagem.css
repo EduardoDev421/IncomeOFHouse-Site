@@ -1,0 +1,517 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #101010;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* ================= TOPO ================= */
+
+.topo {
+    width: 100%;
+    height: 75px;
+    background: #0c0c0c;
+    border-bottom: 1px solid #292929;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 5%;
+}
+
+.logo img {
+    width: 90px;
+}
+
+.topo nav {
+    display: flex;
+    gap: 65px;
+    margin-left: auto;
+    margin-right: 28%;
+}
+
+.topo nav a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.topo nav a:hover {
+    color: #b99745;
+}
+
+/* ================= TELA PRINCIPAL ================= */
+
+.container {
+    width: 92%;
+    height: calc(100vh - 140px);
+
+    margin: 25px auto;
+
+    display: flex;
+}
+
+/* ================= MENU LATERAL ================= */
+
+.menu-lateral {
+    width: 230px;
+    height: 100%;
+
+    background: #151515;
+    border: 1px solid #303030;
+    border-radius: 10px 0 0 10px;
+
+    padding: 15px;
+}
+
+.menu-item {
+    width: 100%;
+    min-height: 42px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 12px;
+    margin-bottom: 6px;
+
+    background: #202020;
+    border: 1px solid #2e2e2e;
+    border-radius: 6px;
+
+    color: #ddd;
+    text-decoration: none;
+
+    font-size: 13px;
+}
+
+.menu-item span {
+    color: #b99745;
+    font-size: 15px;
+    width: 18px;
+    text-align: center;
+}
+
+.menu-item:hover,
+.menu-item.ativo {
+    background: #292724;
+    border-color: #a38435;
+    color: #fff;
+}
+
+.menu-item.sair {
+    margin-top: 20px;
+}
+
+/* ================= ÁREA MENSAGENS ================= */
+
+.mensagens {
+    flex: 1;
+    height: 100%;
+
+    background: #111;
+
+    border: 1px solid #303030;
+    border-left: none;
+
+    border-radius: 0 10px 10px 0;
+
+    padding: 22px;
+}
+
+.titulo h1 {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.titulo p {
+    color: #aaa;
+    font-size: 12px;
+}
+
+.linha {
+    width: 100%;
+    height: 1px;
+
+    background: #a38435;
+
+    margin: 18px 0 12px;
+}
+
+/* ================= ÁREA DO CHAT ================= */
+
+.area-mensagens {
+    width: 100%;
+    height: calc(100% - 75px);
+
+    display: flex;
+
+    background: #141414;
+
+    border: 1px solid #333;
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+/* ================= LISTA ================= */
+
+.conversas {
+    width: 35%;
+    min-width: 300px;
+
+    background: #151515;
+
+    border-right: 1px solid #333;
+}
+
+.buscar {
+    width: 100%;
+
+    display: flex;
+
+    padding: 15px;
+
+    border-bottom: 1px solid #303030;
+}
+
+.buscar input {
+    flex: 1;
+
+    height: 40px;
+
+    background: #202020;
+
+    border: 1px solid #3b3b3b;
+    border-radius: 5px 0 0 5px;
+
+    color: #fff;
+
+    padding: 0 12px;
+
+    font-size: 12px;
+
+    outline: none;
+}
+
+.buscar input:focus {
+    border-color: #a38435;
+}
+
+.buscar button {
+    width: 45px;
+    height: 40px;
+
+    background: #29251f;
+
+    border: 1px solid #a38435;
+
+    border-radius: 0 5px 5px 0;
+
+    color: #c29e43;
+
+    cursor: pointer;
+}
+
+/* ================= CONVERSAS ================= */
+
+.conversa {
+    width: 100%;
+    height: 95px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 15px;
+
+    border-bottom: 1px solid #303030;
+
+    cursor: pointer;
+}
+
+.conversa:hover,
+.conversa.selecionada {
+    background: #252321;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    border: 1px solid #b08b32;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #c29e43;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.dados-conversa {
+    flex: 1;
+    min-width: 0;
+}
+
+.dados-conversa h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.dados-conversa p {
+    color: #999;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hora {
+    align-self: flex-start;
+
+    padding-top: 3px;
+
+    color: #888;
+
+    font-size: 9px;
+}
+
+/* ================= CHAT ================= */
+
+.chat {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #111;
+}
+
+/* TOPO DO CHAT */
+
+.chat-topo {
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 15px 20px;
+
+    border-bottom: 1px solid #303030;
+}
+
+.avatar.grande {
+    width: 50px;
+    height: 50px;
+}
+
+.chat-topo h2 {
+    font-size: 16px;
+
+    margin-bottom: 5px;
+}
+
+.chat-topo p {
+    color: #999;
+
+    font-size: 10px;
+}
+
+/* ================= MENSAGENS ================= */
+
+.chat-conteudo {
+    flex: 1;
+
+    padding: 25px;
+
+    overflow-y: auto;
+}
+
+.mensagem {
+    max-width: 65%;
+
+    padding: 13px 15px;
+
+    margin-bottom: 15px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+.mensagem p {
+    margin-bottom: 5px;
+}
+
+.mensagem span {
+    display: block;
+
+    text-align: right;
+
+    color: #888;
+
+    font-size: 8px;
+}
+
+.recebida {
+    background: #202020;
+
+    border: 1px solid #303030;
+
+    margin-right: auto;
+}
+
+.enviada {
+    background: #292621;
+
+    border: 1px solid #806626;
+
+    margin-left: auto;
+}
+
+/* ================= CAMPO ================= */
+
+.campo-mensagem {
+    width: 100%;
+
+    display: flex;
+
+    gap: 10px;
+
+    padding: 15px;
+
+    border-top: 1px solid #303030;
+}
+
+.campo-mensagem input {
+    flex: 1;
+
+    height: 45px;
+
+    background: #1d1d1d;
+
+    border: 1px solid #383838;
+
+    border-radius: 6px;
+
+    color: white;
+
+    padding: 0 13px;
+
+    font-size: 11px;
+
+    outline: none;
+}
+
+.campo-mensagem input:focus {
+    border-color: #a38435;
+}
+
+.campo-mensagem button {
+    width: 100px;
+    height: 45px;
+
+    background: #29251f;
+
+    border: 1px solid #a38435;
+
+    border-radius: 6px;
+
+    color: #c29e43;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+.campo-mensagem button:hover {
+    background: #383126;
+}
+
+/* ================= RODAPÉ ================= */
+
+footer {
+    width: 100%;
+    height: 55px;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    background: #0c0c0c;
+
+    border-top: 1px solid #92752f;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 5%;
+}
+
+footer p,
+footer a {
+    color: #777;
+
+    font-size: 10px;
+
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #b99745;
+}
+
+footer span {
+    color: #555;
+    margin: 0 8px;
+}
+
+/* ================= TELAS MENORES ================= */
+
+@media (max-width: 900px) {
+
+    .container {
+        width: 96%;
+    }
+
+    .menu-lateral {
+        width: 200px;
+    }
+
+    .conversas {
+        width: 32%;
+        min-width: 250px;
+    }
+
+    .topo nav {
+        margin-right: 5%;
+        gap: 30px;
+    }
+}

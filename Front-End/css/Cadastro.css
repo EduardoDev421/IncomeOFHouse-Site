@@ -1,0 +1,635 @@
+/* ==============================
+   CONFIGURAÇÃO GERAL
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0B0B0C;
+    color: #F5F5F5;
+    min-height: 100vh;
+}
+
+
+/* ==============================
+   HEADER
+============================== */
+
+.topo {
+    width: 100%;
+    height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 65px;
+
+    background: #0B0B0C;
+    border-bottom: 1px solid #6d5316;
+}
+
+.logo img {
+    width: 190px;
+    height: auto;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 65px;
+}
+
+.menu a {
+    color: #F5F5F5;
+    text-decoration: none;
+    font-size: 15px;
+
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #D4A72C;
+}
+
+.usuario a {
+    color: #D4A72C;
+    font-size: 27px;
+    text-decoration: none;
+}
+
+
+/* ==============================
+   ÁREA PRINCIPAL
+============================== */
+
+.Container-Auth {
+    width: 100%;
+    min-height: calc(100vh - 142px);
+
+    display: flex;
+    align-items: center;
+
+    padding: 45px 7%;
+
+    background:
+        radial-gradient(
+            circle at 75% 50%,
+            rgba(212, 167, 44, 0.035),
+            transparent 35%
+        ),
+        #0B0B0C;
+}
+
+
+/* ==============================
+   LADO ESQUERDO
+============================== */
+
+.apresentacao {
+    width: 53%;
+
+    display: flex;
+    align-items: center;
+}
+
+.texto-apresentacao {
+    width: 100%;
+    max-width: 610px;
+}
+
+.detalhe {
+    display: block;
+
+    color: #D4A72C;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 24px;
+}
+
+.apresentacao h1 {
+    color: #F5F5F5;
+
+    font-size: 52px;
+    font-weight: 300;
+
+    line-height: 1.08;
+
+    margin-bottom: 25px;
+}
+
+.apresentacao h1 strong {
+    color: #D4A72C;
+    font-weight: 700;
+}
+
+.apresentacao .texto-apresentacao > p {
+    max-width: 560px;
+
+    color: #A1A1AA;
+
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* ==============================
+   DIFERENCIAIS
+============================== */
+
+.diferenciais {
+    display: flex;
+    align-items: stretch;
+
+    margin-top: 45px;
+}
+
+.item-diferencial {
+    min-width: 125px;
+
+    padding: 0 20px;
+
+    text-align: center;
+
+    border-right: 1px solid #4c3b13;
+}
+
+.item-diferencial:first-child {
+    padding-left: 0;
+}
+
+.item-diferencial:last-child {
+    border-right: none;
+}
+
+.item-diferencial span {
+    display: block;
+
+    color: #D4A72C;
+
+    font-size: 28px;
+
+    margin-bottom: 10px;
+}
+
+.item-diferencial p {
+    color: #D6D6D6;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+
+/* ==============================
+   CARD
+============================== */
+
+.bloco-auth {
+    width: 480px;
+
+    margin-left: auto;
+
+    padding: 35px 40px 30px;
+
+    background: rgba(21, 21, 21, 0.97);
+
+    border: 1px solid #80631b;
+    border-radius: 10px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.55),
+        0 0 25px rgba(212, 167, 44, 0.06);
+}
+
+
+/* ==============================
+   LOGO DO CARD
+============================== */
+
+.logo-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+}
+
+.logo-card span {
+    color: #D4A72C;
+
+    font-size: 35px;
+}
+
+.logo-card p {
+    color: #F5F5F5;
+
+    font-size: 14px;
+    line-height: 1.15;
+
+    letter-spacing: 3px;
+}
+
+.logo-card strong {
+    color: #D4A72C;
+}
+
+
+/* ==============================
+   TÍTULO DO CARD
+============================== */
+
+.bloco-auth h2 {
+    color: #F5F5F5;
+
+    text-align: center;
+
+    font-size: 29px;
+
+    margin-bottom: 7px;
+}
+
+.subtitulo {
+    color: #A1A1AA;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin-bottom: 27px;
+}
+
+
+/* ==============================
+   FORMULÁRIO
+============================== */
+
+.formCadastro {
+    width: 100%;
+}
+
+.Campo {
+    width: 100%;
+}
+
+.Campo label {
+    display: block;
+
+    color: #F5F5F5;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    margin-bottom: 7px;
+}
+
+.Campo input {
+    width: 100%;
+    height: 44px;
+
+    display: block;
+
+    padding: 0 13px;
+
+    margin-bottom: 16px;
+
+    background: #0B0B0C;
+
+    border: 1px solid #464646;
+    border-radius: 5px;
+
+    color: #F5F5F5;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+.Campo input::placeholder {
+    color: #707070;
+}
+
+.Campo input:focus {
+    border-color: #D4A72C;
+
+    box-shadow:
+        0 0 8px rgba(212, 167, 44, 0.12);
+}
+
+
+/* ==============================
+   DATA
+============================== */
+
+.Campo input[type="date"] {
+    color: #A1A1AA;
+}
+
+.Campo input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(70%) sepia(70%) saturate(500%);
+}
+
+
+/* ==============================
+   SENHAS
+============================== */
+
+.linha-senhas {
+    width: 100%;
+
+    display: flex;
+
+    gap: 18px;
+}
+
+.linha-senhas > div {
+    width: 50%;
+}
+
+.linha-senhas input {
+    width: 100%;
+}
+
+
+/* ==============================
+   BOTÃO
+============================== */
+
+.btn-cadastrar {
+    width: 100%;
+    height: 47px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 3px;
+
+    background: #D4A72C;
+
+    color: #0B0B0C;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.btn-cadastrar:hover {
+    background: #F2C94C;
+
+    box-shadow:
+        0 0 20px rgba(242, 201, 76, 0.25);
+
+    transform: translateY(-1px);
+}
+
+
+/* ==============================
+   DIVISOR
+============================== */
+
+.divisor {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    margin: 23px 0 18px;
+}
+
+.divisor span {
+    flex: 1;
+
+    height: 1px;
+
+    background: #454545;
+}
+
+.divisor p {
+    color: #777;
+
+    font-size: 12px;
+}
+
+
+/* ==============================
+   LINKS
+============================== */
+
+.Links {
+    width: 100%;
+
+    text-align: center;
+}
+
+.Links p {
+    color: #A1A1AA;
+
+    font-size: 13px;
+
+    margin-bottom: 11px;
+}
+
+.Links a {
+    color: #D4A72C;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.Links a:hover {
+    color: #F2C94C;
+    text-decoration: underline;
+}
+
+.Links .profissional {
+    font-size: 12px;
+}
+
+
+/* ==============================
+   FOOTER
+============================== */
+
+.rodapé {
+    width: 100%;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 55px;
+
+    background: #0B0B0C;
+
+    border-top: 1px solid #6d5316;
+
+    color: #777;
+
+    font-size: 11px;
+}
+
+.links-footer {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.links-footer a {
+    color: #A1A1AA;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.links-footer a:hover {
+    color: #D4A72C;
+}
+
+.links-footer span {
+    color: #555;
+}
+
+
+/* ==============================
+   TABLET
+============================== */
+
+@media (max-width: 1050px) {
+
+    .topo {
+        padding: 0 35px;
+    }
+
+    .menu {
+        gap: 35px;
+    }
+
+    .Container-Auth {
+        padding: 45px 5%;
+    }
+
+    .apresentacao {
+        width: 48%;
+    }
+
+    .apresentacao h1 {
+        font-size: 43px;
+    }
+
+    .bloco-auth {
+        width: 450px;
+    }
+}
+
+
+/* ==============================
+   TABLET MENOR
+============================== */
+
+@media (max-width: 850px) {
+
+    .apresentacao {
+        display: none;
+    }
+
+    .Container-Auth {
+        justify-content: center;
+    }
+
+    .bloco-auth {
+        width: 480px;
+        margin: 0;
+    }
+}
+
+
+/* ==============================
+   CELULAR
+============================== */
+
+@media (max-width: 600px) {
+
+    .topo {
+        height: 70px;
+
+        padding: 0 20px;
+    }
+
+    .logo img {
+        width: 145px;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .Container-Auth {
+        min-height: calc(100vh - 130px);
+
+        padding: 25px 15px;
+    }
+
+    .bloco-auth {
+        width: 100%;
+
+        padding: 28px 22px 25px;
+    }
+
+    .bloco-auth h2 {
+        font-size: 25px;
+    }
+
+    .subtitulo {
+        font-size: 12px;
+    }
+
+    .linha-senhas {
+        flex-direction: column;
+
+        gap: 0;
+    }
+
+    .linha-senhas > div {
+        width: 100%;
+    }
+
+    .rodapé {
+        height: auto;
+        min-height: 60px;
+
+        padding: 15px 20px;
+
+        flex-direction: column;
+
+        gap: 9px;
+
+        text-align: center;
+    }
+}

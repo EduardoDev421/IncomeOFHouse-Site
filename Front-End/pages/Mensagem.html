@@ -1,83 +1,199 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-   <link rel="stylesheet" href="../css/mensagem.css">
-   <title>Pagina de Mensagem</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagens - Income of Houses</title>
+    <link rel="stylesheet" href="../css/mensagem.css">
 </head>
+
 <body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
-      </div>
-      <!-- Menu -->
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html" class="ativo">Sobre</a>
-      </nav>
-      <div class="iconelogin">
-         <img src="" alt="iconeLogin" href="../pages/Login.html"  class="iconelogin">
-      </div>
-      <!-- Menu Lateral -->
-   </header>
-         <main class="mensagem">
-            <aside class="menu-lateral">
-                  <ul>
-                     <li><a href="../pages/PerfilUsuario.html">Meu Perfil</a></li>
-                     <li><a href="../pages/MeusEnderecos.html">Meus Endereços</a></li>
-                     <li><a href="../pages/MeusPedidos.html">Meus Pedidos</a></li>
-                     <li><a href="../pages/MeusProfissionais.html">Meus Profissionais Favoritos</a></li>
-                     <li><a href="../pages/ProjetosSalvos.html">Projetos Salvos</a></li>
-                     <li><a href="../pages/Mensagem.html" class="ativo">Mensagens</a></li>
-                     <li><a href="../pages/Configurações.html">Configurações</a></li>
-                     <li><a href="../index.html">Sair</a></li>
-                  </ul>
-            </aside>
 
-            <!-- Conteudo -->
-            <section class="conteudo-mensagem">
+    <!-- TOPO -->
+    <header class="topo">
+        <div class="logo">
+            <img src="../img/logo.png" alt="Income of Houses">
+        </div>
 
-               <div class="titulo-mensagem">
-                  <h1>Mensagens</h1>
-                  <p>Contate os Profissionais</p>
-               </div>
-               
-            </section>
+        <nav>
+            <a href="#">Início</a>
+            <a href="#">Plantas</a>
+            <a href="#">Profissionais</a>
+            <a href="#">Sobre Nós</a>
+        </nav>
+    </header>
 
-            <!-- Cards -->
-            <section class="destaques">
-               <div class="container">
-                     <h2>Contatos</h2>
-                     <div class="card-mensagem">
-                        <article class="card-mensagem">
-                           <h3>Nome</h3>
-                           <button>Conversar</button>
-                        </article>
+    <!-- CONTEÚDO -->
+    <main class="container">
 
-                        <article class="card-mensagem">
-                           <h3>Nome</h3>
-                           <button>Conversar</button>
-                        </article>
+        <!-- MENU LATERAL -->
+        <aside class="menu-lateral">
 
-                        <article class="card-mensagem">
-                           <h3>Nome</h3>
-                           <button>Conversar</button>
-                        </article>
-                     </div>
-               </div>
-            </section>
+            <a href="#" class="menu-item">
+                <span>⚙</span> Meu Perfil
+            </a>
 
+            <a href="#" class="menu-item">
+                <span>⌖</span> Meus Endereços
+            </a>
 
-         </main>
-         <!-- Roda Pé -->
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+            <a href="#" class="menu-item">
+                <span>▣</span> Meus Pedidos
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>★</span> Meus Profissionais<br>
+                <span class="espaco"></span> Favoritos
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>♡</span> Projetos Salvos
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▣</span> Agendamentos
+            </a>
+
+            <a href="#" class="menu-item ativo">
+                <span>▱</span> Mensagem
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>⚙</span> Configurações
+            </a>
+
+            <a href="#" class="menu-item sair">
+                <span>↪</span> Sair
+            </a>
+
+        </aside>
+
+        <!-- ÁREA DE MENSAGENS -->
+        <section class="mensagens">
+
+            <div class="titulo">
+                <h1>Mensagens</h1>
+                <p>Gerencie suas conversas e mensagens.</p>
+            </div>
+
+            <div class="linha"></div>
+
+            <div class="area-mensagens">
+
+                <!-- LISTA DE CONVERSAS -->
+                <div class="conversas">
+
+                    <div class="buscar">
+                        <input type="text" placeholder="Buscar mensagem...">
+                        <button>⌕</button>
+                    </div>
+
+                    <div class="conversa selecionada">
+                        <div class="avatar">JS</div>
+
+                        <div class="dados-conversa">
+                            <h3>João Silva</h3>
+                            <p>Olá, gostaria de saber mais sobre...</p>
+                        </div>
+
+                        <span class="hora">14:30</span>
+                    </div>
+
+                    <div class="conversa">
+                        <div class="avatar">MC</div>
+
+                        <div class="dados-conversa">
+                            <h3>Marcos Costa</h3>
+                            <p>Podemos marcar uma reunião?</p>
+                        </div>
+
+                        <span class="hora">Ontem</span>
+                    </div>
+
+                    <div class="conversa">
+                        <div class="avatar">AS</div>
+
+                        <div class="dados-conversa">
+                            <h3>Ana Souza</h3>
+                            <p>Enviei os detalhes do projeto.</p>
+                        </div>
+
+                        <span class="hora">17/05</span>
+                    </div>
+
+                    <div class="conversa">
+                        <div class="avatar">RC</div>
+
+                        <div class="dados-conversa">
+                            <h3>Ricardo Costa</h3>
+                            <p>Obrigado pelo contato!</p>
+                        </div>
+
+                        <span class="hora">16/05</span>
+                    </div>
+
+                </div>
+
+                <!-- CHAT -->
+                <div class="chat">
+
+                    <div class="chat-topo">
+                        <div class="avatar grande">JS</div>
+
+                        <div>
+                            <h2>João Silva</h2>
+                            <p>Profissional</p>
+                        </div>
+                    </div>
+
+                    <div class="chat-conteudo">
+
+                        <div class="mensagem recebida">
+                            <p>Olá! Tudo bem?</p>
+                            <span>14:28</span>
+                        </div>
+
+                        <div class="mensagem recebida">
+                            <p>Gostaria de saber mais sobre o projeto da casa moderna.</p>
+                            <span>14:29</span>
+                        </div>
+
+                        <div class="mensagem enviada">
+                            <p>Olá, tudo bem sim! Claro, posso te passar mais informações.</p>
+                            <span>14:30</span>
+                        </div>
+
+                        <div class="mensagem recebida">
+                            <p>Perfeito, obrigado!</p>
+                            <span>14:30</span>
+                        </div>
+
+                    </div>
+
+                    <div class="campo-mensagem">
+                        <input type="text" placeholder="Digite sua mensagem...">
+                        <button>Enviar</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+
+        <div>
+            <a href="#">Termos de Uso</a>
+            <span>|</span>
+            <a href="#">Política de Privacidade</a>
+        </div>
+    </footer>
+
 </body>
 </html>
