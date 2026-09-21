@@ -1,370 +1,299 @@
-/* Configuração Geral */
+/* =========================
+   RESET
+========================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html,
+body {
+    width: 100%;
+    min-height: 100%;
 }
 
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: #0b0b0b;
-    color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
+    background: #080a0b;
+    color: #eeeeee;
 }
-/* ================================================= */
-/* BackGround do Menu */
-.topo{
-    position: absolute;
-    top: 0;
-    left: 0;
+
+
+/* =========================
+   CORES
+========================= */
+
+:root {
+    --dourado: #d5ad32;
+    --dourado-claro: #f0ca4c;
+    --fundo-card: rgba(17, 20, 21, 0.94);
+    --fundo-card-2: rgba(22, 25, 26, 0.96);
+    --borda: rgba(255, 255, 255, 0.10);
+    --texto: #eeeeee;
+    --texto-secundario: #a8abad;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.topo {
     width: 100%;
-    height: 75px;
+    height: 84px;
+
     display: flex;
     align-items: center;
-    padding: 0 6%;
+    justify-content: space-between;
+
+    padding: 0 7.5%;
+
+    background: rgba(7, 9, 10, 0.97);
+    border-bottom: 1px solid rgba(213, 173, 50, 0.25);
+
+    position: relative;
     z-index: 10;
-    background: rgba(10, 10, 10, 0.25); /* reduzi de 0.55 pra 0.25 — teste esse valor */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
-    backdrop-filter: blur(8px);
 }
+
 
 /* Logo */
 
-.logo{
-    width: 100%;
-    background:  transparent;
-}
-
-.logo a{
+.logo {
+    height: 100%;
     display: flex;
     align-items: center;
-    text-decoration: none;
 }
 
 .logo img {
-    width: 100%;
-    max-width: 70px;
+    width: 78px;
     height: auto;
-    margin-left: 30px;
-}
-
-/* Menu */
-
-.menu {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.menu a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 12px 20px;
-    border-radius: 7px;
-    transition: 0.3s ease;
-}
-
-.menu a:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: #d4af6a;
-}
-
-.menu a.ativo {
-    color: #d4af6a;
-    border: 1px solid rgba(212, 175, 106, 0.4);
-    background: rgba(212, 175, 106, 0.08);
-}
-
-/* Icone Login */
-.iconelogin{
-    margin-left: auto;
-}
-
-.iconelogin a{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 14px;
-    transition: 0.3s ease;
-}
-
-.iconelogin a:hover{
-    color: #d4af6a;
-}
-
-.iconelogin img {
-    max-width: 50px;
-    height: 50px;
     object-fit: contain;
 }
 
-/* ================================================= */
-/* Fundo Home */
-.BackGround{
-    position: relative;
-    min-height: 100vh;
-    background-image: url("../img/BackgroundFundo.png");
-    background-size: cover;
-    background-position: center;
-    z-index: 0;
-}
 
-.container {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    margin: 100px;
-}
-.menu-lateral {
-    width: 250px;
-    background-color: #111112;
-    border: 1px solid #29292b;
-    border-radius: 12px;
-    padding: 12px;
-    box-sizing: border-box;
-}
+/* Menu superior */
 
-
-/* LISTA */
-.menu-lateral ul {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-
-/* ITENS */
-.menu-lateral li {
-    width: 100%;
-    padding: 0;
-    list-style: none;
-}
-
-
-/* LINK */
-.menu-lateral li a{
+.menu {
     display: flex;
     align-items: center;
-    width: 100%;
-    padding: 6px 10px;
-    border-radius: 6px;
+    gap: 55px;
+    margin-right: 13%;
+}
+
+.menu a {
+    color: #eeeeee;
     text-decoration: none;
-    color: #EEEEEE;
-    background-color: #1C1C1E;
-    border: 1px solid #1C1C1E;
-    font-size: 12px;
-    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: 0.25s ease;
 }
 
-/* ÍCONES */
-.menu-lateral li a img {
-    width: 18px;
-    height: 18px;
+.menu a:hover {
+    color: var(--dourado-claro);
 }
 
-.menu-lateral li.ativo a {
-    background-color: #1C1C1E;
-    border: 1px solid #59431f;
-    color: #D4A63A;
-    padding: 6px 10px;
-    border-radius: 6px;
+
+/* =========================
+   FUNDO PRINCIPAL
+========================= */
+
+.BackGround {
+    width: 100%;
+    min-height: calc(100vh - 84px);
+
+    padding: 24px 5% 30px;
+
+    background:
+        linear-gradient(
+            rgba(5, 7, 8, 0.78),
+            rgba(5, 7, 8, 0.88)
+        ),
+        url("../img/fundo-casa.png");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
-.menu-lateral li:hover a {
-    background-color: #302718;
-    border: 1px solid #59431f;
-    color: #D4A63A;
-    padding: 6px 10px;
-    border-radius: 6px;
+
+/* =========================
+   CONTAINER PRINCIPAL
+========================= */
+
+.container {
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+}
+
+
+/* =========================
+   MENU LATERAL
+========================= */
+
+.menu-lateral {
+    width: 220px;
+    min-width: 220px;
+
+    background: rgba(20, 23, 24, 0.96);
+
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.menu-lateral ul {
+    list-style: none;
+    width: 100%;
+}
+
+.menu-lateral li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .menu-lateral li:last-child {
-    margin-top: 5px;
-    padding-top: 8px;
-    border-top: 1px solid #292929;
+    border-bottom: none;
 }
 
-.conteudo{
-    display: flex;
-    flex-direction: column;
-    padding: 13px 10px;
-    gap: 5px;
-    background-color: #111111;
-    border-radius: 10px;
-    border: 2px solid #29292b;
-    width: 100%;
-}
- 
-.conteudo h1{
-    font-size: 25px;
-}
- 
-.conteudo h4{
-    font-size: 13px;
-    font-weight: 400;
-}
- 
-.conteudo h1,h4{
-    padding: 1px 20px;
-}
- 
-.Config {
-    display: flex;
-    flex-direction: column;
-    border-top: 2px solid #D4A63A;
-    margin: 8px 10px 0px 10px;
-    padding: 20px;
-}
- 
-.ConfigSN {
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
- 
-.ConfigCPF {
-    padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
- 
-.Segurança,
-.notificação {
-    padding: 20px;
-    border: 1px solid #292929;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    background-color: #141414;
-}
- 
-.ConfigProfissionail,
-.PerfilProfissional,
-.Financeiro {
-    padding: 20px;
-    border: 1px solid #292929;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    background-color: #141414;   
-}
- 
-.Segurança img,
-.notificação img,
-.ConfigProfissionail img,
-.PerfilProfissional img,
-.Financeiro img {
-    width: 20px;
-    height: 20px;
-    margin-bottom: 10px;
-}
- 
-.Segurança h2,
-.notificação h2,
-.ConfigProfissionail h2,
-.PerfilProfissional h2,
-.Financeiro h2 {
-    font-size: 16px;
-    color: #fff;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
- 
-.seguranças,
-.notificações,
-.ConfigProfissionais,
-.PerfilProfissionais,
-.Financeiros {
+.menu-lateral a {
+    min-height: 48px;
+
+    padding: 10px 14px;
+
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid #1f1f1f;
-    cursor: pointer;
-}
- 
-.seguranças img,
-.notificações img,
-.ConfigProfissionais img,
-.PerfilProfissionais img,
-.Financeiros img {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-}
- 
-.SegurançaText,
-.notificaçõesText,
-.ConfigProfissionaisText,
-.PerfilProfissionaisText,
-.FinanceirosText {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    gap: 2px;
-}
- 
-.SegurançaText h3,
-.notificaçõesText h3,
-.ConfigProfissionaisText h3,
-.PerfilProfissionaisText h3,
-.FinanceirosText h3 {
-    font-size: 14px;
-    color: #fff;
-    font-weight: 500;
-}
- 
-.SegurançaText p,
-.notificaçõesText p,
-.ConfigProfissionaisText p,
-.PerfilProfissionaisText p,
-.FinanceirosText p {
-    font-size: 12px;
-    color: #888;
+
+    color: #dedede;
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: 0.25s ease;
 }
 
+.menu-lateral a:hover {
+    background: rgba(213, 173, 50, 0.10);
+    color: var(--dourado-claro);
+}
+
+.menu-lateral img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+}
+
+.menu-lateral .ativo a {
+    color: var(--dourado-claro);
+
+    background: rgba(213, 173, 50, 0.08);
+
+    border: 1px solid rgba(213, 173, 50, 0.65);
+
+    border-radius: 5px;
+}
+
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.conteudo {
+    flex: 1;
+    min-width: 0;
+
+    background: rgba(13, 16, 17, 0.88);
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 10px;
+
+    padding: 25px 26px 28px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
+}
+
+
+/* Título */
+
+.conteudo > h1 {
+    font-size: 23px;
+    font-weight: 600;
+
+    color: #eeeeee;
+
+    margin-bottom: 5px;
+}
+
+.conteudo > h4 {
+    font-size: 12px;
+    font-weight: 400;
+
+    color: var(--texto-secundario);
+
+    padding-bottom: 16px;
+
+    border-bottom: 2px solid var(--dourado);
+}
+
+
+/* =========================
+   ÁREA DOS CARDS
+========================= */
+
+.Config {
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+/* Primeira linha */
+
+.ConfigSN,
+.ConfigCPF {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.Segurança,
+.notificação,
+.ConfigProfissionail,
+.PerfilProfissional,
+.Financeiro,
 .Privacidade,
 .CentralAjuda {
-    padding: 20px;
-    border: 1px solid #292929;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    background-color: #141414;
-    margin: 10px 10px 0px 10px;
+    background: var(--fundo-card);
+
+    border: 1px solid var(--borda);
+    border-radius: 9px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
 }
- 
-.Privacidade img,
-.CentralAjuda img {
-    width: 20px;
-    height: 20px;
-    margin-bottom: 3px;
-}
- 
-.Privacidade h2,
-.CentralAjuda h2 {
-    font-size: 18px;
-    color: #fff;
-    font-weight: 600;
-}
+
+
+/* =========================
+   TÍTULOS DOS CARDS
+========================= */
 
 .TituloSegurança,
 .TituloNotificação,
@@ -372,172 +301,519 @@ body {
 .TituloPerfilProfissional,
 .TituloFinanceiro,
 .TituloPrivacidade,
-.TituloCentralAjuda{
+.TituloCentralAjuda {
+    min-height: 62px;
+
+    padding: 13px 18px;
+
     display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
- 
-.Privacidades img,
-.CentralAjudas img {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-}
- 
-.PrivacidadesText,
-.CentralAjudasText {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
- 
-.PrivacidadesText h3,
-.CentralAjudasText h3 {
-    font-size: 14px;
-    color: #fff;
-    font-weight: 500;
-}
- 
-.PrivacidadesText p,
-.CentralAjudasText p{
-    font-size: 12px;
-    color: #888;
-}
- 
-.PrivacidadeCard {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    width: 100%;
+    gap: 13px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.TituloSegurança img,
+.TituloNotificação img,
+.TituloConfigProfissional img,
+.TituloPerfilProfissional img,
+.TituloFinanceiro img,
+.TituloPrivacidade img,
+.TituloCentralAjuda img {
+    width: 25px;
+    height: 25px;
+
+    object-fit: contain;
+}
+
+.TituloSegurança h2,
+.TituloNotificação h2,
+.TituloConfigProfissional h2,
+.TituloPerfilProfissional h2,
+.TituloFinanceiro h2,
+.TituloPrivacidade h2,
+.TituloCentralAjuda h2 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #eeeeee;
+}
+
+
+/* =========================
+   ITENS DE CONFIGURAÇÃO
+========================= */
+
+.seguranças,
+.notificações,
+.ConfigProfissionais,
+.PerfilProfissionais,
+.Financeiros,
 .Privacidades,
-.PrivacidadesU {
-    display: grid;
-    grid-template-columns: 20px minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 12px;
-    min-width: 0;
-    padding: 8px 25px;
-    box-sizing: border-box;
-}
-
-/* Divisórias entre os 3 itens */
-.Privacidades:not(:last-child),
-.PrivacidadesU:not(:last-child) {
-    border-right: 2px solid #29292b;
-}
-
-.CentralAjudasCard {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    width: 100%;
-}
-
+.PrivacidadesU,
 .CentralAjudas,
 .CentralAjudaU {
-    display: grid;
-    grid-template-columns: 20px minmax(0, 1fr) auto;
+    min-height: 68px;
+
+    display: flex;
     align-items: center;
-    gap: 12px;
-    min-width: 0;
-    padding: 8px 25px;
-    box-sizing: border-box;
+
+    padding: 10px 17px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+
+    transition: background 0.2s ease;
 }
 
-.CentralAjudas:not(:last-child),
-.CentralAjudaU:not(:last-child) {
-    border-right: 2px solid #29292b;
+.segaranças:last-child,
+.notificações:last-child,
+.ConfigProfissionais:last-child,
+.PerfilProfissionais:last-child,
+.Financeiros:last-child,
+.Privacidades:last-child,
+.PrivacidadesU:last-child,
+.CentralAjudas:last-child,
+.CentralAjudaU:last-child {
+    border-bottom: none;
 }
 
-/* ===== SETA ===== */
-.seta {
+
+/* Hover */
+
+.segunranças:hover,
+.seganças:hover,
+.notificações:hover,
+.ConfigProfissionais:hover,
+.PerfilProfissionais:hover,
+.Financeiros:hover,
+.Privacidades:hover,
+.PrivacidadesU:hover,
+.CentralAjudas:hover,
+.CentralAjudaU:hover {
+    background: rgba(255, 255, 255, 0.025);
+}
+
+
+/* Ícones dos itens */
+
+.seguranças > img,
+.notificações > img,
+.ConfigProfissionais > img,
+.PerfilProfissionais > img,
+.Financeiros > img,
+.Privacidades > img,
+.PrivacidadesU > img,
+.CentralAjudas > img,
+.CentralAjudaU > img {
+    width: 21px;
+    height: 21px;
+
+    object-fit: contain;
+
     flex-shrink: 0;
-    color: #666;
-    font-size: 16px;
-    margin-right: 10px;
 }
 
-/* ===== TOGGLE SWITCH ===== */
+
+/* =========================
+   TEXTOS
+========================= */
+
+.SegurançaText,
+.notificaçõesText,
+.ConfigProfissionaisText,
+.PerfilProfissionaisText,
+.FinanceirosText,
+.PrivacidadesText,
+.CentralAjudasText {
+    flex: 1;
+
+    margin-left: 13px;
+
+    min-width: 0;
+}
+
+.SegurançaText h3,
+.notificaçõesText h3,
+.ConfigProfissionaisText h3,
+.PerfilProfissionaisText h3,
+.FinanceirosText h3,
+.PrivacidadesText h3,
+.CentralAjudasText h3 {
+    color: #e7e7e7;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    margin-bottom: 4px;
+}
+
+.SegurançaText p,
+.notificaçõesText p,
+.ConfigProfissionaisText p,
+.PerfilProfissionaisText p,
+.FinanceirosText p,
+.PrivacidadesText p,
+.CentralAjudasText p {
+    color: #8f9497;
+
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+
+/* =========================
+   SETA
+========================= */
+
+.seta {
+    color: #92979a;
+
+    font-size: 20px;
+    font-weight: 300;
+
+    margin-left: 10px;
+
+    transition: 0.2s ease;
+}
+
+.segunranças:hover .seta,
+.seguranças:hover .seta,
+.ConfigProfissionais:hover .seta,
+.PerfilProfissionais:hover .seta,
+.Financeiros:hover .seta,
+.Privacidades:hover .seta,
+.PrivacidadesU:hover .seta,
+.CentralAjudas:hover .seta,
+.CentralAjudaU:hover .seta {
+    color: var(--dourado-claro);
+    transform: translateX(3px);
+}
+
+
+/* =========================
+   SWITCH
+========================= */
+
 .switch {
     position: relative;
+
+    width: 43px;
+    height: 23px;
+
     display: inline-block;
-    width: 40px;
-    height: 22px;
+
     flex-shrink: 0;
 }
- 
+
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
- 
-.switch span {
+
+.slider {
     position: absolute;
+    inset: 0;
+
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #3a3a3c;
-    transition: 0.3s;
-    border-radius: 34px;
-}
- 
-.switch span::before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 3px;
-    bottom: 3px;
-    background-color: #fff;
-    transition: 0.3s;
-    border-radius: 50%;
-}
- 
-.switch input:checked + span {
-    background-color: #D4A63A;
-}
- 
-.switch input:checked + span::before {
-    transform: translateX(18px);
+
+    background: #34383a;
+
+    border-radius: 30px;
+
+    transition: 0.25s ease;
 }
 
-/* ================================================= */
-/* Rodapé */
+.slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 17px;
+    height: 17px;
+
+    left: 3px;
+    top: 3px;
+
+    background: #eeeeee;
+
+    border-radius: 50%;
+
+    transition: 0.25s ease;
+}
+
+.switch input:checked + .slider {
+    background: linear-gradient(
+        135deg,
+        #c89e26,
+        #efd04f
+    );
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(20px);
+}
+
+
+/* =========================
+   SEGUNDA PARTE DOS CARDS
+========================= */
+
+.ConfigCPF {
+    align-items: start;
+}
+
+
+/* =========================
+   PRIVACIDADE E AJUDA
+========================= */
+
+.Privacidade,
+.CentralAjuda {
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+
+/* =========================
+   ITEM EXCLUIR CONTA
+========================= */
+
+.PrivacidadesU {
+    border-bottom: none;
+}
+
+.PrivacidadesU img {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 
 .rodape {
-    width: 100%;
+    min-height: 55px;
+
+    padding: 0 5%;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    padding: 22px 6%;
-    background: #080808;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    color: #888888;
-    font-size: 13px;
-    border-top: 1px solid #D4A63A;
+
+    background: #080a0b;
+
+    border-top: 1px solid rgba(213, 173, 50, 0.65);
+
+    color: #7e8385;
+
+    font-size: 11px;
 }
 
 .RodapeLinks {
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: #555555;
-
+    gap: 9px;
 }
 
-.rodape a {
-    color: #d4af6a;
+.RodapeLinks a {
+    color: #7e8385;
     text-decoration: none;
-    transition: 0.3s ease;
+
+    transition: 0.2s ease;
 }
 
-.rodape a:hover {
-    color: #e2c07b;
+.RodapeLinks a:hover {
+    color: var(--dourado-claro);
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .topo {
+        padding: 0 4%;
+    }
+
+    .menu {
+        gap: 30px;
+        margin-right: 5%;
+    }
+
+    .BackGround {
+        padding: 20px 3%;
+    }
+
+    .container {
+        gap: 18px;
+    }
+
+    .menu-lateral {
+        width: 190px;
+        min-width: 190px;
+    }
+
+    .ConfigSN,
+    .ConfigCPF {
+        gap: 12px;
+    }
+}
+
+
+/* Tablet */
+
+@media (max-width: 850px) {
+
+    .topo {
+        height: auto;
+        min-height: 80px;
+
+        padding: 12px 4%;
+
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu {
+        margin-right: 0;
+        gap: 22px;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .menu-lateral {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .menu-lateral ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .menu-lateral li {
+        border-right: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .menu-lateral a {
+        justify-content: center;
+        text-align: center;
+        padding: 10px 5px;
+    }
+
+    .conteudo {
+        width: 100%;
+    }
+
+    .ConfigSN,
+    .ConfigCPF {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Celular */
+
+@media (max-width: 600px) {
+
+    .topo {
+        padding: 10px 15px;
+    }
+
+    .logo img {
+        width: 70px;
+    }
+
+    .menu {
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 15px;
+
+        flex-wrap: wrap;
+    }
+
+    .menu a {
+        font-size: 11px;
+    }
+
+    .BackGround {
+        padding: 12px;
+    }
+
+    .conteudo {
+        padding: 17px 12px;
+    }
+
+    .conteudo > h1 {
+        font-size: 20px;
+    }
+
+    .conteudo > h4 {
+        font-size: 10px;
+    }
+
+    .menu-lateral ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .menu-lateral a {
+        font-size: 11px;
+    }
+
+    .TituloSegurança,
+    .TituloNotificação,
+    .TituloConfigProfissional,
+    .TituloPerfilProfissional,
+    .TituloFinanceiro,
+    .TituloPrivacidade,
+    .TituloCentralAjuda {
+        padding: 12px;
+    }
+
+    .seguranças,
+    .notificações,
+    .ConfigProfissionais,
+    .PerfilProfissionais,
+    .Financeiros,
+    .Privacidades,
+    .PrivacidadesU,
+    .CentralAjudas,
+    .CentralAjudaU {
+        padding: 10px;
+    }
+
+    .SegurançaText h3,
+    .notificaçõesText h3,
+    .ConfigProfissionaisText h3,
+    .PerfilProfissionaisText h3,
+    .FinanceirosText h3,
+    .PrivacidadesText h3,
+    .CentralAjudasText h3 {
+        font-size: 11px;
+    }
+
+    .SegurançaText p,
+    .notificaçõesText p,
+    .ConfigProfissionaisText p,
+    .PerfilProfissionaisText p,
+    .FinanceirosText p,
+    .PrivacidadesText p,
+    .CentralAjudasText p {
+        font-size: 9px;
+    }
+
+    .rodape {
+        padding: 12px 15px;
+
+        flex-direction: column;
+        gap: 8px;
+
+        text-align: center;
+    }
 }
