@@ -1,0 +1,379 @@
+:root{
+    --bg: #0c0c0c;
+    --panel: #141414;
+    --panel-2: #181818;
+    --border: #2a2a2a;
+    --gold: #d4af37;
+    --gold-soft: rgba(212,175,55,.12);
+    --text: #f2f2f0;
+    --text-dim: #9a9a95;
+    --text-faint: #6f6f6a;
+    --green: #23a35a;
+    --green-bg: rgba(35,163,90,.15);
+    --gray-bg: #2c2c2c;
+    --radius: 10px;
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  /* ---------- Header ---------- */
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 16px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .brand .icon{
+    width:34px;height:34px;
+    border:1px solid var(--gold);
+    border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    color: var(--gold);
+    font-size:16px;
+  }
+  .brand .name{
+    line-height:1.1;
+  }
+  .brand .name strong{
+    display:block;
+    font-size:14px;
+    letter-spacing:2px;
+    font-weight:700;
+  }
+  .brand .name span{
+    display:block;
+    font-size:9px;
+    letter-spacing:1.5px;
+    color: var(--text-faint);
+  }
+
+  .nav{
+    display:flex;
+    gap:36px;
+    font-size:14px;
+    color: var(--text);
+  }
+  .nav a:hover{ color: var(--gold); }
+
+  .user-icon{
+    width:34px;height:34px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    display:flex;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 28px 40px 60px;
+    gap: 28px;
+    align-items:flex-start;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    width: 220px;
+    flex-shrink:0;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .sidebar a, .sidebar .item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 14px;
+    border-radius:8px;
+    font-size:14px;
+    color: var(--text-dim);
+    cursor:pointer;
+  }
+  .sidebar a:hover{
+    background: var(--panel-2);
+    color: var(--text);
+  }
+  .sidebar .icon-sm{
+    width:16px;
+    text-align:center;
+    font-size:14px;
+    flex-shrink:0;
+  }
+  .sidebar .active{
+    background: var(--gold-soft);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-weight:600;
+  }
+  .sidebar .logout{
+    margin-top: 8px;
+    color: var(--text-dim);
+  }
+
+  /* ---------- Main content ---------- */
+  .main{
+    flex:1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px 32px;
+  }
+
+  .page-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:22px;
+    font-weight:700;
+    margin:0 0 4px;
+  }
+  .page-title .icon-box{
+    width:34px;height:34px;
+    border:1px solid var(--gold);
+    border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    color: var(--gold);
+    font-size:16px;
+  }
+  .page-sub{
+    color: var(--text-dim);
+    font-size:14px;
+    margin: 0 0 18px 46px;
+  }
+  .divider{
+    height:1px;
+    background: linear-gradient(to right, var(--gold), rgba(212,175,55,.05));
+    margin-bottom: 22px;
+  }
+
+  /* ---------- Security banner ---------- */
+  .banner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 22px;
+    gap: 20px;
+  }
+  .banner-left{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+  }
+  .badge-shield, .badge-clock{
+    width:38px;height:38px;
+    border-radius:50%;
+    background: var(--gold-soft);
+    color: var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-size:16px;
+    flex-shrink:0;
+  }
+  .banner-left h3, .banner-right h4{
+    margin:0 0 4px;
+    font-size:14px;
+    font-weight:700;
+  }
+  .banner-left p, .banner-right p{
+    margin:0;
+    font-size:12.5px;
+    color: var(--text-dim);
+  }
+  .banner-right{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    text-align:left;
+    white-space:nowrap;
+  }
+
+  /* ---------- Devices list ---------- */
+  .list-title{
+    font-size:15px;
+    font-weight:700;
+    margin: 0 0 14px;
+  }
+
+  .device-list{
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow:hidden;
+    margin-bottom: 22px;
+  }
+
+  .device-row{
+    display:flex;
+    align-items:center;
+    gap: 18px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+  }
+  .device-row:last-child{ border-bottom:none; }
+
+  .device-icon{
+    width:42px;height:42px;
+    border-radius:10px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;
+    color: var(--text);
+    flex-shrink:0;
+  }
+
+  .device-info{
+    width: 230px;
+    flex-shrink:0;
+  }
+  .device-info h4{
+    margin:0 0 2px;
+    font-size:14.5px;
+    font-weight:700;
+  }
+  .device-info .model{
+    margin:0;
+    font-size:12.5px;
+    color: var(--text-dim);
+  }
+  .device-info .loc{
+    margin:2px 0 0;
+    font-size:12px;
+    color: var(--text-faint);
+  }
+
+  .meta-col{
+    width: 170px;
+    flex-shrink:0;
+  }
+  .meta-col .label{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    color: var(--text-faint);
+    margin-bottom:4px;
+  }
+  .meta-col .value{
+    font-size:13.5px;
+    color: var(--text);
+  }
+
+  .status-pill{
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size:12px;
+    font-weight:600;
+    text-align:center;
+    width: 72px;
+  }
+  .status-ativo{
+    background: var(--green-bg);
+    color: var(--green);
+  }
+  .status-inativo{
+    background: var(--gray-bg);
+    color: var(--text-dim);
+  }
+
+  .row-menu{
+    margin-left:auto;
+    width:36px;height:36px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background: var(--panel-2);
+    display:flex;align-items:center;justify-content:center;
+    color: var(--text-dim);
+    cursor:pointer;
+  }
+
+  /* ---------- Footer notice ---------- */
+  .notice{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+    gap: 20px;
+  }
+  .notice-left{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+  }
+  .notice-left h4{
+    margin:0 0 4px;
+    font-size:14px;
+    font-weight:700;
+  }
+  .notice-left p{
+    margin:0;
+    font-size:12.5px;
+    color: var(--text-dim);
+  }
+  .btn-danger{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size:13.5px;
+    font-weight:600;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .btn-danger:hover{
+    background: var(--gold-soft);
+  }
+
+  /* ---------- Page footer ---------- */
+  .page-footer{
+    max-width:1440px;
+    margin: 0 auto;
+    padding: 18px 40px 30px;
+    border-top: 1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color: var(--text-faint);
+    font-size:12.5px;
+  }
+  .page-footer .links{
+    display:flex;
+    gap:18px;
+  }
+  .page-footer a:hover{ color: var(--gold); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1000px){
+    .layout{ flex-direction:column; }
+    .sidebar{ width:100%; flex-direction:row; flex-wrap:wrap; }
+    .device-row{ flex-wrap:wrap; }
+    .meta-col{ width:auto; }
+    .row-menu{ margin-left:0; }
+  }
