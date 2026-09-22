@@ -1,109 +1,593 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-   <link rel="stylesheet" href="../css/MeusProfissionaisEPedidos.css">
-   <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina de Meus Pedidos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meus Pedidos - Income Of Houses</title>
+
+    <link rel="stylesheet" href="../css/MeusPedidos.css">
 </head>
+
 <body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
-      </div>
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html">Sobre</a>
-      </nav>
-   </header>
-         <main class="container">
-                  <aside class="menu-lateral">
-                     <ul>
-                           <li><a href="../pages/PerfilUsuario.html">Meu Perfil</a></li>
-                           <li><a href="../pages/MeusEndereços.html">Meus Endereços</a></li>
-                           <li><a href="../pages/MeusPedidos.html" class="ativo">Meus Pedidos</a></li>
-                           <li><a href="../pages/MeusProfissionais.html">Meus Profissionais Favoritos</a></li>
-                           <li><a href="../pages/ProjetosSalvos.html">Projetos Salvos</a></li>
-                           <li><a href="../pages/Mensagem.html">Mensagens</a></li>
-                           <li><a href="../pages/Configurações.html">Configurações</a></li>
-                           <li><a href="../index.html">Sair</a></li>
-                     </ul>
-                  </aside>
-               <section class="conteudo">
-                  <div class="titulo">
-                     <h1>Meus Pedidos</h1>
-                     <p>Gerencie seus Pedidos</p>
-                  
 
-                     <div class="cabecalho">
-                        <h2>Pedidos</h2>
+    <!-- TOPO -->
+    <header class="topo">
 
-                        <div class="cards">
-                           <div class="card">
-                              <h3> Pedido 1</h3>
-                              <p>Descrição</p>
+        <div class="logo">
+            <img src="../img/Logo.png" alt="Income Of Houses">
+        </div>
 
-                              <div>
-                                 <a href="../pages/PedidoDetalhe.html">Acessar Pedido</a>
-                              </div>
-                           </div>
+        <nav class="menu-topo">
+            <a href="../index.html" class="ativo">Início</a>
+            <a href="Plantas.html">Plantas</a>
+            <a href="Profissionais.html">Profissionais</a>
+            <a href="Sobre.html">Sobre</a>
+        </nav>
 
-                           <div class="card">
-                              <h3> Pedido 2</h3>
-                              <p>Descrição</p>
+        <a href="PerfilUsuario.html" class="usuario-topo">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="7" r="4"></circle>
+                <path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"></path>
+            </svg>
+        </a>
 
-                              <div>
-                                 <a href="../pages/PedidoDetalhe.html">Acessar Pedido</a>
-                              </div>
-                           </div>
+    </header>
 
-                           <div class="card">
-                              <h3> Pedido 3</h3>
-                              <p>Descrição</p>
 
-                              <div>
-                                 <a href="../pages/PedidoDetalhe.html">Acessar Pedido</a>
-                              </div>
-                           </div>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="estrutura">
 
-                           <div class="card">
-                              <h3> Pedido 4</h3>
-                              <p>Descrição</p>
+        <!-- MENU LATERAL -->
+        <aside class="sidebar">
 
-                              <div>
-                                 <a href="../pages/PedidoDetalhe.html">Acessar Pedido</a>
-                              </div>
-                           </div>
+            <a href="PerfilUsuario.html" class="item-menu">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"></path>
+                </svg>
+                <span>Meu Perfil</span>
+            </a>
 
-                           <div class="card">
-                              <h3> Pedido 5</h3>
-                              <p>Descrição</p>
+            <a href="MeusEndereços.html" class="item-menu">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path>
+                    <circle cx="12" cy="9" r="2.5"></circle>
+                </svg>
+                <span>Meus Endereços</span>
+            </a>
 
-                              <div>
-                                 <a href="../pages/PedidoDetalhe.html">Acessar Pedido</a>
-                              </div>
-                           </div>
+            <a href="MeusPedidos.html" class="item-menu selecionado">
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 8h14l1 12H4L5 8z"></path>
+                    <path d="M8 8a4 4 0 0 1 8 0"></path>
+                </svg>
+                <span>Meus Pedidos</span>
+            </a>
 
-                           <div class="card">
-                              <h3> Pedido 6</h3>
-                              <p>Descrição</p>
+            <a href="ProfissionaisFavoritos.html" class="item-menu">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20.8 8.8c0 5.5-8.8 10.2-8.8 10.2S3.2 14.3 3.2 8.8A4.8 4.8 0 0 1 12 6.1a4.8 4.8 0 0 1 8.8 2.7z"></path>
+                </svg>
+                <span>Meus Profissionais Favoritos</span>
+            </a>
 
-                              <div>
-                                 <a href="../pages/PedidoDetalhe.html">Acessar Pedido</a>
-                              </div>
-                           </div>
-                        </div>
-                  </div>
+            <a href="ProjetosSalvos.html" class="item-menu">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6 4h12v17l-6-4-6 4V4z"></path>
+                </svg>
+                <span>Projetos Salvos</span>
+            </a>
+
+            <a href="Agendamentos.html" class="item-menu">
+                <svg viewBox="0 0 24 24">
+                    <rect x="4" y="5" width="16" height="15" rx="1"></rect>
+                    <path d="M8 3v4M16 3v4M4 9h16"></path>
+                </svg>
+                <span>Agendamentos</span>
+            </a>
+
+            <a href="Mensagem.html" class="item-menu">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 5h16v12H8l-4 4V5z"></path>
+                </svg>
+                <span>Mensagens</span>
+            </a>
+
+            <a href="ConfiguraçõesUsuario.html" class="item-menu">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.8 1.8 0 0 0 .4 2l.1.1-1.8 1.8-.1-.1a1.8 1.8 0 0 0-2-.4 1.8 1.8 0 0 0-1.1 1.6v.2h-2.6V20a1.8 1.8 0 0 0-1.1-1.6 1.8 1.8 0 0 0-2 .4l-.1.1-1.8-1.8.1-.1a1.8 1.8 0 0 0 .4-2A1.8 1.8 0 0 0 6.2 14H6v-2.6h.2a1.8 1.8 0 0 0 1.6-1.1 1.8 1.8 0 0 0-.4-2l-.1-.1 1.8-1.8.1.1a1.8 1.8 0 0 0 2 .4A1.8 1.8 0 0 0 12.3 5v-.2h2.6V5a1.8 1.8 0 0 0 1.1 1.6 1.8 1.8 0 0 0 2-.4l.1-.1 1.8 1.8-.1.1a1.8 1.8 0 0 0-.4 2 1.8 1.8 0 0 0 1.6 1.1h.2V14H21a1.8 1.8 0 0 0-1.6 1z"></path>
+                </svg>
+                <span>Configurações</span>
+            </a>
+
+            <a href="../index.html" class="item-menu sair">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 17l5-5-5-5"></path>
+                    <path d="M15 12H3"></path>
+                    <path d="M14 4h6v16h-6"></path>
+                </svg>
+                <span>Sair</span>
+            </a>
+
+        </aside>
+
+
+        <!-- ÁREA DOS PEDIDOS -->
+        <main class="conteudo">
+
+            <!-- TÍTULO -->
+            <section class="cabecalho-pedidos">
+
+                <div class="titulo-area">
+
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 8h14l1 12H4L5 8z"></path>
+                        <path d="M8 8a4 4 0 0 1 8 0"></path>
+                    </svg>
+
+                    <div>
+                        <h1>Meus Pedidos</h1>
+                        <p>Acompanhe o andamento e o histórico de todos os seus pedidos.</p>
+                    </div>
+
+                </div>
+
             </section>
-         </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+
+
+            <!-- FILTROS -->
+            <section class="filtros">
+
+                <div class="botoes-filtro">
+
+                    <button class="filtro ativo">Todos</button>
+
+                    <button class="filtro">
+                        Em andamento
+                    </button>
+
+                    <button class="filtro">
+                        Concluídos
+                    </button>
+
+                    <button class="filtro">
+                        Cancelados
+                    </button>
+
+                </div>
+
+
+                <div class="campo-busca">
+
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="6"></circle>
+                        <path d="M16 16l5 5"></path>
+                    </svg>
+
+                    <input
+                        type="text"
+                        placeholder="Buscar por pedido ou profissional"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- LISTA DE PEDIDOS -->
+            <section class="lista-pedidos">
+
+
+                <!-- PEDIDO 1 -->
+                <article class="pedido">
+
+                    <div class="icone-pedido">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 20V8l7-5 7 5v12"></path>
+                            <path d="M9 20v-6h6v6"></path>
+                            <path d="M8 9h1M15 9h1M8 12h1M15 12h1"></path>
+                        </svg>
+                    </div>
+
+                    <div class="informacao principal">
+                        <h3>Projeto Arquitetônico Residencial</h3>
+
+                        <div class="profissional">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="7" r="3.5"></circle>
+                                <path d="M5 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"></path>
+                            </svg>
+
+                            <div>
+                                <span>Carlos Silva</span>
+                                <small>Arquiteto</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="informacao detalhe">
+                        <div class="icone-pequeno">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="4" y="5" width="16" height="15" rx="1"></rect>
+                                <path d="M8 3v4M16 3v4M4 9h16"></path>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <small>Pedido em</small>
+                            <span>12/06/2025</span>
+                        </div>
+                    </div>
+
+                    <div class="informacao detalhe">
+                        <div class="icone-pequeno">
+                            <svg viewBox="0 0 24 24">
+                                <ellipse cx="12" cy="6" rx="7" ry="3"></ellipse>
+                                <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"></path>
+                                <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <small>Valor</small>
+                            <span>R$ 2.800,00</span>
+                        </div>
+                    </div>
+
+                    <span class="status andamento">
+                        <i></i>
+                        Em andamento
+                    </span>
+
+                    <a href="DetalhePedido.html" class="btn-detalhes">
+                        Ver detalhes
+                    </a>
+
+                    <button class="mais">⋮</button>
+
+                </article>
+
+
+                <!-- PEDIDO 2 -->
+                <article class="pedido">
+
+                    <div class="icone-pedido">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 20V9h14v11"></path>
+                            <path d="M3 9h18"></path>
+                            <path d="M7 5h10l2 4H5l2-4z"></path>
+                            <path d="M9 13h6v7H9z"></path>
+                        </svg>
+                    </div>
+
+                    <div class="informacao principal">
+                        <h3>Reforma e Ampliação</h3>
+
+                        <div class="profissional">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="7" r="3.5"></circle>
+                                <path d="M5 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"></path>
+                            </svg>
+
+                            <div>
+                                <span>Juliana Martins</span>
+                                <small>Engenheira Civil</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="informacao detalhe">
+                        <div class="icone-pequeno">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="4" y="5" width="16" height="15" rx="1"></rect>
+                                <path d="M8 3v4M16 3v4M4 9h16"></path>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <small>Pedido em</small>
+                            <span>28/05/2025</span>
+                        </div>
+                    </div>
+
+                    <div class="informacao detalhe">
+                        <div class="icone-pequeno">
+                            <svg viewBox="0 0 24 24">
+                                <ellipse cx="12" cy="6" rx="7" ry="3"></ellipse>
+                                <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"></path>
+                                <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <small>Valor</small>
+                            <span>R$ 15.600,00</span>
+                        </div>
+                    </div>
+
+                    <span class="status concluido">
+                        <i></i>
+                        Concluído
+                    </span>
+
+                    <a href="DetalhePedido.html" class="btn-detalhes">
+                        Ver detalhes
+                    </a>
+
+                    <button class="mais">⋮</button>
+
+                </article>
+
+
+                <!-- PEDIDO 3 -->
+                <article class="pedido">
+
+                    <div class="icone-pedido">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 4h14v16H5z"></path>
+                            <path d="M8 8h8M8 12h8M8 16h5"></path>
+                        </svg>
+                    </div>
+
+                    <div class="informacao principal">
+                        <h3>Consultoria de Viabilidade</h3>
+
+                        <div class="profissional">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="7" r="3.5"></circle>
+                                <path d="M5 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"></path>
+                            </svg>
+
+                            <div>
+                                <span>Rafael Costa</span>
+                                <small>Especialista em Investimentos Imobiliários</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="informacao detalhe">
+                        <div class="icone-pequeno">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="4" y="5" width="16" height="15" rx="1"></rect>
+                                <path d="M8 3v4M16 3v4M4 9h16"></path>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <small>Pedido em</small>
+                            <span>15/05/2025</span>
+                        </div>
+                    </div>
+
+                    <div class="informacao detalhe">
+                        <div class="icone-pequeno">
+                            <svg viewBox="0 0 24 24">
+                                <ellipse cx="12" cy="6" rx="7" ry="3"></ellipse>
+                                <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"></path>
+                                <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <small>Valor</small>
+                            <span>R$ 950,00</span>
+                        </div>
+                    </div>
+
+                    <span class="status cancelado">
+                        <i></i>
+                        Cancelado
+                    </span>
+
+                    <a href="DetalhePedido.html" class="btn-detalhes">
+                        Ver detalhes
+                    </a>
+
+                    <button class="mais">⋮</button>
+
+                </article>
+
+
+                <!-- PEDIDO 4 -->
+                <article class="pedido">
+
+                    <div class="icone-pedido">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 19V7h14v12"></path>
+                            <path d="M8 7V4h8v3"></path>
+                            <path d="M8 11h3M13 11h3M8 15h3M13 15h3"></path>
+                        </svg>
+                    </div>
+
+                    <div class="informacao principal">
+                        <h3>Planta Baixa - Sobrado</h3>
+
+                        <div class="profissional">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="7" r="3.5"></circle>
+                                <path d="M5 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"></path>
+                            </svg>
+
+                            <div>
+                                <span>Fernanda Lima</span>
+                                <small>Arquiteta</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="informacao detalhe">
+                        <div class="icone-pequeno">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="4" y="5" width="16" height="15" rx="1"></rect>
+                                <path d="M8 3v4M16 3v4M4 9h16"></path>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <small>Pedido em</small>
+                            <span>03/05/2025</span>
+                        </div>
+                    </div>
+
+                    <div class="informacao detalhe">
+                        <div class="icone-pequeno">
+                            <svg viewBox="0 0 24 24">
+                                <ellipse cx="12" cy="6" rx="7" ry="3"></ellipse>
+                                <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"></path>
+                                <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <small>Valor</small>
+                            <span>R$ 1.750,00</span>
+                        </div>
+                    </div>
+
+                    <span class="status concluido">
+                        <i></i>
+                        Concluído
+                    </span>
+
+                    <a href="DetalhePedido.html" class="btn-detalhes">
+                        Ver detalhes
+                    </a>
+
+                    <button class="mais">⋮</button>
+
+                </article>
+
+
+                <!-- PEDIDO 5 -->
+                <article class="pedido">
+
+                    <div class="icone-pedido">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 9h16v10H4z"></path>
+                            <path d="M7 9V6h10v3"></path>
+                            <path d="M8 14h8"></path>
+                        </svg>
+                    </div>
+
+                    <div class="informacao principal">
+                        <h3>Projeto de Interiores</h3>
+
+                        <div class="profissional">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="7" r="3.5"></circle>
+                                <path d="M5 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"></path>
+                            </svg>
+
+                            <div>
+                                <span>Lucas Pereira</span>
+                                <small>Designer de Interiores</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="informacao detalhe">
+                        <div class="icone-pequeno">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="4" y="5" width="16" height="15" rx="1"></rect>
+                                <path d="M8 3v4M16 3v4M4 9h16"></path>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <small>Pedido em</small>
+                            <span>20/04/2025</span>
+                        </div>
+                    </div>
+
+                    <div class="informacao detalhe">
+                        <div class="icone-pequeno">
+                            <svg viewBox="0 0 24 24">
+                                <ellipse cx="12" cy="6" rx="7" ry="3"></ellipse>
+                                <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"></path>
+                                <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <small>Valor</small>
+                            <span>R$ 3.400,00</span>
+                        </div>
+                    </div>
+
+                    <span class="status andamento">
+                        <i></i>
+                        Em andamento
+                    </span>
+
+                    <a href="DetalhePedido.html" class="btn-detalhes">
+                        Ver detalhes
+                    </a>
+
+                    <button class="mais">⋮</button>
+
+                </article>
+
+            </section>
+
+
+            <!-- PAGINAÇÃO -->
+            <div class="paginacao">
+
+                <button class="pagina seta">‹</button>
+
+                <button class="pagina selecionada">1</button>
+
+                <button class="pagina">2</button>
+
+                <button class="pagina">3</button>
+
+                <button class="pagina">4</button>
+
+                <button class="pagina seta">›</button>
+
+            </div>
+
+
+            <!-- ÁREA SEM PEDIDOS -->
+            <section class="explorar">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 8h14l1 12H4L5 8z"></path>
+                    <path d="M8 8a4 4 0 0 1 8 0"></path>
+                </svg>
+
+                <h2>Você ainda não tem pedidos por aqui</h2>
+
+                <p>
+                    Explore nossos profissionais e encontre o serviço ideal para o seu projeto.
+                </p>
+
+                <a href="Profissionais.html">
+                    Explorar profissionais
+                </a>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+
+        <span>© IncomeOfHouses. Todos os direitos reservados.</span>
+
+        <div>
+            <a href="#">Termos de Uso</a>
+            <b>|</b>
+            <a href="#">Política de Privacidade</a>
+        </div>
+
+    </footer>
+
 </body>
 </html>

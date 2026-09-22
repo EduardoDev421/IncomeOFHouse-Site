@@ -1,32 +1,122 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-   <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina de Projetos</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alterar Senha · Income of Houses</title>
+<link rel="stylesheet" href="../../css/AlterarSenha.css">
 </head>
 <body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
+
+  <!-- Header -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="icon">⌂</div>
+      <div class="name">
+        <strong>INCOME</strong>
+        <span>OF HOUSES</span>
       </div>
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html" class="ativo">Sobre</a>
-      </nav>
-   </header>
-         <main>
+    </div>
+    <nav class="nav">
+      <a href="#">Início</a>
+      <a href="#">Plantas</a>
+      <a href="#">Profissionais</a>
+      <a href="#">Sobre</a>
+    </nav>
+    <div class="user-icon">☺</div>
+  </header>
 
+  <div class="layout">
 
-         </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a><span class="icon-sm">👤</span> Meu Perfil</a>
+      <a><span class="icon-sm">📍</span> Meus Endereços</a>
+      <a><span class="icon-sm">▦</span> Meus Pedidos</a>
+      <a><span class="icon-sm">★</span> Meus Profissionais Favoritos</a>
+      <a><span class="icon-sm">🔖</span> Projetos Salvos</a>
+      <a><span class="icon-sm">📅</span> Agendamentos</a>
+      <a><span class="icon-sm">💬</span> Mensagens</a>
+      <a class="active"><span class="icon-sm">⚙</span> Configurações</a>
+      <a class="logout"><span class="icon-sm">↪</span> Sair</a>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <h1 class="page-title">
+        <span class="icon-box">⚙</span>
+        Alterar Senha
+      </h1>
+      <p class="page-sub">Mantenha sua conta segura. Escolha uma senha forte e exclusiva.</p>
+      <div class="divider"></div>
+
+      <div class="panel">
+        <div class="panel-grid">
+
+          <!-- Left info -->
+          <div class="info-side">
+            <div class="badge-shield-lg">🔒</div>
+            <h3>Segurança da Conta</h3>
+            <p>Sua senha é a chave para manter suas informações protegidas. Utilize uma senha forte e única.</p>
+          </div>
+
+          <!-- Right form -->
+          <div class="form-side">
+
+            <div class="field">
+              <label><span class="lock-ic">🔒</span> Senha atual</label>
+              <div class="input-wrap">
+                <span class="input-ic">🔒</span>
+                <input type="password" placeholder="Digite sua senha atual">
+                <span class="eye-ic">👁</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label><span class="lock-ic">🔒</span> Nova senha</label>
+              <div class="input-wrap">
+                <span class="input-ic">🔒</span>
+                <input type="password" placeholder="Digite sua nova senha">
+                <span class="eye-ic">👁</span>
+              </div>
+              <div class="strength-bar">
+                <span class="seg filled"></span>
+                <span class="seg filled"></span>
+                <span class="seg"></span>
+              </div>
+              <p class="strength-label">Força da senha</p>
+            </div>
+
+            <div class="field">
+              <label><span class="lock-ic">🔒</span> Confirmar nova senha</label>
+              <div class="input-wrap">
+                <span class="input-ic">🔒</span>
+                <input type="password" placeholder="Confirme sua nova senha">
+                <span class="eye-ic">👁</span>
+              </div>
+            </div>
+
+            <button class="btn-submit">🔒 Alterar senha</button>
+
+            <div class="tip">
+              <span class="tip-ic">ⓘ</span>
+              <p><strong>Dica:</strong> Use pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e símbolos.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <footer class="page-footer">
+    <span>© IncomeOfHouses. Todos os direitos reservados.</span>
+    <div class="links">
+      <a href="#">Termos de Uso</a>
+      <a href="#">Política de Privacidade</a>
+    </div>
+  </footer>
+
 </body>
 </html>

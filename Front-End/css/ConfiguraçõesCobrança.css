@@ -1,1139 +1,479 @@
-/* =====================================================
-   RESET
-===================================================== */
-
-* {
-  box-sizing: border-box;
+:root{
+  --bg: #0c0c0c;
+  --panel: #141414;
+  --panel-2: #181818;
+  --border: #2a2a2a;
+  --gold: #d4af37;
+  --gold-light: #f0c956;
+  --gold-soft: rgba(212,175,55,.12);
+  --text: #f2f2f0;
+  --text-dim: #9a9a95;
+  --text-faint: #6f6f6a;
+  --green: #23a35a;
+  --green-bg: rgba(35,163,90,.15);
+  --input-bg: #101010;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-}
-
-body {
-  background: #080909;
-}
-
-
-/* =====================================================
-   PÁGINA
-===================================================== */
-
-.cobranca-page {
-  width: 100%;
+*{ box-sizing: border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
   min-height: 100vh;
+}
+a{ color: inherit; text-decoration: none; }
 
-  display: grid;
-  grid-template-columns: 190px minmax(0, 1fr);
-
-  gap: 10px;
-
-  padding: 16px;
-
-  color: #eeeeee;
-
-  font-family: Arial, Helvetica, sans-serif;
-
-  background:
-    radial-gradient(
-      circle at 85% 45%,
-      rgba(192, 145, 20, 0.10),
-      transparent 30%
-    ),
-    linear-gradient(
-      120deg,
-      #070808 0%,
-      #0b0c0c 50%,
-      #070808 100%
-    );
+/* ---------- Header ---------- */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 16px 40px;
+  border-bottom: 1px solid var(--border);
+}
+.brand{ display:flex; align-items:center; gap:10px; }
+.brand .icon{
+  width:34px;height:34px;
+  border:1px solid var(--gold);
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  color: var(--gold);
+  font-size:16px;
+}
+.brand .name{ line-height:1.1; }
+.brand .name strong{ display:block; font-size:14px; letter-spacing:2px; font-weight:700; }
+.brand .name span{ display:block; font-size:9px; letter-spacing:1.5px; color: var(--text-faint); }
+.nav{ display:flex; gap:36px; font-size:14px; color: var(--text); }
+.nav a:hover{ color: var(--gold); }
+.user-icon{
+  width:34px;height:34px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
 }
 
-
-/* =====================================================
-   SIDEBAR
-===================================================== */
-
-.cobranca-sidebar {
-  width: 190px;
-  min-height: calc(100vh - 32px);
-
-  padding: 10px;
-
-  border: 1px solid #292b2b;
-  border-radius: 10px 10px 0 0;
-
-  background:
-    linear-gradient(
-      180deg,
-      #111313 0%,
-      #0d0f0f 100%
-    );
-
-  box-shadow:
-    inset 0 0 25px rgba(0, 0, 0, 0.25);
+/* ---------- Layout ---------- */
+.layout{
+  display:flex;
+  max-width: 1520px;
+  margin: 0 auto;
+  padding: 28px 40px 60px;
+  gap: 28px;
+  align-items:flex-start;
 }
 
+/* ---------- Sidebar ---------- */
+.sidebar{
+  width: 220px;
+  flex-shrink:0;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.sidebar a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 14px;
+  border-radius:8px;
+  font-size:14px;
+  color: var(--text-dim);
+  cursor:pointer;
+}
+.sidebar a:hover{ background: var(--panel-2); color: var(--text); }
+.sidebar .icon-sm{ width:16px; text-align:center; font-size:14px; flex-shrink:0; }
+.sidebar .active{
+  background: var(--gold-soft);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-weight:600;
+}
+.sidebar .logout{ margin-top: 8px; color: var(--text-dim); }
 
-/* LOGO */
+/* ---------- Main content ---------- */
+.main{ flex:1; min-width:0; }
 
-.cobranca-logo {
-  height: 70px;
-
-  margin-bottom: 10px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-bottom: 1px solid #262828;
+.page-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:24px;
+  font-weight:700;
+  margin:2px 0 4px;
+}
+.page-title .icon-box{
+  width:36px;height:36px;
+  border:1px solid var(--gold);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  color: var(--gold);
+  font-size:16px;
+}
+.page-sub{
+  color: var(--text-dim);
+  font-size:14px;
+  margin: 0 0 18px 48px;
+}
+.divider{
+  height:2px;
+  background: linear-gradient(to right, var(--gold), rgba(212,175,55,.05));
+  margin-bottom: 22px;
 }
 
+/* ---------- Two column grid ---------- */
+.grid-two{
+  display:grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 22px;
+  align-items:start;
+}
+.col{ display:flex; flex-direction:column; gap:22px; min-width:0; }
 
-.logo-symbol {
-  color: #d7aa27;
-
-  font-size: 28px;
-
-  line-height: 25px;
+/* ---------- Card ---------- */
+.card{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+}
+.card-head{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom: 18px;
+}
+.card-head.between{
+  justify-content:space-between;
+  align-items:flex-start;
+}
+.head-with-icon{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+}
+.head-ic{
+  width:30px;height:30px;
+  display:flex;align-items:center;justify-content:center;
+  color: var(--gold);
+  font-size:16px;
+  flex-shrink:0;
+}
+.card-head h2{
+  margin:0;
+  font-size:16.5px;
+  font-weight:700;
+}
+.card-sub{
+  margin:2px 0 0;
+  font-size:12.5px;
+  color: var(--text-dim);
 }
 
-
-.logo-text {
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
+/* ---------- Plano Atual ---------- */
+.plan-box{
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px;
+}
+.plan-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:10px;
+}
+.plan-name-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.plan-name-row h3{
+  margin:0;
+  font-size:17px;
+  font-weight:700;
+}
+.plan-price{
+  text-align:right;
+  white-space:nowrap;
+}
+.plan-price .price{
+  font-size:19px;
+  font-weight:700;
+  color: var(--text);
+}
+.plan-price .per{
+  font-size:13px;
+  color: var(--text-dim);
+}
+.plan-desc{
+  margin: 0 0 16px;
+  font-size:13.5px;
+  color: var(--text-dim);
+  line-height:1.6;
+}
+.plan-features{
+  list-style:none;
+  margin:0 0 18px;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.plan-features li{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:13.5px;
+  color: var(--text);
+}
+.plan-features .check{
+  color: var(--gold);
+  font-weight:700;
+}
+.plan-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.next-charge{
+  margin:0;
+  font-size:12.5px;
+  color: var(--text-faint);
 }
 
-
-.logo-text strong {
-  color: #dddddd;
-
-  font-size: 12px;
-
-  letter-spacing: 3px;
-}
-
-
-.logo-text small {
-  color: #777;
-
-  font-size: 6px;
-
-  letter-spacing: 2px;
-}
-
-
-/* MENU */
-
-.menu-item {
-  width: 100%;
-
-  min-height: 31px;
-
-  margin-bottom: 4px;
-
-  padding: 6px 10px;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  color: #d9d9d9;
-
-  text-decoration: none;
-
-  border: 1px solid transparent;
-
-  border-radius: 6px;
-
-  background: rgba(255,255,255,0.025);
-
-  font-size: 11px;
-
-  line-height: 1.2;
-
-  transition: 0.2s;
-}
-
-
-.menu-item:hover {
-  color: #efc53d;
-
-  background:
-    rgba(215,170,39,0.07);
-}
-
-
-.menu-item > span:first-child {
-  width: 14px;
-
-  flex-shrink: 0;
-
-  color: #d7aa27;
-
-  text-align: center;
-
-  font-size: 13px;
-}
-
-
-.menu-active {
-  color: #efc53d !important;
-
-  border-color: #98791c;
-
-  background:
-    rgba(215,170,39,0.07);
-}
-
-
-.menu-exit {
-  margin-top: 25px;
-}
-
-
-/* =====================================================
-   CONTEÚDO
-===================================================== */
-
-.cobranca-content {
-  min-width: 0;
-
-  padding: 14px 16px 30px;
-
-  border: 1px solid #292b2b;
-
-  border-radius: 10px 10px 0 0;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(16,18,18,0.97),
-      rgba(10,11,11,0.98)
-    );
-}
-
-
-/* =====================================================
-   CABEÇALHO
-===================================================== */
-
-.page-header {
-  height: 57px;
-
-  margin-bottom: 20px;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 18px;
-
-  border-bottom: 2px solid #d7aa27;
-}
-
-
-.header-icon {
-  width: 32px;
-  height: 22px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  color: #d7aa27;
-
-  border: 3px solid #d7aa27;
-
-  border-radius: 4px;
-
-  font-size: 14px;
-}
-
-
-.page-header h1 {
-  margin: 0 0 4px;
-
-  color: #f1f1f1;
-
-  font-size: 20px;
-
-  line-height: 1;
-}
-
-
-.page-header p {
-  margin: 0;
-
-  color: #8d9091;
-
-  font-size: 11px;
-}
-
-
-/* =====================================================
-   GRID
-===================================================== */
-
-.cards-grid {
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 1fr)
-    minmax(0, 1fr);
-
-  gap: 12px;
-}
-
-
-/* =====================================================
-   CARDS
-===================================================== */
-
-.card {
-  min-width: 0;
-
-  padding: 17px;
-
-  border: 1px solid #292c2c;
-
-  border-radius: 7px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #111313,
-      #0f1111
-    );
-}
-
-
-/* =====================================================
-   CABEÇALHO DOS CARDS
-===================================================== */
-
-.card-header {
-  min-width: 0;
-
-  min-height: 29px;
-
-  margin-bottom: 13px;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 15px;
-}
-
-
-.card-header-icon {
-  width: 23px;
-
-  flex-shrink: 0;
-
-  color: #d7aa27;
-
-  text-align: center;
-
-  font-size: 20px;
-}
-
-
-.card-header h2 {
-  margin: 0 0 4px;
-
-  color: #eeeeee;
-
-  font-size: 14px;
-
-  line-height: 1.1;
-}
-
-
-.card-header p {
-  margin: 0;
-
-  color: #777b7c;
-
-  font-size: 10px;
-}
-
-
-/* =====================================================
-   PLANO
-===================================================== */
-
-.plan-box {
-  min-height: 196px;
-
-  position: relative;
-
-  padding: 17px;
-
-  border: 1px solid #5b4a17;
-
-  border-radius: 7px;
-
-  background:
-    linear-gradient(
-      120deg,
-      rgba(215,170,39,0.035),
-      transparent 50%
-    );
-}
-
-
-.plan-title {
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  margin-bottom: 12px;
-}
-
-
-.plan-title h3 {
-  margin: 0;
-
-  color: #eeeeee;
-
-  font-size: 16px;
-}
-
-
-.active-badge {
+/* ---------- Pills ---------- */
+.pill{
   padding: 4px 12px;
-
-  color: #171717;
-
-  border-radius: 15px;
-
-  background: #eac33b;
-
-  font-size: 10px;
-
-  font-weight: bold;
+  border-radius: 20px;
+  font-size:11.5px;
+  font-weight:700;
+  white-space:nowrap;
 }
+.pill-ativo{ background: var(--gold); color: #1a1a1a; }
+.pill-principal{ background: var(--green-bg); color: var(--green); }
+.pill-pago{ background: var(--green-bg); color: var(--green); }
 
-
-.plan-description {
-  width: 58%;
-
-  margin: 0;
-
-  color: #9b9e9f;
-
-  font-size: 10px;
-
-  line-height: 1.6;
-}
-
-
-/* BENEFÍCIOS */
-
-.benefits {
-  margin: 13px 0 0;
-
-  padding: 0;
-
-  list-style: none;
-}
-
-
-.benefits li {
-  margin: 7px 0;
-
-  color: #b5b7b7;
-
-  font-size: 11px;
-}
-
-
-.benefits li::before {
-  content: "✓";
-
-  width: 12px;
-  height: 12px;
-
-  margin-right: 9px;
-
-  display: inline-flex;
-
-  align-items: center;
-  justify-content: center;
-
-  color: #171717;
-
-  border-radius: 50%;
-
-  background: #e6bd35;
-
-  font-size: 8px;
-
-  font-weight: bold;
-}
-
-
-/* PREÇO */
-
-.plan-price {
-  position: absolute;
-
-  top: 40px;
-  right: 17px;
-
-  text-align: right;
-}
-
-
-.plan-price strong {
-  color: #eeeeee;
-
-  font-size: 17px;
-}
-
-
-.plan-price span {
-  color: #929595;
-
-  font-size: 10px;
-}
-
-
-.next-payment {
-  position: absolute;
-
-  top: 73px;
-  right: 17px;
-
-  color: #777b7b;
-
-  font-size: 9px;
-}
-
-
-/* BOTÃO */
-
-.gold-button {
-  position: absolute;
-
-  right: 17px;
-  bottom: 45px;
-
-  width: 170px;
-  height: 38px;
-
-  color: #efc53d;
-
-  border: 1px solid #a5831d;
-
-  border-radius: 6px;
-
+/* ---------- Buttons ---------- */
+.btn-outline-gold{
+  display:flex;
+  align-items:center;
+  gap:8px;
   background: transparent;
-
-  cursor: pointer;
-
-  font-size: 11px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size:13.5px;
+  font-weight:600;
+  cursor:pointer;
+  white-space:nowrap;
 }
+.btn-outline-gold:hover{ background: var(--gold-soft); }
+.btn-outline-gold.sm{ padding: 7px 14px; font-size:12.5px; }
 
-
-.gold-button:hover {
-  background: rgba(215,170,39,0.08);
+/* ---------- Formas de Pagamento ---------- */
+.payment-row{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
 }
-
-
-/* =====================================================
-   HISTÓRICO
-===================================================== */
-
-.history-card {
-  min-height: 280px;
+.payment-card{
+  flex:1;
+  min-width: 260px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
 }
-
-
-.history-header {
-  position: relative;
+.card-logo{
+  width:48px;height:32px;
+  background: #1a2a5e;
+  color:#fff;
+  border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;
+  font-weight:800;
+  font-style:italic;
+  flex-shrink:0;
 }
-
-
-.outline-button {
-  margin-left: auto;
-
-  padding: 7px 12px;
-
-  color: #e1b72f;
-
-  border: 1px solid #957719;
-
-  border-radius: 5px;
-
-  background: transparent;
-
-  cursor: pointer;
-
-  font-size: 10px;
+.card-info{ flex:1; min-width:0; }
+.card-info-top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:2px;
 }
-
-
-.outline-button:hover {
-  background: rgba(215,170,39,0.08);
+.card-info-top strong{ font-size:14px; }
+.card-info p{
+  margin:0;
+  font-size:12px;
+  color: var(--text-faint);
 }
-
-
-/* TABELA */
-
-.table-wrapper {
-  width: 100%;
-
-  overflow-x: auto;
+.card-actions{
+  display:flex;
+  gap:8px;
+  flex-shrink:0;
 }
+.icon-btn{
+  width:30px;height:30px;
+  border-radius:6px;
+  border: 1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color: var(--text-dim);
+  cursor:pointer;
+  font-size:13px;
+  flex-shrink:0;
+}
+.add-payment{
+  flex:1;
+  min-width: 240px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  color: var(--gold);
+  font-size:13.5px;
+  font-weight:600;
+  cursor:pointer;
+}
+.add-payment:hover{ background: var(--gold-soft); }
+.add-ic{ font-size:16px; }
 
-
-table {
-  width: 100%;
-
-  margin-top: 12px;
-
+/* ---------- Billing table ---------- */
+.billing-table{
+  width:100%;
   border-collapse: collapse;
 }
-
-
-th {
-  padding: 8px 7px;
-
-  color: #777b7b;
-
-  border-bottom: 1px solid #272929;
-
-  text-align: left;
-
-  font-size: 10px;
-
-  font-weight: normal;
-
-  white-space: nowrap;
+.billing-table thead th{
+  text-align:left;
+  font-size:11.5px;
+  color: var(--text-faint);
+  font-weight:600;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--border);
+}
+.billing-table tbody td{
+  padding: 12px 0;
+  font-size:13px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  white-space:nowrap;
+}
+.billing-table tbody tr:last-child td{ border-bottom:none; }
+.billing-table .chevron{
+  text-align:right;
+  color: var(--text-faint);
+  width: 20px;
 }
 
-
-td {
-  padding: 10px 7px;
-
-  color: #bfc1c1;
-
-  border-bottom: 1px solid #202222;
-
-  font-size: 10px;
-
-  white-space: nowrap;
+/* ---------- Toggle row ---------- */
+.toggle-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.toggle-row strong{ font-size:14px; }
+.toggle-row p{
+  margin: 3px 0 0;
+  font-size:12.5px;
+  color: var(--text-dim);
 }
 
-
-.paid {
-  display: inline-block;
-
-  padding: 4px 9px;
-
-  color: #54d57b;
-
-  border-radius: 10px;
-
-  background: #124c26;
-
-  font-size: 9px;
+.switch{
+  position:relative;
+  width:44px;
+  height:24px;
+  flex-shrink:0;
 }
-
-
-.arrow {
-  color: #aaa !important;
-
-  font-size: 16px !important;
-
-  text-align: right;
+.switch input{ opacity:0; width:0; height:0; }
+.slider{
+  position:absolute;
+  inset:0;
+  background: #3a3a3a;
+  border-radius: 24px;
+  cursor:pointer;
+  transition: .2s;
 }
-
-
-/* =====================================================
-   PAGAMENTO
-===================================================== */
-
-.payment-card {
-  min-height: 190px;
+.slider::before{
+  content:"";
+  position:absolute;
+  width:18px;height:18px;
+  left:3px;top:3px;
+  background:#fff;
+  border-radius:50%;
+  transition:.2s;
 }
+.switch input:checked + .slider{ background: var(--gold); }
+.switch input:checked + .slider::before{ transform: translateX(20px); }
 
-
-.payment-options {
-  display: flex;
-
-  align-items: center;
-
-  gap: 22px;
+/* ---------- Email field ---------- */
+.email-field label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom: 10px;
 }
-
-
-/* CARTÃO */
-
-.credit-card {
-  width: 325px;
-  height: 69px;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 9px;
-
-  border: 1px solid #303232;
-
-  border-radius: 7px;
-
-  background: #121515;
-}
-
-
-.visa {
-  width: 49px;
-  height: 43px;
-
-  flex-shrink: 0;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  color: white;
-
-  border-radius: 4px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #17356d,
-      #071631
-    );
-
-  font-size: 13px;
-
-  font-weight: bold;
-
-  font-style: italic;
-}
-
-
-.card-info {
-  flex: 1;
-
-  min-width: 0;
-}
-
-
-.card-info strong {
-  display: block;
-
-  margin-bottom: 5px;
-
-  color: #eeeeee;
-
-  font-size: 10px;
-}
-
-
-.card-info span {
-  color: #858888;
-
-  font-size: 9px;
-}
-
-
-.principal {
-  padding: 3px 8px;
-
-  color: #57d27e;
-
+.mail-ic{ color: var(--gold); font-size:13px; }
+.email-field .input-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
-
-  background: #195a35;
-
-  font-size: 8px;
+  padding: 12px 14px;
 }
-
-
-.card-actions {
-  display: flex;
-
-  gap: 10px;
-}
-
-
-.card-actions button {
-  padding: 0;
-
-  color: #d7aa27;
-
-  border: 0;
-
+.email-field input{
+  flex:1;
+  min-width:0;
   background: transparent;
-
-  cursor: pointer;
-
-  font-size: 16px;
+  border:none;
+  outline:none;
+  color: var(--text-dim);
+  font-size:13.5px;
+  font-family: inherit;
 }
 
-
-/* ADICIONAR */
-
-.add-payment {
-  height: 69px;
-
-  flex: 1;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 9px;
-
-  color: #d0a62b;
-
-  border: 1px dashed #303333;
-
-  border-radius: 7px;
-
-  background: transparent;
-
-  cursor: pointer;
-
-  font-size: 10px;
+/* ---------- Page footer ---------- */
+.page-footer{
+  max-width:1520px;
+  margin: 0 auto;
+  padding: 18px 40px 30px;
+  border-top: 1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color: var(--text-faint);
+  font-size:12.5px;
 }
+.page-footer .links{ display:flex; gap:18px; }
+.page-footer a:hover{ color: var(--gold); }
 
-
-.plus {
-  width: 18px;
-  height: 18px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  color: #d7aa27;
-
-  border: 2px solid #d7aa27;
-
-  border-radius: 50%;
-
-  font-size: 15px;
+/* ---------- Responsive ---------- */
+@media (max-width: 1150px){
+  .grid-two{ grid-template-columns: 1fr; }
 }
-
-
-/* =====================================================
-   FATURAMENTO
-===================================================== */
-
-.billing-card {
-  min-height: 190px;
-}
-
-
-/* SWITCH */
-
-.email-switch {
-  padding: 8px 0 12px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 15px;
-
-  border-bottom: 1px solid #282a2a;
-}
-
-
-.email-switch strong {
-  display: block;
-
-  margin-bottom: 5px;
-
-  color: #dddddd;
-
-  font-size: 10px;
-}
-
-
-.email-switch span {
-  display: block;
-
-  color: #858888;
-
-  font-size: 9px;
-}
-
-
-.switch {
-  width: 32px;
-  height: 18px;
-
-  position: relative;
-
-  flex-shrink: 0;
-
-  border-radius: 20px;
-
-  background: #e3bb39;
-}
-
-
-.switch div {
-  width: 14px;
-  height: 14px;
-
-  position: absolute;
-
-  top: 2px;
-  right: 2px;
-
-  border-radius: 50%;
-
-  background: white;
-}
-
-
-/* EMAIL */
-
-.email-row {
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  margin-top: 15px;
-}
-
-
-.email-icon {
-  color: #d7aa27;
-
-  font-size: 20px;
-}
-
-
-.email-field {
-  flex: 1;
-}
-
-
-.email-field label {
-  display: block;
-
-  margin-bottom: 5px;
-
-  color: #aaaaaa;
-
-  font-size: 9px;
-}
-
-
-.email-field input {
-  width: 100%;
-  height: 29px;
-
-  padding: 0 10px;
-
-  color: #777;
-
-  border: 1px solid #292c2c;
-
-  border-radius: 5px;
-
-  outline: none;
-
-  background: #171919;
-
-  font-family: Arial, Helvetica, sans-serif;
-
-  font-size: 9px;
-}
-
-
-.email-field input:focus {
-  color: #ddd;
-
-  border-color: #a5831d;
-}
-
-
-.edit-button {
-  margin-top: 14px;
-
-  padding: 0;
-
-  color: #d7aa27;
-
-  border: 0;
-
-  background: transparent;
-
-  cursor: pointer;
-
-  font-size: 17px;
-}
-
-
-/* =====================================================
-   RESPONSIVO
-===================================================== */
-
-@media (max-width: 1100px) {
-
-  .cobranca-page {
-    grid-template-columns: 175px minmax(0, 1fr);
-  }
-
-  .cobranca-sidebar {
-    width: 175px;
-  }
-
-  .cards-grid {
-    grid-template-columns: 1fr;
-  }
-
-}
-
-
-@media (max-width: 700px) {
-
-  .cobranca-page {
-    display: block;
-
-    padding: 10px;
-  }
-
-  .cobranca-sidebar {
-    width: 100%;
-
-    min-height: auto;
-
-    margin-bottom: 10px;
-  }
-
-  .menu-item {
-    width: 49%;
-
-    display: inline-flex;
-
-    vertical-align: top;
-  }
-
-  .cobranca-content {
-    width: 100%;
-
-    padding: 12px;
-  }
-
-  .page-header {
-    height: auto;
-
-    min-height: 57px;
-
-    padding-bottom: 12px;
-  }
-
-  .page-header h1 {
-    font-size: 17px;
-  }
-
-  .page-header p {
-    font-size: 10px;
-  }
-
-  .plan-description {
-    width: 100%;
-  }
-
-  .plan-price,
-  .next-payment {
-    position: static;
-
-    margin-top: 10px;
-
-    text-align: left;
-  }
-
-  .gold-button {
-    position: static;
-
-    margin-top: 15px;
-  }
-
-  .payment-options {
-    flex-direction: column;
-
-    align-items: stretch;
-  }
-
-  .credit-card {
-    width: 100%;
-  }
-
-  .add-payment {
-    width: 100%;
-
-    flex: none;
-  }
-
-  table {
-    min-width: 600px;
-  }
-
-}
-
-
-@media (max-width: 450px) {
-
-  .menu-item {
-    width: 100%;
-  }
-
-  .plan-title {
-    align-items: flex-start;
-
-    flex-direction: column;
-
-    gap: 7px;
-  }
-
-  .credit-card {
-    gap: 7px;
-
-    padding: 7px;
-  }
-
-  .principal {
-    display: none;
-  }
-
+@media (max-width: 1000px){
+  .layout{ flex-direction:column; }
+  .sidebar{ width:100%; flex-direction:row; flex-wrap:wrap; }
+  .page-sub{ margin-left:0; }
+  .plan-bottom{ flex-direction:column; align-items:flex-start; }
+  .billing-table{ display:block; overflow-x:auto; }
 }

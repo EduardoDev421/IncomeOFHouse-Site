@@ -1,0 +1,875 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 70% 20%, rgba(90, 90, 90, 0.08), transparent 35%),
+        linear-gradient(135deg, #080a0c 0%, #111416 48%, #080a0c 100%);
+    color: #eeeeee;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================
+   TOPO
+========================================= */
+
+.topo {
+    width: 100%;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #b89031;
+    background: #080a0c;
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    width: 268px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    padding-left: 42px;
+}
+
+.logo img {
+    width: 165px;
+    height: auto;
+    object-fit: contain;
+}
+
+.menu-topo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 42px;
+}
+
+.menu-topo a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+    color: #bfc1c7;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.menu-topo a:hover {
+    color: #f0c34f;
+}
+
+.menu-topo a.ativo {
+    color: #f0c34f;
+}
+
+.menu-topo a.ativo::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 47px;
+    background: #d8a934;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.usuario-topo {
+    position: absolute;
+    right: 42px;
+    top: 21px;
+    width: 25px;
+    height: 25px;
+}
+
+.usuario-topo svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: #e5b63e;
+    stroke-width: 1.7;
+}
+
+
+/* =========================================
+   ESTRUTURA
+========================================= */
+
+.estrutura {
+    min-height: calc(100vh - 65px - 55px);
+    display: flex;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    width: 268px;
+    flex-shrink: 0;
+    min-height: calc(100vh - 65px - 55px);
+    padding: 19px 12px;
+    border-right: 1px solid #272b30;
+    background: rgba(7, 9, 11, 0.9);
+}
+
+.item-menu {
+    height: 48px;
+    width: 100%;
+    margin-bottom: 4px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    color: #b8bbc2;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.item-menu svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: #e2b439;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.item-menu:hover {
+    background: rgba(221, 176, 54, 0.07);
+    color: #e6b941;
+}
+
+.item-menu.selecionado {
+    border-color: #c29a36;
+    background: linear-gradient(
+        90deg,
+        rgba(205, 163, 51, 0.17),
+        rgba(205, 163, 51, 0.05)
+    );
+    color: #e5b83e;
+}
+
+.item-menu.selecionado svg {
+    stroke: #e6b83e;
+}
+
+.item-menu.sair {
+    margin-top: 7px;
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.conteudo {
+    flex: 1;
+    min-width: 0;
+    padding: 25px 28px 34px;
+}
+
+
+/* =========================================
+   CABEÇALHO DOS PEDIDOS
+========================================= */
+
+.cabecalho-pedidos {
+    border-bottom: 1px solid #c29b37;
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+}
+
+.titulo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.titulo-area > svg {
+    width: 31px;
+    height: 31px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: #e3b53c;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.titulo-area h1 {
+    color: #f1f1f2;
+    font-size: 29px;
+    font-weight: 500;
+    line-height: 1.05;
+}
+
+.titulo-area p {
+    margin-top: 5px;
+    color: #92959d;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   FILTROS
+========================================= */
+
+.filtros {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.botoes-filtro {
+    display: flex;
+    gap: 13px;
+}
+
+.filtro {
+    min-width: 121px;
+    height: 36px;
+    padding: 0 20px;
+    border-radius: 20px;
+    border: 1px solid #3c4148;
+    background: transparent;
+    color: #d3d4d8;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.filtro:hover {
+    border-color: #b58d2e;
+    color: #e8bb43;
+}
+
+.filtro.ativo {
+    border-color: #d9aa38;
+    background: linear-gradient(135deg, #e9bc4b, #d3a332);
+    color: #0a0b0c;
+    font-weight: 600;
+}
+
+.campo-busca {
+    width: 402px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 13px;
+    border: 1px solid #3a3e44;
+    border-radius: 20px;
+    background: rgba(12, 14, 17, 0.7);
+}
+
+.campo-busca svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: #e0ae36;
+    stroke-width: 1.7;
+}
+
+.campo-busca input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #dedfe1;
+    font-size: 12px;
+}
+
+.campo-busca input::placeholder {
+    color: #777b83;
+}
+
+
+/* =========================================
+   CARDS DOS PEDIDOS
+========================================= */
+
+.lista-pedidos {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.pedido {
+    min-height: 84px;
+    padding: 10px 14px 10px 17px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid #30343a;
+    border-radius: 13px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(18, 20, 23, 0.94),
+            rgba(10, 12, 14, 0.94)
+        );
+    transition: 0.2s;
+}
+
+.pedido:hover {
+    border-color: #62552f;
+}
+
+
+/* ÍCONE DO PEDIDO */
+
+.icone-pedido {
+    width: 66px;
+    height: 59px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #554b2b;
+    border-radius: 13px;
+    background: rgba(13, 15, 17, 0.8);
+}
+
+.icone-pedido svg {
+    width: 32px;
+    height: 32px;
+    fill: none;
+    stroke: #e2b13a;
+    stroke-width: 1.35;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* INFORMAÇÕES */
+
+.informacao {
+    min-width: 0;
+}
+
+.informacao.principal {
+    width: 345px;
+}
+
+.informacao.principal h3 {
+    color: #f0f0f2;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 7px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profissional {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+}
+
+.profissional svg {
+    width: 17px;
+    height: 17px;
+    margin-top: -1px;
+    fill: none;
+    stroke: #dfad35;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+}
+
+.profissional div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.profissional span {
+    color: #d5d6da;
+    font-size: 12px;
+}
+
+.profissional small {
+    color: #8b8e96;
+    font-size: 10px;
+}
+
+
+/* DETALHES */
+
+.informacao.detalhe {
+    width: 125px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.icone-pequeno {
+    width: 19px;
+    height: 19px;
+    flex-shrink: 0;
+}
+
+.icone-pequeno svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: #dfae38;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.informacao.detalhe > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.informacao.detalhe small {
+    color: #878a91;
+    font-size: 9px;
+}
+
+.informacao.detalhe span {
+    color: #cdd0d5;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.status {
+    min-width: 113px;
+    height: 29px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.status i {
+    width: 8px;
+    height: 8px;
+    display: block;
+    border-radius: 50%;
+}
+
+.status.andamento {
+    color: #ded5bb;
+    background: rgba(174, 137, 43, 0.22);
+    border: 1px solid rgba(176, 137, 42, 0.12);
+}
+
+.status.andamento i {
+    background: #f0ca61;
+}
+
+.status.concluido {
+    color: #c4ebd2;
+    background: rgba(30, 135, 68, 0.23);
+    border: 1px solid rgba(47, 167, 87, 0.17);
+}
+
+.status.concluido i {
+    background: #54db83;
+}
+
+.status.cancelado {
+    color: #d2d4db;
+    background: rgba(115, 120, 139, 0.28);
+}
+
+.status.cancelado i {
+    background: #d6d8e2;
+}
+
+
+/* =========================================
+   BOTÃO DETALHES
+========================================= */
+
+.btn-detalhes {
+    width: 130px;
+    height: 35px;
+    margin-left: auto;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d5a936;
+    border-radius: 9px;
+    color: #e4b53f;
+    text-decoration: none;
+    font-size: 11px;
+    transition: 0.2s;
+}
+
+.btn-detalhes:hover {
+    background: #d5a936;
+    color: #0a0b0c;
+}
+
+.mais {
+    width: 24px;
+    height: 35px;
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    color: #e4b53f;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+
+/* =========================================
+   PAGINAÇÃO
+========================================= */
+
+.paginacao {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pagina {
+    width: 31px;
+    height: 31px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #c4c6cb;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.pagina:hover {
+    color: #e4b53d;
+}
+
+.pagina.selecionada {
+    color: #111;
+    border: 1px solid #e1b43e;
+    background: #d6a936;
+}
+
+.pagina.seta {
+    border: 1px solid #343940;
+    color: #dfad36;
+    font-size: 22px;
+    line-height: 20px;
+}
+
+
+/* =========================================
+   EXPLORAR
+========================================= */
+
+.explorar {
+    min-height: 160px;
+    padding: 20px;
+    border: 1px solid #24282d;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(7, 9, 11, 0.42);
+}
+
+.explorar > svg {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 7px;
+    fill: none;
+    stroke: #e0af38;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.explorar h2 {
+    color: #e1e1e4;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.explorar p {
+    margin-top: 5px;
+    margin-bottom: 11px;
+    color: #858990;
+    font-size: 10px;
+}
+
+.explorar a {
+    min-width: 166px;
+    height: 31px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #e8ba48, #d4a432);
+    color: #111;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.explorar a:hover {
+    filter: brightness(1.08);
+}
+
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.rodape {
+    min-height: 55px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #b18a2d;
+    background: #090b0d;
+    color: #8a8d94;
+    font-size: 10px;
+}
+
+.rodape div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rodape a {
+    color: #9a9da4;
+    text-decoration: none;
+}
+
+.rodape a:hover {
+    color: #e1b13b;
+}
+
+.rodape b {
+    color: #53565c;
+    font-weight: normal;
+}
+
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .sidebar {
+        width: 230px;
+    }
+
+    .logo {
+        width: 230px;
+        padding-left: 25px;
+    }
+
+    .informacao.principal {
+        width: 280px;
+    }
+
+    .informacao.detalhe {
+        width: 105px;
+    }
+
+    .campo-busca {
+        width: 330px;
+    }
+
+    .menu-topo {
+        gap: 25px;
+    }
+}
+
+
+@media (max-width: 1000px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .logo {
+        width: 210px;
+    }
+
+    .menu-topo {
+        position: static;
+        transform: none;
+        margin-left: 20px;
+    }
+
+    .usuario-topo {
+        right: 20px;
+    }
+
+    .filtros {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .campo-busca {
+        width: 100%;
+    }
+
+    .pedido {
+        flex-wrap: wrap;
+    }
+
+    .informacao.principal {
+        flex: 1;
+        width: auto;
+    }
+
+    .informacao.detalhe {
+        width: 120px;
+    }
+
+    .status {
+        margin-left: 85px;
+    }
+}
+
+
+@media (max-width: 750px) {
+
+    .topo {
+        height: auto;
+        min-height: 65px;
+        padding: 10px 15px;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        width: auto;
+        padding-left: 0;
+    }
+
+    .logo img {
+        width: 140px;
+    }
+
+    .menu-topo {
+        order: 3;
+        width: 100%;
+        height: 45px;
+        margin: 5px 0 0;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .usuario-topo {
+        right: 15px;
+        top: 22px;
+    }
+
+    .estrutura {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        display: flex;
+        overflow-x: auto;
+        padding: 8px;
+        border-right: none;
+        border-bottom: 1px solid #272b30;
+    }
+
+    .item-menu {
+        min-width: max-content;
+        width: auto;
+        margin: 0 3px;
+    }
+
+    .item-menu.sair {
+        margin-top: 0;
+    }
+
+    .item-menu span {
+        display: none;
+    }
+
+    .conteudo {
+        padding: 20px 14px;
+    }
+
+    .botoes-filtro {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .filtro {
+        flex-shrink: 0;
+    }
+
+    .pedido {
+        padding: 14px;
+    }
+
+    .informacao.detalhe {
+        width: calc(50% - 10px);
+    }
+
+    .status {
+        margin-left: 0;
+    }
+
+    .btn-detalhes {
+        margin-left: 0;
+    }
+
+    .rodape {
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
