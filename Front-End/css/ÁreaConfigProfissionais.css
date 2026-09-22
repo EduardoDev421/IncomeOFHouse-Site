@@ -1,0 +1,824 @@
+/* =========================================================
+   ÁREA DE CONFIGURAÇÃO DE PROFISSIONAIS
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #eeeeee;
+
+    background:
+        linear-gradient(
+            rgba(5, 8, 10, 0.72),
+            rgba(5, 8, 10, 0.82)
+        ),
+        url("../img/fundo-casa.png");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* =========================================================
+   TOPO
+   ========================================================= */
+
+.topo {
+    width: 100%;
+    height: 63px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    background: rgba(5, 7, 9, 0.94);
+
+    border-bottom: 1px solid #333333;
+}
+
+
+/* LOGO */
+
+.logo {
+    position: absolute;
+    left: 117px;
+    top: 3px;
+
+    width: 72px;
+    height: 57px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    width: 67px;
+    height: auto;
+
+    display: block;
+}
+
+
+/* MENU DO TOPO */
+
+.menu-topo {
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+
+    transform: translateX(-50%);
+
+    height: 63px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 43px;
+}
+
+.menu-topo a {
+    position: relative;
+
+    color: #d6d6d6;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    height: 63px;
+
+    display: flex;
+    align-items: center;
+
+    transition: 0.2s;
+}
+
+.menu-topo a:hover {
+    color: #dcae36;
+}
+
+
+/* ÍCONE DO USUÁRIO */
+
+.usuario-topo {
+    position: absolute;
+
+    right: 84px;
+    top: 21px;
+
+    width: 23px;
+    height: 23px;
+}
+
+.usuario-topo svg {
+    width: 23px;
+    height: 23px;
+
+    fill: none;
+
+    stroke: #e1b33b;
+
+    stroke-width: 1.7;
+}
+
+
+/* =========================================================
+   ÁREA CENTRAL
+   ========================================================= */
+
+.estrutura {
+    width: 1432px;
+
+    min-height: calc(100vh - 118px);
+
+    margin: 21px auto 15px;
+
+    display: flex;
+
+    gap: 27px;
+}
+
+
+/* =========================================================
+   MENU LATERAL
+   ========================================================= */
+
+.sidebar {
+    width: 185px;
+
+    flex-shrink: 0;
+
+    padding: 0;
+
+    background: rgba(8, 10, 12, 0.76);
+
+    border: 1px solid rgba(53, 57, 61, 0.75);
+
+    border-radius: 9px;
+
+    overflow: hidden;
+}
+
+
+/* ITENS DO MENU */
+
+.item-menu {
+    width: 100%;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 0 13px;
+
+    color: #d2d3d6;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    border-bottom: 1px solid rgba(55, 59, 63, 0.65);
+
+    transition: 0.2s;
+}
+
+.item-menu:hover {
+    color: #e1b43a;
+
+    background: rgba(218, 173, 57, 0.07);
+}
+
+
+/* ITEM SELECIONADO */
+
+.item-menu.selecionado {
+    color: #e2b53c;
+
+    border: 1px solid #a9822b;
+
+    background: rgba(177, 137, 39, 0.13);
+
+    border-radius: 6px;
+
+    margin: 0;
+}
+
+
+/* ÍCONES DO MENU */
+
+.icone {
+    width: 17px;
+    min-width: 17px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #dcae35;
+
+    font-size: 16px;
+}
+
+
+/* SAIR */
+
+.item-menu.sair {
+    margin-top: 2px;
+
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================= */
+
+.conteudo {
+    width: 1220px;
+
+    min-height: 614px;
+
+    padding: 12px 12px 15px;
+
+    background: rgba(7, 10, 12, 0.88);
+
+    border: 1px solid rgba(50, 54, 58, 0.9);
+
+    border-radius: 9px;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.cabecalho {
+    width: 100%;
+
+    height: 57px;
+
+    padding: 0 2px 10px;
+
+    border-bottom: 2px solid #c29a31;
+
+    margin-bottom: 19px;
+}
+
+.titulo {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+/* ÍCONE DO TÍTULO */
+
+.icone-titulo {
+    width: 31px;
+
+    color: #dcae35;
+
+    font-size: 35px;
+
+    line-height: 1;
+}
+
+
+/* TÍTULO */
+
+.titulo h1 {
+    color: #eeeeee;
+
+    font-size: 20px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+.titulo p {
+    margin-top: 3px;
+
+    color: #a5a7ac;
+
+    font-size: 10px;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   GRID DOS CARDS
+   ========================================================= */
+
+.grid-configuracoes {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 18px;
+
+    row-gap: 12px;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.painel {
+    width: 100%;
+
+    min-height: 260px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25, 28, 31, 0.88),
+            rgba(13, 16, 18, 0.93)
+        );
+
+    border: 1px solid #34383c;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CABEÇALHO DOS CARDS
+   ========================================================= */
+
+.painel-titulo {
+    height: 58px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 14px;
+
+    padding: 12px 17px 9px;
+}
+
+
+/* ÍCONE DO CARD */
+
+.icone-painel {
+    width: 27px;
+
+    flex-shrink: 0;
+
+    color: #dfb238;
+
+    font-size: 27px;
+
+    line-height: 1;
+
+    text-align: center;
+}
+
+
+/* TÍTULO DO CARD */
+
+.painel-titulo h2 {
+    color: #e4e5e7;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+.painel-titulo p {
+    margin-top: 5px;
+
+    color: #999da3;
+
+    font-size: 9px;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   LINHAS DE CONFIGURAÇÃO
+   ========================================================= */
+
+.opcao {
+    width: calc(100% - 28px);
+
+    min-height: 47px;
+
+    margin: 0 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    border-top: 1px solid #2b2f33;
+}
+
+
+/* ÍCONE DA OPÇÃO */
+
+.icone-opcao {
+    width: 25px;
+    min-width: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #d9aa32;
+
+    font-size: 20px;
+
+    line-height: 1;
+}
+
+
+/* TEXTO */
+
+.texto-opcao {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 3px;
+}
+
+.texto-opcao strong {
+    color: #dcdde0;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+.texto-opcao small {
+    color: #858a91;
+
+    font-size: 8px;
+
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   BOTÕES DE SELEÇÃO
+   ========================================================= */
+
+.seletor {
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 0 9px;
+
+    color: #9da1a8;
+
+    background: #25292d;
+
+    border: none;
+
+    border-radius: 13px;
+
+    font-size: 8px;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+.seletor b {
+    color: #9fa3a9;
+
+    font-size: 14px;
+
+    font-weight: normal;
+}
+
+.seletor:hover {
+    color: #e2b33a;
+}
+
+
+/* =========================================================
+   SWITCH
+   ========================================================= */
+
+.switch {
+    position: relative;
+
+    width: 35px;
+    height: 21px;
+
+    min-width: 35px;
+}
+
+.switch input {
+    position: absolute;
+
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+}
+
+.switch span {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 35px;
+    height: 21px;
+
+    border-radius: 20px;
+
+    background: #41464b;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.switch span::before {
+    content: "";
+
+    position: absolute;
+
+    width: 15px;
+    height: 15px;
+
+    left: 3px;
+    top: 3px;
+
+    background: #d8d8d8;
+
+    border-radius: 50%;
+
+    transition: 0.2s;
+}
+
+.switch input:checked + span {
+    background: linear-gradient(
+        90deg,
+        #d2a12b,
+        #f0c64d
+    );
+}
+
+.switch input:checked + span::before {
+    transform: translateX(14px);
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   AVISO
+   ========================================================= */
+
+.aviso {
+    width: 100%;
+
+    height: 41px;
+
+    margin-top: 12px;
+
+    padding: 0 17px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    background: rgba(20, 23, 26, 0.82);
+
+    border: 1px solid #34383c;
+
+    border-radius: 7px;
+}
+
+.icone-aviso {
+    color: #dcae35;
+
+    font-size: 17px;
+}
+
+.aviso p {
+    color: #8e939a;
+
+    font-size: 8px;
+}
+
+.aviso strong {
+    color: #d9aa32;
+}
+
+
+/* =========================================================
+   RODAPÉ
+   ========================================================= */
+
+.rodape {
+    width: 100%;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 67px;
+
+    background: rgba(5, 7, 9, 0.94);
+
+    border-top: 1px solid #9a7627;
+
+    color: #8e9299;
+
+    font-size: 9px;
+}
+
+.rodape div {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.rodape a {
+    color: #969aa1;
+
+    text-decoration: none;
+}
+
+.rodape a:hover {
+    color: #dfb13a;
+}
+
+.rodape b {
+    color: #666a70;
+
+    font-weight: normal;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .estrutura {
+        width: 94%;
+    }
+
+    .logo {
+        left: 30px;
+    }
+
+    .usuario-topo {
+        right: 30px;
+    }
+
+    .conteudo {
+        width: auto;
+        flex: 1;
+    }
+
+    .sidebar {
+        width: 185px;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .estrutura {
+        width: 96%;
+
+        gap: 15px;
+    }
+
+    .grid-configuracoes {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        width: 185px;
+    }
+
+    .menu-topo {
+        gap: 22px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .topo {
+        height: 70px;
+    }
+
+    .logo {
+        left: 15px;
+    }
+
+    .menu-topo {
+        display: none;
+    }
+
+    .usuario-topo {
+        right: 20px;
+    }
+
+    .estrutura {
+        width: 96%;
+
+        display: block;
+
+        margin-top: 12px;
+    }
+
+    .sidebar {
+        width: 100%;
+
+        display: flex;
+
+        overflow-x: auto;
+
+        margin-bottom: 12px;
+    }
+
+    .item-menu {
+        min-width: 48px;
+
+        justify-content: center;
+
+        border-bottom: none;
+    }
+
+    .item-menu span:last-child {
+        display: none;
+    }
+
+    .conteudo {
+        width: 100%;
+
+        margin: 0;
+    }
+
+    .seletor {
+        font-size: 7px;
+
+        gap: 5px;
+    }
+
+    .rodape {
+        padding: 15px;
+
+        height: auto;
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+}
