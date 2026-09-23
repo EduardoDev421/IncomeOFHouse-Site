@@ -204,13 +204,15 @@ body {
 ========================================================= */
 
 .FCadastro {
+    width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: 30px;
     background-color: #0a0a0a;
     border: 2px solid #cda432;
     border-radius: 20px;
+    height: fit-content; 
+    align-self: center;
 }
 
 

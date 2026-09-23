@@ -1,684 +1,455 @@
+/* =========================================================
+   CONFIGURAÇÃO GERAL
+========================================================= */
+
 * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-   font-family: Arial, Helvetica, sans-serif;
-   background: #0B0B0C;
-   color: #F5F5F5;
-   min-height: 100vh;
-   display: flex;
-   flex-direction: column;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0b0b0b;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
-/* =========================
-   HEADER
-========================= */
+/* =========================================================
+   HEADER / MENU
+========================================================= */
 
 .topo {
-   width: 100%;
-   height: 82px;
-   background: rgba(11, 11, 12, 0.97);
-   border-bottom: 1px solid #80631c;
-
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-
-   padding: 0 7%;
-
-   position: relative;
-   z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
+    z-index: 10;
+    background: rgba(10, 10, 10, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
 }
 
-
-/* LOGO */
-
 .logo a {
-   display: flex;
-   align-items: center;
-   text-decoration: none;
-   color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
 }
 
 .logo-casa {
-   color: #D4A72C;
-   font-size: 46px;
-   line-height: 1;
-   margin-right: 10px;
+    color: #d4af6a;
+    font-size: 26px;
+    line-height: 1;
 }
 
 .logo-texto {
-   display: flex;
-   flex-direction: column;
-   letter-spacing: 2px;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
 }
 
 .logo-texto span {
-   font-size: 13px;
-   color: #F5F5F5;
+    color: #e5e5e5;
+    font-size: 11px;
+    letter-spacing: 1px;
 }
 
 .logo-texto strong {
-   font-size: 19px;
-   color: #D4A72C;
-   letter-spacing: 4px;
+    color: #d4af6a;
+    font-size: 15px;
+    letter-spacing: 1px;
 }
 
-
-/* MENU */
-
 .menu {
-   display: flex;
-   align-items: center;
-   gap: 55px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .menu a {
-   color: #D4D4D8;
-   text-decoration: none;
-   font-size: 15px;
-   transition: 0.3s;
+    padding: 12px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 7px;
+    transition: 0.3s ease;
 }
 
 .menu a:hover {
-   color: #D4A72C;
+    background: rgba(255, 255, 255, 0.06);
+    color: #d4af6a;
 }
-
-
-/* ÍCONE USUÁRIO */
 
 .icone-usuario {
-   color: #D4A72C;
-   font-size: 32px;
-   cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    border-radius: 50%;
+    color: #d4af6a;
+    font-size: 16px;
 }
 
 
-/* =========================
-   FUNDO PRINCIPAL
-========================= */
+/* =========================================================
+   ÁREA PRINCIPAL
+========================================================= */
 
 main {
-   flex: 1;
-
-   position: relative;
-
-   /*
-   IMAGEM DE FUNDO
-   Coloque casa.jpg dentro da pasta img
-   */
-
-   background-image:
-      linear-gradient(
-         rgba(5, 5, 6, 0.72),
-         rgba(5, 5, 6, 0.92)
-      ),
-      url("../img/casa.png");
-
-   background-size: cover;
-   background-position: center;
-   background-repeat: no-repeat;
-
-   overflow: hidden;
+    position: relative;
+    flex: 1;
+    min-height: 100vh;
+    background-image: url("../img/BackGroundCadastroELogin.png");
+    background-size: cover;
+    background-position: center;
 }
-
-
-/* EFEITO ESCURO NAS BORDAS */
-
-main::after {
-   content: "";
-
-   position: absolute;
-
-   top: 0;
-   left: 0;
-
-   width: 100%;
-   height: 100%;
-
-   background:
-      radial-gradient(
-         circle at center,
-         transparent 20%,
-         rgba(0, 0, 0, 0.35) 100%
-      );
-
-   pointer-events: none;
-}
-
-
-/* EFEITO DE PLANTA ARQUITETÔNICA */
 
 main::before {
-   content: "";
-
-   position: absolute;
-
-   width: 100%;
-   height: 100%;
-
-   background-image:
-      linear-gradient(
-         90deg,
-         transparent 49.5%,
-         rgba(212, 167, 44, 0.035) 50%,
-         transparent 50.5%
-      ),
-      linear-gradient(
-         transparent 49.5%,
-         rgba(212, 167, 44, 0.035) 50%,
-         transparent 50.5%
-      );
-
-   background-size: 100px 100px;
-
-   opacity: 0.4;
-
-   pointer-events: none;
-
-   z-index: 1;
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15);
+    pointer-events: none;
 }
-
-
-/* =========================
-   CONTEÚDO
-========================= */
 
 .conteudo {
-   width: 90%;
-   max-width: 1350px;
-
-   min-height: 680px;
-
-   margin: auto;
-
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-
-   gap: 70px;
-
-   position: relative;
-
-   z-index: 3;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 100px;
+    padding-top: 75px;
 }
 
 
-/* =========================
-   APRESENTAÇÃO ESQUERDA
-========================= */
+/* =========================================================
+   LADO ESQUERDO - APRESENTAÇÃO
+========================================================= */
 
 .apresentacao {
-   width: 52%;
-
-   padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 100px 0 20px;
 }
 
 .pequeno-titulo {
-   color: #D4A72C;
-
-   font-size: 13px;
-
-   letter-spacing: 4px;
-
-   margin-bottom: 20px;
+    margin-bottom: 8px;
+    color: #d4af6a;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .apresentacao h1 {
-   font-size: 56px;
-
-   line-height: 1.08;
-
-   font-weight: 500;
-
-   max-width: 650px;
-
-   margin-bottom: 25px;
+    margin-bottom: 8px;
+    color: #f5f5f5;
+    font-size: 50px;
+    line-height: 1.2;
 }
 
 .apresentacao h1 span {
-   display: block;
-
-   color: #D4A72C;
+    display: block;
+    color: #cfa835;
 }
 
 .descricao {
-   color: #D4D4D8;
-
-   font-size: 18px;
-
-   line-height: 1.7;
-
-   max-width: 570px;
+    color: #d4af6a;
+    max-width: 480px;
 }
 
 
-/* =========================
-   DIFERENCIAIS
-========================= */
+/* ---------- Diferenciais ---------- */
 
 .diferenciais {
-   display: flex;
-
-   gap: 45px;
-
-   margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 30px;
 }
 
 .diferencial {
-   text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding-right: 30px;
+    border-right: 1px solid rgba(207, 168, 53, 0.4);
+    text-align: center;
+}
 
-   min-width: 85px;
+.diferencial:last-child {
+    padding-right: 0;
+    border-right: none;
 }
 
 .diferencial .icone {
-   display: block;
-
-   color: #D4A72C;
-
-   font-size: 36px;
-
-   margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: #cfa835;
+    font-size: 22px;
 }
 
 .diferencial p {
-   color: #E4E4E7;
-
-   font-size: 13px;
-
-   line-height: 1.4;
+    color: #e5e5e5;
+    font-size: 13px;
 }
 
 
-/* =========================
-   CARD DE SENHA
-========================= */
+/* =========================================================
+   CARD DE RECUPERAÇÃO DE SENHA
+========================================================= */
 
 .Container-Senha {
-   width: 480px;
+    display: flex;
+    justify-content: center;
+}
 
-   background: rgba(21, 21, 21, 0.96);
-
-   border: 1px solid #B58B24;
-
-   border-radius: 16px;
-
-   padding: 45px;
-
-   box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.7),
-      0 0 40px rgba(212, 167, 44, 0.08);
+.bloco-auth {
+    width: 460px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 45px 45px;
+    background-color: #0a0a0a;
+    border: 2px solid #cda432;
+    border-radius: 20px;
 }
 
 
-/* =========================
-   LOGO DO CARD
-========================= */
+/* ---------- Logo dentro do card ---------- */
 
 .logo-card {
-   display: flex;
-
-   justify-content: center;
-   align-items: center;
-
-   margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
 .logo-card .logo-casa {
-   font-size: 40px;
+    font-size: 26px;
 }
 
 .logo-card .logo-texto span {
-   font-size: 11px;
+    font-size: 10px;
 }
 
 .logo-card .logo-texto strong {
-   font-size: 16px;
+    font-size: 14px;
 }
 
 
-/* =========================
-   TÍTULO
-========================= */
+/* ---------- Título e texto ---------- */
 
 .bloco-auth h2 {
-   text-align: center;
-
-   font-size: 30px;
-
-   margin-bottom: 12px;
-
-   color: #F5F5F5;
+    margin-bottom: 10px;
+    color: #f5f5f5;
+    font-size: 30px;
+    text-align: center;
 }
-
-
-/* TEXTO DO CARD */
 
 .texto-card {
-   text-align: center;
-
-   color: #A1A1AA;
-
-   font-size: 14px;
-
-   line-height: 1.6;
-
-   margin-bottom: 35px;
+    margin-bottom: 28px;
+    color: #a3a3a3;
+    font-size: 14px;
+    text-align: center;
 }
 
 
-/* =========================
-   CAMPO
-========================= */
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+.FormSenha {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
 
 .Campo {
-   margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .Campo label {
-   display: block;
-
-   color: #F5F5F5;
-
-   font-size: 14px;
-
-   margin-bottom: 9px;
+    color: #e5e5e5;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 
-/* INPUT */
+/* ---------- Input com ícone ---------- */
 
 .campo-input {
-   height: 52px;
-
-   display: flex;
-
-   align-items: center;
-
-   background: #0B0B0C;
-
-   border: 1px solid #454549;
-
-   border-radius: 8px;
-
-   transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 46px;
+    margin-bottom: 22px;
+    padding: 0 14px;
+    background: #0d0d0d;
+    border: 1px solid #363636;
+    border-radius: 6px;
+    transition: 0.2s;
 }
 
 .campo-input:focus-within {
-   border-color: #D4A72C;
-
-   box-shadow:
-      0 0 12px rgba(212, 167, 44, 0.15);
+    border-color: #cda432;
 }
-
-
-/* ÍCONE DO INPUT */
 
 .icone-campo {
-   color: #D4A72C;
-
-   font-size: 19px;
-
-   margin-left: 15px;
+    flex-shrink: 0;
+    color: #d4af6a;
+    font-size: 15px;
 }
 
-
-/* INPUT */
-
 .campo-input input {
-   width: 100%;
-
-   height: 100%;
-
-   border: none;
-
-   outline: none;
-
-   background: transparent;
-
-   color: #F5F5F5;
-
-   padding: 0 15px;
-
-   font-size: 14px;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #e5e5e5;
+    font-size: 14px;
+    font-family: inherit;
 }
 
 .campo-input input::placeholder {
-   color: #71717A;
+    color: #737373;
 }
 
 
-/* =========================
+/* =========================================================
    BOTÃO
-========================= */
+========================================================= */
 
 .FormSenha button {
-   width: 100%;
-
-   height: 54px;
-
-   border: none;
-
-   border-radius: 8px;
-
-   background: #D4A72C;
-
-   color: #0B0B0C;
-
-   font-size: 16px;
-
-   font-weight: bold;
-
-   cursor: pointer;
-
-   transition: 0.3s;
-
-   box-shadow:
-      0 5px 20px rgba(212, 167, 44, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px 50px;
+    background: #d4af6a;
+    border: none;
+    border-radius: 10px;
+    color: #111111;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
 
 .FormSenha button span {
-   margin-right: 8px;
-
-   font-size: 19px;
+    font-size: 16px;
 }
 
 .FormSenha button:hover {
-   background: #F2C94C;
-
-   transform: translateY(-2px);
-
-   box-shadow:
-      0 8px 25px rgba(212, 167, 44, 0.35);
+    background-color: #e2c07b;
+    transform: translateY(-2px);
 }
 
 
-/* =========================
-   DIVISOR
-========================= */
+/* =========================================================
+   DIVISOR "OU"
+========================================================= */
 
 .divisor {
-   display: flex;
-
-   align-items: center;
-
-   gap: 15px;
-
-   margin: 30px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0 18px 0;
 }
 
 .divisor span {
-   height: 1px;
-
-   background: #3F3F46;
-
-   flex: 1;
+    flex: 1;
+    height: 1px;
+    background: #333333;
 }
 
 .divisor p {
-   color: #71717A;
-
-   font-size: 13px;
+    margin: 0;
+    color: #777777;
+    font-size: 12px;
+    white-space: nowrap;
 }
 
 
-/* =========================
+/* =========================================================
    VOLTAR PARA LOGIN
-========================= */
-
-.voltar-login {
-   text-align: center;
-}
+========================================================= */
 
 .voltar-login p {
-   color: #A1A1AA;
-
-   font-size: 14px;
+    color: #e5e5e5;
+    font-size: 14px;
+    text-align: center;
 }
 
 .voltar-login a {
-   color: #D4A72C;
-
-   text-decoration: none;
-
-   font-weight: bold;
-
-   margin-left: 5px;
+    color: #d4af6a;
+    font-weight: 700;
+    text-decoration: none;
 }
 
 .voltar-login a:hover {
-   color: #F2C94C;
-
-   text-decoration: underline;
+    text-decoration: underline;
 }
 
 
-/* =========================
-   FOOTER
-========================= */
+/* =========================================================
+   RODAPÉ
+========================================================= */
 
 .rodapé {
-   min-height: 70px;
-
-   border-top: 1px solid #80631c;
-
-   background: #0B0B0C;
-
-   padding: 0 7%;
-
-   display: flex;
-
-   align-items: center;
-
-   justify-content: space-between;
-
-   color: #A1A1AA;
-
-   font-size: 14px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 6%;
+    background: #080808;
+    border-top: 1px solid #d4a63a;
+    color: #888888;
+    font-size: 13px;
 }
 
 .links-footer {
-   display: flex;
-
-   gap: 20px;
-
-   align-items: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555555;
 }
 
-.links-footer a {
-   color: #D4D4D8;
-
-   text-decoration: none;
+.rodapé a {
+    color: #d4af6a;
+    text-decoration: none;
+    transition: 0.3s ease;
 }
 
-.links-footer a:hover {
-   color: #D4A72C;
-}
-
-.links-footer span {
-   color: #80631c;
-}
-
-
-/* =========================
-   TABLET
-========================= */
-
-@media (max-width: 1000px) {
-
-   .conteudo {
-      justify-content: center;
-   }
-
-   .apresentacao {
-      display: none;
-   }
-
-   .Container-Senha {
-      width: 480px;
-   }
-
-   .menu {
-      gap: 25px;
-   }
-}
-
-
-/* =========================
-   CELULAR
-========================= */
-
-@media (max-width: 650px) {
-
-   .topo {
-      height: 70px;
-
-      padding: 0 20px;
-   }
-
-   .menu {
-      display: none;
-   }
-
-   .icone-usuario {
-      font-size: 28px;
-   }
-
-   .conteudo {
-      width: 100%;
-
-      min-height: 650px;
-
-      padding: 30px 20px;
-   }
-
-   .Container-Senha {
-      width: 100%;
-
-      padding: 30px 25px;
-   }
-
-   .bloco-auth h2 {
-      font-size: 25px;
-   }
-
-   .rodapé {
-      padding: 20px;
-
-      flex-direction: column;
-
-      gap: 15px;
-
-      text-align: center;
-   }
-
-   .links-footer {
-      flex-wrap: wrap;
-
-      justify-content: center;
-   }
+.rodapé a:hover {
+    color: #e2c07b;
 }
