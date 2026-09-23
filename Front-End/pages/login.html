@@ -3,56 +3,112 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+   <meta name="description" content="IncomeofHouses - Login">
    <link rel="stylesheet" href="../css/Login.css">
-   <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina de Login</title>
+   <title>Login - Income of Houses</title>
 </head>
 <body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
-      </div>
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html">Sobre</a>
-      </nav>
-   </header>
-         <main>
-            <div class="Linha"></div>
-            <section>
-               <div class="Container-Auth">
-                  <div class="Bloco-Login">
+    <header class="topo">
+        <div class="logo">
+            <a href="../index.html">
+                <img src="../img/Logo.png" alt="Logo Income of Houses">
+            </a>
+        </div>
+        <nav class="menu">
+            <a href="../index.html">Início</a>
+            <a href="./Plantas.html">Plantas</a>
+            <a href="./Profissionais.html">Profissionais</a>
+            <a href="./Sobre.html">Sobre Nós</a>
+        </nav>
+    </header>
+    <main class="Background">
+        <div class="overlay"></div>
+        <section class="CLogin">
+            <div class="IntroLogin">
+                <h3>INCOME OF HOUSES</h3>
+                <h1>
+                    Bem-vindo <br>
+                    de <span>volta</span>
+                </h1>
+                <p>Acesse sua conta para gerenciar seu perfil, <br>
+                    acompanhar projetos e conectar-se com profissionais.</p>
+            </div>
+ 
+            <div class="FLogin">
+                <div class="TextLogin">
+                    <h2>Entrar</h2>
+                    <p>Informe seus dados para acessar sua conta.</p>
+                </div>
+                <form class="FormLogin">
+                    <div>
+                        <label>E-mail</label>
+                        <input type="email" id="email" placeholder="Digite seu E-mail">
+                    </div>
+                    <div>
+                        <label>Senha</label>
+                        <input type="password" id="senha" placeholder="Digite sua Senha">
+                    </div>
+ 
+                    <div class="OpcoesLogin">
+                        <label class="Lembrar">
+                            <input type="checkbox" id="lembrar">
+                            Lembrar de mim
+                        </label>
+                    </div>
+ 
+                    <button type="submit">Entrar</button>
+                </form>
 
-                        <h1>Logar</h1>
-                        <form class="FormLogin">
-                           <div class="Campo">
-                              <label for="emailLogin">E-mail:</label>
-                              <input type="email" id="emailLogin" placeholder="Digite seu e-mail" required>
-                              
-                              <label for="senhaLogin">Senha:</label>
-                              <input type="password" id="senhaLogin" placeholder="Digite sua senha" required>
-
-                              <div class="FimCampo">
-                                 <div class="Links">
-                                    <a href="../pages/Cadastro.html">Não possui um cadastro? Cadastre-se</a>
-                                    <a href="../pages/EsqueceuSenha.html">Esqueceu a senha?</a>
-                                 </div>
-
-                                 <button type="submit" class="btn-primario">Entrar</button>
-                              </div>
-                           </div>
-                        </form>
-                  </div>
+               <div class="EsqueciSenha">
+                  <a href="./EsqueciSenha.html" class="EsqueciSenha">Esqueci minha senha</a>
                </div>
-            </section>
-         </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+
+                <div class="Divisor">
+                    <span></span>
+                    <p>ou continue com</p>
+                    <span></span>
+                </div>
+ 
+                <div class="LoginSocial">
+                    <button type="button" class="BotaoSocial">
+                        <svg width="20" height="20" viewBox="0 0 48 48">
+                            <path fill="#FFC107" d="M43.6 20.5H42V20.4H24v7.2h11.3c-1.6 4.6-6 7.9-11.3 7.9-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.1-5.1C34.5 6.1 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/>
+                            <path fill="#FF3D00" d="M6.3 14.7l5.9 4.3C13.7 15.5 18.5 12.4 24 12.4c3.1 0 5.9 1.2 8 3.1l5.1-5.1C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+                            <path fill="#4CAF50" d="M24 44c5.4 0 10.3-2.1 14-5.5l-6.5-5.4c-2 1.5-4.6 2.4-7.5 2.4-5.2 0-9.7-3.3-11.3-7.9l-6.1 4.7C9.6 39.6 16.2 44 24 44z"/>
+                            <path fill="#1976D2" d="M43.6 20.5H42V20.4H24v7.2h11.3c-.8 2.2-2.2 4.1-4.1 5.5l6.5 5.4C39.8 36.7 44 30.9 44 24c0-1.2-.1-2.4-.4-3.5z"/>
+                        </svg>
+                        Entrar com Google
+                    </button>
+                    <button type="button" class="BotaoSocial">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2">
+                            <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/>
+                        </svg>
+                        Entrar com Facebook
+                    </button>
+                    <button type="button" class="BotaoSocial">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff">
+                            <path d="M16.365 1.43c0 1.14-.462 2.16-1.212 2.913-.803.8-2.104 1.42-3.15 1.33-.13-1.09.417-2.24 1.19-3.02.79-.79 2.14-1.36 3.17-1.22zM20.4 17.16c-.4.93-.87 1.83-1.5 2.63-.85 1.09-1.55 1.85-2.35 1.86-.83.02-1.1-.53-2.06-.53-.96 0-1.26.51-2.05.55-.82.03-1.44-.79-2.3-1.87-1.72-2.16-3.04-6.11-1.27-8.78.87-1.32 2.42-2.16 4.1-2.19.83-.02 1.62.56 2.13.56.5 0 1.47-.69 2.48-.59.42.02 1.6.17 2.36 1.28-.06.04-1.41.82-1.39 2.45.02 1.95 1.71 2.6 1.73 2.61-.02.05-.27.93-.88 1.84z"/>
+                        </svg>
+                        Entrar com Apple
+                    </button>
+                </div>
+ 
+                <div class="Linkcadastro">
+                    <a href="./CadastrarProfissionais.html">
+                        Ainda não possui um cadastro?
+                        <span>Cadastre-se</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="rodape">
+        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+        <div class="RodapeLinks">
+            <a href="../pages/TermosUso.html">Termos de Uso</a>
+            <span>|</span>
+            <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+        </div>
+    </footer>
 </body>
 </html>

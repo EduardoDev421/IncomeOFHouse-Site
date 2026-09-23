@@ -1,417 +1,218 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-    <link rel="stylesheet" href="../css/ConfiguraçõesProfissional.css">
-    <title>Pagina de Configurações</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="IncomeofHouses - Quem somos">
+   <link rel="stylesheet" href="../css/CadastrarProfissionais.css">
+   <title>CadastroProfissionais - Income of Houses</title>
 </head>
-
 <body>
     <header class="topo">
         <div class="logo">
-            <img src="../img/Logo.png" alt="Logo Income of Houses">
+            <a href="../index.html">
+                <img src="../img/Logo.png" alt="Logo Income of Houses">
+            </a>
         </div>
         <nav class="menu">
             <a href="../index.html">Início</a>
-            <a href="../pages/Plantas.html">Plantas</a>
-            <a href="../pages/Profissionais.html">Profissionais</a>
-            <a href="../pages/Sobre.html">Sobre</a>
+            <a href="./Plantas.html">Plantas</a>
+            <a href="./Profissionais.html">Profissionais</a>
+            <a href="./Sobre.html">Sobre Nós</a>
         </nav>
     </header>
-    <main class="BackGround">
-        <section class="container">
-            <!-- Menu lateral -->
-            <aside class="menu-lateral">
-                <ul>
-                    <li>
-                        <a href="../pages/PerfilProfissional.html">
-                            <img src="../img/icones/IconePerfil.svg" alt="">
-                            <span>Meu Perfil</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../pages/MeusEndereços.html">
-                            <img src="../img/icones/IconeEndereco.svg" alt="">
-                            <span>Meus Endereços</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../pages/MeusPedidos.html">
-                            <img src="../img/icones/IconeProjetos.svg" alt="">
-                            <span>Meus Pedidos</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../pages/MeusProfissionais.html">
-                            <img src="../img/icones/IconeEstrela.svg" alt="">
-                            <span>Meus Profissionais Favoritos</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../pages/ProjetosSalvos.html">
-                            <img src="../img/icones/IconeSalvos.svg" alt="">
-                            <span>Projetos Salvos</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../pages/Agendamentos.html">
-                            <img src="../img/icones/IconeData.svg" alt="">
-                            <span>Agendamentos</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../pages/Mensagem.html">
-                            <img src="../img/icones/IconeMensagem.svg" alt="">
-                            <span>Mensagem</span>
-                        </a>
-                    </li>
-                    <li class="ativo">
-                        <a href="../pages/ConfiguraçõesProfissionais.html">
-                            <img src="../img/icones/IconeConfiguracao.svg" alt="">
-                            <span>Configurações</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../index.html">
-                            <img src="../img/icones/IconeSair.svg" alt="">
-                            <span>Sair</span>
-                        </a>
-                    </li>
-                </ul>
-            </aside>
-
-            <!-- Conteúdo -->
-            <section class="conteudo">
-                <h1> Configurações</h1>
-                <h4> Gerencie as configurações da sua conta profissional.</h4>
-
-                <div class="Config">
-                    <div class="ConfigSN">
-                        <div class="Segurança">
-                            <div class="TituloSegurança">
-                                <img src="../img/icones/IconeSegurança.svg">
-                                <h2>Segurança da Conta</h2>
-                            </div>
-                            <div class="seguranças">
-                                <img src="../img/icones/IconeSenha.svg">
-                                <div class="SegurançaText">
-                                    <h3> Alterar Senha</h3>
-                                    <p> Atualize sua senha de acesso</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-
-                            <div class="seguranças">
-                                <img src="../img/icones/IconeAutentificação.svg">
-                                <div class="SegurançaText">
-                                    <h3>Autenticação em duas etapas</h3>
-                                    <p>Aumente a segurança da sua conta</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-
-                            <div class="seguranças">
-                                <img src="../img/icones/IconeDispositivos.svg">
-                                <div class="SegurançaText">
-                                    <h3>Dispositivos conectados</h3>
-                                    <p>Gerencie dispositivos e sessões ativas</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
+    <main class="Background">
+        <div class="overlay"></div>
+        <section class="CProfissional">
+            <div class="IntroCadastro">
+                <h3>INCOME OF HOUSES</h3>
+                <h1>
+                    Faça parte da nossa <br>
+                    <span>rede de profissionais</span>
+                </h1>
+                <p>Cadastre seu perfil profissional, divulgue seu trabalho e conecte-se <br>
+                    com pessoas que procuram seus serviços.</p>
+                
+                <div class="MiniCards">
+                    <div class="MiniCard">
+                        <div class="ImgCard">
+                            <img src="../img/icones/IconeArquitetura.png">
                         </div>
-
-                        <div class="notificação">
-                            <div class="TituloNotificação">
-                                <img src="../img/icones/Iconenotificação.svg" alt="">
-                                <h2>Notificações</h2>
-                            </div>
-                            <div class="notificações">
-                                <img src="../img/icones/IconeProjetosConcluidos.svg">
-                                <div class="notificaçõesText">
-                                    <h3>Novos projetos e solicitações</h3>
-                                    <p>Receber notificações de novos projetos</p>
-                                </div>
-
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-
-                            <div class="notificações">
-                                <img src="../img/icones/IconeMensagem.svg">
-                                <div class="notificaçõesText">
-                                    <h3>Mensagens</h3>
-                                    <p>Receber notificações de novas mensagens</p>
-                                </div>
-
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-
-                            <div class="notificações">
-                                <img src="../img/icones/IconeAtualizaçõesPedidos.svg">
-                                <div class="notificaçõesText">
-                                    <h3>Atualizações de pedidos</h3>
-                                    <p>Receber atualizações sobre pedidos</p>
-                                </div>
-
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-
-                            <div class="notificações">
-                                <img src="../img/icones/IconeEmail.svg">
-                                <div class="notificaçõesText">
-                                    <h3>E-mails promocionais</h3>
-                                    <p>Reveber ofertas e novidades por e-mail</p>
-                                </div>
-
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                        </div>
+                        <p>Arquitetura</p>
                     </div>
-
-                    <div class="ConfigCPF">
-                        <div class="ConfigProfissionail">
-                            <div class="TituloConfigProfissional">
-                                <img src="../img/icones/IconeConfigProfissional.svg">
-                                <h2>Configurações Profissionais</h2>
-                            </div>
-                            <div class="ConfigTodosProfissionais">
-                                <div class="ConfigProfissionais">
-                                    <img src="../img/icones/IconeAtuação.svg">
-                                    <div class="ConfigProfissionaisText">
-                                        <h3>Áreas de atuação</h3>
-                                        <p>Gerenciar suas especialidades</p>
-                                    </div>
-
-                                    <span class="seta">></span>
-                                </div>
-
-                                <div class="ConfigProfissionais">
-                                    <img src="../img/icones/IconeServiçosOferecidos.svg">
-                                    <div class="ConfigProfissionaisText">
-                                        <h3>Serviços oferecidos</h3>
-                                        <p>Adicione e edite seus serviços</p>
-                                    </div>
-
-                                    <span class="seta">></span>
-                                </div>
-
-                                <div class="ConfigProfissionais">
-                                    <img src="../img/icones/IconeEndereco.svg">
-                                    <div class="ConfigProfissionaisText">
-                                        <h3>Região de atendimento</h3>
-                                        <p>Defina onde você atende</p>
-                                    </div>
-
-                                    <span class="seta">></span>
-                                </div>
-
-                                <div class="ConfigProfissionais">
-                                    <img src="../img/icones/IconeTempo.svg">
-                                    <div class="ConfigProfissionaisText">
-                                        <h3>Disponibidade</h3>
-                                        <p>Configure seus horários de atendimentos</p>
-                                    </div>
-
-                                    <span class="seta">></span>
-                                </div>
-
-                                <div class="ConfigProfissionais">
-                                    <img src="../img/icones/IconeMoeda.svg">
-                                    <div class="ConfigProfissionaisText">
-                                        <h3>Valor mínimo de projeto</h3>
-                                        <p>Defina o valor mínimo para orçamentos</p>
-                                    </div>
-
-                                    <span class="seta">></span>
-                                </div>
-                            </div>
+                    <div class="MiniCard">
+                        <div class="ImgCard">
+                            <img src="" alt="">
                         </div>
-
-                        <div class="PerfilProfissional">
-                            <div class="TituloPerfilProfissional">
-                                <img src="../img/icones/IconeLogin.svg">
-                                <h2>Perfil Profissional</h2>
-                            </div>
-                            <div class="PerfilProfissionais">
-                                <img src="../img/icones/IconeEmpresa.svg" >
-                                <div class="PerfilProfissionaisText">
-                                    <h3>Dados da empresa</h3>
-                                    <p>Gerencie as informações da sua empresa</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-                            <div class="PerfilProfissionais">
-                                <img src="../img/icones/IconeRegistroPessoal.svg" alt="">
-                                <div class="PerfilProfissionaisText">
-                                    <h3>Registro profissional</h3>
-                                    <p>Adicione seu registro e certificações</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-
-                            <div class="PerfilProfissionais">
-                                <img src="../img/icones/iconePortfolio.svg">
-                                <div class="PerfilProfissionaisText">
-                                    <h3>Portfólio</h3>
-                                    <p>Gerencie seus projetos e trabalhos</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-
-                            <div class="PerfilProfissionais">
-                                <img src="../img/icones/Iconelapis.svg">
-                                <div class="PerfilProfissionaisText">
-                                    <h3>Descrição profissional</h3>
-                                    <p>Conte mais sobre você e sua experiência</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-                        </div>
-
-                        <div class=" Financeiro">
-                            <div class="TituloFinanceiro">
-                                <img src="../img/icones/IconeMoeda.svg">
-                                <h2>Financeiro</h2>
-                            </div>
-                            <div class=" Financeiros">
-                                <img src="../img/icones/IconeRegistro.svg">
-                                <div class="FinanceirosText">
-                                    <h3>Dados para recebimento</h3>
-                                    <p>Configurações suas informações bancárias</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-
-                            <div class=" Financeiros">
-                                <img src="../img/icones/IconeDadosRecebimento.svg">
-                                <div class="FinanceirosText">
-                                    <h3>Histórico de pagamentos</h3>
-                                    <p>Acompanhe seus recebimentos</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-
-                            <div class=" Financeiros">
-                                <img src="../img/icones/IconeCobrança.svg">
-                                <div class="FinanceirosText">
-                                    <h3>Configurações de cobrança</h3>
-                                    <p>Gerencie suas preferências de cobrança</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-
-                            <div class="Financeiros">
-                                <img src="../img/icones/IconeNotaFiscal.svg">
-                                <div class="FinanceirosText">
-                                    <h3>Notas fiscais</h3>
-                                    <p>Emite e gerencie seus notas fiscais</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-                        </div>
+                        <p>Engenharia</p>
                     </div>
-
-                    <div class="Privacidade">
-                        <div class="TituloPrivacidade">
-                            <img src="../img/icones/IconePrivacidade.svg">
-                            <h2>Privacidade</h2>
+                    <div class="MiniCard">
+                        <div class="ImgCard">
+                            <img src="" alt="">
                         </div>
-                        <div class="PrivacidadeCard">
-                            <div class="Privacidades">
-                                <img src="../img/icones/IconeVisao.svg">
-                                <div class="PrivacidadesText">
-                                    <h3>visibilidade do perfil</h3>
-                                    <p>controle quem pode ver seu perfil</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-
-                            <div class="Privacidades">
-                                <img src="../img/icones/IconeDadosPessoais.svg">
-                                <div class="PrivacidadesText">
-                                    <h3>Dados pessoais</h3>
-                                    <p>Gerencie seus dados pessoais</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-
-                            <div class="PrivacidadesU">
-                                <img src="../img/icones/IconeLixeira.svg" alt="">
-                                <div class="PrivacidadesText">
-                                    <h3>Excluir conta</h3>
-                                    <p>Exclua sua conta permanentemente</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-                        </div>
+                        <p>Design</p>
                     </div>
-
-                    <div class="CentralAjuda">
-                        <div class="TituloCentralAjuda">
-                            <img src="../img/icones/IconePergunta.svg" alt="">
-                            <h2>Central de Ajuda</h2>
+                    <div class="MiniCardU">
+                        <div class="ImgCard">
+                            <img src="" alt="">
                         </div>
-                        <div class="CentralAjudasCard">
-                            <div class="CentralAjudas">
-                                <img src="../img/icones/IconePerguntasRespostas.svg">
-                                <div class="CentralAjudasText">
-                                    <h3>Perguntas frequentes</h3>
-                                    <p>Encotre respostas para dúvidas comuns</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-
-                            <div class="CentralAjudas">
-                                <img src="../img/icones/IconeFaleConosco.svg">
-                                <div class="CentralAjudasText">
-                                    <h3>Fale conosco</h3>
-                                    <p>Entre em contato com nosso suporte</p>
-                                </div>
-
-                                <span class="seta">></span>
-                            </div>
-
-                            <div class="CentralAjudaU">
-                                <img src="../img/icones/IconeTutorial.svg">
-                                <div class="CentralAjudasText">
-                                    <h3>Tutoriais para profissionais</h3>
-                                    <p>Aprenda a usar a plataforma</p>
-                                </div>
-
-                            <span class="seta">></span>
-                        </div>
+                        <p>Paisagismo</p>
                     </div>
                 </div>
-            </section>
+            </div>
+
+            <div class="FCadastro">
+                <div class="FormImgCadastro">
+                    <img src="" alt="">
+                </div>
+                <div class="TextCadastro">
+                    <h2>Cadastro Profissionais</h2>
+                    <p>Crie seu perfil profissional e apresente seus serviços.</p>
+                </div>
+                <form class="FormCadastro">
+                    <div class="NRETCDCE">
+                        <div>
+                            <label>Nome</label>
+                            <input type="text" id="nome" placeholder="Digite seu nome">
+                        </div>
+                        <div>
+                            <label>Registro Profissional</label>
+                            <input type="text" id="RP" placeholder="Digite seu Registro Profissional">
+                        </div>
+                        <div>
+                            <label>E-mail</label>
+                            <input type="email" id="email" placeholder="Digite seu E-mail">
+                        </div>
+                        <div>
+                            <label>Telefone</label>
+                            <input type="tel" id="telefone" placeholder="Digite seu Telefone">
+                        </div>
+                        <div>
+                            <label>CPF</label>
+                            <input type="text" id="CPF" placeholder="Digite seu CPF">                            
+                        </div>
+                        <div>
+                            <label>Data de Nascimento</label>
+                            <input type="date" id="DN">
+                        </div>
+                        <div>
+                            <label>Cidade</label>
+                            <input type="text" id="Cidade" placeholder="Digite sua Cidade">
+                        </div>
+                        <div>
+                            <label> Estado</label>
+                            <select name="SEstado" id="SEstado">
+                                <option value="">Selecionar estado</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="Profissao">
+                        <label> Profissao</label>
+                        <select name="profissao" id="profissao">
+                            <option value="">Selecionar sua profissão</option>
+                            <option value="arquiteto">Arquiteto(a)</option>
+                            <option value="arquiteto-urbanista">Arquiteto(a) e Urbanista</option>
+                            <option value="urbanista">Urbanista</option>
+                            <option value="engenheiro-civil">Engenheiro(a) Civil</option>
+                            <option value="engenheiro-eletrico">Engenheiro(a) Eletricista</option>
+                            <option value="engenheiro-mecanico">Engenheiro(a) Mecânico(a)</option>
+                            <option value="engenheiro-sanitarista">Engenheiro(a) Sanitarista</option>
+                            <option value="engenheiro-ambiental">Engenheiro(a) Ambiental</option>
+                            <option value="designer-de-interiores">Designer de Interiores</option>
+                            <option value="desenhista-projetista">Desenhista Projetista</option>
+                            <option value="desenhista-cadista">Desenhista CAD</option>
+                            <option value="projetista-arquitetonico">Projetista Arquitetônico</option>
+                            <option value="projetista-de-edificacoes">Projetista de Edificações</option>
+                            <option value="tecnico-em-edificacoes">Técnico(a) em Edificações</option>
+                            <option value="modelador-3d">Modelador(a) 3D</option>
+                            <option value="artista-3d">Artista 3D</option>
+                            <option value="renderizador-3d">Renderizador(a) 3D</option>
+                            <option value="especialista-bim">Especialista BIM</option>
+                            <option value="coordenador-bim">Coordenador(a) BIM</option>
+                            <option value="projetista-eletrico">Projetista Elétrico</option>
+                            <option value="projetista-hidraulico">Projetista Hidráulico</option>
+                            <option value="projetista-estrutural">Projetista Estrutural</option>
+                            <option value="projetista-sanitario">Projetista Sanitário</option>
+                            <option value="projetista-de-incendio">Projetista de Prevenção contra Incêndio</option>
+                            <option value="projetista-de-climatizacao">Projetista de Climatização</option>
+                            <option value="calculista-estrutural">Calculista Estrutural</option>
+                            <option value="tecnico-em-construcao">Técnico(a) em Construção Civil</option>
+                            <option value="tecnico-em-estruturas">Técnico(a) em Estruturas</option>
+                            <option value="topografo">Topógrafo(a)</option>
+                            <option value="tecnico-em-topografia">Técnico(a) em Topografia</option>
+                            <option value="agrimensor">Agrimensor(a)</option>
+                            <option value="paisagista">Paisagista</option>
+                            <option value="projetista-de-paisagismo">Projetista de Paisagismo</option>
+                            <option value="planejador-de-obras">Planejador(a) de Obras</option>
+                            <option value="gestor-de-projetos">Gestor(a) de Projetos</option>
+                            <option value="compatibilizador-de-projetos">Compatibilizador(a) de Projetos</option>
+                            <option value="consultor-em-arquitetura">Consultor(a) em Arquitetura</option>
+                            <option value="consultor-em-projetos">Consultor(a) em Projetos</option>
+                            <option value="outro">Outro profissional da área</option>
+                        </select>
+                    </div>
+
+                    <div class="SenhaECSenha">
+                        <div>
+                            <label>Senha</label>
+                            <input type="password" id="Senha" placeholder="Crie sua Senha">
+                        </div>
+                        <div>
+                            <label>Confirmar Senha</label>
+                            <input type="password" id="CSenha" placeholder="Confirme sua Senha">
+                        </div>
+                    </div>
+
+                    <div class="CampoArquivo">
+                        <label for="documentos">Documentos</label>
+
+                        <div class="ArquivoBox">
+                            <input type="file" id="documentos" name="documentos">
+                            <label for="documentos" class="BotaoArquivo">
+                                Escolher arquivo
+                            </label>
+                            <span id="NomeArquivo">Nenhum arquivo escolhido</span>
+                        </div>
+                    </div>
+
+                    <button type="submit"> Cadastrar</button>
+                </form>
+
+                <div class="Linklogin">
+                    <a href="../pages/login.html">
+                        Já possui um cadastro?
+                        <span>Entrar</span>
+                    </a>
+                </div>
+            </div>
         </section>
     </main>
     <footer class="rodape">
@@ -423,5 +224,4 @@
         </div>
     </footer>
 </body>
-
 </html>

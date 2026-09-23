@@ -96,7 +96,7 @@ body {
 
 
 /* =========================================================
-   ÁREA PRINCIPAL DO CADASTRO
+   ÁREA PRINCIPAL DO LOGIN
 ========================================================= */
 
 .Background {
@@ -108,7 +108,7 @@ body {
     z-index: 0;
 }
 
-.overlay{
+.overlay {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.15);
@@ -116,86 +116,44 @@ body {
     pointer-events: none;
 }
 
-.CProfissional {
+.CLogin {
     position: relative;
     min-height: 100vh;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     margin: 100px;
 }
 
 
 /* =========================================================
-   INTRODUÇÃO DO CADASTRO
+   INTRODUÇÃO DO LOGIN
 ========================================================= */
 
-.IntroCadastro {
+.IntroLogin {
     display: flex;
     flex-direction: column;
-    padding: 100px 100px 0px 20px;
+    padding: 0 100px 0 20px;
 }
 
-.IntroCadastro h3 {
+.IntroLogin h3 {
     margin-bottom: 8px;
     color: #d4af6a;
 }
 
-.IntroCadastro h1 {
+.IntroLogin h1 {
     margin-bottom: 8px;
     color: #f5f5f5;
     font-size: 50px;
 }
 
-.IntroCadastro h1 span {
+.IntroLogin h1 span {
     color: #cfa835;
 }
 
-.IntroCadastro p {
-    color: #a3a3a3;
-}
-
-
-/* =========================================================
-   MINI CARDS
-========================================================= */
-
-.MiniCards {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
-}
-
-.MiniCard,
-.MiniCardU {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 60px;
-}
-
-.MiniCard {
-    padding-right: 30px;
-    border-right: 3px solid #cfa835;
-}
-
-.MiniCardU {
-    padding-right: 30px;
-}
-
-
-/* =========================================================
-   IMAGEM DO CARD
-========================================================= */
-
-.MiniCard img,
-.MiniCardU img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    display: block;
+.IntroLogin p {
+    color: #d4af6a;
 }
 
 
@@ -203,11 +161,12 @@ body {
    CARD DO FORMULÁRIO
 ========================================================= */
 
-.FCadastro {
+.FLogin {
+    width: 460px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 30px;
+    padding: 45px 45px;
     background-color: #0a0a0a;
     border: 2px solid #cda432;
     border-radius: 20px;
@@ -216,22 +175,22 @@ body {
 
 /* ---------- Título do formulário ---------- */
 
-.TextCadastro {
+.TextLogin {
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-.FCadastro h2 {
-    margin-bottom: 5px;
+.FLogin h2 {
+    margin-bottom: 8px;
     color: #f5f5f5;
-    font-size: 30px;
+    font-size: 34px;
 }
 
-.FCadastro p {
-    margin-bottom: 30px;
+.FLogin p {
+    margin-bottom: 28px;
     color: #a3a3a3;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 
@@ -239,26 +198,13 @@ body {
    FORMULÁRIO
 ========================================================= */
 
-.FormCadastro {
+.FormLogin {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-
-/* =========================================================
-   CAMPOS PRINCIPAIS
-========================================================= */
-
-.NRETCDCE {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    column-gap: 22px;
-    row-gap: 10px;
-}
-
-.NRETCDCE > div {
+.FormLogin > div {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -269,183 +215,102 @@ body {
    LABELS
 ========================================================= */
 
-.NRETCDCE label,
-.Profissao label,
-.SenhaECSenha label,
-.CampoArquivo > label {
+.FormLogin label {
     color: #e5e5e5;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 600;
 }
 
 
 /* =========================================================
-   INPUTS E SELECTS
+   INPUTS
 ========================================================= */
 
-.NRETCDCE input,
-.NRETCDCE select,
-.Profissao input,
-.Profissao select,
-.SenhaECSenha input {
+.FormLogin input[type="email"],
+.FormLogin input[type="password"] {
     width: 100%;
-    height: 34px;
-    margin-bottom: 15px;
-    padding: 0 10px;
+    height: 46px;
+    margin-bottom: 18px;
+    padding: 0 14px;
     box-sizing: border-box;
     background: #0d0d0d;
     border: 1px solid #363636;
-    border-radius: 4px;
+    border-radius: 6px;
     color: #e5e5e5;
-    font-size: 11px;
+    font-size: 14px;
     outline: none;
 }
 
-
-/* ---------- Placeholder ---------- */
-
-.NRETCDCE input::placeholder,
-.Profissao input::placeholder,
-.SenhaECSenha input::placeholder {
+.FormLogin input::placeholder {
     color: #737373;
 }
 
-
-/* ---------- Foco ---------- */
-
-.NRETCDCE input:focus,
-.NRETCDCE select:focus,
-.Profissao input:focus,
-.Profissao select:focus,
-.SenhaECSenha input:focus {
+.FormLogin input:focus {
     border-color: #cda432;
 }
 
 
-/* ---------- Select ---------- */
-
-.NRETCDCE select,
-.Profissao select {
-    cursor: pointer;
-}
-
-.NRETCDCE select option,
-.Profissao select option {
-    background: #101010;
-    color: #e5e5e5;
-}
-
-
 /* =========================================================
-   PROFISSÃO
+   OPÇÕES (LEMBRAR / ESQUECI SENHA)
 ========================================================= */
 
-.Profissao input,
-.Profissao select {
-    width: 100%;
+.OpcoesLogin {
+    display: flex;  
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
-
-/* =========================================================
-   SENHA / CONFIRMAR SENHA
-========================================================= */
-
-.SenhaECSenha {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    column-gap: 22px;
-    row-gap: 10px;
-}
-
-
-/* =========================================================
-   UPLOAD DE ARQUIVO
-========================================================= */
-
-.CampoArquivo {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-
-/* ---------- Label ---------- */
-
-.CampoArquivo > label {
-    display: block;
-    margin-bottom: 5px;
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-
-/* ---------- Caixa ---------- */
-
-.ArquivoBox {
-    width: 100%;
-    height: 40px;
+.Lembrar {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 0 10px;
-    background: #0b0b0b;
-    border: 1px solid #333;
-    border-radius: 4px;
-}
-
-
-/* ---------- Input original ---------- */
-
-.ArquivoBox input[type="file"] {
-    display: none;
-}
-
-
-/* ---------- Botão ---------- */
-
-.BotaoArquivo {
-    padding: 7px 12px;
-    background: #1a1a1a;
-    border: 1px solid #444;
-    border-radius: 4px;
-    color: #ffffff;
-    font-size: 12px;
+    gap: 8px;
+    color: #a3a3a3;
+    font-size: 14px;
+    font-weight: 400;
     cursor: pointer;
-    transition: 0.2s;
 }
 
-.BotaoArquivo:hover {
-    background: #252525;
-    border-color: #666;
+.Lembrar input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #cda432;
+    cursor: pointer;
+}
+
+.EsqueciSenha {
+    text-align: center;
+    color: #d4af6a;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.EsqueciSenha:hover {
+    color: #e2c07b;
+    text-decoration: underline;
 }
 
 
-/* ---------- Nome do arquivo ---------- */
+/* ---------- Link do Cadastro ---------- */
 
-#NomeArquivo {
-    overflow: hidden;
-    color: #777;
-    font-size: 12px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-/* ---------- Link do Login ---------- */
-
-.Linklogin {
+.Linkcadastro {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px;
+    margin: 20px 0 0 0;
 }
 
-.Linklogin a{
+.Linkcadastro {
+    margin: 22px 0 0 0;
+}
+
+.Linkcadastro a {
     text-decoration: none;
     color: #e5e5e5;
+    font-size: 15px;
 }
 
-.Linklogin a span{
+.Linkcadastro a span {
     color: #d4af6a;
 }
 
@@ -454,26 +319,86 @@ body {
    BOTÃO DO FORMULÁRIO
 ========================================================= */
 
-.FormCadastro button {
+.FormLogin button {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    width: 100%;
     padding: 15px 50px;
     background: #d4af6a;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     color: #111111;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
     transition: 0.3s ease;
 }
 
-.FormCadastro button:hover {
+.FormLogin button:hover {
     background-color: #e2c07b;
     transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   DIVISOR "OU CONTINUE COM"
+========================================================= */
+
+.Divisor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0 18px 0;
+}
+
+.Divisor span {
+    flex: 1;
+    height: 1px;
+    background: #333333;
+}
+
+.Divisor p {
+    margin: 0;
+    color: #777777;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   LOGIN SOCIAL
+========================================================= */
+
+.LoginSocial {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.BotaoSocial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 46px;
+    background: #101010;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    color: #e5e5e5;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.BotaoSocial:hover {
+    background: #1a1a1a;
+    border-color: #555555;
 }
 
 
@@ -493,9 +418,6 @@ body {
     color: #888888;
     font-size: 13px;
 }
-
-
-/* ---------- Links do rodapé ---------- */
 
 .RodapeLinks {
     display: flex;
