@@ -433,13 +433,53 @@ body {
     text-overflow: ellipsis;
 }
 
+/* ---------- Divisor do OU ---------- */
+
+.divisor {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.divisor span {
+    flex: 1;
+    height: 1px;
+    background: #363636;
+}
+
+.divisor p {
+    margin-top: 30px;
+    color: #737373;
+    font-size: 15px;
+}
+
 /* ---------- Link do Login ---------- */
 
 .Linklogin {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 20px;
+    gap: 15px;
+}
+
+.Linklogin a.Cliente {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px 50px;
+    font-size: 14px;   /* igual ao botão Cadastrar */
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    border-radius: 8px;
+    background: rgba(212, 175, 106, 0.08);
+    transition: 0.3s ease;
+}
+
+.Linklogin a.Cliente{
+    text-decoration: none;
+    color: #d4af6a;
 }
 
 .Linklogin a{
@@ -450,6 +490,21 @@ body {
 .Linklogin a span{
     color: #d4af6a;
 }
+
+/* ---------- Botão de cadastro profissional ---------- */
+
+.FormCadastro button {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px 50px;
+    /* ...resto igual */
+}
+
+.Linklogin a.Cliente:hover {
+    background: rgba(212, 175, 106, 0.18);
+    color: #e2c07b;
+}
+
 
 
 /* =========================================================

@@ -34,7 +34,6 @@ body {
     height: 75px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 0 6%;
     z-index: 10;
     background: rgba(10, 10, 10, 0.25);
@@ -42,38 +41,33 @@ body {
     backdrop-filter: blur(8px);
 }
 
+
+/* ---------- Logo ---------- */
+
+.logo {
+    width: 100%;
+    background: transparent;
+}
+
 .logo a {
     display: flex;
     align-items: center;
-    gap: 8px;
     text-decoration: none;
 }
 
-.logo-casa {
-    color: #d4af6a;
-    font-size: 26px;
-    line-height: 1;
+.logo img {
+    max-width: 70px;
+    height: auto;
+    margin-left: 30px;
 }
 
-.logo-texto {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-}
 
-.logo-texto span {
-    color: #e5e5e5;
-    font-size: 11px;
-    letter-spacing: 1px;
-}
-
-.logo-texto strong {
-    color: #d4af6a;
-    font-size: 15px;
-    letter-spacing: 1px;
-}
+/* ---------- Menu ---------- */
 
 .menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -94,18 +88,11 @@ body {
     color: #d4af6a;
 }
 
-.icone-usuario {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    border: 1px solid rgba(212, 175, 106, 0.4);
-    border-radius: 50%;
+.menu a.ativo {
     color: #d4af6a;
-    font-size: 16px;
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    background: rgba(212, 175, 106, 0.08);
 }
-
 
 /* =========================================================
    ÁREA PRINCIPAL

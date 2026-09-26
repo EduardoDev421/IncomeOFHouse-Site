@@ -114,7 +114,9 @@ body {
 /* BackGround da Pagina*/
 .PaginaProfissionais {
     flex: 1;
-    background: #0b0b0b;
+    background-image: url("../img/BackGroundPlantasEProfissionais.png");
+    background-size: cover;
+    background-position: center;
 }
 
 
@@ -124,20 +126,22 @@ body {
     min-height: 260px;
     display: flex;
     align-items: center;
-    padding: 120px  6% 40px;
+    margin-top: 75px;
+    padding: 50px 0 40px;
 }
 
 .HeroProfissionaisOverlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, #0b0b0b 35%, rgba(11, 11, 11, 0.55) 65%, rgba(11, 11, 11, 0.15) 100%);
     z-index: 1;
 }
 
 .HeroProfissionaisConteudo {
     position: relative;
     z-index: 2;
-    max-width: 560px;
+    width: 90%;             /* mesma largura dos filtros e cards */
+    max-width: 1300px;
+    margin: 0 auto;  
 }
 
 .Etiqueta {
@@ -255,11 +259,16 @@ body {
     outline: none;
 }
 
+.Pesquisar {
+    margin-top: 22px;   /* mesmo espaço vertical entre as linhas do grid */
+}
+
 .BtnPesquisar {
-    display: flexbox;
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    width: 100%;        /* ocupa a largura toda do card */
     padding: 15px 50px;
     color: #111111;
     background: #d4af6a;

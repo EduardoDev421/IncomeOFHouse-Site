@@ -1,6 +1,6 @@
-/* =====================================================
-   RESET
-===================================================== */
+/* =========================================================
+   CONFIGURAÇÃO GERAL
+========================================================= */
 
 * {
     margin: 0;
@@ -8,191 +8,178 @@
     box-sizing: border-box;
 }
 
-
-/* =====================================================
-   BODY
-===================================================== */
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-
-    background: #0B0B0C;
-    color: #F5F5F5;
-
     min-height: 100vh;
-
     display: flex;
     flex-direction: column;
+    background: #0b0b0b;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
-/* =====================================================
-   HEADER
-===================================================== */
+/* =========================================================
+   HEADER / MENU
+========================================================= */
 
 .topo {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 74px;
-
-    background: #0B0B0C;
-
-    border-bottom: 1px solid #80631c;
-
+    height: 75px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
-    padding: 0 7%;
-
-    position: relative;
+    padding: 0 6%;
     z-index: 10;
+    background: rgba(10, 10, 10, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
 }
 
 
-/* =====================================================
-   LOGO
-===================================================== */
+/* ---------- Logo ---------- */
+
+.logo {
+    width: 100%;
+    background: transparent;
+}
 
 .logo a {
     display: flex;
     align-items: center;
-
     text-decoration: none;
 }
 
-.logo-casa {
-    color: #D4A72C;
-
-    font-size: 38px;
-    line-height: 1;
-
-    margin-right: 8px;
-}
-
-.logo-texto {
-    display: flex;
-    flex-direction: column;
-
-    letter-spacing: 2px;
-}
-
-.logo-texto span {
-    color: #F5F5F5;
-
-    font-size: 11px;
-}
-
-.logo-texto strong {
-    color: #D4A72C;
-
-    font-size: 17px;
-
-    letter-spacing: 3px;
+.logo img {
+    max-width: 70px;
+    height: auto;
+    margin-left: 30px;
 }
 
 
-/* =====================================================
-   MENU
-===================================================== */
+/* ---------- Menu ---------- */
 
 .menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
-
-    gap: 45px;
+    gap: 12px;
 }
 
 .menu a {
-    color: #D4D4D8;
-
+    padding: 12px 20px;
+    color: #ffffff;
     text-decoration: none;
-
     font-size: 14px;
-
-    padding: 9px 15px;
-
-    border: 1px solid transparent;
-    border-radius: 6px;
-
+    font-weight: 500;
+    border-radius: 7px;
     transition: 0.3s ease;
 }
 
 .menu a:hover {
-    color: #D4A72C;
+    background: rgba(255, 255, 255, 0.06);
+    color: #d4af6a;
 }
 
 .menu a.ativo {
-    color: #D4A72C;
-
-    border: 1px solid #80631c;
-
-    background: rgba(212, 167, 44, 0.05);
+    color: #d4af6a;
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    background: rgba(212, 175, 106, 0.08);
 }
 
-
+.BackGround {
+    position: relative;
+    min-height: 100vh;
+    background-image: url("../img/BackGroundPlantasEProfissionais.png");
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
 /* =====================================================
-   LOGIN
-===================================================== */
-
-.login {
-    color: #D4A72C;
-
-    text-decoration: none;
-}
-
-.icone-login {
-    width: 32px;
-    height: 32px;
-
-    border: 2px solid #D4A72C;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 18px;
-}
-
-
-/* =====================================================
-   CONTEÚDO PRINCIPAL
+   CONTAINER
 ===================================================== */
 
 .detalhes-profissional {
-    position: relative;
-
-    flex: 1;
-
-    width: 100%;
-
-    padding: 55px 7% 60px;
-
-    background-color: #0B0B0C;
-
-    background-image:
-        linear-gradient(
-            rgba(5, 5, 6, 0.72),
-            rgba(5, 5, 6, 0.92)
-        ),
-        url("../img/detalhes-profissional.png");
-
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    overflow: hidden;
+    width: min(1180px, 92%);
+    margin: 100px auto;
 }
 
 
 /* =====================================================
-   EFEITO ESCURO
+   CARD PRINCIPAL DO PROFISSIONAL
 ===================================================== */
 
-.detalhes-profissional::after {
+.perfil-profissional {
+
+    display: grid;
+
+    grid-template-columns: 430px 1fr;
+
+    min-height: 480px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(29, 29, 29, 0.98),
+            rgba(12, 12, 12, 0.98)
+        );
+
+    border: 1px solid rgba(218, 174, 82, 0.38);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55),
+        0 0 45px rgba(218, 174, 82, 0.05);
+}
+
+
+/* =====================================================
+   FOTO DO PROFISSIONAL
+===================================================== */
+
+.imagem-profissional {
+    position: relative;
+
+    min-height: 480px;
+
+    overflow: hidden;
+
+    background: #161616;
+}
+
+
+.imagem-profissional img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+
+.imagem-profissional:hover img {
+    transform: scale(1.03);
+}
+
+
+/* degradê sobre a foto */
+
+.imagem-profissional::after {
+
     content: "";
 
     position: absolute;
@@ -200,138 +187,111 @@ body {
     inset: 0;
 
     background:
-        radial-gradient(
-            circle at center,
-            transparent 20%,
-            rgba(0, 0, 0, 0.55) 100%
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.05),
+            rgba(0, 0, 0, 0.15)
         );
 
     pointer-events: none;
-
-    z-index: 0;
 }
 
 
 /* =====================================================
-   PERFIL
-===================================================== */
-
-.perfil-profissional {
-    position: relative;
-
-    z-index: 2;
-
-    width: 100%;
-
-    max-width: 1200px;
-
-    margin: 0 auto 45px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 55px;
-}
-
-
-/* =====================================================
-   IMAGEM DO PROFISSIONAL
-===================================================== */
-
-.imagem-profissional {
-    width: 370px;
-    height: 330px;
-
-    flex-shrink: 0;
-
-    background: #111113;
-
-    border: 1px solid #80631c;
-
-    border-radius: 8px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.45);
-}
-
-.imagem-profissional img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-}
-
-
-/* =====================================================
-   INFORMAÇÕES DO PROFISSIONAL
+   INFORMAÇÕES
 ===================================================== */
 
 .informacoes-profissional {
-    flex: 1;
-}
 
-.informacoes-profissional h1 {
-    color: #F5F5F5;
+    padding: 55px 50px;
 
-    font-size: 46px;
+    display: flex;
 
-    font-weight: 700;
+    flex-direction: column;
 
-    line-height: 1.1;
-
-    margin-bottom: 8px;
-}
-
-.informacoes-profissional h1 span {
-    color: #D4A72C;
-}
-
-.profissao {
-    color: #D4D4D8;
-
-    font-size: 22px;
-
-    font-weight: 400;
-
-    margin-bottom: 20px;
+    justify-content: center;
 }
 
 
 /* =====================================================
-   AVALIAÇÃO
+   NOME
+===================================================== */
+
+.informacoes-profissional h1 {
+
+    font-size: 36px;
+
+    line-height: 1.15;
+
+    font-weight: 600;
+
+    color: #fff;
+
+    margin-bottom: 10px;
+}
+
+
+.informacoes-profissional h1 span {
+
+    display: block;
+
+    color: #d9ad52;
+}
+
+
+/* =====================================================
+   PROFISSÃO
+===================================================== */
+
+.profissao {
+
+    font-size: 16px;
+
+    font-weight: 400;
+
+    color: #aaa;
+
+    margin-bottom: 22px;
+}
+
+
+/* =====================================================
+   AVALIAÇÃO DO TOPO
 ===================================================== */
 
 .avaliacao {
+
     display: flex;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 9px;
 
-    margin-bottom: 28px;
+    margin-bottom: 30px;
 }
 
-.estrela {
-    color: #F2C94C;
 
-    font-size: 28px;
+.avaliacao .estrela {
+
+    color: #e3b957;
+
+    font-size: 22px;
 }
+
 
 .avaliacao strong {
-    color: #F5F5F5;
 
-    font-size: 24px;
+    color: #fff;
+
+    font-size: 16px;
 }
 
-.avaliacao small {
-    color: #A1A1AA;
 
-    font-size: 14px;
+.avaliacao small {
+
+    color: #777;
+
+    font-size: 12px;
 }
 
 
@@ -340,27 +300,61 @@ body {
 ===================================================== */
 
 .dados {
-    display: flex;
 
-    align-items: flex-start;
+    display: grid;
 
-    gap: 90px;
+    grid-template-columns: 1fr 1fr;
 
-    margin-bottom: 25px;
+    gap: 14px;
+
+    margin-bottom: 28px;
 }
+
+
+.dado {
+
+    padding: 17px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(40, 40, 40, 0.65),
+            rgba(20, 20, 20, 0.65)
+        );
+
+    transition: 0.3s ease;
+}
+
+
+.dado:hover {
+
+    border-color: rgba(218, 174, 82, 0.4);
+
+    transform: translateY(-2px);
+}
+
 
 .dado h3 {
-    color: #F5F5F5;
 
-    font-size: 18px;
+    font-size: 12px;
 
-    margin-bottom: 7px;
+    font-weight: 500;
+
+    color: #999;
+
+    margin-bottom: 6px;
 }
 
-.dado p {
-    color: #A1A1AA;
 
-    font-size: 15px;
+.dado p {
+
+    font-size: 14px;
+
+    color: #d9ad52;
 }
 
 
@@ -369,203 +363,371 @@ body {
 ===================================================== */
 
 .descricao {
-    max-width: 650px;
 
-    color: #D4D4D8;
+    color: #aaa;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    max-width: 620px;
+}
+
+
+/* =====================================================
+   SEÇÃO INFERIOR
+===================================================== */
+
+.informacoes {
+
+    display: grid;
+
+    grid-template-columns: 1.35fr 0.85fr;
+
+    gap: 18px;
+
+    margin-top: 18px;
+}
+
+
+/* =====================================================
+   CARD DE AVALIAÇÕES
+===================================================== */
+
+.card-avaliacoes {
+    padding: 30px 40px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24, 24, 24, 0.98),
+            rgba(10, 10, 10, 0.98)
+        );
+
+    border: 1px solid rgba(218, 174, 82, 0.35);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35);
+
+    position: relative;
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.titulo-avaliacao {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-bottom: 15px;
+}
+
+.icone-avaliacao {
+    width: 5px;
+    height: 30px;
+
+    display: block;
+
+    background: #dfb454;
+
+    border-radius: 5px;
+
+    color: transparent;
+
+    box-shadow: 0 0 10px rgba(223, 180, 84, 0.25);
+}
+
+.titulo-avaliacao h2 {
+    margin: 0 !important;
+
+    color: #fff;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.titulo-avaliacao h2::before {
+    content: none !important;
+}
+
+
+/* =========================================================
+   NOTA GERAL
+========================================================= */
+
+.nota-geral {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-bottom: 24px;
+}
+
+.nota-geral strong {
+    color: #fff;
+
+    font-size: 31px;
+    font-weight: 500;
+}
+
+.nota-geral .estrelas {
+    display: flex;
+    gap: 7px;
+}
+
+.nota-geral .estrelas span {
+    color: #dfb454;
+
+    font-size: 18px;
+
+    line-height: 1;
+}
+
+.nota-geral small {
+    color: #777;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   COMENTÁRIO DE DESTAQUE
+========================================================= */
+
+.comentario-destaque {
+    padding: 18px 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.035),
+            rgba(255, 255, 255, 0.012)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    border-radius: 15px;
+
+    transition: 0.3s ease;
+}
+
+.comentario-destaque:hover {
+    border-color: rgba(218, 174, 82, 0.35);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(218, 174, 82, 0.06),
+            rgba(255, 255, 255, 0.015)
+        );
+}
+
+
+/* =========================================================
+   CLIENTE
+========================================================= */
+
+.cliente {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 10px;
+}
+
+.cliente img {
+    width: 48px;
+    height: 48px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 1px solid #dfb454;
+
+    background: #222;
+}
+
+.cliente-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.cliente-info h4 {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cliente-info span {
+    color: #777;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   ESTRELAS DO COMENTÁRIO
+========================================================= */
+
+.estrelas-comentario {
+    display: flex;
+    gap: 4px;
+
+    margin-bottom: 10px;
+}
+
+.estrelas-comentario span {
+    color: #dfb454;
 
     font-size: 16px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   TEXTO DO COMENTÁRIO
+========================================================= */
+
+.texto-comentario {
+    margin: 0;
+
+    color: #b7b7b7;
+
+    font-size: 12px;
 
     line-height: 1.7;
 }
 
 
-/* =====================================================
-   CARDS
-===================================================== */
+/* =========================================================
+   BOTÃO VER AVALIAÇÕES
+========================================================= */
 
-.informacoes {
-    position: relative;
+.container-btn-avaliacoes {
+    display: flex;
+    align-items: center;
 
-    z-index: 2;
-
-    width: 100%;
-
-    max-width: 1200px;
-
-    margin: 0 auto;
-
-    display: grid;
-
-    grid-template-columns: 1.5fr 1fr;
-
-    gap: 30px;
+    margin-top: 25px;
 }
-
-.card-avaliacoes,
-.card-orcamento {
-    position: relative;
-
-    background: rgba(11, 11, 12, 0.94);
-
-    border: 1px solid #80631c;
-
-    border-radius: 8px;
-
-    padding: 28px;
-
-    min-height: 285px;
-
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.35);
-}
-
-
-/* =====================================================
-   TÍTULOS DOS CARDS
-===================================================== */
-
-.card-avaliacoes h2,
-.card-orcamento h2 {
-    color: #F5F5F5;
-
-    font-size: 27px;
-
-    margin-bottom: 14px;
-}
-
-
-/* =====================================================
-   NOTA GERAL
-===================================================== */
-
-.nota-geral strong {
-    display: block;
-
-    color: #F2C94C;
-
-    font-size: 32px;
-
-    margin-bottom: 4px;
-}
-
-.estrelas {
-    color: #F2C94C;
-
-    font-size: 25px;
-
-    letter-spacing: 5px;
-
-    margin-bottom: 5px;
-}
-
-.nota-geral small {
-    color: #A1A1AA;
-
-    font-size: 13px;
-}
-
-
-/* =====================================================
-   LINK DE AVALIAÇÕES
-===================================================== */
 
 .ver-avaliacoes {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    text-align: right;
+    gap: 12px;
 
-    margin-top: -25px;
+    padding: 13px 25px;
 
-    color: #D4A72C;
+    background: transparent;
+
+    border: 1px solid #d4a943;
+
+    border-radius: 12px;
+
+    color: #dfb454;
 
     text-decoration: none;
 
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 500;
+
+    transition: 0.3s ease;
+}
+
+.ver-avaliacoes span {
+    font-size: 17px;
 
     transition: 0.3s ease;
 }
 
 .ver-avaliacoes:hover {
-    color: #F2C94C;
+    color: #111;
+
+    background: #dfb454;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(218, 174, 82, 0.20);
+}
+
+.ver-avaliacoes:hover span {
+    transform: translateX(5px);
 }
 
 
 /* =====================================================
-   COMENTÁRIO
+   CARD ORÇAMENTO
 ===================================================== */
 
-.comentario {
-    display: flex;
+.card-orcamento {
 
-    align-items: center;
+    padding: 32px;
 
-    gap: 17px;
+    border-radius: 18px;
 
-    margin-top: 22px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35, 30, 21, 0.98),
+            rgba(15, 15, 15, 0.98)
+        );
 
-    padding: 15px;
-
-    border: 1px solid #3F3F46;
-
-    border-radius: 7px;
-
-    background: rgba(21, 21, 21, 0.85);
-}
-
-.comentario img {
-    width: 55px;
-    height: 55px;
-
-    flex-shrink: 0;
-
-    object-fit: cover;
-
-    border-radius: 50%;
-}
-
-.comentario h4 {
-    color: #F5F5F5;
-
-    font-size: 16px;
-
-    margin-bottom: 5px;
-}
-
-.comentario p {
-    color: #A1A1AA;
-
-    font-size: 14px;
+    border: 1px solid rgba(218, 174, 82, 0.30);
 }
 
 
-/* =====================================================
-   ORÇAMENTO
-===================================================== */
+/* descrição */
 
-.card-orcamento h2 {
-    margin-bottom: 10px;
-}
+.texto-orcamento {
 
-.card-orcamento > p {
-    color: #A1A1AA;
+    color: #aaa;
 
-    font-size: 16px;
+    font-size: 13px;
 
-    line-height: 1.5;
-}
-
-.card-orcamento .texto-orcamento {
-    max-width: 380px;
+    line-height: 1.7;
 
     margin-bottom: 25px;
 }
 
+
+/* formas pagamento */
+
 .card-orcamento h3 {
-    color: #F5F5F5;
 
-    font-size: 18px;
+    font-size: 13px;
 
-    margin-bottom: 7px;
+    font-weight: 500;
+
+    color: #fff;
+
+    margin-bottom: 8px;
+}
+
+
+.card-orcamento > p:last-of-type {
+
+    color: #d0a94f;
+
+    font-size: 12px;
+
+    margin-bottom: 25px;
 }
 
 
@@ -574,228 +736,269 @@ body {
 ===================================================== */
 
 .card-orcamento button {
-    position: absolute;
 
-    right: 28px;
-    bottom: 25px;
+    width: 100%;
 
-    width: 130px;
-    height: 52px;
+    padding: 14px 20px;
 
     border: none;
 
-    border-radius: 7px;
+    border-radius: 9px;
 
-    background: #D4A72C;
+    background:
+        linear-gradient(
+            135deg,
+            #f1cc79,
+            #c99537
+        );
 
-    color: #0B0B0C;
+    color: #151515;
 
-    font-size: 15px;
+    font-family: inherit;
 
-    font-weight: bold;
+    font-size: 13px;
+
+    font-weight: 600;
 
     cursor: pointer;
 
     transition: 0.3s ease;
+
+    box-shadow:
+        0 8px 25px rgba(218, 174, 82, 0.15);
 }
 
+
+.card-orcamento button::after {
+
+    content: " →";
+
+    font-size: 16px;
+}
+
+
 .card-orcamento button:hover {
-    background: #F2C94C;
 
     transform: translateY(-2px);
 
+    filter: brightness(1.08);
+
     box-shadow:
-        0 8px 25px rgba(212, 167, 44, 0.30);
+        0 12px 30px rgba(218, 174, 82, 0.28);
+}
+/* =========================================================
+   INFORMAÇÕES EXTRAS DO ORÇAMENTO
+========================================================= */
+
+.info-orcamento {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    margin: 25px 0;
 }
 
 
-/* =====================================================
-   FOOTER
-===================================================== */
+/* ITEM */
 
-.rodapé {
-    min-height: 65px;
-
-    background: #0B0B0C;
-
-    border-top: 1px solid #80631c;
-
-    padding: 15px 7%;
-
+.item-orcamento {
     display: flex;
-
     align-items: center;
 
-    justify-content: space-between;
+    gap: 14px;
 
-    gap: 20px;
+    padding: 13px 14px;
 
-    color: #A1A1AA;
+    border: 1px solid rgba(255, 255, 255, 0.07);
 
-    font-size: 13px;
-}
+    border-radius: 12px;
 
-.links-footer {
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-}
-
-.links-footer a {
-    color: #D4D4D8;
-
-    text-decoration: none;
+    background: rgba(255, 255, 255, 0.025);
 
     transition: 0.3s ease;
 }
 
-.links-footer a:hover {
-    color: #D4A72C;
-}
+.item-orcamento:hover {
+    border-color: rgba(218, 174, 82, 0.30);
 
-.links-footer span {
-    color: #80631c;
-}
-
-
-/* =====================================================
-   TABLET
-===================================================== */
-
-@media (max-width: 1000px) {
-
-    .topo {
-        padding: 0 5%;
-    }
-
-    .menu {
-        gap: 15px;
-    }
-
-    .detalhes-profissional {
-        padding: 40px 5% 50px;
-    }
-
-    .perfil-profissional {
-        gap: 30px;
-    }
-
-    .imagem-profissional {
-        width: 320px;
-        height: 300px;
-    }
-
-    .informacoes-profissional h1 {
-        font-size: 38px;
-    }
-
-    .dados {
-        gap: 45px;
-    }
-
-    .informacoes {
-        grid-template-columns: 1fr;
-    }
+    background: rgba(218, 174, 82, 0.035);
 }
 
 
-/* =====================================================
-   CELULAR
-===================================================== */
+/* ÍCONE */
 
-@media (max-width: 650px) {
+.item-orcamento .icone {
+    width: 38px;
+    height: 38px;
 
-    .topo {
-        height: 70px;
+    min-width: 38px;
 
-        padding: 0 20px;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    .menu {
-        display: none;
-    }
+    border-radius: 50%;
 
-    .logo-casa {
-        font-size: 32px;
-    }
+    border: 1px solid rgba(218, 174, 82, 0.55);
 
-    .logo-texto strong {
-        font-size: 15px;
-    }
+    color: #dfb454;
 
-    .detalhes-profissional {
-        padding: 30px 20px 40px;
-    }
+    font-size: 12px;
+    font-weight: 600;
 
-    .perfil-profissional {
-        flex-direction: column;
+    background: rgba(218, 174, 82, 0.05);
+}
 
-        align-items: stretch;
 
-        gap: 25px;
-    }
+/* TEXTO */
 
-    .imagem-profissional {
-        width: 100%;
-        height: 280px;
-    }
+.item-orcamento h4 {
+    margin: 0 0 4px;
 
-    .informacoes-profissional h1 {
-        font-size: 34px;
-    }
+    color: #fff;
 
-    .profissao {
-        font-size: 20px;
-    }
+    font-size: 12px;
+    font-weight: 600;
+}
 
-    .dados {
-        flex-direction: column;
+.item-orcamento p {
+    margin: 0;
 
-        gap: 18px;
-    }
+    color: #888;
 
-    .informacoes {
-        grid-template-columns: 1fr;
-    }
+    font-size: 11px;
+}
 
-    .card-avaliacoes,
-    .card-orcamento {
-        padding: 22px;
-    }
+.item-orcamento strong {
+    color: #dfb454;
 
-    .ver-avaliacoes {
-        margin-top: 15px;
+    font-weight: 500;
+}
 
-        text-align: left;
-    }
 
-    .card-orcamento {
-        min-height: 300px;
-    }
+/* =========================================================
+   PAGAMENTO
+========================================================= */
 
-    .card-orcamento button {
-        position: static;
+.pagamento-orcamento {
+    padding-top: 20px;
 
-        width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
 
-        margin-top: 25px;
-    }
+    margin-bottom: 25px;
+}
 
-    .rodapé {
-        padding: 18px 20px;
+.pagamento-orcamento h3 {
+    margin: 0 0 7px;
 
-        flex-direction: column;
+    color: #fff;
 
-        gap: 12px;
+    font-size: 13px;
+}
 
-        text-align: center;
-    }
+.pagamento-orcamento p {
+    margin: 0;
 
-    .links-footer {
-        flex-wrap: wrap;
+    color: #dfb454;
 
-        justify-content: center;
-    }
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BOTÃO
+========================================================= */
+
+.btn-orcamento {
+    width: 100%;
+
+    min-height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0c76a,
+            #d39f32
+        );
+
+    color: #111;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    box-shadow:
+        0 10px 28px rgba(218, 174, 82, 0.18);
+}
+
+.btn-orcamento span {
+    font-size: 18px;
+
+    transition: 0.3s ease;
+}
+
+.btn-orcamento:hover {
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5d17d,
+            #e0ad43
+        );
+
+    box-shadow:
+        0 14px 35px rgba(218, 174, 82, 0.28);
+}
+
+.btn-orcamento:hover span {
+    transform: translateX(5px);
+}
+
+/* ================================================= */
+/* Rodapé */
+.rodape {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 22px 6%;
+    background: #080808;
+    border-top: 1px solid #d4af6a;
+    color: #888888;
+    font-size: 13px;
+    margin-top: 40px;
+}
+
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555555;
+}
+
+.rodape a {
+    color: #d4af6a;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.rodape a:hover {
+    color: #e2c07b;
 }

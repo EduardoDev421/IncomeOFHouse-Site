@@ -121,7 +121,6 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: space-between;
     margin: 100px;
 }
@@ -134,7 +133,7 @@ body {
 .IntroLogin {
     display: flex;
     flex-direction: column;
-    padding: 0 100px 0 20px;
+    padding: 100px 100px 0px 20px;
 }
 
 .IntroLogin h3 {
@@ -153,7 +152,7 @@ body {
 }
 
 .IntroLogin p {
-    color: #d4af6a;
+    color: #a3a3a3;
 }
 
 

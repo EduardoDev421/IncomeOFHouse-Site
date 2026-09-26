@@ -1,6 +1,6 @@
-/* =====================================================
-   RESET
-===================================================== */
+/* =========================================================
+   CONFIGURAÇÃO GERAL
+========================================================= */
 
 * {
     margin: 0;
@@ -8,162 +8,109 @@
     box-sizing: border-box;
 }
 
-
-/* =====================================================
-   BODY
-===================================================== */
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-
-    background: #2d2d2d;
-
-    color: #102c43;
-
     min-height: 100vh;
-
     display: flex;
     flex-direction: column;
+    background: #0b0b0b;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
-/* =====================================================
-   HEADER
-===================================================== */
+/* =========================================================
+   HEADER / MENU
+========================================================= */
 
 .topo {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 74px;
-
-    background: #0b0b0c;
-
-    border-bottom: 1px solid #80631c;
-
+    height: 75px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
-    padding: 0 7%;
+    padding: 0 6%;
+    z-index: 10;
+    background: rgba(10, 10, 10, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
 }
 
 
-/* =====================================================
-   LOGO
-===================================================== */
+/* ---------- Logo ---------- */
+
+.logo {
+    width: 100%;
+    background: transparent;
+}
 
 .logo a {
     display: flex;
     align-items: center;
-
     text-decoration: none;
 }
 
-.logo-casa {
-    color: #d4a72c;
-
-    font-size: 38px;
-
-    margin-right: 8px;
-}
-
-.logo-texto {
-    display: flex;
-    flex-direction: column;
-
-    letter-spacing: 2px;
-}
-
-.logo-texto span {
-    color: #f5f5f5;
-
-    font-size: 11px;
-}
-
-.logo-texto strong {
-    color: #d4a72c;
-
-    font-size: 17px;
-
-    letter-spacing: 3px;
+.logo img {
+    max-width: 70px;
+    height: auto;
+    margin-left: 30px;
 }
 
 
-/* =====================================================
-   MENU
-===================================================== */
+/* ---------- Menu ---------- */
 
 .menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
-
-    gap: 45px;
+    gap: 12px;
 }
 
 .menu a {
-    color: #d4d4d8;
-
+    padding: 12px 20px;
+    color: #ffffff;
     text-decoration: none;
-
     font-size: 14px;
-
-    padding: 9px 15px;
-
-    border: 1px solid transparent;
-
-    border-radius: 6px;
-
-    transition: 0.3s;
+    font-weight: 500;
+    border-radius: 7px;
+    transition: 0.3s ease;
 }
 
 .menu a:hover {
-    color: #d4a72c;
+    background: rgba(255, 255, 255, 0.06);
+    color: #d4af6a;
 }
 
 .menu a.ativo {
-    color: #d4a72c;
-
-    border-color: #80631c;
-
-    background: rgba(212, 167, 44, 0.05);
+    color: #d4af6a;
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    background: rgba(212, 175, 106, 0.08);
 }
 
-
+.BackGround {
+    position: relative;
+    min-height: 100vh;
+    background-image: url("../img/BackGroundPlantasEProfissionais.png");
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
 /* =====================================================
-   LOGIN
+   DETALHES DA PLANTA
 ===================================================== */
 
-.login {
-    color: #d4a72c;
-
-    text-decoration: none;
-}
-
-.icone-login {
-    width: 32px;
-    height: 32px;
-
-    border: 2px solid #d4a72c;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-/* =====================================================
-   ÁREA PRINCIPAL
-===================================================== */
-
-.detalhes {
-    flex: 1;
-
-    width: 100%;
-
-    padding: 45px 60px;
-
-    background: #2d2d2d;
+.Detalheplanta {
+    width: min(1200px, 100%);
+    margin: 100px auto;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
 }
 
 
@@ -171,574 +118,490 @@ body {
    CARD PRINCIPAL
 ===================================================== */
 
-.card-detalhes {
-    width: 100%;
-
-    max-width: 980px;
-
-    min-height: 357px;
-
-    margin: 0 auto;
-
-    padding: 40px 64px;
-
-    background: #d5edf8;
-
-    border: 2px solid #587a9d;
-
-    border-radius: 15px;
-
+.inicioDetalhePlanta {
     display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
 
-    grid-template-columns: 303px 1fr;
+    background: linear-gradient(
+        145deg,
+        rgba(25, 25, 25, 0.98),
+        rgba(10, 10, 10, 0.98)
+    );
 
-    gap: 30px;
+    border: 1px solid rgba(218, 174, 82, 0.45);
+    border-radius: 22px;
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(218, 174, 82, 0.06);
 }
 
 
 /* =====================================================
-   IMAGEM DA PLANTA
+   IMAGEM PRINCIPAL
 ===================================================== */
 
-.imagem-planta {
-    width: 303px;
-    height: 283px;
-
-    border: 1px solid #7892a8;
-
-    background: #cfe7f2;
-
+.inicioDetalhePlanta > div:first-child {
+    min-height: 500px;
+    position: relative;
     overflow: hidden;
+    background: #151515;
 }
 
-.imagem-planta img {
+.inicioDetalhePlanta > div:first-child img {
     width: 100%;
     height: 100%;
-
-    object-fit: cover;
+    min-height: 500px;
 
     display: block;
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+.inicioDetalhePlanta > div:first-child:hover img {
+    transform: scale(1.03);
+}
+
+
+/* efeito dourado sobre a imagem */
+
+.inicioDetalhePlanta > div:first-child::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.05),
+        transparent 60%,
+        rgba(218, 174, 82, 0.08)
+    );
+
+    pointer-events: none;
 }
 
 
 /* =====================================================
-   INFORMAÇÕES
+   ÁREA DAS INFORMAÇÕES
 ===================================================== */
 
-.info-planta {
-    color: #102c43;
-}
-
-.info-planta h1 {
-    font-size: 32px;
-
-    line-height: 1.1;
-
-    margin-bottom: 10px;
-}
-
-.info-planta h2 {
-    font-size: 20px;
-
-    margin-bottom: 14px;
-}
-
-.descricao {
-    font-size: 16px;
-
-    line-height: 1.48;
-
-    margin-bottom: 8px;
-}
-
-
-/* =====================================================
-   CARACTERÍSTICAS
-===================================================== */
-
-.caracteristicas {
-    width: 100%;
-
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    background: rgba(183, 211, 224, 0.8);
-
-    border: 1px solid #587a8f;
-
-    border-radius: 4px;
-
-    padding: 7px 12px;
-}
-
-.item {
-    min-height: 43px;
-
+.TextiniDetalhe {
+    padding: 42px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.item h3 {
-    color: #102c43;
 
-    font-size: 13px;
+/* título */
 
-    margin-bottom: 5px;
-}
+.TextiniDetalhe h1 {
+    margin: 0 0 8px;
 
-.item p {
-    color: #38566b;
-
-    font-size: 13px;
-}
-
-
-/* =====================================================
-   BOTÃO PRINCIPAL
-===================================================== */
-
-.info-planta button {
-    margin-top: 14px;
-
-    width: 145px;
-
-    height: 42px;
-
-    border: none;
-
-    border-radius: 4px;
-
-    background: #587586;
-
-    color: white;
-
-    font-size: 14px;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.info-planta button:hover {
-    background: #3f6172;
-
-    transform: translateY(-1px);
-}
-
-
-/* =====================================================
-   PARTE INFERIOR
-===================================================== */
-
-.parte-inferior {
-    width: 100%;
-
-    max-width: 980px;
-
-    margin: 33px auto 0;
-
-    display: grid;
-
-    grid-template-columns: 1.55fr 1fr;
-
-    gap: 50px;
-}
-
-
-/* =====================================================
-   CARDS INFERIORES
-===================================================== */
-
-.card-avaliacao,
-.card-orcamento {
-    min-height: 261px;
-
-    padding: 25px 26px;
-
-    background: #bdd5e1;
-
-    border: 1px solid #587a8f;
-
-    border-radius: 4px;
-
-    position: relative;
-}
-
-
-/* =====================================================
-   TÍTULOS
-===================================================== */
-
-.card-avaliacao h2,
-.card-orcamento h2 {
-    color: #28445a;
-
-    font-size: 21px;
-
-    margin-bottom: 11px;
-}
-
-
-/* =====================================================
-   AVALIAÇÃO
-===================================================== */
-
-.nota {
-    display: block;
-
-    color: #111f2c;
-
-    font-size: 22px;
-
-    margin-bottom: 2px;
-}
-
-.estrelas {
-    color: #173b55;
-
-    font-size: 25px;
-
-    letter-spacing: 2px;
-
-    line-height: 1;
-
-    margin-bottom: 8px;
-}
-
-.quantidade {
-    color: #102c43;
-
-    font-size: 12px;
-}
-
-
-/* =====================================================
-   LINK DE COMENTÁRIOS
-===================================================== */
-
-.ver-comentarios {
-    position: absolute;
-
-    top: 126px;
-
-    right: 34px;
-
-    color: #28445a;
-
-    font-size: 9px;
-
-    text-decoration: none;
-}
-
-.ver-comentarios:hover {
-    text-decoration: underline;
-}
-
-
-/* =====================================================
-   COMENTÁRIO
-===================================================== */
-
-.comentario {
-    width: 100%;
-
-    height: 81px;
-
-    margin-top: 8px;
-
-    padding: 14px 16px;
-
-    background: #d5edf8;
-
-    border-radius: 4px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-}
-
-.comentario img {
-    width: 52px;
-    height: 48px;
-
-    object-fit: cover;
-
-    border: 1px solid #587a8f;
-}
-
-.comentario div {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-}
-
-.comentario strong {
-    color: #102c43;
-
-    font-size: 14px;
-}
-
-.comentario span {
-    color: #5a7182;
-
-    font-size: 12px;
-}
-
-
-/* =====================================================
-   ORÇAMENTO
-===================================================== */
-
-.card-orcamento h2 {
-    margin-bottom: 8px;
-}
-
-.card-orcamento > p {
-    color: #466276;
-
-    font-size: 16px;
-
+    font-size: 32px;
     font-weight: 600;
+    letter-spacing: -0.5px;
 
-    line-height: 1.4;
-
-    max-width: 300px;
-
-    margin-bottom: 21px;
-}
-
-.card-orcamento h3 {
-    color: #28445a;
-
-    font-size: 15px;
-
-    margin-bottom: 12px;
-}
-
-.card-orcamento > span {
-    color: #557083;
-
-    font-size: 15px;
+    color: #ffffff;
 }
 
 
-/* =====================================================
-   BOTÃO ORÇAMENTO
-===================================================== */
+/* descrição */
 
-.card-orcamento button {
-    position: absolute;
+.TextiniDetalhe > p {
+    margin: 0 0 30px;
 
-    right: 12px;
-
-    bottom: 23px;
-
-    width: 96px;
-
-    height: 45px;
-
-    border: none;
-
-    border-radius: 4px;
-
-    background: #587586;
-
-    color: white;
-
+    color: #bdbdbd;
     font-size: 14px;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.card-orcamento button:hover {
-    background: #3f6172;
-
-    transform: translateY(-1px);
+    line-height: 1.7;
 }
 
 
 /* =====================================================
-   FOOTER
+   GRID DOS CARDS
 ===================================================== */
 
-.rodapé {
-    min-height: 65px;
-
-    background: #0b0b0c;
-
-    border-top: 1px solid #80631c;
-
-    padding: 15px 7%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    color: #a1a1aa;
-
-    font-size: 13px;
+.Cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
 }
 
-.links-footer {
+
+/* card individual */
+
+.Cards .card {
+    min-height: 88px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    background: linear-gradient(
+        145deg,
+        rgba(35, 35, 35, 0.85),
+        rgba(18, 18, 18, 0.85)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 13px;
+    transition:
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+
+/* hover */
+
+.Cards .card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(218, 174, 82, 0.55);
+    background: linear-gradient(
+        145deg,
+        rgba(42, 37, 27, 0.9),
+        rgba(20, 20, 20, 0.95)
+    );
+}
+
+
+/* =====================================================
+   ÍCONE DOS CARDS
+===================================================== */
+
+.Cards .card > div {
+    grid-row: 1 / 3;
+    width: 42px;
+    height: 42px;
     display: flex;
-
     align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(218, 174, 82, 0.65);
+    background: rgba(218, 174, 82, 0.06);
+}
 
+
+.Cards .card > div img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   TÍTULO DO CARD
+===================================================== */
+
+.Cards .card h2 {
+    margin: 2px 0 3px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #eeeeee;
+}
+
+
+/* =====================================================
+   VALOR DO CARD
+===================================================== */
+
+.Cards .card p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 400;
+    color: #d9af52;
+}
+
+
+/* =====================================================
+   BOTÃO SOLICITAR PROJETO
+===================================================== */
+
+.BtnSolicitar {
+    margin-top: 25px;
+}
+
+
+.BtnSolicitar button {
+    position: relative;
+    padding: 13px 27px;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(
+        135deg,
+        #f2cc78,
+        #c99638
+    );
+    color: #161616;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow:
+        0 8px 25px rgba(218, 174, 82, 0.18);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
+}
+
+
+.BtnSolicitar button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow:
+        0 12px 30px rgba(218, 174, 82, 0.3);
+}
+
+/* =====================================================
+   PARTE INFERIOR DO CARD
+===================================================== */
+
+.infProjeto {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
     gap: 18px;
 }
 
-.links-footer a {
-    color: #d4d4d8;
 
+/* =====================================================
+   SOBRE + DESTAQUES
+===================================================== */
+
+.InfSobre {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+
+/* caixas */
+
+.InfSobre > div {
+    padding: 28px;
+    background: linear-gradient(
+        145deg,
+        rgba(25, 25, 25, 0.95),
+        rgba(13, 13, 13, 0.95)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 17px;
+}
+
+
+/* títulos */
+
+.InfSobre h2,
+.Avaliacao > h2 {
+    margin: 0 0 18px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+
+/* detalhe dourado antes do título */
+
+.InfSobre h2::before,
+.Avaliacao > h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+    border-radius: 5px;
+    background: #d9af52;
+}
+
+
+/* texto */
+
+.Sobre p {
+    margin: 0;
+    color: #aaa;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   DESTAQUES
+===================================================== */
+
+.Destaque p {
+    position: relative;
+    margin: 0 0 13px;
+    padding-left: 22px;
+    color: #cfcfcf;
+    font-size: 13px;
+}
+
+
+/* check */
+
+.Destaque p::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #d9af52;
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   AVALIAÇÕES
+===================================================== */
+
+.Avaliacao {
+    padding: 28px;
+    background: linear-gradient(
+        145deg,
+        rgba(28, 28, 28, 0.98),
+        rgba(13, 13, 13, 0.98)
+    );
+    border: 1px solid rgba(218, 174, 82, 0.28);
+    border-radius: 17px;
+}
+
+
+/* =====================================================
+   CARD DA AVALIAÇÃO
+===================================================== */
+
+.CardAvaliacao {
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 13px;
+}
+
+
+/* usuário */
+
+.CardAvaliacao > div {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+
+/* foto */
+
+.CardAvaliacao > div img {
+    grid-row: 1 / 3;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(218, 174, 82, 0.5);
+}
+
+
+/* nome */
+
+.CardAvaliacao > div h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #fff;
+}
+
+
+/* data */
+
+.CardAvaliacao > div p {
+    margin: 2px 0 0;
+    font-size: 11px;
+    color: #777;
+}
+
+
+/* =====================================================
+   ESTRELAS
+===================================================== */
+
+.CardAvaliacao > h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: #e4b64f;
+}
+
+
+/* comentário */
+
+.CardAvaliacao > p {
+    margin: 0;
+    color: #bdbdbd;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   BOTÃO VER MAIS AVALIAÇÕES
+===================================================== */
+
+.BtnAvaliacao {
+    margin-top: 18px;
+}
+
+.BtnAvaliacao a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 18px;
+    border: 1px solid #cda34e;
+    border-radius: 8px;
+    color: #dcb45d;
     text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.links-footer a:hover {
-    color: #d4a72c;
+.BtnAvaliacao a:hover {
+    background: #d9af52;
+    color: #111;
+    box-shadow:
+        0 8px 20px rgba(218, 174, 82, 0.2);
+}
+/* ================================================= */
+/* Rodapé */
+.rodape {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 22px 6%;
+    background: #080808;
+    border-top: 1px solid #d4af6a;
+    color: #888888;
+    font-size: 13px;
+    margin-top: 40px;
 }
 
-.links-footer span {
-    color: #80631c;
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555555;
 }
 
-
-/* =====================================================
-   TABLET
-===================================================== */
-
-@media (max-width: 850px) {
-
-    .detalhes {
-        padding: 30px;
-    }
-
-    .card-detalhes {
-        padding: 30px;
-
-        grid-template-columns: 1fr;
-
-        gap: 25px;
-    }
-
-    .imagem-planta {
-        width: 100%;
-        max-width: 400px;
-
-        margin: 0 auto;
-    }
-
-    .parte-inferior {
-        grid-template-columns: 1fr;
-
-        gap: 25px;
-    }
+.rodape a {
+    color: #d4af6a;
+    text-decoration: none;
+    transition: 0.3s ease;
 }
 
-
-/* =====================================================
-   CELULAR
-===================================================== */
-
-@media (max-width: 550px) {
-
-    .topo {
-        height: 70px;
-
-        padding: 0 20px;
-    }
-
-    .menu {
-        display: none;
-    }
-
-    .detalhes {
-        padding: 15px;
-    }
-
-    .card-detalhes {
-        padding: 20px;
-
-        border-radius: 10px;
-    }
-
-    .info-planta h1 {
-        font-size: 27px;
-    }
-
-    .info-planta h2 {
-        font-size: 18px;
-    }
-
-    .descricao {
-        font-size: 14px;
-    }
-
-    .caracteristicas {
-        grid-template-columns: repeat(2, 1fr);
-
-        gap: 8px;
-    }
-
-    .info-planta button {
-        width: 100%;
-    }
-
-    .card-avaliacao,
-    .card-orcamento {
-        padding: 20px;
-    }
-
-    .ver-comentarios {
-        position: static;
-
-        display: block;
-
-        text-align: right;
-
-        margin-top: 8px;
-    }
-
-    .comentario {
-        margin-top: 10px;
-    }
-
-    .card-orcamento {
-        min-height: 280px;
-    }
-
-    .card-orcamento button {
-        position: static;
-
-        display: block;
-
-        width: 100%;
-
-        margin-top: 30px;
-    }
-
-    .rodapé {
-        flex-direction: column;
-
-        gap: 12px;
-
-        text-align: center;
-
-        padding: 18px 20px;
-    }
-
-    .links-footer {
-        flex-wrap: wrap;
-
-        justify-content: center;
-    }
+.rodape a:hover {
+    color: #e2c07b;
 }

@@ -25,7 +25,8 @@
         </nav>
         <div class="iconelogin">
             <a href="./Login.html">
-                <img src="../img/icones/IconePerfil.svg" alt="iconeLogin" href="../Front-End/pages/Login.html"  class="iconelogin">
+                <img src="../img/icones/IconePerfil.svg" alt="iconeLogin" href="../Front-End/pages/Login.html"
+                    class="iconelogin">
             </a>
         </div>
     </header>
@@ -53,11 +54,44 @@
                     </label>
                     <select id="profissao">
                         <option value="">Todas</option>
-                        <option value="Arquiteto">Arquiteto</option>
-                        <option value="Arquiteta">Arquiteta</option>
-                        <option value="Engenheiro Civil">Engenheiro Civil</option>
-                        <option value="Designer de Interiores">Designer de Interiores</option>
-                        <option value="Paisagista">Paisagista</option>
+                        <option value="arquiteto">Arquiteto(a)</option>
+                        <option value="arquiteto-urbanista">Arquiteto(a) e Urbanista</option>
+                        <option value="urbanista">Urbanista</option>
+                        <option value="engenheiro-civil">Engenheiro(a) Civil</option>
+                        <option value="engenheiro-eletrico">Engenheiro(a) Eletricista</option>
+                        <option value="engenheiro-mecanico">Engenheiro(a) Mecânico(a)</option>
+                        <option value="engenheiro-sanitarista">Engenheiro(a) Sanitarista</option>
+                        <option value="engenheiro-ambiental">Engenheiro(a) Ambiental</option>
+                        <option value="designer-de-interiores">Designer de Interiores</option>
+                        <option value="desenhista-projetista">Desenhista Projetista</option>
+                        <option value="desenhista-cadista">Desenhista CAD</option>
+                        <option value="projetista-arquitetonico">Projetista Arquitetônico</option>
+                        <option value="projetista-de-edificacoes">Projetista de Edificações</option>
+                        <option value="tecnico-em-edificacoes">Técnico(a) em Edificações</option>
+                        <option value="modelador-3d">Modelador(a) 3D</option>
+                        <option value="artista-3d">Artista 3D</option>
+                        <option value="renderizador-3d">Renderizador(a) 3D</option>
+                        <option value="especialista-bim">Especialista BIM</option>
+                        <option value="coordenador-bim">Coordenador(a) BIM</option>
+                        <option value="projetista-eletrico">Projetista Elétrico</option>
+                        <option value="projetista-hidraulico">Projetista Hidráulico</option>
+                        <option value="projetista-estrutural">Projetista Estrutural</option>
+                        <option value="projetista-sanitario">Projetista Sanitário</option>
+                        <option value="projetista-de-incendio">Projetista de Prevenção contra Incêndio</option>
+                        <option value="projetista-de-climatizacao">Projetista de Climatização</option>
+                        <option value="calculista-estrutural">Calculista Estrutural</option>
+                        <option value="tecnico-em-construcao">Técnico(a) em Construção Civil</option>
+                        <option value="tecnico-em-estruturas">Técnico(a) em Estruturas</option>
+                        <option value="topografo">Topógrafo(a)</option>
+                        <option value="tecnico-em-topografia">Técnico(a) em Topografia</option>
+                        <option value="agrimensor">Agrimensor(a)</option>
+                        <option value="paisagista">Paisagista</option>
+                        <option value="projetista-de-paisagismo">Projetista de Paisagismo</option>
+                        <option value="planejador-de-obras">Planejador(a) de Obras</option>
+                        <option value="gestor-de-projetos">Gestor(a) de Projetos</option>
+                        <option value="compatibilizador-de-projetos">Compatibilizador(a) de Projetos</option>
+                        <option value="consultor-em-arquitetura">Consultor(a) em Arquitetura</option>
+                        <option value="consultor-em-projetos">Consultor(a) em Projetos</option>
                     </select>
                 </div>
 
@@ -121,7 +155,8 @@
                 <div class="Campo">
                     <label for="avaliacao">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                            <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z" /> avaliacao
+                            <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z" />
+                            avaliacao
                         </svg>
                     </label>
                     <select id="avaliacao">
@@ -132,9 +167,13 @@
                         <option value="4.7">4.7</option>
                     </select>
                 </div>
-
+            </div>
+            <div class="Pesquisar">
                 <button id="btnPesquisar" class="BtnPesquisar">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4-4" /></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M21 21l-4-4" />
+                    </svg>
                     Pesquisar
                 </button>
             </div>
@@ -145,7 +184,10 @@
                 <div class="ProfissionalImg">
                     <img src="" alt="Foto do Profissional">
                     <button class="CardFavorito" aria-label="Favoritar">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.6-10-9.2C0.3 8 2 4.5 5.6 4A5 5 0 0112 6.5 5 5 0 0118.4 4C22 4.5 23.7 8 22 11.8 19.5 16.4 12 21 12 21z" /></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path
+                                d="M12 21s-7.5-4.6-10-9.2C0.3 8 2 4.5 5.6 4A5 5 0 0112 6.5 5 5 0 0118.4 4C22 4.5 23.7 8 22 11.8 19.5 16.4 12 21 12 21z" />
+                        </svg>
                     </button>
                 </div>
                 <div class="CardProfissionalConteudo">
@@ -180,4 +222,5 @@
         </div>
     </footer>
 </body>
+
 </html>
