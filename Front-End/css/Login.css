@@ -120,9 +120,12 @@ body {
     position: relative;
     min-height: 100vh;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: space-between;
-    margin: 100px;
+    gap: 40px;
+    padding: 80px 5%;
+    margin: 0; 
 }
 
 
@@ -133,7 +136,8 @@ body {
 .IntroLogin {
     display: flex;
     flex-direction: column;
-    padding: 100px 100px 0px 20px;
+    padding: 50px 100px 0 20px;   /* removi o padding-top de 100px */
+    flex: 1 1 400px;
 }
 
 .IntroLogin h3 {

@@ -121,8 +121,12 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     justify-content: space-between;
-    margin: 100px;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 80px 5%;
+    margin: 0;
 }
 
 
@@ -133,7 +137,9 @@ body {
 .IntroCadastro {
     display: flex;
     flex-direction: column;
-    padding: 100px 100px 0px 20px;
+    flex: 1 1 380px;
+    min-width: 300px;
+    padding: 0 40px 0 20px;
 }
 
 .IntroCadastro h3 {
@@ -204,15 +210,17 @@ body {
 ========================================================= */
 
 .FCadastro {
-    width: 50%;
+    flex: 1 1 460px;
+    min-width: 420px;          /* nunca fica menor que isso, evita o squish */
+    max-width: 500px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 30px;
     background-color: #0a0a0a;
     border: 2px solid #cda432;
     border-radius: 20px;
-    height: fit-content; 
-    align-self: center;
+    height: fit-content;
 }
 
 

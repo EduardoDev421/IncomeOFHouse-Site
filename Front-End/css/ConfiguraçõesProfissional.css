@@ -1,6 +1,10 @@
-/* =========================
-   RESET
-========================= */
+
+/* =========================================================
+   CONFIGURAÇÕES DO PROFISSIONAL
+   Layout corrigido - Income Of House
+========================================================= */
+
+/* CONFIGURAÇÃO GERAL */
 
 * {
     margin: 0;
@@ -8,110 +12,108 @@
     box-sizing: border-box;
 }
 
-html,
-body {
-    width: 100%;
-    min-height: 100%;
+html {
+    scroll-behavior: smooth;
 }
 
 body {
+    width: 100%;
+    min-height: 100vh;
+
     font-family: Arial, Helvetica, sans-serif;
+
     background: #080a0b;
     color: #eeeeee;
 }
 
 
-/* =========================
-   CORES
-========================= */
-
-:root {
-    --dourado: #d5ad32;
-    --dourado-claro: #f0ca4c;
-    --fundo-card: rgba(17, 20, 21, 0.94);
-    --fundo-card-2: rgba(22, 25, 26, 0.96);
-    --borda: rgba(255, 255, 255, 0.10);
-    --texto: #eeeeee;
-    --texto-secundario: #a8abad;
-}
-
-
-/* =========================
+/* =========================================================
    CABEÇALHO
-========================= */
+========================================================= */
 
 .topo {
     width: 100%;
-    height: 84px;
+    height: 75px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 0 7.5%;
-
-    background: rgba(7, 9, 10, 0.97);
-    border-bottom: 1px solid rgba(213, 173, 50, 0.25);
+    padding: 0 6%;
 
     position: relative;
     z-index: 10;
+
+    background: rgba(8, 8, 8, 0.92);
+
+    border-bottom: 1px solid rgba(212, 166, 58, 0.25);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
-
-/* Logo */
-
 .logo {
-    height: 100%;
     display: flex;
     align-items: center;
 }
 
 .logo img {
-    width: 78px;
+    width: 75px;
     height: auto;
     object-fit: contain;
 }
 
-
-/* Menu superior */
-
 .menu {
     display: flex;
     align-items: center;
-    gap: 55px;
-    margin-right: 13%;
+    justify-content: center;
+
+    gap: 32px;
 }
 
 .menu a {
     color: #eeeeee;
+
     text-decoration: none;
-    font-size: 14px;
+
+    font-size: 13px;
     font-weight: 500;
 
-    transition: 0.25s ease;
+    transition: 0.3s ease;
 }
 
 .menu a:hover {
-    color: var(--dourado-claro);
+    color: #d4a63a;
+}
+
+.iconelogin {
+    display: flex;
+    align-items: center;
+}
+
+.iconelogin img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
 }
 
 
-/* =========================
+/* =========================================================
    FUNDO PRINCIPAL
-========================= */
+========================================================= */
 
 .BackGround {
     width: 100%;
-    min-height: calc(100vh - 84px);
+    min-height: calc(100vh - 75px);
 
-    padding: 24px 5% 30px;
+    padding: 28px 4% 40px;
 
     background:
         linear-gradient(
-            rgba(5, 7, 8, 0.78),
-            rgba(5, 7, 8, 0.88)
+            rgba(5, 7, 8, 0.76),
+            rgba(5, 7, 8, 0.90)
         ),
-        url("../img/fundo-casa.png");
+        url("../img/BackgroundFundo.png");
 
     background-size: cover;
     background-position: center;
@@ -119,141 +121,168 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    CONTAINER PRINCIPAL
-========================= */
+========================================================= */
 
 .container {
     width: 100%;
-    max-width: 1450px;
+    max-width: 1100px;
+
     margin: 0 auto;
 
     display: flex;
-    align-items: flex-start;
-    gap: 28px;
+    align-items: stretch;
+
+    gap: 12px;
 }
 
 
-/* =========================
+/* =========================================================
    MENU LATERAL
-========================= */
+========================================================= */
 
 .menu-lateral {
-    width: 220px;
-    min-width: 220px;
+    width: 178px;
+    min-width: 178px;
 
-    background: rgba(20, 23, 24, 0.96);
+    padding: 10px;
 
-    border: 1px solid var(--borda);
+    background: #111112;
+
+    border: 1px solid #29292b;
     border-radius: 10px;
 
-    overflow: hidden;
-
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    align-self: stretch;
 }
 
 .menu-lateral ul {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding: 0;
+    margin: 0;
+
     list-style: none;
-    width: 100%;
 }
 
 .menu-lateral li {
     width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.menu-lateral li:last-child {
-    border-bottom: none;
-}
-
-.menu-lateral a {
-    min-height: 48px;
-
-    padding: 10px 14px;
+.menu-lateral li a {
+    width: 100%;
+    min-height: 29px;
 
     display: flex;
     align-items: center;
-    gap: 12px;
 
-    color: #dedede;
+    padding: 7px 9px;
+
+    gap: 8px;
+
+    color: #eeeeee;
+    background: #1c1c1e;
+
+    border: 1px solid transparent;
+    border-radius: 6px;
+
     text-decoration: none;
 
-    font-size: 13px;
+    font-size: 10px;
 
     transition: 0.25s ease;
 }
 
-.menu-lateral a:hover {
-    background: rgba(213, 173, 50, 0.10);
-    color: var(--dourado-claro);
-}
+.menu-lateral li a img {
+    width: 15px;
+    height: 15px;
 
-.menu-lateral img {
-    width: 17px;
-    height: 17px;
     object-fit: contain;
+    flex-shrink: 0;
 }
 
-.menu-lateral .ativo a {
-    color: var(--dourado-claro);
+.menu-lateral li.ativo a {
+    color: #d4a63a;
 
-    background: rgba(213, 173, 50, 0.08);
+    background: #29231a;
 
-    border: 1px solid rgba(213, 173, 50, 0.65);
+    border-color: #59431f;
+}
 
-    border-radius: 5px;
+.menu-lateral li:hover a {
+    color: #d4a63a;
+
+    background: #302718;
+
+    border-color: #59431f;
+}
+
+.menu-lateral li:last-child {
+    margin-top: 6px;
+    padding-top: 7px;
+
+    border-top: 1px solid #292929;
 }
 
 
-/* =========================
+/* =========================================================
    CONTEÚDO
-========================= */
+========================================================= */
 
 .conteudo {
     flex: 1;
     min-width: 0;
 
-    background: rgba(13, 16, 17, 0.88);
+    padding: 18px 20px 20px;
 
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: #111111;
+
+    border: 1px solid #29292b;
     border-radius: 10px;
 
-    padding: 25px 26px 28px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-
-/* Título */
-
 .conteudo > h1 {
-    font-size: 23px;
+    color: #ffffff;
+
+    font-size: 20px;
     font-weight: 600;
 
-    color: #eeeeee;
-
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .conteudo > h4 {
-    font-size: 12px;
+    color: #a8abad;
+
+    font-size: 10px;
     font-weight: 400;
 
-    color: var(--texto-secundario);
+    padding-bottom: 12px;
 
-    padding-bottom: 16px;
-
-    border-bottom: 2px solid var(--dourado);
+    border-bottom: 1px solid #d4a63a;
 }
 
 
-/* =========================
-   ÁREA DOS CARDS
-========================= */
+/* =========================================================
+   GRID PRINCIPAL DOS CARDS
+========================================================= */
 
 .Config {
     width: 100%;
-    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-top: 15px;
+    padding: 0;
+
+    border-top: none;
 }
 
 
@@ -261,39 +290,47 @@ body {
 
 .ConfigSN,
 .ConfigCPF {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    width: 100%;
 
-    margin-bottom: 18px;
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin: 0;
 }
 
 
-/* =========================
+/* =========================================================
    CARDS
-========================= */
+========================================================= */
 
 .Segurança,
 .notificação,
+.ConfigProfissional,
 .ConfigProfissionail,
 .PerfilProfissional,
 .Financeiro,
 .Privacidade,
 .CentralAjuda {
-    background: var(--fundo-card);
+    width: 100%;
+    min-width: 0;
 
-    border: 1px solid var(--borda);
-    border-radius: 9px;
+    background: #141414;
+
+    border: 1px solid #292929;
+    border-radius: 8px;
 
     overflow: hidden;
 
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 
-/* =========================
-   TÍTULOS DOS CARDS
-========================= */
+/* =========================================================
+   TÍTULOS
+========================================================= */
 
 .TituloSegurança,
 .TituloNotificação,
@@ -302,15 +339,16 @@ body {
 .TituloFinanceiro,
 .TituloPrivacidade,
 .TituloCentralAjuda {
-    min-height: 62px;
-
-    padding: 13px 18px;
+    min-height: 38px;
 
     display: flex;
     align-items: center;
-    gap: 13px;
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 9px;
+
+    padding: 9px 12px;
+
+    border-bottom: 1px solid #292929;
 }
 
 .TituloSegurança img,
@@ -320,8 +358,8 @@ body {
 .TituloFinanceiro img,
 .TituloPrivacidade img,
 .TituloCentralAjuda img {
-    width: 25px;
-    height: 25px;
+    width: 17px;
+    height: 17px;
 
     object-fit: contain;
 }
@@ -333,15 +371,16 @@ body {
 .TituloFinanceiro h2,
 .TituloPrivacidade h2,
 .TituloCentralAjuda h2 {
-    font-size: 15px;
+    color: #ffffff;
+
+    font-size: 11px;
     font-weight: 600;
-    color: #eeeeee;
 }
 
 
-/* =========================
-   ITENS DE CONFIGURAÇÃO
-========================= */
+/* =========================================================
+   ITENS INTERNOS
+========================================================= */
 
 .seguranças,
 .notificações,
@@ -352,19 +391,22 @@ body {
 .PrivacidadesU,
 .CentralAjudas,
 .CentralAjudaU {
-    min-height: 68px;
+    width: 100%;
+    min-height: 45px;
 
     display: flex;
     align-items: center;
 
-    padding: 10px 17px;
+    gap: 8px;
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 8px 12px;
+
+    border-bottom: 1px solid #242424;
 
     transition: background 0.2s ease;
 }
 
-.segaranças:last-child,
+.seguranças:last-child,
 .notificações:last-child,
 .ConfigProfissionais:last-child,
 .PerfilProfissionais:last-child,
@@ -376,11 +418,7 @@ body {
     border-bottom: none;
 }
 
-
-/* Hover */
-
-.segunranças:hover,
-.seganças:hover,
+.seguranças:hover,
 .notificações:hover,
 .ConfigProfissionais:hover,
 .PerfilProfissionais:hover,
@@ -393,7 +431,9 @@ body {
 }
 
 
-/* Ícones dos itens */
+/* =========================================================
+   ÍCONES DOS ITENS
+========================================================= */
 
 .seguranças > img,
 .notificações > img,
@@ -404,8 +444,8 @@ body {
 .PrivacidadesU > img,
 .CentralAjudas > img,
 .CentralAjudaU > img {
-    width: 21px;
-    height: 21px;
+    width: 16px;
+    height: 16px;
 
     object-fit: contain;
 
@@ -413,9 +453,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    TEXTOS
-========================= */
+========================================================= */
 
 .SegurançaText,
 .notificaçõesText,
@@ -425,10 +465,9 @@ body {
 .PrivacidadesText,
 .CentralAjudasText {
     flex: 1;
-
-    margin-left: 13px;
-
     min-width: 0;
+
+    margin-left: 4px;
 }
 
 .SegurançaText h3,
@@ -440,10 +479,10 @@ body {
 .CentralAjudasText h3 {
     color: #e7e7e7;
 
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
 
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 }
 
 .SegurançaText p,
@@ -455,28 +494,30 @@ body {
 .CentralAjudasText p {
     color: #8f9497;
 
-    font-size: 10px;
+    font-size: 8px;
     line-height: 1.35;
 }
 
 
-/* =========================
+/* =========================================================
    SETA
-========================= */
+========================================================= */
 
 .seta {
+    flex-shrink: 0;
+
     color: #92979a;
 
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 300;
 
-    margin-left: 10px;
+    margin-left: 5px;
 
     transition: 0.2s ease;
 }
 
-.segunranças:hover .seta,
 .seguranças:hover .seta,
+.notificações:hover .seta,
 .ConfigProfissionais:hover .seta,
 .PerfilProfissionais:hover .seta,
 .Financeiros:hover .seta,
@@ -484,20 +525,20 @@ body {
 .PrivacidadesU:hover .seta,
 .CentralAjudas:hover .seta,
 .CentralAjudaU:hover .seta {
-    color: var(--dourado-claro);
+    color: #f0ca4c;
     transform: translateX(3px);
 }
 
 
-/* =========================
+/* =========================================================
    SWITCH
-========================= */
+========================================================= */
 
 .switch {
     position: relative;
 
-    width: 43px;
-    height: 23px;
+    width: 30px;
+    height: 17px;
 
     display: inline-block;
 
@@ -528,8 +569,8 @@ body {
 
     position: absolute;
 
-    width: 17px;
-    height: 17px;
+    width: 11px;
+    height: 11px;
 
     left: 3px;
     top: 3px;
@@ -550,55 +591,61 @@ body {
 }
 
 .switch input:checked + .slider::before {
-    transform: translateX(20px);
+    transform: translateX(13px);
 }
 
 
-/* =========================
-   SEGUNDA PARTE DOS CARDS
-========================= */
-
-.ConfigCPF {
-    align-items: start;
-}
-
-
-/* =========================
-   PRIVACIDADE E AJUDA
-========================= */
+/* =========================================================
+   PRIVACIDADE E CENTRAL DE AJUDA
+========================================================= */
 
 .Privacidade,
 .CentralAjuda {
     width: 100%;
-    margin-bottom: 18px;
+
+    margin: 0 0 12px;
+}
+
+.CentralAjuda {
+    padding: 0;
+}
+
+.CentralAjudasCard {
+    display: flex;
+    flex-direction: row;
+
+    gap: 0;
+}
+
+.CentralAjudas,
+.CentralAjudaU {
+    flex: 1;
+
+    padding: 10px 12px;
+
+    border-right: 1px solid #292929;
+}
+
+.CentralAjudaU {
+    border-right: none;
 }
 
 
-/* =========================
-   ITEM EXCLUIR CONTA
-========================= */
-
-.PrivacidadesU {
-    border-bottom: none;
-}
-
-.PrivacidadesU img {
-    opacity: 0.9;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
+/* =========================================================
+   RODAPÉ
+========================================================= */
 
 .rodape {
+    width: 100%;
     min-height: 55px;
 
-    padding: 0 5%;
+    padding: 15px 5%;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    gap: 20px;
 
     background: #080a0b;
 
@@ -617,68 +664,57 @@ body {
 
 .RodapeLinks a {
     color: #7e8385;
+
     text-decoration: none;
 
     transition: 0.2s ease;
 }
 
 .RodapeLinks a:hover {
-    color: var(--dourado-claro);
+    color: #f0ca4c;
 }
 
 
-/* =========================
+/* =========================================================
    RESPONSIVIDADE
-========================= */
+========================================================= */
 
 @media (max-width: 1100px) {
 
-    .topo {
-        padding: 0 4%;
-    }
-
-    .menu {
-        gap: 30px;
-        margin-right: 5%;
-    }
-
-    .BackGround {
-        padding: 20px 3%;
-    }
-
     .container {
-        gap: 18px;
+        max-width: 950px;
     }
 
     .menu-lateral {
-        width: 190px;
-        min-width: 190px;
+        width: 175px;
+        min-width: 175px;
+    }
+
+    .conteudo {
+        padding: 16px;
     }
 
     .ConfigSN,
     .ConfigCPF {
-        gap: 12px;
+        gap: 10px;
     }
 }
 
-
-/* Tablet */
 
 @media (max-width: 850px) {
 
     .topo {
         height: auto;
-        min-height: 80px;
+        min-height: 75px;
 
         padding: 12px 4%;
 
-        flex-direction: column;
+        flex-wrap: wrap;
         gap: 10px;
     }
 
     .menu {
-        margin-right: 0;
-        gap: 22px;
+        gap: 20px;
     }
 
     .container {
@@ -695,125 +731,54 @@ body {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .menu-lateral li {
-        border-right: 1px solid rgba(255, 255, 255, 0.07);
-    }
-
     .menu-lateral a {
         justify-content: center;
         text-align: center;
-        padding: 10px 5px;
     }
 
     .conteudo {
         width: 100%;
     }
-
-    .ConfigSN,
-    .ConfigCPF {
-        grid-template-columns: 1fr;
-    }
 }
 
 
-/* Celular */
-
 @media (max-width: 600px) {
 
-    .topo {
-        padding: 10px 15px;
-    }
-
-    .logo img {
-        width: 70px;
+    .BackGround {
+        padding: 15px 10px 25px;
     }
 
     .menu {
         width: 100%;
-
         justify-content: center;
-
-        gap: 15px;
-
         flex-wrap: wrap;
+        gap: 10px;
     }
 
     .menu a {
         font-size: 11px;
     }
 
-    .BackGround {
-        padding: 12px;
+    .container {
+        gap: 10px;
     }
 
     .conteudo {
-        padding: 17px 12px;
+        padding: 14px 10px;
     }
 
-    .conteudo > h1 {
-        font-size: 20px;
-    }
-
-    .conteudo > h4 {
-        font-size: 10px;
+    .ConfigSN,
+    .ConfigCPF {
+        grid-template-columns: 1fr;
     }
 
     .menu-lateral ul {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .menu-lateral a {
-        font-size: 11px;
-    }
-
-    .TituloSegurança,
-    .TituloNotificação,
-    .TituloConfigProfissional,
-    .TituloPerfilProfissional,
-    .TituloFinanceiro,
-    .TituloPrivacidade,
-    .TituloCentralAjuda {
-        padding: 12px;
-    }
-
-    .seguranças,
-    .notificações,
-    .ConfigProfissionais,
-    .PerfilProfissionais,
-    .Financeiros,
-    .Privacidades,
-    .PrivacidadesU,
-    .CentralAjudas,
-    .CentralAjudaU {
-        padding: 10px;
-    }
-
-    .SegurançaText h3,
-    .notificaçõesText h3,
-    .ConfigProfissionaisText h3,
-    .PerfilProfissionaisText h3,
-    .FinanceirosText h3,
-    .PrivacidadesText h3,
-    .CentralAjudasText h3 {
-        font-size: 11px;
-    }
-
-    .SegurançaText p,
-    .notificaçõesText p,
-    .ConfigProfissionaisText p,
-    .PerfilProfissionaisText p,
-    .FinanceirosText p,
-    .PrivacidadesText p,
-    .CentralAjudasText p {
-        font-size: 9px;
-    }
-
     .rodape {
-        padding: 12px 15px;
-
         flex-direction: column;
-        gap: 8px;
-
         text-align: center;
+        gap: 8px;
     }
 }

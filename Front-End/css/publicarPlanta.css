@@ -1,0 +1,346 @@
+/* Configuração Geral */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0b0b0b;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* ================================================= */
+/* BackGround do Menu */
+.topo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    padding: 0 6%;
+    z-index: 10;
+    background: rgba(10, 10, 10, 0.25); /* reduzi de 0.55 pra 0.25 — teste esse valor */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(8px);
+}
+
+/* Logo */
+
+.logo{
+    width: 100%;
+    background:  transparent;
+}
+
+.logo a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+
+    max-width: 70px;
+    height: auto;
+    margin-left: 30px;
+}
+
+/* Menu */
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 7px;
+    transition: 0.3s ease;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #d4af6a;
+}
+
+.menu a.ativo {
+    color: #d4af6a;
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    background: rgba(212, 175, 106, 0.08);
+}
+
+/* Icone Login */
+.iconelogin{
+    margin-left: auto;
+}
+
+.iconelogin a{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.iconelogin a:hover{
+    color: #d4af6a;
+}
+
+.iconelogin img {
+    max-width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/* ================================================= */
+/* Fundo Home */
+
+.BackGround {
+    width: 100%;
+    min-height: calc(100vh - 75px);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    min-height: 100vh;
+    background-image: url("../img/BackGroundPlantasEProfissionais.png");
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* Publicar Plantas */
+.PublicarPlanta {
+    width: min(950px, 100%);
+    margin: 100px;
+    padding: 35px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25, 25, 25, 0.96),
+            rgba(10, 10, 10, 0.96)
+        );
+    border: 1px solid rgba(212, 166, 58, 0.55);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.PublicarPlanta h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.PublicarPlanta p {
+    color: #a9a9a9;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.PublicarPlanta p::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin-top: 10px;
+    background: rgba(212, 166, 58, 0.45);
+}
+
+.formPublicarPlanta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 25px;
+    row-gap: 22px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.campo:nth-child(2) {
+    grid-column: 1 / -1;
+}
+
+.campo:nth-child(9) {
+    grid-column: 1 / -1;
+}
+
+.campo label {
+    color: #eeeeee;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    padding: 14px 15px;
+    color: #eeeeee;
+    background: #151515;
+    border: 1px solid #414141;
+    border-radius: 8px;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #777777;
+}
+
+.campo input:hover,
+.campo select:hover,
+.campo textarea:hover {
+    border-color: #777777;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: #d4a63a;
+    background: #181818;
+    box-shadow:
+        0 0 0 2px rgba(212, 166, 58, 0.08),
+        0 0 15px rgba(212, 166, 58, 0.08);
+}
+
+.campo textarea {
+    min-height: 150px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.campo select {
+    cursor: pointer;
+}
+
+.campo select option {
+    background: #151515;
+    color: #ffffff;
+}
+
+.campo input[type="file"] {
+    padding: 12px;
+    border: 1px dashed #555555;
+    cursor: pointer;
+}
+
+.campo input[type="file"]:hover {
+    border-color: #d4a63a;
+}
+
+.campo input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 9px 15px;
+    border: 1px solid #d4a63a;
+    border-radius: 6px;
+    background: transparent;
+    color: #d4a63a;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.campo input[type="file"]::file-selector-button:hover {
+    background: #d4a63a;
+    color: #111111;
+}
+
+.formPublicarPlanta button {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 8px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    background:
+        linear-gradient(
+            135deg,
+            #f0c45a,
+            #c99427
+        );
+    color: #111111;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow:
+        0 5px 20px rgba(212, 166, 58, 0.15);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+.formPublicarPlanta button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow:
+        0 8px 25px rgba(212, 166, 58, 0.25);
+}
+
+.formPublicarPlanta button:active {
+    transform: translateY(0);
+}
+
+/* ================================================= */
+/* Rodapé */
+
+.rodape {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 6%;
+    background: #080808;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    color: #888888;
+    font-size: 13px;
+    border-top: 1px solid #D4A63A;
+}
+
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555555;
+
+}
+
+.rodape a {
+    color: #d4af6a;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.rodape a:hover {
+    color: #e2c07b;
+}

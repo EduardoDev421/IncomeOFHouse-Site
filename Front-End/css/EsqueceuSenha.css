@@ -294,7 +294,7 @@ main::before {
     align-items: center;
     gap: 10px;
     height: 46px;
-    margin-bottom: 22px;
+    margin-bottom: 12px;
     padding: 0 14px;
     background: #0d0d0d;
     border: 1px solid #363636;
@@ -359,6 +359,49 @@ main::before {
     transform: translateY(-2px);
 }
 
+/* =========================================================
+   MINI CARDS
+========================================================= */
+
+.MiniCards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.MiniCard,
+.MiniCardU {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60px;
+}
+
+.MiniCard {
+    padding-right: 30px;
+    border-right: 3px solid #cfa835;
+}
+
+.MiniCardU {
+    padding-right: 30px;
+}
+
+
+/* =========================================================
+   IMAGEM DO CARD
+========================================================= */
+
+.MiniCard img,
+.MiniCardU img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    display: block;
+}
+
+
 
 /* =========================================================
    DIVISOR "OU"
@@ -397,21 +440,22 @@ main::before {
 }
 
 .voltar-login a {
+    color: #e5e5e5;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.voltar-login span{
     color: #d4af6a;
     font-weight: 700;
     text-decoration: none;
 }
 
-.voltar-login a:hover {
-    text-decoration: underline;
-}
-
-
 /* =========================================================
    RODAPÉ
 ========================================================= */
 
-.rodapé {
+.rodape {
     width: 100%;
     display: flex;
     align-items: center;
@@ -424,19 +468,19 @@ main::before {
     font-size: 13px;
 }
 
-.links-footer {
+.RodapeLinks {
     display: flex;
     align-items: center;
     gap: 10px;
     color: #555555;
 }
 
-.rodapé a {
+.rodape a {
     color: #d4af6a;
     text-decoration: none;
     transition: 0.3s ease;
 }
 
-.rodapé a:hover {
+.rodape a:hover {
     color: #e2c07b;
 }
