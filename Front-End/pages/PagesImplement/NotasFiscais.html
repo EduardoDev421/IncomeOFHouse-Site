@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IncomeofHouses - Notas Fiscais">
+    <link rel="stylesheet" href="../../css/NotasFiscais.css">
+    <title>Notas Fiscais</title>
+</head>
+
+<body>
+
+<!-- ===== CABEÇALHO ===== -->
+<header class="topo">
+
+    <a class="logo" href="../index.html">
+        <img src="../img/Logo.png" alt="Income of Houses">
+    </a>
+
+    <nav class="menu">
+        <a href="../index.html">Início</a>
+        <a href="../pages/Plantas.html">Plantas</a>
+        <a href="../pages/Profissionais.html">Profissionais</a>
+        <a href="../pages/Sobre.html">Sobre</a>
+    </nav>
+
+    <a class="perfil" href="../pages/Login.html">
+        <img src="../img/icones/IconePerfil.svg" alt="Perfil">
+    </a>
+
+</header>
+
+
+<div class="layout">
+
+    <!-- ===== MENU LATERAL ===== -->
+    <aside class="lateral">
+        <nav>
+            <a href="#">♙ <span>Meu Perfil</span></a>
+            <a href="#">⌖ <span>Meus Endereços</span></a>
+            <a href="#">▦ <span>Meus Pedidos</span></a>
+            <a href="#">☆ <span>Meus Profissionais<br>Favoritos</span></a>
+            <a href="#">▱ <span>Projetos Salvos</span></a>
+            <a href="#">▣ <span>Agendamentos</span></a>
+            <a href="#">▤ <span>Mensagem</span></a>
+            <a href="#">⚙ <span>Configurações</span></a>
+            <a href="#">⬡ <span>Dados e Permissões</span></a>
+            <a href="#">♢ <span>Fale Conosco</span></a>
+
+            <a href="#">▤ <span>Histórico de Pagamentos</span></a>
+
+            <!-- Página atual -->
+            <a class="selecionado" href="#">
+                ▧ <span>Notas Fiscais</span>
+            </a>
+
+            <a href="#">↪ <span>Sair</span></a>
+        </nav>
+    </aside>
+
+
+    <!-- ===== CONTEÚDO ===== -->
+    <main class="conteudo">
+
+        <!-- Título -->
+        <div class="titulo">
+            <span>▧</span>
+
+            <div>
+                <h1>Notas Fiscais</h1>
+                <p>
+                    Acompanhe e gerencie todas as suas notas fiscais e comprovantes de pagamento.
+                </p>
+            </div>
+        </div>
+
+        <div class="linha"></div>
+
+
+        <!-- ===== RESUMO ===== -->
+        <section class="resumo">
+
+            <div class="resumo-card">
+                <i>▧</i>
+                <div>
+                    <small>Total de Notas</small>
+                    <strong>8</strong>
+                    <span>nos últimos 12 meses</span>
+                </div>
+            </div>
+
+            <div class="resumo-card">
+                <i>$</i>
+                <div>
+                    <small>Valor Total</small>
+                    <strong>R$ 15.680,00</strong>
+                    <span>em notas fiscais</span>
+                </div>
+            </div>
+
+            <div class="resumo-card">
+                <i>✓</i>
+                <div>
+                    <small>Pagas</small>
+                    <strong>6</strong>
+                    <span>75% do total</span>
+                </div>
+            </div>
+
+            <div class="resumo-card ultimo">
+
+                <i>◷</i>
+
+                <div>
+                    <small>Pendentes</small>
+                    <strong>2</strong>
+                    <span>25% do total</span>
+                </div>
+
+                <div class="acoes">
+                    <button>⇩ &nbsp; Exportar</button>
+
+                    <div class="pesquisa">
+                        ⌕
+                        <input
+                            type="text"
+                            placeholder="Buscar por número, descrição ou período..."
+                        >
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===== NOTAS FISCAIS ===== -->
+        <section class="notas">
+
+            <h2>▧ &nbsp; Notas Fiscais</h2>
+
+            <div class="tabela">
+
+                <!-- Cabeçalho -->
+                <div class="linha-tabela cabecalho">
+                    <span>Número</span>
+                    <span>Data de Emissão</span>
+                    <span>Descrição</span>
+                    <span>Fornecedor</span>
+                    <span>Valor</span>
+                    <span>Status</span>
+                    <span>Ações</span>
+                </div>
+
+
+                <!-- NOTA 0087 -->
+                <div class="linha-tabela">
+                    <span>▧ &nbsp; NF-0087</span>
+                    <span>28/03/2025</span>
+                    <span>Projeto Arquitetônico - Residencial</span>
+                    <span>Income Of Houses Ltda</span>
+                    <span>R$ 3.750,00</span>
+                    <span><b class="pago">Pago</b></span>
+                    <span>
+                        <button class="visualizar">◉ &nbsp; Visualizar</button>
+                        <button class="mais">⌄</button>
+                    </span>
+                </div>
+
+
+                <!-- NOTA 0086 -->
+                <div class="linha-tabela">
+                    <span>▧ &nbsp; NF-0086</span>
+                    <span>20/03/2025</span>
+                    <span>Planta Baixa - Sobrado</span>
+                    <span>Arquiteto Associados</span>
+                    <span>R$ 1.280,00</span>
+                    <span><b class="pago">Pago</b></span>
+                    <span>
+                        <button class="visualizar">◉ &nbsp; Visualizar</button>
+                        <button class="mais">⌄</button>
+                    </span>
+                </div>
+
+
+                <!-- NOTA 0085 -->
+                <div class="linha-tabela">
+                    <span>▧ &nbsp; NF-0085</span>
+                    <span>12/03/2025</span>
+                    <span>Projeto Comercial</span>
+                    <span>Studio Design Arquitetura</span>
+                    <span>R$ 3.750,00</span>
+                    <span><b class="pago">Pago</b></span>
+                    <span>
+                        <button class="visualizar">◉ &nbsp; Visualizar</button>
+                        <button class="mais">⌄</button>
+                    </span>
+                </div>
+
+
+                <!-- NOTA 0084 -->
+                <div class="linha-tabela">
+                    <span>▧ &nbsp; NF-0084</span>
+                    <span>05/03/2025</span>
+                    <span>Planta Baixa - Residencial</span>
+                    <span>Arquiteto Associados</span>
+                    <span>R$ 980,00</span>
+                    <span><b class="pago">Pago</b></span>
+                    <span>
+                        <button class="visualizar">◉ &nbsp; Visualizar</button>
+                        <button class="mais">⌄</button>
+                    </span>
+                </div>
+
+
+                <!-- NOTA 0083 -->
+                <div class="linha-tabela">
+                    <span>▧ &nbsp; NF-0083</span>
+                    <span>20/02/2025</span>
+                    <span>Projeto Executivo</span>
+                    <span>Engenharia & Construção</span>
+                    <span>R$ 4.200,00</span>
+                    <span><b class="pago">Pago</b></span>
+                    <span>
+                        <button class="visualizar">◉ &nbsp; Visualizar</button>
+                        <button class="mais">⌄</button>
+                    </span>
+                </div>
+
+
+                <!-- NOTA 0082 -->
+                <div class="linha-tabela">
+                    <span>▧ &nbsp; NF-0082</span>
+                    <span>10/02/2025</span>
+                    <span>Consultoria Técnica</span>
+                    <span>Consultoria Especializada</span>
+                    <span>R$ 850,00</span>
+                    <span><b class="pendente">Pendente</b></span>
+                    <span>
+                        <button class="visualizar">◉ &nbsp; Visualizar</button>
+                        <button class="mais">⌄</button>
+                    </span>
+                </div>
+
+
+                <!-- NOTA 0081 -->
+                <div class="linha-tabela">
+                    <span>▧ &nbsp; NF-0081</span>
+                    <span>28/01/2025</span>
+                    <span>Projeto Paisagismo</span>
+                    <span>Verde & Espaço</span>
+                    <span>R$ 1.560,00</span>
+                    <span><b class="pendente">Pendente</b></span>
+                    <span>
+                        <button class="visualizar">◉ &nbsp; Visualizar</button>
+                        <button class="mais">⌄</button>
+                    </span>
+                </div>
+
+
+                <!-- NOTA 0080 -->
+                <div class="linha-tabela">
+                    <span>▧ &nbsp; NF-0080</span>
+                    <span>15/01/2025</span>
+                    <span>Planta Baixa - Térreo</span>
+                    <span>Arquiteto Associados</span>
+                    <span>R$ 1.200,00</span>
+                    <span><b class="pago">Pago</b></span>
+                    <span>
+                        <button class="visualizar">◉ &nbsp; Visualizar</button>
+                        <button class="mais">⌄</button>
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!-- Paginação -->
+            <div class="tabela-footer">
+                <span>Mostrando 1 a 8 de 8 resultados</span>
+
+                <div class="paginas">
+                    <button>‹</button>
+                    <button class="atual">1</button>
+                    <button>›</button>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ===== RODAPÉ ===== -->
+        <footer>
+            <span>© IncomeOfHouses. Todos os direitos reservados.</span>
+
+            <div>
+                <a href="../pages/TermosUso.html">Termos de Uso</a>
+                <span>|</span>
+                <a href="../pages/PoliticaPrivacidade.html">
+                    Política de Privacidade
+                </a>
+            </div>
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>

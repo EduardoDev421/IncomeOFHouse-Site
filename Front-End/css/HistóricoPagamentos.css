@@ -1,0 +1,433 @@
+/* ===== GERAL ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --gold: #d5a928;
+    --gold2: #e7bf45;
+    --bg: #080a0b;
+    --card: #101213;
+    --border: #292c2e;
+    --text: #eee;
+    --gray: #777;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        linear-gradient(#080a0bd9, #080a0bf2),
+        url("../img/FundoDashboard.jpg") center/cover fixed;
+    color: var(--text);
+    font: 12px Arial, sans-serif;
+}
+
+
+/* ===== HEADER ===== */
+.topo {
+    height: 64px;
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    padding: 0 25px 0 115px;
+    background: #090a0bf5;
+    border-bottom: 1px solid #222;
+}
+
+.logo img {
+    width: 58px;
+}
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+}
+
+.menu a,
+.perfil {
+    color: #eee;
+    text-decoration: none;
+}
+
+.menu a {
+    padding: 9px 16px;
+}
+
+.menu a:hover {
+    color: var(--gold2);
+}
+
+.perfil {
+    margin-left: auto;
+}
+
+.perfil img {
+    width: 25px;
+}
+
+
+/* ===== ESTRUTURA ===== */
+.layout {
+    display: flex;
+    padding-top: 64px;
+}
+
+
+/* ===== MENU LATERAL ===== */
+.lateral {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 270px;
+    height: calc(100vh - 64px);
+    padding: 20px 12px;
+    background: #0a0c0df7;
+    border-right: 1px solid #252729;
+}
+
+.lateral a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 34px;
+    padding: 7px 10px;
+    margin-bottom: 3px;
+    color: #d7d7d7;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: 11px;
+}
+
+.lateral a:first-letter {
+    color: var(--gold);
+}
+
+.lateral a:hover {
+    background: #ffffff08;
+}
+
+.lateral .selecionado {
+    color: var(--gold2);
+    border-color: var(--gold);
+    background: #d5a92812;
+}
+
+
+/* ===== CONTEÚDO ===== */
+.conteudo {
+    width: calc(100% - 270px);
+    margin-left: 270px;
+    padding: 20px 18px 0;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.titulo > span {
+    color: var(--gold);
+    font-size: 27px;
+}
+
+.titulo h1 {
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.titulo p {
+    color: #aaa;
+    font-size: 11px;
+}
+
+.linha {
+    height: 2px;
+    margin: 9px 0 14px;
+    background: var(--gold);
+}
+
+
+/* ===== FILTROS ===== */
+.filtros {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1.4fr auto;
+    gap: 8px;
+    padding: 10px;
+    margin-bottom: 14px;
+    background: #0e1011ed;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+.filtros label {
+    min-width: 0;
+}
+
+.filtros small {
+    display: block;
+    color: #777;
+    font-size: 8px;
+    margin-bottom: 3px;
+}
+
+.campo {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    padding: 0 9px;
+    gap: 7px;
+    background: #0a0c0d;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--gold);
+}
+
+.campo input,
+.campo select {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #ddd;
+    font: 9px Arial;
+}
+
+.campo select {
+    appearance: none;
+}
+
+.campo option {
+    background: #111;
+}
+
+.exportar {
+    align-self: end;
+    height: 35px;
+    padding: 0 14px;
+    border: 1px solid #a27e1d;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--gold2);
+    font-size: 9px;
+    cursor: pointer;
+}
+
+.exportar:hover {
+    background: var(--gold);
+    color: #111;
+}
+
+
+/* ===== TABELA ===== */
+.transacoes {
+    padding: 12px 14px;
+    background: #0e1011ed;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+.transacoes h2 {
+    margin-bottom: 9px;
+    font-size: 12px;
+}
+
+.tabela {
+    width: 100%;
+}
+
+.linha-tabela {
+    display: grid;
+    grid-template-columns:
+        .8fr 1.5fr 1fr 1.3fr .9fr .8fr 1.1fr 20px;
+    align-items: center;
+    min-height: 51px;
+    border-top: 1px solid #ffffff0b;
+    color: #ccc;
+    font-size: 9px;
+}
+
+.linha-tabela small {
+    display: block;
+    margin-top: 3px;
+    color: #656a6f;
+    font-size: 8px;
+}
+
+.cabecalho {
+    min-height: 31px;
+    border-top: 1px solid #ffffff0b;
+    color: #bbb;
+    font-size: 9px;
+}
+
+.pago,
+.pendente {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 8px;
+    font-weight: normal;
+}
+
+.pago {
+    background: #0b5a3c;
+    color: #9ee0bd;
+}
+
+.pendente {
+    background: #36393d;
+    color: #ddd;
+}
+
+.comprovante {
+    padding: 7px 9px;
+    border: 1px solid #967722;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--gold2);
+    font-size: 8px;
+    cursor: pointer;
+}
+
+.comprovante:hover {
+    background: var(--gold);
+    color: #111;
+}
+
+.seta {
+    color: #777;
+    font-size: 18px;
+}
+
+
+/* ===== RODAPÉ DA TABELA ===== */
+.tabela-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    color: #777;
+    font-size: 8px;
+}
+
+.paginas {
+    display: flex;
+    gap: 5px;
+}
+
+.paginas button {
+    width: 27px;
+    height: 27px;
+    border: 1px solid #292c2e;
+    border-radius: 4px;
+    background: transparent;
+    color: #888;
+    cursor: pointer;
+}
+
+.paginas .atual {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+
+/* ===== FOOTER ===== */
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 4px;
+    margin-top: 28px;
+    border-top: 1px solid var(--gold);
+    color: #555;
+    font-size: 8px;
+}
+
+footer div {
+    display: flex;
+    gap: 7px;
+}
+
+footer a {
+    color: #666;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--gold);
+}
+
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1100px) {
+    .filtros {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .busca {
+        grid-column: span 2;
+    }
+
+    .exportar {
+        width: 120px;
+    }
+
+    .linha-tabela {
+        min-width: 850px;
+    }
+
+    .transacoes {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 800px) {
+    .lateral {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid #222;
+    }
+
+    .layout {
+        display: block;
+    }
+
+    .conteudo {
+        width: 100%;
+        margin: 0;
+    }
+
+    .lateral nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .menu {
+        display: none;
+    }
+}
+
+@media (max-width: 550px) {
+    .filtros {
+        grid-template-columns: 1fr;
+    }
+
+    .busca {
+        grid-column: auto;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

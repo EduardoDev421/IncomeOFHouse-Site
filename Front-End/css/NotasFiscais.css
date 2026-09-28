@@ -1,0 +1,464 @@
+/* ===== GERAL ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --gold: #d5a928;
+    --gold2: #e7bf45;
+    --bg: #080a0b;
+    --card: #101213;
+    --border: #292c2e;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        linear-gradient(#080a0bd9, #080a0bf2),
+        url("../img/FundoDashboard.jpg") center/cover fixed;
+    color: #eee;
+    font: 12px Arial, sans-serif;
+}
+
+
+/* ===== HEADER ===== */
+.topo {
+    height: 64px;
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    padding: 0 25px 0 115px;
+    background: #090a0bf5;
+    border-bottom: 1px solid #222;
+}
+
+.logo img {
+    width: 58px;
+}
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+}
+
+.menu a,
+.perfil {
+    color: #eee;
+    text-decoration: none;
+}
+
+.menu a {
+    padding: 9px 16px;
+}
+
+.menu a:hover {
+    color: var(--gold2);
+}
+
+.perfil {
+    margin-left: auto;
+}
+
+.perfil img {
+    width: 25px;
+}
+
+
+/* ===== ESTRUTURA ===== */
+.layout {
+    display: flex;
+    padding-top: 64px;
+}
+
+
+/* ===== MENU LATERAL ===== */
+.lateral {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 270px;
+    height: calc(100vh - 64px);
+    padding: 20px 12px;
+    background: #0a0c0df7;
+    border-right: 1px solid #252729;
+}
+
+.lateral a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 34px;
+    padding: 7px 10px;
+    margin-bottom: 3px;
+    color: #d7d7d7;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: 11px;
+}
+
+.lateral a:first-letter {
+    color: var(--gold);
+}
+
+.lateral a:hover {
+    background: #ffffff08;
+}
+
+.lateral .selecionado {
+    color: var(--gold2);
+    border-color: var(--gold);
+    background: #d5a92812;
+}
+
+
+/* ===== CONTEÚDO ===== */
+.conteudo {
+    width: calc(100% - 270px);
+    margin-left: 270px;
+    padding: 20px 18px 0;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.titulo > span {
+    color: var(--gold);
+    font-size: 27px;
+}
+
+.titulo h1 {
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.titulo p {
+    color: #aaa;
+    font-size: 11px;
+}
+
+.linha {
+    height: 2px;
+    margin: 9px 0 24px;
+    background: var(--gold);
+}
+
+
+/* ===== CARDS DE RESUMO ===== */
+.resumo {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.8fr;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.resumo-card {
+    min-height: 84px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 16px;
+    background: #0e1011ed;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.resumo-card > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
+    border: 1px solid #79621c;
+    border-radius: 6px;
+    color: var(--gold);
+    font-size: 20px;
+    font-style: normal;
+}
+
+.resumo-card div:not(.acoes):not(.pesquisa) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.resumo-card small {
+    color: #777;
+    font-size: 8px;
+}
+
+.resumo-card strong {
+    color: #ddd;
+    font-size: 14px;
+}
+
+.resumo-card span {
+    color: #62666a;
+    font-size: 8px;
+}
+
+
+/* ===== EXPORTAR + PESQUISA ===== */
+.ultimo {
+    position: relative;
+    padding-right: 10px;
+}
+
+.acoes {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.acoes button {
+    padding: 7px 12px;
+    border: 1px solid #927621;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--gold2);
+    font-size: 8px;
+}
+
+.pesquisa {
+    width: 100%;
+    max-width: 260px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 8px;
+    border: 1px solid #292c2e;
+    border-radius: 4px;
+    color: var(--gold);
+}
+
+.pesquisa input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #ccc;
+    font-size: 8px;
+}
+
+
+/* ===== NOTAS ===== */
+.notas {
+    padding: 13px 14px;
+    background: #0e1011ed;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+.notas h2 {
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.tabela {
+    width: 100%;
+}
+
+.linha-tabela {
+    display: grid;
+    grid-template-columns:
+        .85fr .95fr 1.6fr 1.5fr 1fr .75fr 1.1fr;
+    align-items: center;
+    min-height: 36px;
+    border-top: 1px solid #ffffff0b;
+    color: #ccc;
+    font-size: 9px;
+}
+
+.cabecalho {
+    min-height: 32px;
+    color: #bbb;
+    font-size: 9px;
+}
+
+.linha-tabela span:first-child {
+    color: #bbb;
+}
+
+.pago,
+.pendente {
+    display: inline-block;
+    width: max-content;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 8px;
+    font-weight: normal;
+}
+
+.pago {
+    background: #07583b;
+    color: #8bd7b3;
+}
+
+.pendente {
+    background: #60470b;
+    color: #e2b936;
+}
+
+
+/* ===== AÇÕES DA TABELA ===== */
+.visualizar,
+.mais {
+    height: 25px;
+    border: 1px solid #80691f;
+    background: transparent;
+    color: var(--gold2);
+    cursor: pointer;
+}
+
+.visualizar {
+    padding: 0 9px;
+    border-radius: 4px 0 0 4px;
+    font-size: 8px;
+}
+
+.mais {
+    width: 27px;
+    margin-left: -5px;
+    border-radius: 0 4px 4px 0;
+}
+
+.visualizar:hover,
+.mais:hover {
+    background: var(--gold);
+    color: #111;
+}
+
+
+/* ===== PAGINAÇÃO ===== */
+.tabela-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 9px;
+    color: #777;
+    font-size: 8px;
+}
+
+.paginas {
+    display: flex;
+    gap: 5px;
+}
+
+.paginas button {
+    width: 27px;
+    height: 27px;
+    border: 1px solid #292c2e;
+    border-radius: 4px;
+    background: transparent;
+    color: #888;
+}
+
+.paginas .atual {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+
+/* ===== FOOTER ===== */
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 4px;
+    margin-top: 23px;
+    border-top: 1px solid var(--gold);
+    color: #555;
+    font-size: 8px;
+}
+
+footer div {
+    display: flex;
+    gap: 7px;
+}
+
+footer a {
+    color: #666;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--gold);
+}
+
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1100px) {
+
+    .resumo {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .ultimo {
+        grid-column: span 2;
+    }
+
+    .notas {
+        overflow-x: auto;
+    }
+
+    .tabela {
+        min-width: 850px;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .lateral {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid #222;
+    }
+
+    .layout {
+        display: block;
+    }
+
+    .conteudo {
+        width: 100%;
+        margin: 0;
+    }
+
+    .lateral nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .menu {
+        display: none;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .ultimo {
+        grid-column: auto;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

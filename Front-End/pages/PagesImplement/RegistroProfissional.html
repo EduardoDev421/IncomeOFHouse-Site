@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IncomeofHouses - Registro de Profissional">
+    <link rel="stylesheet" href="../../css/RegistroProfissional.css">
+    <title>Registro de Profissional</title>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="topo">
+    <a class="logo" href="../index.html">
+        <img src="../img/Logo.png" alt="Income of Houses">
+    </a>
+
+    <nav class="menu">
+        <a href="../index.html">Início</a>
+        <a href="../pages/Plantas.html">Plantas</a>
+        <a href="../pages/Profissionais.html">Profissionais</a>
+        <a href="../pages/Sobre.html">Sobre</a>
+    </nav>
+
+    <a class="perfil" href="../pages/Login.html">
+        <img src="../img/icones/IconePerfil.svg" alt="Perfil">
+    </a>
+</header>
+
+
+<!-- ===== ESTRUTURA PRINCIPAL ===== -->
+<div class="layout">
+
+    <!-- Menu lateral -->
+    <aside class="lateral">
+        <nav>
+            <a href="#">♙ <span>Meu Perfil</span></a>
+            <a href="#">⌖ <span>Meus Endereços</span></a>
+            <a href="#">▦ <span>Meus Pedidos</span></a>
+            <a href="#">☆ <span>Meus Profissionais Favoritos</span></a>
+            <a href="#">▱ <span>Projetos Salvos</span></a>
+            <a href="#">▣ <span>Agendamentos</span></a>
+            <a href="#">▤ <span>Mensagem</span></a>
+            <a href="#">⚙ <span>Configurações</span></a>
+            <a href="#">⬡ <span>Dados e Permissões</span></a>
+            <a href="#">♢ <span>Fale Conosco</span></a>
+            <a class="selecionado" href="#">♙ <span>Registro Profissional</span></a>
+            <a href="#">↪ <span>Sair</span></a>
+        </nav>
+    </aside>
+
+
+    <!-- ===== CONTEÚDO ===== -->
+    <main class="conteudo">
+
+        <div class="titulo">
+            <span>♧</span>
+            <div>
+                <h1>Registro de Profissional</h1>
+                <p>Complete seus dados para se tornar um profissional da plataforma.</p>
+            </div>
+        </div>
+
+        <div class="linha"></div>
+
+
+        <!-- Duas colunas: formulário + informações -->
+        <div class="grid">
+
+            <!-- ===== FORMULÁRIO ===== -->
+            <section>
+
+                <!-- 1 - Informações pessoais -->
+                <div class="card">
+                    <h2><b>1</b> Informações Pessoais</h2>
+
+                    <div class="campos">
+                        <label>Nome completo *
+                            <div class="input">♙<input type="text" placeholder="Digite seu nome completo"></div>
+                        </label>
+
+                        <label>CPF/CNPJ *
+                            <div class="input">♙<input type="text" placeholder="Digite seu CPF ou CNPJ"></div>
+                        </label>
+
+                        <label>E-mail *
+                            <div class="input">✉<input type="email" placeholder="Digite seu e-mail"></div>
+                        </label>
+
+                        <label>Telefone *
+                            <div class="input">☎<input type="tel" placeholder="(11) 98765-4321"></div>
+                        </label>
+
+                        <label>Data de nascimento / Fundação *
+                            <div class="input">▣<input type="text" placeholder="dd/mm/aaaa"></div>
+                        </label>
+
+                        <label>Tipo de profissional *
+                            <div class="input">♙
+                                <select>
+                                    <option>Selecione o tipo de profissional</option>
+                                    <option>Engenheiro</option>
+                                    <option>Arquiteto</option>
+                                    <option>Advogado</option>
+                                </select>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+
+                <!-- 2 - Dados profissionais -->
+                <div class="card">
+                    <h2><b>2</b> Dados Profissionais</h2>
+
+                    <div class="campos">
+                        <label>Registro Profissional (CREA/CAU/etc.) *
+                            <div class="input">♢<input type="text" placeholder="Digite seu registro"></div>
+                        </label>
+
+                        <label>Estado do registro *
+                            <div class="input">⌖
+                                <select>
+                                    <option>Selecione o estado</option>
+                                    <option>São Paulo (SP)</option>
+                                    <option>Rio de Janeiro (RJ)</option>
+                                    <option>Minas Gerais (MG)</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label>Área de atuação *
+                            <div class="input">▦
+                                <select>
+                                    <option>Selecione a área de atuação</option>
+                                    <option>Construção Civil</option>
+                                    <option>Arquitetura</option>
+                                    <option>Engenharia</option>
+                                    <option>Design de Interiores</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label>Experiência (anos) *
+                            <div class="input">◷<input type="number" placeholder="Ex.: 5 anos"></div>
+                        </label>
+
+                        <label class="largo">Descrição profissional *
+                            <div class="textarea">▤
+                                <textarea maxlength="500" placeholder="Conte um pouco sobre sua experiência e especializações..."></textarea>
+                                <small>0/500</small>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+
+                <!-- 3 - Documentos -->
+                <div class="card">
+                    <h2><b>3</b> Documentos</h2>
+
+                    <div class="upload">
+                        <strong>⇧</strong>
+
+                        <div>
+                            <p>Anexe seus documentos (PDF, JPG ou PNG)</p>
+                            <small>RG, CPF, Comprovante de endereço, Registro profissional e Portfólio (opcional)</small>
+                        </div>
+
+                        <label for="arquivos">▣ Selecionar arquivos</label>
+                        <input id="arquivos" type="file" multiple accept=".pdf,.jpg,.jpeg,.png">
+                    </div>
+
+                    <button>♧ &nbsp; Enviar solicitação</button>
+                </div>
+
+            </section>
+
+
+            <!-- ===== COLUNA DIREITA ===== -->
+            <aside>
+
+                <!-- Vantagens -->
+                <div class="info card">
+                    <h2>▥ &nbsp; Vantagens de ser um profissional</h2>
+                    <p class="descricao">Faça parte de uma rede de especialistas em projetos e construção.</p>
+
+                    <div class="item">
+                        <strong>▣ &nbsp; Mais visibilidade</strong>
+                        <p>Seus projetos serão vistos por milhares de usuários.</p>
+                    </div>
+
+                    <div class="item">
+                        <strong>♢ &nbsp; Novas oportunidades</strong>
+                        <p>Conecte-se com clientes e projetos em todo o Brasil.</p>
+                    </div>
+
+                    <div class="item">
+                        <strong>▣ &nbsp; Gestão simplificada</strong>
+                        <p>Acompanhe seus atendimentos e pedidos em um só lugar.</p>
+                    </div>
+
+                    <div class="item">
+                        <strong>♢ &nbsp; Credibilidade</strong>
+                        <p>Faça parte de uma plataforma segura e confiável.</p>
+                    </div>
+                </div>
+
+
+                <!-- Como funciona -->
+                <div class="info card">
+                    <h2>▤ &nbsp; Como funciona?</h2>
+
+                    <div class="passo">
+                        <b>1</b>
+                        <div>
+                            <strong>Preencha seus dados</strong>
+                            <p>Informe suas informações pessoais e profissionais.</p>
+                        </div>
+                    </div>
+
+                    <div class="passo">
+                        <b>2</b>
+                        <div>
+                            <strong>Anexe os documentos</strong>
+                            <p>Envie a documentação necessária para verificação.</p>
+                        </div>
+                    </div>
+
+                    <div class="passo">
+                        <b>3</b>
+                        <div>
+                            <strong>Aguarde a análise</strong>
+                            <p>Nossa equipe irá revisar seus dados em até 3 dias úteis.</p>
+                        </div>
+                    </div>
+
+                    <div class="passo">
+                        <b>4</b>
+                        <div>
+                            <strong>Comece a receber solicitações</strong>
+                            <p>Após a aprovação, seu perfil estará ativo na plataforma.</p>
+                        </div>
+                    </div>
+
+                    <div class="suporte">
+                        ⓘ &nbsp; Em caso de dúvidas, entre em contato com nosso suporte pelo menu <b>Fale Conosco</b>.
+                    </div>
+                </div>
+
+            </aside>
+
+        </div>
+
+
+        <!-- ===== RODAPÉ ===== -->
+        <footer>
+            <span>© IncomeOfHouses. Todos os direitos reservados.</span>
+
+            <div>
+                <a href="../pages/TermosUso.html">Termos de Uso</a>
+                <span>|</span>
+                <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+            </div>
+        </footer>
+
+    </main>
+</div>
+
+</body>
+</html>
