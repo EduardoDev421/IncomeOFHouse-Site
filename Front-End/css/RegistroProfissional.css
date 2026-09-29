@@ -1,480 +1,153 @@
-/* ===== GERAL ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* =========================================================
+   PERGUNTAS FREQUENTES - só o que é específico da página
+   (cabeçalho, menu lateral, rodapé, .seta e variáveis vêm de
+   ConfiguraçõesProfissional.css, carregado antes)
+========================================================= */
 
-:root {
-    --gold: #d5a928;
-    --gold2: #e7bf45;
-    --bg: #080a0b;
-    --card: #101213;
-    --border: #292c2e;
-    --text: #eee;
-    --gray: #777;
-}
+/* ===== BUSCA ===== */
 
-body {
-    min-height: 100vh;
-    background:
-        linear-gradient(#080a0bd9, #080a0bf2),
-        url("../img/FundoDashboard.jpg") center/cover fixed;
-    color: var(--text);
-    font: 12px Arial, sans-serif;
-}
-
-
-/* ===== HEADER ===== */
-.topo {
-    height: 64px;
-    position: fixed;
-    inset: 0 0 auto;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    padding: 0 25px 0 115px;
-    background: #090a0bf5;
-    border-bottom: 1px solid #222;
-}
-
-.logo img {
-    width: 58px;
-}
-
-.menu {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
-}
-
-.menu a,
-.perfil {
-    color: #eee;
-    text-decoration: none;
-}
-
-.menu a {
-    padding: 9px 16px;
-}
-
-.menu a:hover {
-    color: var(--gold2);
-}
-
-.perfil {
-    margin-left: auto;
-}
-
-.perfil img {
-    width: 25px;
-}
-
-
-/* ===== LAYOUT ===== */
-.layout {
-    display: flex;
-    padding-top: 64px;
-}
-
-
-/* ===== MENU LATERAL ===== */
-.lateral {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    width: 270px;
-    height: calc(100vh - 64px);
-    padding: 20px 12px;
-    background: #0a0c0df7;
-    border-right: 1px solid #252729;
-}
-
-.lateral a {
+.busca {
+    height: 42px;
+    margin: 20px 0 16px;
     display: flex;
     align-items: center;
     gap: 10px;
-    min-height: 34px;
-    padding: 7px 10px;
-    margin-bottom: 3px;
-    color: #d7d7d7;
-    text-decoration: none;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    font-size: 11px;
-}
-
-.lateral a:first-letter {
+    padding: 0 8px 0 14px;
     color: var(--gold);
+    background: #141414;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
 }
 
-.lateral a:hover {
-    background: #ffffff08;
-}
+.busca > span { font-size: 18px; }
 
-.lateral .selecionado {
-    color: var(--gold2);
-    border-color: var(--gold);
-    background: #d5a92812;
-}
-
-
-/* ===== CONTEÚDO ===== */
-.conteudo {
-    width: calc(100% - 270px);
-    margin-left: 270px;
-    padding: 20px 18px 0;
-}
-
-.titulo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.titulo > span {
-    color: var(--gold);
-    font-size: 28px;
-}
-
-.titulo h1 {
-    font-size: 17px;
-    margin-bottom: 3px;
-}
-
-.titulo p {
-    color: #aaa;
-    font-size: 11px;
-}
-
-.linha {
-    height: 2px;
-    margin: 9px 0 14px;
-    background: var(--gold);
-}
-
-
-/* ===== GRID ===== */
-.grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 16px;
-}
-
-.grid > section,
-.grid > aside {
+.busca input {
+    flex: 1;
     min-width: 0;
-}
-
-
-/* ===== CARDS ===== */
-.card {
-    padding: 11px 13px;
-    margin-bottom: 7px;
-    background: #0e1011ed;
-    border: 1px solid var(--border);
-    border-radius: 7px;
-}
-
-.card h2 {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 9px;
-    font-size: 12px;
-}
-
-.card h2 b {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--gold);
-    color: #111;
-    font-size: 10px;
-}
-
-
-/* ===== FORMULÁRIO ===== */
-.campos {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px 13px;
-}
-
-.campos label {
-    color: #bbb;
-    font-size: 10px;
-}
-
-.largo {
-    grid-column: 1 / -1;
-}
-
-.input,
-.textarea {
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin-top: 4px;
-    background: #0a0c0d;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    color: var(--gold);
-}
-
-.input {
-    height: 27px;
-}
-
-.input input,
-.input select,
-.textarea textarea {
-    width: 100%;
     height: 100%;
-    padding: 5px 8px 5px 4px;
     border: 0;
     outline: 0;
     background: transparent;
     color: #ddd;
-    font: 9px Arial;
+    font-size: 13px;
 }
 
-.input select {
-    appearance: none;
-}
+.busca input::placeholder { color: #777; }
 
-.input select option {
-    background: #111;
-}
-
-.input:focus-within,
-.textarea:focus-within {
-    border-color: #a98525;
-}
-
-.textarea {
-    height: 61px;
-    align-items: flex-start;
-}
-
-.textarea textarea {
-    resize: none;
-    padding-top: 7px;
-}
-
-.textarea small {
-    position: absolute;
-    right: 7px;
-    bottom: 4px;
-    color: #555;
-    font-size: 8px;
-}
-
-
-/* ===== DOCUMENTOS ===== */
-.upload {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 7px 9px;
-    border: 1px dashed #8f7425;
-    border-radius: 5px;
-}
-
-.upload > strong {
-    color: var(--gold);
-    font-size: 23px;
-}
-
-.upload div {
-    flex: 1;
-}
-
-.upload p {
-    font-size: 9px;
-    margin-bottom: 2px;
-}
-
-.upload small {
-    color: #666;
-    font-size: 8px;
-}
-
-.upload input {
-    display: none;
-}
-
-.upload label {
-    padding: 7px 9px;
-    border: 1px solid #80691f;
-    border-radius: 4px;
-    color: var(--gold2);
-    font-size: 8px;
-    cursor: pointer;
-}
-
-.upload label:hover {
-    background: var(--gold);
-    color: #111;
-}
-
-.card > button {
-    width: 185px;
+.busca button {
     height: 28px;
-    margin-top: 10px;
-    border: 0;
+    padding: 0 14px;
+    color: var(--gold2);
+    background: transparent;
+    border: 1px solid #8a701e;
     border-radius: 5px;
-    background: linear-gradient(#e3bc43, #c99d26);
-    color: #111;
-    font-weight: bold;
-    font-size: 9px;
     cursor: pointer;
+    font-size: 11px;
+    transition: 0.2s ease;
 }
 
+.busca button:hover { background: var(--gold); color: #111; }
 
-/* ===== INFORMAÇÕES ===== */
-.info .descricao {
-    margin: -4px 0 10px 32px;
-    color: #707478;
-    font-size: 8px;
+/* ===== GRID ===== */
+
+.faq {
+    display: grid;
+    grid-template-columns: 380px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
 }
 
-.item {
-    padding: 9px 0;
-    border-top: 1px solid #ffffff0a;
-}
+/* ===== CATEGORIAS ===== */
 
-.item strong {
-    color: #ddd;
-    font-size: 9px;
-}
-
-.item p,
-.passo p {
-    margin-top: 3px;
-    color: #686d72;
-    font-size: 8px;
-}
-
-
-/* ===== COMO FUNCIONA ===== */
-.passo {
+.categorias {
     display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.passo > b {
+.categoria {
+    min-height: 64px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-width: 24px;
-    height: 24px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    color: var(--gold);
-    font-size: 10px;
-}
-
-.passo strong {
-    display: block;
-    margin-top: 2px;
-    font-size: 9px;
-}
-
-.suporte {
-    padding: 8px;
-    border: 1px solid #947a27;
-    border-radius: 5px;
-    color: #888;
-    font-size: 8px;
-}
-
-.suporte b {
-    color: var(--gold2);
-}
-
-
-/* ===== FOOTER ===== */
-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 4px 15px;
-    border-top: 1px solid var(--gold);
-    color: #555;
-    font-size: 8px;
-}
-
-footer div {
-    display: flex;
-    gap: 7px;
-}
-
-footer a {
-    color: #666;
+    gap: 12px;
+    padding: 10px 14px;
+    color: #e7e7e7;
     text-decoration: none;
+    background: #141414;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    transition: 0.25s ease;
 }
 
-footer a:hover {
-    color: var(--gold);
+.categoria > img { width: 20px; height: 20px; object-fit: contain; flex-shrink: 0; }
+.categoria div { flex: 1; min-width: 0; }
+.categoria strong { display: block; margin-bottom: 4px; font-size: 13px; }
+.categoria small { color: #8f9497; font-size: 11px; line-height: 1.35; }
+.categoria b { font-weight: 300; }
+
+.categoria:hover,
+.categoria.ativa { background: #29231a; border-color: #59431f; }
+
+.categoria:hover strong,
+.categoria.ativa strong { color: var(--gold); }
+
+.categoria:hover .seta { color: var(--gold2); transform: translateX(3px); }
+
+/* ===== PERGUNTAS ===== */
+
+.perguntas {
+    min-width: 0;
+    background: #141414;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
+.perguntas-titulo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.perguntas-titulo > img { width: 22px; height: 22px; object-fit: contain; }
+.perguntas-titulo h2 { margin-bottom: 4px; color: #fff; font-size: 15px; font-weight: 600; }
+.perguntas-titulo p { color: #8f9497; font-size: 12px; }
+
+.pergunta {
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #242424;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.pergunta:last-child { border-bottom: none; }
+.pergunta:hover { background: rgba(255, 255, 255, 0.03); }
+.pergunta:hover .seta { color: var(--gold2); transform: translateX(3px); }
+
+.pergunta .icone { width: 20px; height: 20px; object-fit: contain; flex-shrink: 0; }
+
+.pergunta > div { flex: 1; min-width: 0; }
+.pergunta strong { display: block; margin-bottom: 5px; color: #e7e7e7; font-size: 13px; }
+.pergunta p { color: #8f9497; font-size: 12px; line-height: 1.45; }
 
 /* ===== RESPONSIVIDADE ===== */
-@media (max-width: 1050px) {
-    .grid {
-        grid-template-columns: 1fr;
-    }
+
+@media (max-width: 1200px) {
+    .faq { grid-template-columns: 1fr; }
+    .categorias { display: grid; grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 800px) {
-    .lateral {
-        position: static;
-        width: 100%;
-        height: auto;
-        border-right: 0;
-        border-bottom: 1px solid #222;
-    }
-
-    .layout {
-        display: block;
-    }
-
-    .conteudo {
-        width: 100%;
-        margin: 0;
-    }
-
-    .lateral nav {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .menu {
-        display: none;
-    }
+@media (max-width: 700px) {
+    .categorias { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 550px) {
-    .campos {
-        grid-template-columns: 1fr;
-    }
-
-    .largo {
-        grid-column: auto;
-    }
-
-    .upload {
-        flex-wrap: wrap;
-    }
-
-    footer {
-        flex-direction: column;
-        gap: 8px;
-    }
+@media (max-width: 500px) {
+    .busca button { padding: 0 8px; }
 }

@@ -1,195 +1,47 @@
-/* ===== GERAL ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --gold: #d5a928;
-    --gold2: #e7bf45;
-    --bg: #080a0b;
-    --card: #101213;
-    --border: #292c2e;
-    --text: #eee;
-    --gray: #777;
-}
-
-body {
-    min-height: 100vh;
-    background:
-        linear-gradient(#080a0bd9, #080a0bf2),
-        url("../img/FundoDashboard.jpg") center/cover fixed;
-    color: var(--text);
-    font: 12px Arial, sans-serif;
-}
-
-
-/* ===== HEADER ===== */
-.topo {
-    height: 64px;
-    position: fixed;
-    inset: 0 0 auto;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    padding: 0 25px 0 115px;
-    background: #090a0bf5;
-    border-bottom: 1px solid #222;
-}
-
-.logo img {
-    width: 58px;
-}
-
-.menu {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
-}
-
-.menu a,
-.perfil {
-    color: #eee;
-    text-decoration: none;
-}
-
-.menu a {
-    padding: 9px 16px;
-}
-
-.menu a:hover {
-    color: var(--gold2);
-}
-
-.perfil {
-    margin-left: auto;
-}
-
-.perfil img {
-    width: 25px;
-}
-
-
-/* ===== ESTRUTURA ===== */
-.layout {
-    display: flex;
-    padding-top: 64px;
-}
-
-
-/* ===== MENU LATERAL ===== */
-.lateral {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    width: 270px;
-    height: calc(100vh - 64px);
-    padding: 20px 12px;
-    background: #0a0c0df7;
-    border-right: 1px solid #252729;
-}
-
-.lateral a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 34px;
-    padding: 7px 10px;
-    margin-bottom: 3px;
-    color: #d7d7d7;
-    text-decoration: none;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    font-size: 11px;
-}
-
-.lateral a:first-letter {
-    color: var(--gold);
-}
-
-.lateral a:hover {
-    background: #ffffff08;
-}
-
-.lateral .selecionado {
-    color: var(--gold2);
-    border-color: var(--gold);
-    background: #d5a92812;
-}
-
-
-/* ===== CONTEÚDO ===== */
-.conteudo {
-    width: calc(100% - 270px);
-    margin-left: 270px;
-    padding: 20px 18px 0;
-}
-
-.titulo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.titulo > span {
-    color: var(--gold);
-    font-size: 27px;
-}
-
-.titulo h1 {
-    font-size: 18px;
-    margin-bottom: 3px;
-}
-
-.titulo p {
-    color: #aaa;
-    font-size: 11px;
-}
-
-.linha {
-    height: 2px;
-    margin: 9px 0 14px;
-    background: var(--gold);
-}
-
+/* =========================================================
+   HISTÓRICO DE PAGAMENTOS - só o que é específico da página
+   (cabeçalho, menu lateral, rodapé, .seta e variáveis vêm de
+   ConfiguraçõesProfissional.css, carregado antes)
+========================================================= */
 
 /* ===== FILTROS ===== */
+
 .filtros {
     display: grid;
     grid-template-columns: 1.2fr 1fr 1fr 1.4fr auto;
-    gap: 8px;
-    padding: 10px;
-    margin-bottom: 14px;
-    background: #0e1011ed;
-    border: 1px solid var(--border);
-    border-radius: 7px;
+    gap: 12px;
+    margin: 20px 0 16px;
+    padding: 14px 16px;
+    background: #141414;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-.filtros label {
-    min-width: 0;
-}
+.filtros label { min-width: 0; }
 
 .filtros small {
     display: block;
-    color: #777;
-    font-size: 8px;
-    margin-bottom: 3px;
+    margin-bottom: 6px;
+    color: #8f9497;
+    font-size: 11px;
 }
 
 .campo {
+    height: 38px;
     display: flex;
     align-items: center;
-    height: 35px;
-    padding: 0 9px;
-    gap: 7px;
-    background: #0a0c0d;
-    border: 1px solid var(--border);
-    border-radius: 5px;
+    gap: 8px;
+    padding: 0 10px;
     color: var(--gold);
+    background: #1a1a1c;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    transition: border-color 0.2s ease;
 }
+
+.campo:focus-within { border-color: var(--gold); }
+.campo img { width: 16px; height: 16px; object-fit: contain; flex-shrink: 0; }
 
 .campo input,
 .campo select {
@@ -198,236 +50,145 @@ body {
     outline: 0;
     background: transparent;
     color: #ddd;
-    font: 9px Arial;
+    font: 13px Arial, sans-serif;
 }
 
-.campo select {
-    appearance: none;
-}
-
-.campo option {
-    background: #111;
-}
+.campo input::placeholder { color: #666; }
+.campo select { appearance: none; cursor: pointer; }
+.campo option { background: #111; }
 
 .exportar {
     align-self: end;
-    height: 35px;
-    padding: 0 14px;
-    border: 1px solid #a27e1d;
-    border-radius: 5px;
-    background: transparent;
+    height: 38px;
+    padding: 0 20px;
     color: var(--gold2);
-    font-size: 9px;
+    background: transparent;
+    border: 1px solid #8a701e;
+    border-radius: 6px;
+    font-size: 12px;
     cursor: pointer;
+    transition: 0.2s ease;
 }
 
-.exportar:hover {
-    background: var(--gold);
-    color: #111;
-}
-
+.exportar:hover { background: var(--gold); color: #111; }
 
 /* ===== TABELA ===== */
+
 .transacoes {
-    padding: 12px 14px;
-    background: #0e1011ed;
-    border: 1px solid var(--border);
-    border-radius: 7px;
+    background: #141414;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-.transacoes h2 {
-    margin-bottom: 9px;
-    font-size: 12px;
+.TituloTransacoes {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--borda);
 }
 
-.tabela {
-    width: 100%;
-}
+.TituloTransacoes img { width: 20px; height: 20px; object-fit: contain; }
+.TituloTransacoes h2 { color: #fff; font-size: 14px; font-weight: 600; }
 
 .linha-tabela {
     display: grid;
-    grid-template-columns:
-        .8fr 1.5fr 1fr 1.3fr .9fr .8fr 1.1fr 20px;
+    grid-template-columns: .8fr 1.5fr 1fr 1.3fr .9fr .8fr 1.1fr 24px;
     align-items: center;
-    min-height: 51px;
-    border-top: 1px solid #ffffff0b;
+    gap: 10px;
+    min-height: 62px;
+    padding: 0 16px;
+    border-bottom: 1px solid #242424;
     color: #ccc;
-    font-size: 9px;
+    font-size: 12px;
+    transition: background 0.2s ease;
 }
+
+.linha-tabela:not(.cabecalho):hover { background: rgba(255, 255, 255, 0.03); }
+.linha-tabela:not(.cabecalho):hover .seta { color: var(--gold2); transform: translateX(3px); }
 
 .linha-tabela small {
     display: block;
-    margin-top: 3px;
+    margin-top: 4px;
     color: #656a6f;
-    font-size: 8px;
+    font-size: 11px;
 }
 
 .cabecalho {
-    min-height: 31px;
-    border-top: 1px solid #ffffff0b;
-    color: #bbb;
-    font-size: 9px;
+    min-height: 40px;
+    color: #a8abad;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
 }
 
 .pago,
 .pendente {
     display: inline-block;
+    width: max-content;
     padding: 4px 12px;
     border-radius: 12px;
-    font-size: 8px;
+    font-size: 11px;
     font-weight: normal;
 }
 
-.pago {
-    background: #0b5a3c;
-    color: #9ee0bd;
-}
-
-.pendente {
-    background: #36393d;
-    color: #ddd;
-}
+.pago { background: #07583b; color: #8bd7b3; }
+.pendente { background: #60470b; color: #e2b936; }
 
 .comprovante {
-    padding: 7px 9px;
-    border: 1px solid #967722;
-    border-radius: 5px;
-    background: transparent;
+    padding: 7px 12px;
     color: var(--gold2);
-    font-size: 8px;
+    background: transparent;
+    border: 1px solid #8a701e;
+    border-radius: 5px;
+    font-size: 11px;
     cursor: pointer;
+    transition: 0.2s ease;
 }
 
-.comprovante:hover {
-    background: var(--gold);
-    color: #111;
-}
+.comprovante:hover { background: var(--gold); color: #111; }
 
-.seta {
-    color: #777;
-    font-size: 18px;
-}
+/* ===== PAGINAÇÃO ===== */
 
-
-/* ===== RODAPÉ DA TABELA ===== */
 .tabela-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 10px;
-    color: #777;
-    font-size: 8px;
+    padding: 12px 16px;
+    color: #8f9497;
+    font-size: 12px;
 }
 
-.paginas {
-    display: flex;
-    gap: 5px;
-}
+.paginas { display: flex; gap: 6px; }
 
 .paginas button {
-    width: 27px;
-    height: 27px;
-    border: 1px solid #292c2e;
-    border-radius: 4px;
-    background: transparent;
+    width: 30px;
+    height: 30px;
     color: #888;
+    background: transparent;
+    border: 1px solid var(--borda);
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.paginas .atual {
-    border-color: var(--gold);
-    color: var(--gold);
-}
-
-
-/* ===== FOOTER ===== */
-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 14px 4px;
-    margin-top: 28px;
-    border-top: 1px solid var(--gold);
-    color: #555;
-    font-size: 8px;
-}
-
-footer div {
-    display: flex;
-    gap: 7px;
-}
-
-footer a {
-    color: #666;
-    text-decoration: none;
-}
-
-footer a:hover {
-    color: var(--gold);
-}
-
+.paginas .atual { color: var(--gold); border-color: var(--gold); }
 
 /* ===== RESPONSIVIDADE ===== */
-@media (max-width: 1100px) {
-    .filtros {
-        grid-template-columns: 1fr 1fr;
-    }
 
-    .busca {
-        grid-column: span 2;
-    }
-
-    .exportar {
-        width: 120px;
-    }
-
-    .linha-tabela {
-        min-width: 850px;
-    }
-
-    .transacoes {
-        overflow-x: auto;
-    }
-}
-
-@media (max-width: 800px) {
-    .lateral {
-        position: static;
-        width: 100%;
-        height: auto;
-        border-right: 0;
-        border-bottom: 1px solid #222;
-    }
-
-    .layout {
-        display: block;
-    }
-
-    .conteudo {
-        width: 100%;
-        margin: 0;
-    }
-
-    .lateral nav {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .menu {
-        display: none;
-    }
+@media (max-width: 1200px) {
+    .filtros { grid-template-columns: 1fr 1fr; }
+    .busca { grid-column: span 2; }
+    .exportar { width: 140px; }
+    .transacoes { overflow-x: auto; }
+    .tabela, .TituloTransacoes, .tabela-footer { min-width: 900px; }
 }
 
 @media (max-width: 550px) {
-    .filtros {
-        grid-template-columns: 1fr;
-    }
-
-    .busca {
-        grid-column: auto;
-    }
-
-    footer {
-        flex-direction: column;
-        gap: 8px;
-    }
+    .filtros { grid-template-columns: 1fr; }
+    .busca { grid-column: auto; }
+    .exportar { width: 100%; }
 }

@@ -111,7 +111,7 @@ main::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.15);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.15) 60%);
     pointer-events: none;
 }
 
@@ -120,10 +120,12 @@ main::before {
     min-height: 100vh;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: space-between;
-    margin: 0 100px;
-    padding-top: 75px;
+    gap: 60px;
+    margin: 0;
+    padding: 130px 8% 60px;
 }
 
 
@@ -134,6 +136,7 @@ main::before {
 .apresentacao {
     display: flex;
     flex-direction: column;
+    flex: 1 1 400px;
     padding: 0 100px 0 20px;
 }
 
@@ -158,8 +161,12 @@ main::before {
 }
 
 .descricao {
-    color: #d4af6a;
-    max-width: 480px;
+    color: #f0f0f0;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.5;
+    max-width: 380px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
 }
 
 
@@ -214,14 +221,17 @@ main::before {
 }
 
 .bloco-auth {
-    width: 460px;
+    flex: 0 0 500px;
+    width: 500px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 45px 45px;
+    padding: 40px 45px;
     background-color: #0a0a0a;
     border: 2px solid #cda432;
     border-radius: 20px;
+    height: fit-content;
 }
 
 
@@ -259,7 +269,7 @@ main::before {
 .texto-card {
     margin-bottom: 28px;
     color: #a3a3a3;
-    font-size: 14px;
+    font-size: 18px;
     text-align: center;
 }
 
@@ -282,7 +292,7 @@ main::before {
 
 .Campo label {
     color: #e5e5e5;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 600;
 }
 
@@ -293,8 +303,8 @@ main::before {
     display: flex;
     align-items: center;
     gap: 10px;
-    height: 46px;
-    margin-bottom: 12px;
+    height: 52px;
+    margin-bottom: 22px;
     padding: 0 14px;
     background: #0d0d0d;
     border: 1px solid #363636;
@@ -319,7 +329,7 @@ main::before {
     border: none;
     outline: none;
     color: #e5e5e5;
-    font-size: 14px;
+    font-size: 15px;
     font-family: inherit;
 }
 
@@ -338,7 +348,7 @@ main::before {
     justify-content: center;
     gap: 10px;
     width: 100%;
-    padding: 15px 50px;
+    padding: 17px 50px;
     background: #d4af6a;
     border: none;
     border-radius: 10px;
@@ -366,9 +376,18 @@ main::before {
 .MiniCards {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 15px;
     margin-top: 30px;
+}
+
+.MiniCard p,
+.MiniCardU p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #ffffff;
 }
 
 .MiniCard,
@@ -412,7 +431,7 @@ main::before {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 24px 0 18px 0;
+    margin: 30px 0 24px 0;
 }
 
 .divisor span {
@@ -435,7 +454,7 @@ main::before {
 
 .voltar-login p {
     color: #e5e5e5;
-    font-size: 14px;
+    font-size: 15px;
     text-align: center;
 }
 
