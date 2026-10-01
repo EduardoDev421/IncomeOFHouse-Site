@@ -1,0 +1,812 @@
+/* =========================================================
+   CONFIGURAÇÕES DE COBRANÇA
+   CSS completo da página (não depende de outro arquivo)
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080a0b;
+    color: #eee;
+}
+
+/* ================================================= */
+/* CABEÇALHO (fixo) */
+
+.topo {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    z-index: 20;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3%;
+    background: rgba(8, 8, 8, 0.95);
+    border-bottom: 1px solid rgba(212, 166, 58, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 58px;
+    height: auto;
+    object-fit: contain;
+}
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 32px;
+}
+
+.menu a {
+    color: #eee;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.menu a:hover {
+    color: #d4a63a;
+}
+
+.iconelogin img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+/* ================================================= */
+/* Fundo / estrutura */
+
+.BackGround {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 64px;
+    background:
+        linear-gradient(rgba(5, 7, 8, 0.80), rgba(5, 7, 8, 0.92)),
+        url("../../img/BackgroundFundo.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: block;
+}
+
+/* ================================================= */
+/* MENU LATERAL (fixo, altura total) */
+
+.menu-lateral {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    z-index: 15;
+    width: 250px;
+    height: calc(100vh - 64px);
+    padding: 16px 12px;
+    overflow-y: auto;
+    background: #0d0d0e;
+    border-right: 1px solid #252729;
+}
+
+.menu-lateral ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    list-style: none;
+}
+
+.menu-lateral li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 38px;
+    padding: 8px 12px;
+    color: #eee;
+    background: #1a1a1c;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: 0.25s ease;
+}
+
+.menu-lateral li a img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.menu-lateral li.ativo a {
+    color: #d4a63a;
+    background: #29231a;
+    border-color: #59431f;
+}
+
+.menu-lateral li:hover a {
+    color: #d4a63a;
+    background: #302718;
+    border-color: #59431f;
+}
+
+.menu-lateral li:last-child {
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 1px solid #292929;
+}
+
+/* ================================================= */
+/* CONTEÚDO (ocupa o resto da tela) */
+
+.conteudo {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: calc(100vh - 64px - 55px);
+    padding: 26px 32px 32px;
+    background: rgba(17, 17, 17, 0.88);
+}
+
+.conteudo > h1 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.conteudo > h4 {
+    color: #a8abad;
+    font-size: 13px;
+    font-weight: 400;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #d4a63a;
+}
+
+/* ================================================= */
+/* Seta */
+
+.seta {
+    flex-shrink: 0;
+    color: #92979a;
+    font-size: 18px;
+    margin-left: 6px;
+    transition: 0.2s ease;
+}
+
+/* ================================================= */
+/* Switch */
+
+.switch {
+    position: relative;
+    width: 38px;
+    height: 21px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+    background: #34383a;
+    border-radius: 30px;
+    transition: 0.25s ease;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    left: 3px;
+    top: 3px;
+    background: #eee;
+    border-radius: 50%;
+    transition: 0.25s ease;
+}
+
+.switch input:checked + .slider {
+    background: linear-gradient(135deg, #c89e26, #efd04f);
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(17px);
+}
+
+/* ================================================= */
+/* Rodapé */
+
+.rodape {
+    margin-left: 250px;
+    min-height: 55px;
+    padding: 15px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: #080a0b;
+    border-top: 1px solid rgba(213, 173, 50, 0.65);
+    color: #7e8385;
+    font-size: 12px;
+}
+
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.RodapeLinks a {
+    color: #7e8385;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.RodapeLinks a:hover {
+    color: #f0ca4c;
+}
+
+/* ================================================= */
+/* Responsividade (menu e rodapé) */
+
+@media (max-width: 1100px) {
+
+    .menu-lateral {
+        width: 220px;
+    }
+
+    .conteudo {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+
+    .rodape {
+        margin-left: 220px;
+    }
+
+}
+
+@media (max-width: 850px) {
+
+    .menu {
+        display: none;
+    }
+
+    .menu-lateral {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid #252729;
+    }
+
+    .menu-lateral ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .menu-lateral li a {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .conteudo {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px 16px;
+    }
+
+    .rodape {
+        margin-left: 0;
+        padding: 15px 16px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .menu-lateral ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rodape {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+}
+
+/* ================================================= */
+/* Configurações de cobrança (parte específica) */
+
+/* ================================================= */
+/* Grid */
+
+.grid-two {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+    align-items: start;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+/* ================================================= */
+/* Card */
+
+.card {
+    padding: 16px 18px 18px;
+    background: #141414;
+    border: 1px solid #292929;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #292929;
+}
+
+.card-head.between {
+    justify-content: space-between;
+}
+
+.head-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.card-head img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.card-head h2 {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-sub {
+    margin-top: 3px;
+    color: #8f9497;
+    font-size: 11px;
+}
+
+/* ================================================= */
+/* Plano atual */
+
+.plan-box {
+    padding: 18px;
+    background: #1a1a1c;
+    border: 1px solid #292929;
+    border-radius: 8px;
+}
+
+.plan-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.plan-name-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.plan-name-row h3 {
+    color: #fff;
+    font-size: 15px;
+}
+
+.plan-price {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.plan-price .price {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.plan-price .per {
+    color: #8f9497;
+    font-size: 12px;
+}
+
+.plan-desc {
+    margin-bottom: 14px;
+    color: #8f9497;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.plan-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.plan-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #e7e7e7;
+    font-size: 13px;
+}
+
+.check {
+    color: #d4a63a;
+    font-weight: 700;
+}
+
+.plan-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 14px;
+    border-top: 1px solid #292929;
+}
+
+.next-charge {
+    color: #8f9497;
+    font-size: 12px;
+}
+
+/* ================================================= */
+/* Pills */
+
+.pill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.pill-ativo {
+    background: linear-gradient(135deg, #c89e26, #efd04f);
+    color: #111;
+}
+
+.pill-principal,
+.pill-pago {
+    background: #07583b;
+    color: #8bd7b3;
+    font-weight: normal;
+}
+
+/* ================================================= */
+/* Botões */
+
+.btn-outline-gold {
+    padding: 9px 18px;
+    color: #f0ca4c;
+    background: transparent;
+    border: 1px solid #8a701e;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-outline-gold.sm {
+    padding: 6px 14px;
+    font-size: 11px;
+}
+
+.btn-outline-gold:hover {
+    background: #d4a63a;
+    color: #111;
+}
+
+/* ================================================= */
+/* Formas de pagamento */
+
+.payment-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.payment-card {
+    flex: 1;
+    min-width: 260px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    background: #1a1a1c;
+    border: 1px solid #292929;
+    border-radius: 8px;
+}
+
+.card-logo {
+    width: 48px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a2a5e;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 800;
+    font-style: italic;
+}
+
+.card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-info-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 3px;
+}
+
+.card-info-top strong {
+    color: #e7e7e7;
+    font-size: 13px;
+}
+
+.card-info p {
+    color: #8f9497;
+    font-size: 11px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.icon-btn {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #141414;
+    border: 1px solid #292929;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.icon-btn img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+.icon-btn:hover {
+    background: #302718;
+    border-color: #59431f;
+}
+
+.add-payment {
+    flex: 1;
+    min-width: 240px;
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #d4a63a;
+    border: 1px dashed #59431f;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.add-payment:hover {
+    background: #302718;
+}
+
+.add-ic {
+    font-size: 18px;
+}
+
+/* ================================================= */
+/* Histórico */
+
+.billing-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.billing-table thead th {
+    padding: 0 0 10px;
+    color: #a8abad;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border-bottom: 1px solid #292929;
+}
+
+.billing-table tbody td {
+    padding: 13px 0;
+    color: #ccc;
+    font-size: 12px;
+    white-space: nowrap;
+    border-bottom: 1px solid #242424;
+}
+
+.billing-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.billing-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.billing-table .seta {
+    text-align: right;
+    width: 20px;
+}
+
+/* ================================================= */
+/* Faturamento */
+
+.toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #292929;
+}
+
+.toggle-row strong {
+    color: #e7e7e7;
+    font-size: 13px;
+}
+
+.toggle-row p {
+    margin-top: 4px;
+    color: #8f9497;
+    font-size: 11px;
+}
+
+.email-field label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: #a8abad;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.email-field label img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px 6px 12px;
+    background: #1a1a1c;
+    border: 1px solid #292929;
+    border-radius: 6px;
+}
+
+.input-wrap input {
+    flex: 1;
+    min-width: 0;
+    color: #a8abad;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+}
+
+/* ================================================= */
+/* Responsividade */
+
+@media (max-width: 1200px) {
+
+    .grid-two {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .plan-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .billing-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .plan-top {
+        flex-direction: column;
+    }
+
+    .plan-price {
+        text-align: left;
+    }
+
+}

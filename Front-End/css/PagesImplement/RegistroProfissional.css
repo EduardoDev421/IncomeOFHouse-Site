@@ -1,0 +1,632 @@
+/* =========================================================
+   REGISTRO PROFISSIONAL
+   CSS completo da página (não depende de outro arquivo)
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080a0b;
+    color: #eee;
+}
+
+/* ================================================= */
+/* CABEÇALHO (fixo) */
+
+.topo {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    z-index: 20;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3%;
+    background: rgba(8, 8, 8, 0.95);
+    border-bottom: 1px solid rgba(212, 166, 58, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 58px;
+    height: auto;
+    object-fit: contain;
+}
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 32px;
+}
+
+.menu a {
+    color: #eee;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.menu a:hover {
+    color: #d4a63a;
+}
+
+.iconelogin img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+/* ================================================= */
+/* Fundo / estrutura */
+
+.BackGround {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 64px;
+    background:
+        linear-gradient(rgba(5, 7, 8, 0.80), rgba(5, 7, 8, 0.92)),
+        url("../../img/BackgroundFundo.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: block;
+}
+
+/* ================================================= */
+/* MENU LATERAL (fixo, altura total) */
+
+.menu-lateral {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    z-index: 15;
+    width: 250px;
+    height: calc(100vh - 64px);
+    padding: 16px 12px;
+    overflow-y: auto;
+    background: #0d0d0e;
+    border-right: 1px solid #252729;
+}
+
+.menu-lateral ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    list-style: none;
+}
+
+.menu-lateral li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 38px;
+    padding: 8px 12px;
+    color: #eee;
+    background: #1a1a1c;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: 0.25s ease;
+}
+
+.menu-lateral li a img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.menu-lateral li.ativo a {
+    color: #d4a63a;
+    background: #29231a;
+    border-color: #59431f;
+}
+
+.menu-lateral li:hover a {
+    color: #d4a63a;
+    background: #302718;
+    border-color: #59431f;
+}
+
+.menu-lateral li:last-child {
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 1px solid #292929;
+}
+
+/* ================================================= */
+/* CONTEÚDO (ocupa o resto da tela) */
+
+.conteudo {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: calc(100vh - 64px - 55px);
+    padding: 26px 32px 32px;
+    background: rgba(17, 17, 17, 0.88);
+}
+
+.conteudo > h1 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.conteudo > h4 {
+    color: #a8abad;
+    font-size: 13px;
+    font-weight: 400;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #d4a63a;
+}
+
+/* ================================================= */
+/* Rodapé */
+
+.rodape {
+    margin-left: 250px;
+    min-height: 55px;
+    padding: 15px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: #080a0b;
+    border-top: 1px solid rgba(213, 173, 50, 0.65);
+    color: #7e8385;
+    font-size: 12px;
+}
+
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.RodapeLinks a {
+    color: #7e8385;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.RodapeLinks a:hover {
+    color: #f0ca4c;
+}
+
+/* ================================================= */
+/* Responsividade (menu e rodapé) */
+
+@media (max-width: 1100px) {
+
+    .menu-lateral {
+        width: 220px;
+    }
+
+    .conteudo {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+
+    .rodape {
+        margin-left: 220px;
+    }
+
+}
+
+@media (max-width: 850px) {
+
+    .menu {
+        display: none;
+    }
+
+    .menu-lateral {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid #252729;
+    }
+
+    .menu-lateral ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .menu-lateral li a {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .conteudo {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px 16px;
+    }
+
+    .rodape {
+        margin-left: 0;
+        padding: 15px 16px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .menu-lateral ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rodape {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+}
+
+/* ================================================= */
+/* Registro profissional (parte específica) */
+
+/* ================================================= */
+/* GRID (formulário + informações) */
+
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+    align-items: start;
+}
+
+.formulario,
+.lado {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ================================================= */
+/* Cards */
+
+.card {
+    padding: 16px 18px 18px;
+    background: #141414;
+    border: 1px solid #292929;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #292929;
+}
+
+.card h2 img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.card h2 b {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #d4a63a;
+    color: #111;
+    border-radius: 50%;
+    font-size: 11px;
+}
+
+/* ================================================= */
+/* Formulário */
+
+.campos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+}
+
+.campos label {
+    color: #a8abad;
+    font-size: 12px;
+}
+
+.largo {
+    grid-column: 1 / -1;
+}
+
+.input,
+.textarea {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    padding-left: 10px;
+    background: #1a1a1c;
+    border: 1px solid #292929;
+    border-radius: 6px;
+    transition: border-color 0.2s ease;
+}
+
+.input {
+    height: 38px;
+}
+
+.input img,
+.textarea img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.input input,
+.input select,
+.textarea textarea {
+    width: 100%;
+    height: 100%;
+    padding: 8px 10px 8px 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #ddd;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+}
+
+.input input::placeholder,
+.textarea textarea::placeholder {
+    color: #666;
+}
+
+.input select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.input select option {
+    background: #111;
+}
+
+.input:focus-within,
+.textarea:focus-within {
+    border-color: #d4a63a;
+}
+
+.textarea {
+    height: 96px;
+    align-items: flex-start;
+}
+
+.textarea img {
+    margin-top: 11px;
+}
+
+.textarea textarea {
+    resize: none;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.textarea small {
+    position: absolute;
+    right: 10px;
+    bottom: 6px;
+    color: #666;
+    font-size: 11px;
+}
+
+/* ================================================= */
+/* Documentos */
+
+.upload {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px dashed #8f7425;
+    border-radius: 8px;
+}
+
+.upload > strong {
+    color: #d4a63a;
+    font-size: 26px;
+}
+
+.upload div {
+    flex: 1;
+    min-width: 0;
+}
+
+.upload p {
+    margin-bottom: 4px;
+    color: #e7e7e7;
+    font-size: 13px;
+}
+
+.upload small {
+    color: #8f9497;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.upload input {
+    display: none;
+}
+
+.upload label {
+    padding: 8px 14px;
+    color: #f0ca4c;
+    border: 1px solid #8a701e;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.upload label:hover {
+    background: #d4a63a;
+    color: #111;
+}
+
+.card > button {
+    width: 220px;
+    height: 38px;
+    margin-top: 14px;
+    border: 0;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #c89e26, #efd04f);
+    color: #111;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.card > button:hover {
+    filter: brightness(1.1);
+}
+
+/* ================================================= */
+/* Coluna direita */
+
+.info .descricao {
+    margin: -4px 0 6px;
+    color: #8f9497;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.item {
+    padding: 12px 0;
+    border-top: 1px solid #242424;
+}
+
+.item:last-child {
+    padding-bottom: 0;
+}
+
+.item strong {
+    color: #e7e7e7;
+    font-size: 13px;
+}
+
+.item p,
+.passo p {
+    margin-top: 4px;
+    color: #8f9497;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.passo {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.passo > b {
+    min-width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d4a63a;
+    border: 1px solid #d4a63a;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+.passo strong {
+    display: block;
+    margin-top: 3px;
+    color: #e7e7e7;
+    font-size: 13px;
+}
+
+.suporte {
+    padding: 10px 12px;
+    color: #8f9497;
+    background: rgba(212, 166, 58, 0.06);
+    border: 1px solid #59431f;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.suporte b {
+    color: #f0ca4c;
+}
+
+/* ================================================= */
+/* Responsividade */
+
+@media (max-width: 1200px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .campos {
+        grid-template-columns: 1fr;
+    }
+
+    .largo {
+        grid-column: auto;
+    }
+
+    .upload {
+        flex-wrap: wrap;
+    }
+
+    .card > button {
+        width: 100%;
+    }
+
+}

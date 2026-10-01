@@ -1,6 +1,6 @@
 /* =========================================================
-   CONFIGURAÇÕES DO USUÁRIO - TELA CHEIA
-   Mesmo layout da página de Configurações do Profissional
+   TUTORIAIS
+   CSS completo da página (não depende de outro arquivo)
 ========================================================= */
 
 * {
@@ -88,7 +88,7 @@ body {
     padding-top: 64px;
     background:
         linear-gradient(rgba(5, 7, 8, 0.80), rgba(5, 7, 8, 0.92)),
-        url("../img/BackgroundFundo.png");
+        url("../../img/BackgroundFundo.png");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -195,178 +195,10 @@ body {
 
 .Config {
     width: 100%;
+    margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
-    margin-top: 20px;
-}
-
-/* ================================================= */
-/* Cards */
-
-.Segurança,
-.notificação,
-.Personalização,
-.privacidade,
-.CentralAjuda {
-    background: #141414;
-    border: 1px solid #292929;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-}
-
-.CentralAjuda {
-    margin-top: 16px;
-}
-
-/* ================================================= */
-/* Títulos */
-
-.Titulosegurança,
-.TituloNotificações,
-.TituloPersonalização,
-.TituloPrivacidade,
-.TituloCentralAjuda {
-    min-height: 46px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    border-bottom: 1px solid #292929;
-}
-
-.Titulosegurança img,
-.TituloNotificações img,
-.TituloPersonalização img,
-.TituloPrivacidade img,
-.TituloCentralAjuda img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-}
-
-.Titulosegurança h2,
-.TituloNotificações h2,
-.TituloPersonalização h2,
-.TituloPrivacidade h2,
-.TituloCentralAjuda h2 {
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* ================================================= */
-/* Itens */
-
-.seguranças,
-.notificações,
-.Personalizações,
-.privacidades,
-.CentralAjudas,
-.CentralAjudaU {
-    min-height: 56px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    border-bottom: 1px solid #242424;
-    transition: background 0.2s ease;
-}
-
-.seguranças:last-child,
-.notificações:last-child,
-.Personalizações:last-child,
-.privacidades:last-child,
-.CentralAjudas:last-child,
-.CentralAjudaU:last-child {
-    border-bottom: none;
-}
-
-.seguranças:hover,
-.notificações:hover,
-.Personalizações:hover,
-.privacidades:hover,
-.CentralAjudas:hover,
-.CentralAjudaU:hover {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-/* Ícones dos itens */
-
-.seguranças > img,
-.notificações > img,
-.Personalizações > img,
-.privacidades > img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-/* ================================================= */
-/* Itens que são links (<a> dentro do item) */
-
-.seguranças,
-.CentralAjudas,
-.CentralAjudaU {
-    padding: 0;
-}
-
-.seguranças a,
-.CentralAjudas a,
-.CentralAjudaU a {
-    width: 100%;
-    min-height: 56px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    color: inherit;
-    text-decoration: none;
-}
-
-.seguranças a > img,
-.CentralAjudas a > img,
-.CentralAjudaU a > img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-/* ================================================= */
-/* Textos */
-
-.SegurançaText,
-.notificaçõesText,
-.PersonalizaçõesText,
-.privacidadesText,
-.CentralAjudasText {
-    flex: 1;
-    min-width: 0;
-    margin-left: 4px;
-}
-
-.SegurançaText h3,
-.notificaçõesText h3,
-.PersonalizaçõesText h3,
-.privacidadesText h3,
-.CentralAjudasText h3 {
-    color: #e7e7e7;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
-.SegurançaText p,
-.notificaçõesText p,
-.PersonalizaçõesText p,
-.privacidadesText p,
-.CentralAjudasText p {
-    color: #8f9497;
-    font-size: 11px;
-    line-height: 1.4;
 }
 
 /* ================================================= */
@@ -378,109 +210,6 @@ body {
     font-size: 18px;
     margin-left: 6px;
     transition: 0.2s ease;
-}
-
-.seguranças:hover .seta,
-.privacidades:hover .seta,
-.CentralAjudas:hover .seta,
-.CentralAjudaU:hover .seta {
-    color: #f0ca4c;
-    transform: translateX(3px);
-}
-
-/* ================================================= */
-/* Seletor (tema, idioma, moeda) */
-
-.seletor {
-    height: 32px;
-    padding: 0 10px;
-    background: #1a1a1c;
-    color: #eeeeee;
-    border: 1px solid #292929;
-    border-radius: 6px;
-    outline: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.seletor:focus {
-    border-color: #d4a63a;
-}
-
-.seletor option {
-    background: #111111;
-}
-
-/* ================================================= */
-/* Toggle */
-
-.toggle {
-    position: relative;
-    width: 38px;
-    height: 21px;
-    display: inline-block;
-    flex-shrink: 0;
-}
-
-.toggle input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    cursor: pointer;
-    background: #34383a;
-    border-radius: 30px;
-    transition: 0.25s ease;
-}
-
-.slider::before {
-    content: "";
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    left: 3px;
-    top: 3px;
-    background: #eeeeee;
-    border-radius: 50%;
-    transition: 0.25s ease;
-}
-
-.toggle input:checked + .slider {
-    background: linear-gradient(135deg, #c89e26, #efd04f);
-}
-
-.toggle input:checked + .slider::before {
-    transform: translateX(17px);
-}
-
-/* ================================================= */
-/* Central de ajuda */
-
-.CentralAjudasCard {
-    display: flex;
-    flex-direction: row;
-}
-
-.CentralAjudas,
-.CentralAjudaU {
-    flex: 1;
-    border-bottom: none;
-}
-
-.CentralAjudas {
-    border-right: 1px solid #292929;
-}
-
-.CentralAjudaU {
-    border-right: none;
 }
 
 /* ================================================= */
@@ -517,7 +246,7 @@ body {
 }
 
 /* ================================================= */
-/* Responsividade */
+/* Responsividade (menu e rodapé) */
 
 @media (max-width: 1100px) {
 
@@ -532,10 +261,6 @@ body {
 
     .rodape {
         margin-left: 220px;
-    }
-
-    .Config {
-        gap: 12px;
     }
 
 }
@@ -579,27 +304,315 @@ body {
 
 @media (max-width: 600px) {
 
-    .Config {
-        grid-template-columns: 1fr;
-    }
-
     .menu-lateral ul {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .CentralAjudasCard {
-        flex-direction: column;
-    }
-
-    .CentralAjudas {
-        border-right: none;
-        border-bottom: 1px solid #292929;
     }
 
     .rodape {
         flex-direction: column;
         text-align: center;
         gap: 8px;
+    }
+
+}
+
+/* ================================================= */
+/* Tutoriais (parte específica) */
+
+/* ================================================= */
+/* Busca */
+
+.pesquisa-topo {
+    height: 42px;
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 14px;
+    background: #141414;
+    border: 1px solid #292929;
+    border-radius: 8px;
+}
+
+.pesquisa-topo img {
+    width: 17px;
+    height: 17px;
+}
+
+.pesquisa-topo input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #ddd;
+    font-size: 13px;
+}
+
+.pesquisa-topo input::placeholder {
+    color: #777;
+}
+
+.pesquisa-topo small {
+    color: #555;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+/* ================================================= */
+/* CARDS DE SEÇÃO (mesmo visual dos cards do Configurações) */
+
+.Destaques,
+.Categorias,
+.Ajuda {
+    min-width: 0;
+    background: #141414;
+    border: 1px solid #292929;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.Destaques {
+    grid-column: 1 / -1;
+}
+
+.TituloDestaques {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #292929;
+}
+
+.TituloDestaques img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.TituloDestaques h2 {
+    flex: 1;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.TituloDestaques a {
+    color: #f0ca4c;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+/* ================================================= */
+/* Destaques */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    padding: 16px;
+}
+
+.tutorial-card {
+    min-width: 0;
+    overflow: hidden;
+    background: #1a1a1c;
+    border: 1px solid #292929;
+    border-radius: 8px;
+    transition: 0.25s ease;
+}
+
+.tutorial-card:hover {
+    border-color: #59431f;
+    background: #302718;
+}
+
+.thumb {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        repeating-linear-gradient(0deg, transparent 0, transparent 15px, rgba(212, 166, 58, 0.06) 16px),
+        #0b0c0d;
+    border-bottom: 1px solid #292929;
+}
+
+.play {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f0ca4c;
+    background: rgba(9, 10, 11, 0.85);
+    border: 1px solid #d4a63a;
+    border-radius: 50%;
+    font-size: 13px;
+}
+
+.tutorial-info {
+    padding: 12px 14px 14px;
+}
+
+.categoria {
+    color: #d4a63a;
+    font-size: 11px;
+}
+
+.tutorial-info h3 {
+    margin: 5px 0;
+    color: #e7e7e7;
+    font-size: 13px;
+}
+
+.tutorial-info p {
+    min-height: 44px;
+    color: #8f9497;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.card-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #8f9497;
+    font-size: 11px;
+}
+
+.card-footer button,
+.ajuda-corpo button {
+    padding: 6px 14px;
+    color: #f0ca4c;
+    background: transparent;
+    border: 1px solid #8a701e;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: 0.2s ease;
+}
+
+.card-footer button:hover,
+.ajuda-corpo button:hover {
+    background: #d4a63a;
+    color: #111;
+}
+
+/* ================================================= */
+/* CATEGORIAS (mesmo padrão de item do Configurações) */
+
+.categoria-item {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid #242424;
+    transition: background 0.2s ease;
+}
+
+.categoria-item:last-child {
+    border-bottom: none;
+}
+
+.categoria-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.categoria-item:hover .seta {
+    color: #f0ca4c;
+    transform: translateX(3px);
+}
+
+.categoria-texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.categoria-texto h3 {
+    margin-bottom: 4px;
+    color: #e7e7e7;
+    font-size: 13px;
+}
+
+.categoria-texto p {
+    color: #8f9497;
+    font-size: 11px;
+}
+
+.categoria-item small {
+    color: #666;
+    font-size: 11px;
+}
+
+/* ================================================= */
+/* Ajuda + dicas */
+
+.ajuda-corpo {
+    padding: 14px 16px 16px;
+    border-bottom: 1px solid #292929;
+}
+
+.ajuda-corpo p {
+    margin-bottom: 12px;
+    color: #8f9497;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.ajuda-corpo button {
+    width: 100%;
+    height: 34px;
+}
+
+.dicas {
+    list-style: none;
+    padding: 12px 16px 6px;
+}
+
+.dicas li {
+    position: relative;
+    padding: 0 0 10px 20px;
+    color: #8f9497;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.dicas li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #d4a63a;
+}
+
+/* ================================================= */
+/* Responsividade */
+
+@media (max-width: 1200px) {
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    .pesquisa-topo small {
+        display: none;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .cards {
+        grid-template-columns: 1fr;
     }
 
 }

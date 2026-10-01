@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="IncomeofHouses - Perguntas Frequentes">
-    <!-- 1º: base de layout (igual ao Configurações) | 2º: estilos só de Perguntas Frequentes -->
-    <link rel="stylesheet" href="../../css/ConfiguraçõesProfissional.css">
-    <link rel="stylesheet" href="../../css/PerguntasFrequentes.css">
-    <title>Perguntas Frequentes</title>
+    <meta name="description" content="IncomeofHouses - Registro de Profissional">
+    <link rel="stylesheet" href="../../css/PagesImplement/RegistroProfissional.css">
+    <title>Registro de Profissional</title>
 </head>
 
 <body>
@@ -42,114 +40,140 @@
 
             <!-- Conteúdo -->
             <section class="conteudo">
-                <h1>Perguntas Frequentes</h1>
-                <h4>Encontre respostas rápidas para as dúvidas mais comuns sobre a plataforma.</h4>
+                <h1>Registro de Profissional</h1>
+                <h4>Complete seus dados para se tornar um profissional da plataforma.</h4>
 
-                <!-- Busca -->
-                <div class="busca">
-                    <span>⌕</span>
-                    <input type="text" placeholder="Busque por uma pergunta ou palavra-chave...">
-                    <button>Limpar busca</button>
-                </div>
+                <div class="grid">
+                    <!-- ===== FORMULÁRIO ===== -->
+                    <div class="formulario">
 
-                <div class="faq">
-                    <!-- Categorias -->
-                    <div class="categorias">
-                        <a class="categoria ativa" href="#">
-                            <img src="../../img/icones/IconeLogin.svg" alt="">
-                            <div><strong>Conta e Acesso</strong><small>Informações sobre login, cadastro e conta.</small></div>
-                            <b class="seta">></b>
-                        </a>
-                        <a class="categoria" href="#">
-                            <img src="../../img/icones/IconeCobrança.svg" alt="">
-                            <div><strong>Pagamentos</strong><small>Dúvidas sobre valores, formas de pagamento e notas fiscais.</small></div>
-                            <b class="seta">></b>
-                        </a>
-                        <a class="categoria" href="#">
-                            <img src="../../img/icones/IconeProjetos.svg" alt="">
-                            <div><strong>Projetos e Plantas</strong><small>Informações sobre aquisição, formatos e uso das plantas.</small></div>
-                            <b class="seta">></b>
-                        </a>
-                        <a class="categoria" href="#">
-                            <img src="../../img/icones/IconeEstrela.svg" alt="">
-                            <div><strong>Profissionais</strong><small>Dúvidas sobre contratação e contato com profissionais.</small></div>
-                            <b class="seta">></b>
-                        </a>
-                        <a class="categoria" href="#">
-                            <img src="../../img/icones/IconeData.svg" alt="">
-                            <div><strong>Agendamentos</strong><small>Informações sobre como agendar e gerenciar seus projetos.</small></div>
-                            <b class="seta">></b>
-                        </a>
-                        <a class="categoria" href="#">
-                            <img src="../../img/icones/IconeFaleConosco.svg" alt="">
-                            <div><strong>Suporte Técnico</strong><small>Ajuda com problemas técnicos e funcionalidades da plataforma.</small></div>
-                            <b class="seta">></b>
-                        </a>
-                    </div>
-
-                    <!-- Perguntas -->
-                    <div class="perguntas">
-                        <div class="perguntas-titulo">
-                            <img src="../../img/icones/IconeLogin.svg" alt="">
-                            <div>
-                                <h2>Conta e Acesso</h2>
-                                <p>Respostas sobre login, cadastro, senha e acesso à plataforma.</p>
+                        <!-- 1 - Informações pessoais -->
+                        <div class="card">
+                            <h2><b>1</b> Informações Pessoais</h2>
+                            <div class="campos">
+                                <label>Nome completo *
+                                    <div class="input"><img src="../../img/icones/IconeLogin.svg" alt=""><input type="text" placeholder="Digite seu nome completo"></div>
+                                </label>
+                                <label>CPF/CNPJ *
+                                    <div class="input"><img src="../../img/icones/IconeCPF.svg" alt=""><input type="text" placeholder="Digite seu CPF ou CNPJ"></div>
+                                </label>
+                                <label>E-mail *
+                                    <div class="input"><img src="../../img/icones/IconeEmail.svg" alt=""><input type="email" placeholder="Digite seu e-mail"></div>
+                                </label>
+                                <label>Telefone *
+                                    <div class="input"><img src="../../img/icones/IconeTelefone.svg" alt=""><input type="tel" placeholder="(11) 98765-4321"></div>
+                                </label>
+                                <label>Data de nascimento / Fundação *
+                                    <div class="input"><img src="../../img/icones/IconeData.svg" alt=""><input type="text" placeholder="dd/mm/aaaa"></div>
+                                </label>
+                                <label>Tipo de profissional *
+                                    <div class="input"><img src="../../img/icones/IconeEmpresa.svg" alt="">
+                                        <select>
+                                            <option>Selecione o tipo de profissional</option>
+                                            <option>Engenheiro</option>
+                                            <option>Arquiteto</option>
+                                            <option>Advogado</option>
+                                        </select>
+                                    </div>
+                                </label>
                             </div>
                         </div>
 
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Como faço para me cadastrar na plataforma?</strong>
-                                <p>Clique em "Cadastre-se" na página inicial e preencha seus dados. Após a confirmação do e-mail, sua conta estará ativa.</p>
+                        <!-- 2 - Dados profissionais -->
+                        <div class="card">
+                            <h2><b>2</b> Dados Profissionais</h2>
+                            <div class="campos">
+                                <label>Registro Profissional (CREA/CAU/etc.) *
+                                    <div class="input"><img src="../../img/icones/IconeRegistroPessoal.svg" alt=""><input type="text" placeholder="Digite seu registro"></div>
+                                </label>
+                                <label>Estado do registro *
+                                    <div class="input"><img src="../../img/icones/IconeEndereco.svg" alt="">
+                                        <select>
+                                            <option>Selecione o estado</option>
+                                            <option>São Paulo (SP)</option>
+                                            <option>Rio de Janeiro (RJ)</option>
+                                            <option>Minas Gerais (MG)</option>
+                                        </select>
+                                    </div>
+                                </label>
+                                <label>Área de atuação *
+                                    <div class="input"><img src="../../img/icones/IconeAtuação.svg" alt="">
+                                        <select>
+                                            <option>Selecione a área de atuação</option>
+                                            <option>Construção Civil</option>
+                                            <option>Arquitetura</option>
+                                            <option>Engenharia</option>
+                                            <option>Design de Interiores</option>
+                                        </select>
+                                    </div>
+                                </label>
+                                <label>Experiência (anos) *
+                                    <div class="input"><img src="../../img/icones/IconeTempo.svg" alt=""><input type="number" placeholder="Ex.: 5 anos"></div>
+                                </label>
+                                <label class="largo">Descrição profissional *
+                                    <div class="textarea"><img src="../../img/icones/Iconelapis.svg" alt="">
+                                        <textarea maxlength="500" placeholder="Conte um pouco sobre sua experiência e especializações..."></textarea>
+                                        <small>0/500</small>
+                                    </div>
+                                </label>
                             </div>
-                            <span class="seta">></span>
-                        </article>
+                        </div>
 
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Esqueci minha senha. Como recupero?</strong>
-                                <p>Na página de login, clique em "Esqueceu sua senha?" e siga as instruções enviadas por e-mail.</p>
+                        <!-- 3 - Documentos -->
+                        <div class="card">
+                            <h2><b>3</b> Documentos</h2>
+                            <div class="upload">
+                                <strong>⇧</strong>
+                                <div>
+                                    <p>Anexe seus documentos (PDF, JPG ou PNG)</p>
+                                    <small>RG, CPF, Comprovante de endereço, Registro profissional e Portfólio (opcional)</small>
+                                </div>
+                                <label for="arquivos">Selecionar arquivos</label>
+                                <input id="arquivos" type="file" multiple accept=".pdf,.jpg,.jpeg,.png">
                             </div>
-                            <span class="seta">></span>
-                        </article>
+                            <button>Enviar solicitação</button>
+                        </div>
+                    </div>
 
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Posso ter mais de um dispositivo conectado?</strong>
-                                <p>Sim, você pode acessar sua conta em múltiplos dispositivos, mas por segurança recomendamos sair dos dispositivos que não estiver usando.</p>
-                            </div>
-                            <span class="seta">></span>
-                        </article>
+                    <!-- ===== COLUNA DIREITA ===== -->
+                    <div class="lado">
 
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Como alterar meus dados de perfil?</strong>
-                                <p>Acesse a seção "Meu Perfil" no menu lateral e clique em "Editar" para atualizar suas informações.</p>
-                            </div>
-                            <span class="seta">></span>
-                        </article>
+                        <!-- Vantagens -->
+                        <div class="info card">
+                            <h2><img src="../../img/icones/IconeEstrela.svg" alt=""> Vantagens de ser um profissional</h2>
+                            <p class="descricao">Faça parte de uma rede de especialistas em projetos e construção.</p>
 
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Existe um limite de dispositivos conectados?</strong>
-                                <p>Não há um limite específico, mas recomendamos manter apenas os dispositivos que você utiliza regularmente.</p>
+                            <div class="item">
+                                <strong>Mais visibilidade</strong>
+                                <p>Seus projetos serão vistos por milhares de usuários.</p>
                             </div>
-                            <span class="seta">></span>
-                        </article>
+                            <div class="item">
+                                <strong>Novas oportunidades</strong>
+                                <p>Conecte-se com clientes e projetos em todo o Brasil.</p>
+                            </div>
+                            <div class="item">
+                                <strong>Gestão simplificada</strong>
+                                <p>Acompanhe seus atendimentos e pedidos em um só lugar.</p>
+                            </div>
+                            <div class="item">
+                                <strong>Credibilidade</strong>
+                                <p>Faça parte de uma plataforma segura e confiável.</p>
+                            </div>
+                        </div>
 
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Minha conta foi bloqueada. O que fazer?</strong>
-                                <p>Entre em contato com nosso suporte através da página "Fale Conosco" para verificarmos o motivo do bloqueio e orientarmos a liberação.</p>
+                        <!-- Como funciona -->
+                        <div class="info card">
+                            <h2><img src="../../img/icones/IconeTutorial.svg" alt=""> Como funciona?</h2>
+
+                            <div class="passo"><b>1</b><div><strong>Preencha seus dados</strong><p>Informe suas informações pessoais e profissionais.</p></div></div>
+                            <div class="passo"><b>2</b><div><strong>Anexe os documentos</strong><p>Envie a documentação necessária para verificação.</p></div></div>
+                            <div class="passo"><b>3</b><div><strong>Aguarde a análise</strong><p>Nossa equipe irá revisar seus dados em até 3 dias úteis.</p></div></div>
+                            <div class="passo"><b>4</b><div><strong>Comece a receber solicitações</strong><p>Após a aprovação, seu perfil estará ativo na plataforma.</p></div></div>
+
+                            <div class="suporte">
+                                Em caso de dúvidas, entre em contato com nosso suporte pelo menu <b>Fale Conosco</b>.
                             </div>
-                            <span class="seta">></span>
-                        </article>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -164,5 +188,6 @@
             <a href="../PoliticaPrivacidade.html">Política de Privacidade</a>
         </div>
     </footer>
+
 </body>
 </html>

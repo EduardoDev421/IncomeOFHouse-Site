@@ -1,77 +1,129 @@
-/* =========================================================
-   CONFIGURAÇÕES DO PROFISSIONAL - TELA CHEIA
-   Também é a BASE de layout usada pela página Tutoriais
-========================================================= */
-
-:root {
-    --gold: #d4a63a;
-    --gold2: #f0ca4c;
-    --topo: 64px;
-    --lateral: 250px;
-    --borda: #292929;
+/* Configuração Geral */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    width: 100%;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0b0b0b;
+    color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
-    background: #080a0b;
-    color: #eee;
 }
-
-/* ===== CABEÇALHO (fixo) ===== */
-
-.topo {
-    position: fixed;
-    inset: 0 0 auto 0;
-    z-index: 20;
-    height: var(--topo);
+/* ================================================= */
+/* BackGround do Menu */
+.topo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 3%;
-    background: rgba(8, 8, 8, 0.95);
-    border-bottom: 1px solid rgba(212, 166, 58, 0.25);
+    padding: 0 6%;
+    z-index: 10;
+    background: rgba(10, 10, 10, 0.25); /* reduzi de 0.55 pra 0.25 — teste esse valor */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
     backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
 }
 
-.logo { display: flex; align-items: center; }
-.logo img { width: 58px; height: auto; object-fit: contain; }
+/* Logo */
+
+.logo{
+    width: 100%;
+    background:  transparent;
+}
+
+.logo a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 100%;
+    max-width: 70px;
+    height: auto;
+    margin-left: 30px;
+}
+
+/* Menu */
 
 .menu {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 32px;
+    align-items: center;
+    gap: 12px;
 }
 
 .menu a {
-    color: #eee;
+    color: #ffffff;
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 7px;
     transition: 0.3s ease;
 }
 
-.menu a:hover { color: var(--gold); }
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #d4af6a;
+}
 
-.iconelogin img { width: 28px; height: 28px; object-fit: contain; }
+.menu a.ativo {
+    color: #d4af6a;
+    border: 1px solid rgba(212, 175, 106, 0.4);
+    background: rgba(212, 175, 106, 0.08);
+}
 
-/* ===== FUNDO / ESTRUTURA ===== */
+/* Icone Login */
+.iconelogin{
+    margin-left: auto;
+}
+
+.iconelogin a{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.iconelogin a:hover{
+    color: #d4af6a;
+}
+
+.iconelogin img {
+    max-width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+/* ================================================= */
+/* Fundo / estrutura */
 
 .BackGround {
     width: 100%;
     min-height: 100vh;
-    padding-top: var(--topo);
+    padding-top: 64px;
     background:
         linear-gradient(rgba(5, 7, 8, 0.80), rgba(5, 7, 8, 0.92)),
-        url("../img/BackgroundFundo.png") center / cover fixed;
+        url("../img/BackgroundFundo.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .container {
@@ -81,15 +133,16 @@ body {
     display: block;
 }
 
-/* ===== MENU LATERAL (fixo, altura total) ===== */
+/* ================================================= */
+/* MENU LATERAL (fixo, altura total) */
 
 .menu-lateral {
     position: fixed;
-    top: var(--topo);
+    top: 64px;
     left: 0;
     z-index: 15;
-    width: var(--lateral);
-    height: calc(100vh - var(--topo));
+    width: 250px;
+    height: calc(100vh - 64px);
     padding: 16px 12px;
     overflow-y: auto;
     background: #0d0d0e;
@@ -118,16 +171,21 @@ body {
     transition: 0.25s ease;
 }
 
-.menu-lateral li a img { width: 17px; height: 17px; object-fit: contain; flex-shrink: 0; }
+.menu-lateral li a img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
 
 .menu-lateral li.ativo a {
-    color: var(--gold);
+    color: #d4a63a;
     background: #29231a;
     border-color: #59431f;
 }
 
 .menu-lateral li:hover a {
-    color: var(--gold);
+    color: #d4a63a;
     background: #302718;
     border-color: #59431f;
 }
@@ -135,36 +193,43 @@ body {
 .menu-lateral li:last-child {
     margin-top: 6px;
     padding-top: 8px;
-    border-top: 1px solid var(--borda);
+    border-top: 1px solid #292929;
 }
 
-/* ===== CONTEÚDO (ocupa o resto da tela) ===== */
+/* ================================================= */
+/* CONTEÚDO (ocupa o resto da tela) */
 
 .conteudo {
-    margin-left: var(--lateral);
-    width: calc(100% - var(--lateral));
-    min-height: calc(100vh - var(--topo) - 55px);
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: calc(100vh - 64px - 55px);
     padding: 26px 32px 32px;
     background: rgba(17, 17, 17, 0.88);
 }
 
-.conteudo > h1 { color: #fff; font-size: 24px; font-weight: 600; margin-bottom: 6px; }
+.conteudo > h1 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
 
 .conteudo > h4 {
     color: #a8abad;
     font-size: 13px;
     font-weight: 400;
     padding-bottom: 14px;
-    border-bottom: 1px solid var(--gold);
+    border-bottom: 1px solid #d4a63a;
 }
 
-/* ===== GRID DOS CARDS ===== */
+/* ================================================= */
+/* Grid dos cards */
 
 .Config {
     width: 100%;
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
 }
 
@@ -172,47 +237,83 @@ body {
 .ConfigCPF {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
 }
 
-.CentralAjuda { grid-column: 1 / -1; }
+.CentralAjuda {
+    grid-column: 1 / -1;
+}
 
-/* ===== CARDS ===== */
+/* ================================================= */
+/* Cards */
 
-:is(.Segurança, .notificação, .ConfigProfissionail, .PerfilProfissional,
-    .Financeiro, .Privacidade, .CentralAjuda) {
+.Segurança,
+.notificação,
+.ConfigProfissionail,
+.PerfilProfissional,
+.Financeiro,
+.Privacidade,
+.CentralAjuda {
     min-width: 0;
     background: #141414;
-    border: 1px solid var(--borda);
+    border: 1px solid #292929;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-:is(.TituloSegurança, .TituloNotificação, .TituloConfigProfissional,
-    .TituloPerfilProfissional, .TituloFinanceiro, .TituloPrivacidade,
-    .TituloCentralAjuda) {
+.TituloSegurança,
+.TituloNotificação,
+.TituloConfigProfissional,
+.TituloPerfilProfissional,
+.TituloFinanceiro,
+.TituloPrivacidade,
+.TituloCentralAjuda {
     min-height: 46px;
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 10px 16px;
-    border-bottom: 1px solid var(--borda);
+    border-bottom: 1px solid #292929;
 }
 
-:is(.TituloSegurança, .TituloNotificação, .TituloConfigProfissional,
-    .TituloPerfilProfissional, .TituloFinanceiro, .TituloPrivacidade,
-    .TituloCentralAjuda) img { width: 20px; height: 20px; object-fit: contain; }
+.TituloSegurança img,
+.TituloNotificação img,
+.TituloConfigProfissional img,
+.TituloPerfilProfissional img,
+.TituloFinanceiro img,
+.TituloPrivacidade img,
+.TituloCentralAjuda img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
 
-:is(.TituloSegurança, .TituloNotificação, .TituloConfigProfissional,
-    .TituloPerfilProfissional, .TituloFinanceiro, .TituloPrivacidade,
-    .TituloCentralAjuda) h2 { color: #fff; font-size: 14px; font-weight: 600; }
+.TituloSegurança h2,
+.TituloNotificação h2,
+.TituloConfigProfissional h2,
+.TituloPerfilProfissional h2,
+.TituloFinanceiro h2,
+.TituloPrivacidade h2,
+.TituloCentralAjuda h2 {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
 
-/* ===== ITENS ===== */
+/* ================================================= */
+/* Itens */
 
-:is(.seguranças, .notificações, .ConfigProfissionais, .PerfilProfissionais,
-    .Financeiros, .Privacidades, .PrivacidadesU, .CentralAjudas, .CentralAjudaU) {
+.seguranças,
+.notificações,
+.ConfigProfissionais,
+.PerfilProfissionais,
+.Financeiros,
+.Privacidades,
+.PrivacidadesU,
+.CentralAjudas,
+.CentralAjudaU {
     min-height: 56px;
     display: flex;
     align-items: center;
@@ -222,60 +323,165 @@ body {
     transition: background 0.2s ease;
 }
 
-:is(.seguranças, .notificações, .ConfigProfissionais, .PerfilProfissionais,
-    .Financeiros, .Privacidades, .PrivacidadesU, .CentralAjudas, .CentralAjudaU):last-child {
+.seguranças:last-child,
+.notificações:last-child,
+.ConfigProfissionais:last-child,
+.PerfilProfissionais:last-child,
+.Financeiros:last-child,
+.Privacidades:last-child,
+.PrivacidadesU:last-child,
+.CentralAjudas:last-child,
+.CentralAjudaU:last-child {
     border-bottom: none;
 }
 
-:is(.seguranças, .notificações, .ConfigProfissionais, .PerfilProfissionais,
-    .Financeiros, .Privacidades, .PrivacidadesU, .CentralAjudas, .CentralAjudaU):hover {
+.seguranças:hover,
+.notificações:hover,
+.ConfigProfissionais:hover,
+.PerfilProfissionais:hover,
+.Financeiros:hover,
+.Privacidades:hover,
+.PrivacidadesU:hover,
+.CentralAjudas:hover,
+.CentralAjudaU:hover {
     background: rgba(255, 255, 255, 0.03);
 }
 
-:is(.seguranças, .notificações, .ConfigProfissionais, .PerfilProfissionais,
-    .Financeiros, .Privacidades, .PrivacidadesU, .CentralAjudas, .CentralAjudaU) > img {
+.seguranças > img,
+.notificações > img,
+.ConfigProfissionais > img,
+.PerfilProfissionais > img,
+.Financeiros > img,
+.Privacidades > img,
+.PrivacidadesU > img,
+.CentralAjudas > img,
+.CentralAjudaU > img {
     width: 20px;
     height: 20px;
     object-fit: contain;
     flex-shrink: 0;
 }
 
-:is(.SegurançaText, .notificaçõesText, .ConfigProfissionaisText, .PerfilProfissionaisText,
-    .FinanceirosText, .PrivacidadesText, .CentralAjudasText) { flex: 1; min-width: 0; margin-left: 4px; }
+.SegurançaText,
+.notificaçõesText,
+.ConfigProfissionaisText,
+.PerfilProfissionaisText,
+.FinanceirosText,
+.PrivacidadesText,
+.CentralAjudasText {
+    flex: 1;
+    min-width: 0;
+    margin-left: 4px;
+}
 
-:is(.SegurançaText, .notificaçõesText, .ConfigProfissionaisText, .PerfilProfissionaisText,
-    .FinanceirosText, .PrivacidadesText, .CentralAjudasText) h3 {
+.SegurançaText h3,
+.notificaçõesText h3,
+.ConfigProfissionaisText h3,
+.PerfilProfissionaisText h3,
+.FinanceirosText h3,
+.PrivacidadesText h3,
+.CentralAjudasText h3 {
     color: #e7e7e7;
     font-size: 13px;
     font-weight: 600;
     margin-bottom: 4px;
 }
 
-:is(.SegurançaText, .notificaçõesText, .ConfigProfissionaisText, .PerfilProfissionaisText,
-    .FinanceirosText, .PrivacidadesText, .CentralAjudasText) p {
+.SegurançaText p,
+.notificaçõesText p,
+.ConfigProfissionaisText p,
+.PerfilProfissionaisText p,
+.FinanceirosText p,
+.PrivacidadesText p,
+.CentralAjudasText p {
     color: #8f9497;
     font-size: 11px;
     line-height: 1.4;
 }
 
-/* ===== SETA ===== */
+/* ================================================= */
+/* Itens que são links (<a> dentro do item) */
 
-.seta { flex-shrink: 0; color: #92979a; font-size: 18px; margin-left: 6px; transition: 0.2s ease; }
+.seguranças,
+.PerfilProfissionais,
+.Financeiros,
+.CentralAjudas,
+.CentralAjudaU {
+    padding: 0;
+}
 
-:is(.seguranças, .ConfigProfissionais, .PerfilProfissionais, .Financeiros,
-    .Privacidades, .PrivacidadesU, .CentralAjudas, .CentralAjudaU):hover .seta {
-    color: var(--gold2);
+.seguranças a,
+.PerfilProfissionais a,
+.Financeiros a,
+.CentralAjudas a,
+.CentralAjudaU a {
+    width: 100%;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.seguranças a > img,
+.PerfilProfissionais a > img,
+.Financeiros a > img,
+.CentralAjudas a > img,
+.CentralAjudaU a > img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* ================================================= */
+/* Seta */
+
+.seta {
+    flex-shrink: 0;
+    color: #92979a;
+    font-size: 18px;
+    margin-left: 6px;
+    transition: 0.2s ease;
+}
+
+.seguranças:hover .seta,
+.ConfigProfissionais:hover .seta,
+.PerfilProfissionais:hover .seta,
+.Financeiros:hover .seta,
+.Privacidades:hover .seta,
+.PrivacidadesU:hover .seta,
+.CentralAjudas:hover .seta,
+.CentralAjudaU:hover .seta {
+    color: #f0ca4c;
     transform: translateX(3px);
 }
 
-/* ===== SWITCH ===== */
+/* ================================================= */
+/* Switch */
 
-.switch { position: relative; width: 38px; height: 21px; display: inline-block; flex-shrink: 0; }
-.switch input { opacity: 0; width: 0; height: 0; }
+.switch {
+    position: relative;
+    width: 38px;
+    height: 21px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
 .slider {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     cursor: pointer;
     background: #34383a;
     border-radius: 30px;
@@ -294,22 +500,38 @@ body {
     transition: 0.25s ease;
 }
 
-.switch input:checked + .slider { background: linear-gradient(135deg, #c89e26, #efd04f); }
-.switch input:checked + .slider::before { transform: translateX(17px); }
+.switch input:checked + .slider {
+    background: linear-gradient(135deg, #c89e26, #efd04f);
+}
 
-/* ===== CENTRAL DE AJUDA ===== */
+.switch input:checked + .slider::before {
+    transform: translateX(17px);
+}
 
-.CentralAjudasCard { display: flex; flex-direction: row; }
+/* ================================================= */
+/* Central de ajuda */
+
+.CentralAjudasCard {
+    display: flex;
+    flex-direction: row;
+}
 
 .CentralAjudas,
-.CentralAjudaU { flex: 1; border-bottom: none; border-right: 1px solid var(--borda); }
+.CentralAjudaU {
+    flex: 1;
+    border-bottom: none;
+    border-right: 1px solid #292929;
+}
 
-.CentralAjudaU { border-right: none; }
+.CentralAjudaU {
+    border-right: none;
+}
 
-/* ===== RODAPÉ ===== */
+/* ================================================= */
+/* Rodapé */
 
 .rodape {
-    margin-left: var(--lateral);
+    margin-left: 250px;
     min-height: 55px;
     padding: 15px 32px;
     display: flex;
@@ -322,19 +544,53 @@ body {
     font-size: 12px;
 }
 
-.RodapeLinks { display: flex; align-items: center; gap: 9px; }
-.RodapeLinks a { color: #7e8385; text-decoration: none; transition: 0.2s ease; }
-.RodapeLinks a:hover { color: var(--gold2); }
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
 
-/* ===== RESPONSIVIDADE ===== */
+.RodapeLinks a {
+    color: #7e8385;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.RodapeLinks a:hover {
+    color: #f0ca4c;
+}
+
+/* ================================================= */
+/* Responsividade */
 
 @media (max-width: 1100px) {
-    :root { --lateral: 220px; }
-    .ConfigSN, .ConfigCPF, .Config { gap: 12px; }
+
+    .menu-lateral {
+        width: 220px;
+    }
+
+    .conteudo {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+
+    .rodape {
+        margin-left: 220px;
+    }
+
+    .ConfigSN,
+    .ConfigCPF,
+    .Config {
+        gap: 12px;
+    }
+
 }
 
 @media (max-width: 850px) {
-    .menu { display: none; }
+
+    .menu {
+        display: none;
+    }
 
     .menu-lateral {
         position: static;
@@ -344,17 +600,54 @@ body {
         border-bottom: 1px solid #252729;
     }
 
-    .menu-lateral ul { display: grid; grid-template-columns: repeat(3, 1fr); }
-    .menu-lateral li a { justify-content: center; text-align: center; }
+    .menu-lateral ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
 
-    .conteudo { margin-left: 0; width: 100%; padding: 20px 16px; }
-    .rodape { margin-left: 0; padding: 15px 16px; }
+    .menu-lateral li a {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .conteudo {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px 16px;
+    }
+
+    .rodape {
+        margin-left: 0;
+        padding: 15px 16px;
+    }
+
 }
 
 @media (max-width: 600px) {
-    .Config, .ConfigSN, .ConfigCPF { grid-template-columns: 1fr; }
-    .menu-lateral ul { grid-template-columns: repeat(2, 1fr); }
-    .CentralAjudasCard { flex-direction: column; }
-    .CentralAjudas { border-right: none; border-bottom: 1px solid var(--borda); }
-    .rodape { flex-direction: column; text-align: center; gap: 8px; }
+
+    .Config,
+    .ConfigSN,
+    .ConfigCPF {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-lateral ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .CentralAjudasCard {
+        flex-direction: column;
+    }
+
+    .CentralAjudas {
+        border-right: none;
+        border-bottom: 1px solid #292929;
+    }
+
+    .rodape {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
 }
