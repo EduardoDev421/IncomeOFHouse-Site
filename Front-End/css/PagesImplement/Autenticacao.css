@@ -1,0 +1,901 @@
+/* =========================================================
+   AUTENTICAÇÃO EM DUAS ETAPAS
+   CSS completo da página (não depende de outro arquivo)
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080a0b;
+    color: #eee;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ================================================= */
+/* CABEÇALHO (fixo) */
+
+.topo {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    z-index: 20;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3%;
+    background: rgba(8, 8, 8, 0.95);
+    border-bottom: 1px solid rgba(212, 166, 58, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 58px;
+    height: auto;
+    object-fit: contain;
+}
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 32px;
+}
+
+.menu a {
+    color: #eee;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.menu a:hover {
+    color: #d4a63a;
+}
+
+.acoes-topo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.acoes-topo button,
+.iconelogin {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #eee;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.acoes-topo button:hover,
+.iconelogin:hover {
+    color: #d4a63a;
+}
+
+.iconelogin .avatar {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1c;
+    background: #cfcfcf;
+    border-radius: 50%;
+}
+
+/* ================================================= */
+/* Fundo / estrutura */
+
+.BackGround {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 64px;
+    background:
+        linear-gradient(rgba(5, 7, 8, 0.80), rgba(5, 7, 8, 0.92)),
+        url("../../img/BackgroundFundo.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: block;
+}
+
+/* ================================================= */
+/* MENU LATERAL (fixo, altura total) */
+
+.menu-lateral {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    z-index: 15;
+    width: 250px;
+    height: calc(100vh - 64px);
+    padding: 16px 12px;
+    overflow-y: auto;
+    background: #0d0d0e;
+    border-right: 1px solid #252729;
+}
+
+.menu-lateral ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    list-style: none;
+}
+
+.menu-lateral li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 38px;
+    padding: 8px 12px;
+    color: #eee;
+    background: #1a1a1c;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: 0.25s ease;
+}
+
+.menu-lateral li a img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.menu-lateral li.ativo a {
+    color: #d4a63a;
+    background: #29231a;
+    border-color: #59431f;
+}
+
+.menu-lateral li:hover a {
+    color: #d4a63a;
+    background: #302718;
+    border-color: #59431f;
+}
+
+.menu-lateral li:last-child {
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 1px solid #292929;
+}
+
+/* ================================================= */
+/* CONTEÚDO (ocupa o resto da tela) */
+
+.conteudo {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: calc(100vh - 64px - 55px);
+    padding: 26px 32px 32px;
+    background: rgba(17, 17, 17, 0.88);
+}
+
+.conteudo > h1 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.conteudo > h4 {
+    color: #a8abad;
+    font-size: 13px;
+    font-weight: 400;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #d4a63a;
+}
+
+/* ================================================= */
+/* Grid dos cards */
+
+.Config {
+    width: 100%;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+/* ================================================= */
+/* Seta */
+
+.seta {
+    flex-shrink: 0;
+    color: #92979a;
+    font-size: 18px;
+    margin-left: 6px;
+    transition: 0.2s ease;
+}
+
+/* ================================================= */
+/* Rodapé */
+
+.rodape {
+    margin-left: 250px;
+    min-height: 55px;
+    padding: 15px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: #080a0b;
+    border-top: 1px solid rgba(213, 173, 50, 0.65);
+    color: #7e8385;
+    font-size: 12px;
+}
+
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.RodapeLinks a {
+    color: #7e8385;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.RodapeLinks a:hover {
+    color: #f0ca4c;
+}
+
+/* ================================================= */
+/* Responsividade (menu e rodapé) */
+
+@media (max-width: 1100px) {
+
+    .menu-lateral {
+        width: 220px;
+    }
+
+    .conteudo {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+
+    .rodape {
+        margin-left: 220px;
+    }
+
+}
+
+@media (max-width: 850px) {
+
+    .menu {
+        display: none;
+    }
+
+    .menu-lateral {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid #252729;
+    }
+
+    .menu-lateral ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .menu-lateral li a {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .conteudo {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px 16px;
+    }
+
+    .rodape {
+        margin-left: 0;
+        padding: 15px 16px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .menu-lateral ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rodape {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+}
+
+/* ================================================= */
+/* Autenticação em duas etapas (parte específica) */
+
+/* ================================================= */
+/* Voltar + título */
+
+.voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+    color: #a8abad;
+    text-decoration: none;
+    font-size: 12px;
+    transition: 0.2s ease;
+}
+
+.voltar:hover {
+    color: #f0ca4c;
+}
+
+.conteudo > h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.conteudo > h1 svg {
+    flex-shrink: 0;
+    color: #d4a63a;
+}
+
+/* ================================================= */
+/* CARDS DE SEÇÃO (mesmo visual dos cards do Configurações) */
+
+.Painel,
+.Assistente {
+    grid-column: 1 / -1;
+    min-width: 0;
+    background: #141414;
+    border: 1px solid #292929;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.TituloDestaques {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #292929;
+}
+
+.TituloDestaques svg {
+    flex-shrink: 0;
+    color: #d4a63a;
+}
+
+.TituloDestaques h2 {
+    flex: 1;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ================================================= */
+/* Linhas (mesmo padrão de item do Configurações) */
+
+.linha {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #242424;
+}
+
+.linha-texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.linha-texto h3 {
+    margin-bottom: 4px;
+    color: #e7e7e7;
+    font-size: 13px;
+}
+
+.linha-texto p {
+    color: #8f9497;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.linha-texto b {
+    display: block;
+    margin-bottom: 4px;
+    color: #e7e7e7;
+    font-size: 13px;
+}
+
+.linha-texto small {
+    display: block;
+    color: #8f9497;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+/* ================================================= */
+/* Interruptor (mesmo dourado das Notificações) */
+
+.switch {
+    position: relative;
+    flex-shrink: 0;
+    width: 44px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.switch input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.switch .trilho {
+    position: absolute;
+    inset: 0;
+    background: #2c2c2e;
+    border-radius: 99px;
+    transition: 0.25s ease;
+    pointer-events: none;
+}
+
+.switch .trilho::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    background: #eee;
+    border-radius: 50%;
+    transition: 0.25s ease;
+}
+
+.switch input:checked + .trilho {
+    background: #d4a63a;
+}
+
+.switch input:checked + .trilho::after {
+    transform: translateX(20px);
+}
+
+.switch input:focus-visible + .trilho {
+    outline: 2px solid #f0ca4c;
+    outline-offset: 2px;
+}
+
+/* ================================================= */
+/* Métodos de autenticação */
+
+.metodos {
+    min-width: 0;
+    border: 0;
+}
+
+.metodos:disabled {
+    opacity: 0.45;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.opcao {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #242424;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.opcao:last-child {
+    border-bottom: none;
+}
+
+.opcao:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.opcao:has(input:checked) {
+    background: #29231a;
+}
+
+.opcao:has(input:focus-visible) {
+    outline: 2px solid #f0ca4c;
+    outline-offset: -2px;
+}
+
+.metodos:disabled .opcao {
+    cursor: not-allowed;
+}
+
+.opcao input {
+    appearance: none;
+    -webkit-appearance: none;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    background: transparent;
+    border: 1px solid #5a5d60;
+    border-radius: 50%;
+    cursor: inherit;
+}
+
+.opcao input:checked {
+    border-color: #d4a63a;
+    background: radial-gradient(circle, #d4a63a 0 42%, transparent 48%);
+}
+
+.opcao > svg {
+    flex-shrink: 0;
+    color: #d4a63a;
+}
+
+/* ================================================= */
+/* Botões (mesmo estilo dos botões dos cards) */
+
+.acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 16px;
+}
+
+.btn {
+    height: 34px;
+    padding: 0 18px;
+    color: #f0ca4c;
+    background: transparent;
+    border: 1px solid #8a701e;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s ease;
+}
+
+.btn:hover {
+    background: #d4a63a;
+    color: #111;
+}
+
+.btn-principal {
+    color: #111;
+    background: #d4a63a;
+    border-color: #d4a63a;
+    font-weight: 600;
+}
+
+.btn-principal:hover {
+    background: #f0ca4c;
+    border-color: #f0ca4c;
+}
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+    background: transparent;
+    color: #f0ca4c;
+}
+
+.btn-principal:disabled:hover {
+    background: #d4a63a;
+    color: #111;
+}
+
+.btn:focus-visible,
+.reenviar:focus-visible {
+    outline: 2px solid #f0ca4c;
+    outline-offset: 2px;
+}
+
+/* ================================================= */
+/* Assistente */
+
+.corpo {
+    padding: 16px;
+}
+
+.corpo .acoes {
+    padding: 16px 0 0;
+}
+
+.Painel > .acoes {
+    border-top: 1px solid #242424;
+}
+
+.acoes-topo button:focus-visible,
+.iconelogin:focus-visible {
+    outline: 2px solid #f0ca4c;
+    outline-offset: 2px;
+}
+
+.progresso {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+    list-style: none;
+}
+
+.progresso li {
+    flex: 1;
+    padding-top: 7px;
+    color: #666;
+    font-size: 11px;
+    border-top: 2px solid #292929;
+}
+
+.progresso li.atual {
+    color: #e7e7e7;
+    border-color: #d4a63a;
+}
+
+.progresso li.feito {
+    color: #d4a63a;
+    border-color: #d4a63a;
+}
+
+.etapa h2 {
+    color: #e7e7e7;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.etapa > p,
+.etapa [data-metodo] > p {
+    margin: 4px 0 14px;
+    color: #8f9497;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.qr-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.qr-area svg {
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    padding: 8px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.chave-area b {
+    color: #e7e7e7;
+    font-size: 12px;
+}
+
+.chave-area p {
+    margin: 4px 0 8px;
+    color: #8f9497;
+    font-size: 11px;
+}
+
+.chave {
+    display: flex;
+    gap: 8px;
+}
+
+.chave code {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 12px;
+    color: #f0ca4c;
+    background: #0b0c0d;
+    border: 1px solid #292929;
+    border-radius: 5px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    overflow-wrap: anywhere;
+}
+
+.aviso-email {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    color: #e7e7e7;
+    background: #1a1a1c;
+    border: 1px solid #292929;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.aviso-email svg {
+    flex-shrink: 0;
+    color: #d4a63a;
+}
+
+/* ---------- Código de 6 dígitos ---------- */
+
+.otp {
+    display: flex;
+    gap: 8px;
+}
+
+.otp input {
+    width: 44px;
+    height: 50px;
+    color: #fff;
+    background: #0b0c0d;
+    border: 1px solid #292929;
+    border-radius: 6px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.otp input:focus {
+    outline: 1px solid #d4a63a;
+    border-color: #d4a63a;
+}
+
+.otp.erro input {
+    border-color: #e5736b;
+}
+
+.msg-erro {
+    min-height: 20px;
+    margin-top: 8px;
+    color: #e5736b;
+    font-size: 12px;
+}
+
+.reenviar {
+    padding: 0;
+    color: #f0ca4c;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font-size: 11px;
+    text-decoration: underline;
+}
+
+/* ---------- Códigos de backup ---------- */
+
+.codigos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.codigos code {
+    padding: 9px 6px;
+    color: #e7e7e7;
+    background: #0b0c0d;
+    border: 1px solid #292929;
+    border-radius: 5px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-align: center;
+}
+
+.confirma {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    color: #8f9497;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.confirma input {
+    accent-color: #d4a63a;
+}
+
+/* ---------- Aviso ---------- */
+
+.toast {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 30;
+    max-width: calc(100% - 48px);
+    padding: 12px 18px;
+    color: #f0ca4c;
+    background: #29231a;
+    border: 1px solid #59431f;
+    border-radius: 8px;
+    font-size: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ================================================= */
+/* Responsividade */
+
+@media (max-width: 850px) {
+
+    .codigos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .qr-area {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .qr-area svg {
+        align-self: center;
+    }
+
+    .otp input {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+    }
+
+    .conteudo > h1 {
+        font-size: 20px;
+    }
+
+}

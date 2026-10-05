@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IncomeofHouses - Autenticação em duas etapas">
+    <link rel="stylesheet" href="../../css/PagesImplement/Autenticacao.css">
+    <title>Autenticação em duas etapas</title>
+</head>
+
+<body>
+    <header class="topo">
+        <a class="logo" href="../../index.html">
+            <img src="../../img/Logo.png" alt="Income of Houses">
+        </a>
+        <nav class="menu">
+            <a href="../../index.html">Início</a>
+            <a href="../Plantas.html">Plantas</a>
+            <a href="../Profissionais.html">Profissionais</a>
+            <a href="../Sobre.html">Sobre Nós</a>
+        </nav>
+        <div class="acoes-topo">
+            <button type="button" aria-label="Notificações">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+            </button>
+            <a class="iconelogin" href="../Login.html" aria-label="Meu perfil">
+                <span class="avatar">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="8" r="4.5"/><path d="M3.5 21c.5-4.5 4-7 8.5-7s8 2.5 8.5 7z"/></svg>
+                </span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <main class="BackGround">
+        <section class="container">
+            <aside class="menu-lateral">
+                <ul>
+                    <li><a href="../PerfilProfissional.html"><img src="../../img/icones/IconePerfil.svg" alt=""><span>Meu Perfil</span></a></li>
+                    <li><a href="../MeusEndereços.html"><img src="../../img/icones/IconeEndereco.svg" alt=""><span>Meus Endereços</span></a></li>
+                    <li><a href="../MeusPedidos.html"><img src="../../img/icones/IconeProjetos.svg" alt=""><span>Meus Pedidos</span></a></li>
+                    <li><a href="../MeusProfissionais.html"><img src="../../img/icones/IconeEstrela.svg" alt=""><span>Meus Profissionais Favoritos</span></a></li>
+                    <li><a href="../ProjetosSalvos.html"><img src="../../img/icones/IconeSalvos.svg" alt=""><span>Projetos Salvos</span></a></li>
+                    <li><a href="../Agendamentos.html"><img src="../../img/icones/IconeData.svg" alt=""><span>Agendamentos</span></a></li>
+                    <li><a href="../Mensagem.html"><img src="../../img/icones/IconeMensagem.svg" alt=""><span>Mensagem</span></a></li>
+                    <li class="ativo"><a href="../ConfiguraçõesProfissionais.html"><img src="../../img/icones/IconeConfiguracao.svg" alt=""><span>Configurações</span></a></li>
+                    <li><a href="../../index.html"><img src="../../img/icones/IconeSair.svg" alt=""><span>Sair</span></a></li>
+                </ul>
+            </aside>
+
+            <section class="conteudo">
+                <a class="voltar" href="../ConfiguraçõesProfissionais.html">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                    Voltar para configurações
+                </a>
+
+                <h1>
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.3 8.6 8 10 4.7-1.4 8-5 8-10v-6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+                    Autenticação em duas etapas
+                </h1>
+                <h4>Aumente a segurança da sua conta.</h4>
+
+                <div class="Config">
+
+                    <!-- ========== PAINEL PRINCIPAL ========== -->
+                    <div class="Painel" id="painel-config">
+                        <div class="TituloDestaques">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.3 8.6 8 10 4.7-1.4 8-5 8-10v-6z"/><rect x="9" y="10.5" width="6" height="5" rx="1"/><path d="M10.5 10.5V9a1.5 1.5 0 0 1 3 0v1.5"/></svg>
+                            <h2>Segurança extra</h2>
+                        </div>
+                        <div class="linha">
+                            <div class="linha-texto">
+                                <h3>Verificação em duas etapas</h3>
+                                <p>A autenticação em duas etapas adiciona uma camada extra de proteção à sua conta.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="chave-2fa" role="switch" aria-label="Ativar autenticação em duas etapas" checked>
+                                <span class="trilho"></span>
+                            </label>
+                        </div>
+
+                        <div class="TituloDestaques">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2"/><path d="M11 18h2"/></svg>
+                            <h2>Método de autenticação</h2>
+                        </div>
+                        <fieldset class="metodos" id="metodos">
+                            <legend class="sr-only">Método de autenticação</legend>
+
+                            <label class="opcao">
+                                <input type="radio" name="metodo" value="app" checked>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2"/><circle cx="12" cy="10" r="1.6"/><path d="M11.2 18h1.6"/></svg>
+                                <span class="linha-texto">
+                                    <b>Aplicativo autenticador</b>
+                                    <small>Google Authenticator ou Microsoft Authenticator.</small>
+                                </span>
+                            </label>
+
+                            <label class="opcao">
+                                <input type="radio" name="metodo" value="email">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 7 9 6.5L21 7"/></svg>
+                                <span class="linha-texto">
+                                    <b>E-mail</b>
+                                    <small>Receba o código de verificação no seu e-mail.</small>
+                                </span>
+                            </label>
+                        </fieldset>
+
+                        <div class="acoes">
+                            <button class="btn btn-principal" type="button" id="btn-salvar">Salvar alterações</button>
+                        </div>
+                    </div>
+
+                    <!-- ========== ASSISTENTE DE CONFIGURAÇÃO ========== -->
+                    <div class="Assistente" id="assistente" hidden>
+                        <div class="TituloDestaques">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.3 8.6 8 10 4.7-1.4 8-5 8-10v-6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
+                            <h2>Configurar autenticação em duas etapas</h2>
+                        </div>
+
+                        <div class="corpo">
+                            <ol class="progresso" id="progresso">
+                                <li>1. Configurar</li>
+                                <li>2. Verificar</li>
+                                <li>3. Códigos de backup</li>
+                            </ol>
+
+                            <!-- Etapa 1 -->
+                            <div class="etapa" data-etapa="1">
+                                <div data-metodo="app">
+                                    <h2>Escaneie o QR Code</h2>
+                                    <p>Abra o aplicativo autenticador e adicione uma nova conta.</p>
+                                    <div class="qr-area">
+                                        <div id="qr"></div>
+                                        <div class="chave-area">
+                                            <b>Não consegue escanear?</b>
+                                            <p>Digite esta chave no aplicativo:</p>
+                                            <div class="chave">
+                                                <code id="chave-texto"></code>
+                                                <button class="btn" type="button" id="btn-copiar-chave">Copiar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div data-metodo="email" hidden>
+                                    <h2>Confirme seu e-mail</h2>
+                                    <p>Vamos enviar um código de 6 dígitos para o e-mail cadastrado na sua conta.</p>
+                                    <div class="aviso-email">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 7 9 6.5L21 7"/></svg>
+                                        <span id="email-mascarado">e•••••@email.com</span>
+                                    </div>
+                                </div>
+                                <div class="acoes">
+                                    <button class="btn" type="button" data-acao="cancelar">Cancelar</button>
+                                    <button class="btn btn-principal" type="button" id="btn-etapa1">Continuar</button>
+                                </div>
+                            </div>
+
+                            <!-- Etapa 2 -->
+                            <div class="etapa" data-etapa="2" hidden>
+                                <h2>Digite o código de 6 dígitos</h2>
+                                <p id="texto-verificar"></p>
+                                <div class="otp" id="otp">
+                                    <input inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="Dígito 1">
+                                    <input inputmode="numeric" maxlength="1" aria-label="Dígito 2">
+                                    <input inputmode="numeric" maxlength="1" aria-label="Dígito 3">
+                                    <input inputmode="numeric" maxlength="1" aria-label="Dígito 4">
+                                    <input inputmode="numeric" maxlength="1" aria-label="Dígito 5">
+                                    <input inputmode="numeric" maxlength="1" aria-label="Dígito 6">
+                                </div>
+                                <div class="msg-erro" id="msg-erro" role="alert"></div>
+                                <button class="reenviar" type="button" id="btn-reenviar" hidden>Reenviar código</button>
+                                <div class="acoes">
+                                    <button class="btn" type="button" data-acao="voltar-1">Voltar</button>
+                                    <button class="btn btn-principal" type="button" id="btn-verificar" disabled>Verificar</button>
+                                </div>
+                            </div>
+
+                            <!-- Etapa 3 -->
+                            <div class="etapa" data-etapa="3" hidden>
+                                <h2>Guarde seus códigos de backup</h2>
+                                <p>Se perder o acesso ao seu método de verificação, cada código abaixo pode ser usado uma única vez para entrar na conta.</p>
+                                <div class="codigos" id="codigos"></div>
+                                <button class="btn" type="button" id="btn-copiar-codigos">Copiar códigos</button>
+                                <label class="confirma">
+                                    <input type="checkbox" id="confirma-backup">
+                                    Guardei meus códigos em um lugar seguro
+                                </label>
+                                <div class="acoes">
+                                    <button class="btn btn-principal" type="button" id="btn-ativar" disabled>Ativar proteção</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" hidden></div>
+
+    <footer class="rodape">
+        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+        <div class="RodapeLinks">
+            <a href="../TermosUso.html">Termos de Uso</a>
+            <span>|</span>
+            <a href="../PoliticaPrivacidade.html">Política de Privacidade</a>
+        </div>
+    </footer>
+
+    <script src="../../js/AutenticacaoDuasEtapas.js"></script>
+</body>
+</html>

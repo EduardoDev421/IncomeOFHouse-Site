@@ -1,6 +1,7 @@
-/* =====================================================
-   RESET
-===================================================== */
+/* =========================================================
+   PROJETOS SALVOS
+   CSS completo da página (não depende de outro arquivo)
+========================================================= */
 
 * {
     margin: 0;
@@ -8,557 +9,392 @@
     box-sizing: border-box;
 }
 
-
-/* =====================================================
-   BODY
-===================================================== */
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-
-    color: #ffffff;
-
+    width: 100%;
     min-height: 100vh;
-
-    display: flex;
-
-    flex-direction: column;
-
-    background:
-        linear-gradient(
-            rgba(0, 0, 0, 0.58),
-            rgba(0, 0, 0, 0.72)
-        ),
-        url("../img/fundo-casa.png");
-
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    background-attachment: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080a0b;
+    color: #eee;
 }
 
-
-/* =====================================================
-   HEADER
-===================================================== */
+/* ================================================= */
+/* CABEÇALHO (fixo) */
 
 .topo {
-    width: 100%;
-
-    height: 75px;
-
-    background: #080808;
-
-    border-bottom: 1px solid #b99620;
-
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 20;
+    height: 64px;
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    padding: 0 7%;
+    padding: 0 3%;
+    background: rgba(8, 8, 8, 0.95);
+    border-bottom: 1px solid rgba(212, 166, 58, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
-
-/* =====================================================
-   LOGO
-===================================================== */
-
-.logo a {
+.logo {
     display: flex;
-
     align-items: center;
-
-    text-decoration: none;
 }
 
-.logo-casa {
-    color: #d8ad27;
-
-    font-size: 31px;
-
-    line-height: 1;
-
-    margin-right: 10px;
+.logo img {
+    width: 58px;
+    height: auto;
+    object-fit: contain;
 }
-
-.logo-texto {
-    display: flex;
-
-    flex-direction: column;
-
-    letter-spacing: 1px;
-}
-
-.logo-texto span {
-    color: #ffffff;
-
-    font-size: 10px;
-
-    letter-spacing: 1px;
-}
-
-.logo-texto strong {
-    color: #d8ad27;
-
-    font-size: 16px;
-
-    letter-spacing: 3px;
-}
-
-
-/* =====================================================
-   MENU
-===================================================== */
 
 .menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-
-    align-items: center;
-
-    gap: 50px;
+    gap: 32px;
 }
 
 .menu a {
-    color: #eeeeee;
-
+    color: #eee;
     text-decoration: none;
-
-    font-size: 13px;
-
-    transition: 0.2s;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s ease;
 }
 
 .menu a:hover {
-    color: #d8ad27;
+    color: #d4a63a;
 }
 
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-.login {
-    color: #d8ad27;
-
-    text-decoration: none;
-}
-
-.icone-login {
+.iconelogin img {
     width: 28px;
-
     height: 28px;
-
-    border: 2px solid #d8ad27;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 17px;
+    object-fit: contain;
 }
 
+/* ================================================= */
+/* Fundo / estrutura */
 
-/* =====================================================
-   CONTEÚDO
-===================================================== */
-
-.conteudo {
-    flex: 1;
-
+.BackGround {
     width: 100%;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: flex-start;
-
-    padding: 64px 20px;
+    min-height: 100vh;
+    padding-top: 64px;
+    background:
+        linear-gradient(rgba(5, 7, 8, 0.80), rgba(5, 7, 8, 0.92)),
+        url("../img/BackgroundFundo.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
-
-/* =====================================================
-   PAINEL
-===================================================== */
-
-.painel {
+.container {
     width: 100%;
-
-    max-width: 850px;
-
-    min-height: 550px;
-
-    display: grid;
-
-    grid-template-columns: 205px 1fr;
-
-    overflow: hidden;
-
-    background: rgba(15, 15, 15, 0.94);
-
-    border: 1px solid #806817;
-
-    border-radius: 16px;
-
-    box-shadow:
-        0 15px 45px rgba(0, 0, 0, 0.65);
+    display: block;
 }
 
+/* ================================================= */
+/* MENU LATERAL (fixo, altura total) */
 
-/* =====================================================
-   BARRA LATERAL
-===================================================== */
+.menu-lateral {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    z-index: 15;
+    width: 250px;
+    height: calc(100vh - 64px);
+    padding: 16px 12px;
+    overflow-y: auto;
+    background: #0d0d0e;
+    border-right: 1px solid #252729;
+}
 
-.barra-lateral {
-    background: rgba(25, 25, 25, 0.96);
-
-    padding: 30px 23px;
-
+.menu-lateral ul {
     display: flex;
-
     flex-direction: column;
-
-    border-right: 1px solid #4c401c;
+    gap: 5px;
+    list-style: none;
 }
 
-.barra-lateral a {
-    color: #bdbdbd;
-
-    text-decoration: none;
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-    line-height: 1.4;
-
-    padding: 9px 0;
-
-    margin-bottom: 10px;
-
-    transition: 0.2s;
-}
-
-.barra-lateral a:hover {
-    color: #d8ad27;
-}
-
-.barra-lateral a.selecionado {
-    color: #d8ad27;
-}
-
-
-/* =====================================================
-   ÁREA PRINCIPAL
-===================================================== */
-
-.area-principal {
-    padding: 38px 28px;
-
-    background: rgba(17, 17, 17, 0.95);
-}
-
-.area-principal h1 {
-    color: #ffffff;
-
-    font-size: 22px;
-
-    margin-bottom: 8px;
-}
-
-.area-principal h2 {
-    color: #bdbdbd;
-
-    font-size: 13px;
-
-    margin-bottom: 20px;
-}
-
-
-/* =====================================================
-   CAIXA DOS PROJETOS
-===================================================== */
-
-.caixa-projetos {
-    width: 100%;
-
-    min-height: 420px;
-
-    background: #171717;
-
-    border: 1px solid #555555;
-
-    border-radius: 5px;
-
-    padding: 20px 12px;
-}
-
-.caixa-projetos > h3 {
-    color: #ffffff;
-
-    font-size: 18px;
-
-    margin: 0 0 28px 18px;
-}
-
-
-/* =====================================================
-   PROJETO
-===================================================== */
-
-.projeto {
-    width: 100%;
-
-    min-height: 100px;
-
-    padding: 18px;
-
-    background: #101010;
-
-    border: 1px solid #4e4e4e;
-
-    border-radius: 5px;
-
-    margin-bottom: 18px;
-
+.menu-lateral li a {
     display: flex;
-
     align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    transition: 0.2s;
-}
-
-.projeto:hover {
-    border-color: #d8ad27;
-
-    background: #141414;
-}
-
-.projeto h4 {
-    color: #ffffff;
-
-    font-size: 19px;
-
-    margin-bottom: 14px;
-}
-
-.projeto p {
-    color: #aaaaaa;
-
-    font-size: 13px;
-}
-
-
-/* =====================================================
-   BOTÃO
-===================================================== */
-
-.botao-projeto {
-    width: 130px;
-
-    height: 36px;
-
-    border: 1px solid #d8ad27;
-
-    border-radius: 5px;
-
-    background: #d8ad27;
-
-    color: #080808;
-
+    gap: 10px;
+    min-height: 38px;
+    padding: 8px 12px;
+    color: #eee;
+    background: #1a1a1c;
+    border: 1px solid transparent;
+    border-radius: 6px;
     text-decoration: none;
+    font-size: 12px;
+    transition: 0.25s ease;
+}
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    transition: 0.2s;
-
+.menu-lateral li a img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
     flex-shrink: 0;
 }
 
-.botao-projeto:hover {
-    background: #f0c93d;
-
-    border-color: #f0c93d;
+.menu-lateral li.ativo a {
+    color: #d4a63a;
+    background: #29231a;
+    border-color: #59431f;
 }
 
+.menu-lateral li:hover a {
+    color: #d4a63a;
+    background: #302718;
+    border-color: #59431f;
+}
 
-/* =====================================================
-   FOOTER
-===================================================== */
+.menu-lateral li:last-child {
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 1px solid #292929;
+}
 
-.rodapé {
-    min-height: 65px;
+/* ================================================= */
+/* CONTEÚDO */
 
-    background: #080808;
+.conteudo {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: calc(100vh - 64px - 55px);
+    padding: 26px 32px 32px;
+    background: rgba(17, 17, 17, 0.88);
+}
 
-    border-top: 1px solid #5b4a19;
+.conteudo > h1 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
 
-    color: #aaaaaa;
+.conteudo > h4 {
+    color: #a8abad;
+    font-size: 13px;
+    font-weight: 400;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #d4a63a;
+}
 
+.Config {
+    width: 100%;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+/* ================================================= */
+/* Rodapé */
+
+.rodape {
+    margin-left: 250px;
+    min-height: 55px;
+    padding: 15px 32px;
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    padding: 15px 7%;
-
+    gap: 20px;
+    background: #080a0b;
+    border-top: 1px solid rgba(213, 173, 50, 0.65);
+    color: #7e8385;
     font-size: 12px;
 }
 
-.links-footer {
+.RodapeLinks {
     display: flex;
-
     align-items: center;
-
-    gap: 15px;
+    gap: 9px;
 }
 
-.links-footer a {
-    color: #dddddd;
-
+.RodapeLinks a {
+    color: #7e8385;
     text-decoration: none;
+    transition: 0.2s ease;
 }
 
-.links-footer a:hover {
-    color: #d8ad27;
+.RodapeLinks a:hover {
+    color: #f0ca4c;
 }
 
-.links-footer span {
-    color: #62531f;
+/* ================================================= */
+/* Projetos salvos (parte específica) */
+
+.CaixaProjetos {
+    grid-column: 1 / -1;
+    min-width: 0;
+    background: #141414;
+    border: 1px solid #292929;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
+.TituloDestaques {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #292929;
+}
 
-/* =====================================================
-   TABLET
-===================================================== */
+.TituloDestaques svg {
+    flex-shrink: 0;
+    color: #d4a63a;
+}
 
-@media (max-width: 850px) {
+.TituloDestaques h2 {
+    flex: 1;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
 
-    .topo {
-        padding: 0 30px;
-    }
+.projeto {
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #242424;
+    transition: background 0.2s ease;
+}
 
-    .menu {
-        gap: 25px;
+.projeto:last-child {
+    border-bottom: none;
+}
+
+.projeto:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.projeto-texto {
+    flex: 1;
+    min-width: 0;
+}
+
+.projeto-texto h3 {
+    margin-bottom: 4px;
+    color: #e7e7e7;
+    font-size: 13px;
+}
+
+.projeto-texto p {
+    color: #8f9497;
+    font-size: 11px;
+}
+
+.botao-projeto {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    padding: 0 16px;
+    color: #f0ca4c;
+    background: transparent;
+    border: 1px solid #8a701e;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 11px;
+    transition: 0.2s ease;
+}
+
+.botao-projeto:hover {
+    background: #d4a63a;
+    color: #111;
+}
+
+.botao-projeto:focus-visible {
+    outline: 2px solid #f0ca4c;
+    outline-offset: 2px;
+}
+
+/* ================================================= */
+/* Responsividade */
+
+@media (max-width: 1100px) {
+
+    .menu-lateral {
+        width: 220px;
     }
 
     .conteudo {
-        padding: 40px 25px;
+        margin-left: 220px;
+        width: calc(100% - 220px);
     }
 
-    .painel {
-        max-width: 100%;
+    .rodape {
+        margin-left: 220px;
     }
 
 }
 
-
-/* =====================================================
-   CELULAR
-===================================================== */
-
-@media (max-width: 650px) {
-
-    .topo {
-        height: 70px;
-
-        padding: 0 20px;
-    }
+@media (max-width: 850px) {
 
     .menu {
         display: none;
     }
 
-    .logo-texto strong {
-        font-size: 14px;
+    .menu-lateral {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid #252729;
+    }
+
+    .menu-lateral ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .menu-lateral li a {
+        justify-content: center;
+        text-align: center;
     }
 
     .conteudo {
-        padding: 20px 15px;
+        margin-left: 0;
+        width: 100%;
+        padding: 20px 16px;
     }
 
-    .painel {
-        display: block;
-
-        min-height: auto;
-
-        border-radius: 10px;
+    .rodape {
+        margin-left: 0;
+        padding: 15px 16px;
     }
 
-    .barra-lateral {
-        display: grid;
+}
 
+@media (max-width: 600px) {
+
+    .menu-lateral ul {
         grid-template-columns: repeat(2, 1fr);
-
-        gap: 5px;
-
-        padding: 20px;
-
-        border-right: none;
-
-        border-bottom: 1px solid #4c401c;
-    }
-
-    .barra-lateral a {
-        margin-bottom: 5px;
-    }
-
-    .area-principal {
-        padding: 25px 18px;
-    }
-
-    .caixa-projetos {
-        min-height: auto;
-
-        padding-bottom: 20px;
     }
 
     .projeto {
-        align-items: flex-start;
-
         flex-direction: column;
+        align-items: stretch;
     }
 
-    .botao-projeto {
-        width: 100%;
-    }
-
-    .rodapé {
+    .rodape {
         flex-direction: column;
-
-        gap: 12px;
-
         text-align: center;
-
-        padding: 18px 20px;
-    }
-
-    .links-footer {
-        flex-wrap: wrap;
-
-        justify-content: center;
+        gap: 8px;
     }
 
 }
