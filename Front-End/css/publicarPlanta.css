@@ -1,4 +1,26 @@
-/* Configuração Geral */
+:root {
+    --cor-fundo: #0b0b0b;
+    --cor-campo: #151515;
+    --cor-campo-foco: #181818;
+    --cor-texto: #ffffff;
+    --cor-texto-campo: #eeeeee;
+    --cor-texto-suave: #a9a9a9;
+    --cor-placeholder: #777777;
+    --cor-dourado: #d4a63a;
+    --cor-dourado-claro: #d4af6a;
+    --cor-dourado-hover: #e2c07b;
+    --cor-dourado-check: #e0b84c;
+    --borda-campo: #414141;
+    --borda-campo-hover: #777777;
+    --borda-dourada: rgba(212, 166, 58, 0.55);
+    --borda-dourada-suave: rgba(212, 166, 58, 0.35);
+    --altura-topo: 75px;
+    --raio-campo: 8px;
+    --raio-card: 16px;
+    --gradiente-dourado: linear-gradient(135deg, #f0c45a, #c99427);
+    --fonte: Arial, Helvetica, sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13,48 +35,53 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: #0b0b0b;
-    color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: var(--fonte);
 }
-/* ================================================= */
-/* BackGround do Menu */
-.topo{
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.topo {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 75px;
+    height: var(--altura-topo);
     display: flex;
     align-items: center;
     padding: 0 6%;
     z-index: 10;
-    background: rgba(10, 10, 10, 0.25); /* reduzi de 0.55 pra 0.25 — teste esse valor */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    background: rgba(10, 10, 10, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(8px);
 }
 
-/* Logo */
-
-.logo{
+.logo {
     width: 100%;
-    background:  transparent;
+    background: transparent;
 }
 
-.logo a{
+.logo a {
     display: flex;
     align-items: center;
     text-decoration: none;
 }
 
 .logo img {
-
     max-width: 70px;
     height: auto;
     margin-left: 30px;
 }
-
-/* Menu */
 
 .menu {
     position: absolute;
@@ -66,7 +93,7 @@ body {
 }
 
 .menu a {
-    color: #ffffff;
+    color: var(--cor-texto);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
@@ -77,69 +104,62 @@ body {
 
 .menu a:hover {
     background: rgba(255, 255, 255, 0.06);
-    color: #d4af6a;
+    color: var(--cor-dourado-claro);
 }
 
 .menu a.ativo {
-    color: #d4af6a;
+    color: var(--cor-dourado-claro);
     border: 1px solid rgba(212, 175, 106, 0.4);
     background: rgba(212, 175, 106, 0.08);
 }
 
-/* Icone Login */
-.iconelogin{
+.iconelogin {
     margin-left: auto;
 }
 
-.iconelogin a{
+.iconelogin a {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #ffffff;
+    color: var(--cor-texto);
     text-decoration: none;
     font-size: 14px;
     transition: 0.3s ease;
 }
 
-.iconelogin a:hover{
-    color: #d4af6a;
+.iconelogin a:hover {
+    color: var(--cor-dourado-claro);
 }
 
 .iconelogin img {
     max-width: 50px;
     height: 50px;
+    margin-left: 0;
     object-fit: contain;
 }
 
-/* ================================================= */
-/* Fundo Home */
-
 .BackGround {
     width: 100%;
-    min-height: calc(100vh - 75px);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     position: relative;
-    min-height: 100vh;
     background-image: url("../img/BackGroundPlantasEProfissionais.png");
     background-size: cover;
     background-position: center;
 }
 
-
-/* Publicar Plantas */
 .PublicarPlanta {
     width: min(950px, 100%);
-    margin: 100px;
+    margin: 100px 20px 60px;
     padding: 35px;
-    background:
-        linear-gradient(
-            145deg,
-            rgba(25, 25, 25, 0.96),
-            rgba(10, 10, 10, 0.96)
-        );
-    border: 1px solid rgba(212, 166, 58, 0.55);
-    border-radius: 16px;
+    background: linear-gradient(
+        145deg,
+        rgba(25, 25, 25, 0.96),
+        rgba(10, 10, 10, 0.96)
+    );
+    border: 1px solid var(--borda-dourada);
+    border-radius: var(--raio-card);
     position: relative;
     overflow: hidden;
 }
@@ -147,18 +167,18 @@ body {
 .PublicarPlanta h1 {
     font-size: 30px;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--cor-texto);
     margin-bottom: 10px;
 }
 
-.PublicarPlanta p {
-    color: #a9a9a9;
+.PublicarPlanta > p {
+    color: var(--cor-texto-suave);
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 20px;
 }
 
-.PublicarPlanta p::after {
+.PublicarPlanta > p::after {
     content: "";
     display: block;
     width: 100%;
@@ -178,33 +198,55 @@ body {
     display: flex;
     flex-direction: column;
     gap: 9px;
+    min-width: 0;
+    order: 5;
 }
 
-.campo:nth-child(2) {
+.campo:has(#titulo) {
     grid-column: 1 / -1;
+    order: 0;
 }
 
-.campo:nth-child(9) {
+.campo:has(#descricao) {
+    grid-column: 1 / -1;
+    order: 1;
+}
+
+.campo:has(#estilo) {
+    order: 2;
+}
+
+.campo:has(#categoria) {
+    order: 3;
+}
+
+.campo:has(#distribuicaoAmbientes) {
+    grid-column: 1 / -1;
+    order: 4;
+}
+
+.full {
     grid-column: 1 / -1;
 }
 
 .campo label {
-    color: #eeeeee;
+    color: var(--cor-texto-campo);
     font-size: 14px;
     font-weight: 600;
 }
 
 .campo input,
 .campo select,
-.campo textarea {
+.campo textarea,
+.destaques-box input[type="text"] {
     width: 100%;
     padding: 14px 15px;
-    color: #eeeeee;
-    background: #151515;
-    border: 1px solid #414141;
-    border-radius: 8px;
+    color: var(--cor-texto-campo);
+    background: var(--cor-campo);
+    border: 1px solid var(--borda-campo);
+    border-radius: var(--raio-campo);
     outline: none;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--fonte);
     font-size: 14px;
     transition:
         border-color 0.25s ease,
@@ -212,21 +254,24 @@ body {
 }
 
 .campo input::placeholder,
-.campo textarea::placeholder {
-    color: #777777;
+.campo textarea::placeholder,
+.destaques-box input[type="text"]::placeholder {
+    color: var(--cor-placeholder);
 }
 
 .campo input:hover,
 .campo select:hover,
-.campo textarea:hover {
-    border-color: #777777;
+.campo textarea:hover,
+.destaques-box input[type="text"]:hover {
+    border-color: var(--borda-campo-hover);
 }
 
 .campo input:focus,
 .campo select:focus,
-.campo textarea:focus {
-    border-color: #d4a63a;
-    background: #181818;
+.campo textarea:focus,
+.destaques-box input[type="text"]:focus {
+    border-color: var(--cor-dourado);
+    background: var(--cor-campo-foco);
     box-shadow:
         0 0 0 2px rgba(212, 166, 58, 0.08),
         0 0 15px rgba(212, 166, 58, 0.08);
@@ -238,13 +283,17 @@ body {
     line-height: 1.5;
 }
 
+.campo:has(#distribuicaoAmbientes) textarea {
+    min-height: 90px;
+}
+
 .campo select {
     cursor: pointer;
 }
 
 .campo select option {
-    background: #151515;
-    color: #ffffff;
+    background: var(--cor-campo);
+    color: var(--cor-texto);
 }
 
 .campo input[type="file"] {
@@ -254,64 +303,152 @@ body {
 }
 
 .campo input[type="file"]:hover {
-    border-color: #d4a63a;
+    border-color: var(--cor-dourado);
 }
 
 .campo input[type="file"]::file-selector-button {
     margin-right: 12px;
     padding: 9px 15px;
-    border: 1px solid #d4a63a;
+    border: 1px solid var(--cor-dourado);
     border-radius: 6px;
     background: transparent;
-    color: #d4a63a;
+    color: var(--cor-dourado);
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s ease;
 }
 
 .campo input[type="file"]::file-selector-button:hover {
-    background: #d4a63a;
+    background: var(--cor-dourado);
     color: #111111;
 }
 
-.formPublicarPlanta button {
+.destaques-box {
     grid-column: 1 / -1;
+    order: 4;
+    border: 1px solid var(--borda-dourada-suave);
+    border-radius: 10px;
+    padding: 16px;
+    min-width: 0;
+}
+
+.destaques-box legend {
+    padding: 0 8px;
+    font-weight: 600;
+    color: var(--cor-texto);
+}
+
+.destaques-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 34px;
+    margin-bottom: 14px;
+}
+
+.destaques-lista:empty::before {
+    content: "Nenhum destaque adicionado.";
+    align-self: center;
+    color: var(--cor-placeholder);
+    font-size: 13px;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 6px 6px 14px;
+    border: 1px solid var(--borda-dourada-suave);
+    border-radius: 999px;
+    background: rgba(212, 166, 58, 0.08);
+    color: #eeeeee;
+    font-size: 13px;
+}
+
+.chip button {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--cor-dourado);
+    font-size: 17px;
+    line-height: 1;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.chip button:hover {
+    background: var(--cor-dourado);
+    color: #111111;
+}
+
+.destaques-adicionar {
+    display: flex;
+    gap: 10px;
+}
+
+.destaques-adicionar input {
+    flex: 1;
+    min-width: 0;
+}
+
+.destaques-adicionar button {
+    padding: 0 22px;
+    border: 1px solid var(--cor-dourado);
+    border-radius: var(--raio-campo);
+    background: transparent;
+    color: var(--cor-dourado);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.destaques-adicionar button:hover {
+    background: var(--cor-dourado);
+    color: #111111;
+}
+
+.formPublicarPlanta button[type="submit"] {
+    grid-column: 1 / -1;
+    order: 6;
     width: 100%;
     margin-top: 8px;
     padding: 15px 20px;
     border: none;
-    border-radius: 8px;
-    background:
-        linear-gradient(
-            135deg,
-            #f0c45a,
-            #c99427
-        );
+    border-radius: var(--raio-campo);
+    background: var(--gradiente-dourado);
     color: #111111;
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow:
-        0 5px 20px rgba(212, 166, 58, 0.15);
+    box-shadow: 0 5px 20px rgba(212, 166, 58, 0.15);
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease,
         filter 0.25s ease;
 }
 
-.formPublicarPlanta button:hover {
+.formPublicarPlanta button[type="submit"]:hover {
     transform: translateY(-2px);
     filter: brightness(1.08);
-    box-shadow:
-        0 8px 25px rgba(212, 166, 58, 0.25);
+    box-shadow: 0 8px 25px rgba(212, 166, 58, 0.25);
 }
 
-.formPublicarPlanta button:active {
+.formPublicarPlanta button[type="submit"]:active {
     transform: translateY(0);
 }
 
-/* ================================================= */
-/* Rodapé */
+.formPublicarPlanta button[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    filter: none;
+}
 
 .rodape {
     width: 100%;
@@ -321,10 +458,9 @@ body {
     gap: 20px;
     padding: 22px 6%;
     background: #080808;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--cor-dourado);
     color: #888888;
     font-size: 13px;
-    border-top: 1px solid #D4A63A;
 }
 
 .RodapeLinks {
@@ -332,15 +468,34 @@ body {
     align-items: center;
     gap: 10px;
     color: #555555;
-
 }
 
 .rodape a {
-    color: #d4af6a;
+    color: var(--cor-dourado-claro);
     text-decoration: none;
     transition: 0.3s ease;
 }
 
 .rodape a:hover {
-    color: #e2c07b;
+    color: var(--cor-dourado-hover);
+}
+
+@media (max-width: 700px) {
+    .menu {
+        display: none;
+    }
+
+    .PublicarPlanta {
+        margin: 95px 12px 40px;
+        padding: 22px;
+    }
+
+    .formPublicarPlanta {
+        grid-template-columns: 1fr;
+    }
+
+    .rodape {
+        flex-direction: column;
+        text-align: center;
+    }
 }

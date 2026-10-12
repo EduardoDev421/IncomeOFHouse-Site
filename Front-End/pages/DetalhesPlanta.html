@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Quem somos">
-   <link rel="stylesheet" href="../css/DetalhesPlanta.css">
-   <title>Detalhes Planta - Income of Houses</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IncomeofHouses - Detalhes da planta">
+    <link rel="stylesheet" href="../css/DetalhesPlanta.css">
+    <title>Detalhes Planta - Income of Houses</title>
 </head>
 <body>
     <header class="topo">
@@ -16,104 +16,134 @@
         </div>
         <nav class="menu">
             <a href="../index.html">Início</a>
-            <a href="./Plantas.html">Plantas</a>
+            <a href="./Plantas.html" class="ativo">Plantas</a>
             <a href="./Profissionais.html">Profissionais</a>
             <a href="./Sobre.html">Sobre Nós</a>
         </nav>
+        <div class="iconelogin">
+            <a href="./Login.html" aria-label="Entrar">
+                <img src="../img/icones/IconePerfil.svg" alt="Ícone de login">
+            </a>
+        </div>
     </header>
+
     <main class="BackGround">
         <section class="Detalheplanta">
+
             <div class="inicioDetalhePlanta">
+
+                <!-- Imagem principal -->
                 <div class="ImgPlanta">
-                    <img src="" alt="Fotodaplanta">
+                    <img id="imagemPlanta" src="" alt="Imagem da planta">
                 </div>
+
+                <!-- Painel de informações -->
                 <div class="TextiniDetalhe">
-                    <h1>Casa Térrea Moderna</h1>
-                    <p>Conforto, elegância e funcionalidade em um só lugar.</p>
+                    <span class="Pill">
+                        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
+                        <span id="categoriaPlanta"></span>
+                    </span>
+                    <h1 id="nomePlanta">Carregando planta...</h1>
+                    <p class="ResumoPlanta" id="resumoPlanta"></p>
+                    <p class="PrecoDestaque" id="precoDestaque"></p>
+
                     <div class="Cards">
                         <div class="card">
-                            <div>
-                                <img src="../img/icones/IconeCasa.svg" alt="">
-                            </div>
-                            <h2>Área Construida</h2>
-                            <p>Construida</p>
+                            <div><img src="../img/icones/IconeCasa.svg" alt=""></div>
+                            <h2>Área construída</h2>
+                            <p id="areaPlanta"></p>
                         </div>
                         <div class="card">
-                            <div>
-                                <img src="../img/icones/IconeTerreno.svg" alt="">
-                            </div>
-                            <h2>Área do Terreno</h2>
-                            <p>Terreno</p>
-                        </div>
-                        <div class="card">
-                            <div>
-                                <img src="../img/icones/IconeQuartos.svg" alt="">
-                            </div>
+                            <div><img src="../img/icones/IconeQuartos.svg" alt=""></div>
                             <h2>Quartos</h2>
-                            <p>Quartos</p>
+                            <p id="quartosPlanta"></p>
                         </div>
                         <div class="card">
-                            <div>
-                                <img src="../img/icones/IconeGaragem.svg" alt="">
-                            </div>
+                            <div><img src="../img/icones/IconeGaragem.svg" alt=""></div>
                             <h2>Vagas de garagem</h2>
-                            <p>garagem</p>
+                            <p id="garagemPlanta"></p>
                         </div>
                         <div class="card">
-                            <div>
-                                <img src="../img/icones/Iconelapis.svg" alt="">
-                            </div>
+                            <div><img src="../img/icones/Iconelapis.svg" alt=""></div>
                             <h2>Estilo</h2>
-                            <p>Estilo</p>
+                            <p id="estiloPlanta"></p>
                         </div>
                         <div class="card">
-                            <div class="">
-                                <img src="../img/icones/iconeBanheiros.svg" alt="">
-                            </div>
+                            <div><img src="../img/icones/iconeBanheiros.svg" alt=""></div>
                             <h2>Banheiros</h2>
-                            <p>Banheiros</p>
-                        </div> 
+                            <p id="banheirosPlanta"></p>
+                        </div>
                     </div>
 
                     <div class="BtnSolicitar">
-                        <button>
+                        <button type="button" class="BtnPrincipal">
+                            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
                             Solicitar Projeto
+                        </button>
+                        <button type="button" class="BtnFavorito" id="botaoFavorito" aria-pressed="false">
+                            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.3-9A5.3 5.3 0 0112 6a5.3 5.3 0 019.3 6C19 16.6 12 21 12 21z"/></svg>
+                            <span id="textoFavorito">Salvar nos favoritos</span>
                         </button>
                     </div>
                 </div>
             </div>
+
+            <!-- Parte inferior -->
             <div class="infProjeto">
-                <div class="InfSobre">
-                    <div class="Sobre">
-                        <h2>Sobre o Projeto</h2>
-                        <p>Descriçao do projeto</p>
-                    </div>
-                    <div class="Destaque">
-                        <h2>Destaques do projeto</h2>
-                        <p>Suite com closet</p>
-                        <p>sala e cozinha integradas</p>
+
+                <!-- Sobre o projeto -->
+                <div class="Sobre">
+                    <h2>
+                        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg>
+                        Sobre o Projeto
+                    </h2>
+                    <p id="descricaoPlanta">Carregando descrição...</p>
+
+                    <div class="Distribuicao" id="blocoDistribuicao" hidden>
+                        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/></svg>
+                        <div>
+                            <strong>Distribuição dos ambientes</strong>
+                            <span id="distribuicaoPlanta"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="Avaliacao">
-                    <h2>Avalições do Cliente</h2>
-                    <div class="CardAvaliacao">
-                        <div>
-                            <img src="" alt="">
-                            <h3>Emmanuel</h3>
-                            <p>Há 1 ano</p>
+
+                <!-- Destaques -->
+                <div class="Destaque">
+                    <h2>
+                        <svg class="icone preenchido" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg>
+                        Destaques do projeto
+                    </h2>
+                    <div class="DestaquesLista" id="destaquesPlanta"></div>
+                    <div class="NotaDestaque">
+                        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 11 4 20 4c0 9-6 15-15 15zM5 19l8-8"/></svg>
+                        <p>Um projeto pensado para o seu bem-estar, com qualidade, beleza e sustentabilidade.</p>
+                    </div>
+                </div>
+
+                <!-- Profissional responsável + avaliações -->
+                <div class="Profissional">
+                    <h2>
+                        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                        Profissional responsável
+                    </h2>
+                    <div class="ProfissionalInfo" id="profissionalPlanta"></div>
+
+                    <div class="Avaliacao">
+                        <div class="AvaliacaoTopo">
+                            <h3>
+                                <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 01-11.5 7.2L4 21l1.8-5A8 8 0 1121 12z"/></svg>
+                                Avaliações do cliente
+                            </h3>
+                            <a href="../pages/Avaliações.html">Ver mais avaliações →</a>
                         </div>
-                        <h3>ESTRELAS</h3>
-                        <p>descrição do cliente</p>
-                    </div> 
-                    <div class="BtnAvaliacao">
-                        <a href="../pages/Avaliações.html">
-                            Ver mais avaliações
-                        </a>
+                        <div class="CardAvaliacao" id="avaliacaoPlanta"></div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
     <footer class="rodape">
         <p>©IncomeOfHouses. Todos os direitos reservados.</p>
         <div class="RodapeLinks">
@@ -122,5 +152,8 @@
             <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
         </div>
     </footer>
+
+    <script src="../js/PlantasStorage.js"></script>
+    <script src="../js/detalhePlanta.js"></script>
 </body>
 </html>

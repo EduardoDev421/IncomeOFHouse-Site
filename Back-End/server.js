@@ -1,301 +1,316 @@
 
-const express = require("express");
-const cors = require("cors");
-const crypto = require("crypto");
-const { promisify } = require("util");
-const { pool, testarConexao } = require("./db");
-
 require("dotenv").config();
 
-const app = express();
-const PORT = Number(process.env.PORT || 3000);
+const express = require("express");
+const cors = require("cors");
+const fs = require("fs");
+const path = require("path");
+const crypto = require("crypto");
+const mysql = require("mysql2/promise");
 
-const scryptAsync = promisify(crypto.scrypt);
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+const BASE_URL = (
+    process.env.BASE_URL || `http://localhost:${PORT}`
+).replace(/\/+$/, "");
+
+const PASTA_UPLOADS = path.join(
+    __dirname,
+    process.env.UPLOAD_DIR || "uploads"
+);
+
+const MAX_UPLOAD_MB = Number(process.env.MAX_UPLOAD_MB) || 5;
+
+const CATEGORIAS = [
+    "Casa Térrea", "Sobrado", "Casa Geminada",
+    "Casa de Condomínio", "Casa de Campo", "Casa de Praia",
+    "Chácara", "Sítio", "Fazenda", "Apartamento",
+    "Kitnet / Studio", "Loft", "Cobertura", "Edícula",
+    "Casa de Madeira", "Casa Pré-Fabricada", "Casa Modular",
+    "Loja", "Sala Comercial", "Escritório", "Galpão",
+    "Prédio Comercial", "Galpão Industrial", "Fábrica",
+    "Centro de Distribuição", "Área de Lazer",
+    "Espaço Gourmet", "Salão de Festas", "Área de Piscina",
+    "Projeto Residencial", "Projeto Comercial",
+    "Projeto Industrial", "Projeto Arquitetônico"
+];
+
+const ESTILOS = [
+    "Moderno", "Contemporâneo", "Minimalista", "Clássico",
+    "Neoclássico", "Colonial", "Rústico", "Industrial",
+    "Escandinavo", "Tropical"
+];
+
+const CRIAR_TABELA_PLANTAS = `
+    CREATE TABLE IF NOT EXISTS plantas (
+        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        titulo VARCHAR(150) NOT NULL,
+        descricao TEXT NOT NULL,
+        categoria VARCHAR(80) NOT NULL,
+        estilo VARCHAR(40) NULL,
+        quartos TINYINT UNSIGNED NOT NULL,
+        banheiros TINYINT UNSIGNED NOT NULL,
+        garagem TINYINT UNSIGNED NOT NULL,
+        area DECIMAL(10, 2) NOT NULL,
+        preco DECIMAL(12, 2) NOT NULL,
+        imagem_url VARCHAR(255) NOT NULL,
+        profissional VARCHAR(150) NOT NULL DEFAULT 'Profissional',
+        criada_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        ativa BOOLEAN NOT NULL DEFAULT TRUE,
+        INDEX idx_plantas_ativa_id (ativa, id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+`;
+
+const SELECT_PLANTAS = `
+    SELECT
+        p.id,
+        p.titulo,
+        p.descricao,
+        p.categoria,
+        p.estilo,
+        p.quartos,
+        p.banheiros,
+        p.garagem,
+        p.area,
+        p.preco,
+        p.imagem_url AS imagem,
+        p.profissional,
+        p.criada_em AS criadaEm
+    FROM plantas p
+    WHERE p.ativa = TRUE
+`;
+
+fs.mkdirSync(PASTA_UPLOADS, { recursive: true });
+
+const pool = mysql.createPool({
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT) || 3306,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    decimalNumbers: true
+});
 
 app.use(cors());
-app.use(express.json({ limit: "20kb" }));
+app.use(express.json({ limit: "10mb" }));
+app.use("/uploads", express.static(PASTA_UPLOADS));
 
-// Gera um hash seguro para a senha.
-async function gerarHashSenha(senha) {
-    const salt = crypto.randomBytes(16).toString("hex");
-    const hash = await scryptAsync(senha, salt, 64);
+const rota = (fn) => (req, res, next) => {
+    fn(req, res, next).catch(next);
+};
 
-    return `scrypt:${salt}:${hash.toString("hex")}`;
-}
-
-// Compara a senha informada com o hash armazenado.
-async function verificarSenha(senha, senhaArmazenada) {
-    if (!senhaArmazenada || typeof senhaArmazenada !== "string") {
-        return false;
+function salvarImagem(dataUrl) {
+    if (typeof dataUrl !== "string") {
+        return null;
     }
 
-    // Formato atual: scrypt:salt:hash
-    if (senhaArmazenada.startsWith("scrypt:")) {
-        const partes = senhaArmazenada.split(":");
+    const resultado = /^data:image\/(jpeg|png|webp);base64,([A-Za-z0-9+/=]+)$/.exec(dataUrl);
 
-        if (partes.length !== 3) {
-            return false;
-        }
+    if (!resultado) {
+        return null;
+    }
 
-        const [, salt, hashSalvo] = partes;
+    const buffer = Buffer.from(resultado[2], "base64");
 
-        try {
-            const hashCalculado = await scryptAsync(senha, salt, 64);
-            const hashOriginal = Buffer.from(hashSalvo, "hex");
+    if (buffer.length === 0 || buffer.length > MAX_UPLOAD_MB * 1024 * 1024) {
+        return null;
+    }
 
-            if (hashOriginal.length !== hashCalculado.length) {
-                return false;
-            }
+    const extensao = resultado[1] === "jpeg"
+        ? "jpg"
+        : resultado[1];
 
-            return crypto.timingSafeEqual(
-                hashCalculado,
-                hashOriginal
-            );
-        } catch {
-            return false;
+    const nome = `${crypto.randomUUID()}.${extensao}`;
+
+    fs.writeFileSync(path.join(PASTA_UPLOADS, nome), buffer);
+
+    return `/uploads/${nome}`;
+}
+
+function paraSite(planta) {
+    return {
+        ...planta,
+        imagem: `${BASE_URL}${planta.imagem}`
+    };
+}
+
+function validarPlanta(c) {
+    if (!c || typeof c !== "object" || Array.isArray(c)) {
+        return "Os dados da planta são inválidos.";
+    }
+
+    for (const campo of ["titulo", "descricao", "categoria"]) {
+        if (
+            typeof c[campo] !== "string" ||
+            c[campo].trim() === ""
+        ) {
+            return `O campo "${campo}" é obrigatório.`;
         }
     }
 
-    // Compatibilidade temporária com cadastros antigos em texto.
-    // Após login válido, a senha será convertida para hash.
-    return senha === senhaArmazenada;
+    if (c.titulo.trim().length > 150) {
+        return "O título pode ter no máximo 150 caracteres.";
+    }
+
+    if (!CATEGORIAS.includes(c.categoria.trim())) {
+        return "Categoria inválida.";
+    }
+
+    if (
+        c.estilo != null &&
+        c.estilo !== "" &&
+        (typeof c.estilo !== "string" || !ESTILOS.includes(c.estilo.trim()))
+    ) {
+        return "Estilo inválido.";
+    }
+
+    for (const campo of ["quartos", "banheiros", "garagem"]) {
+        if (
+            !Number.isInteger(c[campo]) ||
+            c[campo] < 0 ||
+            c[campo] > 255
+        ) {
+            return `O campo "${campo}" precisa ser um número inteiro entre 0 e 255.`;
+        }
+    }
+
+    if (!Number.isFinite(c.area) || c.area <= 0 || c.area >= 1000000) {
+        return 'O campo "area" é inválido.';
+    }
+
+    if (!Number.isFinite(c.preco) || c.preco <= 0 || c.preco >= 10000000000) {
+        return 'O campo "preco" é inválido.';
+    }
+
+    if (
+        typeof c.imagem !== "string" ||
+        !c.imagem.startsWith("data:image/")
+    ) {
+        return "Imagem inválida.";
+    }
+
+    return null;
 }
 
-// Verifica se os dados são textos válidos.
-function textoValido(valor, limite) {
-    return (
-        typeof valor === "string" &&
-        valor.trim().length > 0 &&
-        valor.trim().length <= limite
+// Listar plantas
+app.get("/plantas", rota(async (req, res) => {
+    const [linhas] = await pool.query(
+        `${SELECT_PLANTAS} ORDER BY p.id DESC`
     );
-}
 
-// Rota para verificar se o servidor está funcionando.
-app.get("/api/status", (req, res) => {
-    res.json({
-        funcionando: true,
-        mensagem: "API do Income of Houses está funcionando."
-    });
-});
+    res.json(linhas.map(paraSite));
+}));
 
-// ======================================================
-// CADASTRO DE USUÁRIO
-// POST /api/usuarios
-// ======================================================
+// Consultar uma planta
+app.get("/plantas/:id", rota(async (req, res) => {
+    const id = req.params.id;
 
-app.post("/api/usuarios", async (req, res) => {
-    try {
-        const { nome, email, senha } = req.body;
-
-        if (!textoValido(nome, 150)) {
-            return res.status(400).json({
-                erro: "Informe um nome válido."
-            });
-        }
-
-        if (
-            !textoValido(email, 254) ||
-            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
-        ) {
-            return res.status(400).json({
-                erro: "Informe um e-mail válido."
-            });
-        }
-
-        if (typeof senha !== "string" || senha.length < 6 || senha.length > 200) {
-            return res.status(400).json({
-                erro: "A senha deve possuir pelo menos 6 caracteres."
-            });
-        }
-
-        const emailNormalizado = email.trim().toLowerCase();
-
-        const [usuariosExistentes] = await pool.execute(
-            "SELECT id FROM tb_usuarios WHERE LOWER(email) = ? LIMIT 1",
-            [emailNormalizado]
-        );
-
-        if (usuariosExistentes.length > 0) {
-            return res.status(409).json({
-                erro: "Este e-mail já está cadastrado."
-            });
-        }
-
-        const senhaHash = await gerarHashSenha(senha);
-
-        const [resultado] = await pool.execute(
-            `INSERT INTO tb_usuarios (nome, email, senha)
-             VALUES (?, ?, ?)`,
-            [nome.trim(), emailNormalizado, senhaHash]
-        );
-
-        return res.status(201).json({
-            mensagem: "Cadastro realizado com sucesso.",
-            usuario: {
-                id: resultado.insertId,
-                nome: nome.trim(),
-                email: emailNormalizado
-            }
-        });
-    } catch (erro) {
-        console.error("Erro no cadastro:", erro.message);
-
-        return res.status(500).json({
-            erro: "Não foi possível realizar o cadastro."
+    if (!/^\d+$/.test(id) || Number(id) <= 0) {
+        return res.status(400).json({
+            erro: "Id inválido."
         });
     }
-});
 
-// ======================================================
-// LOGIN
-// POST /api/login
-// ======================================================
+    const [linhas] = await pool.query(
+        `${SELECT_PLANTAS} AND p.id = ?`,
+        [id]
+    );
 
-app.post("/api/login", async (req, res) => {
-    try {
-        const { email, senha } = req.body;
-
-        if (
-            !textoValido(email, 254) ||
-            typeof senha !== "string" ||
-            senha.length === 0
-        ) {
-            return res.status(400).json({
-                erro: "Informe seu e-mail e sua senha."
-            });
-        }
-
-        const emailNormalizado = email.trim().toLowerCase();
-
-        const [usuarios] = await pool.execute(
-            `SELECT id, nome, email, senha
-             FROM tb_usuarios
-             WHERE LOWER(email) = ?
-             LIMIT 1`,
-            [emailNormalizado]
-        );
-
-        if (usuarios.length === 0) {
-            return res.status(401).json({
-                erro: "E-mail ou senha inválidos."
-            });
-        }
-
-        const usuario = usuarios[0];
-
-        const senhaCorreta = await verificarSenha(
-            senha,
-            usuario.senha
-        );
-
-        if (!senhaCorreta) {
-            return res.status(401).json({
-                erro: "E-mail ou senha inválidos."
-            });
-        }
-
-        // Converte senhas antigas em texto para hash após login válido.
-        if (!usuario.senha.startsWith("scrypt:")) {
-            const novoHash = await gerarHashSenha(senha);
-
-            await pool.execute(
-                "UPDATE tb_usuarios SET senha = ? WHERE id = ?",
-                [novoHash, usuario.id]
-            );
-        }
-
-        return res.json({
-            mensagem: "Login realizado com sucesso.",
-            usuario: {
-                id: usuario.id,
-                nome: usuario.nome,
-                email: usuario.email
-            }
-        });
-    } catch (erro) {
-        console.error("Erro no login:", erro.message);
-
-        return res.status(500).json({
-            erro: "Não foi possível realizar o login."
+    if (linhas.length === 0) {
+        return res.status(404).json({
+            erro: "Planta não encontrada."
         });
     }
-});
 
-// ======================================================
-// FALE CONOSCO
-// POST /api/mensagens
-// ======================================================
+    res.json(paraSite(linhas[0]));
+}));
 
-app.post("/api/mensagens", async (req, res) => {
+// Publicar uma planta
+app.post("/plantas", rota(async (req, res) => {
+    const c = req.body;
+
+    const erro = validarPlanta(c);
+
+    if (erro) {
+        return res.status(400).json({ erro });
+    }
+
+    const estilo = c.estilo && c.estilo.trim() !== ""
+        ? c.estilo.trim()
+        : null;
+
+    const caminhoImagem = salvarImagem(c.imagem);
+
+    if (!caminhoImagem) {
+        return res.status(400).json({
+            erro: `Imagem inválida ou maior que ${MAX_UPLOAD_MB}MB.`
+        });
+    }
+
     try {
-        const { nome, email, mensagem } = req.body;
-
-        if (!textoValido(nome, 150)) {
-            return res.status(400).json({
-                erro: "Informe seu nome."
-            });
-        }
-
-        if (
-            !textoValido(email, 254) ||
-            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
-        ) {
-            return res.status(400).json({
-                erro: "Informe um e-mail válido."
-            });
-        }
-
-        if (!textoValido(mensagem, 5000)) {
-            return res.status(400).json({
-                erro: "A mensagem não pode estar vazia e deve ter até 5000 caracteres."
-            });
-        }
-
-        const [resultado] = await pool.execute(
-            `INSERT INTO tb_mensagem (nome, email, mensagem)
-             VALUES (?, ?, ?)`,
+        const [resultado] = await pool.query(
+            `INSERT INTO plantas (
+                titulo, descricao, categoria, estilo,
+                quartos, banheiros, garagem, area,
+                preco, imagem_url
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
-                nome.trim(),
-                email.trim().toLowerCase(),
-                mensagem.trim()
+                c.titulo.trim(),
+                c.descricao.trim(),
+                c.categoria.trim(),
+                estilo,
+                c.quartos,
+                c.banheiros,
+                c.garagem,
+                c.area,
+                c.preco,
+                caminhoImagem
             ]
         );
 
-        return res.status(201).json({
-            mensagem: "Mensagem enviada com sucesso.",
+        res.status(201).json({
+            mensagem: "Planta publicada com sucesso.",
             id: resultado.insertId
         });
-    } catch (erro) {
-        console.error("Erro ao salvar mensagem:", erro.message);
+    } catch (erroBanco) {
+        fs.unlink(
+            path.join(PASTA_UPLOADS, path.basename(caminhoImagem)),
+            () => {}
+        );
 
-        return res.status(500).json({
-            erro: "Não foi possível enviar sua mensagem."
-        });
+        throw erroBanco;
     }
-});
+}));
 
-// Tratamento para rotas que não existem.
-app.use((req, res) => {
-    res.status(404).json({
-        erro: "Rota não encontrada."
+// Tratamento de erros
+app.use((erro, req, res, next) => {
+    console.error("Erro na API:", erro);
+
+    res.status(500).json({
+        erro: "Não foi possível processar a requisição.",
+        detalhe: erro.message
     });
 });
 
-// Inicia o servidor somente depois de testar a conexão.
+// Iniciar servidor e criar a tabela
 async function iniciarServidor() {
-    try {
-        await testarConexao();
+    await pool.query("SELECT 1");
+    await pool.query(CRIAR_TABELA_PLANTAS);
 
-        app.listen(PORT, () => {
-            console.log(`Servidor disponível em http://localhost:${PORT}`);
-        });
-    } catch (erro) {
-        console.error(
-            "O servidor não foi iniciado. Confira o MySQL e o arquivo .env."
-        );
+    console.log(`Conectado ao MySQL: ${process.env.DB_NAME}`);
 
-        process.exit(1);
-    }
+    app.listen(PORT, () => {
+        console.log(`Servidor rodando em http://localhost:${PORT}`);
+    });
 }
 
-iniciarServidor();
+iniciarServidor().catch(async (erro) => {
+    console.error("Erro ao iniciar o servidor:", erro.message);
+    console.error("Confira as configurações do arquivo .env.");
+
+    await pool.end();
+    process.exitCode = 1;
+});

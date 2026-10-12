@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,67 +47,133 @@
             <div class="FiltrosGrid">
 
                 <div class="Campo">
-                    <label for="tipo">
+                    <label for="filtrotipo">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /></svg>
                         Projetos
                     </label>
-                    <select id="tipo">
+                    <select id="filtrotipo">
                         <option value="">Todos os projetos</option>
-                        <option value="Casa Térrea">Casa Térrea</option>
-                        <option value="Sobrado">Sobrado</option>
-                        <option value="Moderno">Moderno</option>
+                        <optgroup label="Residencial">
+                            <option>Casa Térrea</option>
+                            <option>Sobrado</option>
+                            <option>Casa Geminada</option>
+                            <option>Casa de Condomínio</option>
+                            <option>Casa de Campo</option>
+                            <option>Casa de Praia</option>
+                            <option>Chácara</option>
+                            <option>Sítio</option>
+                            <option>Fazenda</option>
+                        </optgroup>
+ 
+                        <optgroup label="Apartamentos">
+                            <option>Apartamento</option>
+                            <option>Kitnet / Studio</option>
+                            <option>Loft</option>
+                            <option>Cobertura</option>
+                        </optgroup>
+ 
+                        <optgroup label="Construções Especiais">
+                            <option>Edícula</option>
+                            <option>Casa de Madeira</option>
+                            <option>Casa Pré-Fabricada</option>
+                            <option>Casa Modular</option>
+                        </optgroup>
+ 
+                        <optgroup label="Comercial">
+                            <option>Loja</option>
+                            <option>Sala Comercial</option>
+                            <option>Escritório</option>
+                            <option>Galpão</option>
+                            <option>Prédio Comercial</option>
+                        </optgroup>
+ 
+                        <optgroup label="Industrial">
+                            <option>Galpão Industrial</option>
+                            <option>Fábrica</option>
+                            <option>Centro de Distribuição</option>
+                        </optgroup>
+ 
+                        <optgroup label="Lazer">
+                            <option>Área de Lazer</option>
+                            <option>Espaço Gourmet</option>
+                            <option>Salão de Festas</option>
+                            <option>Área de Piscina</option>
+                        </optgroup>
+ 
+                        <optgroup label="Projetos">
+                            <option>Projeto Residencial</option>
+                            <option>Projeto Comercial</option>
+                            <option>Projeto Industrial</option>
+                            <option>Projeto Arquitetônico</option>
+                        </optgroup>
                     </select>
                 </div>
 
                 <div class="Campo">
-                    <label for="quartos">
+                    <label for="filtroquartos">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 18v-6a3 3 0 013-3h12a3 3 0 013 3v6" /><path d="M3 18h18" /><path d="M7 12V9a2 2 0 012-2h6a2 2 0 012 2v3" /></svg>
                         Quartos
                     </label>
-                    <select id="quartos">
+                    <select id="filtroquartos">
                         <option value="">Todos</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4+</option>
+                        <option value="1">1 quarto</option>
+                        <option value="2">2 quartos</option>
+                        <option value="3">3 quartos</option>
+                        <option value="4">4 quartos</option>
+                        <option value="5+">5+ quartos</option>
                     </select>
                 </div>
 
+
                 <div class="Campo">
-                    <label for="garagem">
+                    <label for="filtrogaragem">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 17h14M5 17a2 2 0 01-2-2v-2l2-5h14l2 5v2a2 2 0 01-2 2M5 17v2a1 1 0 001 1h1a1 1 0 001-1v-2m10 0v2a1 1 0 001 1h1a1 1 0 001-1v-2" /><circle cx="7.5" cy="14.5" r="1" /><circle cx="16.5" cy="14.5" r="1" /></svg>
                         Garagens
                     </label>
-                    <select id="garagem">
+                    <select id="filtrogaragem">
                         <option value="">Todas</option>
+                        <option value="0">Sem garagem</option>
                         <option value="1">1 vaga</option>
                         <option value="2">2 vagas</option>
                         <option value="3">3 vagas</option>
+                        <option value="4+">4+ vagas</option>
                     </select>
                 </div>
 
                 <div class="Campo">
-                    <label for="area">
+                    <label for="filtroarea">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20L20 4M4 20h6M4 20v-6M20 4h-6M20 4v6" /></svg>
-                        Área do terreno
+                        Área construída
                     </label>
-                    <select id="area">
+                    <select id="filtroarea">
                         <option value="">Todas as áreas</option>
-                        <option value="80">80 m²</option>
-                        <option value="120">120 m²</option>
-                        <option value="180">180 m²</option>
+                        <option value="0-60">Até 60 m²</option>
+                        <option value="60-100">60 a 100 m²</option>
+                        <option value="100-150">100 a 150 m²</option>
+                        <option value="150-200">150 a 200 m²</option>
+                        <option value="200-300">200 a 300 m²</option>
+                        <option value="300-500">300 a 500 m²</option>
+                        <option value="500-">Acima de 500 m²</option>
                     </select>
                 </div>
 
                 <div class="Campo">
-                    <label for="estilo">
+                    <label for="filtroestilo">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9" /><circle cx="9" cy="9" r="1" /><circle cx="15" cy="9" r="1" /><circle cx="9" cy="15" r="1" /><path d="M12 12a3 3 0 003 3h1a2 2 0 000-4 2 2 0 01-2-2 3 3 0 00-2-2" /></svg>
                         Estilo
                     </label>
-                    <select id="estilo">
+                    <select id="filtroestilo">
                         <option value="">Todos os estilos</option>
                         <option value="Moderno">Moderno</option>
-                        <option value="Clássico">Clássico</option>
+                        <option value="Contemporâneo">Contemporâneo</option>
                         <option value="Minimalista">Minimalista</option>
+                        <option value="Clássico">Clássico</option>
+                        <option value="Neoclássico">Neoclássico</option>
+                        <option value="Colonial">Colonial</option>
+                        <option value="Rústico">Rústico</option>
+                        <option value="Industrial">Industrial</option>
+                        <option value="Escandinavo">Escandinavo</option>
+                        <option value="Tropical">Tropical</option>
                     </select>
                 </div>
 
@@ -120,37 +185,11 @@
             </div>
         </section>
 
-        <section class="CardsGrid" id="cardsPlantas">
+        <p id="mensagemPlantas"></p>
 
-            <article class="CardPlanta">
-                <div class="CardPlantaImagem">
-                    <img src="" alt="Casa Horizonte">
-                    <button class="CardFavorito" aria-label="Favoritar">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.6-10-9.2C0.3 8 2 4.5 5.6 4A5 5 0 0112 6.5 5 5 0 0118.4 4C22 4.5 23.7 8 22 11.8 19.5 16.4 12 21 12 21z" /></svg>
-                    </button>
-                </div>
-                <div class="CardPlantaConteudo">
-                    <h3>Casa Horizonte</h3>
-                    <div class="CardPlantaSpecs">
-                        <span>3 Quartos</span>
-                        <span>2 Banheiros</span>
-                        <span>2 Garagens</span>
-                    </div>
-                    <a href="#" class="BtnDetalhes">Detalhes</a>
-                </div>
-            </article>
+        <div id="ListaPlantas"></div>
 
-        </section>
-
-        <nav class="Paginacao" aria-label="Paginação">
-            <button class="PaginacaoBtn" aria-label="Página anterior">‹</button>
-            <button class="PaginacaoBtn ativo">1</button>
-            <button class="PaginacaoBtn">2</button>
-            <button class="PaginacaoBtn">3</button>
-            <button class="PaginacaoBtn">4</button>
-            <button class="PaginacaoBtn">5</button>
-            <button class="PaginacaoBtn" aria-label="Próxima página">›</button>
-        </nav>
+        <div id="paginacao"></div>
 
     </main>
 
@@ -162,5 +201,9 @@
             <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
         </div>
     </footer>
+
+    <script src="../js/PlantasStorage.js"></script>
+    <script src="../js/plantas.js"></script>
+
 </body>
 </html>

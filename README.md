@@ -178,3 +178,16 @@
 # Objetivo Final
 
     Desenvolver uma plataforma web institucional responsiva e funcional para a IncomeOfHouse, permitindo a divulgação de plantas arquitetônicas, cadastro de profissionais, gerenciamento de usuários e comunicação entre clientes e especialistas da construção civil. O sistema deverá apresentar uma interface intuitiva, organizada e de fácil manutenção, utilizando HTML5, CSS3, JavaScript, Node.js e MySQL.
+
+## Publicação de plantas no MySQL
+
+O servidor em `Back-End` publica as plantas pela API `POST /plantas` e consulta os registros pelo banco MySQL. Configure `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD` e `DB_NAME` no arquivo `.env` de `Back-End`. Ao iniciar, o servidor verifica a conexão e cria a tabela `plantas` caso ainda não exista; se o banco estiver indisponível ou não permitir a criação da tabela, a API não inicia.
+
+Inicie o servidor com `npm start` dentro de `Back-End`. Em desenvolvimento, o front-end usa `http://localhost:3000` quando aberto localmente. Em produção, sirva a API no mesmo domínio do site (com `/plantas` encaminhado ao servidor) ou defina `window.PLANTAS_API_URL` antes de carregar `PlantasStorage.js` nas páginas de publicação, listagem e detalhes:
+
+```html
+<script>window.PLANTAS_API_URL = "https://api.seudominio.com";</script>
+<script src="../js/PlantasStorage.js"></script>
+```
+
+Quando a API estiver em outro domínio, configure também `CORS_ORIGIN` no servidor com a origem do front-end e `BASE_URL` com a URL pública da API, para que as imagens salvas em `Back-End/uploads` sejam exibidas corretamente.
