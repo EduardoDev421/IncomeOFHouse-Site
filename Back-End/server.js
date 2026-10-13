@@ -62,6 +62,23 @@ const CRIAR_TABELA_PLANTAS = `
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 `;
 
+const CRIAR_TABELA_USUARIOS = `
+    CREATE TABLE IF NOT EXISTS usuarios (
+        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(150) NOT NULL,
+        email VARCHAR(254) NOT NULL,
+        senha_hash VARCHAR(255) NOT NULL,
+        cpf CHAR(11) NULL,
+        telefone VARCHAR(20) NULL,
+        data_nascimento DATE NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        ativo BOOLEAN NOT NULL DEFAULT TRUE,
+        UNIQUE KEY uq_usuarios_email (email),
+        UNIQUE KEY uq_usuarios_cpf (cpf)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+`;
+
 const SELECT_PLANTAS = `
     SELECT
         p.id,
@@ -83,6 +100,8 @@ const SELECT_PLANTAS = `
 
 fs.mkdirSync(PASTA_UPLOADS, { recursive: true });
 
+const sessoes = new Map();
+
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT) || 3306,
@@ -93,6 +112,32 @@ const pool = mysql.createPool({
     connectionLimit: 10,
     decimalNumbers: true
 });
+
+// Hash de senha usando recursos nativos do Node.js (sem armazenar senha em texto puro).
+function criarHashSenha(senha) {
+    return new Promise((resolve, reject) => {
+        const sal = crypto.randomBytes(16).toString("hex");
+        crypto.scrypt(senha, sal, 64, (erro, chave) => {
+            if (erro) return reject(erro);
+            resolve(`${sal}:${chave.toString("hex")}`);
+        });
+    });
+}
+
+function verificarHashSenha(senha, hashArmazenado) {
+    return new Promise((resolve, reject) => {
+        if (typeof hashArmazenado !== "string" || !hashArmazenado.includes(":")) {
+            return resolve(false);
+        }
+        const [sal, chaveHex] = hashArmazenado.split(":");
+        const chaveEsperada = Buffer.from(chaveHex, "hex");
+        crypto.scrypt(senha, sal, chaveEsperada.length, (erro, chaveCalculada) => {
+            if (erro) return reject(erro);
+            if (chaveCalculada.length !== chaveEsperada.length) return resolve(false);
+            resolve(crypto.timingSafeEqual(chaveCalculada, chaveEsperada));
+        });
+    });
+}
 
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
@@ -194,6 +239,176 @@ function validarPlanta(c) {
 
     return null;
 }
+
+// Cadastrar usuário
+app.post("/api/usuarios", rota(async (req, res) => {
+    const dados = req.body;
+
+    if (!dados || typeof dados !== "object" || Array.isArray(dados)) {
+        return res.status(400).json({ erro: "Envie os dados do cadastro em JSON." });
+    }
+
+    const nome = typeof dados.nome === "string" ? dados.nome.trim() : "";
+    const email = typeof dados.email === "string" ? dados.email.trim().toLowerCase() : "";
+    const senha = typeof dados.senha === "string" ? dados.senha : "";
+
+    if (nome.length < 3 || nome.length > 150) {
+        return res.status(400).json({ erro: "O nome deve ter entre 3 e 150 caracteres." });
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) {
+        return res.status(400).json({ erro: "Informe um e-mail válido." });
+    }
+
+    if (senha.length < 6 || senha.length > 200) {
+        return res.status(400).json({ erro: "A senha deve ter entre 6 e 200 caracteres." });
+    }
+
+    const cpf = typeof dados.cpf === "string" ? dados.cpf.replace(/\D/g, "") : "";
+    const telefone = typeof dados.telefone === "string" ? dados.telefone.replace(/\D/g, "") : "";
+    const dataNascimento = typeof dados.dataNascimento === "string" && dados.dataNascimento.trim()
+        ? dados.dataNascimento.trim()
+        : null;
+
+    if (cpf && cpf.length !== 11) {
+        return res.status(400).json({ erro: "O CPF deve conter 11 números." });
+    }
+
+    if (telefone && ![10, 11].includes(telefone.length)) {
+        return res.status(400).json({ erro: "Informe um telefone válido." });
+    }
+
+    if (dataNascimento && !/^\d{4}-\d{2}-\d{2}$/.test(dataNascimento)) {
+        return res.status(400).json({ erro: "A data de nascimento deve estar no formato AAAA-MM-DD." });
+    }
+
+    const senhaHash = await criarHashSenha(senha);
+
+    try {
+        const [resultado] = await pool.execute(
+            `INSERT INTO usuarios (nome, email, senha_hash, cpf, telefone, data_nascimento)
+             VALUES (?, ?, ?, ?, ?, ?)`,
+            [nome, email, senhaHash, cpf || null, telefone || null, dataNascimento]
+        );
+
+        return res.status(201).json({
+            mensagem: "Cadastro realizado com sucesso.",
+            usuario: { id: resultado.insertId, nome, email }
+        });
+    } catch (erroBanco) {
+        if (erroBanco.code === "ER_DUP_ENTRY") {
+            return res.status(409).json({ erro: "Já existe uma conta com esse e-mail ou CPF." });
+        }
+        throw erroBanco;
+    }
+}));
+
+
+// Entrar na conta
+app.post("/api/login", rota(async (req, res) => {
+    const email = typeof req.body?.email === "string"
+        ? req.body.email.trim().toLowerCase()
+        : "";
+    const senha = typeof req.body?.senha === "string" ? req.body.senha : "";
+
+    if (!email || !senha) {
+        return res.status(400).json({ erro: "Informe o e-mail e a senha." });
+    }
+
+    const [usuarios] = await pool.execute(
+        `SELECT id, nome, email, senha_hash, ativo FROM usuarios WHERE email = ? LIMIT 1`,
+        [email]
+    );
+
+    if (usuarios.length === 0 || !usuarios[0].ativo) {
+        return res.status(401).json({ erro: "E-mail ou senha incorretos." });
+    }
+
+    const usuario = usuarios[0];
+    const senhaCorreta = await verificarHashSenha(senha, usuario.senha_hash);
+
+    if (!senhaCorreta) {
+        return res.status(401).json({ erro: "E-mail ou senha incorretos." });
+    }
+
+    const token = crypto.randomBytes(32).toString("hex");
+    sessoes.set(token, Number(usuario.id));
+
+    return res.json({
+        mensagem: "Login realizado com sucesso.",
+        token,
+        usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email }
+    });
+}));
+
+function exigirLogin(req, res, next) {
+    const cabecalho = req.headers.authorization || "";
+    const correspondencia = /^Bearer\s+(.+)$/i.exec(cabecalho);
+    const token = correspondencia?.[1];
+    const usuarioId = token ? sessoes.get(token) : null;
+
+    if (!usuarioId) {
+        return res.status(401).json({ erro: "Sua sessão expirou. Entre novamente." });
+    }
+
+    req.usuarioId = usuarioId;
+    next();
+}
+
+// Consultar os dados do próprio usuário autenticado
+app.get("/api/usuarios/me", exigirLogin, rota(async (req, res) => {
+    const [linhas] = await pool.execute(
+        `SELECT id, nome, email, cpf, telefone, data_nascimento, criado_em
+         FROM usuarios WHERE id = ? AND ativo = TRUE LIMIT 1`,
+        [req.usuarioId]
+    );
+
+    if (!linhas.length) {
+        return res.status(404).json({ erro: "Usuário não encontrado." });
+    }
+
+    return res.json({ usuario: linhas[0] });
+}));
+
+// Atualizar nome e e-mail do próprio usuário autenticado
+app.put("/api/usuarios/me", exigirLogin, rota(async (req, res) => {
+    const nome = typeof req.body?.nome === "string" ? req.body.nome.trim() : "";
+    const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
+
+    if (nome.length < 3 || nome.length > 150) {
+        return res.status(400).json({ erro: "O nome deve ter entre 3 e 150 caracteres." });
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) {
+        return res.status(400).json({ erro: "Informe um e-mail válido." });
+    }
+
+    try {
+        const [resultado] = await pool.execute(
+            "UPDATE usuarios SET nome = ?, email = ? WHERE id = ? AND ativo = TRUE",
+            [nome, email, req.usuarioId]
+        );
+        if (!resultado.affectedRows) {
+            return res.status(404).json({ erro: "Usuário não encontrado." });
+        }
+        const [linhas] = await pool.execute(
+            `SELECT id, nome, email, cpf, telefone, data_nascimento, criado_em
+             FROM usuarios WHERE id = ? LIMIT 1`,
+            [req.usuarioId]
+        );
+        return res.json({ mensagem: "Perfil atualizado no banco de dados.", usuario: linhas[0] });
+    } catch (erroBanco) {
+        if (erroBanco.code === "ER_DUP_ENTRY") {
+            return res.status(409).json({ erro: "Esse e-mail já está cadastrado em outra conta." });
+        }
+        throw erroBanco;
+    }
+}));
+
+app.post("/api/logout", exigirLogin, (req, res) => {
+    const token = (req.headers.authorization || "").replace(/^Bearer\s+/i, "");
+    sessoes.delete(token);
+    return res.json({ mensagem: "Sessão encerrada." });
+});
 
 // Listar plantas
 app.get("/plantas", rota(async (req, res) => {
@@ -299,6 +514,7 @@ app.use((erro, req, res, next) => {
 async function iniciarServidor() {
     await pool.query("SELECT 1");
     await pool.query(CRIAR_TABELA_PLANTAS);
+    await pool.query(CRIAR_TABELA_USUARIOS);
 
     console.log(`Conectado ao MySQL: ${process.env.DB_NAME}`);
 

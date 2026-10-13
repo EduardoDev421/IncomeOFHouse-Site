@@ -1,358 +1,136 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // ============================================================
-    // ELEMENTOS DA PÁGINA
-    // ============================================================
-
+document.addEventListener("DOMContentLoaded", async () => {
+    const API_BASE = "http://localhost:3000";
     const nomeUsuario = document.querySelector(".dados-usuario h2");
     const emailUsuario = document.querySelector(".dados-usuario > p");
-
     const informacoes = document.querySelectorAll(".card-informacoes .item");
-
     const botaoEditar = document.querySelector(".editar-perfil");
+    const token = localStorage.getItem("incomeOfHouses_token");
 
     if (!nomeUsuario || !emailUsuario) {
-        console.error("Elementos do perfil do usuário não foram encontrados.");
+        console.error("Elementos do perfil não encontrados.");
         return;
     }
 
-    // ============================================================
-    // RECUPERAR USUÁRIO LOGADO
-    // ============================================================
-
-    function obterUsuarioLogado() {
-        const chavesPossiveis = [
-            "usuarioLogado",
-            "usuario",
-            "user",
-            "usuarioAtual"
-        ];
-
-        for (const chave of chavesPossiveis) {
-            const dados = localStorage.getItem(chave);
-
-            if (!dados) {
-                continue;
-            }
-
-            try {
-                const usuario = JSON.parse(dados);
-
-                if (usuario && typeof usuario === "object") {
-                    return usuario;
-                }
-            } catch (erro) {
-                console.warn(`Não foi possível ler o usuário salvo em "${chave}".`);
-            }
-        }
-
-        return null;
-    }
-
-    const usuario = obterUsuarioLogado();
-
-    // ============================================================
-    // SE NÃO EXISTIR USUÁRIO LOGADO
-    // ============================================================
-
-    if (!usuario) {
-        nomeUsuario.textContent = "Usuário não identificado";
-        emailUsuario.textContent = "Faça login para acessar seu perfil.";
-
-        if (botaoEditar) {
-            botaoEditar.disabled = true;
-        }
-
-        mostrarAvisoLogin();
-
+    if (!token) {
+        mostrarAviso("Você precisa entrar na sua conta para ver o perfil.");
+        if (botaoEditar) botaoEditar.disabled = true;
         return;
     }
 
-    // ============================================================
-    // PREENCHER DADOS DO USUÁRIO
-    // ============================================================
+    let usuarioAtual = null;
+    try {
+        const resposta = await fetch(`${API_BASE}/api/usuarios/me`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        const dados = await resposta.json().catch(() => ({}));
+        if (!resposta.ok) throw new Error(dados.erro || "Não foi possível carregar o perfil.");
+        usuarioAtual = dados.usuario;
+        renderizar(usuarioAtual);
+        localStorage.setItem("incomeOfHouses_usuario", JSON.stringify({ id: usuarioAtual.id, nome: usuarioAtual.nome, email: usuarioAtual.email }));
+    } catch (erro) {
+        mostrarAviso(erro.message || "Não foi possível conectar ao servidor.");
+        if (botaoEditar) botaoEditar.disabled = true;
+        return;
+    }
 
-    const nome = usuario.nome || "Usuário";
-    const email = usuario.email || "E-mail não informado";
-
-    nomeUsuario.textContent = nome;
-    emailUsuario.textContent = email;
-
-    preencherInformacoesPessoais(nome, email);
-
-    preencherDataMembro(usuario);
-
-    // ============================================================
-    // INFORMAÇÕES PESSOAIS
-    // ============================================================
-
-    function preencherInformacoesPessoais(nomeCompleto, email) {
-        informacoes.forEach((item) => {
-            const titulo = item.querySelector(".item-text span");
+    function renderizar(usuario) {
+        nomeUsuario.textContent = usuario.nome || "Usuário";
+        emailUsuario.textContent = usuario.email || "E-mail não informado";
+        informacoes.forEach(item => {
+            const titulo = item.querySelector(".item-text span")?.textContent.trim().toLowerCase();
             const valor = item.querySelector(".item-text strong");
-
-            if (!titulo || !valor) {
-                return;
-            }
-
-            const textoTitulo = titulo.textContent.trim().toLowerCase();
-
-            if (textoTitulo === "nome completo") {
-                valor.textContent = nomeCompleto;
-            }
-
-            if (textoTitulo === "e-mail") {
-                valor.textContent = email;
-            }
-
-            /*
-             * CPF, telefone, data de nascimento e senha
-             * não são alterados aqui porque essas informações
-             * não existem atualmente na tabela tb_usuarios.
-             */
+            if (!valor || !titulo) return;
+            if (titulo === "nome completo") valor.textContent = usuario.nome || "Não informado";
+            if (titulo === "e-mail") valor.textContent = usuario.email || "Não informado";
+            if (titulo === "cpf") valor.textContent = formatarCPF(usuario.cpf) || "Não informado";
+            if (titulo === "telefone") valor.textContent = formatarTelefone(usuario.telefone) || "Não informado";
+            if (titulo === "data de nascimento") valor.textContent = formatarData(usuario.data_nascimento) || "Não informado";
+            if (titulo === "senha") valor.textContent = "••••••••••";
         });
+        const membro = document.querySelector(".membro-desde p");
+        if (membro) {
+            const data = usuario.criado_em ? new Date(usuario.criado_em) : null;
+            membro.textContent = data && !Number.isNaN(data.getTime())
+                ? `Membro desde: ${data.toLocaleDateString("pt-BR", { month: "long", year: "numeric" })}`
+                : "Membro desde: data não informada";
+        }
     }
 
-    // ============================================================
-    // DATA DE MEMBRO
-    // ============================================================
+    if (botaoEditar) botaoEditar.addEventListener("click", editarPerfil);
 
-    function preencherDataMembro(usuario) {
-        const elementoMembro = document.querySelector(".membro-desde p");
-
-        if (!elementoMembro) {
-            return;
+    async function editarPerfil() {
+        const nome = prompt("Digite seu novo nome:", usuarioAtual.nome || "");
+        if (nome === null) return;
+        const email = prompt("Digite seu novo e-mail:", usuarioAtual.email || "");
+        if (email === null) return;
+        if (nome.trim().length < 3 || nome.trim().length > 150) {
+            alert("O nome deve ter entre 3 e 150 caracteres."); return;
         }
-
-        /*
-         * Se futuramente o backend retornar enviado_em,
-         * utilizaremos essa data.
-         */
-
-        if (usuario.enviado_em) {
-            const data = new Date(usuario.enviado_em);
-
-            if (!Number.isNaN(data.getTime())) {
-                const dataFormatada = data.toLocaleDateString("pt-BR", {
-                    month: "long",
-                    year: "numeric"
-                });
-
-                elementoMembro.textContent =
-                    `Membro desde: ${capitalizarPrimeiraLetra(dataFormatada)}`;
-
-                return;
-            }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+            alert("Informe um e-mail válido."); return;
         }
-
-        // Caso a informação ainda não esteja disponível
-        elementoMembro.textContent = "Membro desde: Data não informada";
+        botaoEditar.disabled = true;
+        try {
+            const resposta = await fetch(`${API_BASE}/api/usuarios/me`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+                body: JSON.stringify({ nome: nome.trim(), email: email.trim() })
+            });
+            const dados = await resposta.json().catch(() => ({}));
+            if (!resposta.ok) throw new Error(dados.erro || "Não foi possível atualizar o perfil.");
+            usuarioAtual = dados.usuario;
+            renderizar(usuarioAtual);
+            localStorage.setItem("incomeOfHouses_usuario", JSON.stringify({ id: usuarioAtual.id, nome: usuarioAtual.nome, email: usuarioAtual.email }));
+            mostrarMensagem("Perfil atualizado e salvo no banco de dados.");
+        } catch (erro) {
+            alert(erro.message || "Erro ao salvar as alterações.");
+        } finally {
+            botaoEditar.disabled = false;
+        }
     }
 
-    // ============================================================
-    // CAPITALIZAR PRIMEIRA LETRA
-    // ============================================================
-
-    function capitalizarPrimeiraLetra(texto) {
-        if (!texto) {
-            return texto;
-        }
-
-        return texto.charAt(0).toUpperCase() + texto.slice(1);
+    function formatarCPF(valor) {
+        const n = String(valor || "").replace(/\D/g, "");
+        return n.length === 11 ? n.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4") : n;
     }
-
-    // ============================================================
-    // BOTÃO EDITAR PERFIL
-    // ============================================================
-
-    if (botaoEditar) {
-        botaoEditar.addEventListener("click", () => {
-            ativarEdicaoPerfil();
-        });
+    function formatarTelefone(valor) {
+        const n = String(valor || "").replace(/\D/g, "");
+        if (n.length === 11) return n.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+        if (n.length === 10) return n.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
+        return n;
     }
-
-    function ativarEdicaoPerfil() {
-        const nomeAtual = nomeUsuario.textContent;
-        const emailAtual = emailUsuario.textContent;
-
-        const novoNome = prompt(
-            "Digite seu novo nome:",
-            nomeAtual
-        );
-
-        if (novoNome === null) {
-            return;
-        }
-
-        const nomeFormatado = novoNome.trim();
-
-        if (nomeFormatado.length < 2) {
-            alert("O nome deve possuir pelo menos 2 caracteres.");
-            return;
-        }
-
-        if (nomeFormatado.length > 150) {
-            alert("O nome deve possuir no máximo 150 caracteres.");
-            return;
-        }
-
-        const novoEmail = prompt(
-            "Digite seu novo e-mail:",
-            emailAtual
-        );
-
-        if (novoEmail === null) {
-            return;
-        }
-
-        const emailFormatado = novoEmail.trim().toLowerCase();
-
-        if (!validarEmail(emailFormatado)) {
-            alert("Informe um e-mail válido.");
-            return;
-        }
-
-        /*
-         * Atualiza a informação exibida na página.
-         */
-        nomeUsuario.textContent = nomeFormatado;
-        emailUsuario.textContent = emailFormatado;
-
-        preencherInformacoesPessoais(
-            nomeFormatado,
-            emailFormatado
-        );
-
-        /*
-         * Atualiza os dados armazenados localmente.
-         *
-         * IMPORTANTE:
-         * Isso não altera o MySQL.
-         * A atualização definitiva no banco será feita quando
-         * criarmos a rota de edição de usuário no Back-End.
-         */
-        const usuarioAtualizado = {
-            ...usuario,
-            nome: nomeFormatado,
-            email: emailFormatado
-        };
-
-        localStorage.setItem(
-            "usuarioLogado",
-            JSON.stringify(usuarioAtualizado)
-        );
-
-        mostrarMensagem(
-            "Perfil atualizado nesta sessão."
-        );
+    function formatarData(valor) {
+        if (!valor) return "";
+        const data = new Date(valor);
+        return Number.isNaN(data.getTime()) ? "" : data.toLocaleDateString("pt-BR", { timeZone: "UTC" });
     }
-
-    // ============================================================
-    // VALIDAR E-MAIL
-    // ============================================================
-
-    function validarEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    // ============================================================
-    // MENSAGEM DE AVISO DE LOGIN
-    // ============================================================
-
-    function mostrarAvisoLogin() {
+    function mostrarAviso(texto) {
         const conteudo = document.querySelector(".conteudo");
-
-        if (!conteudo) {
-            return;
-        }
-
-        const aviso = document.createElement("div");
-
-        aviso.className = "aviso-login";
-
-        aviso.innerHTML = `
-            <p>Você precisa estar logado para visualizar seus dados.</p>
-            <a href="../pages/login.html">Ir para o login</a>
-        `;
-
-        conteudo.prepend(aviso);
+        if (!conteudo) return;
+        let aviso = conteudo.querySelector(".aviso-login");
+        if (!aviso) { aviso = document.createElement("div"); aviso.className = "aviso-login"; conteudo.prepend(aviso); }
+        aviso.textContent = texto + " ";
+        const link = document.createElement("a"); link.href = "./Login.html"; link.textContent = "Ir para o login"; aviso.appendChild(link);
     }
-
-    // ============================================================
-    // MENSAGEM DE SUCESSO
-    // ============================================================
-
     function mostrarMensagem(texto) {
         let mensagem = document.querySelector(".mensagem-perfil");
-
-        if (!mensagem) {
-            mensagem = document.createElement("div");
-            mensagem.className = "mensagem-perfil";
-
-            const conteudo = document.querySelector(".conteudo");
-
-            if (conteudo) {
-                conteudo.prepend(mensagem);
-            }
-        }
-
-        mensagem.textContent = texto;
-
-        setTimeout(() => {
-            mensagem.remove();
-        }, 4000);
+        if (!mensagem) { mensagem = document.createElement("div"); mensagem.className = "mensagem-perfil"; document.querySelector(".conteudo")?.prepend(mensagem); }
+        if (mensagem) mensagem.textContent = texto;
     }
 
-    // ============================================================
-    // SAIR DA CONTA
-    // ============================================================
-
-    const links = document.querySelectorAll(".menu-lateral a");
-
-    links.forEach((link) => {
-        const texto = link.textContent.trim().toLowerCase();
-
-        if (texto === "sair") {
-            link.addEventListener("click", (event) => {
-                event.preventDefault();
-
-                const confirmar = confirm(
-                    "Deseja realmente sair da sua conta?"
-                );
-
-                if (!confirmar) {
-                    return;
-                }
-
-                /*
-                 * Remove os dados da sessão local.
-                 */
-                localStorage.removeItem("usuarioLogado");
-                localStorage.removeItem("usuario");
-                localStorage.removeItem("user");
-                localStorage.removeItem("usuarioAtual");
-
-                /*
-                 * Volta para a página inicial.
-                 */
-                window.location.href = "../index.html";
-            });
-        }
+    document.querySelectorAll(".menu-lateral a").forEach(link => {
+        if (link.textContent.trim().toLowerCase() !== "sair") return;
+        link.addEventListener("click", async event => {
+            event.preventDefault();
+            if (!confirm("Deseja realmente sair da sua conta?")) return;
+            try { await fetch(`${API_BASE}/api/logout`, { method: "POST", headers: { Authorization: `Bearer ${token}` } }); } catch (_) {}
+            localStorage.removeItem("incomeOfHouses_token");
+            localStorage.removeItem("incomeOfHouses_usuario");
+            localStorage.removeItem("usuarioLogado");
+            localStorage.removeItem("usuario");
+            localStorage.removeItem("user");
+            localStorage.removeItem("usuarioAtual");
+            window.location.href = "../index.html";
+        });
     });
-
-    // ============================================================
-    // ATUALIZAÇÃO DO CONTADOR DE ATIVIDADES
-    // ============================================================
-
-    /*
-     * Os cards abaixo ainda possuem valores estáticos no HTML:
-     *
-     * Projetos Salvos
-     * Profissionais Favoritos
-     * Pedidos Realizados
-     *
-     * Eles serão ligados às respectivas funcionalidades quando
-     * essas páginas e estruturas forem implementadas.
-     */
-
-    console.log("perfilUsuario.js carregado com sucesso.");
 });

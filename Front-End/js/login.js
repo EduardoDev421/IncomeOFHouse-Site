@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const senha = document.getElementById("senha");
     const lembrar = document.getElementById("lembrar");
     const botoesSociais = document.querySelectorAll(".BotaoSocial");
+    const API_URL = "http://localhost:3000/api/login";
 
     if (!form || !email || !senha || !lembrar) {
         console.error("Formulário de login não encontrado.");
@@ -12,102 +13,84 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const EMAIL_KEY = "incomeOfHouses_email";
 
-    function criarMensagem(campo, mensagem) {
-        const antiga = campo.parentElement.querySelector(".erro-login");
-        if (antiga) antiga.remove();
-
-        const erro = document.createElement("small");
-        erro.className = "erro-login";
-        erro.textContent = mensagem;
-        erro.style.cssText = `
-            display:block;
-            margin-top:6px;
-            color:#e74c3c;
-            font-size:13px;
-        `;
-
-        campo.parentElement.appendChild(erro);
-        campo.setAttribute("aria-invalid", "true");
+    function mostrarMensagem(mensagem, sucesso = false) {
+        let caixa = form.querySelector(".mensagem-login");
+        if (!caixa) {
+            caixa = document.createElement("div");
+            caixa.className = "mensagem-login";
+            caixa.setAttribute("role", "status");
+            form.appendChild(caixa);
+        }
+        caixa.textContent = mensagem;
+        caixa.style.cssText = `margin-top:15px;padding:12px;border-radius:8px;font-size:14px;line-height:1.4;background:${sucesso ? "#e8f5e9" : "#fdecea"};color:${sucesso ? "#2e7d32" : "#b42318"};`;
     }
 
-    function limparMensagens() {
-        form.querySelectorAll(".erro-login").forEach(el => el.remove());
-        [email, senha].forEach(campo => campo.removeAttribute("aria-invalid"));
-    }
-
-    function emailValido(valor) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+    function limparMensagem() {
+        form.querySelector(".mensagem-login")?.remove();
     }
 
     const emailSalvo = localStorage.getItem(EMAIL_KEY);
-
     if (emailSalvo) {
         email.value = emailSalvo;
         lembrar.checked = true;
     }
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        limparMensagens();
+        limparMensagem();
 
-        const emailValor = email.value.trim();
+        const emailValor = email.value.trim().toLowerCase();
         const senhaValor = senha.value;
 
-        let valido = true;
-
-        if (!emailValor) {
-            criarMensagem(email, "Digite seu e-mail.");
-            valido = false;
-        } else if (!emailValido(emailValor)) {
-            criarMensagem(email, "Digite um e-mail válido.");
-            valido = false;
+        if (!emailValor || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValor)) {
+            mostrarMensagem("Digite um e-mail válido.");
+            return;
         }
-
         if (!senhaValor) {
-            criarMensagem(senha, "Digite sua senha.");
-            valido = false;
-        } else if (senhaValor.length < 6) {
-            criarMensagem(senha, "A senha deve ter pelo menos 6 caracteres.");
-            valido = false;
+            mostrarMensagem("Digite sua senha.");
+            return;
         }
 
-        if (!valido) return;
-
-        if (lembrar.checked) {
-            localStorage.setItem(EMAIL_KEY, emailValor);
-        } else {
-            localStorage.removeItem(EMAIL_KEY);
+        const botao = form.querySelector('button[type="submit"]');
+        if (botao) {
+            botao.disabled = true;
+            botao.textContent = "Entrando...";
         }
 
-        // O projeto ainda não possui uma rota de login no Back-End.
-        // Portanto, aqui fazemos somente a validação do formulário.
-        mostrarSucesso("Dados válidos! A autenticação com o servidor ainda precisa ser conectada.");
+        try {
+            const resposta = await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: emailValor, senha: senhaValor })
+            });
+            const dados = await resposta.json().catch(() => ({}));
+
+            if (!resposta.ok) {
+                throw new Error(dados.erro || "Não foi possível entrar. Tente novamente.");
+            }
+
+            if (lembrar.checked) localStorage.setItem(EMAIL_KEY, emailValor);
+            else localStorage.removeItem(EMAIL_KEY);
+
+            // Guarda apenas os dados públicos para personalizar a interface.
+            // A senha nunca é armazenada no navegador.
+            localStorage.setItem("incomeOfHouses_usuario", JSON.stringify(dados.usuario));
+            localStorage.setItem("incomeOfHouses_token", dados.token);
+            mostrarMensagem("Login validado com sucesso! Redirecionando...", true);
+            window.location.href = "../index.html";
+        } catch (erro) {
+            mostrarMensagem(erro.message || "Não foi possível conectar ao servidor. Confira se o Back-End está rodando.");
+        } finally {
+            if (botao) {
+                botao.disabled = false;
+                botao.textContent = "Entrar";
+            }
+        }
     });
-
-    function mostrarSucesso(mensagem) {
-        const antigo = form.querySelector(".sucesso-login");
-        if (antigo) antigo.remove();
-
-        const sucesso = document.createElement("div");
-        sucesso.className = "sucesso-login";
-        sucesso.textContent = mensagem;
-        sucesso.style.cssText = `
-            margin-top:15px;
-            padding:12px;
-            border-radius:8px;
-            background:#e8f5e9;
-            color:#2e7d32;
-            font-size:14px;
-            line-height:1.4;
-        `;
-
-        form.appendChild(sucesso);
-    }
 
     botoesSociais.forEach(botao => {
         botao.addEventListener("click", () => {
-            const provedor = botao.textContent.trim();
-            mostrarSucesso(`${provedor}: integração ainda não configurada.`);
+            mostrarMensagem("O login social ainda não está configurado.");
         });
     });
 });
