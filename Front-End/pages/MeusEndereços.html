@@ -1,32 +1,176 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-   <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina de Meus Endereços</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+    <link rel="stylesheet" href="../css/MeusEnderecos.css">
+    <title>Meus Endereços - Income Of Houses</title>
 </head>
+
 <body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
-      </div>
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html" class="ativo">Sobre</a>
-      </nav>
-   </header>
-         <main>
+    <header class="topo">
+        <div class="logo">
+            <a href="../index.html">
+                <img src="../img/Logo.png" alt="Logo Income of Houses">
+            </a>
+        </div>
+        <nav class="menu">
+            <a href="../index.html">Início</a>
+            <a href="./Plantas.html">Plantas</a>
+            <a href="./Profissionais.html">Profissionais</a>
+            <a href="./Sobre.html">Sobre Nós</a>
+        </nav>
+    </header>
 
+    <main class="BackGround">
+        <section class="container">
+            <aside class="menu-lateral">
+                <ul>
+                    <li>
+                        <a href="../pages/perfilUsuario.html">
+                            <img src="../img/icones/IconePerfil.svg" alt="">
+                            <span>Meu Perfil</span>
+                        </a>
+                    </li>
+                    <li class="ativo">
+                        <a href="../pages/MeusEndereços.html">
+                            <img src="../img/icones/IconeEndereco.svg" alt="">
+                            <span>Meus Endereços</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/MeusPedidos.html">
+                            <img src="../img/icones/IconeProjetos.svg" alt="">
+                            <span>Meus Pedidos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/MeusProfissionais.html">
+                            <img src="../img/icones/IconeEstrela.svg" alt="">
+                            <span>Meus Profissionais Favoritos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/ProjetosSalvos.html">
+                            <img src="../img/icones/IconeSalvos.svg" alt="">
+                            <span>Projetos Salvos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/Agendamentos.html">
+                            <img src="../img/icones/IconeData.svg" alt="">
+                            <span>Agendamentos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/Mensagem.html">
+                            <img src="../img/icones/IconeMensagem.svg" alt="">
+                            <span>Mensagem</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/ConfiguraçõesUsuario.html">
+                            <img src="../img/icones/IconeConfiguracao.svg" alt="">
+                            <span>Configurações</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../index.html">
+                            <img src="../img/icones/IconeSair.svg" alt="">
+                            <span>Sair</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
 
-         </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+            <section class="conteudo">
+                <div class="Inicio">
+                    <div>
+                        <h1>Meus Endereços</h1>
+                        <p>Gerencie os endereços da sua conta. Eles são pessoais e só você vê.</p>
+                    </div>
+                    <button class="btn-primario" id="btnNovo">+ Adicionar endereço</button>
+                </div>
+
+                <div class="resumo" id="resumo"></div>
+
+                <div class="lista-enderecos" id="lista">
+                    <p class="aviso-js">Os endereços não carregaram. Confira se o arquivo js/MeusEnderecos.js existe e atualize a página com Ctrl+F5.</p>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <dialog id="modal">
+        <form id="form" novalidate>
+            <h2 id="modalTitulo">Novo endereço</h2>
+
+            <label>Apelido
+                <input type="text" name="apelido" list="apelidos" maxlength="30" placeholder="Ex.: Casa, Trabalho" required>
+                <datalist id="apelidos">
+                    <option value="Casa"></option>
+                    <option value="Trabalho"></option>
+                    <option value="Imóvel de investimento"></option>
+                </datalist>
+            </label>
+
+            <div class="linha">
+                <label>CEP
+                    <input type="text" name="cep" inputmode="numeric" maxlength="9" placeholder="00000-000" required>
+                </label>
+                <label>Número
+                    <input type="text" name="numero" maxlength="10" placeholder="123" required>
+                </label>
+            </div>
+
+            <label>Rua / Logradouro
+                <input type="text" name="rua" maxlength="80" required>
+            </label>
+
+            <div class="linha">
+                <label>Complemento
+                    <input type="text" name="complemento" maxlength="40" placeholder="Apto, bloco... (opcional)">
+                </label>
+                <label>Bairro
+                    <input type="text" name="bairro" maxlength="50" required>
+                </label>
+            </div>
+
+            <div class="linha cidade-uf">
+                <label>Cidade
+                    <input type="text" name="cidade" maxlength="50" required>
+                </label>
+                <label>UF
+                    <input type="text" name="uf" maxlength="2" placeholder="DF" required>
+                </label>
+            </div>
+
+            <label class="check">
+                <input type="checkbox" name="principal">
+                Definir como endereço principal
+            </label>
+
+            <p class="erro" id="erro" role="alert"></p>
+
+            <div class="acoes-modal">
+                <button type="button" class="btn-secundario" id="btnCancelar">Cancelar</button>
+                <button type="submit" class="btn-primario">Salvar endereço</button>
+            </div>
+        </form>
+    </dialog>
+
+    <footer class="rodape">
+        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+        <div class="RodapeLinks">
+            <a href="../pages/TermosUso.html">Termos de Uso</a>
+            <span>|</span>
+            <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+        </div>
+    </footer>
+
+    <script src="../js/MeusEnderecos.js"></script>
 </body>
+
 </html>
