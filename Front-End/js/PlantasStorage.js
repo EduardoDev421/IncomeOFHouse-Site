@@ -1,56 +1,121 @@
-// PlantasStorage.js
-// Carregue este arquivo ANTES do publicarPlanta.js e do plantas.js.
-//
-// Configure window.PLANTAS_API_URL antes deste script se o front e a API
-// estiverem em domínios diferentes. Em produção, o padrão usa a mesma origem.
-const API_BASE_URL = window.PLANTAS_API_URL || (
-    window.location.protocol === "file:" ||
-    ["localhost", "127.0.0.1"].includes(window.location.hostname)
-        ? "http://localhost:3000"
-        : window.location.origin
-);
-const API_PLANTAS = `${API_BASE_URL.replace(/\/+$/, "")}/plantas`;
+/* PlantasStorage.js
+   Responsável pela comunicação com a API de plantas.
+   Carregue este arquivo ANTES de plantas.js, detalhePlanta.js e publicarPlanta.js.
+*/
 
-async function respostaOuErro(resposta) {
-    if (resposta.ok) return;
+(function () {
+    const API_BASE_URL = (
+        window.PLANTAS_API_URL ||
+        (
+            window.location.protocol === "file:" ||
+            ["localhost", "127.0.0.1"].includes(window.location.hostname)
+                ? "http://localhost:3000"
+                : window.location.origin
+        )
+    ).replace(/\/+$/, "");
 
-    const conteudo = await resposta.text();
-    let detalhe = {};
-    try {
-        detalhe = JSON.parse(conteudo);
-    } catch (erro) {
-        console.error("A API retornou uma resposta de erro inválida:", erro);
+    const API_PLANTAS = `${API_BASE_URL}/plantas`;
+
+    // Lê a resposta e informa o erro retornado pelo servidor.
+    async function lerResposta(resposta) {
+        const texto = await resposta.text();
+        let dados = {};
+
+        if (texto) {
+            try {
+                dados = JSON.parse(texto);
+            } catch {
+                dados = {};
+            }
+        }
+
+        if (!resposta.ok) {
+            const mensagem =
+                dados.erro ||
+                dados.mensagem ||
+                (resposta.status === 413
+                    ? "A imagem é grande demais para o servidor (HTTP 413)."
+                    : `Erro do servidor: HTTP ${resposta.status}`);
+
+            throw new Error(mensagem);
+        }
+
+        return dados;
     }
 
-    throw new Error(detalhe.erro || `O servidor respondeu com status ${resposta.status}.`);
-}
-
-// Devolve as plantas salvas no banco, da mais nova para a mais antiga.
-async function getPlantas() {
-    const resposta = await fetch(API_PLANTAS);
-    await respostaOuErro(resposta);
-
-    const dados = await resposta.json();
-    if (!Array.isArray(dados)) {
-        throw new Error("A API retornou uma lista de plantas inválida.");
+    // fetch que explica melhor quando o servidor está fora do ar.
+    async function requisitar(url, opcoes) {
+        try {
+            return await fetch(url, opcoes);
+        } catch {
+            throw new Error(
+                "Não foi possível conectar ao servidor. Verifique se a API está rodando."
+            );
+        }
     }
 
-    return dados.reverse();
-}
+    // Busca todas as plantas publicadas (mais novas primeiro).
+    async function getPlantas() {
+        const resposta = await requisitar(API_PLANTAS);
+        const dados = await lerResposta(resposta);
 
-async function getPlanta(id) {
-    const resposta = await fetch(`${API_PLANTAS}/${encodeURIComponent(id)}`);
-    await respostaOuErro(resposta);
-    return resposta.json();
-}
+        const lista = Array.isArray(dados) ? dados : dados.plantas;
 
-// Só considera publicação concluída quando a API confirmar a gravação no MySQL.
-async function salvarPlanta(planta) {
-    const resposta = await fetch(API_PLANTAS, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(planta),
-    });
-    await respostaOuErro(resposta);
-    return true;
-}
+        if (!Array.isArray(lista)) {
+            throw new Error(
+                "O servidor não retornou uma lista válida de plantas."
+            );
+        }
+
+        // Ordena pelo id (maior = mais nova). Funciona mesmo que o
+        // servidor passe a ordenar sozinho com ORDER BY id DESC.
+        return [...lista].sort((a, b) => Number(b.id) - Number(a.id));
+    }
+
+    // Busca uma planta específica pelo ID.
+    async function getPlanta(id) {
+        if (!id) {
+            throw new Error("O ID da planta não foi informado.");
+        }
+
+        const resposta = await requisitar(
+            `${API_PLANTAS}/${encodeURIComponent(id)}`
+        );
+
+        const dados = await lerResposta(resposta);
+
+        return dados.planta || dados;
+    }
+
+    // Envia uma planta para ser salva no MySQL.
+    async function salvarPlanta(planta) {
+        const resposta = await requisitar(API_PLANTAS, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(planta)
+        });
+
+        return lerResposta(resposta);
+    }
+
+    // Exclui uma planta do banco de dados.
+    async function excluirPlanta(id) {
+        if (!id) {
+            throw new Error("O ID da planta não foi informado.");
+        }
+
+        const resposta = await requisitar(
+            `${API_PLANTAS}/${encodeURIComponent(id)}`,
+            { method: "DELETE" }
+        );
+
+        return lerResposta(resposta);
+    }
+
+    window.PlantasStorage = {
+        getPlantas,
+        getPlanta,
+        salvarPlanta,
+        excluirPlanta
+    };
+})();

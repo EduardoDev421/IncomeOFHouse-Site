@@ -4,12 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="description" content="Income Of Houses - Cadastro de usuários">
-
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/Cadastro.css">
-
+    <link rel="stylesheet" href="../css/Modais/LegalModal.css">
     <title>Cadastro | Income Of Houses</title>
 </head>
 
@@ -40,23 +37,26 @@
                 <p>Cadastre-se para encontrar profissionais,
                     descobrir projetos e transformar suas ideias
                     em realidade.</p>
-                
+
                 <div class="MiniCards">
                     <div class="MiniCard">
                         <div class="ImgCard">
-                            <img src="../img/icones/MiniCardArquitetura.svg" alt="Ilustração de uma casa em projeto arquitetônico">
+                            <img src="../img/icones/MiniCardArquitetura.svg"
+                                alt="Ilustração de uma casa em projeto arquitetônico">
                         </div>
                         <p>Arquitetura</p>
                     </div>
                     <div class="MiniCard">
                         <div class="ImgCard">
-                            <img src="../img/icones/MiniCardEngenharia.svg" alt="Ilustração de um guindaste de construção">
+                            <img src="../img/icones/MiniCardEngenharia.svg"
+                                alt="Ilustração de um guindaste de construção">
                         </div>
                         <p>Engenharia</p>
                     </div>
                     <div class="MiniCard">
                         <div class="ImgCard">
-                            <img src="../img/icones/MiniCardDesign.svg" alt="Ilustração de uma paleta de cores e pincel">
+                            <img src="../img/icones/MiniCardDesign.svg"
+                                alt="Ilustração de uma paleta de cores e pincel">
                         </div>
                         <p>Design</p>
                     </div>
@@ -92,13 +92,7 @@
                         Nome
                     </label>
 
-                    <input
-                        type="text"
-                        id="nomeCadastro"
-                        name="nome"
-                        placeholder="Digite seu nome"
-                        required
-                    >
+                    <input type="text" id="nomeCadastro" name="nome" placeholder="Digite seu nome" required>
 
 
                     <!-- E-MAIL -->
@@ -106,13 +100,7 @@
                         E-mail
                     </label>
 
-                    <input
-                        type="email"
-                        id="emailCadastro"
-                        name="email"
-                        placeholder="Digite seu e-mail"
-                        required
-                    >
+                    <input type="email" id="emailCadastro" name="email" placeholder="Digite seu e-mail" required>
 
 
                     <!-- CPF -->
@@ -120,14 +108,7 @@
                         CPF
                     </label>
 
-                    <input
-                        type="text"
-                        id="cpfCadastro"
-                        name="cpf"
-                        placeholder="Digite seu CPF"
-                        maxlength="14"
-                        required
-                    >
+                    <input type="text" id="cpfCadastro" name="cpf" placeholder="Digite seu CPF" maxlength="14" required>
 
 
                     <!-- TELEFONE -->
@@ -135,13 +116,7 @@
                         Telefone
                     </label>
 
-                    <input
-                        type="tel"
-                        id="telefoneCadastro"
-                        name="telefone"
-                        placeholder="Digite seu telefone"
-                        required
-                    >
+                    <input type="tel" id="telefoneCadastro" name="telefone" placeholder="Digite seu telefone" required>
 
 
                     <!-- DATA DE NASCIMENTO -->
@@ -149,12 +124,7 @@
                         Data de nascimento
                     </label>
 
-                    <input
-                        type="date"
-                        id="datanascCadastro"
-                        name="dataNascimento"
-                        required
-                    >
+                    <input type="date" id="datanascCadastro" name="dataNascimento" required>
 
 
                     <!-- SENHAS -->
@@ -166,13 +136,8 @@
                                 Senha
                             </label>
 
-                            <input
-                                type="password"
-                                id="senhaCadastro"
-                                name="senha"
-                                placeholder="Crie uma senha"
-                                required
-                            >
+                            <input type="password" id="senhaCadastro" name="senha" placeholder="Crie uma senha"
+                                required>
 
                         </div>
 
@@ -183,13 +148,8 @@
                                 Confirmar senha
                             </label>
 
-                            <input
-                                type="password"
-                                id="confirmaSenha"
-                                name="confirmarSenha"
-                                placeholder="Confirme sua senha"
-                                required
-                            >
+                            <input type="password" id="confirmaSenha" name="confirmarSenha"
+                                placeholder="Confirme sua senha" required>
 
                         </div>
 
@@ -197,10 +157,7 @@
 
 
                     <!-- BOTÃO -->
-                    <button
-                        type="submit"
-                        class="btn-cadastrar"
-                    >
+                    <button type="submit" class="btn-cadastrar">
                         Cadastrar
                     </button>
 
@@ -222,15 +179,12 @@
 
                         <p>
                             <a href="../pages/Login.html">
-                            Já possui uma conta?
-                            <span>Entrar</span>
+                                Já possui uma conta?
+                                <span>Entrar</span>
                             </a>
                         </p>
 
-                        <a
-                            class="profissional"
-                            href="../pages/CadastrarProfissionais.html"
-                        >
+                        <a class="profissional" href="../pages/CadastrarProfissionais.html">
                             Quero me cadastrar como profissional
                         </a>
 
@@ -246,14 +200,14 @@
     <footer class="rodape">
         <p>©IncomeOfHouses. Todos os direitos reservados.</p>
         <div class="RodapeLinks">
-            <a href="../pages/TermosUso.html">Termos de Uso</a>
+            <a href="../pages/Modais/TermosUso.html" data-legal="termos">Termos de Uso</a>
             <span>|</span>
-            <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+            <a href="../pages/Modais/PoliticaPrivacidade.html" data-legal="privacidade">Política de Privacidade</a>
         </div>
     </footer>
 
+    <script src="../js/Modais/LegalModais.js"></script>
     <script src="../js/cadastro.js"></script>
-
 </body>
 
 </html>

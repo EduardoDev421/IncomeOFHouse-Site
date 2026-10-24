@@ -499,3 +499,29 @@ input[type="number"] {
         text-align: center;
     }
 }
+
+/* ================================================= */
+/* Melhorias */
+
+.dica {
+    color: var(--cor-texto-suave);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.campo input:focus-visible,
+.campo select:focus-visible,
+.campo textarea:focus-visible,
+.chip button:focus-visible,
+.destaques-adicionar button:focus-visible,
+.formPublicarPlanta button[type="submit"]:focus-visible {
+    outline: 2px solid var(--cor-dourado);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="IncomeofHouses - Detalhes da planta">
     <link rel="stylesheet" href="../css/DetalhesPlanta.css">
+    <link rel="stylesheet" href="../css/Modais/LegalModal.css">
     <title>Detalhes Planta - Income of Houses</title>
 </head>
 <body>
@@ -21,8 +22,8 @@
             <a href="./Sobre.html">Sobre Nós</a>
         </nav>
         <div class="iconelogin">
-            <a href="./Login.html" aria-label="Entrar">
-                <img src="../img/icones/IconePerfil.svg" alt="Ícone de login">
+            <a href="./Login.html">
+                <img src="../img/icones/IconePerfil.svg" alt="Entrar">
             </a>
         </div>
     </header>
@@ -76,7 +77,7 @@
                     </div>
 
                     <div class="BtnSolicitar">
-                        <button type="button" class="BtnPrincipal">
+                        <button type="button" class="BtnPrincipal" id="botaoSolicitar">
                             <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
                             Solicitar Projeto
                         </button>
@@ -135,10 +136,25 @@
                                 <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 01-11.5 7.2L4 21l1.8-5A8 8 0 1121 12z"/></svg>
                                 Avaliações do cliente
                             </h3>
-                            <a href="../pages/Avaliações.html">Ver mais avaliações →</a>
+                            <a href="../pages/Avaliacoes.html">Ver mais avaliações →</a>
                         </div>
                         <div class="CardAvaliacao" id="avaliacaoPlanta"></div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Comentários da planta (resumo + link para a página de comentários) -->
+            <div class="Comentarios" id="comentariosPlanta">
+                <div class="ComentariosTopo">
+                    <h2>
+                        <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 01-11.5 7.2L4 21l1.8-5A8 8 0 1121 12z"/></svg>
+                        Comentários
+                        <span class="ContagemComentarios" id="contagemComentarios">0</span>
+                    </h2>
+                    <a class="BtnComentarios" id="linkComentarios" href="./Comentarios.html">Ver e comentar →</a>
+                </div>
+                <div class="PreviaComentario" id="previaComentario">
+                    <p class="PreviaVazia">Carregando comentários...</p>
                 </div>
             </div>
         </section>
@@ -147,13 +163,16 @@
     <footer class="rodape">
         <p>©IncomeOfHouses. Todos os direitos reservados.</p>
         <div class="RodapeLinks">
-            <a href="../pages/TermosUso.html">Termos de Uso</a>
+            <a href="../pages/Modais/TermosUso.html" data-legal="termos">Termos de Uso</a>
             <span>|</span>
-            <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+            <a href="../pages/Modais/PoliticaPrivacidade.html" data-legal="privacidade">Política de Privacidade</a>
         </div>
     </footer>
 
+    <script src="../js/Modais/LegalModais.js"></script>
     <script src="../js/PlantasStorage.js"></script>
+    <script src="../js/Favoritos.js"></script>
     <script src="../js/detalhePlanta.js"></script>
+    <script src="../js/ComentariosPlanta.js"></script>
 </body>
 </html>

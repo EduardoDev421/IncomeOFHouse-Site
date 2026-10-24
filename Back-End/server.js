@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 
 const express = require("express");
@@ -55,7 +54,8 @@ const CRIAR_TABELA_PLANTAS = `
         area DECIMAL(10, 2) NOT NULL,
         preco DECIMAL(12, 2) NOT NULL,
         imagem_url VARCHAR(255) NOT NULL,
-        profissional VARCHAR(150) NOT NULL DEFAULT 'Profissional',
+        destaques JSON NULL,
+        distribuicao_ambientes TEXT NULL,
         criada_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         ativa BOOLEAN NOT NULL DEFAULT TRUE,
         INDEX idx_plantas_ativa_id (ativa, id)
@@ -92,7 +92,8 @@ const SELECT_PLANTAS = `
         p.area,
         p.preco,
         p.imagem_url AS imagem,
-        p.profissional,
+        p.destaques,
+        p.distribuicao_ambientes AS distribuicaoAmbientes,
         p.criada_em AS criadaEm
     FROM plantas p
     WHERE p.ativa = TRUE
@@ -175,9 +176,22 @@ function salvarImagem(dataUrl) {
     return `/uploads/${nome}`;
 }
 
+// Converte a linha do banco no formato que o site espera.
 function paraSite(planta) {
+    let destaques = planta.destaques;
+
+    // Dependendo da versão do MySQL, a coluna JSON volta como texto.
+    if (typeof destaques === "string") {
+        try {
+            destaques = JSON.parse(destaques);
+        } catch {
+            destaques = [];
+        }
+    }
+
     return {
         ...planta,
+        destaques: Array.isArray(destaques) ? destaques : [],
         imagem: `${BASE_URL}${planta.imagem}`
     };
 }
@@ -457,6 +471,20 @@ app.post("/plantas", rota(async (req, res) => {
         ? c.estilo.trim()
         : null;
 
+    // Destaques: lista de textos (máx. 30, cada um com até 150 caracteres).
+    const destaques = Array.isArray(c.destaques)
+        ? c.destaques
+            .map((d) => String(d).trim().slice(0, 150))
+            .filter(Boolean)
+            .slice(0, 30)
+        : [];
+
+    const distribuicao =
+        typeof c.distribuicaoAmbientes === "string" &&
+        c.distribuicaoAmbientes.trim() !== ""
+            ? c.distribuicaoAmbientes.trim().slice(0, 5000)
+            : null;
+
     const caminhoImagem = salvarImagem(c.imagem);
 
     if (!caminhoImagem) {
@@ -470,8 +498,8 @@ app.post("/plantas", rota(async (req, res) => {
             `INSERT INTO plantas (
                 titulo, descricao, categoria, estilo,
                 quartos, banheiros, garagem, area,
-                preco, imagem_url
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                preco, imagem_url, destaques, distribuicao_ambientes
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 c.titulo.trim(),
                 c.descricao.trim(),
@@ -482,7 +510,9 @@ app.post("/plantas", rota(async (req, res) => {
                 c.garagem,
                 c.area,
                 c.preco,
-                caminhoImagem
+                caminhoImagem,
+                JSON.stringify(destaques),
+                distribuicao
             ]
         );
 
@@ -504,13 +534,19 @@ app.post("/plantas", rota(async (req, res) => {
 app.use((erro, req, res, next) => {
     console.error("Erro na API:", erro);
 
+    if (erro.type === "entity.too.large") {
+        return res.status(413).json({
+            erro: "A imagem é grande demais para o servidor."
+        });
+    }
+
     res.status(500).json({
         erro: "Não foi possível processar a requisição.",
         detalhe: erro.message
     });
 });
 
-// Iniciar servidor e criar a tabela
+// Iniciar servidor e criar as tabelas
 async function iniciarServidor() {
     await pool.query("SELECT 1");
     await pool.query(CRIAR_TABELA_PLANTAS);
@@ -522,6 +558,139 @@ async function iniciarServidor() {
         console.log(`Servidor rodando em http://localhost:${PORT}`);
     });
 }
+/* =========================================================
+   COMENTÁRIOS NO server.js  (3 pedaços para colar)
+========================================================= */
+
+
+/* ---------- 1) Junto das outras constantes de tabela ---------- */
+
+const CRIAR_TABELA_COMENTARIOS = `
+    CREATE TABLE IF NOT EXISTS comentarios (
+        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        planta_id BIGINT UNSIGNED NOT NULL,
+        usuario_id BIGINT UNSIGNED NOT NULL,
+        texto VARCHAR(1000) NOT NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_comentarios_planta (planta_id, id),
+        INDEX idx_comentarios_usuario (usuario_id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+`;
+
+const SELECT_COMENTARIOS = `
+    SELECT
+        c.id,
+        c.texto,
+        c.criado_em AS criadoEm,
+        c.usuario_id AS usuarioId,
+        u.nome AS autor
+    FROM comentarios c
+    JOIN usuarios u ON u.id = c.usuario_id
+`;
+
+
+/* ---------- 2) Dentro de iniciarServidor(), depois do CREATE de usuarios ---------- */
+
+//    await pool.query(CRIAR_TABELA_COMENTARIOS);
+
+
+/* ---------- 3) Rotas: colar ANTES do "// Tratamento de erros" ---------- */
+
+function idValido(id) {
+    return /^\d+$/.test(id) && Number(id) > 0;
+}
+
+// Listar comentários de uma planta (público)
+// ?limite=20&offset=0&ordem=recentes|antigos
+app.get("/plantas/:id/comentarios", rota(async (req, res) => {
+    const id = req.params.id;
+
+    if (!idValido(id)) {
+        return res.status(400).json({ erro: "Id inválido." });
+    }
+
+    const limite = Math.min(Math.max(parseInt(req.query.limite, 10) || 20, 1), 50);
+    const offset = Math.max(parseInt(req.query.offset, 10) || 0, 0);
+    const ordem = req.query.ordem === "antigos" ? "ASC" : "DESC";
+
+    const [[{ total }]] = await pool.query(
+        "SELECT COUNT(*) AS total FROM comentarios WHERE planta_id = ?",
+        [id]
+    );
+
+    const [linhas] = await pool.query(
+        `${SELECT_COMENTARIOS}
+         WHERE c.planta_id = ?
+         ORDER BY c.id ${ordem}
+         LIMIT ? OFFSET ?`,
+        [id, limite, offset]
+    );
+
+    res.json({ total: Number(total), comentarios: linhas });
+}));
+
+// Publicar comentário (só logado)
+app.post("/plantas/:id/comentarios", exigirLogin, rota(async (req, res) => {
+    const id = req.params.id;
+
+    if (!idValido(id)) {
+        return res.status(400).json({ erro: "Id inválido." });
+    }
+
+    const texto = typeof req.body?.texto === "string" ? req.body.texto.trim() : "";
+
+    if (!texto) {
+        return res.status(400).json({ erro: "Escreva um comentário antes de enviar." });
+    }
+
+    if (texto.length > 1000) {
+        return res.status(400).json({ erro: "O comentário pode ter no máximo 1.000 caracteres." });
+    }
+
+    const [planta] = await pool.query(
+        "SELECT id FROM plantas WHERE id = ? AND ativa = TRUE LIMIT 1",
+        [id]
+    );
+
+    if (planta.length === 0) {
+        return res.status(404).json({ erro: "Planta não encontrada." });
+    }
+
+    const [resultado] = await pool.query(
+        "INSERT INTO comentarios (planta_id, usuario_id, texto) VALUES (?, ?, ?)",
+        [id, req.usuarioId, texto]
+    );
+
+    const [linhas] = await pool.query(
+        `${SELECT_COMENTARIOS} WHERE c.id = ?`,
+        [resultado.insertId]
+    );
+
+    res.status(201).json({
+        mensagem: "Comentário publicado.",
+        comentario: linhas[0]
+    });
+}));
+
+// Apagar o próprio comentário (só logado)
+app.delete("/comentarios/:id", exigirLogin, rota(async (req, res) => {
+    const id = req.params.id;
+
+    if (!idValido(id)) {
+        return res.status(400).json({ erro: "Id inválido." });
+    }
+
+    const [resultado] = await pool.query(
+        "DELETE FROM comentarios WHERE id = ? AND usuario_id = ?",
+        [id, req.usuarioId]
+    );
+
+    if (!resultado.affectedRows) {
+        return res.status(404).json({ erro: "Comentário não encontrado ou não é seu." });
+    }
+
+    res.json({ mensagem: "Comentário apagado." });
+}));
 
 iniciarServidor().catch(async (erro) => {
     console.error("Erro ao iniciar o servidor:", erro.message);

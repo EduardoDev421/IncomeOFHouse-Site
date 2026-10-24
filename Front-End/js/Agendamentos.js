@@ -1,3 +1,5 @@
+if (typeof Conta !== "undefined") Conta.renderMenu("agendamentos");
+
 const TIPOS = {
     visita: "Visita ao imóvel",
     reuniao: "Reunião",

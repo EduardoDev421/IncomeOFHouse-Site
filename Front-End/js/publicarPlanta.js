@@ -1,9 +1,14 @@
+/* publicarPlanta.js */
+
 const formulario = document.getElementById("formPublicarPlanta");
 
-console.log(formulario);
-console.log("Java esta funcionando");
+const listaDestaques = document.getElementById("listaDestaques");
+const campoDestaque = document.getElementById("destaquesPersonalizados");
+const botaoAdicionarDestaque = document.getElementById(
+    "botaoAdicionarDestaque"
+);
 
-// Destaques que já aparecem marcados e podem ser removidos pelo profissional
+// Destaques que já aparecem marcados e podem ser removidos.
 const destaquesPadrao = [
     "Suíte com closet",
     "Sala e cozinha integradas",
@@ -14,64 +19,71 @@ const destaquesPadrao = [
     "Escritório",
     "Lavanderia"
 ];
- 
-const listaDestaques = document.getElementById("listaDestaques");
-const campoDestaque = document.getElementById("destaquesPersonalizados");
-const botaoAdicionarDestaque = document.getElementById("botaoAdicionarDestaque");
- 
-// Retorna os destaques que estão na tela no momento
+
+// Obtém os destaques que estão visíveis.
 function obterDestaquesAtuais() {
-    return Array.from(listaDestaques.querySelectorAll(".chip"))
-        .map((chip) => chip.dataset.valor);
+    if (!listaDestaques) return [];
+
+    return Array.from(
+        listaDestaques.querySelectorAll(".chip")
+    ).map((chip) => chip.dataset.valor);
 }
- 
-// Cria uma etiqueta de destaque com botão de remover
+
+// Cria um destaque com botão para removê-lo.
 function adicionarDestaque(texto) {
+    if (!listaDestaques) return;
+
     const valor = texto.trim();
- 
+
     if (!valor) return;
- 
-    const jaExiste = obterDestaquesAtuais()
-        .some((item) => item.toLowerCase() === valor.toLowerCase());
- 
-    if (jaExiste) return;
- 
+
+    const existe = obterDestaquesAtuais().some(
+        (item) => item.toLowerCase() === valor.toLowerCase()
+    );
+
+    if (existe) return;
+
     const chip = document.createElement("span");
     chip.className = "chip";
     chip.dataset.valor = valor;
- 
+
     const rotulo = document.createElement("span");
     rotulo.textContent = valor;
- 
+
     const remover = document.createElement("button");
     remover.type = "button";
     remover.textContent = "×";
-    remover.setAttribute("aria-label", "Remover " + valor);
+    remover.setAttribute("aria-label", `Remover ${valor}`);
+
     remover.addEventListener("click", function () {
         chip.remove();
     });
- 
+
     chip.append(rotulo, remover);
     listaDestaques.appendChild(chip);
 }
- 
-// Adiciona o que foi digitado no input (aceita vários separados por vírgula)
+
+// Adiciona os destaques digitados, separados por vírgulas.
 function adicionarDoCampo() {
+    if (!campoDestaque) return;
+
     campoDestaque.value
         .split(",")
         .forEach(adicionarDestaque);
- 
+
     campoDestaque.value = "";
 }
- 
-// Recria as etiquetas padrão
+
+// Restaura os destaques padrão.
 function carregarDestaquesPadrao() {
-    listaDestaques.innerHTML = "";
+    if (!listaDestaques) return;
+
+    listaDestaques.replaceChildren();
     destaquesPadrao.forEach(adicionarDestaque);
 }
- 
-// Converte o arquivo de imagem em data URL (base64), formato que o backend exige
-function lerImagem(arquivo) {
+
+// Lê o arquivo como data URL (Base64).
+function lerArquivo(arquivo) {
     return new Promise(function (resolve, reject) {
         const leitor = new FileReader();
 
@@ -87,84 +99,161 @@ function lerImagem(arquivo) {
     });
 }
 
+const LARGURA_MAXIMA_IMAGEM = 1600;
+const QUALIDADE_JPEG = 0.85;
+
+// Reduz a imagem (máx. 1600 px de largura) e converte para JPEG.
+// Isso deixa o envio bem mais leve (o Base64 de 5 MB viraria ~6,7 MB).
+// Se algo der errado, envia a imagem original.
+async function lerImagem(arquivo) {
+    const original = await lerArquivo(arquivo);
+
+    try {
+        const imagem = await new Promise(function (resolve, reject) {
+            const img = new Image();
+            img.onload = function () { resolve(img); };
+            img.onerror = reject;
+            img.src = original;
+        });
+
+        const escala = Math.min(1, LARGURA_MAXIMA_IMAGEM / imagem.width);
+        const canvas = document.createElement("canvas");
+
+        canvas.width = Math.round(imagem.width * escala);
+        canvas.height = Math.round(imagem.height * escala);
+
+        const contexto = canvas.getContext("2d");
+
+        // Fundo branco, para PNG com transparência não ficar preto no JPEG.
+        contexto.fillStyle = "#ffffff";
+        contexto.fillRect(0, 0, canvas.width, canvas.height);
+        contexto.drawImage(imagem, 0, 0, canvas.width, canvas.height);
+
+        const reduzida = canvas.toDataURL("image/jpeg", QUALIDADE_JPEG);
+
+        return reduzida.length < original.length ? reduzida : original;
+    } catch {
+        return original;
+    }
+}
+
+// Lê o texto do botão (funciona para <button> e <input type="submit">).
+function lerTextoBotao(botao) {
+    return botao.tagName === "INPUT" ? botao.value : botao.textContent;
+}
+
+function definirTextoBotao(botao, texto) {
+    if (botao.tagName === "INPUT") {
+        botao.value = texto;
+    } else {
+        botao.textContent = texto;
+    }
+}
+
 if (!formulario) {
-    console.log("Erro: formulário de publicação não encontrado.");
+    console.error(
+        'Erro: não encontrei o formulário "formPublicarPlanta".'
+    );
 } else {
     carregarDestaquesPadrao();
- 
-    botaoAdicionarDestaque.addEventListener("click", function () {
-        adicionarDoCampo();
-        campoDestaque.focus();
-    });
- 
-    // Enter no input adiciona o destaque em vez de enviar o formulário
-    campoDestaque.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
+
+    if (botaoAdicionarDestaque && campoDestaque) {
+        botaoAdicionarDestaque.addEventListener("click", function () {
             adicionarDoCampo();
-        }
-    });
+            campoDestaque.focus();
+        });
+
+        // Enter no campo adiciona o destaque em vez de enviar o formulário.
+        campoDestaque.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                adicionarDoCampo();
+            }
+        });
+    }
 
     formulario.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        const obterValor = (id) =>
-            document.getElementById(id)?.value.trim() || "";
+        if (!window.PlantasStorage) {
+            alert("O serviço de plantas não foi carregado.");
+            return;
+        }
 
-        // 1. Buscar os campos do formulário
-        const titulo = document.getElementById("titulo").value.trim();
-        const descricao = document.getElementById("descricao").value.trim();
-        const quartos = document.getElementById("quartos").value;
-        const area = document.getElementById("area").value;
+        function valorCampo(id) {
+            return document.getElementById(id)?.value.trim() || "";
+        }
 
-        // 2. Buscar os demais campos
-        const estilo = document.getElementById("estilo")?.value || "";
-        const categoria = document.getElementById("categoria")?.value || "";
-        const banheiros = document.getElementById("banheiros")?.value || "0";
-        const garagem = document.getElementById("garagem")?.value || "0";
-        const preco = document.getElementById("preco")?.value || "";
-    
-        const distribuicaoAmbientes =
-            obterValor("distribuicaoAmbientes");
+        const titulo = valorCampo("titulo");
+        const descricao = valorCampo("descricao");
+        const categoria = valorCampo("categoria");
+        const estilo = valorCampo("estilo");
+        const distribuicaoAmbientes = valorCampo(
+            "distribuicaoAmbientes"
+        );
 
-        // A imagem é um ARQUIVO: use .files[0], nunca .value
+        const quartosTexto = valorCampo("quartos");
+        const banheirosTexto = valorCampo("banheiros");
+        const garagemTexto = valorCampo("garagem");
+        const areaTexto = valorCampo("area");
+        const precoTexto = valorCampo("preco");
+
         const arquivo = document.getElementById("imagem")?.files[0];
 
-        // Se algo foi digitado e não confirmado, adiciona antes de coletar
+        // Confirma qualquer destaque que ainda esteja digitado.
         adicionarDoCampo();
- 
-        // Coleta os destaques que estão na tela (padrão + personalizados)
+
         const destaques = obterDestaquesAtuais();
 
-        // 3. Validar os campos obrigatórios
-        if (!titulo || !descricao || !categoria || !quartos || !area || !preco) {
-            alert("Por favor, preencha todos os campos obrigatórios.");
+        // Campos obrigatórios.
+        if (
+            !titulo ||
+            !descricao ||
+            !categoria ||
+            !quartosTexto ||
+            !banheirosTexto ||
+            !garagemTexto ||
+            !areaTexto ||
+            !precoTexto
+        ) {
+            alert("Preencha todos os campos obrigatórios.");
             return;
         }
 
-        if (Number(quartos) <= 0 || Number(area) <= 0 || Number(preco) <= 0) {
-            alert("Quartos, área e preço devem ser números positivos.");
-            return;
-        }
+        const quartos = Number(quartosTexto);
+        const banheiros = Number(banheirosTexto);
+        const garagem = Number(garagemTexto);
+        const area = Number(areaTexto);
+        const preco = Number(precoTexto);
 
         if (
-            banheiros === "" ||
-            garagem === "" ||
-            !Number.isInteger(Number(banheiros)) ||
-            !Number.isInteger(Number(garagem)) ||
-            Number(banheiros) < 1 ||
-            Number(garagem) < 0
+            !Number.isInteger(quartos) ||
+            quartos <= 0 ||
+            !Number.isInteger(banheiros) ||
+            banheiros < 1 ||
+            !Number.isInteger(garagem) ||
+            garagem < 0 ||
+            !Number.isFinite(area) ||
+            area <= 0 ||
+            !Number.isFinite(preco) ||
+            preco <= 0
         ) {
-            alert("Confira a quantidade de banheiros e garagens.");
+            alert(
+                "Confira os números: quartos e banheiros devem ser inteiros positivos; garagem pode ser zero; área e preço devem ser positivos."
+            );
             return;
         }
 
         if (!arquivo) {
-            alert("Selecione uma imagem.");
+            alert("Selecione uma imagem para a planta.");
             return;
         }
 
-        if (!["image/jpeg", "image/png", "image/webp"].includes(arquivo.type)) {
+        if (
+            !["image/jpeg", "image/png", "image/webp"].includes(
+                arquivo.type
+            )
+        ) {
             alert("A imagem deve ser JPEG, PNG ou WebP.");
             return;
         }
@@ -174,70 +263,55 @@ if (!formulario) {
             return;
         }
 
-        // 4. Localizar o botão para evitar envios repetidos
-        const botao = formulario.querySelector("button[type='submit']");
+        const botao = formulario.querySelector(
+            'button[type="submit"], input[type="submit"]'
+        );
+
+        const textoOriginal = botao ? lerTextoBotao(botao) : "";
 
         try {
             if (botao) {
                 botao.disabled = true;
-                botao.textContent = "Publicando...";
+                definirTextoBotao(botao, "Publicando...");
             }
 
-            // 5. Ler a imagem e organizar os dados da planta
             const imagem = await lerImagem(arquivo);
 
             const planta = {
-                titulo: titulo,
-                descricao: descricao,
-                categoria: categoria,
-                estilo: estilo,
-                quartos: Number(quartos),
-                banheiros: Number(banheiros),
-                garagem: Number(garagem),
-                area: Number(area),
-                preco: Number(preco),
-                imagem: imagem,
-                destaques: destaques,
-                distribuicaoAmbientes: distribuicaoAmbientes
+                titulo,
+                descricao,
+                categoria,
+                estilo,
+                quartos,
+                banheiros,
+                garagem,
+                area,
+                preco,
+                imagem,
+                destaques,
+                distribuicaoAmbientes
             };
 
-            // 6. Enviar a planta para o backend
-            const resposta = await fetch("http://localhost:3000/plantas", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(planta)
-            });
+            const dados = await window.PlantasStorage.salvarPlanta(planta);
 
-            // 7. Ler a resposta do backend
-            const dados = await resposta.json();
-
-            if (!resposta.ok) {
-                throw new Error(dados.erro || "Erro ao publicar planta.");
-            }
-
-            // 8. Informar que a publicação deu certo
-            alert("Planta publicada com sucesso!");
             console.log("Planta publicada:", dados);
 
-            // 9. Limpar o formulário e restaurar os destaques padrão
+            alert("Planta publicada com sucesso!");
+
             formulario.reset();
             carregarDestaquesPadrao();
 
         } catch (erro) {
-            console.error("Erro ao publicar planta:", erro);
+            console.error("Erro ao publicar a planta:", erro);
 
             alert(
                 "Não foi possível publicar a planta.\n" +
                 erro.message
             );
-
         } finally {
-            // 10. Liberar o botão novamente
             if (botao) {
                 botao.disabled = false;
-                botao.textContent = "Publicar Planta";
+                definirTextoBotao(botao, textoOriginal);
             }
         }
     });

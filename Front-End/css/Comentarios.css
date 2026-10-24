@@ -1,0 +1,406 @@
+/* =========================================================
+   PÁGINA COMENTÁRIOS (de uma planta) - visual igual ao DetalhesPlanta
+========================================================= */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+[hidden] { display: none !important; }
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0b0b0b;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ---------- Header / menu ---------- */
+
+.topo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    padding: 0 6%;
+    z-index: 10;
+    background: rgba(10, 10, 10, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+}
+
+.logo { width: 100%; background: transparent; }
+.logo a { display: flex; align-items: center; text-decoration: none; }
+.logo img { max-width: 70px; height: auto; margin-left: 30px; }
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu a {
+    padding: 12px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    transition: 0.3s ease;
+}
+
+.menu a:hover { background: rgba(255, 255, 255, 0.06); color: #d4af6a; }
+
+.menu a.ativo {
+    color: #d4af6a;
+    border-color: rgba(212, 175, 106, 0.4);
+    background: rgba(212, 175, 106, 0.08);
+}
+
+.iconelogin { position: absolute; right: 6%; top: 50%; transform: translateY(-50%); }
+
+.iconelogin a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-radius: 50%;
+    transition: 0.3s ease;
+}
+
+.iconelogin a:hover { border-color: #d4af6a; background: rgba(212, 175, 106, 0.1); }
+.iconelogin img { width: 20px; height: 20px; object-fit: contain; }
+
+/* ---------- Fundo / container ---------- */
+
+.BackGround {
+    flex: 1 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url("../img/BackGroundPlantasEProfissionais.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.PaginaComentarios {
+    width: min(860px, calc(100% - 48px));
+    margin: 105px auto 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* ---------- Planta ---------- */
+
+.PlantaResumo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(218, 174, 82, 0.5);
+}
+
+.PlantaResumo img {
+    width: 110px;
+    height: 74px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border: 1.5px solid rgba(218, 174, 82, 0.7);
+    border-radius: 8px;
+}
+
+.PlantaTexto { min-width: 0; }
+
+.Voltar {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #e4b64f;
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+.Voltar:hover { color: #f2cc78; }
+
+.PlantaTexto h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    overflow-wrap: anywhere;
+}
+
+/* ---------- Avatar ---------- */
+
+.Avatar {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1c1c1c;
+    border: 1px solid rgba(218, 174, 82, 0.6);
+    border-radius: 50%;
+    color: #e4b64f;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+/* ---------- Escrever comentário ---------- */
+
+.Compor {
+    padding: 18px;
+    background: linear-gradient(145deg, rgba(25, 25, 25, 0.95), rgba(13, 13, 13, 0.95));
+    border: 1px solid rgba(218, 174, 82, 0.35);
+    border-radius: 12px;
+}
+
+.FormComentario { display: flex; gap: 14px; align-items: flex-start; }
+.CampoComentario { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+
+.CampoComentario textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 2px;
+    resize: none;
+    overflow-y: auto;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+    transition: border-color 0.3s ease;
+}
+
+.CampoComentario textarea::placeholder { color: #777; }
+.CampoComentario textarea:focus { outline: none; border-bottom-color: #d9af52; }
+
+.AcoesComentario {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.AcoesComentario small { color: #777; font-size: 11.5px; }
+.Botoes { display: flex; gap: 8px; }
+
+.BtnCancelar,
+.BtnComentar,
+.BtnEntrar {
+    padding: 10px 20px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.BtnCancelar {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #d6d6d6;
+    font-weight: 500;
+}
+
+.BtnCancelar:hover { color: #e4b64f; }
+
+.BtnComentar,
+.BtnEntrar {
+    border: none;
+    background: linear-gradient(135deg, #f2cc78, #c99638);
+    color: #161616;
+    box-shadow: 0 8px 25px rgba(218, 174, 82, 0.18);
+}
+
+.BtnComentar:hover:not(:disabled),
+.BtnEntrar:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 12px 30px rgba(218, 174, 82, 0.3);
+}
+
+.BtnComentar:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+
+#mensagemComentario { min-height: 16px; color: #e4b64f; font-size: 12.5px; }
+#mensagemComentario:empty { display: none; }
+#mensagemComentario.erro { color: #e86a6a; }
+#mensagemComentario.sucesso { color: #6ac98a; }
+
+.AvisoLogin {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.AvisoLogin p { color: #d0d0d0; font-size: 13.5px; }
+
+/* ---------- Barra da lista ---------- */
+
+.BarraLista {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.BarraLista h2 { font-size: 18px; font-weight: 600; color: #e4b64f; }
+
+.Ordenar { display: flex; align-items: center; gap: 8px; }
+.Ordenar label { color: #aaa; font-size: 12px; }
+
+.Ordenar select {
+    height: 36px;
+    padding: 0 10px;
+    background: #0d0d0e;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 9px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.Ordenar select:focus { outline: none; border-color: #d9af52; }
+.Ordenar select option { background: #171717; color: #fff; }
+
+/* ---------- Lista ---------- */
+
+.ListaComentarios { display: flex; flex-direction: column; gap: 4px; }
+
+.Comentario {
+    display: flex;
+    gap: 14px;
+    padding: 16px 14px;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.Comentario:hover { background: rgba(255, 255, 255, 0.03); }
+
+.ComentarioCorpo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.ComentarioTopo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.ComentarioNome { color: #fff; font-size: 13.5px; font-weight: 600; }
+.ComentarioData { color: #888; font-size: 11.5px; }
+
+.ComentarioTexto {
+    color: #d8d8d8;
+    font-size: 14px;
+    line-height: 1.65;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.BtnApagar {
+    align-self: flex-start;
+    margin-top: 2px;
+    padding: 4px 0;
+    background: transparent;
+    border: none;
+    color: #888;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.BtnApagar:hover { color: #e86a6a; }
+.BtnApagar:disabled { opacity: 0.5; cursor: wait; }
+
+.ComentariosVazio {
+    padding: 40px 20px;
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+    line-height: 1.6;
+    background: rgba(18, 18, 18, 0.85);
+    border: 1px dashed rgba(255, 255, 255, 0.16);
+    border-radius: 12px;
+}
+
+.MaisComentarios { display: flex; justify-content: center; }
+
+.BtnMais {
+    padding: 12px 28px;
+    background: transparent;
+    border: 1px solid #cda34e;
+    border-radius: 9px;
+    color: #e4b64f;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.BtnMais:hover { background: #d9af52; color: #111; box-shadow: 0 8px 20px rgba(218, 174, 82, 0.2); }
+
+/* ---------- Rodapé ---------- */
+
+.rodape {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 22px 6%;
+    background: #080808;
+    border-top: 1px solid #d4af6a;
+    color: #888;
+    font-size: 13px;
+}
+
+.RodapeLinks { display: flex; align-items: center; gap: 10px; color: #555; }
+.rodape a { color: #d4af6a; text-decoration: none; transition: 0.3s ease; }
+.rodape a:hover { color: #e2c07b; }
+
+/* ---------- Foco e responsivo ---------- */
+
+.menu a:focus-visible,
+.Voltar:focus-visible,
+.BtnCancelar:focus-visible,
+.BtnComentar:focus-visible,
+.BtnEntrar:focus-visible,
+.BtnApagar:focus-visible,
+.BtnMais:focus-visible {
+    outline: 2px solid #d4af6a;
+    outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+    .menu { display: none; }
+}
+
+@media (max-width: 600px) {
+    .PaginaComentarios { width: calc(100% - 32px); }
+    .PlantaResumo img { width: 84px; height: 58px; }
+    .PlantaTexto h1 { font-size: 21px; }
+    .Compor { padding: 14px; }
+    .FormComentario, .Comentario { gap: 10px; }
+    .Avatar { width: 38px; height: 38px; font-size: 15px; }
+    .rodape { flex-direction: column; text-align: center; gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+}

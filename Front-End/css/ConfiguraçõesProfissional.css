@@ -17,41 +17,36 @@ body {
     color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 /* ================================================= */
-/* BackGround do Menu */
-.topo{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 75px;
+/* CABEÇALHO (fixo) */
+
+.topo {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 20;
+    height: 64px;
     display: flex;
     align-items: center;
-    padding: 0 6%;
-    z-index: 10;
-    background: rgba(10, 10, 10, 0.25); /* reduzi de 0.55 pra 0.25 — teste esse valor */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    justify-content: space-between;
+    padding: 0 3%;
+    background: rgba(8, 8, 8, 0.95);
+    border-bottom: 1px solid rgba(212, 166, 58, 0.25);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 /* Logo */
 
-.logo{
-    width: 100%;
-    background:  transparent;
-}
-
-.logo a{
+.logo a {
     display: flex;
     align-items: center;
     text-decoration: none;
 }
 
 .logo img {
-    width: 100%;
-    max-width: 70px;
+    width: 58px;
     height: auto;
-    margin-left: 30px;
 }
 
 /* Menu */
@@ -70,7 +65,7 @@ body {
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
-    padding: 12px 20px;
+    padding: 10px 18px;
     border-radius: 7px;
     transition: 0.3s ease;
 }
@@ -87,11 +82,11 @@ body {
 }
 
 /* Icone Login */
-.iconelogin{
+.iconelogin {
     margin-left: auto;
 }
 
-.iconelogin a{
+.iconelogin a {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -101,7 +96,7 @@ body {
     transition: 0.3s ease;
 }
 
-.iconelogin a:hover{
+.iconelogin a:hover {
     color: #d4af6a;
 }
 
@@ -403,6 +398,7 @@ body {
 /* Itens que são links (<a> dentro do item) */
 
 .seguranças,
+.ConfigProfissionais,
 .PerfilProfissionais,
 .Financeiros,
 .CentralAjudas,
@@ -411,6 +407,7 @@ body {
 }
 
 .seguranças a,
+.ConfigProfissionais a,
 .PerfilProfissionais a,
 .Financeiros a,
 .CentralAjudas a,
@@ -426,6 +423,7 @@ body {
 }
 
 .seguranças a > img,
+.ConfigProfissionais a > img,
 .PerfilProfissionais a > img,
 .Financeiros a > img,
 .CentralAjudas a > img,
@@ -434,6 +432,13 @@ body {
     height: 20px;
     object-fit: contain;
     flex-shrink: 0;
+}
+
+/* Itens de privacidade não são links, mas se comportam como botões */
+
+.Privacidades,
+.PrivacidadesU {
+    cursor: pointer;
 }
 
 /* ================================================= */
@@ -608,6 +613,13 @@ body {
     .menu-lateral li a {
         justify-content: center;
         text-align: center;
+    }
+
+    /* o "Sair" não precisa do espaço/linha de separação na grade */
+    .menu-lateral li:last-child {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
     }
 
     .conteudo {

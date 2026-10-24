@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="IncomeofHouses - Detalhes do pedido">
+   <link rel="stylesheet" href="../css/DetalhesPedidos.css">
+   <link rel="stylesheet" href="../css/Modais/LegalModal.css">
+   <title>Detalhes do Pedido - Income of Houses</title>
+</head>
+<body>
+   <header class="topo">
+      <div class="logo">
+         <a href="../index.html">
+            <img src="../img/Logo.png" alt="Logo Income of Houses">
+         </a>
+      </div>
+      <nav class="menu">
+         <a href="../index.html">Início</a>
+         <a href="./Plantas.html">Plantas</a>
+         <a href="./Profissionais.html">Profissionais</a>
+         <a href="./Sobre.html">Sobre Nós</a>
+      </nav>
+   </header>
+
+   <main class="BackGround">
+      <div class="container">
+
+         <aside class="menu-lateral">
+            <ul>
+               <li><a href="./PerfilUsuario.html">Meu Perfil</a></li>
+               <li><a href="./MeusEnderecos.html">Meus Endereços</a></li>
+               <li class="ativo"><a href="./MeusPedidos.html">Meus Pedidos</a></li>
+               <li><a href="./MeusProfissionais.html">Meus Profissionais Favoritos</a></li>
+               <li><a href="./ProjetosSalvos.html">Projetos Salvos</a></li>
+               <li><a href="./Mensagem.html">Mensagens</a></li>
+               <li><a href="./Configuracoes.html">Configurações</a></li>
+               <li><a href="../index.html">Sair</a></li>
+            </ul>
+         </aside>
+
+         <section class="conteudo">
+
+            <!-- TOPO: voltar + título + status -->
+            <div class="Inicio">
+               <a class="voltar" href="./MeusPedidos.html">&larr; Voltar aos Pedidos</a>
+
+               <div class="titulo-pedido">
+                  <div>
+                     <h1>Pedido #0001</h1>
+                     <p>Realizado em 10/10/2026</p>
+                  </div>
+                  <span class="status andamento">Em andamento</span>
+               </div>
+            </div>
+
+            <div class="grade-detalhes">
+
+               <!-- COLUNA PRINCIPAL -->
+               <div class="coluna-principal">
+
+                  <article class="cartao">
+                     <h2 class="cartao-titulo">Projeto</h2>
+
+                     <div class="projeto">
+                        <div class="projeto-imagem">
+                           <img alt="Imagem da planta do pedido">
+                        </div>
+
+                        <div class="projeto-info">
+                           <h2>Nome da planta</h2>
+                           <p class="descricao">
+                              Descrição resumida do projeto contratado neste pedido.
+                           </p>
+
+                           <dl class="dados">
+                              <div class="dado">
+                                 <dt>Área</dt>
+                                 <dd>120 m²</dd>
+                              </div>
+                              <div class="dado">
+                                 <dt>Quartos</dt>
+                                 <dd>3</dd>
+                              </div>
+                              <div class="dado">
+                                 <dt>Banheiros</dt>
+                                 <dd>2</dd>
+                              </div>
+                              <div class="dado">
+                                 <dt>Garagens</dt>
+                                 <dd>1</dd>
+                              </div>
+                           </dl>
+                        </div>
+                     </div>
+                  </article>
+
+                  <article class="cartao">
+                     <h2 class="cartao-titulo">Andamento do Pedido</h2>
+
+                     <ol class="linha-tempo">
+                        <li class="etapa feita">
+                           <h3>Pedido solicitado</h3>
+                           <p>Seu pedido foi recebido com sucesso.</p>
+                           <time>10/10/2026</time>
+                        </li>
+                        <li class="etapa feita">
+                           <h3>Aprovado pelo profissional</h3>
+                           <p>O profissional aceitou o projeto.</p>
+                           <time>11/10/2026</time>
+                        </li>
+                        <li class="etapa atual">
+                           <h3>Em desenvolvimento</h3>
+                           <p>O projeto está sendo elaborado.</p>
+                           <time>Em andamento</time>
+                        </li>
+                        <li class="etapa">
+                           <h3>Entrega do projeto</h3>
+                           <p>Os arquivos finais serão disponibilizados.</p>
+                        </li>
+                     </ol>
+                  </article>
+
+                  <article class="cartao">
+                     <h2 class="cartao-titulo">Profissional Responsável</h2>
+
+                     <div class="profissional-card">
+                        <div class="avatar">N</div>
+                        <div class="profissional-dados">
+                           <h3>Nome do profissional</h3>
+                           <span>Arquiteto(a) • CAU 00000-0</span>
+                        </div>
+                        <a class="btn btn-secundario" href="./Mensagem.html">Enviar mensagem</a>
+                     </div>
+                  </article>
+
+               </div>
+
+               <!-- COLUNA LATERAL -->
+               <div class="coluna-lateral">
+
+                  <article class="cartao">
+                     <h2 class="cartao-titulo">Resumo Financeiro</h2>
+
+                     <div class="resumo-linhas">
+                        <div class="resumo-linha">
+                           <span>Valor do projeto</span>
+                           <strong>R$ 0,00</strong>
+                        </div>
+                        <div class="resumo-linha">
+                           <span>Taxa da plataforma</span>
+                           <strong>R$ 0,00</strong>
+                        </div>
+                        <div class="resumo-linha">
+                           <span>Forma de pagamento</span>
+                           <strong>Pix</strong>
+                        </div>
+                        <div class="resumo-linha resumo-total">
+                           <span>Total</span>
+                           <strong>R$ 0,00</strong>
+                        </div>
+                     </div>
+                  </article>
+
+                  <article class="cartao">
+                     <h2 class="cartao-titulo">Ações</h2>
+
+                     <div class="acoes">
+                        <a class="btn btn-principal" href="./Mensagem.html">Falar com o profissional</a>
+                        <a class="btn btn-secundario" href="#">Baixar comprovante</a>
+                        <button type="button" class="btn btn-perigo">Cancelar pedido</button>
+                     </div>
+                  </article>
+
+               </div>
+            </div>
+
+         </section>
+      </div>
+   </main>
+
+   <footer class="rodape">
+      <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+      <div class="RodapeLinks">
+         <a href="./Modais/TermosUso.html" data-legal="termos">Termos de Uso</a>
+         <span>|</span>
+         <a href="./Modais/PoliticaPrivacidade.html" data-legal="privacidade">Política de Privacidade</a>
+      </div>
+   </footer>
+
+   <script src="../js/Modais/LegalModais.js"></script>
+</body>
+</html>

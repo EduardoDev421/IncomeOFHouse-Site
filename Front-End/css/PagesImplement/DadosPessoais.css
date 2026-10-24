@@ -1,0 +1,548 @@
+/* ================================================= */
+/* DADOS PESSOAIS
+   Usa o estilo base de ConfiguraçõesProfissional.css
+   (cabeçalho, menu lateral, painel .conteudo e rodapé),
+   que precisa ser carregado ANTES deste arquivo. */
+
+.dados-pessoais {
+    padding-bottom: 40px;
+}
+
+/* Acessível por teclado, mas invisível (usado no input de arquivo) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Ícones SVG inline (<svg class="ic">) */
+.ic {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ================================================= */
+/* LAYOUT: foto em cima, duas colunas, aviso e botões */
+
+.DadosPessoaisContainer {
+    width: 100%;
+    margin: 22px 0 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 16px;
+    align-items: start;
+}
+
+.FotoPerfilCard,
+.AvisoPrivacidade,
+.AcoesDados,
+.MensagemDados {
+    grid-column: 1 / -1;
+}
+
+.DadosPrincipal,
+.DadosLateral {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ================================================= */
+/* CARDS */
+
+.CardDados {
+    min-width: 0;
+    background: #141414;
+    border: 1px solid #292929;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* TÍTULOS DOS CARDS */
+
+.TituloDados {
+    padding: 16px 22px;
+    border-bottom: 1px solid #292929;
+}
+
+.TituloDadosInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.IconeDados {
+    display: flex;
+    color: #d4a63a;
+}
+
+.TituloDados h2 {
+    color: #f2f2f2;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.TituloDados > p {
+    margin-top: 6px;
+    margin-left: 30px;
+    color: #92979a;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ================================================= */
+/* FOTO DE PERFIL (mesmo círculo tracejado do Meu Perfil) */
+
+.FotoPerfilConteudo {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 22px 24px;
+}
+
+.FotoPerfilPreview {
+    width: 104px;
+    height: 104px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    padding: 5px;
+    border: 2px dashed #d4a63a;
+    border-radius: 50%;
+}
+
+.FotoPerfilPreview > * {
+    grid-area: 1 / 1;
+}
+
+.FotoPerfilPreview .IconeAvatar {
+    width: 42px;
+    height: 42px;
+    color: #d4a63a;
+}
+
+.FotoPerfilPreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #202020;
+    border-radius: 50%;
+}
+
+.FotoPerfilPreview img[hidden] {
+    display: none;
+}
+
+.FotoPerfilTexto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.FotoPerfilTexto h3 {
+    color: #eee;
+    font-size: 14px;
+}
+
+.FotoPerfilTexto p {
+    color: #92979a;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.TextoAjuda {
+    display: block;
+    margin-top: 5px;
+    color: #777d80;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.CampoOpcional {
+    color: #777d80;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+/* ================================================= */
+/* CAMPOS DO FORMULÁRIO */
+
+.CamposDados {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    padding: 22px;
+}
+
+.CampoDados {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.CampoDados label {
+    margin-bottom: 9px;
+    color: #d9d9d9;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.CampoDados input {
+    width: 100%;
+    height: 43px;
+    padding: 0 13px;
+    color: #f1f1f1;
+    color-scheme: dark; /* calendário e ícones do campo de data em tema escuro */
+    background: #0e0e0e;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.CampoDados input::placeholder {
+    color: #666b6e;
+}
+
+.CampoDados input:hover {
+    border-color: #555555;
+}
+
+.CampoDados input:focus {
+    border-color: #d4a63a;
+    box-shadow: 0 0 0 3px rgba(212, 166, 58, 0.10);
+}
+
+/* só marca erro depois que a pessoa mexeu no campo */
+.CampoDados input:user-invalid {
+    border-color: #b5483c;
+    box-shadow: 0 0 0 3px rgba(181, 72, 60, 0.12);
+}
+
+/* ================================================= */
+/* INFORMAÇÕES ADICIONAIS */
+
+.InformacoesAdicionais {
+    padding: 0 22px;
+}
+
+.InformacaoItem {
+    min-height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid #292929;
+}
+
+.InformacaoItem:last-child {
+    border-bottom: none;
+}
+
+.InformacaoItem h3 {
+    margin-bottom: 6px;
+    color: #e7e7e7;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.InformacaoItem p {
+    color: #858a8d;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.ValorInformacao {
+    color: #a7abad;
+    font-size: 12px;
+    text-align: right;
+}
+
+/* mesmo selo verde do "Verificado" do Meu Perfil */
+.StatusConta {
+    padding: 5px 12px;
+    color: #70d09b;
+    background: #155b3b;
+    border-radius: 20px;
+    font-size: 11px;
+}
+
+/* ================================================= */
+/* DADOS RELACIONADOS (atalhos) */
+
+.AtalhoItem + .AtalhoItem {
+    border-top: 1px solid #292929;
+}
+
+.AtalhoItem a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px;
+    color: inherit;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.AtalhoItem a:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.AtalhoItem a:focus-visible {
+    outline: 2px solid #efd078;
+    outline-offset: -2px;
+}
+
+.AtalhoItem img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.AtalhoTexto {
+    flex: 1;
+    min-width: 0;
+}
+
+.AtalhoTexto h3 {
+    margin-bottom: 4px;
+    color: #e7e7e7;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.AtalhoTexto p {
+    color: #8f9497;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.AtalhoItem a:hover .seta {
+    color: #f0ca4c;
+    transform: translateX(3px);
+}
+
+/* ================================================= */
+/* AVISO DE PRIVACIDADE */
+
+.AvisoPrivacidade {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 18px 20px;
+    background: rgba(212, 166, 58, 0.045);
+    border: 1px solid rgba(212, 166, 58, 0.22);
+    border-radius: 8px;
+}
+
+.IconeAviso {
+    display: flex;
+    flex-shrink: 0;
+    color: #e3c878;
+}
+
+.AvisoPrivacidade h3 {
+    margin-bottom: 6px;
+    color: #e3c878;
+    font-size: 13px;
+}
+
+.AvisoPrivacidade p {
+    color: #a0a4a6;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* ================================================= */
+/* BOTÕES */
+
+.AcoesDados {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    padding-top: 3px;
+}
+
+.BotaoSecundario,
+.BotaoCancelar,
+.BotaoSalvar {
+    min-height: 39px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 17px;
+    border-radius: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.BotaoSecundario .ic {
+    width: 16px;
+    height: 16px;
+}
+
+.BotaoSecundario {
+    color: #e3c878;
+    background: #211d15;
+    border: 1px solid #59431f;
+}
+
+.BotaoSecundario:hover {
+    background: #302718;
+    border-color: #d4a63a;
+}
+
+.BotaoCancelar {
+    color: #d0d0d0;
+    background: #171717;
+    border: 1px solid #383838;
+}
+
+.BotaoCancelar:hover {
+    background: #242424;
+    border-color: #555;
+}
+
+.BotaoSalvar {
+    color: #15120a;
+    background: linear-gradient(135deg, #d4a63a, #efd078);
+    border: 1px solid #d4a63a;
+}
+
+.BotaoSalvar:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+}
+
+.BotaoSecundario:focus-visible,
+.BotaoCancelar:focus-visible,
+.BotaoSalvar:focus-visible,
+/* o input de arquivo fica escondido: o foco aparece no botão (label) */
+.BotaoSecundario:has(+ .sr-only:focus-visible) {
+    outline: 2px solid #efd078;
+    outline-offset: 3px;
+}
+
+/* ================================================= */
+/* MENSAGEM DE RETORNO */
+
+.MensagemDados {
+    padding: 13px 16px;
+    color: #e3c878;
+    background: #211d15;
+    border: 1px solid #59431f;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.MensagemDados.sucesso {
+    color: #70d09b;
+    background: rgba(21, 91, 59, 0.35);
+    border-color: #1f7a50;
+}
+
+.MensagemDados.erro {
+    color: #ee9b92;
+    background: rgba(181, 72, 60, 0.15);
+    border-color: #8f3b32;
+}
+
+.MensagemDados[hidden] {
+    display: none;
+}
+
+/* ================================================= */
+/* RESPONSIVIDADE */
+
+@media (max-width: 1100px) {
+
+    .DadosPessoaisContainer {
+        grid-template-columns: minmax(0, 1fr) 300px;
+    }
+}
+
+@media (max-width: 950px) {
+
+    .DadosPessoaisContainer {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 850px) {
+
+    .DadosPessoaisContainer {
+        margin-top: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .CamposDados {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 18px;
+    }
+
+    .TituloDados {
+        padding: 16px 18px;
+    }
+
+    .FotoPerfilConteudo {
+        gap: 15px;
+        padding: 18px;
+    }
+
+    .FotoPerfilPreview {
+        width: 84px;
+        height: 84px;
+    }
+
+    .InformacoesAdicionais {
+        padding: 0 18px;
+    }
+
+    .InformacaoItem {
+        align-items: flex-start;
+    }
+
+    .AtalhoItem a {
+        padding: 14px 18px;
+    }
+
+    .AcoesDados {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .BotaoCancelar,
+    .BotaoSalvar {
+        width: 100%;
+        min-height: 43px;
+    }
+}

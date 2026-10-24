@@ -1,32 +1,109 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-   <link rel="stylesheet" href="../css/style.css">
-   <title>Pagina de Comentários</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comentários sobre a planta no IncomeOfHouse.">
+    <link rel="stylesheet" href="../css/Comentarios.css">
+    <link rel="stylesheet" href="../css/Modais/LegalModal.css">
+    <title>Comentários | IncomeOfHouse</title>
 </head>
+
 <body>
-   <header class="topo">
-      <div class="logo">
-         <img src="" alt="Logo Income of Houses">
-      </div>
-      <nav class="menu">
-         <a href="../index.html">Início</a>
-         <a href="../pages/Plantas.html">Plantas</a>
-         <a href="../pages/Profissionais.html">Profissionais</a>
-         <a href="../pages/Sobre.html" class="ativo">Sobre</a>
-      </nav>
-   </header>
-         <main>
 
+    <header class="topo">
+        <div class="logo">
+            <a href="../index.html">
+                <img src="../img/Logo.png" alt="Logo Income of Houses">
+            </a>
+        </div>
+        <nav class="menu">
+            <a href="../index.html">Início</a>
+            <a href="./Plantas.html" class="ativo">Plantas</a>
+            <a href="./Profissionais.html">Profissionais</a>
+            <a href="./Sobre.html">Sobre Nós</a>
+        </nav>
+        <div class="iconelogin">
+            <a href="./Login.html">
+                <img src="../img/icones/IconePerfil.svg" alt="Entrar">
+            </a>
+        </div>
+    </header>
 
-         </main>
-   <footer class="rodapé">
-      <p>©IncomeOfHouses.Todos os direitos reservados.</p>
-      <a href="../pages/TermosUso.html">Termos de Uso</a>
-      <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
-   </footer>
+    <main class="BackGround">
+        <section class="PaginaComentarios">
+
+            <!-- Planta que está sendo comentada -->
+            <div class="PlantaResumo">
+                <img id="plantaImagem" src="" alt="" hidden>
+                <div class="PlantaTexto">
+                    <a class="Voltar" id="linkVoltar" href="./Plantas.html">← Voltar para a planta</a>
+                    <h1 id="plantaTitulo">Comentários</h1>
+                </div>
+            </div>
+
+            <!-- Escrever comentário -->
+            <div class="Compor" id="areaComentar">
+
+                <div class="AvisoLogin" id="avisoLogin" hidden>
+                    <p>Entre na sua conta para comentar nesta planta.</p>
+                    <a class="BtnEntrar" id="linkLogin" href="./Login.html">Entrar</a>
+                </div>
+
+                <form class="FormComentario" id="formComentario" hidden>
+                    <div class="Avatar" id="avatarUsuario">?</div>
+                    <div class="CampoComentario">
+                        <textarea id="textoComentario" rows="1" maxlength="1000"
+                            placeholder="Adicione um comentário..." aria-label="Escreva seu comentário"></textarea>
+                        <div class="AcoesComentario">
+                            <small id="ajudaComentario">1.000 caracteres restantes</small>
+                            <div class="Botoes">
+                                <button type="button" class="BtnCancelar" id="btnCancelar">Cancelar</button>
+                                <button type="submit" class="BtnComentar" id="btnEnviarComentario" disabled>Comentar</button>
+                            </div>
+                        </div>
+                        <p id="mensagemComentario" role="status" aria-live="polite"></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Barra da lista -->
+            <div class="BarraLista">
+                <h2 id="contagemComentarios">Comentários</h2>
+                <div class="Ordenar">
+                    <label for="filtroOrdem">Ordenar por</label>
+                    <select id="filtroOrdem">
+                        <option value="recentes">Mais recentes</option>
+                        <option value="antigos">Mais antigos</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lista -->
+            <div class="ListaComentarios" id="listaComentarios" aria-live="polite">
+                <p class="ComentariosVazio">Carregando comentários...</p>
+            </div>
+
+            <div class="MaisComentarios">
+                <button type="button" class="BtnMais" id="btnMais" hidden>Mostrar mais comentários</button>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+        <div class="RodapeLinks">
+            <a href="./Modais/TermosUso.html" data-legal="termos">Termos de Uso</a>
+            <span>|</span>
+            <a href="./Modais/PoliticaPrivacidade.html" data-legal="privacidade">Política de Privacidade</a>
+        </div>
+    </footer>
+
+    <script src="../js/Modais/LegalModais.js"></script>
+    <script src="../js/PlantasStorage.js"></script>
+    <script src="../js/Comentarios.js"></script>
 </body>
+
 </html>

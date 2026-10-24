@@ -1,3 +1,6 @@
+/* plantas.js
+   Carregue PlantasStorage.js e Favoritos.js ANTES deste arquivo. */
+
 const ListaPlantas = document.getElementById("ListaPlantas");
 const mensagem = document.getElementById("mensagemPlantas");
 const paginacao = document.getElementById("paginacao");
@@ -15,58 +18,56 @@ let paginaAtual = 1;
 
 const PLANTAS_POR_PAGINA = 6;
 
-
-// Protege o HTML contra textos que venham do banco
-function escapar(texto) {
-    return String(texto)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-}
-
-
-// Aceita "3" (igual a) ou "5+" (5 ou mais)
+// Permite filtros como 3 ou 5+.
 function correspondeNumero(valor, filtro) {
-    if (!filtro) {
-        return true;
-    }
+    if (!filtro) return true;
+
+    const numero = Number(valor);
 
     if (filtro.endsWith("+")) {
-        return Number(valor) >= Number(filtro.slice(0, -1));
+        return numero >= Number(filtro.slice(0, -1));
     }
 
-    return Number(valor) === Number(filtro);
+    return numero === Number(filtro);
 }
 
-
-// Aceita "60-100" (de 60 até menos de 100) ou "500-" (500 ou mais)
+// Permite faixas como 60-100 ou 500-.
 function correspondeFaixa(valor, filtro) {
-    if (!filtro) {
-        return true;
-    }
+    if (!filtro) return true;
 
     const partes = filtro.split("-");
     const minimo = Number(partes[0]);
-    const maximo = partes[1] === "" ? Infinity : Number(partes[1]);
+    const maximo = partes[1] === ""
+        ? Infinity
+        : Number(partes[1]);
 
-    return Number(valor) >= minimo && Number(valor) < maximo;
+    const numero = Number(valor);
+
+    return numero >= minimo && numero < maximo;
 }
 
-
-// 1. Buscar as plantas no backend
+// Busca as plantas no servidor.
 async function buscarPlantas() {
+    if (!ListaPlantas || !mensagem || !paginacao) {
+        console.error(
+            "Verifique os IDs ListaPlantas, mensagemPlantas e paginacao no HTML."
+        );
+        return;
+    }
+
+    if (!window.PlantasStorage) {
+        mensagem.textContent =
+            "O serviço de plantas não foi carregado.";
+        console.error("PlantasStorage.js não foi carregado.");
+        return;
+    }
+
+    mensagem.textContent = "Carregando plantas...";
+    ListaPlantas.replaceChildren();
+    paginacao.replaceChildren();
+
     try {
-        mensagem.textContent = "Carregando plantas...";
-
-        const resposta = await fetch("http://localhost:3000/plantas");
-
-        if (!resposta.ok) {
-            throw new Error("Erro ao buscar plantas.");
-        }
-
-        plantas = await resposta.json();
+        plantas = await window.PlantasStorage.getPlantas();
 
         aplicarFiltros();
 
@@ -74,64 +75,62 @@ async function buscarPlantas() {
         console.error("Erro ao buscar plantas:", erro);
 
         mensagem.textContent =
-            "Não foi possível carregar as plantas. Tente novamente mais tarde.";
+            "Não foi possível carregar as plantas. " +
+            erro.message;
 
-        ListaPlantas.innerHTML = "";
-        paginacao.innerHTML = "";
+        ListaPlantas.replaceChildren();
+        paginacao.replaceChildren();
     }
 }
 
-
-// 2. Aplicar os filtros
+// Aplica os filtros selecionados.
 function aplicarFiltros() {
-    const tipo = filtrotipo.value;
-    const quartos = filtroquartos.value;
-    const garagem = filtrogaragem.value;
-    const area = filtroarea.value;
-    const estilo = filtroestilo.value;
+    const tipo = filtrotipo?.value || "";
+    const quartos = filtroquartos?.value || "";
+    const garagem = filtrogaragem?.value || "";
+    const area = filtroarea?.value || "";
+    const estilo = filtroestilo?.value || "";
 
     plantasFiltradas = plantas.filter(function (planta) {
-        const correspondeTipo =
-            !tipo || planta.categoria === tipo;
-
-        const correspondeQuartos =
-            correspondeNumero(planta.quartos, quartos);
-
-        const correspondeGaragem =
-            correspondeNumero(planta.garagem, garagem);
-
-        const correspondeArea =
-            correspondeFaixa(planta.area, area);
-
-        const correspondeEstilo =
-            !estilo || planta.estilo === estilo;
-
-        return correspondeTipo &&
-            correspondeQuartos &&
-            correspondeGaragem &&
-            correspondeArea &&
-            correspondeEstilo;
+        return (
+            (!tipo || planta.categoria === tipo) &&
+            correspondeNumero(planta.quartos, quartos) &&
+            correspondeNumero(planta.garagem, garagem) &&
+            correspondeFaixa(planta.area, area) &&
+            (!estilo || planta.estilo === estilo)
+        );
     });
 
     paginaAtual = 1;
 
-    mensagem.textContent = "";
+    if (mensagem) {
+        mensagem.textContent = plantasFiltradas.length
+            ? `${plantasFiltradas.length} planta(s) encontrada(s).`
+            : "Nenhuma planta encontrada. Verifique os filtros.";
+    }
 
     renderizar();
 }
 
-
-// 3. Mostrar as plantas na página
+// Cria os cards das plantas.
 function mostrarPlantas() {
-    ListaPlantas.innerHTML = "";
+    if (!ListaPlantas) return;
+
+    ListaPlantas.replaceChildren();
 
     if (plantasFiltradas.length === 0) {
-        ListaPlantas.innerHTML = `
-            <div class="NenhumaPlanta">
-                <h3>Nenhuma planta encontrada.</h3>
-                <p>Verifique os filtros aplicados ou tente novamente.</p>
-            </div>
-        `;
+        const vazio = document.createElement("div");
+        vazio.className = "NenhumaPlanta";
+
+        const titulo = document.createElement("h3");
+        titulo.textContent = "Nenhuma planta encontrada.";
+
+        const texto = document.createElement("p");
+        texto.textContent =
+            "Verifique os filtros aplicados ou tente novamente.";
+
+        vazio.append(titulo, texto);
+        ListaPlantas.appendChild(vazio);
 
         return;
     }
@@ -144,129 +143,188 @@ function mostrarPlantas() {
     );
 
     plantasDaPagina.forEach(function (planta) {
-        const plantaHTML = `
-            <article class="CardPlanta">
-                <div class="CardPlantaImagem">
-                    <img
-                        src="${escapar(planta.imagem || "")}"
-                        alt="${escapar(planta.titulo || "Planta")}"
-                        loading="lazy"
-                    >
+        const card = document.createElement("article");
+        card.className = "CardPlanta";
 
-                    <button
-                        class="CardFavorito"
-                        type="button"
-                        aria-label="Favoritar planta"
-                    >
-                        <svg viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.8">
-                            <path d="M12 21s-7.5-4.6-10-9.2C0.3 8 2 4.5 5.6 4A5 5 0 0112 6.5 5 5 0 0118.4 4C22 4.5 23.7 8 22 11.8 19.5 16.4 12 21 12 21z"/>
-                        </svg>
-                    </button>
-                </div>
+        const areaImagem = document.createElement("div");
+        areaImagem.className = "CardPlantaImagem";
 
-                <div class="CardPlantaConteudo">
-                    <h3>${escapar(planta.titulo || "Planta sem título")}</h3>
+        const imagem = document.createElement("img");
+        imagem.src = planta.imagem || "";
+        imagem.alt = planta.titulo || "Planta";
+        imagem.loading = "lazy";
 
-                    <div class="CardPlantaSpecs">
-                        <span>${Number(planta.quartos) || 0} Quartos</span>
-                        <span>${Number(planta.banheiros) || 0} Banheiros</span>
-                        <span>${Number(planta.garagem) || 0} Garagens</span>
-                    </div>
+        imagem.addEventListener("error", function () {
+            imagem.alt = "Imagem indisponível";
+            imagem.removeAttribute("src");
+        }, { once: true });
 
-                    <a
-                        href="DetalhesPlanta.html?id=${encodeURIComponent(planta.id)}"
-                        class="BtnDetalhes"
-                    >
-                        Detalhes
-                    </a>
-                </div>
-            </article>
-        `;
+        areaImagem.appendChild(imagem);
 
-        ListaPlantas.insertAdjacentHTML("beforeend", plantaHTML);
+        const favorito = document.createElement("button");
+        favorito.type = "button";
+        favorito.className = "CardFavorito";
+
+        function atualizarFavorito() {
+            const ativo = window.Favoritos
+                ? window.Favoritos.eFavorito(planta.id)
+                : false;
+
+            favorito.classList.toggle("ativo", ativo);
+            favorito.textContent = ativo ? "♥" : "♡";
+            favorito.setAttribute("aria-pressed", String(ativo));
+            favorito.setAttribute(
+                "aria-label",
+                ativo ? "Remover dos favoritos" : "Salvar nos favoritos"
+            );
+        }
+
+        favorito.addEventListener("click", function () {
+            if (!window.Favoritos) return;
+            window.Favoritos.alternar(planta.id);
+            atualizarFavorito();
+        });
+
+        atualizarFavorito();
+        areaImagem.appendChild(favorito);
+
+        const conteudo = document.createElement("div");
+        conteudo.className = "CardPlantaConteudo";
+
+        const titulo = document.createElement("h3");
+        titulo.textContent = planta.titulo || "Planta sem título";
+
+        // Categoria e estilo como etiquetas
+        const tags = document.createElement("div");
+        tags.className = "CardPlantaTags";
+
+        [planta.categoria, planta.estilo]
+            .filter(Boolean)
+            .forEach(function (texto) {
+                const tag = document.createElement("span");
+                tag.className = "CardPlantaTag";
+                tag.textContent = texto;
+                tags.appendChild(tag);
+            });
+
+        // Quartos, banheiros, garagens e área na mesma linha
+        const specs = document.createElement("div");
+        specs.className = "CardPlantaSpecs";
+
+        [
+            `${Number(planta.quartos) || 0} Quartos`,
+            `${Number(planta.banheiros) || 0} Banheiros`,
+            `${Number(planta.garagem) || 0} Garagens`,
+            `${Number(planta.area) || 0} m²`
+        ].forEach(function (texto) {
+            const item = document.createElement("span");
+            item.textContent = texto;
+            specs.appendChild(item);
+        });
+
+        const preco = document.createElement("strong");
+        preco.className = "CardPlantaPreco";
+        preco.textContent = Number(planta.preco || 0).toLocaleString(
+            "pt-BR",
+            { style: "currency", currency: "BRL" }
+        );
+
+        const detalhes = document.createElement("a");
+        detalhes.className = "BtnDetalhes";
+        detalhes.textContent = "Detalhes";
+        detalhes.href =
+            `./DetalhesPlanta.html?id=${encodeURIComponent(planta.id)}`;
+
+        conteudo.append(titulo, tags, specs, preco, detalhes);
+
+        card.append(areaImagem, conteudo);
+        ListaPlantas.appendChild(card);
     });
 }
 
-
-// 4. Criar os botões da paginação
+// Monta os botões da paginação.
 function mostrarPaginacao() {
+    if (!paginacao) return;
+
+    paginacao.replaceChildren();
+
     const totalPaginas = Math.ceil(
         plantasFiltradas.length / PLANTAS_POR_PAGINA
     );
 
-    if (totalPaginas <= 1) {
-        paginacao.innerHTML = "";
-        return;
+    if (totalPaginas <= 1) return;
+
+    function criarBotao(texto, pagina, desabilitado, atual = false) {
+        const botao = document.createElement("button");
+
+        botao.type = "button";
+        botao.className = "PaginacaoBtn";
+        botao.textContent = texto;
+        botao.dataset.pagina = pagina;
+        botao.disabled = desabilitado;
+
+        if (atual) {
+            botao.classList.add("ativo");
+            botao.setAttribute("aria-current", "page");
+        }
+
+        return botao;
     }
 
-    let html = `
-        <button
-            class="PaginacaoBtn"
-            data-pagina="${paginaAtual - 1}"
-            aria-label="Página anterior"
-            ${paginaAtual === 1 ? "disabled" : ""}
-        >
-            ‹
-        </button>
-    `;
+    paginacao.appendChild(
+        criarBotao("‹", paginaAtual - 1, paginaAtual === 1)
+    );
 
     for (let i = 1; i <= totalPaginas; i++) {
-        html += `
-            <button
-                class="PaginacaoBtn ${i === paginaAtual ? "ativo" : ""}"
-                data-pagina="${i}"
-                ${i === paginaAtual ? 'aria-current="page"' : ""}
-            >
-                ${i}
-            </button>
-        `;
+        paginacao.appendChild(
+            criarBotao(String(i), i, false, i === paginaAtual)
+        );
     }
 
-    html += `
-        <button
-            class="PaginacaoBtn"
-            data-pagina="${paginaAtual + 1}"
-            aria-label="Próxima página"
-            ${paginaAtual === totalPaginas ? "disabled" : ""}
-        >
-            ›
-        </button>
-    `;
-
-    paginacao.innerHTML = html;
+    paginacao.appendChild(
+        criarBotao(
+            "›",
+            paginaAtual + 1,
+            paginaAtual === totalPaginas
+        )
+    );
 }
 
-
-// 5. Atualizar a lista e a paginação
+// Atualiza os cards e a paginação.
 function renderizar() {
     mostrarPlantas();
     mostrarPaginacao();
 }
 
+// Evento do botão Pesquisar.
+if (btnPesquisar) {
+    btnPesquisar.addEventListener("click", aplicarFiltros);
+}
 
-// 6. Evento do botão Pesquisar
-btnPesquisar.addEventListener("click", aplicarFiltros);
-
-
-// 7. Evento dos botões da paginação
-paginacao.addEventListener("click", function (event) {
-    const botao = event.target.closest("button[data-pagina]");
-
-    if (!botao || botao.disabled) {
-        return;
-    }
-
-    paginaAtual = Number(botao.dataset.pagina);
-
-    renderizar();
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+// Os filtros também são aplicados assim que o visitante muda uma opção.
+[filtrotipo, filtroquartos, filtrogaragem, filtroarea, filtroestilo]
+    .forEach(function (filtro) {
+        if (filtro) filtro.addEventListener("change", aplicarFiltros);
     });
-});
 
+// Paginação: um único evento para todos os botões.
+if (paginacao) {
+    paginacao.addEventListener("click", function (event) {
+        const botao = event.target.closest("button[data-pagina]");
 
-// 8. Iniciar a página
+        if (!botao || botao.disabled) return;
+
+        paginaAtual = Number(botao.dataset.pagina);
+
+        renderizar();
+
+        const topoLista = document.querySelector(".FiltrosCard");
+
+        if (topoLista) {
+            topoLista.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    });
+}
+
+// Inicia a listagem.
 buscarPlantas();

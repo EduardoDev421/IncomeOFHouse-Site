@@ -6,6 +6,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
    <link rel="stylesheet" href="../css/ConfiguraçõesUsuario.css">
+   <link rel="stylesheet" href="../css/Modais/LegalModal.css">
    <title>Pagina de Configurações</title>
 </head>
 
@@ -182,18 +183,18 @@
                      <img src="../img/icones/iconePersonalização.svg">
                      <h2>Personalização</h2>
                   </div>
-                     <div class="Personalizações">
-                        <img src="../img/icones/iconeTema.svg">
-                        <div class="PersonalizaçõesText">
-                           <h3>Tema da plataforma</h3>
-                           <p>Escolha entre temas claro ou escuro</p>
-                        </div>
-
-                        <select id="tema" class="seletor">
-                           <option value="">Escuro</option>
-                           <option value="Casa Térrea">Claro</option>
-                        </select>
+                  <div class="Personalizações">
+                     <img src="../img/icones/iconeTema.svg">
+                     <div class="PersonalizaçõesText">
+                        <h3>Tema da plataforma</h3>
+                        <p>Escolha entre temas claro ou escuro</p>
                      </div>
+
+                     <select id="tema" class="seletor">
+                        <option value="">Escuro</option>
+                        <option value="Casa Térrea">Claro</option>
+                     </select>
+                  </div>
 
                   <div class="Personalizações">
                      <img src="../img/icones/IconeIdiomas.svg">
@@ -235,9 +236,9 @@
                </div>
                <div class="privacidade">
                   <div class="TituloPrivacidade">
-                  <img src="../img/icones/IconePrivacidade.svg">
-                  <h2>Privacidade</h2>
-                  </div>   
+                     <img src="../img/icones/IconePrivacidade.svg">
+                     <h2>Privacidade</h2>
+                  </div>
                   <div class="privacidades">
                      <img src="../img/icones/iconePerfilView.svg" alt="">
                      <div class="privacidadesText">
@@ -272,61 +273,62 @@
 
             <div class="CentralAjuda">
                <div class="TituloCentralAjuda">
-                     <img src="../img/icones/IconePergunta.svg" alt="">
-                     <h2>Central de Ajuda</h2>
+                  <img src="../img/icones/IconePergunta.svg" alt="">
+                  <h2>Central de Ajuda</h2>
                </div>
                <div class="CentralAjudasCard">
-                     <div class="CentralAjudas">
-                        <a href="../pages/PagesImplement/PerguntasFrequentes.html">
-                           <img src="../img/icones/IconePerguntasRespostas.svg">
-                           <div class="CentralAjudasText">
-                              <h3>Perguntas frequentes</h3>
-                              <p>Encotre respostas para dúvidas comuns</p>
-                           </div>
+                  <div class="CentralAjudas">
+                     <a href="../pages/PagesImplement/PerguntasFrequentes.html">
+                        <img src="../img/icones/IconePerguntasRespostas.svg">
+                        <div class="CentralAjudasText">
+                           <h3>Perguntas frequentes</h3>
+                           <p>Encotre respostas para dúvidas comuns</p>
+                        </div>
 
-                           <span class="seta">></span>
-                        </a>
-                     </div>
+                        <span class="seta">></span>
+                     </a>
+                  </div>
 
-                     <div class="CentralAjudas">
-                        <a href="../pages/PagesImplement/FaleConosco.html">
-                           <img src="../img/icones/IconeFaleConosco.svg">
-                           <div class="CentralAjudasText">
-                              <h3>Fale conosco</h3>
-                              <p>Entre em contato com nosso suporte</p>
-                           </div>
+                  <div class="CentralAjudas">
+                     <a href="../pages/PagesImplement/FaleConosco.html">
+                        <img src="../img/icones/IconeFaleConosco.svg">
+                        <div class="CentralAjudasText">
+                           <h3>Fale conosco</h3>
+                           <p>Entre em contato com nosso suporte</p>
+                        </div>
 
-                           <span class="seta">></span>
-                        </a>
-                     </div>
+                        <span class="seta">></span>
+                     </a>
+                  </div>
 
-                     <div class="CentralAjudaU">
-                        <a href="../pages/PagesImplement/Tutoriais.html">
-                           <img src="../img/icones/IconeTutorial.svg">
-                           <div class="CentralAjudasText">
-                              <h3>Tutoriais para profissionais</h3>
-                              <p>Aprenda a usar a plataforma</p>
-                           </div>
+                  <div class="CentralAjudaU">
+                     <a href="../pages/PagesImplement/Tutoriais.html">
+                        <img src="../img/icones/IconeTutorial.svg">
+                        <div class="CentralAjudasText">
+                           <h3>Tutoriais para profissionais</h3>
+                           <p>Aprenda a usar a plataforma</p>
+                        </div>
 
-                           <span class="seta">></span>
-                        </a>
+                        <span class="seta">></span>
+                     </a>
                   </div>
                </div>
-               </div>
+            </div>
          </section>
       </section>
    </main>
    <footer class="rodape">
       <p>©IncomeOfHouses. Todos os direitos reservados.</p>
       <div class="RodapeLinks">
-         <a href="../pages/TermosUso.html">Termos de Uso</a>
+         <a href="../pages/Modais/TermosUso.html" data-legal="termos">Termos de Uso</a>
          <span>|</span>
-         <a href="../pages/PoliticaPrivacidade.html">Política de Privacidade</a>
+         <a href="../pages/Modais/PoliticaPrivacidade.html" data-legal="privacidade">Política de Privacidade</a>
       </div>
    </footer>
 
+   <script src="../js/Modais/LegalModais.js"></script>
    <script src="../js/configuracoesUsuario.js"></script>
-   
+
 </body>
 
 </html>

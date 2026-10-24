@@ -78,6 +78,7 @@ body {
     height: auto;
     margin-left: 30px;
 }
+/* Menu */
 
 .menu {
     position: absolute;
@@ -89,13 +90,12 @@ body {
 }
 
 .menu a {
-    padding: 10px 20px;
     color: #ffffff;
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
-    border-radius: 999px;
-    border: 1px solid transparent;
+    padding: 12px 20px;
+    border-radius: 7px;
     transition: 0.3s ease;
 }
 
@@ -106,7 +106,7 @@ body {
 
 .menu a.ativo {
     color: #d4af6a;
-    border: 1px solid rgba(212, 175, 106, 0.6);
+    border: 1px solid rgba(212, 175, 106, 0.4);
     background: rgba(212, 175, 106, 0.08);
 }
 
@@ -844,6 +844,125 @@ body {
 
 
 /* =====================================================
+   COMENTÁRIOS DA PLANTA (resumo)
+   A lista completa e o formulário ficam em Comentarios.html
+===================================================== */
+
+.Comentarios {
+    margin-top: 24px;
+    padding: 20px 22px;
+    background: linear-gradient(
+        145deg,
+        rgba(25, 25, 25, 0.95),
+        rgba(13, 13, 13, 0.95)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 12px;
+}
+
+.ComentariosTopo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.ComentariosTopo h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #e4b64f;
+}
+
+.ComentariosTopo h2 .icone {
+    width: 22px;
+    height: 22px;
+}
+
+.ContagemComentarios {
+    padding: 3px 12px;
+    border: 1px solid rgba(218, 174, 82, 0.45);
+    border-radius: 999px;
+    background: rgba(218, 174, 82, 0.06);
+    color: #e4b64f;
+    font-size: 11.5px;
+    font-weight: 500;
+}
+
+.BtnComentarios {
+    padding: 10px 20px;
+    border: 1px solid #cda34e;
+    border-radius: 8px;
+    color: #e4b64f;
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.BtnComentarios:hover {
+    background: #d9af52;
+    color: #111;
+    box-shadow: 0 8px 20px rgba(218, 174, 82, 0.2);
+}
+
+.BtnComentarios:focus-visible {
+    outline: 2px solid #d4af6a;
+    outline-offset: 2px;
+}
+
+.PreviaComentario {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.PreviaVazia {
+    color: #888;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.PreviaItem {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.PreviaItem .Avatar {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    font-size: 15px;
+}
+
+.PreviaCorpo {
+    min-width: 0;
+}
+
+.PreviaCorpo strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.PreviaCorpo p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #cfcfcf;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* =====================================================
    RESPONSIVO
 ===================================================== */
 
@@ -907,5 +1026,25 @@ body {
 
     .PrecoDestaque {
         font-size: 26px;
+    }
+}
+
+/* =====================================================
+   MELHORIAS
+===================================================== */
+
+.menu a:focus-visible,
+.BtnPrincipal:focus-visible,
+.BtnFavorito:focus-visible,
+.BtnPerfil:focus-visible,
+.AvaliacaoTopo a:focus-visible {
+    outline: 2px solid #d4af6a;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        scroll-behavior: auto !important;
     }
 }
