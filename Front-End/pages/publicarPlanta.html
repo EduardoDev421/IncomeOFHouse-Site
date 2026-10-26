@@ -10,7 +10,7 @@
     <title>Publicar Planta - Income of Houses</title>
 </head>
 
-<body>
+<body data-conta="profissional">
     <header class="topo">
         <div class="logo">
             <a href="../index.html">
@@ -23,160 +23,225 @@
             <a href="./Profissionais.html">Profissionais</a>
             <a href="./Sobre.html">Sobre Nós</a>
         </nav>
-        <div class="iconelogin">
-            <a href="./Login.html">
-                <img src="../img/icones/IconePerfil.svg" alt="Entrar">
-            </a>
-        </div>
     </header>
+
     <main class="BackGround">
-        <section class="PublicarPlanta">
-            <h1>Publicar Nova Planta</h1>
-            <p> Preencha as informações abaixo para cadastrar uma nova planta.</p>
+        <section class="container">
+            <!-- Menu lateral -->
+            <aside class="menu-lateral">
+                <ul>
+                    <li>
+                        <a href="../pages/PerfilProfissional.html">
+                            <img src="../img/icones/IconePerfil.svg" alt="">
+                            <span>Meu Perfil</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/MeusEndereços.html">
+                            <img src="../img/icones/IconeEndereco.svg" alt="">
+                            <span>Meus Endereços</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/MeuPortfolio.html">
+                            <img src="../img/icones/iconePortfolio.svg" alt="">
+                            <span>Meu Portfolio</span>
+                        </a>
+                    </li>
+                    <li class="ativo">
+                        <a href="../pages/publicarPlanta.html">
+                            <img src="../img/icones/IconePublicarPlantas.svg" alt="">
+                            <span>Publicar Plantas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/Projetos.html">
+                            <img src="../img/icones/IconeProjetos.svg" alt="">
+                            <span>Projetos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/Avaliações.html">
+                            <img src="../img/icones/IconeEstrela.svg" alt="">
+                            <span>Avaliações</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/Agendamentos.html">
+                            <img src="../img/icones/IconeData.svg" alt="">
+                            <span>Agendamentos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/Mensagem.html">
+                            <img src="../img/icones/IconeMensagem.svg" alt="">
+                            <span>Mensagem</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/ConfiguraçõesProfissionais.html">
+                            <img src="../img/icones/IconeConfiguracao.svg" alt="">
+                            <span>Configurações</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../index.html">
+                            <img src="../img/icones/IconeSair.svg" alt="">
+                            <span>Sair</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
 
-            <form class="formPublicarPlanta" id="formPublicarPlanta">
+            <!-- Conteúdo -->
+            <section class="conteudo PublicarPlanta">
+                <h1>Publicar Nova Planta</h1>
+                <p>Preencha as informações abaixo para cadastrar uma nova planta.</p>
 
-                <div class="campo">
-                    <label for="titulo">Título da Planta</label>
-                    <input type="text" id="titulo" placeholder="Ex.: Casa Moderna com 3 Quartos" required>
-                </div>
+                <form class="formPublicarPlanta" id="formPublicarPlanta">
 
-                <div class="campo">
-                    <label for="descricao">Descrição</label>
-                    <textarea id="descricao" rows="6" placeholder="Descreva sua planta..." required></textarea>
-                </div>
-
-                <div class="campo">
-                    <label for="estilo">Estilo da Planta</label>
-                    <select id="estilo" name="estilo">
-                        <option value="">Selecione</option>
-                        <option value="Moderno">Moderno</option>
-                        <option value="Contemporâneo">Contemporâneo</option>
-                        <option value="Clássico">Clássico</option>
-                        <option value="Rústico">Rústico</option>
-                        <option value="Minimalista">Minimalista</option>
-                        <option value="Colonial">Colonial</option>
-                        <option value="Neoclássico">Neoclássico</option>
-                        <option value="Industrial">Industrial</option>
-                        <option value="Escandinavo">Escandinavo</option>
-                        <option value="Tropical">Tropical</option>
-                    </select>
-                </div>
-
-                <!-- Distribuição dos ambientes -->
-                <div class="campo full">
-                    <label for="distribuicaoAmbientes">Distribuição dos Ambientes</label>
-                    <textarea id="distribuicaoAmbientes" name="distribuicaoAmbientes" rows="3"
-                        placeholder="Ex.: Sala integrada com cozinha, suíte master com closet, área gourmet..."></textarea>
-                </div>
-
-                <!-- Destaques do projeto -->
-                <fieldset class="destaques-box full">
-                    <legend>Destaques do Projeto</legend>
-
-                    <div class="destaques-lista" id="listaDestaques"></div>
-
-                    <div class="destaques-adicionar">
-                        <input type="text" id="destaquesPersonalizados" placeholder="Digite um diferencial e pressione Enter (ex.: Energia solar)">
-                        <button type="button" id="botaoAdicionarDestaque">Adicionar</button>
+                    <div class="campo">
+                        <label for="titulo">Título da Planta</label>
+                        <input type="text" id="titulo" placeholder="Ex.: Casa Moderna com 3 Quartos" required>
                     </div>
-                </fieldset>
 
-                <div class="campo">
-                    <label for="categoria">Categoria</label>
-                    <select id="categoria" required>
-                        <option value="">Selecione</option>
-                        <optgroup label="Residencial">
-                            <option>Casa Térrea</option>
-                            <option>Sobrado</option>
-                            <option>Casa Geminada</option>
-                            <option>Casa de Condomínio</option>
-                            <option>Casa de Campo</option>
-                            <option>Casa de Praia</option>
-                            <option>Chácara</option>
-                            <option>Sítio</option>
-                            <option>Fazenda</option>
-                        </optgroup>
+                    <div class="campo">
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" rows="6" placeholder="Descreva sua planta..." required></textarea>
+                    </div>
 
-                        <optgroup label="Apartamentos">
-                            <option>Apartamento</option>
-                            <option>Kitnet / Studio</option>
-                            <option>Loft</option>
-                            <option>Cobertura</option>
-                        </optgroup>
+                    <div class="campo">
+                        <label for="estilo">Estilo da Planta</label>
+                        <select id="estilo" name="estilo">
+                            <option value="">Selecione</option>
+                            <option value="Moderno">Moderno</option>
+                            <option value="Contemporâneo">Contemporâneo</option>
+                            <option value="Clássico">Clássico</option>
+                            <option value="Rústico">Rústico</option>
+                            <option value="Minimalista">Minimalista</option>
+                            <option value="Colonial">Colonial</option>
+                            <option value="Neoclássico">Neoclássico</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Escandinavo">Escandinavo</option>
+                            <option value="Tropical">Tropical</option>
+                        </select>
+                    </div>
 
-                        <optgroup label="Construções Especiais">
-                            <option>Edícula</option>
-                            <option>Casa de Madeira</option>
-                            <option>Casa Pré-Fabricada</option>
-                            <option>Casa Modular</option>
-                        </optgroup>
+                    <!-- Distribuição dos ambientes -->
+                    <div class="campo full">
+                        <label for="distribuicaoAmbientes">Distribuição dos Ambientes</label>
+                        <textarea id="distribuicaoAmbientes" name="distribuicaoAmbientes" rows="3"
+                            placeholder="Ex.: Sala integrada com cozinha, suíte master com closet, área gourmet..."></textarea>
+                    </div>
 
-                        <optgroup label="Comercial">
-                            <option>Loja</option>
-                            <option>Sala Comercial</option>
-                            <option>Escritório</option>
-                            <option>Galpão</option>
-                            <option>Prédio Comercial</option>
-                        </optgroup>
+                    <!-- Destaques do projeto -->
+                    <fieldset class="destaques-box full">
+                        <legend>Destaques do Projeto</legend>
 
-                        <optgroup label="Industrial">
-                            <option>Galpão Industrial</option>
-                            <option>Fábrica</option>
-                            <option>Centro de Distribuição</option>
-                        </optgroup>
+                        <div class="destaques-lista" id="listaDestaques"></div>
 
-                        <optgroup label="Lazer">
-                            <option>Área de Lazer</option>
-                            <option>Espaço Gourmet</option>
-                            <option>Salão de Festas</option>
-                            <option>Área de Piscina</option>
-                        </optgroup>
+                        <div class="destaques-adicionar">
+                            <input type="text" id="destaquesPersonalizados" placeholder="Digite um diferencial e pressione Enter (ex.: Energia solar)">
+                            <button type="button" id="botaoAdicionarDestaque">Adicionar</button>
+                        </div>
+                    </fieldset>
 
-                        <optgroup label="Projetos">
-                            <option>Projeto Residencial</option>
-                            <option>Projeto Comercial</option>
-                            <option>Projeto Industrial</option>
-                            <option>Projeto Arquitetônico</option>
-                        </optgroup>
-                    </select>
-                </div>
+                    <div class="campo">
+                        <label for="categoria">Categoria</label>
+                        <select id="categoria" required>
+                            <option value="">Selecione</option>
+                            <optgroup label="Residencial">
+                                <option>Casa Térrea</option>
+                                <option>Sobrado</option>
+                                <option>Casa Geminada</option>
+                                <option>Casa de Condomínio</option>
+                                <option>Casa de Campo</option>
+                                <option>Casa de Praia</option>
+                                <option>Chácara</option>
+                                <option>Sítio</option>
+                                <option>Fazenda</option>
+                            </optgroup>
 
-                <div class="campo">
-                    <label for="quartos">Quantidade de Quartos</label>
-                    <input type="number" id="quartos" min="1" required placeholder="Ex.: 3 quartos">
-                </div>
+                            <optgroup label="Apartamentos">
+                                <option>Apartamento</option>
+                                <option>Kitnet / Studio</option>
+                                <option>Loft</option>
+                                <option>Cobertura</option>
+                            </optgroup>
 
-                <div class="campo">
-                    <label for="banheiros">Quantidade de Banheiros</label>
-                    <input type="number" id="banheiros" min="1" required placeholder="Ex.: 2 banheiros">
-                </div>
+                            <optgroup label="Construções Especiais">
+                                <option>Edícula</option>
+                                <option>Casa de Madeira</option>
+                                <option>Casa Pré-Fabricada</option>
+                                <option>Casa Modular</option>
+                            </optgroup>
 
-                <div class="campo">
-                    <label for="garagem">Vagas na Garagem</label>
-                    <input type="number" id="garagem" min="0" required placeholder="Ex.: 2 vagas">
-                </div>
+                            <optgroup label="Comercial">
+                                <option>Loja</option>
+                                <option>Sala Comercial</option>
+                                <option>Escritório</option>
+                                <option>Galpão</option>
+                                <option>Prédio Comercial</option>
+                            </optgroup>
 
-                <div class="campo">
-                    <label for="area">Área Construída (m²)</label>
-                    <input type="number" id="area" min="0" required placeholder="Ex.: 120 m²">
-                </div>
+                            <optgroup label="Industrial">
+                                <option>Galpão Industrial</option>
+                                <option>Fábrica</option>
+                                <option>Centro de Distribuição</option>
+                            </optgroup>
 
-                <div class="campo">
-                    <label for="preco">Preço (R$)</label>
-                    <input type="number" id="preco" min="0" step="0.01" required placeholder="Ex.: R$ 350.000,00">
-                </div>
+                            <optgroup label="Lazer">
+                                <option>Área de Lazer</option>
+                                <option>Espaço Gourmet</option>
+                                <option>Salão de Festas</option>
+                                <option>Área de Piscina</option>
+                            </optgroup>
 
-                <div class="campo">
-                    <label for="imagem">Imagem da Planta</label>
-                    <input type="file" id="imagem" accept="image/jpeg,image/png,image/webp" required>
-                    <small class="dica" id="dicaImagem">JPEG, PNG ou WebP, até 5 MB. A imagem é reduzida automaticamente antes do envio.</small>
-                </div>
+                            <optgroup label="Projetos">
+                                <option>Projeto Residencial</option>
+                                <option>Projeto Comercial</option>
+                                <option>Projeto Industrial</option>
+                                <option>Projeto Arquitetônico</option>
+                            </optgroup>
+                        </select>
+                    </div>
 
-                <button id="botaoPublicar" type="submit">
-                    Publicar Planta
-                </button>
-            </form>
+                    <div class="campo">
+                        <label for="quartos">Quantidade de Quartos</label>
+                        <input type="number" id="quartos" min="1" required placeholder="Ex.: 3 quartos">
+                    </div>
+
+                    <div class="campo">
+                        <label for="banheiros">Quantidade de Banheiros</label>
+                        <input type="number" id="banheiros" min="1" required placeholder="Ex.: 2 banheiros">
+                    </div>
+
+                    <div class="campo">
+                        <label for="garagem">Vagas na Garagem</label>
+                        <input type="number" id="garagem" min="0" required placeholder="Ex.: 2 vagas">
+                    </div>
+
+                    <div class="campo">
+                        <label for="area">Área Construída (m²)</label>
+                        <input type="number" id="area" min="0" required placeholder="Ex.: 120 m²">
+                    </div>
+
+                    <div class="campo">
+                        <label for="preco">Preço (R$)</label>
+                        <input type="number" id="preco" min="0" step="0.01" required placeholder="Ex.: R$ 350.000,00">
+                    </div>
+
+                    <div class="campo">
+                        <label for="imagem">Imagem da Planta</label>
+                        <input type="file" id="imagem" accept="image/jpeg,image/png,image/webp" required>
+                        <small class="dica" id="dicaImagem">JPEG, PNG ou WebP, até 5 MB. A imagem é reduzida automaticamente antes do envio.</small>
+                    </div>
+
+                    <button id="botaoPublicar" type="submit">
+                        Publicar Planta
+                    </button>
+                </form>
+            </section>
         </section>
     </main>
 
@@ -189,6 +254,7 @@
         </div>
     </footer>
 
+    <script src="../js/Conta.js"></script>
     <script src="../js/Modais/LegalModais.js"></script>
     <script src="../js/PlantasStorage.js"></script>
     <script src="../js/publicarPlanta.js"></script>

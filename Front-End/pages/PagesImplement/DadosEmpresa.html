@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="IncomeofHouses - Dados e Permissões">
-    <link rel="stylesheet" href="../../css/PagesImplement/DadosPermissões.css">
+    <meta name="description" content="IncomeofHouses - Dados da Empresa">
+    <link rel="stylesheet" href="../../css/PagesImplement/DadosEmpresa.css">
     <link rel="stylesheet" href="../../css/Modais/LegalModal.css">
-    <title>Dados e Permissões</title>
+    <title>Dados da Empresa | Income Of Houses</title>
 </head>
 
 <body>
@@ -41,189 +41,201 @@
 
             <!-- Conteúdo -->
             <section class="conteudo">
-                <h1>Dados e Permissões</h1>
-                <h4>Gerencie seus dados de acesso e as permissões da sua conta.</h4>
+                <h1>Dados da Empresa</h1>
+                <h4>Gerencie as informações da sua empresa.</h4>
 
-                <div class="top-cards">
+                <!-- Primeira linha -->
+                <div class="grid-superior">
 
-                    <!-- Dados da conta -->
-                    <div class="panel-card account-panel">
-                        <div class="panel-card-header">
-                            <img src="../../img/icones/IconeDadosPessoais.svg" alt="">
+                    <!-- Informações básicas -->
+                    <div class="card">
+                        <div class="titulo-card">
+                            <img src="../../img/icones/IconeEmpresa.svg" alt="">
                             <div>
-                                <h2>Dados da Conta</h2>
-                                <p>Informações da sua conta e acesso ao sistema.</p>
+                                <h2>Informações Básicas</h2>
+                                <p>Dados principais da sua empresa.</p>
                             </div>
                         </div>
 
-                        <div class="account-information">
-                            <img src="../../img/icones/IconeLogin.svg" alt="">
-                            <div class="information-content">
-                                <span class="information-title">Nome completo</span>
-                                <span class="information-value">João Silva</span>
+                        <div class="form-grid">
+                            <div class="campo">
+                                <label>Nome da empresa <b>*</b></label>
+                                <div class="input-box"><img src="../../img/icones/IconeEmpresa.svg" alt=""><input type="text" value="Income Of Houses"></div>
+                            </div>
+
+                            <div class="campo">
+                                <label>CNPJ <b>*</b></label>
+                                <div class="input-box"><img src="../../img/icones/IconeCPF.svg" alt=""><input type="text" value="12.345.678/0001-90"></div>
+                            </div>
+
+                            <div class="campo">
+                                <label>Tipo de empresa <b>*</b></label>
+                                <select>
+                                    <option>Construtora</option>
+                                    <option>Imobiliária</option>
+                                    <option>Arquitetura</option>
+                                    <option>Engenharia</option>
+                                </select>
+                            </div>
+
+                            <div class="campo">
+                                <label>Telefone <b>*</b></label>
+                                <div class="input-box"><img src="../../img/icones/IconeTelefone.svg" alt=""><input type="text" value="(11) 98765-4321"></div>
+                            </div>
+
+                            <div class="campo campo-completo">
+                                <label>E-mail corporativo <b>*</b></label>
+                                <div class="input-box"><img src="../../img/icones/IconeEmail.svg" alt=""><input type="email" value="contato@incomeofhouses.com"></div>
                             </div>
                         </div>
-
-                        <div class="account-information">
-                            <img src="../../img/icones/IconeEmail.svg" alt="">
-                            <div class="information-content">
-                                <span class="information-title">E-mail</span>
-                                <span class="information-value">joao@exemplo.com</span>
-                            </div>
-                        </div>
-
-                        <div class="account-information">
-                            <img src="../../img/icones/IconeTelefone.svg" alt="">
-                            <div class="information-content">
-                                <span class="information-title">Telefone</span>
-                                <span class="information-value">(11) 98765-4321</span>
-                            </div>
-                        </div>
-
-                        <div class="account-information">
-                            <img src="../../img/icones/IconePerfil.svg" alt="">
-                            <div class="information-content">
-                                <span class="information-title">Tipo de conta</span>
-                                <span class="information-value">Cliente</span>
-                            </div>
-                        </div>
-
-                        <button class="edit-account" type="button">
-                            <img src="../../img/icones/Iconelapis.svg" alt="">
-                            <span>Editar dados</span>
-                        </button>
                     </div>
 
-                    <!-- Funções e permissões -->
-                    <div class="panel-card roles-panel">
-                        <div class="panel-card-header">
-                            <img src="../../img/icones/IconeConfigProfissional.svg" alt="">
+                    <!-- Endereço -->
+                    <div class="card">
+                        <div class="titulo-card">
+                            <img src="../../img/icones/IconeEndereco.svg" alt="">
                             <div>
-                                <h2>Funções e Permissões</h2>
-                                <p>Configure as permissões de acesso da sua conta.</p>
+                                <h2>Endereço Comercial</h2>
+                                <p>Informe o endereço da sua empresa.</p>
                             </div>
                         </div>
 
-                        <div class="role-row">
-                            <div class="role-content">
-                                <img src="../../img/icones/IconeSegurança.svg" alt="">
-                                <div>
-                                    <h3>Administrador</h3>
-                                    <p>Acesso total ao sistema, incluindo configurações e gerenciamento de usuários.</p>
-                                </div>
+                        <div class="form-grid">
+                            <div class="campo">
+                                <label>CEP <b>*</b></label>
+                                <div class="input-box"><input type="text" value="01310-100"></div>
                             </div>
-                            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                        </div>
 
-                        <div class="role-row">
-                            <div class="role-content">
-                                <img src="../../img/icones/IconeConfigProfissional.svg" alt="">
-                                <div>
-                                    <h3>Gerente</h3>
-                                    <p>Acesso a projetos, profissionais e configurações (sem acesso a permissões).</p>
-                                </div>
+                            <div class="campo">
+                                <label>Logradouro <b>*</b></label>
+                                <div class="input-box"><input type="text" value="Av. Paulista"></div>
                             </div>
-                            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                        </div>
 
-                        <div class="role-row">
-                            <div class="role-content">
-                                <img src="../../img/icones/Iconelapis.svg" alt="">
-                                <div>
-                                    <h3>Editor</h3>
-                                    <p>Pode criar e editar projetos, plantas e informações da conta.</p>
-                                </div>
+                            <div class="campo">
+                                <label>Número <b>*</b></label>
+                                <div class="input-box"><input type="text" value="1000"></div>
                             </div>
-                            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                        </div>
 
-                        <div class="role-row">
-                            <div class="role-content">
-                                <img src="../../img/icones/IconeVisao.svg" alt="">
-                                <div>
-                                    <h3>Visualizador</h3>
-                                    <p>Apenas visualização de projetos, plantas e informações públicas.</p>
-                                </div>
+                            <div class="campo">
+                                <label>Complemento</label>
+                                <div class="input-box"><input type="text" value="Conjunto 501"></div>
                             </div>
-                            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+
+                            <div class="campo">
+                                <label>Bairro <b>*</b></label>
+                                <div class="input-box"><input type="text" value="Bela Vista"></div>
+                            </div>
+
+                            <div class="campo">
+                                <label>Cidade <b>*</b></label>
+                                <select>
+                                    <option>São Paulo</option>
+                                    <option>Brasília</option>
+                                    <option>Rio de Janeiro</option>
+                                </select>
+                            </div>
+
+                            <div class="campo">
+                                <label>Estado <b>*</b></label>
+                                <select>
+                                    <option>SP</option>
+                                    <option>DF</option>
+                                    <option>RJ</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Permissões por módulo -->
-                <div class="panel-card module-panel">
-                    <div class="panel-card-header">
-                        <img src="../../img/icones/IconeProjetosConcluidos.svg" alt="">
-                        <div>
-                            <h2>Permissões por Módulo</h2>
-                            <p>Defina quais módulos o usuário pode acessar e quais ações estão liberadas.</p>
+                <!-- Segunda linha -->
+                <div class="grid-inferior">
+
+                    <!-- Sobre -->
+                    <div class="card sobre">
+                        <div class="titulo-card">
+                            <img src="../../img/icones/Iconelapis.svg" alt="">
+                            <div>
+                                <h2>Sobre a Empresa</h2>
+                                <p>Conte um pouco sobre a sua empresa.</p>
+                            </div>
+                        </div>
+
+                        <textarea maxlength="500">Somos uma plataforma que conecta pessoas e profissionais da área de arquitetura e construção, facilitando a realização de projetos únicos e personalizados.</textarea>
+                        <div class="contador">142/500</div>
+                    </div>
+
+                    <!-- Identidade visual -->
+                    <div class="card identidade">
+                        <div class="titulo-card">
+                            <img src="../../img/icones/IconeConfigProfissional.svg" alt="">
+                            <div>
+                                <h2>Identidade Visual</h2>
+                                <p>Logo e informações de contato.</p>
+                            </div>
+                        </div>
+
+                        <div class="identidade-conteudo">
+                            <div class="logo-area">
+                                <img src="../../img/Logo.png" alt="Logo Income Of Houses">
+                                <button type="button">Alterar logo</button>
+                            </div>
+
+                            <div class="dados-visuais">
+                                <div class="campo">
+                                    <label>Site (opcional)</label>
+                                    <div class="input-box"><input type="text" value="www.incomeofhouses.com"></div>
+                                </div>
+
+                                <div class="campo">
+                                    <label>Redes sociais (opcional)</label>
+                                    <div class="rede">
+                                        <div class="input-box"><input type="text" value="@incomeofhouses"></div>
+                                        <button type="button">+</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="permissions">
-                        <div class="permissions-header">
-                            <div class="module-title">Módulo</div>
-                            <div>Visualizar</div>
-                            <div>Criar</div>
-                            <div>Editar</div>
-                            <div>Excluir</div>
+                    <!-- Documentos -->
+                    <div class="card documentos">
+                        <div class="titulo-card">
+                            <img src="../../img/icones/IconeRegistro.svg" alt="">
+                            <div>
+                                <h2>Documentos</h2>
+                                <p>Mantenha seus documentos atualizados.</p>
+                            </div>
                         </div>
 
-                        <div class="permission-row">
-                            <div class="module-information">
-                                <img src="../../img/icones/IconeProjetos.svg" alt="">
-                                <div><h3>Plantas</h3><p>Acesso às plantas e projetos arquitetônicos.</p></div>
-                            </div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                        <div class="documento">
+                            <img src="../../img/icones/IconeNotaFiscal.svg" alt="">
+                            <div class="doc-info"><strong>Contrato Social</strong><small>Enviado em 15/04/2025</small></div>
+                            <span class="status">Ativo</span>
+                            <span class="seta">></span>
                         </div>
 
-                        <div class="permission-row">
-                            <div class="module-information">
-                                <img src="../../img/icones/IconeEstrela.svg" alt="">
-                                <div><h3>Profissionais</h3><p>Busca e contato com profissionais.</p></div>
-                            </div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                        <div class="documento">
+                            <img src="../../img/icones/IconeNotaFiscal.svg" alt="">
+                            <div class="doc-info"><strong>Comprovante de Endereço</strong><small>Enviado em 10/04/2025</small></div>
+                            <span class="status">Ativo</span>
+                            <span class="seta">></span>
                         </div>
 
-                        <div class="permission-row">
-                            <div class="module-information">
-                                <img src="../../img/icones/IconeSalvos.svg" alt="">
-                                <div><h3>Projetos</h3><p>Gerenciamento de projetos salvos.</p></div>
-                            </div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                        <div class="documento">
+                            <img src="../../img/icones/IconeNotaFiscal.svg" alt="">
+                            <div class="doc-info"><strong>Certidão Negativa de Débitos</strong><small>Enviado em 08/04/2025</small></div>
+                            <span class="status">Ativo</span>
+                            <span class="seta">></span>
                         </div>
 
-                        <div class="permission-row">
-                            <div class="module-information">
-                                <img src="../../img/icones/IconeMensagem.svg" alt="">
-                                <div><h3>Mensagens</h3><p>Troca de mensagens com profissionais e clientes.</p></div>
-                            </div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                        </div>
-
-                        <div class="permission-row">
-                            <div class="module-information">
-                                <img src="../../img/icones/IconeData.svg" alt="">
-                                <div><h3>Agendamentos</h3><p>Controle de agendamentos e reuniões.</p></div>
-                            </div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                        </div>
+                        <button class="gerenciar" type="button">Gerenciar documentos</button>
                     </div>
+                </div>
+
+                <!-- Botões -->
+                <div class="acoes">
+                    <button class="cancelar" type="button">Cancelar alterações</button>
+                    <button class="salvar" type="button">Salvar alterações</button>
                 </div>
             </section>
         </section>

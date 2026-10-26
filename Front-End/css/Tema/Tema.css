@@ -1,0 +1,557 @@
+/* =========================================================
+   TEMA.CSS - cores do site (escuro = padrão, claro = alternativo)
+
+   Local do arquivo: Front-End/css/Tema/Tema.css
+   Imagens claras:   Front-End/img/Tema/
+
+   Carregue em TODAS as páginas, depois do CSS da própria página:
+       <link rel="stylesheet" href="../css/Tema/Tema.css">
+       <script src="../js/Preferencias.js"></script>
+
+   O tema é trocado pelo atributo no <html>:  data-tema="escuro" | "claro"
+   (quem faz isso é o Preferencias.js).
+
+   ESTRUTURA
+     1) Variáveis do ESCURO (padrão)
+     2) Variáveis do CLARO
+     3) Regras do CLARO para páginas com cores fixas
+     4) HOME, SOBRE, PROFISSIONAIS e CADASTRO (claro)
+========================================================= */
+
+/* ---------- 1) ESCURO (padrão) ---------- */
+:root {
+    color-scheme: dark;
+
+    /* fundos */
+    --fundo-pagina: #080a0b;
+    --veu-topo: rgba(5, 7, 8, 0.80);
+    --veu-base: rgba(5, 7, 8, 0.92);
+    --topo: rgba(8, 8, 8, 0.95);
+    --lateral: #0d0d0e;
+    --conteudo: rgba(17, 17, 17, 0.88);
+    --card: #141414;
+    --superficie: #0d0d0e;
+    --item: #1a1a1c;
+    --chat-fundo: #101011;
+    --rodape: #080a0b;
+
+    /* bordas */
+    --borda: #292929;
+    --borda-item: #242424;
+    --borda-lateral: #252729;
+    --topo-borda: rgba(212, 166, 58, 0.25);
+    --rodape-borda: rgba(213, 173, 50, 0.65);
+
+    /* textos */
+    --texto: #ffffff;
+    --texto-menu: #eeeeee;
+    --texto-titulo: #e7e7e7;
+    --texto-sub: #a8abad;
+    --texto-suave: #8f9497;
+    --texto-rodape: #7e8385;
+    --seta: #92979a;
+
+    /* dourado e estados */
+    --ouro: #d4a63a;
+    --ouro-vivo: #f0ca4c;
+    --ativo-bg: #29231a;
+    --ativo-borda: #59431f;
+    --hover-bg: #302718;
+    --hover-suave: rgba(255, 255, 255, 0.03);
+    --botao: #292929;
+    --sombra: rgba(0, 0, 0, 0.15);
+    --verde: #54db83;
+    --vermelho: #e06a6a;
+
+    /* campos e toggle */
+    --seletor-bg: #1a1a1c;
+    --seletor-opcao: #111111;
+    --slider-off: #34383a;
+    --slider-bola: #eeeeee;
+}
+
+/* ---------- 2) CLARO ---------- */
+:root[data-tema="claro"] {
+    color-scheme: light;
+
+    --fundo-pagina: #e8e9ed;
+    --veu-topo: rgba(232, 233, 237, 0.90);
+    --veu-base: rgba(232, 233, 237, 0.96);
+    --topo: rgba(255, 255, 255, 0.97);
+    --lateral: #ffffff;
+    --conteudo: rgba(232, 233, 237, 0.94);
+    --card: #ffffff;
+    --superficie: #f4f5f7;
+    --item: #eceef2;
+    --chat-fundo: #f4f5f7;
+    --rodape: #dfe1e6;
+
+    --borda: #c6c9d0;
+    --borda-item: #e1e3e8;
+    --borda-lateral: #cdd0d6;
+    --topo-borda: rgba(166, 120, 18, 0.40);
+    --rodape-borda: rgba(166, 120, 18, 0.60);
+
+    --texto: #14161a;
+    --texto-menu: #25282c;
+    --texto-titulo: #1b1d20;
+    --texto-sub: #494e54;
+    --texto-suave: #565b61;
+    --texto-rodape: #4c5157;
+    --seta: #6f747a;
+
+    --ouro: #a67812;
+    --ouro-vivo: #b8891f;
+    --ativo-bg: #fbf1dc;
+    --ativo-borda: #d9b865;
+    --hover-bg: #f6e7c4;
+    --hover-suave: rgba(0, 0, 0, 0.04);
+    --botao: #fbf4e1;
+    --sombra: rgba(20, 24, 32, 0.10);
+    --verde: #1a7f42;
+    --vermelho: #c0392b;
+
+    --seletor-bg: #ffffff;
+    --seletor-opcao: #ffffff;
+    --slider-off: #b9bdc4;
+    --slider-bola: #ffffff;
+}
+
+/* =========================================================
+   3) REGRAS DO CLARO PARA PÁGINAS COM CORES FIXAS
+========================================================= */
+
+:root[data-tema="claro"] .logo img { filter: brightness(0.45) saturate(1.5); }
+
+/* ---------- base, cabeçalho, fundo, rodapé, menu lateral ---------- */
+:root[data-tema="claro"] body { background: var(--fundo-pagina); color: var(--texto); }
+
+/* páginas internas que usam .BackGround (com "r") */
+:root[data-tema="claro"] .BackGround {
+    background:
+        linear-gradient(var(--veu-topo), var(--veu-base)),
+        url("../../img/BackgroundFundo.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+:root[data-tema="claro"] .topo { background: var(--topo); border-bottom-color: var(--topo-borda); }
+:root[data-tema="claro"] .menu a { color: var(--texto-menu); }
+:root[data-tema="claro"] .menu a:hover { background: rgba(0, 0, 0, 0.05); color: var(--ouro); }
+:root[data-tema="claro"] .menu a.ativo { color: var(--ouro); background: var(--ativo-bg); border-color: var(--ativo-borda); }
+
+:root[data-tema="claro"] .conteudo { background: var(--conteudo); color: var(--texto); }
+:root[data-tema="claro"] .conteudo > h1 { color: var(--texto); }
+:root[data-tema="claro"] .conteudo > h4 { color: var(--texto-sub); border-bottom-color: var(--ouro); }
+
+:root[data-tema="claro"] .menu-lateral { background: var(--lateral); border-color: var(--borda-lateral); }
+:root[data-tema="claro"] .menu-lateral li a { background: var(--item); color: var(--texto-menu); }
+:root[data-tema="claro"] .menu-lateral li.ativo a { color: var(--ouro); background: var(--ativo-bg); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .menu-lateral li:hover a { color: var(--ouro); background: var(--hover-bg); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .menu-lateral li:last-child { border-top-color: var(--borda); }
+
+:root[data-tema="claro"] .rodape { background: var(--rodape); color: var(--texto-rodape); border-top-color: var(--rodape-borda); }
+:root[data-tema="claro"] .RodapeLinks { color: var(--texto-rodape); }
+:root[data-tema="claro"] .rodape a { color: var(--ouro); }
+:root[data-tema="claro"] .rodape a:hover { color: var(--ouro-vivo); }
+
+:root[data-tema="claro"] .Inicio { border-bottom-color: var(--ouro); }
+
+/* ---------- cards ---------- */
+:root[data-tema="claro"] :is(.cardInfo, .card-informacoes, .card-Atividades, .calendario, .lateral,
+    .card, .pedido, .explorar, .end-card, .campo-busca, .lista-enderecos .vazio, dialog, .area-mensagens) {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+
+:root[data-tema="claro"] :is(.card:hover, .pedido:hover, .end-card:hover) { border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .end-card.principal { background: var(--ativo-bg); border-color: var(--ouro); }
+:root[data-tema="claro"] :is(.campo-busca:focus-within) { border-color: var(--ouro); }
+:root[data-tema="claro"] .campo-busca svg { stroke: var(--ouro); }
+:root[data-tema="claro"] .campo-busca input { color: var(--texto); }
+
+:root[data-tema="claro"] :is(.dia, .item-evento, .novo input, .novo select, .icone-pedido,
+    .end-apelido .icone, .card .avatar, dialog input[type="text"], .foto img) { background: var(--superficie); }
+
+:root[data-tema="claro"] :is(.dia, .novo input, .novo select, dialog input[type="text"]) { border-color: var(--borda); }
+:root[data-tema="claro"] :is(.icone-pedido, .end-apelido .icone) { border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .icone-pedido svg { stroke: var(--ouro); }
+:root[data-tema="claro"] .item-evento { border-top-color: var(--borda); border-right-color: var(--borda); border-bottom-color: var(--borda); }
+
+:root[data-tema="claro"] :is(.item, .atividade, .novo) { border-top-color: var(--borda); }
+:root[data-tema="claro"] .TextAtividades { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .conteudo-perfil { border-top-color: var(--ouro); }
+:root[data-tema="claro"] .dia-sel { border-bottom-color: var(--ouro); }
+
+/* ---------- textos ---------- */
+:root[data-tema="claro"] :is(.dia, .item-text strong, .TextAtividades h2, .AtividadeDetalhe span,
+    .info-detalhe span, .novo input, .novo select, dialog, dialog input[type="text"],
+    .chat-topo h2) { color: var(--texto); }
+
+:root[data-tema="claro"] :is(.item-text span, .atividade strong, .AtividadeDetalhe p, .Inicio p, .resumo,
+    .cal-semana span, .dia-sel small, .item-evento small, .info, .novo label, .vazio, .mais,
+    .explorar p, .card p, .profissional small, .info-detalhe small, dialog label,
+    .btn-remover, .sem-resultado, .chat-vazio p, .chat-topo p, .hora,
+    .separador span, .hora-msg, .dados-conversa p) { color: var(--texto-suave); }
+:root[data-tema="claro"] .dia.passado .num { color: var(--texto-suave); }
+
+:root[data-tema="claro"] :is(.evento, .profissional) { color: var(--texto-menu); }
+:root[data-tema="claro"] .end-card p { color: var(--texto-menu); }
+:root[data-tema="claro"] .end-card p.sec { color: var(--texto-suave); }
+:root[data-tema="claro"] .conversa.nao-lida .dados-conversa p { color: var(--texto-menu); }
+:root[data-tema="claro"] .dados-conversa h3 { color: var(--texto-titulo); }
+:root[data-tema="claro"] .conversa.nao-lida .dados-conversa h3 { color: var(--texto); }
+:root[data-tema="claro"] dialog label.check { color: var(--texto-menu); }
+:root[data-tema="claro"] .item-evento .hora { color: var(--ouro); }
+
+:root[data-tema="claro"] :is(.resumo strong, .cal-nav button, .dia-sel strong, .especialidade,
+    .novo-card, .end-card .badge, .aviso-js, .digitando) { color: var(--ouro); }
+:root[data-tema="claro"] .conversa.nao-lida .hora { color: var(--ouro); }
+:root[data-tema="claro"] .enviada .hora-msg { color: var(--ouro); }
+
+:root[data-tema="claro"] .campo-busca input::placeholder,
+:root[data-tema="claro"] .buscar input::placeholder,
+:root[data-tema="claro"] .campo-mensagem textarea::placeholder { color: var(--texto-suave); }
+
+/* ---------- botões ---------- */
+:root[data-tema="claro"] :is(.EditarPerfil button, .BtnAtividadesDetalhes a, .btnAlterarSenha,
+    .btn-hoje, .btn-ver, .btn-detalhes, .btn-secundario) {
+    background: var(--botao);
+    color: var(--ouro);
+    border-color: var(--ouro);
+}
+
+:root[data-tema="claro"] .btnAlterarSenha a { color: var(--ouro); }
+
+:root[data-tema="claro"] :is(.EditarPerfil button:hover, .btn-hoje:hover, .btn-ver:hover,
+    .btn-detalhes:hover, .btn-secundario:hover, .novo-card:hover) { background: var(--hover-bg); }
+
+:root[data-tema="claro"] .editar-perfil { color: var(--ouro); border-color: var(--ouro); }
+:root[data-tema="claro"] .editar-perfil:hover { background: rgba(166, 120, 18, 0.12); }
+
+:root[data-tema="claro"] .especialidade { background: var(--ativo-bg); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .end-card .badge { background: var(--ativo-bg); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .novo-card { border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .novo-card:hover { background: var(--ativo-bg); }
+
+:root[data-tema="claro"] .acoes button { background: var(--item); border-color: var(--borda); color: var(--texto-menu); }
+:root[data-tema="claro"] .acoes button:hover { border-color: var(--ouro); color: var(--ouro); }
+:root[data-tema="claro"] .acoes .excluir:hover { border-color: var(--vermelho); color: var(--vermelho); }
+
+:root[data-tema="claro"] .duracao button { background: var(--item); border-color: var(--borda); color: var(--texto); }
+:root[data-tema="claro"] .duracao button:hover { border-color: var(--ouro); color: var(--ouro); }
+
+:root[data-tema="claro"] .cal-nav button { border-color: var(--borda); }
+:root[data-tema="claro"] .cal-nav button:hover { background: var(--hover-bg); border-color: var(--ativo-borda); }
+
+:root[data-tema="claro"] .btn-remover { border-color: var(--borda); }
+:root[data-tema="claro"] .btn-remover:hover { background: var(--hover-bg); border-color: var(--ativo-borda); color: var(--ouro); }
+
+:root[data-tema="claro"] .btn-agendar:disabled,
+:root[data-tema="claro"] .campo-mensagem button:disabled { background: #e1e3e8; border-color: #e1e3e8; color: #8a8f95; }
+
+/* ---------- filtros, chips, horários ---------- */
+:root[data-tema="claro"] :is(.filtro, .chip, .slot) { border-color: var(--borda); color: var(--texto-menu); }
+:root[data-tema="claro"] :is(.filtro:hover, .chip:hover, .slot:hover:not(:disabled)) { border-color: var(--ouro); color: var(--ouro); }
+:root[data-tema="claro"] .calendario .filtro.ativo { background: var(--ativo-bg); border-color: var(--ouro); color: var(--ouro); }
+
+:root[data-tema="claro"] .botoes-filtro .filtro.ativo,
+:root[data-tema="claro"] .botoes-filtro .filtro.ativo:hover,
+:root[data-tema="claro"] .chip.ativo,
+:root[data-tema="claro"] .chip.ativo:hover,
+:root[data-tema="claro"] .slot.sel,
+:root[data-tema="claro"] .slot.sel:hover:not(:disabled) { background: #d4a63a; border-color: #d4a63a; color: #111; }
+
+:root[data-tema="claro"] .pagina { color: var(--texto-menu); }
+:root[data-tema="claro"] .pagina:hover { color: var(--ouro); }
+:root[data-tema="claro"] .pagina.selecionada { background: #d4a63a; color: #111; }
+:root[data-tema="claro"] .pagina.seta { border-color: var(--borda); color: var(--ouro); }
+
+/* ---------- calendário ---------- */
+:root[data-tema="claro"] .dia:hover { border-color: var(--ativo-borda); background: var(--item); }
+:root[data-tema="claro"] .dia.sel { border-color: var(--ouro); background: var(--ativo-bg); }
+:root[data-tema="claro"] .novo input:focus,
+:root[data-tema="claro"] .novo select:focus,
+:root[data-tema="claro"] dialog input[type="text"]:focus { border-color: var(--ouro); }
+
+/* ---------- status ---------- */
+:root[data-tema="claro"] .status.andamento,
+:root[data-tema="claro"] .selo.pendente { color: #8a6410; background: rgba(166, 120, 18, 0.16); }
+:root[data-tema="claro"] .status.concluido,
+:root[data-tema="claro"] .selo.confirmado { color: #1a7f42; background: rgba(30, 135, 68, 0.14); }
+:root[data-tema="claro"] .status.cancelado { color: #555b6e; background: rgba(115, 120, 139, 0.18); }
+:root[data-tema="claro"] .msg { color: var(--verde); }
+
+/* ---------- Perfil: avisos ---------- */
+:root[data-tema="claro"] .aviso-login,
+:root[data-tema="claro"] .mensagem-perfil { border-color: var(--ativo-borda); color: var(--texto-menu); }
+:root[data-tema="claro"] .aviso-login p { color: var(--texto-menu); }
+:root[data-tema="claro"] .aviso-login a { color: var(--ouro); border-color: var(--ouro); }
+:root[data-tema="claro"] .aviso-login a:hover { background: var(--hover-bg); }
+
+/* ---------- Mensagem ---------- */
+:root[data-tema="claro"] .conversas { background: var(--card); border-right-color: var(--borda); }
+:root[data-tema="claro"] .buscar input { background: var(--superficie); border-color: var(--borda); color: var(--texto); }
+:root[data-tema="claro"] .buscar input:focus { border-color: var(--ouro); }
+:root[data-tema="claro"] .buscar button { color: var(--ouro); background: var(--ativo-bg); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .filtros { border-bottom-color: var(--borda); }
+
+:root[data-tema="claro"] .conversa { border-bottom-color: var(--borda-item); }
+:root[data-tema="claro"] .conversa:hover { background: var(--hover-suave); }
+:root[data-tema="claro"] .conversa.selecionada { background: var(--ativo-bg); box-shadow: inset 3px 0 0 var(--ouro); }
+:root[data-tema="claro"] :is(.conversa .avatar, .chat-topo .avatar) { color: var(--ouro); border-color: var(--ouro); }
+:root[data-tema="claro"] .avatar.online::after { border-color: var(--card); background: var(--verde); }
+
+:root[data-tema="claro"] .chat { background: var(--chat-fundo); }
+:root[data-tema="claro"] .chat-vazio { color: var(--ativo-borda); }
+:root[data-tema="claro"] .chat-topo { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .chat-topo p.on { color: var(--verde); }
+:root[data-tema="claro"] .voltar { background: var(--item); border-color: var(--borda); color: var(--ouro); }
+:root[data-tema="claro"] .separador span { background: var(--item); border-color: var(--borda); }
+
+:root[data-tema="claro"] .recebida { background: var(--card); border-color: var(--borda); }
+:root[data-tema="claro"] .enviada { background: var(--ativo-bg); border-color: var(--ativo-borda); }
+
+:root[data-tema="claro"] .campo-mensagem { border-top-color: var(--borda); }
+:root[data-tema="claro"] .campo-mensagem textarea { background: var(--card); border-color: var(--borda); color: var(--texto); }
+:root[data-tema="claro"] .campo-mensagem textarea:focus { border-color: var(--ouro); }
+
+:root[data-tema="claro"] :is(.conversa:focus-visible, .chip:focus-visible, .voltar:focus-visible,
+    .campo-mensagem button:focus-visible) { outline-color: var(--ouro); }
+
+/* ---------- Endereços: modal e erros ---------- */
+:root[data-tema="claro"] dialog { border-color: var(--ativo-borda); }
+:root[data-tema="claro"] dialog input.invalido { border-color: var(--vermelho); }
+:root[data-tema="claro"] .erro { color: var(--vermelho); }
+
+
+/* =========================================================
+   4) HOME (Index.html) - versão clara
+   Imagem: Front-End/img/Tema/BackgroundFundoClaro.png
+   (a classe no HTML é .BackGound, sem "r")
+========================================================= */
+:root[data-tema="claro"] .BackGound {
+    background-image: url("../../img/Tema/BackgroundFundoClaro.png");
+    background-size: cover;
+    background-position: center;
+}
+
+:root[data-tema="claro"] .overlay {
+    background: linear-gradient(
+        90deg,
+        rgba(250, 248, 242, 0.88) 0%,
+        rgba(250, 248, 242, 0.60) 40%,
+        rgba(250, 248, 242, 0) 75%
+    );
+}
+
+:root[data-tema="claro"] body:has(.BackGound) .topo {
+    background: rgba(255, 255, 255, 0.55);
+    border-bottom-color: var(--topo-borda);
+    backdrop-filter: blur(8px);
+}
+
+:root[data-tema="claro"] .Container h1 { color: var(--texto); }
+:root[data-tema="claro"] .Container h1 span { color: var(--ouro); }
+:root[data-tema="claro"] .Container p { color: var(--texto-sub); }
+
+:root[data-tema="claro"] .BtnCriar {
+    background: var(--ouro);
+    border-color: var(--ouro);
+    color: #ffffff;
+}
+:root[data-tema="claro"] .BtnCriar:hover {
+    background: var(--ouro-vivo);
+    border-color: var(--ouro-vivo);
+}
+:root[data-tema="claro"] .BtnLogar {
+    background: rgba(255, 255, 255, 0.65);
+    border-color: var(--ouro);
+    color: var(--ouro);
+}
+:root[data-tema="claro"] .BtnLogar:hover {
+    background: var(--ativo-bg);
+    color: var(--ouro);
+}
+
+:root[data-tema="claro"] .Destaque {
+    background: rgba(255, 255, 255, 0.78);
+    border-color: var(--ativo-borda);
+    box-shadow: 0 4px 14px var(--sombra);
+}
+:root[data-tema="claro"] .Destaque:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--ouro);
+}
+:root[data-tema="claro"] .DestaqueContainer h2 { color: var(--texto); }
+:root[data-tema="claro"] .DestaqueContainer p { color: var(--texto-sub); }
+
+
+/* =========================================================
+   SOBRE (Sobre.html) - versão clara
+   Imagem: Front-End/img/Tema/BackGroundSobreClaro.png
+========================================================= */
+:root[data-tema="claro"] .PaginaSobre { background: var(--fundo-pagina); }
+
+:root[data-tema="claro"] .QuemSomos {
+    background-image: url("../../img/Tema/BackGroundSobreClaro.png");
+}
+:root[data-tema="claro"] .QuemSomos::before {
+    background: linear-gradient(
+        90deg,
+        rgba(250, 248, 242, 0.90) 0%,
+        rgba(250, 248, 242, 0.70) 35%,
+        rgba(250, 248, 242, 0.25) 60%,
+        rgba(250, 248, 242, 0) 90%
+    );
+}
+
+:root[data-tema="claro"] .Etiqueta { color: var(--ouro); }
+:root[data-tema="claro"] .Etiqueta::before,
+:root[data-tema="claro"] .Etiqueta::after { background: var(--ativo-borda); }
+
+:root[data-tema="claro"] .QuemSomosTexto h1,
+:root[data-tema="claro"] .NossosValores h2 { color: var(--texto); }
+:root[data-tema="claro"] .QuemSomosTexto h1 span { color: var(--ouro); }
+:root[data-tema="claro"] .QuemSomosTexto p { color: var(--texto-sub); }
+
+:root[data-tema="claro"] .EstatisticasCard {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: var(--ativo-borda);
+    box-shadow: 0 4px 14px var(--sombra);
+}
+:root[data-tema="claro"] .Estatistica strong { color: var(--texto); }
+:root[data-tema="claro"] .Estatistica span { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .NossosValores {
+    background: var(--superficie);
+    border-top-color: var(--borda);
+}
+:root[data-tema="claro"] .ValorCard {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+:root[data-tema="claro"] .ValorCard:hover {
+    background: var(--card);
+    border-color: var(--ouro);
+}
+:root[data-tema="claro"] .ValorIcone { background: var(--ativo-bg); }
+:root[data-tema="claro"] .ValorCard h3 { color: var(--texto); }
+:root[data-tema="claro"] .ValorCard p { color: var(--texto-suave); }
+
+
+/* =========================================================
+   PROFISSIONAIS (Profissionais.html) - versão clara
+   Imagem: Front-End/img/Tema/BackGroundPlantasEProfissionaisClaro.png
+========================================================= */
+:root[data-tema="claro"] .PaginaProfissionais {
+    background-image: url("../../img/Tema/BackGroundPlantasEProfissionaisClaro.png");
+}
+
+:root[data-tema="claro"] .HeroProfissionaisConteudo h1 { color: var(--texto); }
+:root[data-tema="claro"] .HeroProfissionaisConteudo h1::after { background: var(--ouro); }
+:root[data-tema="claro"] .HeroProfissionaisConteudo p { color: var(--texto-sub); }
+
+:root[data-tema="claro"] .FiltrosCard,
+:root[data-tema="claro"] .CardProfissional {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 6px 20px var(--sombra);
+}
+:root[data-tema="claro"] .CardProfissional:hover { border-color: var(--ouro); }
+
+:root[data-tema="claro"] .Campo label { color: var(--texto-menu); }
+:root[data-tema="claro"] .Campo label svg { color: var(--ouro); }
+:root[data-tema="claro"] .Campo select {
+    background-color: var(--seletor-bg);
+    color: var(--texto);
+    border-color: var(--borda);
+}
+:root[data-tema="claro"] .Campo select:hover,
+:root[data-tema="claro"] .Campo select:focus { border-color: var(--ouro); }
+
+:root[data-tema="claro"] .BtnPesquisar { background: var(--ouro); color: #ffffff; }
+:root[data-tema="claro"] .BtnPesquisar:hover { background: var(--ouro-vivo); }
+
+:root[data-tema="claro"] .ProfissionalImg img { background: var(--item); }
+:root[data-tema="claro"] .CardFavorito { background: rgba(255, 255, 255, 0.85); color: var(--texto-menu); }
+:root[data-tema="claro"] .CardFavorito:hover { background: #ffffff; color: var(--ouro); }
+
+:root[data-tema="claro"] .CardProfissionalConteudo h3 { color: var(--texto); }
+:root[data-tema="claro"] .CardProfissionalSpecs span { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .BtnDetalhes {
+    background: var(--botao);
+    border-color: var(--ouro);
+    color: var(--ouro);
+}
+:root[data-tema="claro"] .BtnDetalhes:hover { background: var(--ouro); color: #ffffff; }
+
+:root[data-tema="claro"] .PaginacaoBtn {
+    background: var(--card);
+    border-color: var(--borda);
+    color: var(--texto-menu);
+}
+:root[data-tema="claro"] .PaginacaoBtn:hover { border-color: var(--ouro); color: var(--ouro); }
+:root[data-tema="claro"] .PaginacaoBtn.ativo {
+    background: #d4a63a;
+    border-color: #d4a63a;
+    color: #111;
+}
+
+
+/* =========================================================
+   CADASTRO (Cadastro.html) - versão clara
+   Imagem: Front-End/img/Tema/BackGroundCadastroELoginClaro.png
+   (vale também para o Login, se usar as mesmas classes)
+========================================================= */
+:root[data-tema="claro"] .Container-Auth {
+    background-image:
+        linear-gradient(to right, rgba(250, 248, 242, 0.80), rgba(250, 248, 242, 0.15) 60%),
+        url("../../img/Tema/BackGroundCadastroELoginClaro.png");
+}
+
+:root[data-tema="claro"] .IntroCadastro h3 { color: var(--ouro); }
+:root[data-tema="claro"] .IntroCadastro h1 { color: var(--texto); }
+:root[data-tema="claro"] .IntroCadastro h1 span { color: var(--ouro); }
+:root[data-tema="claro"] .IntroCadastro p { color: var(--texto-sub); text-shadow: none; }
+
+:root[data-tema="claro"] .MiniCard { border-right-color: var(--ouro); }
+:root[data-tema="claro"] :is(.MiniCard, .MiniCardU) p { color: var(--texto-menu); }
+
+:root[data-tema="claro"] .bloco-auth {
+    background-color: var(--card);
+    border-color: var(--ouro);
+    box-shadow: 0 10px 30px var(--sombra);
+}
+:root[data-tema="claro"] .bloco-auth h2 { color: var(--texto); }
+:root[data-tema="claro"] .subtitulo { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .formCadastro .Campo label { color: var(--texto-menu); }
+:root[data-tema="claro"] .formCadastro .Campo input {
+    background: var(--superficie);
+    border-color: var(--borda);
+    color: var(--texto);
+}
+:root[data-tema="claro"] .formCadastro .Campo input::placeholder { color: var(--texto-suave); }
+:root[data-tema="claro"] .formCadastro .Campo input:focus { border-color: var(--ouro); }
+:root[data-tema="claro"] .Campo input[type="date"] { color-scheme: light; }
+
+:root[data-tema="claro"] .btn-cadastrar { background: var(--ouro); color: #ffffff; }
+:root[data-tema="claro"] .btn-cadastrar:hover { background: var(--ouro-vivo); }
+
+:root[data-tema="claro"] .divisor span { background: var(--borda); }
+:root[data-tema="claro"] .divisor p { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .Links p a { color: var(--texto-menu); }
+:root[data-tema="claro"] .Links p a span { color: var(--ouro); }
+:root[data-tema="claro"] .Links p a:hover { color: var(--ouro-vivo); }
+:root[data-tema="claro"] .Links a.profissional {
+    background: var(--botao);
+    border-color: var(--ouro);
+    color: var(--ouro);
+}
+:root[data-tema="claro"] .Links a.profissional:hover { background: var(--hover-bg); color: var(--ouro); }

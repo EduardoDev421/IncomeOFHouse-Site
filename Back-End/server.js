@@ -7,6 +7,9 @@ const path = require("path");
 const crypto = require("crypto");
 const mysql = require("mysql2/promise");
 
+// Mensagens entre usuário e profissional (arquivo separado)
+const mensagens = require("./server/mensagens");
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -18,6 +21,9 @@ const PASTA_UPLOADS = path.join(
     __dirname,
     process.env.UPLOAD_DIR || "uploads"
 );
+
+// Pasta do site (Front-End), ao lado da pasta Back-End
+const PASTA_SITE = path.join(__dirname, "..", "Front-End");
 
 const MAX_UPLOAD_MB = Number(process.env.MAX_UPLOAD_MB) || 5;
 
@@ -79,6 +85,18 @@ const CRIAR_TABELA_USUARIOS = `
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 `;
 
+const CRIAR_TABELA_COMENTARIOS = `
+    CREATE TABLE IF NOT EXISTS comentarios (
+        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        planta_id BIGINT UNSIGNED NOT NULL,
+        usuario_id BIGINT UNSIGNED NOT NULL,
+        texto VARCHAR(1000) NOT NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_comentarios_planta (planta_id, id),
+        INDEX idx_comentarios_usuario (usuario_id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+`;
+
 const SELECT_PLANTAS = `
     SELECT
         p.id,
@@ -97,6 +115,17 @@ const SELECT_PLANTAS = `
         p.criada_em AS criadaEm
     FROM plantas p
     WHERE p.ativa = TRUE
+`;
+
+const SELECT_COMENTARIOS = `
+    SELECT
+        c.id,
+        c.texto,
+        c.criado_em AS criadoEm,
+        c.usuario_id AS usuarioId,
+        u.nome AS autor
+    FROM comentarios c
+    JOIN usuarios u ON u.id = c.usuario_id
 `;
 
 fs.mkdirSync(PASTA_UPLOADS, { recursive: true });
@@ -144,9 +173,16 @@ app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use("/uploads", express.static(PASTA_UPLOADS));
 
+// API de mensagens (/api/mensagens/...)
+app.use(mensagens);
+
 const rota = (fn) => (req, res, next) => {
     fn(req, res, next).catch(next);
 };
+
+function idValido(id) {
+    return /^\d+$/.test(id) && Number(id) > 0;
+}
 
 function salvarImagem(dataUrl) {
     if (typeof dataUrl !== "string") {
@@ -254,6 +290,24 @@ function validarPlanta(c) {
     return null;
 }
 
+function exigirLogin(req, res, next) {
+    const cabecalho = req.headers.authorization || "";
+    const correspondencia = /^Bearer\s+(.+)$/i.exec(cabecalho);
+    const token = correspondencia?.[1];
+    const usuarioId = token ? sessoes.get(token) : null;
+
+    if (!usuarioId) {
+        return res.status(401).json({ erro: "Sua sessão expirou. Entre novamente." });
+    }
+
+    req.usuarioId = usuarioId;
+    next();
+}
+
+/* =========================================================
+   USUÁRIOS
+========================================================= */
+
 // Cadastrar usuário
 app.post("/api/usuarios", rota(async (req, res) => {
     const dados = req.body;
@@ -317,7 +371,6 @@ app.post("/api/usuarios", rota(async (req, res) => {
     }
 }));
 
-
 // Entrar na conta
 app.post("/api/login", rota(async (req, res) => {
     const email = typeof req.body?.email === "string"
@@ -355,20 +408,6 @@ app.post("/api/login", rota(async (req, res) => {
     });
 }));
 
-function exigirLogin(req, res, next) {
-    const cabecalho = req.headers.authorization || "";
-    const correspondencia = /^Bearer\s+(.+)$/i.exec(cabecalho);
-    const token = correspondencia?.[1];
-    const usuarioId = token ? sessoes.get(token) : null;
-
-    if (!usuarioId) {
-        return res.status(401).json({ erro: "Sua sessão expirou. Entre novamente." });
-    }
-
-    req.usuarioId = usuarioId;
-    next();
-}
-
 // Consultar os dados do próprio usuário autenticado
 app.get("/api/usuarios/me", exigirLogin, rota(async (req, res) => {
     const [linhas] = await pool.execute(
@@ -384,10 +423,16 @@ app.get("/api/usuarios/me", exigirLogin, rota(async (req, res) => {
     return res.json({ usuario: linhas[0] });
 }));
 
-// Atualizar nome e e-mail do próprio usuário autenticado
+// Atualizar os dados do próprio usuário autenticado
 app.put("/api/usuarios/me", exigirLogin, rota(async (req, res) => {
-    const nome = typeof req.body?.nome === "string" ? req.body.nome.trim() : "";
-    const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
+    const corpo = req.body || {};
+    const nome = typeof corpo.nome === "string" ? corpo.nome.trim() : "";
+    const email = typeof corpo.email === "string" ? corpo.email.trim().toLowerCase() : "";
+    const cpf = typeof corpo.cpf === "string" ? corpo.cpf.replace(/\D/g, "") : "";
+    const telefone = typeof corpo.telefone === "string" ? corpo.telefone.replace(/\D/g, "") : "";
+    const dataNascimento = typeof corpo.dataNascimento === "string" && corpo.dataNascimento.trim()
+        ? corpo.dataNascimento.trim()
+        : null;
 
     if (nome.length < 3 || nome.length > 150) {
         return res.status(400).json({ erro: "O nome deve ter entre 3 e 150 caracteres." });
@@ -395,11 +440,22 @@ app.put("/api/usuarios/me", exigirLogin, rota(async (req, res) => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) {
         return res.status(400).json({ erro: "Informe um e-mail válido." });
     }
+    if (cpf && cpf.length !== 11) {
+        return res.status(400).json({ erro: "O CPF deve conter 11 números." });
+    }
+    if (telefone && ![10, 11].includes(telefone.length)) {
+        return res.status(400).json({ erro: "Informe um telefone válido." });
+    }
+    if (dataNascimento && !/^\d{4}-\d{2}-\d{2}$/.test(dataNascimento)) {
+        return res.status(400).json({ erro: "A data de nascimento deve estar no formato AAAA-MM-DD." });
+    }
 
     try {
         const [resultado] = await pool.execute(
-            "UPDATE usuarios SET nome = ?, email = ? WHERE id = ? AND ativo = TRUE",
-            [nome, email, req.usuarioId]
+            `UPDATE usuarios
+                SET nome = ?, email = ?, cpf = ?, telefone = ?, data_nascimento = ?
+              WHERE id = ? AND ativo = TRUE`,
+            [nome, email, cpf || null, telefone || null, dataNascimento, req.usuarioId]
         );
         if (!resultado.affectedRows) {
             return res.status(404).json({ erro: "Usuário não encontrado." });
@@ -409,10 +465,10 @@ app.put("/api/usuarios/me", exigirLogin, rota(async (req, res) => {
              FROM usuarios WHERE id = ? LIMIT 1`,
             [req.usuarioId]
         );
-        return res.json({ mensagem: "Perfil atualizado no banco de dados.", usuario: linhas[0] });
+        return res.json({ mensagem: "Perfil atualizado.", usuario: linhas[0] });
     } catch (erroBanco) {
         if (erroBanco.code === "ER_DUP_ENTRY") {
-            return res.status(409).json({ erro: "Esse e-mail já está cadastrado em outra conta." });
+            return res.status(409).json({ erro: "Esse e-mail ou CPF já está cadastrado em outra conta." });
         }
         throw erroBanco;
     }
@@ -423,6 +479,10 @@ app.post("/api/logout", exigirLogin, (req, res) => {
     sessoes.delete(token);
     return res.json({ mensagem: "Sessão encerrada." });
 });
+
+/* =========================================================
+   PLANTAS
+========================================================= */
 
 // Listar plantas
 app.get("/plantas", rota(async (req, res) => {
@@ -437,10 +497,8 @@ app.get("/plantas", rota(async (req, res) => {
 app.get("/plantas/:id", rota(async (req, res) => {
     const id = req.params.id;
 
-    if (!/^\d+$/.test(id) || Number(id) <= 0) {
-        return res.status(400).json({
-            erro: "Id inválido."
-        });
+    if (!idValido(id)) {
+        return res.status(400).json({ erro: "Id inválido." });
     }
 
     const [linhas] = await pool.query(
@@ -449,9 +507,7 @@ app.get("/plantas/:id", rota(async (req, res) => {
     );
 
     if (linhas.length === 0) {
-        return res.status(404).json({
-            erro: "Planta não encontrada."
-        });
+        return res.status(404).json({ erro: "Planta não encontrada." });
     }
 
     res.json(paraSite(linhas[0]));
@@ -530,75 +586,9 @@ app.post("/plantas", rota(async (req, res) => {
     }
 }));
 
-// Tratamento de erros
-app.use((erro, req, res, next) => {
-    console.error("Erro na API:", erro);
-
-    if (erro.type === "entity.too.large") {
-        return res.status(413).json({
-            erro: "A imagem é grande demais para o servidor."
-        });
-    }
-
-    res.status(500).json({
-        erro: "Não foi possível processar a requisição.",
-        detalhe: erro.message
-    });
-});
-
-// Iniciar servidor e criar as tabelas
-async function iniciarServidor() {
-    await pool.query("SELECT 1");
-    await pool.query(CRIAR_TABELA_PLANTAS);
-    await pool.query(CRIAR_TABELA_USUARIOS);
-
-    console.log(`Conectado ao MySQL: ${process.env.DB_NAME}`);
-
-    app.listen(PORT, () => {
-        console.log(`Servidor rodando em http://localhost:${PORT}`);
-    });
-}
 /* =========================================================
-   COMENTÁRIOS NO server.js  (3 pedaços para colar)
+   COMENTÁRIOS
 ========================================================= */
-
-
-/* ---------- 1) Junto das outras constantes de tabela ---------- */
-
-const CRIAR_TABELA_COMENTARIOS = `
-    CREATE TABLE IF NOT EXISTS comentarios (
-        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        planta_id BIGINT UNSIGNED NOT NULL,
-        usuario_id BIGINT UNSIGNED NOT NULL,
-        texto VARCHAR(1000) NOT NULL,
-        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        INDEX idx_comentarios_planta (planta_id, id),
-        INDEX idx_comentarios_usuario (usuario_id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-`;
-
-const SELECT_COMENTARIOS = `
-    SELECT
-        c.id,
-        c.texto,
-        c.criado_em AS criadoEm,
-        c.usuario_id AS usuarioId,
-        u.nome AS autor
-    FROM comentarios c
-    JOIN usuarios u ON u.id = c.usuario_id
-`;
-
-
-/* ---------- 2) Dentro de iniciarServidor(), depois do CREATE de usuarios ---------- */
-
-//    await pool.query(CRIAR_TABELA_COMENTARIOS);
-
-
-/* ---------- 3) Rotas: colar ANTES do "// Tratamento de erros" ---------- */
-
-function idValido(id) {
-    return /^\d+$/.test(id) && Number(id) > 0;
-}
 
 // Listar comentários de uma planta (público)
 // ?limite=20&offset=0&ordem=recentes|antigos
@@ -691,6 +681,51 @@ app.delete("/comentarios/:id", exigirLogin, rota(async (req, res) => {
 
     res.json({ mensagem: "Comentário apagado." });
 }));
+
+/* =========================================================
+   SITE (Front-End)
+   Fica depois das rotas da API para nunca atrapalhar elas.
+   Abrir: http://localhost:3000/pages/Mensagem.html
+========================================================= */
+
+app.use(express.static(PASTA_SITE));
+
+/* =========================================================
+   TRATAMENTO DE ERROS (sempre depois de todas as rotas)
+========================================================= */
+
+app.use((erro, req, res, next) => {
+    console.error("Erro na API:", erro);
+
+    if (erro.type === "entity.too.large") {
+        return res.status(413).json({
+            erro: "A imagem é grande demais para o servidor."
+        });
+    }
+
+    res.status(500).json({
+        erro: "Não foi possível processar a requisição.",
+        detalhe: erro.message
+    });
+});
+
+/* =========================================================
+   INICIAR SERVIDOR E CRIAR AS TABELAS
+========================================================= */
+
+async function iniciarServidor() {
+    await pool.query("SELECT 1");
+    await pool.query(CRIAR_TABELA_PLANTAS);
+    await pool.query(CRIAR_TABELA_USUARIOS);
+    await pool.query(CRIAR_TABELA_COMENTARIOS);
+
+    console.log(`Conectado ao MySQL: ${process.env.DB_NAME}`);
+
+    app.listen(PORT, () => {
+        console.log(`Servidor rodando em http://localhost:${PORT}`);
+        console.log(`Mensagens: http://localhost:${PORT}/pages/Mensagem.html`);
+    });
+}
 
 iniciarServidor().catch(async (erro) => {
     console.error("Erro ao iniciar o servidor:", erro.message);

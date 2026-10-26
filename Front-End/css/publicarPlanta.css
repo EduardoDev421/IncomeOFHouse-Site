@@ -14,9 +14,9 @@
     --borda-campo-hover: #777777;
     --borda-dourada: rgba(212, 166, 58, 0.55);
     --borda-dourada-suave: rgba(212, 166, 58, 0.35);
-    --altura-topo: 75px;
+    --altura-topo: 64px;
+    --largura-lateral: 250px;
     --raio-campo: 8px;
-    --raio-card: 16px;
     --gradiente-dourado: linear-gradient(135deg, #f0c45a, #c99427);
     --fonte: Arial, Helvetica, sans-serif;
 }
@@ -51,24 +51,22 @@ input[type="number"] {
     appearance: textfield;
 }
 
+/* ================================================= */
+/* CABEÇALHO (fixo) */
+
 .topo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 20;
     height: var(--altura-topo);
     display: flex;
     align-items: center;
-    padding: 0 6%;
-    z-index: 10;
-    background: rgba(10, 10, 10, 0.25);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    justify-content: space-between;
+    padding: 0 3%;
+    background: rgba(8, 8, 8, 0.95);
+    border-bottom: 1px solid rgba(212, 166, 58, 0.25);
     backdrop-filter: blur(8px);
-}
-
-.logo {
-    width: 100%;
-    background: transparent;
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .logo a {
@@ -78,9 +76,8 @@ input[type="number"] {
 }
 
 .logo img {
-    max-width: 70px;
+    width: 58px;
     height: auto;
-    margin-left: 30px;
 }
 
 .menu {
@@ -97,7 +94,7 @@ input[type="number"] {
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
-    padding: 12px 20px;
+    padding: 10px 18px;
     border-radius: 7px;
     transition: 0.3s ease;
 }
@@ -113,81 +110,121 @@ input[type="number"] {
     background: rgba(212, 175, 106, 0.08);
 }
 
-.iconelogin {
-    margin-left: auto;
-}
-
-.iconelogin a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--cor-texto);
-    text-decoration: none;
-    font-size: 14px;
-    transition: 0.3s ease;
-}
-
-.iconelogin a:hover {
-    color: var(--cor-dourado-claro);
-}
-
-.iconelogin img {
-    max-width: 50px;
-    height: 50px;
-    margin-left: 0;
-    object-fit: contain;
-}
+/* ================================================= */
+/* Fundo / estrutura */
 
 .BackGround {
     width: 100%;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    background-image: url("../img/BackGroundPlantasEProfissionais.png");
+    padding-top: var(--altura-topo);
+    background:
+        linear-gradient(rgba(5, 7, 8, 0.80), rgba(5, 7, 8, 0.92)),
+        url("../img/BackgroundFundo.png");
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
 }
 
-.PublicarPlanta {
-    width: min(950px, 100%);
-    margin: 100px 20px 60px;
-    padding: 35px;
-    background: linear-gradient(
-        145deg,
-        rgba(25, 25, 25, 0.96),
-        rgba(10, 10, 10, 0.96)
-    );
-    border: 1px solid var(--borda-dourada);
-    border-radius: var(--raio-card);
-    position: relative;
-    overflow: hidden;
+.container {
+    width: 100%;
+    display: block;
+}
+
+/* ================================================= */
+/* MENU LATERAL (fixo, altura total) */
+
+.menu-lateral {
+    position: fixed;
+    top: var(--altura-topo);
+    left: 0;
+    z-index: 15;
+    width: var(--largura-lateral);
+    height: calc(100vh - var(--altura-topo));
+    padding: 16px 12px;
+    overflow-y: auto;
+    background: #0d0d0e;
+    border-right: 1px solid #252729;
+}
+
+.menu-lateral ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    list-style: none;
+}
+
+.menu-lateral li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 38px;
+    padding: 8px 12px;
+    color: #eee;
+    background: #1a1a1c;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: 0.25s ease;
+}
+
+.menu-lateral li a img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.menu-lateral li.ativo a {
+    color: var(--cor-dourado);
+    background: #29231a;
+    border-color: #59431f;
+}
+
+.menu-lateral li:hover a {
+    color: var(--cor-dourado);
+    background: #302718;
+    border-color: #59431f;
+}
+
+.menu-lateral li:last-child {
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 1px solid #292929;
+}
+
+/* ================================================= */
+/* CONTEÚDO (ocupa o resto da tela) */
+
+.conteudo {
+    margin-left: var(--largura-lateral);
+    width: calc(100% - var(--largura-lateral));
+    min-height: calc(100vh - var(--altura-topo) - 55px);
+    padding: 26px 32px 32px;
+    background: rgba(17, 17, 17, 0.88);
 }
 
 .PublicarPlanta h1 {
-    font-size: 30px;
-    font-weight: 700;
     color: var(--cor-texto);
-    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 6px;
 }
 
 .PublicarPlanta > p {
     color: var(--cor-texto-suave);
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.6;
-    margin-bottom: 20px;
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--cor-dourado);
 }
 
-.PublicarPlanta > p::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 1px;
-    margin-top: 10px;
-    background: rgba(212, 166, 58, 0.45);
-}
+/* ================================================= */
+/* Formulário */
 
 .formPublicarPlanta {
+    max-width: 960px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 25px;
@@ -323,6 +360,9 @@ input[type="number"] {
     color: #111111;
 }
 
+/* ================================================= */
+/* Destaques */
+
 .destaques-box {
     grid-column: 1 / -1;
     order: 4;
@@ -413,6 +453,9 @@ input[type="number"] {
     color: #111111;
 }
 
+/* ================================================= */
+/* Botão publicar */
+
 .formPublicarPlanta button[type="submit"] {
     grid-column: 1 / -1;
     order: 6;
@@ -450,54 +493,37 @@ input[type="number"] {
     filter: none;
 }
 
+/* ================================================= */
+/* Rodapé */
+
 .rodape {
-    width: 100%;
+    margin-left: var(--largura-lateral);
+    min-height: 55px;
+    padding: 15px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    padding: 22px 6%;
-    background: #080808;
-    border-top: 1px solid var(--cor-dourado);
-    color: #888888;
-    font-size: 13px;
+    background: #080a0b;
+    border-top: 1px solid rgba(213, 173, 50, 0.65);
+    color: #7e8385;
+    font-size: 12px;
 }
 
 .RodapeLinks {
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: #555555;
+    gap: 9px;
 }
 
-.rodape a {
-    color: var(--cor-dourado-claro);
+.RodapeLinks a {
+    color: #7e8385;
     text-decoration: none;
-    transition: 0.3s ease;
+    transition: 0.2s ease;
 }
 
-.rodape a:hover {
-    color: var(--cor-dourado-hover);
-}
-
-@media (max-width: 700px) {
-    .menu {
-        display: none;
-    }
-
-    .PublicarPlanta {
-        margin: 95px 12px 40px;
-        padding: 22px;
-    }
-
-    .formPublicarPlanta {
-        grid-template-columns: 1fr;
-    }
-
-    .rodape {
-        flex-direction: column;
-        text-align: center;
-    }
+.RodapeLinks a:hover {
+    color: #f0ca4c;
 }
 
 /* ================================================= */
@@ -514,9 +540,79 @@ input[type="number"] {
 .campo textarea:focus-visible,
 .chip button:focus-visible,
 .destaques-adicionar button:focus-visible,
-.formPublicarPlanta button[type="submit"]:focus-visible {
+.formPublicarPlanta button[type="submit"]:focus-visible,
+.menu-lateral li a:focus-visible {
     outline: 2px solid var(--cor-dourado);
     outline-offset: 2px;
+}
+
+/* ================================================= */
+/* Responsividade */
+
+@media (max-width: 1100px) {
+    :root {
+        --largura-lateral: 220px;
+    }
+}
+
+@media (max-width: 850px) {
+    :root {
+        --largura-lateral: 0px;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .menu-lateral {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid #252729;
+    }
+
+    .menu-lateral ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .menu-lateral li a {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .menu-lateral li:last-child {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+    }
+
+    .conteudo {
+        padding: 20px 16px;
+    }
+
+    .rodape {
+        padding: 15px 16px;
+    }
+}
+
+@media (max-width: 700px) {
+    .formPublicarPlanta {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .menu-lateral ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rodape {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,10 +1,15 @@
 /* =========================================================
    CONTA - identifica se quem está logado é "usuario" ou "profissional"
    e monta o menu lateral certo. Use em TODA página compartilhada
-   (Mensagem, Meus Endereços, Configurações...).
+   (Mensagem, Meus Endereços, Configurações, Tutoriais...).
 
    No login, grave o tipo da conta:   Conta.definir("profissional");
    No "Sair":                          Conta.limpar();  (o menu já faz isso)
+
+   USO NO MENU:
+       Conta.renderMenu("config");      // página direto em /pages
+       Conta.renderMenu("config", 1);   // página em /pages/PagesImplement
+   O 2º parâmetro (nivel) é quantas pastas a página está abaixo de /pages.
 
    Páginas EXCLUSIVAS de um tipo (perfilUsuario, MeusPedidos, PerfilProfissional,
    Projetos...) se declaram sozinhas com um atributo no body + este script:
@@ -82,19 +87,22 @@ const Conta = (() => {
         if (tipo() !== esperado) location.replace(destino);
     }
 
-    function renderMenu(ativoId) {
+    // nivel = quantas pastas a página está abaixo de /pages (0 = /pages, 1 = /pages/PagesImplement)
+    function renderMenu(ativoId, nivel = 0) {
         const ul = document.querySelector(".menu-lateral ul");
         if (!ul) return;
 
+        const base = "../".repeat(nivel);
+
         ul.innerHTML = MENUS[tipo()].map((i) => `
             <li${i.id === ativoId ? ' class="ativo"' : ""}>
-                <a href="${i.href}"${i.id === ativoId ? ' aria-current="page"' : ""}>
-                    <img src="../img/icones/${i.icone}" alt=""><span>${i.texto}</span>
+                <a href="${base}${i.href}" data-id="${i.id}"${i.id === ativoId ? ' aria-current="page"' : ""}>
+                    <img src="${base}../img/icones/${i.icone}" alt=""><span>${i.texto}</span>
                 </a>
             </li>`).join("");
 
         // "Sair" encerra a sessão local
-        const sair = ul.querySelector('a[href="../index.html"]');
+        const sair = ul.querySelector('a[data-id="sair"]');
         if (sair) sair.addEventListener("click", limpar);
     }
 

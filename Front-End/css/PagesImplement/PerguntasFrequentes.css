@@ -486,6 +486,30 @@ body {
     transition: background 0.2s ease;
 }
 
+.pergunta p {
+    display: none;
+}
+
+.pergunta.aberta p {
+    display: block;
+}
+
+.pergunta.aberta .seta {
+    transform: rotate(90deg);
+    color: #f0ca4c;
+}
+
+.pergunta.aberta:hover .seta {
+    transform: rotate(90deg);
+}
+
+.sem-resultados {
+    padding: 28px 16px;
+    text-align: center;
+    color: #8f9497;
+    font-size: 13px;
+}
+
 .pergunta:last-child {
     border-bottom: none;
 }

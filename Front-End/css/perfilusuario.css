@@ -546,6 +546,153 @@ body {
 }
 
 /* ================================================= */
+/* JANELA "EDITAR PERFIL" (criada pelo perfilUsuario.js) */
+
+.edicao-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.82);
+}
+
+.edicao-modal[hidden] {
+    display: none;
+}
+
+.edicao-caixa {
+    width: 100%;
+    max-width: 480px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #141414;
+    border: 1px solid #59431f;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.edicao-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #292929;
+}
+
+.edicao-topo h3 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.edicao-fechar {
+    width: 28px;
+    height: 28px;
+    color: #f0ca4c;
+    background: transparent;
+    border: 1px solid #8a701e;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.edicao-fechar:hover {
+    background: #d4a63a;
+    color: #111;
+}
+
+.edicao-corpo {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+    overflow-y: auto;
+}
+
+.edicao-corpo label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #999;
+    font-size: 12px;
+}
+
+.edicao-corpo input {
+    height: 38px;
+    padding: 0 12px;
+    color: #fff;
+    background: #0d0d0e;
+    border: 1px solid #292929;
+    border-radius: 6px;
+    outline: 0;
+    font-size: 14px;
+    font-family: inherit;
+    color-scheme: dark;
+    transition: border-color 0.2s ease;
+}
+
+.edicao-corpo input:focus {
+    border-color: #d4a63a;
+}
+
+.edicao-corpo input::placeholder {
+    color: #555;
+}
+
+.edicao-erro {
+    min-height: 16px;
+    color: #ff8a80;
+    font-size: 12px;
+}
+
+.edicao-rodape {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 18px;
+    border-top: 1px solid #292929;
+}
+
+.edicao-rodape button {
+    padding: 9px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+.edicao-cancelar {
+    color: #ccc;
+    background: transparent;
+    border: 1px solid #3a3a3a;
+}
+
+.edicao-cancelar:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.edicao-salvar {
+    color: #d4a63a;
+    background: #292929;
+    border: 1px solid #d4a63a;
+}
+
+.edicao-salvar:hover {
+    background: #302718;
+}
+
+.edicao-salvar:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* ================================================= */
 /* Rodapé */
 
 .rodape {

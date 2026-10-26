@@ -1,6 +1,10 @@
 /* =========================================================
    CONFIGURAÇÕES DO USUÁRIO - TELA CHEIA
    Mesmo layout da página de Configurações do Profissional
+
+   As CORES vêm de css/Tema.css (variáveis var(--...)),
+   por isso esta página funciona nos temas escuro e claro.
+   Carregue o Tema.css ANTES deste arquivo.
 ========================================================= */
 
 * {
@@ -17,8 +21,8 @@ body {
     width: 100%;
     min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    background: #080a0b;
-    color: #eee;
+    background: var(--fundo-pagina);
+    color: var(--texto-menu);
 }
 
 /* ================================================= */
@@ -36,8 +40,8 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 3%;
-    background: rgba(8, 8, 8, 0.95);
-    border-bottom: 1px solid rgba(212, 166, 58, 0.25);
+    background: var(--topo);
+    border-bottom: 1px solid var(--topo-borda);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
@@ -62,7 +66,7 @@ body {
 }
 
 .menu a {
-    color: #eee;
+    color: var(--texto-menu);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
@@ -70,7 +74,7 @@ body {
 }
 
 .menu a:hover {
-    color: #d4a63a;
+    color: var(--ouro);
 }
 
 .iconelogin img {
@@ -87,7 +91,7 @@ body {
     min-height: 100vh;
     padding-top: 64px;
     background:
-        linear-gradient(rgba(5, 7, 8, 0.80), rgba(5, 7, 8, 0.92)),
+        linear-gradient(var(--veu-topo), var(--veu-base)),
         url("../img/BackgroundFundo.png");
     background-size: cover;
     background-position: center;
@@ -113,8 +117,8 @@ body {
     height: calc(100vh - 64px);
     padding: 16px 12px;
     overflow-y: auto;
-    background: #0d0d0e;
-    border-right: 1px solid #252729;
+    background: var(--lateral);
+    border-right: 1px solid var(--borda-lateral);
 }
 
 .menu-lateral ul {
@@ -130,8 +134,8 @@ body {
     gap: 10px;
     min-height: 38px;
     padding: 8px 12px;
-    color: #eee;
-    background: #1a1a1c;
+    color: var(--texto-menu);
+    background: var(--item);
     border: 1px solid transparent;
     border-radius: 6px;
     text-decoration: none;
@@ -147,21 +151,21 @@ body {
 }
 
 .menu-lateral li.ativo a {
-    color: #d4a63a;
-    background: #29231a;
-    border-color: #59431f;
+    color: var(--ouro);
+    background: var(--ativo-bg);
+    border-color: var(--ativo-borda);
 }
 
 .menu-lateral li:hover a {
-    color: #d4a63a;
-    background: #302718;
-    border-color: #59431f;
+    color: var(--ouro);
+    background: var(--hover-bg);
+    border-color: var(--ativo-borda);
 }
 
 .menu-lateral li:last-child {
     margin-top: 6px;
     padding-top: 8px;
-    border-top: 1px solid #292929;
+    border-top: 1px solid var(--borda);
 }
 
 /* ================================================= */
@@ -172,22 +176,22 @@ body {
     width: calc(100% - 250px);
     min-height: calc(100vh - 64px - 55px);
     padding: 26px 32px 32px;
-    background: rgba(17, 17, 17, 0.88);
+    background: var(--conteudo);
 }
 
 .conteudo > h1 {
-    color: #fff;
+    color: var(--texto);
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 6px;
 }
 
 .conteudo > h4 {
-    color: #a8abad;
+    color: var(--texto-sub);
     font-size: 13px;
     font-weight: 400;
     padding-bottom: 14px;
-    border-bottom: 1px solid #d4a63a;
+    border-bottom: 1px solid var(--ouro);
 }
 
 /* ================================================= */
@@ -209,11 +213,11 @@ body {
 .Personalização,
 .privacidade,
 .CentralAjuda {
-    background: #141414;
-    border: 1px solid #292929;
+    background: var(--card);
+    border: 1px solid var(--borda);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 15px var(--sombra);
 }
 
 .CentralAjuda {
@@ -233,7 +237,7 @@ body {
     align-items: center;
     gap: 10px;
     padding: 10px 16px;
-    border-bottom: 1px solid #292929;
+    border-bottom: 1px solid var(--borda);
 }
 
 .Titulosegurança img,
@@ -251,7 +255,7 @@ body {
 .TituloPersonalização h2,
 .TituloPrivacidade h2,
 .TituloCentralAjuda h2 {
-    color: #ffffff;
+    color: var(--texto);
     font-size: 14px;
     font-weight: 600;
 }
@@ -270,7 +274,7 @@ body {
     align-items: center;
     gap: 8px;
     padding: 10px 16px;
-    border-bottom: 1px solid #242424;
+    border-bottom: 1px solid var(--borda-item);
     transition: background 0.2s ease;
 }
 
@@ -289,7 +293,7 @@ body {
 .privacidades:hover,
 .CentralAjudas:hover,
 .CentralAjudaU:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--hover-suave);
 }
 
 /* Ícones dos itens */
@@ -353,7 +357,7 @@ body {
 .PersonalizaçõesText h3,
 .privacidadesText h3,
 .CentralAjudasText h3 {
-    color: #e7e7e7;
+    color: var(--texto-titulo);
     font-size: 13px;
     font-weight: 600;
     margin-bottom: 4px;
@@ -364,7 +368,7 @@ body {
 .PersonalizaçõesText p,
 .privacidadesText p,
 .CentralAjudasText p {
-    color: #8f9497;
+    color: var(--texto-suave);
     font-size: 11px;
     line-height: 1.4;
 }
@@ -374,7 +378,7 @@ body {
 
 .seta {
     flex-shrink: 0;
-    color: #92979a;
+    color: var(--seta);
     font-size: 18px;
     margin-left: 6px;
     transition: 0.2s ease;
@@ -384,7 +388,7 @@ body {
 .privacidades:hover .seta,
 .CentralAjudas:hover .seta,
 .CentralAjudaU:hover .seta {
-    color: #f0ca4c;
+    color: var(--ouro-vivo);
     transform: translateX(3px);
 }
 
@@ -394,9 +398,9 @@ body {
 .seletor {
     height: 32px;
     padding: 0 10px;
-    background: #1a1a1c;
-    color: #eeeeee;
-    border: 1px solid #292929;
+    background: var(--seletor-bg);
+    color: var(--texto-menu);
+    border: 1px solid var(--borda);
     border-radius: 6px;
     outline: none;
     font-family: Arial, Helvetica, sans-serif;
@@ -405,11 +409,12 @@ body {
 }
 
 .seletor:focus {
-    border-color: #d4a63a;
+    border-color: var(--ouro);
 }
 
 .seletor option {
-    background: #111111;
+    background: var(--seletor-opcao);
+    color: var(--texto-menu);
 }
 
 /* ================================================= */
@@ -436,7 +441,7 @@ body {
     bottom: 0;
     left: 0;
     cursor: pointer;
-    background: #34383a;
+    background: var(--slider-off);
     border-radius: 30px;
     transition: 0.25s ease;
 }
@@ -448,8 +453,9 @@ body {
     height: 15px;
     left: 3px;
     top: 3px;
-    background: #eeeeee;
+    background: var(--slider-bola);
     border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
     transition: 0.25s ease;
 }
 
@@ -476,7 +482,7 @@ body {
 }
 
 .CentralAjudas {
-    border-right: 1px solid #292929;
+    border-right: 1px solid var(--borda);
 }
 
 .CentralAjudaU {
@@ -494,9 +500,9 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    background: #080a0b;
-    border-top: 1px solid rgba(213, 173, 50, 0.65);
-    color: #7e8385;
+    background: var(--rodape);
+    border-top: 1px solid var(--rodape-borda);
+    color: var(--texto-rodape);
     font-size: 12px;
 }
 
@@ -507,13 +513,13 @@ body {
 }
 
 .RodapeLinks a {
-    color: #7e8385;
+    color: var(--texto-rodape);
     text-decoration: none;
     transition: 0.2s ease;
 }
 
 .RodapeLinks a:hover {
-    color: #f0ca4c;
+    color: var(--ouro-vivo);
 }
 
 /* ================================================= */
@@ -551,7 +557,7 @@ body {
         width: 100%;
         height: auto;
         border-right: 0;
-        border-bottom: 1px solid #252729;
+        border-bottom: 1px solid var(--borda-lateral);
     }
 
     .menu-lateral ul {
@@ -593,7 +599,7 @@ body {
 
     .CentralAjudas {
         border-right: none;
-        border-bottom: 1px solid #292929;
+        border-bottom: 1px solid var(--borda);
     }
 
     .rodape {

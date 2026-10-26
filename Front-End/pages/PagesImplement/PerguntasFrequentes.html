@@ -26,17 +26,7 @@
         <section class="container">
             <!-- Menu lateral -->
             <aside class="menu-lateral">
-                <ul>
-                    <li><a href="../PerfilProfissional.html"><img src="../../img/icones/IconePerfil.svg" alt=""><span>Meu Perfil</span></a></li>
-                    <li><a href="../MeusEndereços.html"><img src="../../img/icones/IconeEndereco.svg" alt=""><span>Meus Endereços</span></a></li>
-                    <li><a href="../MeusPedidos.html"><img src="../../img/icones/IconeProjetos.svg" alt=""><span>Meus Pedidos</span></a></li>
-                    <li><a href="../MeusProfissionais.html"><img src="../../img/icones/IconeEstrela.svg" alt=""><span>Meus Profissionais Favoritos</span></a></li>
-                    <li><a href="../ProjetosSalvos.html"><img src="../../img/icones/IconeSalvos.svg" alt=""><span>Projetos Salvos</span></a></li>
-                    <li><a href="../Agendamentos.html"><img src="../../img/icones/IconeData.svg" alt=""><span>Agendamentos</span></a></li>
-                    <li><a href="../Mensagem.html"><img src="../../img/icones/IconeMensagem.svg" alt=""><span>Mensagem</span></a></li>
-                    <li class="ativo"><a href="../ConfiguraçõesProfissionais.html"><img src="../../img/icones/IconeConfiguracao.svg" alt=""><span>Configurações</span></a></li>
-                    <li><a href="../../index.html"><img src="../../img/icones/IconeSair.svg" alt=""><span>Sair</span></a></li>
-                </ul>
+                <ul></ul>
             </aside>
 
             <!-- Conteúdo -->
@@ -48,108 +38,46 @@
                 <div class="busca">
                     <span>⌕</span>
                     <input type="text" placeholder="Busque por uma pergunta ou palavra-chave...">
-                    <button>Limpar busca</button>
+                    <button type="button">Limpar busca</button>
                 </div>
 
                 <div class="faq">
-                    <!-- Categorias -->
+                    <!-- Categorias (data-categoria liga cada uma ao JS) -->
                     <div class="categorias">
-                        <a class="categoria ativa" href="#">
+                        <a class="categoria ativa" href="#" data-categoria="conta">
                             <img src="../../img/icones/IconeLogin.svg" alt="">
                             <div><strong>Conta e Acesso</strong><small>Informações sobre login, cadastro e conta.</small></div>
                             <b class="seta">></b>
                         </a>
-                        <a class="categoria" href="#">
+                        <a class="categoria" href="#" data-categoria="pagamentos">
                             <img src="../../img/icones/IconeCobrança.svg" alt="">
                             <div><strong>Pagamentos</strong><small>Dúvidas sobre valores, formas de pagamento e notas fiscais.</small></div>
                             <b class="seta">></b>
                         </a>
-                        <a class="categoria" href="#">
+                        <a class="categoria" href="#" data-categoria="projetos">
                             <img src="../../img/icones/IconeProjetos.svg" alt="">
                             <div><strong>Projetos e Plantas</strong><small>Informações sobre aquisição, formatos e uso das plantas.</small></div>
                             <b class="seta">></b>
                         </a>
-                        <a class="categoria" href="#">
+                        <a class="categoria" href="#" data-categoria="profissionais">
                             <img src="../../img/icones/IconeEstrela.svg" alt="">
                             <div><strong>Profissionais</strong><small>Dúvidas sobre contratação e contato com profissionais.</small></div>
                             <b class="seta">></b>
                         </a>
-                        <a class="categoria" href="#">
+                        <a class="categoria" href="#" data-categoria="agendamentos">
                             <img src="../../img/icones/IconeData.svg" alt="">
                             <div><strong>Agendamentos</strong><small>Informações sobre como agendar e gerenciar seus projetos.</small></div>
                             <b class="seta">></b>
                         </a>
-                        <a class="categoria" href="#">
+                        <a class="categoria" href="#" data-categoria="suporte">
                             <img src="../../img/icones/IconeFaleConosco.svg" alt="">
                             <div><strong>Suporte Técnico</strong><small>Ajuda com problemas técnicos e funcionalidades da plataforma.</small></div>
                             <b class="seta">></b>
                         </a>
                     </div>
 
-                    <!-- Perguntas -->
-                    <div class="perguntas">
-                        <div class="perguntas-titulo">
-                            <img src="../../img/icones/IconeLogin.svg" alt="">
-                            <div>
-                                <h2>Conta e Acesso</h2>
-                                <p>Respostas sobre login, cadastro, senha e acesso à plataforma.</p>
-                            </div>
-                        </div>
-
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Como faço para me cadastrar na plataforma?</strong>
-                                <p>Clique em "Cadastre-se" na página inicial e preencha seus dados. Após a confirmação do e-mail, sua conta estará ativa.</p>
-                            </div>
-                            <span class="seta">></span>
-                        </article>
-
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Esqueci minha senha. Como recupero?</strong>
-                                <p>Na página de login, clique em "Esqueceu sua senha?" e siga as instruções enviadas por e-mail.</p>
-                            </div>
-                            <span class="seta">></span>
-                        </article>
-
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Posso ter mais de um dispositivo conectado?</strong>
-                                <p>Sim, você pode acessar sua conta em múltiplos dispositivos, mas por segurança recomendamos sair dos dispositivos que não estiver usando.</p>
-                            </div>
-                            <span class="seta">></span>
-                        </article>
-
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Como alterar meus dados de perfil?</strong>
-                                <p>Acesse a seção "Meu Perfil" no menu lateral e clique em "Editar" para atualizar suas informações.</p>
-                            </div>
-                            <span class="seta">></span>
-                        </article>
-
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Existe um limite de dispositivos conectados?</strong>
-                                <p>Não há um limite específico, mas recomendamos manter apenas os dispositivos que você utiliza regularmente.</p>
-                            </div>
-                            <span class="seta">></span>
-                        </article>
-
-                        <article class="pergunta">
-                            <img class="icone" src="../../img/icones/IconePerguntasRespostas.svg" alt="">
-                            <div>
-                                <strong>Minha conta foi bloqueada. O que fazer?</strong>
-                                <p>Entre em contato com nosso suporte através da página "Fale Conosco" para verificarmos o motivo do bloqueio e orientarmos a liberação.</p>
-                            </div>
-                            <span class="seta">></span>
-                        </article>
-                    </div>
+                    <!-- Perguntas: preenchido automaticamente pelo PerguntasFrequentes.js -->
+                    <div class="perguntas" id="perguntas"></div>
                 </div>
             </section>
         </section>
@@ -164,6 +92,9 @@
         </div>
     </footer>
 
+    <script src="../../js/Conta.js"></script>
     <script src="../../js/modais/LegalModais.js"></script>
+    <script>Conta.renderMenu("config", 1);</script>
+    <script src="../../js/PagesImplement/PerguntasFrequentes.js"></script>
 </body>
 </html>

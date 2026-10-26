@@ -1,33 +1,37 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
-    <link rel="stylesheet" href="../css/MeuPortfolio.css">
-    <link rel="stylesheet" href="../css/Modais/LegalModal.css">
-    <title>Meu Portfólio - Income Of Houses</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+   <link rel="stylesheet" href="../css/MeuPortfolio.css">
+   <link rel="stylesheet" href="../css/Modais/LegalModal.css">
+   <script src="../js/conta.js"></script>
+   <title>Meu Portfólio - Income Of Houses</title>
 </head>
 
-<body>
-    <header class="topo">
-        <div class="logo">
-            <a href="../index.html">
-                <img src="../img/Logo.png" alt="Logo Income of Houses">
-            </a>
-        </div>
-        <nav class="menu">
-            <a href="../index.html">Início</a>
-            <a href="./Plantas.html">Plantas</a>
-            <a href="./Profissionais.html">Profissionais</a>
-            <a href="./Sobre.html">Sobre Nós</a>
-        </nav>
-    </header>
+<body data-conta="profissional">
 
-    <main class="BackGround">
-        <section class="container">
-            <aside class="menu-lateral">
+   <header class="topo">
+      <div class="logo">
+         <a href="../index.html">
+            <img src="../img/Logo.png" alt="Logo Income of Houses">
+         </a>
+      </div>
+      <nav class="menu">
+         <a href="../index.html">Início</a>
+         <a href="./Plantas.html">Plantas</a>
+         <a href="./Profissionais.html">Profissionais</a>
+         <a href="./Sobre.html">Sobre Nós</a>
+      </nav>
+   </header>
+
+   <main class="BackGround">
+      <section class="container">
+
+         <!-- Menu lateral -->
+         <aside class="menu-lateral">
             <ul>
                <li>
                   <a href="../pages/PerfilProfissional.html">
@@ -42,7 +46,7 @@
                   </a>
                </li>
                <li class="ativo">
-                  <a href="../pages/MeuPortfolio.html">
+                  <a href="../pages/MeuPortfolio.html" aria-current="page">
                      <img src="../img/icones/iconePortfolio.svg" alt="">
                      <span>Meu Portfolio</span>
                   </a>
@@ -90,82 +94,99 @@
                   </a>
                </li>
             </ul>
-            </aside>
+         </aside>
 
-            <section class="conteudo">
-                <div class="Inicio">
-                    <div>
-                        <h1>Meu Portfólio</h1>
-                        <p>Apresente-se aos clientes.</p>
-                    </div>
-                    <button class="btn-editar">Editar Portfólio</button>
-                </div>
+         <!-- Conteúdo -->
+         <section class="conteudo">
 
-                <div class="conteudo-perfil">
-                    <div class="foto">
-                        <img src="../img/perfil.png" alt="Foto do profissional">
-                    </div>
-                    <div class="dados-usuario">
-                        <h2>Nome do Profissional</h2>
-                        <p>Profissão do profissional</p>
-                    </div>
-                </div>
+            <div class="Inicio">
+               <div>
+                  <h1>Meu Portfólio</h1>
+                  <p>Envie seu portfólio e preenchemos esta página com o que está nele.</p>
+               </div>
+               <div class="acoes-topo" id="acoesTopo" hidden>
+                  <button class="btn-secundario" type="button" id="btnTrocar">Enviar outro arquivo</button>
+                  <button class="btn-editar" type="button">Editar Portfólio</button>
+               </div>
+            </div>
 
-                <div class="informacao">
-                    <div class="card">
-                        <h2>Minhas Capacitações</h2>
-                        <div class="item">
-                            <span>Tempo na área</span>
-                            <strong>8 anos</strong>
-                        </div>
-                        <div class="item">
-                            <span>Nível acadêmico</span>
-                            <strong>Graduação</strong>
-                        </div>
-                        <div class="item">
-                            <span>Onde se formou / curso</span>
-                            <strong>Universidade / Curso</strong>
-                        </div>
-                    </div>
+            <!-- ESTADO 1: vazio, aguardando o arquivo -->
+            <div id="estadoVazio" class="area-envio">
+               <label class="dropzone" id="dropzone" for="inputArquivo">
+                  <input type="file" id="inputArquivo" accept=".pdf,.docx,.png,.jpg,.jpeg">
+                  <svg class="dropzone-icone" viewBox="0 0 24 24" aria-hidden="true">
+                     <path d="M12 16V4"></path>
+                     <path d="M7 9L12 4L17 9"></path>
+                     <path d="M4 16V20H20V16"></path>
+                  </svg>
+                  <strong>Arraste seu portfólio aqui</strong>
+                  <span>ou clique para escolher um arquivo</span>
+                  <small>PDF, Word (.docx), PNG ou JPG · até 10 MB</small>
+               </label>
+               <div class="erro-envio" id="erroEnvio" role="alert" hidden></div>
+               <p class="dica-envio">Vamos ler o arquivo e preencher seu nome, projetos, capacitações e resumo. Você poderá revisar tudo antes de publicar.</p>
+            </div>
 
-                    <div class="card">
-                        <h2>Resumo Profissional</h2>
-                        <div class="item">
-                            <span>Membro desde</span>
-                            <strong>Janeiro/2022</strong>
-                        </div>
-                        <div class="item">
-                            <span>Projetos concluídos</span>
-                            <strong>156</strong>
-                        </div>
-                        <div class="item">
-                            <span>Clientes atendidos</span>
-                            <strong>98+</strong>
-                        </div>
-                        <div class="item">
-                            <span>Taxa de resposta</span>
-                            <strong>98%</strong>
-                        </div>
-                        <div class="item">
-                            <span>Tempo médio de resposta</span>
-                            <strong>1h 30m</strong>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </section>
-    </main>
+            <!-- ESTADO 2: analisando -->
+            <div id="estadoAnalisando" class="area-envio" hidden>
+               <div class="analisando" role="status" aria-live="polite">
+                  <div class="spinner" aria-hidden="true"></div>
+                  <strong>Analisando <span id="nomeArquivo">seu arquivo</span></strong>
+                  <span id="etapaAnalise">Lendo o arquivo...</span>
+               </div>
+            </div>
 
-    <footer class="rodape">
-        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
-        <div class="RodapeLinks">
-            <a href="../pages/Modais/TermosUso.html" data-legal="termos">Termos de Uso</a>
-            <span>|</span>
-            <a href="../pages/Modais/PoliticaPrivacidade.html" data-legal="privacidade">Política de Privacidade</a>
-        </div>
-    </footer>
+            <!-- ESTADO 3: preenchido com os dados do arquivo -->
+            <div id="estadoPreenchido" hidden>
 
-    <script src="../js/Modais/LegalModais.js"></script>
+               <div class="relatorio" id="relatorio"></div>
+
+               <div class="conteudo-perfil">
+                  <div class="avatar" id="pfAvatar" aria-hidden="true"></div>
+                  <div class="dados-usuario">
+                     <h2 id="pfNome"></h2>
+                     <p class="profissao" id="pfProfissao"></p>
+                     <div class="selos" id="pfSelos"></div>
+                  </div>
+               </div>
+
+               <div class="card" id="cardSobre">
+                  <h2>Sobre o meu trabalho</h2>
+                  <p class="texto-apresentacao" id="pfSobre"></p>
+                  <div class="tags" id="pfAreas" aria-label="Áreas de atuação"></div>
+               </div>
+
+               <div class="card">
+                  <div class="card-cabecalho">
+                     <div>
+                        <h2>Projetos</h2>
+                        <p class="subtitulo" id="pfQtdProjetos"></p>
+                     </div>
+                  </div>
+
+                  <div class="filtros" id="filtros" role="group" aria-label="Filtrar projetos por categoria"></div>
+                  <div class="projetos" id="listaProjetos"></div>
+                  <p class="vazio" id="msgVazio" hidden>Nenhum projeto encontrado.</p>
+               </div>
+
+            </div>
+
+         </section>
+      </section>
+   </main>
+
+   <footer class="rodape">
+      <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+      <div class="RodapeLinks">
+         <a href="../pages/Modais/TermosUso.html" data-legal="termos">Termos de Uso</a>
+         <span>|</span>
+         <a href="../pages/Modais/PoliticaPrivacidade.html" data-legal="privacidade">Política de Privacidade</a>
+      </div>
+   </footer>
+
+   <script src="../js/Modais/LegalModais.js"></script>
+   <script src="../js/config.js"></script>
+   <script src="../js/MeuPortfolio.js"></script>
 </body>
 
 </html>
