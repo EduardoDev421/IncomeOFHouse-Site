@@ -1,4 +1,7 @@
-/* Configuração Geral */
+
+/* ================================================= */
+/* CONFIGURAÇÃO GERAL */
+
 * {
     margin: 0;
     padding: 0;
@@ -17,9 +20,11 @@ body {
     color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 /* ================================================= */
-/* BackGround do Menu */
-.topo{
+/* MENU SUPERIOR */
+
+.topo {
     position: absolute;
     top: 0;
     left: 0;
@@ -29,29 +34,29 @@ body {
     align-items: center;
     padding: 0 6%;
     z-index: 10;
-    background: rgba(10, 10, 10, 0.25); /* reduzi de 0.55 pra 0.25 — teste esse valor */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    background: rgba(10, 10, 10, 0.35);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(8px);
 }
 
 /* Logo */
 
-.logo{
-    width: 100%;
-    background:  transparent;
+.logo {
+    width: auto;
+    background: transparent;
 }
 
-.logo a{
+.logo a {
     display: flex;
     align-items: center;
     text-decoration: none;
 }
 
 .logo img {
-    width: 100%;
-    max-width: 70px;
+    width: 70px;
+    max-width: 100%;
     height: auto;
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 /* Menu */
@@ -68,9 +73,9 @@ body {
 .menu a {
     color: #ffffff;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
-    padding: 12px 20px;
+    padding: 11px 18px;
     border-radius: 7px;
     transition: 0.3s ease;
 }
@@ -86,35 +91,36 @@ body {
     background: rgba(212, 175, 106, 0.08);
 }
 
-/* Icone Login */
-.iconelogin{
+/* Ícone de Login */
+
+.iconelogin {
     margin-left: auto;
 }
 
-.iconelogin a{
+.iconelogin a {
     display: flex;
     align-items: center;
     gap: 8px;
     color: #ffffff;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     transition: 0.3s ease;
 }
 
-.iconelogin a:hover{
+.iconelogin a:hover {
     color: #d4af6a;
 }
 
 .iconelogin img {
-    max-width: 50px;
-    height: 50px;
+    max-width: 45px;
+    height: 45px;
     object-fit: contain;
 }
 
 /* ================================================= */
-/* Fundo Home */
+/* FUNDO HOME */
 
-.BackGound{
+.BackGound {
     position: relative;
     min-height: 100vh;
     background-image: url("../img/BackgroundFundo.png");
@@ -129,38 +135,42 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom: 160px;
+    padding-top: 75px;
+    padding-bottom: 155px;
 }
 
-.overlay{
+.overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.22);
     z-index: 1;
     pointer-events: none;
 }
 
-/* Home */
-.Container{
+/* ================================================= */
+/* CONTEÚDO PRINCIPAL */
+
+.Container {
     position: relative;
     z-index: 2;
     width: 100%;
     max-width: 1200px;
-    margin-left: 150px;
-}
- 
-/* Limita a largura do texto em vez de cortar a tela ao meio com padding-right */
-.Container h1,
-.Container p {
-    max-width: 620px;
+    margin-left: clamp(35px, 11vw, 150px);
+    padding-right: 30px;
 }
 
-.Container h1{
-    margin-bottom: 25px;
+.Container h1,
+.Container p {
+    max-width: 590px;
+}
+
+.Container h1 {
+    margin-bottom: 20px;
     color: #f5f5f5;
-    font-size: clamp(50px, 6vw, 60px);
+    font-size: clamp(42px, 4.5vw, 56px);
     font-weight: 800;
-    line-height: 1.02;
+    line-height: 1.05;
+    letter-spacing: -1px;
 }
 
 .Container h1 span {
@@ -168,24 +178,26 @@ body {
 }
 
 .Container p {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     color: #d2d2d2;
-    font-size: 17px;
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.65;
 }
+
+/* Botão Criar / Explorar */
 
 .BtnCriar {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 25px;
-    margin-right: 10px;
+    padding: 13px 23px;
+    margin-right: 8px;
     color: #111111;
     background: #d4af6a;
     border: 1px solid #d4af6a;
     border-radius: 7px;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     transition: 0.3s ease;
 }
@@ -196,17 +208,19 @@ body {
     transform: translateY(-2px);
 }
 
+/* Botão Login / Profissionais */
+
 .BtnLogar {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 25px;
+    padding: 13px 23px;
     color: #ffffff;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 7px;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     transition: 0.3s ease;
     backdrop-filter: blur(5px);
@@ -219,26 +233,29 @@ body {
     transform: translateY(-2px);
 }
 
+/* ================================================= */
+/* CARDS DE DESTAQUE */
+
 .Destaques {
     position: absolute;
     z-index: 3;
-    bottom: 40px;
+    bottom: 35px;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
     max-width: 1150px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 18px;
 }
 
 .Destaque {
-    min-height: 110px;
+    min-height: 115px;
     display: flex;
     align-items: center;
-    gap: 17px;
-    padding: 20px;
-    background: rgba(10, 10, 10, 0.72);
+    gap: 15px;
+    padding: 18px;
+    background: rgba(10, 10, 10, 0.78);
     border: 1px solid rgba(212, 175, 106, 0.18);
     border-radius: 12px;
     backdrop-filter: blur(10px);
@@ -247,22 +264,22 @@ body {
 
 .Destaque:hover {
     transform: translateY(-5px);
-    background: rgba(15, 15, 15, 0.88);
+    background: rgba(15, 15, 15, 0.90);
     border-color: rgba(212, 175, 106, 0.45);
 }
 
 .DestaqueIcone {
-    min-width: 48px;
-    width: 48px;
-    height: 48px;
+    min-width: 42px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .DestaqueIcone img {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     object-fit: contain;
 }
 
@@ -271,20 +288,20 @@ body {
 }
 
 .DestaqueContainer h2 {
-    margin-bottom: 7px;
+    margin-bottom: 6px;
     color: #ffffff;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
 }
 
 .DestaqueContainer p {
     color: #aaaaaa;
-    font-size: 12px;
-    line-height: 1.5;
+    font-size: 11px;
+    line-height: 1.55;
 }
 
 /* ================================================= */
-/* Rodapé */
+/* RODAPÉ */
 
 .rodape {
     width: 100%;
@@ -292,12 +309,11 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    padding: 22px 6%;
+    padding: 20px 6%;
     background: #080808;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    color: #888888;
-    font-size: 13px;
     border-top: 1px solid #D4A63A;
+    color: #888888;
+    font-size: 12px;
 }
 
 .RodapeLinks {
@@ -305,7 +321,6 @@ body {
     align-items: center;
     gap: 10px;
     color: #555555;
-
 }
 
 .rodape a {
@@ -316,4 +331,144 @@ body {
 
 .rodape a:hover {
     color: #e2c07b;
+}
+
+/* ================================================= */
+/* RESPONSIVIDADE - TABLETS */
+
+@media (max-width: 1000px) {
+    .Container {
+        margin-left: 7%;
+    }
+
+    .Destaques {
+        width: 94%;
+        gap: 12px;
+    }
+
+    .Destaque {
+        padding: 14px;
+        gap: 10px;
+    }
+
+    .DestaqueContainer h2 {
+        font-size: 13px;
+    }
+
+    .DestaqueContainer p {
+        font-size: 10px;
+    }
+}
+
+/* ================================================= */
+/* RESPONSIVIDADE - CELULARES */
+
+@media (max-width: 700px) {
+    .topo {
+        height: 65px;
+        padding: 0 4%;
+    }
+
+    .logo img {
+        width: 55px;
+        margin-left: 0;
+    }
+
+    .menu {
+        gap: 2px;
+    }
+
+    .menu a {
+        font-size: 11px;
+        padding: 9px 8px;
+    }
+
+    .iconelogin img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .Home {
+        min-height: auto;
+        padding-top: 125px;
+        padding-bottom: 35px;
+    }
+
+    .Container {
+        margin: 0;
+        padding: 0 7%;
+    }
+
+    .Container h1 {
+        font-size: clamp(36px, 9vw, 46px);
+        margin-bottom: 16px;
+    }
+
+    .Container p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 22px;
+    }
+
+    .BtnCriar,
+    .BtnLogar {
+        padding: 12px 15px;
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .Destaques {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        width: 86%;
+        margin: 40px auto 0;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .Destaque {
+        min-height: 95px;
+        padding: 16px;
+    }
+
+    .DestaqueContainer h2 {
+        font-size: 13px;
+    }
+
+    .DestaqueContainer p {
+        font-size: 11px;
+    }
+
+    .rodape {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 5%;
+        font-size: 11px;
+    }
+}
+
+/* ================================================= */
+/* CELULARES PEQUENOS */
+
+@media (max-width: 400px) {
+    .menu a {
+        font-size: 10px;
+        padding: 8px 6px;
+    }
+
+    .Container h1 {
+        font-size: 34px;
+    }
+
+    .Container p {
+        font-size: 13px;
+    }
+
+    .BtnCriar,
+    .BtnLogar {
+        padding: 11px 12px;
+        font-size: 11px;
+    }
 }

@@ -1,611 +1,611 @@
-/* =========================================================
-   CONFIGURAÇÕES DO USUÁRIO - TELA CHEIA
-   Mesmo layout da página de Configurações do Profissional
-
-   As CORES vêm de css/Tema.css (variáveis var(--...)),
-   por isso esta página funciona nos temas escuro e claro.
-   Carregue o Tema.css ANTES deste arquivo.
-========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    width: 100%;
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--fundo-pagina);
-    color: var(--texto-menu);
-}
-
-/* ================================================= */
-/* CABEÇALHO (fixo) */
-
-.topo {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: auto;
-    left: 0;
-    z-index: 20;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 3%;
-    background: var(--topo);
-    border-bottom: 1px solid var(--topo-borda);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo img {
-    width: 58px;
-    height: auto;
-    object-fit: contain;
-}
-
-.menu {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 32px;
-}
-
-.menu a {
-    color: var(--texto-menu);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: 0.3s ease;
-}
-
-.menu a:hover {
-    color: var(--ouro);
-}
-
-.iconelogin img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-}
-
-/* ================================================= */
-/* Fundo / estrutura */
-
-.BackGround {
-    width: 100%;
-    min-height: 100vh;
-    padding-top: 64px;
-    background:
-        linear-gradient(var(--veu-topo), var(--veu-base)),
-        url("../img/BackgroundFundo.png");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-.container {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    display: block;
-}
-
-/* ================================================= */
-/* MENU LATERAL (fixo, altura total) */
-
-.menu-lateral {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    z-index: 15;
-    width: 250px;
-    height: calc(100vh - 64px);
-    padding: 16px 12px;
-    overflow-y: auto;
-    background: var(--lateral);
-    border-right: 1px solid var(--borda-lateral);
-}
-
-.menu-lateral ul {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    list-style: none;
-}
-
-.menu-lateral li a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 38px;
-    padding: 8px 12px;
-    color: var(--texto-menu);
-    background: var(--item);
-    border: 1px solid transparent;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 12px;
-    transition: 0.25s ease;
-}
-
-.menu-lateral li a img {
-    width: 17px;
-    height: 17px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.menu-lateral li.ativo a {
-    color: var(--ouro);
-    background: var(--ativo-bg);
-    border-color: var(--ativo-borda);
-}
-
-.menu-lateral li:hover a {
-    color: var(--ouro);
-    background: var(--hover-bg);
-    border-color: var(--ativo-borda);
-}
-
-.menu-lateral li:last-child {
-    margin-top: 6px;
-    padding-top: 8px;
-    border-top: 1px solid var(--borda);
-}
-
-/* ================================================= */
-/* CONTEÚDO (ocupa o resto da tela) */
-
-.conteudo {
-    margin-left: 250px;
-    width: calc(100% - 250px);
-    min-height: calc(100vh - 64px - 55px);
-    padding: 26px 32px 32px;
-    background: var(--conteudo);
-}
-
-.conteudo > h1 {
-    color: var(--texto);
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.conteudo > h4 {
-    color: var(--texto-sub);
-    font-size: 13px;
-    font-weight: 400;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--ouro);
-}
-
-/* ================================================= */
-/* Grid dos cards */
-
-.Config {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-top: 20px;
-}
-
-/* ================================================= */
-/* Cards */
-
-.Segurança,
-.notificação,
-.Personalização,
-.privacidade,
-.CentralAjuda {
-    background: var(--card);
-    border: 1px solid var(--borda);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px var(--sombra);
-}
-
-.CentralAjuda {
-    margin-top: 16px;
-}
-
-/* ================================================= */
-/* Títulos */
-
-.Titulosegurança,
-.TituloNotificações,
-.TituloPersonalização,
-.TituloPrivacidade,
-.TituloCentralAjuda {
-    min-height: 46px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--borda);
-}
-
-.Titulosegurança img,
-.TituloNotificações img,
-.TituloPersonalização img,
-.TituloPrivacidade img,
-.TituloCentralAjuda img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-}
-
-.Titulosegurança h2,
-.TituloNotificações h2,
-.TituloPersonalização h2,
-.TituloPrivacidade h2,
-.TituloCentralAjuda h2 {
-    color: var(--texto);
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* ================================================= */
-/* Itens */
-
-.seguranças,
-.notificações,
-.Personalizações,
-.privacidades,
-.CentralAjudas,
-.CentralAjudaU {
-    min-height: 56px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--borda-item);
-    transition: background 0.2s ease;
-}
-
-.seguranças:last-child,
-.notificações:last-child,
-.Personalizações:last-child,
-.privacidades:last-child,
-.CentralAjudas:last-child,
-.CentralAjudaU:last-child {
-    border-bottom: none;
-}
-
-.seguranças:hover,
-.notificações:hover,
-.Personalizações:hover,
-.privacidades:hover,
-.CentralAjudas:hover,
-.CentralAjudaU:hover {
-    background: var(--hover-suave);
-}
-
-/* Ícones dos itens */
-
-.seguranças > img,
-.notificações > img,
-.Personalizações > img,
-.privacidades > img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-/* ================================================= */
-/* Itens que são links (<a> dentro do item) */
-
-.seguranças,
-.CentralAjudas,
-.CentralAjudaU {
-    padding: 0;
-}
-
-.seguranças a,
-.CentralAjudas a,
-.CentralAjudaU a {
-    width: 100%;
-    min-height: 56px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    color: inherit;
-    text-decoration: none;
-}
-
-.seguranças a > img,
-.CentralAjudas a > img,
-.CentralAjudaU a > img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-/* ================================================= */
-/* Textos */
-
-.SegurançaText,
-.notificaçõesText,
-.PersonalizaçõesText,
-.privacidadesText,
-.CentralAjudasText {
-    flex: 1;
-    min-width: 0;
-    margin-left: 4px;
-}
-
-.SegurançaText h3,
-.notificaçõesText h3,
-.PersonalizaçõesText h3,
-.privacidadesText h3,
-.CentralAjudasText h3 {
-    color: var(--texto-titulo);
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
-.SegurançaText p,
-.notificaçõesText p,
-.PersonalizaçõesText p,
-.privacidadesText p,
-.CentralAjudasText p {
-    color: var(--texto-suave);
-    font-size: 11px;
-    line-height: 1.4;
-}
-
-/* ================================================= */
-/* Seta */
-
-.seta {
-    flex-shrink: 0;
-    color: var(--seta);
-    font-size: 18px;
-    margin-left: 6px;
-    transition: 0.2s ease;
-}
-
-.seguranças:hover .seta,
-.privacidades:hover .seta,
-.CentralAjudas:hover .seta,
-.CentralAjudaU:hover .seta {
-    color: var(--ouro-vivo);
-    transform: translateX(3px);
-}
-
-/* ================================================= */
-/* Seletor (tema, idioma, moeda) */
-
-.seletor {
-    height: 32px;
-    padding: 0 10px;
-    background: var(--seletor-bg);
-    color: var(--texto-menu);
-    border: 1px solid var(--borda);
-    border-radius: 6px;
-    outline: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.seletor:focus {
-    border-color: var(--ouro);
-}
-
-.seletor option {
-    background: var(--seletor-opcao);
-    color: var(--texto-menu);
-}
-
-/* ================================================= */
-/* Toggle */
-
-.toggle {
-    position: relative;
-    width: 38px;
-    height: 21px;
-    display: inline-block;
-    flex-shrink: 0;
-}
-
-.toggle input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    cursor: pointer;
-    background: var(--slider-off);
-    border-radius: 30px;
-    transition: 0.25s ease;
-}
-
-.slider::before {
-    content: "";
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    left: 3px;
-    top: 3px;
-    background: var(--slider-bola);
-    border-radius: 50%;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-    transition: 0.25s ease;
-}
-
-.toggle input:checked + .slider {
-    background: linear-gradient(135deg, #c89e26, #efd04f);
-}
-
-.toggle input:checked + .slider::before {
-    transform: translateX(17px);
-}
-
-/* ================================================= */
-/* Central de ajuda */
-
-.CentralAjudasCard {
-    display: flex;
-    flex-direction: row;
-}
-
-.CentralAjudas,
-.CentralAjudaU {
-    flex: 1;
-    border-bottom: none;
-}
-
-.CentralAjudas {
-    border-right: 1px solid var(--borda);
-}
-
-.CentralAjudaU {
-    border-right: none;
-}
-
-/* ================================================= */
-/* Rodapé */
-
-.rodape {
-    margin-left: 250px;
-    min-height: 55px;
-    padding: 15px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    background: var(--rodape);
-    border-top: 1px solid var(--rodape-borda);
-    color: var(--texto-rodape);
-    font-size: 12px;
-}
-
-.RodapeLinks {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-}
-
-.RodapeLinks a {
-    color: var(--texto-rodape);
-    text-decoration: none;
-    transition: 0.2s ease;
-}
-
-.RodapeLinks a:hover {
-    color: var(--ouro-vivo);
-}
-
-/* ================================================= */
-/* Responsividade */
-
-@media (max-width: 1100px) {
-
-    .menu-lateral {
-        width: 220px;
+    /* =========================================================
+    CONFIGURAÇÕES DO USUÁRIO - TELA CHEIA
+    Mesmo layout da página de Configurações do Profissional
+
+    As CORES vêm de css/Tema.css (variáveis var(--...)),
+    por isso esta página funciona nos temas escuro e claro.
+    Carregue o Tema.css ANTES deste arquivo.
+    ========================================================= */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
 
-    .conteudo {
-        margin-left: 220px;
-        width: calc(100% - 220px);
+    html {
+        scroll-behavior: smooth;
     }
 
-    .rodape {
-        margin-left: 220px;
+    body {
+        width: 100%;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--fundo-pagina);
+        color: var(--texto-menu);
     }
 
-    .Config {
-        gap: 12px;
+    /* ================================================= */
+    /* CABEÇALHO (fixo) */
+
+    .topo {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: auto;
+        left: 0;
+        z-index: 20;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 3%;
+        background: var(--topo);
+        border-bottom: 1px solid var(--topo-borda);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
 
-}
+    .logo {
+        display: flex;
+        align-items: center;
+    }
 
-@media (max-width: 850px) {
+    .logo img {
+        width: 58px;
+        height: auto;
+        object-fit: contain;
+    }
 
     .menu {
-        display: none;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 32px;
     }
 
-    .menu-lateral {
-        position: static;
+    .menu a {
+        color: var(--texto-menu);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: 0.3s ease;
+    }
+
+    .menu a:hover {
+        color: var(--ouro);
+    }
+
+    .iconelogin img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+    }
+
+    /* ================================================= */
+    /* Fundo / estrutura */
+
+    .BackGround {
         width: 100%;
-        height: auto;
-        border-right: 0;
-        border-bottom: 1px solid var(--borda-lateral);
+        min-height: 100vh;
+        padding-top: 64px;
+        background:
+            linear-gradient(var(--veu-topo), var(--veu-base)),
+            url("../img/BackgroundFundo.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    .container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        display: block;
+    }
+
+    /* ================================================= */
+    /* MENU LATERAL (fixo, altura total) */
+
+    .menu-lateral {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        z-index: 15;
+        width: 250px;
+        height: calc(100vh - 64px);
+        padding: 16px 12px;
+        overflow-y: auto;
+        background: var(--lateral);
+        border-right: 1px solid var(--borda-lateral);
     }
 
     .menu-lateral ul {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        list-style: none;
     }
 
     .menu-lateral li a {
-        justify-content: center;
-        text-align: center;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 38px;
+        padding: 8px 12px;
+        color: var(--texto-menu);
+        background: var(--item);
+        border: 1px solid transparent;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 12px;
+        transition: 0.25s ease;
     }
+
+    .menu-lateral li a img {
+        width: 17px;
+        height: 17px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    .menu-lateral li.ativo a {
+        color: var(--ouro);
+        background: var(--ativo-bg);
+        border-color: var(--ativo-borda);
+    }
+
+    .menu-lateral li:hover a {
+        color: var(--ouro);
+        background: var(--hover-bg);
+        border-color: var(--ativo-borda);
+    }
+
+    .menu-lateral li:last-child {
+        margin-top: 6px;
+        padding-top: 8px;
+        border-top: 1px solid var(--borda);
+    }
+
+    /* ================================================= */
+    /* CONTEÚDO (ocupa o resto da tela) */
 
     .conteudo {
-        margin-left: 0;
-        width: 100%;
-        padding: 20px 16px;
+        margin-left: 250px;
+        width: calc(100% - 250px);
+        min-height: calc(100vh - 64px - 55px);
+        padding: 26px 32px 32px;
+        background: var(--conteudo);
     }
 
-    .rodape {
-        margin-left: 0;
-        padding: 15px 16px;
+    .conteudo > h1 {
+        color: var(--texto);
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 6px;
     }
 
-}
+    .conteudo > h4 {
+        color: var(--texto-sub);
+        font-size: 13px;
+        font-weight: 400;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--ouro);
+    }
 
-@media (max-width: 600px) {
+    /* ================================================= */
+    /* Grid dos cards */
 
     .Config {
-        grid-template-columns: 1fr;
-    }
-
-    .menu-lateral ul {
+        width: 100%;
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 20px;
     }
 
-    .CentralAjudasCard {
-        flex-direction: column;
+    /* ================================================= */
+    /* Cards */
+
+    .Segurança,
+    .notificação,
+    .Personalização,
+    .privacidade,
+    .CentralAjuda {
+        background: var(--card);
+        border: 1px solid var(--borda);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px var(--sombra);
     }
 
-    .CentralAjudas {
-        border-right: none;
+    .CentralAjuda {
+        margin-top: 16px;
+    }
+
+    /* ================================================= */
+    /* Títulos */
+
+    .Titulosegurança,
+    .TituloNotificações,
+    .TituloPersonalização,
+    .TituloPrivacidade,
+    .TituloCentralAjuda {
+        min-height: 46px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
         border-bottom: 1px solid var(--borda);
     }
 
-    .rodape {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
+    .Titulosegurança img,
+    .TituloNotificações img,
+    .TituloPersonalização img,
+    .TituloPrivacidade img,
+    .TituloCentralAjuda img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
     }
 
-}
+    .Titulosegurança h2,
+    .TituloNotificações h2,
+    .TituloPersonalização h2,
+    .TituloPrivacidade h2,
+    .TituloCentralAjuda h2 {
+        color: var(--texto);
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    /* ================================================= */
+    /* Itens */
+
+    .seguranças,
+    .notificações,
+    .Personalizações,
+    .privacidades,
+    .CentralAjudas,
+    .CentralAjudaU {
+        min-height: 56px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--borda-item);
+        transition: background 0.2s ease;
+    }
+
+    .seguranças:last-child,
+    .notificações:last-child,
+    .Personalizações:last-child,
+    .privacidades:last-child,
+    .CentralAjudas:last-child,
+    .CentralAjudaU:last-child {
+        border-bottom: none;
+    }
+
+    .seguranças:hover,
+    .notificações:hover,
+    .Personalizações:hover,
+    .privacidades:hover,
+    .CentralAjudas:hover,
+    .CentralAjudaU:hover {
+        background: var(--hover-suave);
+    }
+
+    /* Ícones dos itens */
+
+    .seguranças > img,
+    .notificações > img,
+    .Personalizações > img,
+    .privacidades > img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    /* ================================================= */
+    /* Itens que são links (<a> dentro do item) */
+
+    .seguranças,
+    .CentralAjudas,
+    .CentralAjudaU {
+        padding: 0;
+    }
+
+    .seguranças a,
+    .CentralAjudas a,
+    .CentralAjudaU a {
+        width: 100%;
+        min-height: 56px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .seguranças a > img,
+    .CentralAjudas a > img,
+    .CentralAjudaU a > img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    /* ================================================= */
+    /* Textos */
+
+    .SegurançaText,
+    .notificaçõesText,
+    .PersonalizaçõesText,
+    .privacidadesText,
+    .CentralAjudasText {
+        flex: 1;
+        min-width: 0;
+        margin-left: 4px;
+    }
+
+    .SegurançaText h3,
+    .notificaçõesText h3,
+    .PersonalizaçõesText h3,
+    .privacidadesText h3,
+    .CentralAjudasText h3 {
+        color: var(--texto-titulo);
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    .SegurançaText p,
+    .notificaçõesText p,
+    .PersonalizaçõesText p,
+    .privacidadesText p,
+    .CentralAjudasText p {
+        color: var(--texto-suave);
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    /* ================================================= */
+    /* Seta */
+
+    .seta {
+        flex-shrink: 0;
+        color: var(--seta);
+        font-size: 18px;
+        margin-left: 6px;
+        transition: 0.2s ease;
+    }
+
+    .seguranças:hover .seta,
+    .privacidades:hover .seta,
+    .CentralAjudas:hover .seta,
+    .CentralAjudaU:hover .seta {
+        color: var(--ouro-vivo);
+        transform: translateX(3px);
+    }
+
+    /* ================================================= */
+    /* Seletor (tema, idioma, moeda) */
+
+    .seletor {
+        height: 32px;
+        padding: 0 10px;
+        background: var(--seletor-bg);
+        color: var(--texto-menu);
+        border: 1px solid var(--borda);
+        border-radius: 6px;
+        outline: none;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .seletor:focus {
+        border-color: var(--ouro);
+    }
+
+    .seletor option {
+        background: var(--seletor-opcao);
+        color: var(--texto-menu);
+    }
+
+    /* ================================================= */
+    /* Toggle */
+
+    .toggle {
+        position: relative;
+        width: 38px;
+        height: 21px;
+        display: inline-block;
+        flex-shrink: 0;
+    }
+
+    .toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        cursor: pointer;
+        background: var(--slider-off);
+        border-radius: 30px;
+        transition: 0.25s ease;
+    }
+
+    .slider::before {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        left: 3px;
+        top: 3px;
+        background: var(--slider-bola);
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+        transition: 0.25s ease;
+    }
+
+    .toggle input:checked + .slider {
+        background: linear-gradient(135deg, #c89e26, #efd04f);
+    }
+
+    .toggle input:checked + .slider::before {
+        transform: translateX(17px);
+    }
+
+    /* ================================================= */
+    /* Central de ajuda */
+
+    .CentralAjudasCard {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .CentralAjudas,
+    .CentralAjudaU {
+        flex: 1;
+        border-bottom: none;
+    }
+
+    .CentralAjudas {
+        border-right: 1px solid var(--borda);
+    }
+
+    .CentralAjudaU {
+        border-right: none;
+    }
+
+    /* ================================================= */
+    /* Rodapé */
+
+    .rodape {
+        margin-left: 250px;
+        min-height: 55px;
+        padding: 15px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        background: var(--rodape);
+        border-top: 1px solid var(--rodape-borda);
+        color: var(--texto-rodape);
+        font-size: 12px;
+    }
+
+    .RodapeLinks {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+    }
+
+    .RodapeLinks a {
+        color: var(--texto-rodape);
+        text-decoration: none;
+        transition: 0.2s ease;
+    }
+
+    .RodapeLinks a:hover {
+        color: var(--ouro-vivo);
+    }
+
+    /* ================================================= */
+    /* Responsividade */
+
+    @media (max-width: 1100px) {
+
+        .menu-lateral {
+            width: 220px;
+        }
+
+        .conteudo {
+            margin-left: 220px;
+            width: calc(100% - 220px);
+        }
+
+        .rodape {
+            margin-left: 220px;
+        }
+
+        .Config {
+            gap: 12px;
+        }
+
+    }
+
+    @media (max-width: 850px) {
+
+        .menu {
+            display: none;
+        }
+
+        .menu-lateral {
+            position: static;
+            width: 100%;
+            height: auto;
+            border-right: 0;
+            border-bottom: 1px solid var(--borda-lateral);
+        }
+
+        .menu-lateral ul {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .menu-lateral li a {
+            justify-content: center;
+            text-align: center;
+        }
+
+        .conteudo {
+            margin-left: 0;
+            width: 100%;
+            padding: 20px 16px;
+        }
+
+        .rodape {
+            margin-left: 0;
+            padding: 15px 16px;
+        }
+
+    }
+
+    @media (max-width: 600px) {
+
+        .Config {
+            grid-template-columns: 1fr;
+        }
+
+        .menu-lateral ul {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .CentralAjudasCard {
+            flex-direction: column;
+        }
+
+        .CentralAjudas {
+            border-right: none;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        .rodape {
+            flex-direction: column;
+            text-align: center;
+            gap: 8px;
+        }
+
+    }
