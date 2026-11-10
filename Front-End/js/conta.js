@@ -35,7 +35,11 @@ const Conta = (() => {
             { id: "enderecos", texto: "Meus Endereços", href: "MeusEndereços.html", icone: "IconeEndereco.svg" },
             { id: "pedidos", texto: "Meus Pedidos", href: "MeusPedidos.html", icone: "IconeProjetos.svg" },
             { id: "favoritos", texto: "Meus Profissionais Favoritos", href: "MeusProfissionais.html", icone: "IconeEstrela.svg" },
+<<<<<<< HEAD
             { id: "salvos", texto: "Meus Projetos Favoritos", href: "ProjetosSalvos.html", icone: "IconeSalvos.svg" },
+=======
+            { id: "salvos", texto: "Meus Projetos Favoritos", href: "MeusProjetosFavoritos.html", icone: "IconeSalvos.svg" },
+>>>>>>> 644f3059d948e6cd1a852cd7a139d195cdf65601
             { id: "agendamentos", texto: "Agendamentos", href: "Agendamentos.html", icone: "IconeData.svg" },
             { id: "mensagem", texto: "Mensagem", href: "Mensagem.html", icone: "IconeMensagem.svg" },
             { id: "config", texto: "Configurações", href: "ConfiguraçõesUsuario.html", icone: "IconeConfiguracao.svg" },
