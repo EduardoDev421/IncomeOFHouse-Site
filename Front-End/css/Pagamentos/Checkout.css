@@ -1,0 +1,926 @@
+/* =========================================================
+    CHECKOUT - TELA CHEIA (mesmo estilo da página Configurações)
+    As CORES vêm de css/Tema/Tema.css (variáveis var(--...)).
+    O que mudou: sem sombras, sem gradientes, sem ícones
+    decorativos, cantos menos arredondados, seções separadas por
+    linhas finas (em vez de vários cardzinhos iguais), números em
+    fonte serifada e botão dourado chapado.
+    ========================================================= */
+
+:where(:root) {
+    --fundo-pagina: #0a0a0a;
+    --conteudo: rgba(8, 8, 8, 0.55);
+    --veu-topo: rgba(0, 0, 0, 0.80);
+    --veu-base: rgba(0, 0, 0, 0.93);
+
+    --topo: rgba(10, 10, 10, 0.94);
+    --topo-borda: rgba(200, 158, 38, 0.45);
+
+    --lateral: #0e0e0e;
+    --borda-lateral: #1f1f1f;
+    --item: #171717;
+    --ativo-bg: rgba(200, 158, 38, 0.12);
+    --ativo-borda: rgba(200, 158, 38, 0.45);
+    --hover-bg: rgba(200, 158, 38, 0.08);
+    --hover-suave: rgba(255, 255, 255, 0.04);
+
+    --card: #121212;
+    --borda: #2c2c2c;
+    --borda-item: #232323;
+    --sombra: rgba(0, 0, 0, 0.5);
+
+    --texto: #ffffff;
+    --texto-titulo: #ffffff;
+    --texto-menu: #e8e8e8;
+    --texto-sub: #b8b8b8;
+    --texto-suave: #a9a9a9;
+    --seta: #8a8a8a;
+
+    --ouro: #d4a82e;
+    --ouro-vivo: #efc23f;
+    --verde: #3ecf5a;
+
+    --rodape: #0a0a0a;
+    --rodape-borda: #1f1f1f;
+    --texto-rodape: #9a9a9a;
+}
+
+:where([data-tema="claro"], [data-theme="light"], .claro, .tema-claro) {
+    --fundo-pagina: #f4f4f1;
+    --conteudo: rgba(255, 255, 255, 0.82);
+    --veu-topo: rgba(255, 255, 255, 0.88);
+    --veu-base: rgba(255, 255, 255, 0.95);
+
+    --topo: rgba(255, 255, 255, 0.95);
+    --topo-borda: rgba(200, 158, 38, 0.55);
+
+    --lateral: #ffffff;
+    --borda-lateral: #e4e4df;
+    --item: #f6f6f2;
+    --ativo-bg: rgba(200, 158, 38, 0.14);
+    --ativo-borda: rgba(200, 158, 38, 0.55);
+    --hover-bg: rgba(200, 158, 38, 0.10);
+    --hover-suave: rgba(0, 0, 0, 0.03);
+
+    --card: #ffffff;
+    --borda: #dcdcd5;
+    --borda-item: #e8e8e2;
+    --sombra: rgba(0, 0, 0, 0.08);
+
+    --texto: #141414;
+    --texto-titulo: #141414;
+    --texto-menu: #2a2a2a;
+    --texto-sub: #5c5c5c;
+    --texto-suave: #6b6b6b;
+    --seta: #8a8a8a;
+
+    --ouro: #a97f12;
+    --ouro-vivo: #b98a10;
+    --verde: #1f9d3a;
+
+    --rodape: #ffffff;
+    --rodape-borda: #e4e4df;
+    --texto-rodape: #6b6b6b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fundo-pagina);
+    color: var(--texto-menu);
+}
+
+/* ================================================= */
+/* CABEÇALHO (igual às outras páginas) */
+
+.topo {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    z-index: 20;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3%;
+    background: var(--topo);
+    border-bottom: 1px solid var(--topo-borda);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 58px;
+    height: auto;
+    object-fit: contain;
+}
+
+.menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu a {
+    color: var(--texto-menu);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: 7px;
+    transition: 0.3s ease;
+}
+
+.menu a:hover {
+    background: var(--hover-suave);
+    color: var(--ouro);
+}
+
+.menu a.ativo {
+    color: var(--ouro);
+    border: 1px solid var(--ativo-borda);
+    background: var(--ativo-bg);
+}
+
+.acoes-topo {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.carrinho,
+.iconelogin {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--texto-menu);
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.carrinho:hover,
+.iconelogin:hover {
+    color: var(--ouro);
+}
+
+.carrinho svg {
+    width: 26px;
+    height: 26px;
+}
+
+.iconelogin {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--borda);
+    border-radius: 50%;
+    background: var(--item);
+}
+
+.iconelogin svg {
+    width: 20px;
+    height: 20px;
+}
+
+.carrinho svg,
+.iconelogin svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.carrinho-qtd {
+    position: absolute;
+    top: -9px;
+    right: -10px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ouro-vivo);
+    color: #1a1405;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ================================================= */
+/* Fundo / estrutura */
+
+.BackGround {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 64px;
+    background:
+        linear-gradient(var(--veu-topo), var(--veu-base)),
+        url("../../img/BackgroundFundo.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: block;
+}
+
+/* ================================================= */
+/* MENU LATERAL (igual às outras páginas) */
+
+.menu-lateral {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    z-index: 15;
+    width: 250px;
+    height: calc(100vh - 64px);
+    padding: 16px 12px;
+    overflow-y: auto;
+    background: var(--lateral);
+    border-right: 1px solid var(--borda-lateral);
+}
+
+.menu-lateral ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    list-style: none;
+}
+
+.menu-lateral li {
+    width: 100%;
+}
+
+.menu-lateral li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 12px;
+    color: var(--texto-menu);
+    background: var(--item);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: 0.25s ease;
+}
+
+.menu-lateral li a img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.menu-lateral li.ativo a {
+    color: var(--ouro);
+    background: var(--ativo-bg);
+    border-color: var(--ativo-borda);
+}
+
+.menu-lateral li:hover a {
+    color: var(--ouro);
+    background: var(--hover-bg);
+    border-color: var(--ativo-borda);
+}
+
+.menu-lateral li:last-child {
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 1px solid var(--borda);
+}
+
+/* ================================================= */
+/* CONTEÚDO (mesmo estilo da página Configurações) */
+
+.conteudo {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: calc(100vh - 64px - 55px);
+    padding: 26px 32px 32px;
+    background: var(--conteudo);
+}
+
+.conteudo > h1 {
+    color: var(--texto);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.conteudo > h4 {
+    color: var(--texto-sub);
+    font-size: 13px;
+    font-weight: 400;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--ouro);
+}
+
+/* ================================================= */
+/* Grid principal: pedido | pagamento */
+
+.Checkout {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 16px;
+    align-items: start;
+    margin-top: 20px;
+}
+
+.ColunaPedido,
+.ColunaPagamento {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+/* ================================================= */
+/* Cards (quadrados) */
+
+.ResumoPedido,
+.Selos,
+.FormaPagamento,
+.EnderecoCobranca {
+    min-width: 0;
+    background: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Títulos dos cards: ícone dourado + texto + linha embaixo */
+
+.TituloResumo,
+.TituloPagamento,
+.TituloEndereco {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    margin: 0;
+    border-bottom: 1px solid var(--borda);
+}
+
+.TituloResumo h2,
+.TituloPagamento h2,
+.TituloEndereco h2 {
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.TituloResumo svg,
+.TituloPagamento svg,
+.TituloEndereco svg,
+.LinhaValor svg,
+.IconeCasa,
+.BotaoAlterar svg,
+.Selo svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: var(--ouro);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ================================================= */
+/* Resumo do pedido */
+
+.ItemPedido {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border-bottom: 1px solid var(--borda-item);
+}
+
+.ItemPedido img {
+    width: 150px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.ItemPedidoText h3 {
+    color: var(--texto-titulo);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.ItemAutor {
+    display: block;
+    color: var(--texto-suave);
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.ItemPedidoText p {
+    color: var(--texto-suave);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.ValoresPedido {
+    padding: 0;
+}
+
+.LinhaValor,
+.LinhaTotal {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 10px 16px;
+}
+
+.LinhaValor {
+    border-bottom: 1px solid var(--borda-item);
+}
+
+.LinhaRotulo {
+    flex: 1;
+    color: var(--texto-menu);
+    font-size: 13px;
+}
+
+.LinhaValor strong {
+    color: var(--texto-titulo);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.LinhaValor strong.desconto {
+    color: var(--verde, #3ecf5a);
+}
+
+.LinhaTotal {
+    min-height: 60px;
+    background: var(--ativo-bg);
+}
+
+.LinhaTotal .LinhaRotulo {
+    color: var(--texto-titulo);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.LinhaTotal strong {
+    color: var(--ouro-vivo);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* "$" só com contorno, no mesmo estilo dos outros ícones */
+.IconeTotal {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--ouro);
+    border: 1.8px solid var(--ouro);
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ================================================= */
+/* Selos de segurança */
+
+.Selos {
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.Selo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+}
+
+.Selo + .Selo {
+    border-left: 1px solid var(--borda);
+}
+
+.SeloText h3 {
+    color: var(--texto-titulo);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.SeloText p {
+    color: var(--texto-suave);
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+/* ================================================= */
+/* Forma de pagamento: linhas dentro do card */
+
+.OpcoesPagamento {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+}
+
+.OpcaoPagamento {
+    position: relative;
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 16px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--borda-item);
+    border-radius: 0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.OpcaoPagamento:last-child {
+    border-bottom: none;
+}
+
+.OpcaoPagamento:hover {
+    background: var(--hover-suave);
+}
+
+.OpcaoPagamento:has(input:checked) {
+    background: var(--ativo-bg);
+    box-shadow: inset 3px 0 0 var(--ouro);
+}
+
+.OpcaoPagamento:has(input:focus-visible) {
+    outline: 2px solid var(--ouro-vivo);
+    outline-offset: -2px;
+}
+
+.OpcaoPagamento input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.radio {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border: 1.5px solid var(--seta);
+    border-radius: 50%;
+    transition: 0.2s ease;
+}
+
+.radio::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: var(--ouro);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 0.2s ease;
+}
+
+.OpcaoPagamento input:checked + .radio {
+    border-color: var(--ouro);
+}
+
+.OpcaoPagamento input:checked + .radio::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.OpcaoIcone {
+    width: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.OpcaoIcone svg {
+    width: 30px;
+    height: 30px;
+}
+
+.OpcaoText {
+    flex: 1;
+    min-width: 0;
+}
+
+.OpcaoText h3 {
+    color: var(--texto-titulo);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.OpcaoText p {
+    color: var(--texto-suave);
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.OpcaoMarca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+/* Só o cartão mostra marcas (bandeiras) */
+.OpcaoMarca:not(.Bandeiras) {
+    display: none;
+}
+
+.icone-claro {
+    fill: none;
+    stroke: var(--texto-titulo);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.bandeira-visa {
+    color: #1a6fd4;
+    font-size: 18px;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: -1px;
+}
+
+.bandeira-master {
+    display: flex;
+    align-items: center;
+}
+
+.bandeira-master i {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #eb001b;
+}
+
+.bandeira-master i + i {
+    margin-left: -8px;
+    background: #f79e1b;
+    opacity: 0.92;
+}
+
+.bandeira-elo {
+    color: var(--texto-titulo);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* ================================================= */
+/* Endereço de cobrança */
+
+.EnderecoCard {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+.IconeCasa {
+    width: 24px;
+    height: 24px;
+}
+
+.EnderecoText {
+    flex: 1;
+    min-width: 0;
+}
+
+.EnderecoText h3 {
+    color: var(--texto-titulo);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.EnderecoText p {
+    color: var(--texto-suave);
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.BotaoAlterar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 14px;
+    flex-shrink: 0;
+    color: var(--texto-titulo);
+    background: transparent;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: 0.2s ease;
+}
+
+.BotaoAlterar:hover {
+    color: var(--ouro);
+    border-color: var(--ouro);
+}
+
+.BotaoAlterar svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* ================================================= */
+/* Botão finalizar: dourado chapado */
+
+.AcaoFinalizar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.BotaoFinalizar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 300px;
+    height: 54px;
+    padding: 0 28px;
+    color: #1a1405;
+    background: var(--ouro-vivo);
+    border: none;
+    border-radius: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.BotaoFinalizar:hover {
+    background: var(--ouro);
+}
+
+.BotaoFinalizar:focus-visible {
+    outline: 2px solid var(--texto-titulo);
+    outline-offset: 3px;
+}
+
+.BotaoFinalizar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.BotaoFinalizar svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ================================================= */
+/* Rodapé */
+
+.rodape {
+    margin-left: 250px;
+    min-height: 55px;
+    padding: 15px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--rodape);
+    border-top: 1px solid var(--rodape-borda);
+    color: var(--texto-rodape);
+    font-size: 12px;
+}
+
+.RodapeLinks {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.RodapeLinks a {
+    color: var(--texto-rodape);
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.RodapeLinks a:hover {
+    color: var(--ouro-vivo);
+}
+
+/* ================================================= */
+/* Responsividade */
+
+@media (max-width: 1100px) {
+    .menu-lateral { width: 220px; }
+    .conteudo { margin-left: 220px; width: calc(100% - 220px); }
+    .rodape { margin-left: 220px; }
+    .Checkout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 850px) {
+    .menu { display: none; }
+
+    .menu-lateral {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--borda-lateral);
+    }
+
+    .menu-lateral ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .menu-lateral li a {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .conteudo { margin-left: 0; width: 100%; padding: 20px 16px; }
+    .rodape { margin-left: 0; padding: 15px 16px; }
+}
+
+@media (max-width: 600px) {
+    .menu-lateral ul { grid-template-columns: repeat(2, 1fr); }
+
+    .ItemPedido { flex-direction: column; align-items: flex-start; }
+    .Selos { flex-direction: column; align-items: stretch; }
+    .Selo + .Selo { border-left: none; border-top: 1px solid var(--borda); }
+    .ItemPedido img { width: 100%; height: 180px; }
+
+    .OpcaoMarca { display: none; }
+
+    .EnderecoCard { flex-wrap: wrap; }
+    .BotaoAlterar { width: 100%; justify-content: center; }
+
+    .BotaoFinalizar { width: 100%; min-width: 0; }
+
+    .rodape { flex-direction: column; text-align: center; gap: 8px; }
+}

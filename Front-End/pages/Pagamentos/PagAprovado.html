@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+   <link rel="stylesheet" href="../../css/Tema/Tema.css">
+   <link rel="stylesheet" href="../../css/Pagamentos/PagStatus.css">
+   <script src="../../js/Preferencias.js"></script>
+   <title>Pagamento Aprovado</title>
+</head>
+
+<body data-conta="usuario">
+   <header class="topo">
+      <div class="logo">
+         <a href="../index.html">
+            <img src="../../img/Logo.png" alt="Logo Income of Houses">
+         </a>
+      </div>
+      <nav class="menu">
+         <a href="../../index.html">Início</a>
+         <a href=".././Plantas.html">Plantas</a>
+         <a href=".././Profissionais.html">Profissionais</a>
+         <a href=".././Sobre.html">Sobre Nós</a>
+      </nav>
+
+      <!-- Carrinho e perfil (como no print do Aprovado). Apague este bloco se não quiser os ícones. -->
+      <div class="acoes-topo">
+         <a href="../Carrinho.html" class="carrinho" aria-label="Carrinho (1 item)">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+               <circle cx="9" cy="20" r="1.5"></circle>
+               <circle cx="18" cy="20" r="1.5"></circle>
+               <path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 7H6"></path>
+            </svg>
+            <span class="carrinho-qtd">1</span>
+         </a>
+         <a href="../perfilUsuario.html" class="iconelogin" aria-label="Meu perfil">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+               <circle cx="12" cy="8" r="4"></circle>
+               <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"></path>
+            </svg>
+         </a>
+      </div>
+   </header>
+
+   <main class="BackGround">
+      <section class="CardStatus status-aprovado">
+
+         <div class="SeloStatus">
+            <span class="linha"></span>
+            <div class="CirculoStatus">
+               <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m5 12.5 4.5 4.5L19 7.5"></path>
+               </svg>
+            </div>
+            <span class="linha"></span>
+         </div>
+
+         <h1>Pagamento <span>Aprovado!</span></h1>
+         <p class="MensagemStatus">
+            Seu pagamento foi processado com sucesso.<br>
+            Obrigado por comprar conosco!
+         </p>
+
+         <div class="Comprovante">
+            <svg class="IconeComprovante" viewBox="0 0 24 24" aria-hidden="true">
+               <path d="M6 3h9l4 4v14H6z"></path>
+               <path d="M14.5 3v4.5H19"></path>
+               <path d="M9 11.5h7M9 15h7M9 18.5h4"></path>
+            </svg>
+            <div class="ComprovanteText">
+               <h3>Comprovante da Compra</h3>
+               <p>Enviamos um e-mail com os detalhes da sua compra.</p>
+            </div>
+            <button type="button" class="BotaoSecundario" id="btnBaixar">
+               <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 4v11M7 11l5 5 5-5M5 20h14"></path>
+               </svg>
+               Baixar Comprovante
+            </button>
+         </div>
+
+         <a href="../../index.html" class="BotaoPrincipal">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+               <path d="M12 3 2.5 11.5h2.8V21h4.4v-6h4.6v6h4.4v-9.5h2.8z" class="preenchido"></path>
+            </svg>
+            <span>Voltar para o Início</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+               <path d="M4 12h16M14 6l6 6-6 6"></path>
+            </svg>
+         </a>
+      </section>
+   </main>
+
+   <script src="../../js/Conta.js"></script>
+   <script src="../../js/PagamentoAprovado.js"></script>
+   <script src="../../js/Idioma.js"></script>
+</body>
+
+</html>
