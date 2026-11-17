@@ -16,6 +16,9 @@
      2) Variáveis do CLARO
      3) Regras do CLARO para páginas com cores fixas
      4) HOME, SOBRE, PROFISSIONAIS e CADASTRO (claro)
+     5) TUTORIAIS, FALE CONOSCO e PERGUNTAS FREQUENTES (claro)
+     6) ALTERAR SENHA, DISPOSITIVOS e AUTENTICAÇÃO EM DUAS ETAPAS (claro)
+     7) MEUS PROJETOS FAVORITOS (claro)
 ========================================================= */
 
 /* ---------- 1) ESCURO (padrão) ---------- */
@@ -555,3 +558,386 @@
     color: var(--ouro);
 }
 :root[data-tema="claro"] .Links a.profissional:hover { background: var(--hover-bg); color: var(--ouro); }
+
+
+/* =========================================================
+   5) TUTORIAIS, FALE CONOSCO e PERGUNTAS FREQUENTES - versão clara
+   Cuidado: ".categoria" existe nas duas páginas com sentidos
+   diferentes (Tutoriais = rótulo pequeno do card; FAQ = card).
+   Por isso cada uma está presa ao seu contêiner.
+========================================================= */
+
+/* seta compartilhada (Tutoriais e FAQ) */
+:root[data-tema="claro"] .seta { color: var(--seta); }
+
+/* aviso de "nada encontrado" (Tutoriais e FAQ) */
+:root[data-tema="claro"] .sem-resultados { color: var(--texto-suave); }
+
+/* ---------- TUTORIAIS ---------- */
+:root[data-tema="claro"] .pesquisa-topo { background: var(--card); border-color: var(--borda); }
+:root[data-tema="claro"] .pesquisa-topo input { color: var(--texto); }
+:root[data-tema="claro"] .pesquisa-topo input::placeholder { color: var(--texto-suave); }
+:root[data-tema="claro"] .pesquisa-topo small { color: var(--texto-suave); }
+
+:root[data-tema="claro"] :is(.Destaques, .Categorias, .Ajuda) {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+:root[data-tema="claro"] .TituloDestaques { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .TituloDestaques h2 { color: var(--texto); }
+:root[data-tema="claro"] .TituloDestaques a { color: var(--ouro); }
+
+:root[data-tema="claro"] .tutorial-card { background: var(--item); border-color: var(--borda); }
+:root[data-tema="claro"] .tutorial-card:hover { background: var(--hover-bg); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .thumb {
+    background:
+        repeating-linear-gradient(0deg, transparent 0, transparent 15px, rgba(166, 120, 18, 0.10) 16px),
+        var(--superficie);
+    border-bottom-color: var(--borda);
+}
+:root[data-tema="claro"] .play { background: rgba(255, 255, 255, 0.92); color: var(--ouro); border-color: var(--ouro); }
+:root[data-tema="claro"] .tutorial-card:hover .play { background: var(--ouro); color: #ffffff; }
+:root[data-tema="claro"] .tutorial-info .categoria { color: var(--ouro); }
+:root[data-tema="claro"] .tutorial-info h3 { color: var(--texto-titulo); }
+:root[data-tema="claro"] .tutorial-info p,
+:root[data-tema="claro"] .card-footer { color: var(--texto-suave); }
+
+:root[data-tema="claro"] :is(.card-footer button, .ajuda-corpo button) { color: var(--ouro); border-color: var(--ouro); }
+:root[data-tema="claro"] :is(.card-footer button:hover, .ajuda-corpo button:hover) { background: var(--ouro); color: #ffffff; }
+
+:root[data-tema="claro"] .categoria-item { border-bottom-color: var(--borda-item); }
+:root[data-tema="claro"] .categoria-item:hover { background: var(--hover-suave); }
+:root[data-tema="claro"] .categoria-item.ativa { background: var(--ativo-bg); }
+:root[data-tema="claro"] .categoria-item.ativa h3 { color: var(--ouro); }
+:root[data-tema="claro"] .categoria-texto h3 { color: var(--texto-titulo); }
+:root[data-tema="claro"] .categoria-texto p,
+:root[data-tema="claro"] .categoria-item small { color: var(--texto-suave); }
+:root[data-tema="claro"] .categoria-item:hover .seta,
+:root[data-tema="claro"] .categoria-item.ativa .seta { color: var(--ouro); }
+
+:root[data-tema="claro"] .ajuda-corpo { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .ajuda-corpo p,
+:root[data-tema="claro"] .dicas li { color: var(--texto-suave); }
+:root[data-tema="claro"] .dicas li::before { color: var(--ouro); }
+
+:root[data-tema="claro"] .video-caixa { background: var(--card); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .video-topo { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .video-topo h3 { color: var(--texto); }
+:root[data-tema="claro"] .video-fechar { color: var(--ouro); border-color: var(--ouro); }
+:root[data-tema="claro"] .video-fechar:hover { background: var(--ouro); color: #ffffff; }
+
+/* ---------- FALE CONOSCO ---------- */
+:root[data-tema="claro"] :is(.contact-info, .contact-form) {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+:root[data-tema="claro"] .eyebrow { color: var(--ouro); }
+:root[data-tema="claro"] .contact-info h2 { color: var(--texto); }
+:root[data-tema="claro"] .intro { color: var(--texto-suave); }
+
+:root[data-tema="claro"] :is(.info-icon, .form-heading-icon) {
+    background: var(--ativo-bg);
+    border-color: var(--ativo-borda);
+}
+:root[data-tema="claro"] .info-text h3 { color: var(--texto-titulo); }
+:root[data-tema="claro"] .info-text p { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .form-heading { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .form-heading h2 { color: var(--texto); }
+:root[data-tema="claro"] .form-heading p { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .form-group label { color: var(--texto-sub); }
+:root[data-tema="claro"] .required { color: var(--ouro); }
+:root[data-tema="claro"] :is(.form-group input, .form-group select, .form-group textarea) {
+    background-color: var(--seletor-bg);
+    border-color: var(--borda);
+    color: var(--texto);
+}
+:root[data-tema="claro"] .form-group input::placeholder,
+:root[data-tema="claro"] .form-group textarea::placeholder { color: var(--texto-suave); }
+:root[data-tema="claro"] :is(.form-group input:focus, .form-group select:focus, .form-group textarea:focus) {
+    border-color: var(--ouro);
+    box-shadow: 0 0 0 3px rgba(166, 120, 18, 0.15);
+}
+:root[data-tema="claro"] .form-group select option { background: var(--seletor-opcao); color: var(--texto); }
+:root[data-tema="claro"] #counter { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .privacy span { color: var(--texto-suave); }
+:root[data-tema="claro"] .privacy a { color: var(--ouro); }
+
+/* ---------- PERGUNTAS FREQUENTES ---------- */
+:root[data-tema="claro"] .busca { background: var(--card); border-color: var(--borda); color: var(--ouro); }
+:root[data-tema="claro"] .busca input { color: var(--texto); }
+:root[data-tema="claro"] .busca input::placeholder { color: var(--texto-suave); }
+:root[data-tema="claro"] .busca button { color: var(--ouro); border-color: var(--ouro); }
+:root[data-tema="claro"] .busca button:hover { background: var(--ouro); color: #ffffff; }
+
+:root[data-tema="claro"] .categorias .categoria {
+    background: var(--card);
+    border-color: var(--borda);
+    color: var(--texto-titulo);
+}
+:root[data-tema="claro"] .categorias .categoria small { color: var(--texto-suave); }
+:root[data-tema="claro"] .categorias .categoria:hover,
+:root[data-tema="claro"] .categorias .categoria.ativa { background: var(--ativo-bg); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .categorias .categoria:hover strong,
+:root[data-tema="claro"] .categorias .categoria.ativa strong { color: var(--ouro); }
+:root[data-tema="claro"] .categorias .categoria:hover .seta { color: var(--ouro); }
+
+:root[data-tema="claro"] .perguntas {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+:root[data-tema="claro"] .perguntas-titulo { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .perguntas-titulo h2 { color: var(--texto); }
+:root[data-tema="claro"] .perguntas-titulo p { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .pergunta { border-bottom-color: var(--borda-item); }
+:root[data-tema="claro"] .pergunta:hover { background: var(--hover-suave); }
+:root[data-tema="claro"] .pergunta:hover .seta,
+:root[data-tema="claro"] .pergunta.aberta .seta { color: var(--ouro); }
+:root[data-tema="claro"] .pergunta strong { color: var(--texto-titulo); }
+:root[data-tema="claro"] .pergunta p { color: var(--texto-suave); }
+
+
+/* =========================================================
+   6) ALTERAR SENHA, DISPOSITIVOS CONECTADOS e
+      AUTENTICAÇÃO EM DUAS ETAPAS - versão clara
+   Atenção: o Mensagem.css tem regras globais para ".voltar" e
+   ".acoes button". Aqui elas são anuladas só para o que pertence
+   a estas páginas (link "Voltar" e botões ".btn" do assistente).
+========================================================= */
+
+/* ---------- cabeçalho do 2FA (botões do topo) ---------- */
+:root[data-tema="claro"] :is(.acoes-topo button, .iconelogin) { color: var(--texto-menu); }
+:root[data-tema="claro"] :is(.acoes-topo button:hover, .iconelogin:hover) { color: var(--ouro); }
+:root[data-tema="claro"] :is(.acoes-topo button:focus-visible, .iconelogin:focus-visible) { outline-color: var(--ouro); }
+
+/* ---------- ALTERAR SENHA ---------- */
+:root[data-tema="claro"] .panel {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+:root[data-tema="claro"] .info-side { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .badge-shield-lg { background: var(--ativo-bg); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .info-side h3 { color: var(--texto); }
+:root[data-tema="claro"] .info-side p { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .field label { color: var(--texto-sub); }
+:root[data-tema="claro"] .input-wrap { background: var(--seletor-bg); border-color: var(--borda); }
+:root[data-tema="claro"] .input-wrap:focus-within { border-color: var(--ouro); }
+:root[data-tema="claro"] .input-wrap input { color: var(--texto); }
+:root[data-tema="claro"] .input-wrap input::placeholder { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .strength-bar .seg { background: var(--borda); }
+:root[data-tema="claro"] .strength-bar .seg.filled { background: var(--ouro); }
+:root[data-tema="claro"] .strength-label { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .tip { border-top-color: var(--borda); }
+:root[data-tema="claro"] .tip p { color: var(--texto-suave); }
+:root[data-tema="claro"] .tip p strong { color: var(--ouro); }
+
+/* ---------- DISPOSITIVOS CONECTADOS ---------- */
+:root[data-tema="claro"] :is(.banner, .notice, .device-card) {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+:root[data-tema="claro"] .badge { background: var(--ativo-bg); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .device-icon { background: var(--item); border-color: var(--borda); }
+:root[data-tema="claro"] :is(.banner h3, .banner h4, .notice h4) { color: var(--texto); }
+:root[data-tema="claro"] :is(.banner p, .notice p) { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .TituloDispositivos { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .TituloDispositivos h2 { color: var(--texto); }
+
+:root[data-tema="claro"] .device-row { border-bottom-color: var(--borda-item); }
+:root[data-tema="claro"] .device-row:hover { background: var(--hover-suave); }
+:root[data-tema="claro"] .device-info h4 { color: var(--texto-titulo); }
+:root[data-tema="claro"] .device-info .model { color: var(--texto-sub); }
+:root[data-tema="claro"] .device-info .loc { color: var(--texto-suave); }
+:root[data-tema="claro"] .meta-col .label { color: var(--texto-suave); }
+:root[data-tema="claro"] .meta-col .value { color: var(--texto-menu); }
+
+:root[data-tema="claro"] .status-ativo { background: rgba(30, 135, 68, 0.14); color: var(--verde); }
+:root[data-tema="claro"] .status-inativo { background: var(--item); color: var(--texto-suave); }
+
+:root[data-tema="claro"] .row-menu { background: var(--item); border-color: var(--borda); color: var(--texto-sub); }
+:root[data-tema="claro"] .row-menu:hover { background: var(--hover-bg); border-color: var(--ativo-borda); color: var(--ouro); }
+
+:root[data-tema="claro"] .btn-danger { color: var(--ouro); border-color: var(--ouro); }
+:root[data-tema="claro"] .btn-danger:hover { background: var(--ouro); color: #ffffff; }
+
+/* ---------- 2FA: voltar, títulos, cards ---------- */
+:root[data-tema="claro"] a.voltar {
+    background: transparent;
+    border: 0;
+    color: var(--texto-sub);
+}
+:root[data-tema="claro"] a.voltar:hover { color: var(--ouro); }
+
+:root[data-tema="claro"] .conteudo > h1 svg { color: var(--ouro); }
+
+:root[data-tema="claro"] :is(.Painel, .Assistente) {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+:root[data-tema="claro"] .TituloDestaques svg { color: var(--ouro); }
+:root[data-tema="claro"] .Painel > .acoes { border-top-color: var(--borda-item); }
+
+/* ---------- 2FA: linhas e interruptor ---------- */
+:root[data-tema="claro"] .linha { border-bottom-color: var(--borda-item); }
+:root[data-tema="claro"] :is(.linha-texto h3, .linha-texto b) { color: var(--texto-titulo); }
+:root[data-tema="claro"] :is(.linha-texto p, .linha-texto small) { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .switch .trilho { background: var(--slider-off); }
+:root[data-tema="claro"] .switch .trilho::after { background: var(--slider-bola); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
+:root[data-tema="claro"] .switch input:checked + .trilho { background: var(--ouro); }
+:root[data-tema="claro"] .switch input:focus-visible + .trilho { outline-color: var(--ouro); }
+
+/* ---------- 2FA: métodos de autenticação ---------- */
+:root[data-tema="claro"] .opcao { border-bottom-color: var(--borda-item); }
+:root[data-tema="claro"] .opcao:hover { background: var(--hover-suave); }
+:root[data-tema="claro"] .opcao:has(input:checked) { background: var(--ativo-bg); }
+:root[data-tema="claro"] .opcao:has(input:focus-visible) { outline-color: var(--ouro); }
+:root[data-tema="claro"] .opcao input { border-color: var(--seta); }
+:root[data-tema="claro"] .opcao input:checked {
+    border-color: var(--ouro);
+    background: radial-gradient(circle, var(--ouro) 0 42%, transparent 48%);
+}
+:root[data-tema="claro"] .opcao > svg { color: var(--ouro); }
+
+/* ---------- 2FA: botões (.btn) ---------- */
+:root[data-tema="claro"] :is(.btn, .acoes .btn) {
+    background: transparent;
+    color: var(--ouro);
+    border-color: var(--ouro);
+}
+:root[data-tema="claro"] :is(.btn, .acoes .btn):hover {
+    background: var(--ouro);
+    color: #ffffff;
+    border-color: var(--ouro);
+}
+:root[data-tema="claro"] :is(.btn-principal, .acoes .btn-principal) {
+    background: var(--ouro);
+    color: #ffffff;
+    border-color: var(--ouro);
+}
+:root[data-tema="claro"] :is(.btn-principal, .acoes .btn-principal):hover {
+    background: var(--ouro-vivo);
+    color: #ffffff;
+    border-color: var(--ouro-vivo);
+}
+:root[data-tema="claro"] :is(.btn, .acoes .btn):disabled:hover {
+    background: transparent;
+    color: var(--ouro);
+    border-color: var(--ouro);
+}
+:root[data-tema="claro"] :is(.btn-principal, .acoes .btn-principal):disabled:hover {
+    background: var(--ouro);
+    color: #ffffff;
+    border-color: var(--ouro);
+}
+:root[data-tema="claro"] :is(.btn:focus-visible, .reenviar:focus-visible) { outline-color: var(--ouro); }
+
+/* ---------- 2FA: assistente (etapas) ---------- */
+:root[data-tema="claro"] .progresso li { color: var(--texto-suave); border-top-color: var(--borda); }
+:root[data-tema="claro"] .progresso li.atual { color: var(--texto-titulo); border-top-color: var(--ouro); }
+:root[data-tema="claro"] .progresso li.feito { color: var(--ouro); border-top-color: var(--ouro); }
+
+:root[data-tema="claro"] .etapa h2 { color: var(--texto-titulo); }
+:root[data-tema="claro"] :is(.etapa > p, .etapa [data-metodo] > p) { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .chave-area b { color: var(--texto-titulo); }
+:root[data-tema="claro"] .chave-area p { color: var(--texto-suave); }
+:root[data-tema="claro"] .chave code { background: var(--superficie); border-color: var(--borda); color: var(--ouro); }
+
+:root[data-tema="claro"] .aviso-email { background: var(--item); border-color: var(--borda); color: var(--texto-menu); }
+:root[data-tema="claro"] .aviso-email svg { color: var(--ouro); }
+
+:root[data-tema="claro"] .otp input { background: var(--seletor-bg); border-color: var(--borda); color: var(--texto); }
+:root[data-tema="claro"] .otp input:focus { border-color: var(--ouro); outline-color: var(--ouro); }
+:root[data-tema="claro"] .otp.erro input { border-color: var(--vermelho); }
+:root[data-tema="claro"] .msg-erro { color: var(--vermelho); }
+:root[data-tema="claro"] .reenviar { color: var(--ouro); }
+
+:root[data-tema="claro"] .codigos code { background: var(--superficie); border-color: var(--borda); color: var(--texto-titulo); }
+:root[data-tema="claro"] .confirma { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .toast {
+    background: var(--ativo-bg);
+    border-color: var(--ativo-borda);
+    color: var(--ouro);
+    box-shadow: 0 8px 24px var(--sombra);
+}
+
+
+/* =========================================================
+   7) MEUS PROJETOS FAVORITOS - versão clara
+   (reaproveita regras gerais: .Inicio, .campo-busca, .chip, .explorar,
+   .btn-detalhes e .btn-remover; aqui entram só as classes novas)
+========================================================= */
+
+/* resumo */
+:root[data-tema="claro"] .card-resumo {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+:root[data-tema="claro"] .card-resumo span { color: var(--texto-suave); }
+:root[data-tema="claro"] .card-resumo strong { color: var(--ouro); }
+
+/* filtros */
+:root[data-tema="claro"] .controles select {
+    background-color: var(--seletor-bg);
+    border-color: var(--borda);
+    color: var(--texto);
+}
+:root[data-tema="claro"] .controles select:focus { border-color: var(--ouro); }
+:root[data-tema="claro"] .contagem { color: var(--texto-suave); }
+
+/* cards de projeto */
+:root[data-tema="claro"] .projeto {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+:root[data-tema="claro"] .projeto:hover { border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .projeto .thumb {
+    background: linear-gradient(135deg, var(--ativo-bg), var(--superficie));
+    border-bottom-color: var(--borda);
+}
+:root[data-tema="claro"] .thumb svg { stroke: var(--ouro); }
+
+/* coração (remover dos favoritos) */
+:root[data-tema="claro"] .projeto .btn-remover {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: var(--borda);
+}
+:root[data-tema="claro"] .projeto .btn-remover:hover {
+    background: var(--hover-bg);
+    border-color: var(--ativo-borda);
+}
+
+/* textos do card */
+:root[data-tema="claro"] .projeto .corpo h3 { color: var(--texto); }
+:root[data-tema="claro"] .cliente { color: var(--texto-suave); }
+:root[data-tema="claro"] .tag {
+    color: var(--ouro);
+    background: var(--ativo-bg);
+    border-color: var(--ativo-borda);
+}
+:root[data-tema="claro"] .meta { border-top-color: var(--borda); border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .meta small { color: var(--texto-suave); }
+:root[data-tema="claro"] .meta span { color: var(--texto); }
+:root[data-tema="claro"] .nota { color: var(--ouro); }
+:root[data-tema="claro"] .nota.sem { color: var(--texto-suave); }
+
+/* "sem projetos": botão de explorar */
+:root[data-tema="claro"] .explorar h2 { color: var(--texto); }
+:root[data-tema="claro"] .explorar a { background: var(--ouro); color: #ffffff; }

@@ -210,13 +210,6 @@ window.IDIOMAS.zh = {
     "Consultor(a) em Arquitetura": "建筑顾问",
     "Consultor(a) em Projetos": "项目顾问",
 
-/* =========================================================
-   CHINÊS (SIMPLIFICADO) - RESTO (colar em zh.js)
-   1) Coloque uma VÍRGULA depois da última linha atual:
-        "Consultor(a) em Projetos": "项目顾问",
-   2) Cole TUDO abaixo logo em seguida, antes do "};" final.
-   (a última linha deste bloco já está sem vírgula)
-========================================================= */
 
     /* ---------- comum (chaves que faltavam) ---------- */
     "Sobre": "关于",
