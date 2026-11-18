@@ -4,6 +4,9 @@
    - Editar Perfil: janela com nome, e-mail, telefone, CPF e
      data de nascimento (salva no banco)
    - Sair da conta
+
+   Precisa de:  ../css/mensagens.css  e  ../js/mensagens.js
+   (mensagens.js deve ser carregado ANTES deste arquivo)
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -20,6 +23,46 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!nomeUsuario || !emailUsuario) {
         console.error("[Perfil] Elementos do perfil não encontrados.");
         return;
+    }
+
+    // Garantia: se o mensagens.js não foi carregado, cria uma versão mínima aqui
+    // (os estilos continuam vindo do mensagens.css)
+    if (!window.Mensagem) {
+        console.warn("[Perfil] mensagens.js não foi carregado; usando a versão interna.");
+
+        window.Mensagem = {
+            mostrar(container, tipo, texto, opcoes = {}) {
+                const grupo = opcoes.grupo || "padrao";
+                this.limpar(container, grupo);
+
+                const card = document.createElement("div");
+                card.className = `card-mensagem card-${tipo}` + (opcoes.topo ? " card-topo" : "");
+                card.dataset.grupo = grupo;
+                card.setAttribute("role", tipo === "erro" ? "alert" : "status");
+
+                const conteudo = document.createElement("span");
+                conteudo.textContent = texto;
+
+                if (opcoes.link) {
+                    const link = document.createElement("a");
+                    link.href = opcoes.link.href;
+                    link.textContent = opcoes.link.texto;
+                    conteudo.append(" ", link);
+                }
+
+                card.append(conteudo);
+
+                if (opcoes.posicao === "inicio") container.prepend(card);
+                else container.append(card);
+
+                if (opcoes.tempo) setTimeout(() => card.remove(), opcoes.tempo);
+                return card;
+            },
+            limpar(container, grupo = "padrao") {
+                container?.querySelectorAll(`.card-mensagem[data-grupo="${grupo}"]`)
+                    .forEach(card => card.remove());
+            }
+        };
     }
 
     let usuarioAtual = null;
@@ -122,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     '<label>Telefone<input type="text" name="telefone" inputmode="numeric" placeholder="(00) 00000-0000" maxlength="15" autocomplete="tel"></label>' +
                     '<label>CPF<input type="text" name="cpf" inputmode="numeric" placeholder="000.000.000-00" maxlength="14"></label>' +
                     '<label>Data de nascimento<input type="date" name="dataNascimento"></label>' +
-                    '<p class="edicao-erro" role="alert"></p>' +
+                    '<div class="edicao-mensagens"></div>' +
                 "</div>" +
                 '<div class="edicao-rodape">' +
                     '<button type="button" class="edicao-cancelar">Cancelar</button>' +
@@ -141,6 +184,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             e.target.value = formatarCPF(e.target.value);
         });
 
+        // Tira o destaque vermelho quando a pessoa volta a digitar no campo
+        form.addEventListener("input", e => {
+            e.target.classList?.remove("campo-invalido");
+        });
+
         janela.addEventListener("click", e => {
             if (e.target === janela || e.target.closest(".edicao-fechar, .edicao-cancelar")) fecharEdicao();
         });
@@ -148,6 +196,29 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (e.key === "Escape" && !janela.hidden) fecharEdicao();
         });
         form.addEventListener("submit", salvarEdicao);
+    }
+
+    /* ---------- Mensagens dentro da janela de edição ---------- */
+    function limparErroEdicao() {
+        if (!janela) return;
+        window.Mensagem?.limpar(janela.querySelector(".edicao-mensagens"), "edicao");
+        janela.querySelectorAll(".campo-invalido").forEach(campo => {
+            campo.classList.remove("campo-invalido");
+        });
+    }
+
+    function mostrarErroEdicao(texto, campo = null) {
+        limparErroEdicao();
+        window.Mensagem?.mostrar(
+            janela.querySelector(".edicao-mensagens"),
+            "erro",
+            texto,
+            { grupo: "edicao" }
+        );
+        if (campo) {
+            campo.classList.add("campo-invalido");
+            campo.focus();
+        }
     }
 
     function abrirEdicao() {
@@ -160,7 +231,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         f.cpf.value = formatarCPF(usuarioAtual.cpf);
         f.dataNascimento.value = dataParaInput(usuarioAtual.data_nascimento);
 
-        janela.querySelector(".edicao-erro").textContent = "";
+        limparErroEdicao();
         janela.hidden = false;
         document.body.style.overflow = "hidden";
         f.nome.focus();
@@ -175,7 +246,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         evento.preventDefault();
         const form = janela.querySelector("form");
         const f = form.elements;
-        const erroEl = janela.querySelector(".edicao-erro");
         const botaoSalvar = janela.querySelector(".edicao-salvar");
 
         const dados = {
@@ -186,17 +256,33 @@ document.addEventListener("DOMContentLoaded", async () => {
             dataNascimento: f.dataNascimento.value
         };
 
-        // Validação no navegador
+        // Validação no navegador (mostra o primeiro problema encontrado)
         let problema = "";
-        if (dados.nome.length < 3 || dados.nome.length > 150) problema = "O nome deve ter entre 3 e 150 caracteres.";
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dados.email)) problema = "Informe um e-mail válido.";
-        else if (dados.telefone && ![10, 11].includes(dados.telefone.length)) problema = "Informe um telefone válido com DDD.";
-        else if (dados.cpf && dados.cpf.length !== 11) problema = "O CPF deve ter 11 números.";
-        else if (dados.dataNascimento && dados.dataNascimento > new Date().toISOString().slice(0, 10)) problema = "A data de nascimento não pode ser no futuro.";
+        let campoProblema = null;
 
-        if (problema) { erroEl.textContent = problema; return; }
+        if (dados.nome.length < 3 || dados.nome.length > 150) {
+            problema = "O nome deve ter entre 3 e 150 caracteres.";
+            campoProblema = f.nome;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dados.email)) {
+            problema = "Informe um e-mail válido.";
+            campoProblema = f.email;
+        } else if (dados.telefone && ![10, 11].includes(dados.telefone.length)) {
+            problema = "Informe um telefone válido com DDD.";
+            campoProblema = f.telefone;
+        } else if (dados.cpf && dados.cpf.length !== 11) {
+            problema = "O CPF deve ter 11 números.";
+            campoProblema = f.cpf;
+        } else if (dados.dataNascimento && dados.dataNascimento > new Date().toISOString().slice(0, 10)) {
+            problema = "A data de nascimento não pode ser no futuro.";
+            campoProblema = f.dataNascimento;
+        }
 
-        erroEl.textContent = "";
+        if (problema) {
+            mostrarErroEdicao(problema, campoProblema);
+            return;
+        }
+
+        limparErroEdicao();
         botaoSalvar.disabled = true;
         botaoSalvar.textContent = "Salvando...";
 
@@ -218,9 +304,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             mostrarMensagem("Perfil atualizado com sucesso.");
         } catch (erro) {
             console.error("[Perfil]", erro);
-            erroEl.textContent = erro.name === "TypeError"
-                ? "Não foi possível conectar ao servidor. Verifique se ele está ligado."
-                : (erro.message || "Erro ao salvar as alterações.");
+            mostrarErroEdicao(
+                erro.name === "TypeError"
+                    ? "Não foi possível conectar ao servidor. Verifique se ele está ligado."
+                    : (erro.message || "Erro ao salvar as alterações.")
+            );
         } finally {
             botaoSalvar.disabled = false;
             botaoSalvar.textContent = "Salvar alterações";
@@ -256,36 +344,30 @@ document.addEventListener("DOMContentLoaded", async () => {
         return Number.isNaN(data.getTime()) ? "" : data.toISOString().slice(0, 10);
     }
 
-    /* ---------- AVISOS ---------- */
+    /* ---------- AVISOS (card no topo da página) ---------- */
     function mostrarAviso(texto) {
         const conteudo = document.querySelector(".conteudo");
         if (!conteudo) return;
-        let aviso = conteudo.querySelector(".aviso-login");
-        if (!aviso) {
-            aviso = document.createElement("div");
-            aviso.className = "aviso-login";
-            conteudo.prepend(aviso);
-        }
-        aviso.textContent = texto + " ";
-        const link = document.createElement("a");
-        link.href = "./Login.html";
-        link.textContent = "Ir para o login";
-        aviso.appendChild(link);
+
+        window.Mensagem?.mostrar(conteudo, "erro", texto, {
+            grupo: "perfil",
+            posicao: "inicio",
+            topo: true,
+            link: { texto: "Ir para o login", href: "./Login.html" }
+        });
     }
 
     function mostrarMensagem(texto) {
         const conteudo = document.querySelector(".conteudo");
         if (!conteudo) return;
-        conteudo.querySelector(".aviso-login")?.remove();
-        let mensagem = conteudo.querySelector(".mensagem-perfil");
-        if (!mensagem) {
-            mensagem = document.createElement("div");
-            mensagem.className = "mensagem-perfil";
-            conteudo.prepend(mensagem);
-        }
-        mensagem.textContent = texto;
-        clearTimeout(mensagem._t);
-        mensagem._t = setTimeout(() => mensagem.remove(), 5000);
+
+        // Mesmo grupo do aviso: o card de sucesso substitui o de erro
+        window.Mensagem?.mostrar(conteudo, "sucesso", texto, {
+            grupo: "perfil",
+            posicao: "inicio",
+            topo: true,
+            tempo: 5000
+        });
     }
 
     /* ---------- SAIR ---------- */

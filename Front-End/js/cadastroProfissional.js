@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    // Desliga o balão do navegador para usar o card vermelho
+    formulario.noValidate = true;
+
     const nome = document.getElementById("nome");
     const registro = document.getElementById("RP");
     const email = document.getElementById("email");
@@ -21,73 +24,98 @@ document.addEventListener("DOMContentLoaded", () => {
     const documentos = document.getElementById("documentos");
     const nomeArquivo = document.getElementById("NomeArquivo");
 
+    const botao =
+        formulario.querySelector('button[type="submit"]') ||
+        formulario.querySelector("button");
+
+    const todosCampos = [
+        nome, registro, email, telefone, cpf, dataNascimento,
+        cidade, estado, profissao, senha, confirmarSenha, documentos
+    ];
+
     /*
      * =====================================================
-     * FUNÇÕES AUXILIARES
+     * MENSAGEM ÚNICA (CARD LOGO ABAIXO DO BOTÃO)
      * =====================================================
      */
 
-    function mostrarErro(campo, mensagem) {
+    function removerMensagem() {
 
-        removerErro(campo);
+        formulario
+            .querySelectorAll(".mensagem-cadastro-profissional")
+            .forEach(card => card.remove());
 
-        campo.classList.add("campo-invalido");
-
-        const erro = document.createElement("small");
-
-        erro.className = "erro-cadastro-profissional";
-        erro.textContent = mensagem;
-
-        campo.insertAdjacentElement("afterend", erro);
     }
 
 
-    function removerErro(campo) {
+    function mostrarMensagem(texto, sucesso = false) {
 
-        campo.classList.remove("campo-invalido");
+        removerMensagem();
 
-        const erroExistente =
-            campo.parentElement.querySelector(
-                ".erro-cadastro-profissional"
-            );
+        const card = document.createElement("div");
 
-        if (erroExistente) {
-            erroExistente.remove();
+        card.className =
+            "mensagem-cadastro-profissional card-mensagem " +
+            (sucesso ? "card-sucesso" : "card-erro");
+
+        card.setAttribute("role", sucesso ? "status" : "alert");
+        card.textContent = texto;
+
+        if (botao) {
+            botao.insertAdjacentElement("afterend", card);
+        } else {
+            formulario.appendChild(card);
         }
+    }
+
+
+    // O input de arquivo fica escondido, então o destaque vai na caixa dele
+    function alvoDoCampo(campo) {
+        return campo.type === "file"
+            ? campo.closest(".ArquivoBox") || campo
+            : campo;
+    }
+
+
+    function marcarInvalido(campo) {
+        alvoDoCampo(campo).classList.add("campo-invalido");
     }
 
 
     function limparErros() {
 
-        document
-            .querySelectorAll(".erro-cadastro-profissional")
-            .forEach(erro => erro.remove());
+        removerMensagem();
 
-        document
+        formulario
             .querySelectorAll(".campo-invalido")
-            .forEach(campo => {
-                campo.classList.remove("campo-invalido");
-            });
+            .forEach(campo => campo.classList.remove("campo-invalido"));
 
     }
 
 
-    function mostrarSucesso(mensagem) {
+    // Quando a pessoa corrige um campo, o destaque some;
+    // se não sobrou nenhum campo com erro, o card também some
+    todosCampos.forEach(campo => {
 
-        const mensagemExistente =
-            document.querySelector(".sucesso-cadastro-profissional");
+        const evento =
+            campo.tagName === "SELECT" || campo.type === "file"
+                ? "change"
+                : "input";
 
-        if (mensagemExistente) {
-            mensagemExistente.remove();
-        }
+        campo.addEventListener(evento, () => {
 
-        const sucesso = document.createElement("div");
+            alvoDoCampo(campo).classList.remove("campo-invalido");
 
-        sucesso.className = "sucesso-cadastro-profissional";
-        sucesso.textContent = mensagem;
+            if (
+                !formulario.querySelector(".campo-invalido") &&
+                formulario.querySelector(".mensagem-cadastro-profissional.card-erro")
+            ) {
+                removerMensagem();
+            }
 
-        formulario.prepend(sucesso);
-    }
+        });
+
+    });
 
 
     /*
@@ -244,9 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const arquivo = documentos.files[0];
-
-        nomeArquivo.textContent = arquivo.name;
+        nomeArquivo.textContent = documentos.files[0].name;
 
     });
 
@@ -285,7 +311,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         limparErros();
 
-        let formularioValido = true;
+        const erros = [];
+
+        function falhar(campo, mensagem) {
+
+            marcarInvalido(campo);
+
+            erros.push({ campo, mensagem });
+        }
 
         /*
          * NOME
@@ -294,13 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const nomeValor = nome.value.trim();
 
         if (nomeValor.length < 3) {
-
-            mostrarErro(
-                nome,
-                "Informe seu nome completo."
-            );
-
-            formularioValido = false;
+            falhar(nome, "Informe seu nome completo.");
         }
 
 
@@ -311,13 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const registroValor = registro.value.trim();
 
         if (registroValor.length < 2) {
-
-            mostrarErro(
-                registro,
-                "Informe seu registro profissional."
-            );
-
-            formularioValido = false;
+            falhar(registro, "Informe seu registro profissional.");
         }
 
 
@@ -328,13 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const emailValor = email.value.trim();
 
         if (!emailValido(emailValor)) {
-
-            mostrarErro(
-                email,
-                "Informe um e-mail válido."
-            );
-
-            formularioValido = false;
+            falhar(email, "Informe um e-mail válido.");
         }
 
 
@@ -349,13 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
             telefoneValor.length !== 10 &&
             telefoneValor.length !== 11
         ) {
-
-            mostrarErro(
-                telefone,
-                "Informe um telefone válido."
-            );
-
-            formularioValido = false;
+            falhar(telefone, "Informe um telefone válido.");
         }
 
 
@@ -366,13 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const cpfValor = cpf.value.trim();
 
         if (!cpfValido(cpfValor)) {
-
-            mostrarErro(
-                cpf,
-                "Informe um CPF válido."
-            );
-
-            formularioValido = false;
+            falhar(cpf, "Informe um CPF válido.");
         }
 
 
@@ -381,13 +384,10 @@ document.addEventListener("DOMContentLoaded", () => {
          */
 
         if (!dataValida(dataNascimento.value)) {
-
-            mostrarErro(
+            falhar(
                 dataNascimento,
                 "Informe uma data de nascimento válida."
             );
-
-            formularioValido = false;
         }
 
 
@@ -396,13 +396,7 @@ document.addEventListener("DOMContentLoaded", () => {
          */
 
         if (cidade.value.trim().length < 2) {
-
-            mostrarErro(
-                cidade,
-                "Informe sua cidade."
-            );
-
-            formularioValido = false;
+            falhar(cidade, "Informe sua cidade.");
         }
 
 
@@ -411,13 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
          */
 
         if (!estado.value) {
-
-            mostrarErro(
-                estado,
-                "Selecione seu estado."
-            );
-
-            formularioValido = false;
+            falhar(estado, "Selecione seu estado.");
         }
 
 
@@ -426,13 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
          */
 
         if (!profissao.value) {
-
-            mostrarErro(
-                profissao,
-                "Selecione sua profissão."
-            );
-
-            formularioValido = false;
+            falhar(profissao, "Selecione sua profissão.");
         }
 
 
@@ -441,13 +423,10 @@ document.addEventListener("DOMContentLoaded", () => {
          */
 
         if (senha.value.length < 6) {
-
-            mostrarErro(
+            falhar(
                 senha,
                 "A senha deve possuir pelo menos 6 caracteres."
             );
-
-            formularioValido = false;
         }
 
 
@@ -456,13 +435,7 @@ document.addEventListener("DOMContentLoaded", () => {
          */
 
         if (senha.value !== confirmarSenha.value) {
-
-            mostrarErro(
-                confirmarSenha,
-                "As senhas não coincidem."
-            );
-
-            formularioValido = false;
+            falhar(confirmarSenha, "As senhas não coincidem.");
         }
 
 
@@ -471,21 +444,36 @@ document.addEventListener("DOMContentLoaded", () => {
          */
 
         if (documentos.files.length === 0) {
-
-            mostrarErro(
-                documentos,
-                "Selecione um documento."
-            );
-
-            formularioValido = false;
+            falhar(documentos, "Selecione um documento.");
         }
 
 
         /*
          * SE EXISTIR ALGUM ERRO
+         * Mostra o primeiro problema no card abaixo do botão;
+         * os campos com erro ficam com a borda vermelha.
          */
 
-        if (!formularioValido) {
+        if (erros.length > 0) {
+
+            let texto = erros[0].mensagem;
+
+            if (erros.length > 1) {
+
+                const restantes = erros.length - 1;
+
+                texto += restantes === 1
+                    ? " Mais 1 campo precisa de correção."
+                    : ` Mais ${restantes} campos precisam de correção.`;
+            }
+
+            mostrarMensagem(texto);
+
+            // Foco sem rolar a tela, para o card continuar visível
+            if (erros[0].campo.type !== "file") {
+                erros[0].campo.focus({ preventScroll: true });
+            }
+
             return;
         }
 
@@ -544,15 +532,15 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        mostrarSucesso(
-            "Cadastro profissional validado com sucesso!"
-        );
-
-
         formulario.reset();
 
         nomeArquivo.textContent =
             "Nenhum arquivo escolhido";
+
+        mostrarMensagem(
+            "Cadastro profissional validado com sucesso!",
+            true
+        );
 
     });
 

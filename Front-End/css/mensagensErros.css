@@ -1,0 +1,145 @@
+/* =========================================================
+   CARDS DE MENSAGEM - erro, sucesso, aviso e informação
+   Padrão: fundo colorido, borda mais escura e texto escuro
+   da mesma cor. Linke este arquivo DEPOIS do CSS de cada página.
+========================================================= */
+
+body .card-mensagem[role] {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin: 14px 0 0 0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 2px solid;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: left;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    animation: aparecerCard 0.25s ease;
+}
+
+body .card-mensagem[role] span {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ---------- Ícone ---------- */
+
+body .card-mensagem[role]::before {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+/* ---------- Link dentro do card ---------- */
+
+body .card-mensagem[role] a {
+    color: inherit;
+    font-weight: 800;
+    text-decoration: underline;
+}
+
+body .card-mensagem[role] a:hover {
+    text-decoration: none;
+}
+
+/* ---------- ERRO (vermelho) ---------- */
+
+body .card-mensagem.card-erro[role] {
+    background: #f87171;
+    border-color: #991b1b;
+    color: #5f0f0f;
+}
+
+body .card-mensagem.card-erro[role]::before {
+    content: "!";
+    background: #991b1b;
+}
+
+/* ---------- SUCESSO (verde) ---------- */
+
+body .card-mensagem.card-sucesso[role] {
+    background: #4ade80;
+    border-color: #166534;
+    color: #0f3d1f;
+}
+
+body .card-mensagem.card-sucesso[role]::before {
+    content: "✓";
+    background: #166534;
+}
+
+/* ---------- AVISO (amarelo) ---------- */
+
+body .card-mensagem.card-aviso[role] {
+    background: #fbbf24;
+    border-color: #92400e;
+    color: #4a2305;
+}
+
+body .card-mensagem.card-aviso[role]::before {
+    content: "!";
+    background: #92400e;
+}
+
+/* ---------- INFORMAÇÃO (azul) ---------- */
+
+body .card-mensagem.card-info[role] {
+    background: #60a5fa;
+    border-color: #1e40af;
+    color: #0f2557;
+}
+
+body .card-mensagem.card-info[role]::before {
+    content: "i";
+    background: #1e40af;
+}
+
+/* ---------- Posições ---------- */
+
+/* Erro logo abaixo de um campo */
+body .card-mensagem.card-campo[role] {
+    margin: -6px 0 16px 0;
+    padding: 8px 10px;
+    font-size: 12px;
+}
+
+body .card-mensagem.card-campo[role]::before {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+}
+
+/* Mensagem no topo de uma página (ex.: perfil) */
+body .card-mensagem.card-topo[role] {
+    margin: 0 0 16px 0;
+}
+
+/* ---------- Campo inválido ---------- */
+
+body .campo-invalido {
+    border-color: #f87171 !important;
+    box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.3);
+}
+
+@keyframes aparecerCard {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

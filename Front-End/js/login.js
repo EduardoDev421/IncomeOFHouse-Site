@@ -11,23 +11,38 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    const EMAIL_KEY = "incomeOfHouses_email";
+    // Desliga o balão do navegador para usar o card vermelho
+    form.noValidate = true;
 
-    function mostrarMensagem(mensagem, sucesso = false) {
-        let caixa = form.querySelector(".mensagem-login");
-        if (!caixa) {
-            caixa = document.createElement("div");
-            caixa.className = "mensagem-login";
-            caixa.setAttribute("role", "status");
-            form.appendChild(caixa);
-        }
-        caixa.textContent = mensagem;
-        caixa.style.cssText = `margin-top:15px;padding:12px;border-radius:8px;font-size:14px;line-height:1.4;background:${sucesso ? "#e8f5e9" : "#fdecea"};color:${sucesso ? "#2e7d32" : "#b42318"};`;
-    }
+    const EMAIL_KEY = "incomeOfHouses_email";
 
     function limparMensagem() {
         form.querySelector(".mensagem-login")?.remove();
+        email.classList.remove("campo-invalido");
+        senha.classList.remove("campo-invalido");
     }
+
+    function mostrarMensagem(mensagem, sucesso = false) {
+        form.querySelector(".mensagem-login")?.remove();
+
+        const caixa = document.createElement("div");
+        caixa.className = `mensagem-login card-mensagem ${sucesso ? "card-sucesso" : "card-erro"}`;
+        caixa.setAttribute("role", sucesso ? "status" : "alert");
+        caixa.textContent = mensagem;
+
+        form.appendChild(caixa);
+    }
+
+    function erroNoCampo(campo, mensagem) {
+        mostrarMensagem(mensagem);
+        campo.classList.add("campo-invalido");
+        campo.focus();
+    }
+
+    // Some o destaque vermelho quando a pessoa volta a digitar
+    [email, senha].forEach(campo => {
+        campo.addEventListener("input", () => campo.classList.remove("campo-invalido"));
+    });
 
     const emailSalvo = localStorage.getItem(EMAIL_KEY);
     if (emailSalvo) {
@@ -43,11 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const senhaValor = senha.value;
 
         if (!emailValor || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValor)) {
-            mostrarMensagem("Digite um e-mail válido.");
+            erroNoCampo(email, "Digite um e-mail válido.");
             return;
         }
         if (!senhaValor) {
-            mostrarMensagem("Digite sua senha.");
+            erroNoCampo(senha, "Digite sua senha.");
             return;
         }
 
@@ -76,10 +91,20 @@ document.addEventListener("DOMContentLoaded", () => {
             // A senha nunca é armazenada no navegador.
             localStorage.setItem("incomeOfHouses_usuario", JSON.stringify(dados.usuario));
             localStorage.setItem("incomeOfHouses_token", dados.token);
+
             mostrarMensagem("Login validado com sucesso! Redirecionando...", true);
-            window.location.href = "../index.html";
+
+            // Pequena pausa para a pessoa conseguir ver o card de sucesso
+            setTimeout(() => {
+                window.location.href = "../index.html";
+            }, 900);
         } catch (erro) {
-            mostrarMensagem(erro.message || "Não foi possível conectar ao servidor. Confira se o Back-End está rodando.");
+            // TypeError = fetch falhou (servidor fora do ar)
+            if (erro instanceof TypeError) {
+                mostrarMensagem("Não foi possível conectar ao servidor. Confira se o Back-End está rodando.");
+            } else {
+                mostrarMensagem(erro.message);
+            }
         } finally {
             if (botao) {
                 botao.disabled = false;
