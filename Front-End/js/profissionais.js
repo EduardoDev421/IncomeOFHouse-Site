@@ -107,9 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // A experiência e as avaliações não fazem parte dos dados coletados no cadastro atual.
         filtrados = profissionais.filter(p =>
             (!profissao || p.profissao === profissao) &&
-            (!estado || p.estado === estado) &&
-            !experiencia &&
-            !(filtroAvaliacao?.value)
+            (!estado || p.estado === estado)
         );
         paginaAtual = 1;
         mostrarMensagem(`${filtrados.length} profissional(is) encontrado(s).`);
@@ -134,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    [filtroProfissao, filtroEstado, filtroExperiencia, filtroAvaliacao].forEach(filtro => {
+    [filtroProfissao, filtroEstado].forEach(filtro => {
         if (filtro) filtro.addEventListener("change", aplicarFiltros);
     });
     if (botaoPesquisar) botaoPesquisar.addEventListener("click", aplicarFiltros);
