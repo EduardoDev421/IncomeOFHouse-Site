@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const secoesSeguranca = document.querySelectorAll(".seguranças");
     const secoesPrivacidade = document.querySelectorAll(".privacidades");
-    const secoesAjuda = document.querySelectorAll(".CentralAjudas");
+    const secoesAjuda = document.querySelectorAll(".CentralAjudas, .CentralAjudaU");
 
     // ============================================================
     // CONFIGURAÇÕES PADRÃO
@@ -31,126 +31,54 @@ document.addEventListener("DOMContentLoaded", () => {
         novidades: true,
         tema: "escuro",
         idioma: "pt-br",
-        moeda: "BRL"
+        moeda: "BRL",
+        visibilidadePerfil: "publico" // "publico" | "privado"
     };
 
     // ============================================================
-    // CARREGAR CONFIGURAÇÕES SALVAS
+    // CARREGAR / SALVAR
     // ============================================================
 
     function carregarConfiguracoes() {
-        const configuracoesSalvas = localStorage.getItem(STORAGE_KEY);
+        const salvas = localStorage.getItem(STORAGE_KEY);
 
-        if (!configuracoesSalvas) {
-            return {
-                ...configuracoesPadrao
-            };
+        if (!salvas) {
+            return { ...configuracoesPadrao };
         }
 
         try {
-            const configuracoes = JSON.parse(configuracoesSalvas);
-
-            return {
-                ...configuracoesPadrao,
-                ...configuracoes
-            };
+            return { ...configuracoesPadrao, ...JSON.parse(salvas) };
         } catch (erro) {
-            console.error(
-                "Erro ao carregar configurações do usuário:",
-                erro
-            );
-
-            return {
-                ...configuracoesPadrao
-            };
+            console.error("Erro ao carregar configurações do usuário:", erro);
+            return { ...configuracoesPadrao };
         }
     }
 
     let configuracoes = carregarConfiguracoes();
 
-    // ============================================================
-    // SALVAR CONFIGURAÇÕES
-    // ============================================================
-
     function salvarConfiguracoes() {
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(configuracoes)
-        );
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(configuracoes));
     }
 
     // ============================================================
-    // APLICAR CONFIGURAÇÕES
+    // MENSAGEM TEMPORÁRIA
     // ============================================================
 
-    function aplicarConfiguracoes() {
-        // --------------------------------------------------------
-        // NOTIFICAÇÕES
-        // --------------------------------------------------------
+    function mostrarMensagem(texto) {
+        const antiga = document.querySelector(".mensagem-configuracao");
 
-        if (toggles.length >= 1) {
-            toggles[0].checked = configuracoes.notificacoesEmail;
-        }
+        if (antiga) antiga.remove();
 
-        if (toggles.length >= 2) {
-            toggles[1].checked = configuracoes.notificacoesPush;
-        }
+        const mensagem = document.createElement("div");
+        mensagem.className = "mensagem-configuracao";
+        mensagem.textContent = texto;
 
-        if (toggles.length >= 3) {
-            toggles[2].checked = configuracoes.novidades;
-        }
+        document.body.appendChild(mensagem);
 
-        // --------------------------------------------------------
-        // TEMA
-        // --------------------------------------------------------
-
-        if (tema) {
-            /*
-             * O HTML possui:
-             *
-             * value=""            -> Escuro
-             * value="Casa Térrea"  -> Claro
-             *
-             * Corrigimos isso no JS para que a configuração
-             * funcione de maneira consistente.
-             */
-
-            if (configuracoes.tema === "claro") {
-                tema.value = "claro";
-            } else {
-                tema.value = "";
-            }
-        }
-
-        aplicarTema();
-
-        // --------------------------------------------------------
-        // IDIOMA
-        // --------------------------------------------------------
-
-        if (idioma) {
-            const idiomaExiste = Array.from(idioma.options).some(
-                (option) => option.value === configuracoes.idioma
-            );
-
-            if (idiomaExiste) {
-                idioma.value = configuracoes.idioma;
-            }
-        }
-
-        // --------------------------------------------------------
-        // MOEDA
-        // --------------------------------------------------------
-
-        if (moeda) {
-            const moedaExiste = Array.from(moeda.options).some(
-                (option) => option.value === configuracoes.moeda
-            );
-
-            if (moedaExiste) {
-                moeda.value = configuracoes.moeda;
-            }
-        }
+        setTimeout(() => {
+            mensagem.classList.add("saindo");
+            setTimeout(() => mensagem.remove(), 300);
+        }, 3000);
     }
 
     // ============================================================
@@ -158,268 +86,124 @@ document.addEventListener("DOMContentLoaded", () => {
     // ============================================================
 
     function aplicarTema() {
-        const temaAtual = configuracoes.tema;
-
-        document.body.classList.remove(
-            "tema-claro",
-            "tema-escuro"
+        document.body.classList.remove("tema-claro", "tema-escuro");
+        document.body.classList.add(
+            configuracoes.tema === "claro" ? "tema-claro" : "tema-escuro"
         );
+    }
 
-        if (temaAtual === "claro") {
-            document.body.classList.add("tema-claro");
-        } else {
-            document.body.classList.add("tema-escuro");
+    // ============================================================
+    // VISIBILIDADE DO PERFIL (modal de escolha)
+    // ============================================================
+
+    const OPCOES_VISIBILIDADE = {
+        publico: {
+            titulo: "Público",
+            descricao: "Profissionais e outros usuários podem ver seu perfil.",
+            resumo: "Seu perfil é público"
+        },
+        privado: {
+            titulo: "Privado",
+            descricao: "Ninguém pode ver seu perfil. Só você tem acesso.",
+            resumo: "Seu perfil é privado"
         }
-    }
+    };
 
-    // ============================================================
-    // EVENTOS DOS TOGGLES
-    // ============================================================
-
-    if (toggles.length >= 1) {
-        toggles[0].addEventListener("change", () => {
-            configuracoes.notificacoesEmail = toggles[0].checked;
-
-            salvarConfiguracoes();
-
-            mostrarMensagem(
-                toggles[0].checked
-                    ? "Notificações por e-mail ativadas."
-                    : "Notificações por e-mail desativadas."
-            );
+    // Mostra a escolha atual no texto pequeno do item
+    function atualizarResumoVisibilidade() {
+        const item = Array.from(secoesPrivacidade).find((secao) => {
+            const h3 = secao.querySelector("h3");
+            return h3 && h3.textContent.trim().toLowerCase() === "quem pode ver seu perfil";
         });
+
+        if (!item) return;
+
+        const p = item.querySelector("p");
+        const opcao = OPCOES_VISIBILIDADE[configuracoes.visibilidadePerfil];
+
+        if (p && opcao) p.textContent = opcao.resumo;
     }
 
-    if (toggles.length >= 2) {
-        toggles[1].addEventListener("change", () => {
-            configuracoes.notificacoesPush = toggles[1].checked;
+    function abrirModalVisibilidade() {
+        // evita abrir duas vezes
+        if (document.querySelector(".modal-visibilidade")) return;
 
-            salvarConfiguracoes();
+        const overlay = document.createElement("div");
+        overlay.className = "modal-visibilidade";
 
-            mostrarMensagem(
-                toggles[1].checked
-                    ? "Notificações Push ativadas."
-                    : "Notificações Push desativadas."
-            );
+        const opcoesHTML = Object.entries(OPCOES_VISIBILIDADE)
+            .map(([valor, opcao]) => `
+                <label class="opcao-visibilidade">
+                    <input type="radio" name="visibilidade" value="${valor}"
+                        ${configuracoes.visibilidadePerfil === valor ? "checked" : ""}>
+                    <span class="opcao-visibilidade-texto">
+                        <strong>${opcao.titulo}</strong>
+                        <small>${opcao.descricao}</small>
+                    </span>
+                </label>
+            `)
+            .join("");
+
+        overlay.innerHTML = `
+            <div class="modal-visibilidade-caixa" role="dialog" aria-modal="true"
+                 aria-labelledby="tituloVisibilidade">
+                <h3 id="tituloVisibilidade">Quem pode ver seu perfil</h3>
+                <p>Escolha se outras pessoas podem ou não ver o seu perfil.</p>
+                <div class="opcoes-visibilidade">${opcoesHTML}</div>
+                <div class="modal-visibilidade-botoes">
+                    <button type="button" class="btn-cancelar">Cancelar</button>
+                    <button type="button" class="btn-salvar">Salvar</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+
+        function fechar() {
+            document.removeEventListener("keydown", aoPressionarTecla);
+            overlay.remove();
+        }
+
+        function aoPressionarTecla(evento) {
+            if (evento.key === "Escape") fechar();
+        }
+
+        document.addEventListener("keydown", aoPressionarTecla);
+
+        // clicar fora da caixa fecha
+        overlay.addEventListener("click", (evento) => {
+            if (evento.target === overlay) fechar();
         });
-    }
 
-    if (toggles.length >= 3) {
-        toggles[2].addEventListener("change", () => {
-            configuracoes.novidades = toggles[2].checked;
+        overlay.querySelector(".btn-cancelar").addEventListener("click", fechar);
 
-            salvarConfiguracoes();
+        overlay.querySelector(".btn-salvar").addEventListener("click", () => {
+            const escolhida = overlay.querySelector('input[name="visibilidade"]:checked');
 
-            mostrarMensagem(
-                toggles[2].checked
-                    ? "Novidades e atualizações ativadas."
-                    : "Novidades e atualizações desativadas."
-            );
-        });
-    }
+            if (escolhida) {
+                configuracoes.visibilidadePerfil = escolhida.value;
+                salvarConfiguracoes();
+                atualizarResumoVisibilidade();
 
-    // ============================================================
-    // EVENTO DO TEMA
-    // ============================================================
-
-    if (tema) {
-        tema.addEventListener("change", () => {
-            /*
-             * O HTML atual possui valores incorretos para o
-             * select do tema. Por isso aceitamos os dois formatos.
-             */
-
-            const valor = tema.value.toLowerCase();
-
-            if (
-                valor === "claro" ||
-                valor === "casa térrea"
-            ) {
-                configuracoes.tema = "claro";
-            } else {
-                configuracoes.tema = "escuro";
+                mostrarMensagem(
+                    escolhida.value === "publico"
+                        ? "Seu perfil agora é público."
+                        : "Seu perfil agora é privado."
+                );
             }
 
-            salvarConfiguracoes();
-
-            aplicarTema();
-
-            mostrarMensagem(
-                `Tema ${configuracoes.tema} selecionado.`
-            );
+            fechar();
         });
     }
-
-    // ============================================================
-    // EVENTO DO IDIOMA
-    // ============================================================
-
-    if (idioma) {
-        idioma.addEventListener("change", () => {
-            configuracoes.idioma = idioma.value;
-
-            salvarConfiguracoes();
-
-            mostrarMensagem(
-                `Idioma selecionado: ${idioma.options[idioma.selectedIndex].text}.`
-            );
-
-            /*
-             * A tradução completa da plataforma ainda não foi
-             * implementada.
-             *
-             * Por enquanto salvamos a preferência para que ela
-             * possa ser utilizada posteriormente.
-             */
-        });
-    }
-
-    // ============================================================
-    // EVENTO DA MOEDA
-    // ============================================================
-
-    if (moeda) {
-        moeda.addEventListener("change", () => {
-            configuracoes.moeda = moeda.value;
-
-            salvarConfiguracoes();
-
-            const moedaSelecionada =
-                moeda.options[moeda.selectedIndex].text;
-
-            mostrarMensagem(
-                `Moeda selecionada: ${moedaSelecionada}.`
-            );
-        });
-    }
-
-    // ============================================================
-    // LINKS DE SEGURANÇA
-    // ============================================================
-
-    secoesSeguranca.forEach((secao) => {
-        const titulo = secao.querySelector("h3");
-
-        if (!titulo) {
-            return;
-        }
-
-        const texto = titulo.textContent.trim().toLowerCase();
-
-        // --------------------------------------------------------
-        // ALTERAR SENHA
-        // --------------------------------------------------------
-
-        if (texto === "alterar senha") {
-            secao.style.cursor = "pointer";
-
-            secao.addEventListener("click", () => {
-                window.location.href =
-                    "../pages/PagesImplement/AlterarSenha.html";
-            });
-        }
-
-        // --------------------------------------------------------
-        // AUTENTICAÇÃO EM DUAS ETAPAS
-        // --------------------------------------------------------
-
-        if (texto === "autenticação em duas etapas") {
-            secao.style.cursor = "pointer";
-
-            secao.addEventListener("click", () => {
-                mostrarMensagem(
-                    "A autenticação em duas etapas ainda não está disponível."
-                );
-            });
-        }
-
-        // --------------------------------------------------------
-        // DISPOSITIVOS CONECTADOS
-        // --------------------------------------------------------
-
-        if (texto === "dispositivos conectados") {
-            secao.style.cursor = "pointer";
-
-            secao.addEventListener("click", () => {
-                mostrarMensagem(
-                    "O gerenciamento de dispositivos será implementado posteriormente."
-                );
-            });
-        }
-    });
-
-    // ============================================================
-    // LINKS DE PRIVACIDADE
-    // ============================================================
-
-    secoesPrivacidade.forEach((secao) => {
-        const titulo = secao.querySelector("h3");
-
-        if (!titulo) {
-            return;
-        }
-
-        const texto = titulo.textContent.trim().toLowerCase();
-
-        // --------------------------------------------------------
-        // VISIBILIDADE DO PERFIL
-        // --------------------------------------------------------
-
-        if (texto === "quem pode ver seu perfil") {
-            secao.style.cursor = "pointer";
-
-            secao.addEventListener("click", () => {
-                mostrarMensagem(
-                    "As opções de visibilidade do perfil ainda estão em desenvolvimento."
-                );
-            });
-        }
-
-        // --------------------------------------------------------
-        // DADOS E PERMISSÕES
-        // --------------------------------------------------------
-
-        if (texto === "dados e permissões") {
-            secao.style.cursor = "pointer";
-
-            secao.addEventListener("click", () => {
-                mostrarMensagem(
-                    "A área de dados e permissões ainda está em desenvolvimento."
-                );
-            });
-        }
-
-        // --------------------------------------------------------
-        // EXCLUIR CONTA
-        // --------------------------------------------------------
-
-        if (texto === "excluir conta") {
-            secao.style.cursor = "pointer";
-
-            secao.addEventListener("click", confirmarExclusaoConta);
-        }
-    });
 
     // ============================================================
     // EXCLUSÃO DA CONTA
     // ============================================================
 
     function confirmarExclusaoConta() {
-        const primeiraConfirmacao = confirm(
-            "Tem certeza que deseja excluir sua conta?"
-        );
+        if (!confirm("Tem certeza que deseja excluir sua conta?")) return;
 
-        if (!primeiraConfirmacao) {
-            return;
-        }
-
-        const segundaConfirmacao = confirm(
-            "Essa ação é permanente. Deseja realmente continuar?"
-        );
-
-        if (!segundaConfirmacao) {
-            return;
-        }
+        if (!confirm("Essa ação é permanente. Deseja realmente continuar?")) return;
 
         /*
          * Ainda não existe uma rota no Back-End para excluir
@@ -433,121 +217,137 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ============================================================
-    // CENTRAL DE AJUDA
+    // APLICAR CONFIGURAÇÕES NA TELA
     // ============================================================
 
-    secoesAjuda.forEach((secao) => {
-        const titulo = secao.querySelector("h3");
+    function aplicarConfiguracoes() {
+        // Notificações
+        if (toggles[0]) toggles[0].checked = configuracoes.notificacoesEmail;
+        if (toggles[1]) toggles[1].checked = configuracoes.notificacoesPush;
+        if (toggles[2]) toggles[2].checked = configuracoes.novidades;
 
-        if (!titulo) {
-            return;
+        // Tema
+        if (tema) tema.value = configuracoes.tema === "claro" ? "claro" : "escuro";
+        aplicarTema();
+
+        // Idioma
+        if (idioma && Array.from(idioma.options).some((o) => o.value === configuracoes.idioma)) {
+            idioma.value = configuracoes.idioma;
         }
 
-        const texto = titulo.textContent.trim().toLowerCase();
-
-        // --------------------------------------------------------
-        // PERGUNTAS FREQUENTES
-        // --------------------------------------------------------
-
-        if (texto === "perguntas frequentes") {
-            secao.style.cursor = "pointer";
-
-            secao.addEventListener("click", () => {
-                mostrarMensagem(
-                    "A área de perguntas frequentes ainda está em desenvolvimento."
-                );
-            });
+        // Moeda
+        if (moeda && Array.from(moeda.options).some((o) => o.value === configuracoes.moeda)) {
+            moeda.value = configuracoes.moeda;
         }
 
-        // --------------------------------------------------------
-        // FALE CONOSCO
-        // --------------------------------------------------------
+        // Visibilidade
+        atualizarResumoVisibilidade();
+    }
 
-        if (texto === "fale conosco") {
-            secao.style.cursor = "pointer";
+    // ============================================================
+    // EVENTOS DOS TOGGLES
+    // ============================================================
 
-            secao.addEventListener("click", () => {
-                window.location.href =
-                    "../pages/PagesImplement/FaleConosco.html";
-            });
-        }
+    const NOTIFICACOES = [
+        { chave: "notificacoesEmail", on: "Notificações por e-mail ativadas.", off: "Notificações por e-mail desativadas." },
+        { chave: "notificacoesPush", on: "Notificações Push ativadas.", off: "Notificações Push desativadas." },
+        { chave: "novidades", on: "Novidades e atualizações ativadas.", off: "Novidades e atualizações desativadas." }
+    ];
 
-        // --------------------------------------------------------
-        // TUTORIAIS
-        // --------------------------------------------------------
+    NOTIFICACOES.forEach((notificacao, indice) => {
+        const input = toggles[indice];
 
-        if (texto === "tutoriais para profissionais") {
-            secao.style.cursor = "pointer";
+        if (!input) return;
 
-            secao.addEventListener("click", () => {
-                mostrarMensagem(
-                    "Os tutoriais ainda estão em desenvolvimento."
-                );
-            });
-        }
+        input.addEventListener("change", () => {
+            configuracoes[notificacao.chave] = input.checked;
+            salvarConfiguracoes();
+            mostrarMensagem(input.checked ? notificacao.on : notificacao.off);
+        });
+    });
+
+    // ============================================================
+    // EVENTOS DE TEMA, IDIOMA E MOEDA
+    // ============================================================
+
+    if (tema) {
+        tema.addEventListener("change", () => {
+            configuracoes.tema = tema.value === "claro" ? "claro" : "escuro";
+            salvarConfiguracoes();
+            aplicarTema();
+            mostrarMensagem(`Tema ${configuracoes.tema} selecionado.`);
+        });
+    }
+
+    if (idioma) {
+        idioma.addEventListener("change", () => {
+            configuracoes.idioma = idioma.value;
+            salvarConfiguracoes();
+            mostrarMensagem(
+                `Idioma selecionado: ${idioma.options[idioma.selectedIndex].text}.`
+            );
+        });
+    }
+
+    if (moeda) {
+        moeda.addEventListener("change", () => {
+            configuracoes.moeda = moeda.value;
+            salvarConfiguracoes();
+            mostrarMensagem(
+                `Moeda selecionada: ${moeda.options[moeda.selectedIndex].text}.`
+            );
+        });
+    }
+
+    // ============================================================
+    // ITENS SEM LINK
+    // (itens com <a href> navegam sozinhos, o JS não mexe neles)
+    // ============================================================
+
+    const ACOES = {
+        "quem pode ver seu perfil": abrirModalVisibilidade,
+        "excluir conta": confirmarExclusaoConta,
+        "perguntas frequentes": () =>
+            mostrarMensagem("A área de perguntas frequentes ainda está em desenvolvimento."),
+        "tutoriais": () =>
+            mostrarMensagem("Os tutoriais ainda estão em desenvolvimento.")
+    };
+
+    [...secoesSeguranca, ...secoesPrivacidade, ...secoesAjuda].forEach((item) => {
+        if (item.querySelector("a[href]")) return;
+
+        const titulo = item.querySelector("h3");
+
+        if (!titulo) return;
+
+        const acao = ACOES[titulo.textContent.trim().toLowerCase()];
+
+        if (!acao) return;
+
+        item.style.cursor = "pointer";
+        item.addEventListener("click", acao);
     });
 
     // ============================================================
     // SAIR DA CONTA
     // ============================================================
 
-    const linksMenu = document.querySelectorAll(".menu-lateral a");
+    document.querySelectorAll(".menu-lateral a").forEach((link) => {
+        if (link.textContent.trim().toLowerCase() !== "sair") return;
 
-    linksMenu.forEach((link) => {
-        const texto = link.textContent.trim().toLowerCase();
+        link.addEventListener("click", (evento) => {
+            evento.preventDefault();
 
-        if (texto === "sair") {
-            link.addEventListener("click", (event) => {
-                event.preventDefault();
+            if (!confirm("Deseja realmente sair da sua conta?")) return;
 
-                const confirmar = confirm(
-                    "Deseja realmente sair da sua conta?"
-                );
+            localStorage.removeItem("usuarioLogado");
+            localStorage.removeItem("usuario");
+            localStorage.removeItem("user");
+            localStorage.removeItem("usuarioAtual");
 
-                if (!confirmar) {
-                    return;
-                }
-
-                localStorage.removeItem("usuarioLogado");
-                localStorage.removeItem("usuario");
-                localStorage.removeItem("user");
-                localStorage.removeItem("usuarioAtual");
-
-                window.location.href = "../index.html";
-            });
-        }
+            window.location.href = "../index.html";
+        });
     });
-
-    // ============================================================
-    // MENSAGEM TEMPORÁRIA
-    // ============================================================
-
-    function mostrarMensagem(texto) {
-        let mensagem = document.querySelector(
-            ".mensagem-configuracao"
-        );
-
-        if (mensagem) {
-            mensagem.remove();
-        }
-
-        mensagem = document.createElement("div");
-
-        mensagem.className = "mensagem-configuracao";
-        mensagem.textContent = texto;
-
-        document.body.appendChild(mensagem);
-
-        setTimeout(() => {
-            mensagem.classList.add("saindo");
-
-            setTimeout(() => {
-                if (mensagem) {
-                    mensagem.remove();
-                }
-            }, 300);
-        }, 3000);
-    }
 
     // ============================================================
     // INICIALIZAÇÃO
@@ -555,7 +355,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     aplicarConfiguracoes();
 
-    console.log(
-        "configuracoesUsuario.js carregado com sucesso."
-    );
+    console.log("configuracoesUsuario.js carregado com sucesso.");
 });

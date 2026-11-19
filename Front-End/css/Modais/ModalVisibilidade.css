@@ -1,0 +1,127 @@
+/* =================================================
+   MODAL: QUEM PODE VER SEU PERFIL
+   Cole no FINAL de ConfiguraçõesUsuario.css
+   ================================================= */
+
+.modal-visibilidade {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+.modal-visibilidade-caixa {
+    width: 100%;
+    max-width: 420px;
+    padding: 22px;
+    background: var(--card);
+    color: var(--texto);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px var(--sombra);
+}
+
+.modal-visibilidade-caixa h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.modal-visibilidade-caixa > p {
+    color: var(--texto-suave);
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
+
+.opcoes-visibilidade {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.opcao-visibilidade {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.opcao-visibilidade:hover {
+    background: var(--hover-suave);
+}
+
+.opcao-visibilidade:has(input:checked) {
+    border-color: var(--ouro);
+    background: var(--ativo-bg);
+}
+
+.opcao-visibilidade input {
+    margin-top: 3px;
+    accent-color: #d4a63a;
+    cursor: pointer;
+}
+
+.opcao-visibilidade-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.opcao-visibilidade-texto strong {
+    color: var(--texto-titulo);
+    font-size: 13px;
+}
+
+.opcao-visibilidade-texto small {
+    color: var(--texto-suave);
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.modal-visibilidade-botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.modal-visibilidade-botoes button {
+    height: 34px;
+    padding: 0 18px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.modal-visibilidade-botoes .btn-cancelar {
+    background: transparent;
+    color: var(--texto-menu);
+    border: 1px solid var(--borda);
+}
+
+.modal-visibilidade-botoes .btn-cancelar:hover {
+    background: var(--hover-suave);
+}
+
+.modal-visibilidade-botoes .btn-salvar {
+    background: linear-gradient(135deg, #c89e26, #efd04f);
+    color: #111;
+    border: none;
+}
+
+.modal-visibilidade-botoes .btn-salvar:hover {
+    filter: brightness(1.08);
+}

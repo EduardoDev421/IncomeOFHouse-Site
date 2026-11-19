@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="IncomeofHouses - Dados e Permissões">
+    <meta name="description" content="IncomeofHouses - Dados Pessoais">
     <link rel="stylesheet" href="../../css/PagesImplement/DadosPermissões.css">
     <link rel="stylesheet" href="../../css/Modais/LegalModal.css">
-    <title>Dados e Permissões</title>
+    <title>Dados Pessoais</title>
 </head>
 
-<body>
+<body data-conta="usuario">
     <header class="topo">
         <a class="logo" href="../../index.html">
             <img src="../../img/Logo.png" alt="Income of Houses">
@@ -24,14 +24,15 @@
 
     <main class="BackGround">
         <section class="container">
-            <!-- Menu lateral -->
-            <aside class="menu-lateral">
+
+            <!-- Menu lateral: USUÁRIO (o script mostra só o menu da conta atual) -->
+            <aside class="menu-lateral" data-conta="usuario">
                 <ul>
                     <li><a href="../perfilUsuario.html"><img src="../../img/icones/IconePerfil.svg" alt=""><span>Meu Perfil</span></a></li>
                     <li><a href="../MeusEndereços.html"><img src="../../img/icones/IconeEndereco.svg" alt=""><span>Meus Endereços</span></a></li>
                     <li><a href="../MeusPedidos.html"><img src="../../img/icones/IconeProjetos.svg" alt=""><span>Meus Pedidos</span></a></li>
                     <li><a href="../MeusProfissionais.html"><img src="../../img/icones/IconeEstrela.svg" alt=""><span>Meus Profissionais Favoritos</span></a></li>
-                    <li><a href="../ProjetosSalvos.html"><img src="../../img/icones/IconeSalvos.svg" alt=""><span>Projetos Salvos</span></a></li>
+                    <li><a href="../MeusProjetosFavoritos.html"><img src="../../img/icones/IconeSalvos.svg" alt=""><span>Meus Projetos Favoritos</span></a></li>
                     <li><a href="../Agendamentos.html"><img src="../../img/icones/IconeData.svg" alt=""><span>Agendamentos</span></a></li>
                     <li><a href="../Mensagem.html"><img src="../../img/icones/IconeMensagem.svg" alt=""><span>Mensagem</span></a></li>
                     <li class="ativo"><a href="../ConfiguraçõesUsuario.html"><img src="../../img/icones/IconeConfiguracao.svg" alt=""><span>Configurações</span></a></li>
@@ -39,10 +40,26 @@
                 </ul>
             </aside>
 
+            <!-- Menu lateral: PROFISSIONAL -->
+            <aside class="menu-lateral" data-conta="profissional" hidden>
+                <ul>
+                    <li><a href="../PerfilProfissional.html"><img src="../../img/icones/IconePerfil.svg" alt=""><span>Meu Perfil</span></a></li>
+                    <li><a href="../MeusEndereços.html"><img src="../../img/icones/IconeEndereco.svg" alt=""><span>Meus Endereços</span></a></li>
+                    <li><a href="../MeuPortfolio.html"><img src="../../img/icones/iconePortfolio.svg" alt=""><span>Meu Portfolio</span></a></li>
+                    <li><a href="../publicarPlanta.html"><img src="../../img/icones/IconePublicarPlantas.svg" alt=""><span>Publicar Plantas</span></a></li>
+                    <li><a href="../Projetos.html"><img src="../../img/icones/IconeProjetos.svg" alt=""><span>Projetos</span></a></li>
+                    <li><a href="../Avaliações.html"><img src="../../img/icones/IconeEstrela.svg" alt=""><span>Avaliações</span></a></li>
+                    <li><a href="../Agendamentos.html"><img src="../../img/icones/IconeData.svg" alt=""><span>Agendamentos</span></a></li>
+                    <li><a href="../Mensagem.html"><img src="../../img/icones/IconeMensagem.svg" alt=""><span>Mensagem</span></a></li>
+                    <li class="ativo"><a href="../ConfiguraçõesProfissionais.html"><img src="../../img/icones/IconeConfiguracao.svg" alt=""><span>Configurações</span></a></li>
+                    <li><a href="../../index.html"><img src="../../img/icones/IconeSair.svg" alt=""><span>Sair</span></a></li>
+                </ul>
+            </aside>
+
             <!-- Conteúdo -->
             <section class="conteudo">
-                <h1>Dados e Permissões</h1>
-                <h4>Gerencie seus dados de acesso e as permissões da sua conta.</h4>
+                <h1>Dados Pessoais</h1>
+                <h4>Gerencie suas informações pessoais e de acesso.</h4>
 
                 <div class="top-cards">
 
@@ -80,11 +97,20 @@
                             </div>
                         </div>
 
-                        <div class="account-information">
-                            <img src="../../img/icones/IconePerfil.svg" alt="">
+                        <!-- Somente conta profissional -->
+                        <div class="account-information" data-somente="profissional" hidden>
+                            <img src="../../img/icones/IconeEmpresa.svg" alt="">
                             <div class="information-content">
-                                <span class="information-title">Tipo de conta</span>
-                                <span class="information-value">Cliente</span>
+                                <span class="information-title">Empresa</span>
+                                <span class="information-value">Silva Arquitetura</span>
+                            </div>
+                        </div>
+
+                        <div class="account-information" data-somente="profissional" hidden>
+                            <img src="../../img/icones/IconeRegistroPessoal.svg" alt="">
+                            <div class="information-content">
+                                <span class="information-title">Registro profissional</span>
+                                <span class="information-value">CAU A12345-6</span>
                             </div>
                         </div>
 
@@ -94,134 +120,69 @@
                         </button>
                     </div>
 
-                    <!-- Funções e permissões -->
-                    <div class="panel-card roles-panel">
+                    <!-- Gerenciamento de dados -->
+                    <div class="panel-card data-panel">
                         <div class="panel-card-header">
-                            <img src="../../img/icones/IconeConfigProfissional.svg" alt="">
+                            <img src="../../img/icones/IconePrivacidade.svg" alt="">
                             <div>
-                                <h2>Funções e Permissões</h2>
-                                <p>Configure as permissões de acesso da sua conta.</p>
+                                <h2>Gerenciamento de Dados</h2>
+                                <p>Controle as informações que a plataforma guarda sobre você.</p>
                             </div>
                         </div>
 
-                        <div class="role-row">
-                            <div class="role-content">
-                                <img src="../../img/icones/IconeSegurança.svg" alt="">
-                                <div>
-                                    <h3>Administrador</h3>
-                                    <p>Acesso total ao sistema, incluindo configurações e gerenciamento de usuários.</p>
-                                </div>
+                        <button class="data-row" type="button" id="baixarDados">
+                            <img src="../../img/icones/IconeDadosPessoais.svg" alt="">
+                            <div class="data-row-text">
+                                <h3>Baixar cópia dos meus dados</h3>
+                                <p>Receba um arquivo com as informações da sua conta.</p>
                             </div>
-                            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                        </div>
+                            <span class="seta">&gt;</span>
+                        </button>
 
-                        <div class="role-row">
-                            <div class="role-content">
-                                <img src="../../img/icones/IconeConfigProfissional.svg" alt="">
-                                <div>
-                                    <h3>Gerente</h3>
-                                    <p>Acesso a projetos, profissionais e configurações (sem acesso a permissões).</p>
-                                </div>
+                        <a class="data-row" href="../Modais/PoliticaPrivacidade.html" data-legal="privacidade">
+                            <img src="../../img/icones/IconeSegurança.svg" alt="">
+                            <div class="data-row-text">
+                                <h3>Consentimentos e privacidade</h3>
+                                <p>Veja como seus dados são usados pela plataforma.</p>
                             </div>
-                            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                        </div>
-
-                        <div class="role-row">
-                            <div class="role-content">
-                                <img src="../../img/icones/Iconelapis.svg" alt="">
-                                <div>
-                                    <h3>Editor</h3>
-                                    <p>Pode criar e editar projetos, plantas e informações da conta.</p>
-                                </div>
-                            </div>
-                            <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
-                        </div>
-
-                        <div class="role-row">
-                            <div class="role-content">
-                                <img src="../../img/icones/IconeVisao.svg" alt="">
-                                <div>
-                                    <h3>Visualizador</h3>
-                                    <p>Apenas visualização de projetos, plantas e informações públicas.</p>
-                                </div>
-                            </div>
-                            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-                        </div>
+                            <span class="seta">&gt;</span>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Permissões por módulo -->
-                <div class="panel-card module-panel">
+                <!-- Direitos sobre os dados -->
+                <div class="panel-card rights-panel">
                     <div class="panel-card-header">
-                        <img src="../../img/icones/IconeProjetosConcluidos.svg" alt="">
+                        <img src="../../img/icones/IconePrivacidade.svg" alt="">
                         <div>
-                            <h2>Permissões por Módulo</h2>
-                            <p>Defina quais módulos o usuário pode acessar e quais ações estão liberadas.</p>
+                            <h2>Seus direitos sobre os dados</h2>
+                            <p>Você decide o que a plataforma pode guardar e usar. Veja o que você pode fazer.</p>
                         </div>
                     </div>
 
-                    <div class="permissions">
-                        <div class="permissions-header">
-                            <div class="module-title">Módulo</div>
-                            <div>Visualizar</div>
-                            <div>Criar</div>
-                            <div>Editar</div>
-                            <div>Excluir</div>
+                    <div class="rights-grid">
+                        <div class="right-item">
+                            <img src="../../img/icones/IconeDadosPessoais.svg" alt="">
+                            <h3>Acessar seus dados</h3>
+                            <p>Consulte as informações da sua conta e baixe uma cópia quando quiser.</p>
                         </div>
 
-                        <div class="permission-row">
-                            <div class="module-information">
-                                <img src="../../img/icones/IconeProjetos.svg" alt="">
-                                <div><h3>Plantas</h3><p>Acesso às plantas e projetos arquitetônicos.</p></div>
-                            </div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                        <div class="right-item">
+                            <img src="../../img/icones/Iconelapis.svg" alt="">
+                            <h3>Corrigir informações</h3>
+                            <p data-texto-profissional="Atualize seus dados e as informações da empresa sempre que algo mudar.">Atualize nome, e-mail e telefone sempre que algo mudar.</p>
                         </div>
 
-                        <div class="permission-row">
-                            <div class="module-information">
-                                <img src="../../img/icones/IconeEstrela.svg" alt="">
-                                <div><h3>Profissionais</h3><p>Busca e contato com profissionais.</p></div>
-                            </div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                        <div class="right-item">
+                            <img src="../../img/icones/IconeVisao.svg" alt="">
+                            <h3>Controlar a visibilidade</h3>
+                            <p data-texto-profissional="Escolha, em Configurações, se seu perfil e suas plantas são públicos ou privados.">Escolha, em Configurações, se seu perfil é público ou privado.</p>
                         </div>
 
-                        <div class="permission-row">
-                            <div class="module-information">
-                                <img src="../../img/icones/IconeSalvos.svg" alt="">
-                                <div><h3>Projetos</h3><p>Gerenciamento de projetos salvos.</p></div>
-                            </div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                        </div>
-
-                        <div class="permission-row">
-                            <div class="module-information">
-                                <img src="../../img/icones/IconeMensagem.svg" alt="">
-                                <div><h3>Mensagens</h3><p>Troca de mensagens com profissionais e clientes.</p></div>
-                            </div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
-                        </div>
-
-                        <div class="permission-row">
-                            <div class="module-information">
-                                <img src="../../img/icones/IconeData.svg" alt="">
-                                <div><h3>Agendamentos</h3><p>Controle de agendamentos e reuniões.</p></div>
-                            </div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
-                            <div class="permission-toggle"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                        <div class="right-item">
+                            <img src="../../img/icones/IconeLixeira.svg" alt="">
+                            <h3>Excluir sua conta</h3>
+                            <p>Peça a exclusão dos seus dados em Configurações, na área de Privacidade.</p>
                         </div>
                     </div>
                 </div>
@@ -239,5 +200,86 @@
     </footer>
 
     <script src="../../js/modais/LegalModais.js"></script>
+    <script>
+        (function () {
+
+            // ------------------------------------------------------------
+            // Descobre o tipo de conta
+            // 1) pelo link: DadosPermissões.html?conta=profissional
+            // 2) se não vier no link, pela página de onde a pessoa veio
+            // 3) se nada indicar, é conta de usuário
+            // ------------------------------------------------------------
+            const parametro = new URLSearchParams(window.location.search).get("conta");
+
+            let conta;
+
+            if (parametro === "profissional" || parametro === "usuario") {
+                conta = parametro;
+            } else {
+                let origem = "";
+
+                try {
+                    origem = decodeURIComponent(document.referrer).toLowerCase();
+                } catch (erro) {
+                    origem = "";
+                }
+
+                conta = origem.includes("profission") ? "profissional" : "usuario";
+            }
+
+            document.body.dataset.conta = conta;
+
+            // menu lateral da conta certa
+            document.querySelectorAll(".menu-lateral[data-conta]").forEach(menu => {
+                menu.hidden = menu.dataset.conta !== conta;
+            });
+
+            // linhas que só existem em um tipo de conta
+            document.querySelectorAll("[data-somente]").forEach(el => {
+                el.hidden = el.dataset.somente !== conta;
+            });
+
+            // textos que mudam para o profissional
+            if (conta === "profissional") {
+                document.querySelectorAll("[data-texto-profissional]").forEach(el => {
+                    el.textContent = el.dataset.textoProfissional;
+                });
+            }
+
+            // ------------------------------------------------------------
+            // Baixar cópia dos dados (arquivo .json)
+            // ------------------------------------------------------------
+            const chave = conta === "profissional"
+                ? "configuracoesProfissionais"
+                : "configuracoesUsuario";
+
+            document.getElementById("baixarDados").addEventListener("click", () => {
+
+                let configuracoes = {};
+
+                try {
+                    configuracoes = JSON.parse(localStorage.getItem(chave) || "{}");
+                } catch (erro) {
+                    configuracoes = {};
+                }
+
+                const dados = {
+                    conta: conta,
+                    exportadoEm: new Date().toISOString(),
+                    configuracoes: configuracoes
+                };
+
+                const blob = new Blob([JSON.stringify(dados, null, 2)], { type: "application/json" });
+                const link = document.createElement("a");
+
+                link.href = URL.createObjectURL(blob);
+                link.download = "meus-dados-incomeofhouses.json";
+                link.click();
+
+                URL.revokeObjectURL(link.href);
+            });
+
+        })();
+    </script>
 </body>
 </html>
