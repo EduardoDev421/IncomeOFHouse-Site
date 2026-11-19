@@ -85,6 +85,29 @@ const CRIAR_TABELA_USUARIOS = `
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 `;
 
+
+const CRIAR_TABELA_PROFISSIONAIS = `
+    CREATE TABLE IF NOT EXISTS profissionais (
+        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(150) NOT NULL,
+        registro_profissional VARCHAR(80) NOT NULL,
+        email VARCHAR(254) NOT NULL,
+        telefone VARCHAR(20) NOT NULL,
+        cpf CHAR(11) NOT NULL,
+        data_nascimento DATE NOT NULL,
+        cidade VARCHAR(100) NOT NULL,
+        estado CHAR(2) NOT NULL,
+        profissao VARCHAR(80) NOT NULL,
+        senha_hash VARCHAR(255) NOT NULL,
+        documento_nome VARCHAR(255) NOT NULL,
+        criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        ativo BOOLEAN NOT NULL DEFAULT TRUE,
+        UNIQUE KEY uq_profissionais_email (email),
+        UNIQUE KEY uq_profissionais_cpf (cpf),
+        INDEX idx_profissionais_ativos (ativo, id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+`;
+
 const CRIAR_TABELA_COMENTARIOS = `
     CREATE TABLE IF NOT EXISTS comentarios (
         id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -587,6 +610,62 @@ app.post("/plantas", rota(async (req, res) => {
 }));
 
 /* =========================================================
+   PROFISSIONAIS
+========================================================= */
+
+// Cadastrar profissional. A senha é armazenada somente como hash.
+app.post("/profissionais", rota(async (req, res) => {
+    const c = req.body || {};
+    const nome = typeof c.nome === "string" ? c.nome.trim() : "";
+    const registro = typeof c.registroProfissional === "string" ? c.registroProfissional.trim() : "";
+    const email = typeof c.email === "string" ? c.email.trim().toLowerCase() : "";
+    const telefone = typeof c.telefone === "string" ? c.telefone.replace(/\D/g, "") : "";
+    const cpf = typeof c.cpf === "string" ? c.cpf.replace(/\D/g, "") : "";
+    const dataNascimento = typeof c.dataNascimento === "string" ? c.dataNascimento : "";
+    const cidade = typeof c.cidade === "string" ? c.cidade.trim() : "";
+    const estado = typeof c.estado === "string" ? c.estado.trim().toUpperCase() : "";
+    const profissao = typeof c.profissao === "string" ? c.profissao.trim() : "";
+    const senha = typeof c.senha === "string" ? c.senha : "";
+    const documento = typeof c.documento === "string" ? c.documento.trim().slice(0, 255) : "";
+
+    if (nome.length < 3 || nome.length > 150) return res.status(400).json({ erro: "O nome deve ter entre 3 e 150 caracteres." });
+    if (registro.length < 2 || registro.length > 80) return res.status(400).json({ erro: "Informe um registro profissional válido." });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) return res.status(400).json({ erro: "Informe um e-mail válido." });
+    if (![10, 11].includes(telefone.length)) return res.status(400).json({ erro: "Informe um telefone válido." });
+    if (cpf.length !== 11) return res.status(400).json({ erro: "O CPF deve conter 11 números." });
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dataNascimento) || Number.isNaN(Date.parse(dataNascimento))) return res.status(400).json({ erro: "Informe uma data de nascimento válida." });
+    if (cidade.length < 2 || cidade.length > 100) return res.status(400).json({ erro: "Informe uma cidade válida." });
+    if (!/^[A-Z]{2}$/.test(estado)) return res.status(400).json({ erro: "Selecione um estado válido." });
+    if (!profissao || profissao.length > 80) return res.status(400).json({ erro: "Selecione uma profissão válida." });
+    if (senha.length < 6 || senha.length > 200) return res.status(400).json({ erro: "A senha deve ter entre 6 e 200 caracteres." });
+    if (!documento) return res.status(400).json({ erro: "Selecione um documento." });
+
+    const senhaHash = await criarHashSenha(senha);
+    try {
+        const [resultado] = await pool.execute(
+            `INSERT INTO profissionais (nome, registro_profissional, email, telefone, cpf, data_nascimento, cidade, estado, profissao, senha_hash, documento_nome)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [nome, registro, email, telefone, cpf, dataNascimento, cidade, estado, profissao, senhaHash, documento]
+        );
+        return res.status(201).json({
+            mensagem: "Cadastro profissional realizado com sucesso.",
+            profissional: { id: resultado.insertId, nome, profissao, cidade, estado }
+        });
+    } catch (erroBanco) {
+        if (erroBanco.code === "ER_DUP_ENTRY") return res.status(409).json({ erro: "Já existe um profissional cadastrado com esse e-mail ou CPF." });
+        throw erroBanco;
+    }
+}));
+
+// Listagem pública: dados pessoais e credenciais nunca são retornados.
+app.get("/profissionais", rota(async (req, res) => {
+    const [linhas] = await pool.query(
+        `SELECT id, nome, registro_profissional AS registroProfissional, cidade, estado, profissao, criado_em AS criadoEm
+           FROM profissionais WHERE ativo = TRUE ORDER BY id DESC`
+    );
+    return res.json(linhas);
+}));
+/* =========================================================
    COMENTÁRIOS
 ========================================================= */
 
@@ -717,6 +796,7 @@ async function iniciarServidor() {
     await pool.query("SELECT 1");
     await pool.query(CRIAR_TABELA_PLANTAS);
     await pool.query(CRIAR_TABELA_USUARIOS);
+    await pool.query(CRIAR_TABELA_PROFISSIONAIS);
     await pool.query(CRIAR_TABELA_COMENTARIOS);
 
     console.log(`Conectado ao MySQL: ${process.env.DB_NAME}`);
