@@ -305,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
      * =====================================================
      */
 
-    formulario.addEventListener("submit", (evento) => {
+    formulario.addEventListener("submit", async (evento) => {
 
         evento.preventDefault();
 
@@ -478,70 +478,47 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /*
-         * DADOS DO CADASTRO
-         *
-         * Por enquanto os dados são preparados apenas
-         * no Front-End porque o server.js do projeto
-         * ainda não possui uma rota de cadastro.
-         */
-
         const dadosProfissional = {
-
             nome: nomeValor,
-
-            registroProfissional:
-                registroValor,
-
-            email:
-                emailValor,
-
-            telefone:
-                telefoneValor,
-
-            cpf:
-                cpfValor.replace(/\D/g, ""),
-
-            dataNascimento:
-                dataNascimento.value,
-
-            cidade:
-                cidade.value.trim(),
-
-            estado:
-                estado.value,
-
-            profissao:
-                profissao.value,
-
-            senha:
-                senha.value,
-
-            documento:
-                documentos.files[0].name
-
+            registroProfissional: registroValor,
+            email: emailValor,
+            telefone: telefoneValor,
+            cpf: cpfValor.replace(/\D/g, ""),
+            dataNascimento: dataNascimento.value,
+            cidade: cidade.value.trim(),
+            estado: estado.value,
+            profissao: profissao.value,
+            senha: senha.value,
+            documento: documentos.files[0].name
         };
 
+        if (botao) {
+            botao.disabled = true;
+            botao.textContent = "Cadastrando...";
+        }
 
-        console.log(
-            "Dados do cadastro profissional:",
-            {
-                ...dadosProfissional,
-                senha: "[OCULTA]"
+        try {
+            const apiBase = window.location.port === "3000" ? "" : "http://localhost:3000";
+            const resposta = await fetch(`${apiBase}/profissionais`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dadosProfissional)
+            });
+            const resultado = await resposta.json().catch(() => ({}));
+            if (!resposta.ok) {
+                throw new Error(resultado.erro || `Não foi possível cadastrar (HTTP ${resposta.status}).`);
             }
-        );
-
-
-        formulario.reset();
-
-        nomeArquivo.textContent =
-            "Nenhum arquivo escolhido";
-
-        mostrarMensagem(
-            "Cadastro profissional validado com sucesso!",
-            true
-        );
-
+            formulario.reset();
+            nomeArquivo.textContent = "Nenhum arquivo escolhido";
+            mostrarMensagem("Cadastro profissional realizado! Seu perfil já está disponível na página Profissionais.", true);
+        } catch (erro) {
+            mostrarMensagem(erro.message || "Não foi possível conectar ao servidor. Verifique se ele está rodando.");
+        } finally {
+            if (botao) {
+                botao.disabled = false;
+                botao.textContent = " Cadastrar";
+            }
+        }
     });
 
 });
