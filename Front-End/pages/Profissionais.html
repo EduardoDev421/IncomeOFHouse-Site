@@ -181,39 +181,9 @@
             </div>
         </section>
 
-        <section class="CardsGrid" id="CardsProfissionais">
-            <article class="CardProfissional">
-                <div class="ProfissionalImg">
-                    <img src="" alt="Foto do Profissional">
-                    <button class="CardFavorito" aria-label="Favoritar">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path
-                                d="M12 21s-7.5-4.6-10-9.2C0.3 8 2 4.5 5.6 4A5 5 0 0112 6.5 5 5 0 0118.4 4C22 4.5 23.7 8 22 11.8 19.5 16.4 12 21 12 21z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="CardProfissionalConteudo">
-                    <h3>Nome do Profissional</h3>
-                    <div class="CardProfissionalSpecs">
-                        <span>engenheiro Civil</span>
-                        <span>Amazonas</span>
-                        <span>15 anos</span>
-                        <span>5.0 estrelas</span>
-                    </div>
-                    <a href="../pages/DetalheProfissional.html" class="BtnDetalhes"> Detalhes</a>
-                </div>
-            </article>
-        </section>
-
-        <nav class="Paginacao" aria-label="Paginação">
-            <button class="PaginacaoBtn" aria-label="Página anterior">‹</button>
-            <button class="PaginacaoBtn ativo">1</button>
-            <button class="PaginacaoBtn">2</button>
-            <button class="PaginacaoBtn">3</button>
-            <button class="PaginacaoBtn">4</button>
-            <button class="PaginacaoBtn">5</button>
-            <button class="PaginacaoBtn" aria-label="Próxima página">›</button>
-        </nav>
+        <p id="mensagemProfissionais" class="MensagemProfissionais" role="status" aria-live="polite">Carregando profissionais...</p>
+        <section class="CardsGrid" id="CardsProfissionais"></section>
+        <nav class="Paginacao" id="paginacaoProfissionais" aria-label="Paginação dos profissionais"></nav>
     </main>
     <footer class="rodape">
         <p>©IncomeOfHouses. Todos os direitos reservados.</p>
@@ -227,6 +197,7 @@
     <script src="../js/Modais/LegalModais.js"></script>
     <script src="../js/Idioma.js"></script>
     <script src="../js/mensagensErros.js"></script>
+    <script src="../js/profissionais.js"></script>
 </body>
 
 </html>
