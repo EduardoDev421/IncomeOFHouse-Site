@@ -19,6 +19,10 @@
      5) TUTORIAIS, FALE CONOSCO e PERGUNTAS FREQUENTES (claro)
      6) ALTERAR SENHA, DISPOSITIVOS e AUTENTICAÇÃO EM DUAS ETAPAS (claro)
      7) MEUS PROJETOS FAVORITOS (claro)
+     8) CONFIGURAÇÕES DE PROFISSIONAIS (claro)
+     9) CONFIGURAÇÕES DE COBRANÇA (claro)
+    10) DADOS DA EMPRESA (claro)
+    11) DADOS PESSOAIS / DadosPermissões (claro)
 ========================================================= */
 
 /* ---------- 1) ESCURO (padrão) ---------- */
@@ -941,3 +945,312 @@
 /* "sem projetos": botão de explorar */
 :root[data-tema="claro"] .explorar h2 { color: var(--texto); }
 :root[data-tema="claro"] .explorar a { background: var(--ouro); color: #ffffff; }
+
+
+/* =========================================================
+   8) CONFIGURAÇÕES DE PROFISSIONAIS - versão clara
+   Atenção: a regra ".opcao:has(input:checked)" do 2FA (seção 6)
+   pintaria a linha inteira quando um interruptor está ligado;
+   por isso ela é anulada dentro de ".painel".
+========================================================= */
+
+:root[data-tema="claro"] .caminho { color: var(--texto-suave); }
+:root[data-tema="claro"] .caminho a { color: var(--ouro); }
+:root[data-tema="claro"] .caminho a:hover { color: var(--ouro-vivo); }
+:root[data-tema="claro"] .caminho .atual { color: var(--texto-sub); }
+
+/* cards */
+:root[data-tema="claro"] .painel {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+:root[data-tema="claro"] .TituloPainel { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .TituloPainel h2 { color: var(--texto); }
+:root[data-tema="claro"] .TituloPainel p { color: var(--texto-suave); }
+
+/* linhas (anula o destaque ".opcao:has(input:checked)" do 2FA) */
+:root[data-tema="claro"] .painel .opcao { border-bottom-color: var(--borda-item); }
+:root[data-tema="claro"] .painel .opcao:hover { background: var(--hover-suave); }
+:root[data-tema="claro"] .painel .opcao:has(input:checked) { background: transparent; }
+:root[data-tema="claro"] .painel .opcao:hover:has(input:checked) { background: var(--hover-suave); }
+
+:root[data-tema="claro"] .icone-opcao { color: var(--ouro); }
+:root[data-tema="claro"] .texto-opcao strong { color: var(--texto-titulo); }
+:root[data-tema="claro"] .texto-opcao small { color: var(--texto-suave); }
+
+/* botão seletor (valor + seta) */
+:root[data-tema="claro"] .seletor {
+    color: var(--texto);
+    background: var(--superficie);
+    border-color: var(--borda);
+}
+:root[data-tema="claro"] .seletor:hover,
+:root[data-tema="claro"] .seletor:focus-visible {
+    color: var(--ouro);
+    border-color: var(--ativo-borda);
+}
+:root[data-tema="claro"] .seletor b { color: var(--seta); }
+:root[data-tema="claro"] .seletor:hover b { color: var(--ouro); }
+
+/* interruptor (este HTML usa <span> sem classe) */
+:root[data-tema="claro"] .switch span { background: var(--slider-off); }
+:root[data-tema="claro"] .switch span::before {
+    background: var(--slider-bola);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+:root[data-tema="claro"] .switch input:checked + span { background: var(--ouro); }
+:root[data-tema="claro"] .switch input:focus-visible + span { outline-color: var(--ouro); }
+
+/* dica */
+:root[data-tema="claro"] .aviso { background: var(--ativo-bg); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .icone-aviso { color: var(--ouro); }
+:root[data-tema="claro"] .aviso p { color: var(--texto-sub); }
+:root[data-tema="claro"] .aviso strong { color: var(--ouro); }
+
+/* modal de seleção */
+:root[data-tema="claro"] .modal-fundo { background: rgba(20, 24, 32, 0.45); }
+:root[data-tema="claro"] .modal {
+    background: var(--card);
+    border-color: var(--ativo-borda);
+    box-shadow: 0 -10px 40px var(--sombra);
+}
+:root[data-tema="claro"] .modal-alca { background: var(--borda); }
+:root[data-tema="claro"] .modal h3 { color: var(--texto); }
+
+:root[data-tema="claro"] .modal-item { color: var(--texto-menu); }
+:root[data-tema="claro"] .modal-item:hover { background: var(--hover-suave); }
+:root[data-tema="claro"] .modal-item input { border-color: var(--seta); }
+:root[data-tema="claro"] .modal-item input:checked {
+    background: var(--ouro);
+    border-color: var(--ouro);
+}
+:root[data-tema="claro"] .modal-item input::after { border-color: #ffffff; }
+:root[data-tema="claro"] .modal-item:has(input:checked) {
+    color: var(--ouro);
+    background: var(--ativo-bg);
+}
+
+:root[data-tema="claro"] .modal-botoes .btn-cancelar {
+    color: var(--ouro);
+    background: transparent;
+    border-color: var(--ouro);
+}
+:root[data-tema="claro"] .modal-botoes .btn-cancelar:hover { background: rgba(166, 120, 18, 0.12); }
+:root[data-tema="claro"] .modal-botoes .btn-confirmar {
+    color: #ffffff;
+    background: var(--ouro);
+    border-color: var(--ouro);
+}
+:root[data-tema="claro"] .modal-botoes .btn-confirmar:hover {
+    background: var(--ouro-vivo);
+    border-color: var(--ouro-vivo);
+}
+:root[data-tema="claro"] .modal-botoes button:focus-visible { outline-color: var(--ouro); }
+
+/* faixa de preço (dentro do modal) */
+:root[data-tema="claro"] .campo-faixa > span { color: var(--texto-menu); }
+:root[data-tema="claro"] .campo-valor { background: var(--seletor-bg); border-color: var(--borda); }
+:root[data-tema="claro"] .campo-valor:focus-within { border-color: var(--ouro); }
+:root[data-tema="claro"] .campo-valor b { color: var(--ouro); }
+:root[data-tema="claro"] .campo-valor input { color: var(--texto); }
+:root[data-tema="claro"] .modal-erro { color: var(--vermelho); }
+
+/* aviso rápido (confirmação) */
+:root[data-tema="claro"] .mensagem-config-profissionais {
+    color: var(--ouro);
+    background: var(--ativo-bg);
+    border-color: var(--ativo-borda);
+    box-shadow: 0 8px 24px var(--sombra);
+}
+:root[data-tema="claro"] .mensagem-config-profissionais[data-tipo="erro"] {
+    color: var(--vermelho);
+    background: #fdecea;
+    border-color: #e4a8a1;
+}
+
+
+/* =========================================================
+   9) CONFIGURAÇÕES DE COBRANÇA - versão clara
+   (".card" já recebe fundo, borda e sombra das regras gerais)
+========================================================= */
+
+:root[data-tema="claro"] .card-head { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .card-head h2 { color: var(--texto); }
+:root[data-tema="claro"] .card-sub { color: var(--texto-suave); }
+
+/* plano atual */
+:root[data-tema="claro"] .plan-box { background: var(--item); border-color: var(--borda); }
+:root[data-tema="claro"] .plan-name-row h3 { color: var(--texto); }
+:root[data-tema="claro"] .plan-price .price { color: var(--texto); }
+:root[data-tema="claro"] .plan-price .per { color: var(--texto-suave); }
+:root[data-tema="claro"] .plan-desc { color: var(--texto-suave); }
+:root[data-tema="claro"] .plan-features li { color: var(--texto-titulo); }
+:root[data-tema="claro"] .check { color: var(--ouro); }
+:root[data-tema="claro"] .plan-bottom { border-top-color: var(--borda); }
+:root[data-tema="claro"] .next-charge { color: var(--texto-suave); }
+
+/* etiquetas */
+:root[data-tema="claro"] .pill-principal,
+:root[data-tema="claro"] .pill-pago {
+    background: rgba(30, 135, 68, 0.14);
+    color: var(--verde);
+}
+
+/* botões */
+:root[data-tema="claro"] .btn-outline-gold {
+    color: var(--ouro);
+    background: transparent;
+    border-color: var(--ouro);
+}
+:root[data-tema="claro"] .btn-outline-gold:hover { background: var(--ouro); color: #ffffff; }
+
+/* formas de pagamento */
+:root[data-tema="claro"] .payment-card { background: var(--item); border-color: var(--borda); }
+:root[data-tema="claro"] .card-info-top strong { color: var(--texto-titulo); }
+:root[data-tema="claro"] .card-info p { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .icon-btn { background: var(--card); border-color: var(--borda); }
+:root[data-tema="claro"] .icon-btn:hover { background: var(--hover-bg); border-color: var(--ativo-borda); }
+
+:root[data-tema="claro"] .add-payment { color: var(--ouro); border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .add-payment:hover { background: var(--ativo-bg); }
+
+/* histórico */
+:root[data-tema="claro"] .billing-table thead th { color: var(--texto-sub); border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .billing-table tbody td { color: var(--texto-menu); border-bottom-color: var(--borda-item); }
+:root[data-tema="claro"] .billing-table tbody tr:hover { background: var(--hover-suave); }
+
+/* faturamento */
+:root[data-tema="claro"] .toggle-row { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .toggle-row strong { color: var(--texto-titulo); }
+:root[data-tema="claro"] .toggle-row p { color: var(--texto-suave); }
+:root[data-tema="claro"] .email-field label { color: var(--texto-sub); }
+:root[data-tema="claro"] .input-wrap:focus-within { border-color: var(--ouro); }
+
+/* interruptor (este HTML usa .slider) */
+:root[data-tema="claro"] .slider { background: var(--slider-off); }
+:root[data-tema="claro"] .slider::before {
+    background: var(--slider-bola);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+:root[data-tema="claro"] .switch input:checked + .slider { background: var(--ouro); }
+
+
+/* =========================================================
+   10) DADOS DA EMPRESA - versão clara
+   (".card" já recebe fundo, borda e sombra das regras gerais)
+   Atenção: a regra geral ".acoes button" (Mensagem) pintaria
+   "Cancelar" e "Salvar"; por isso os dois são reforçados no fim.
+========================================================= */
+
+:root[data-tema="claro"] .titulo-card { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .titulo-card h2 { color: var(--texto); }
+:root[data-tema="claro"] .titulo-card p { color: var(--texto-suave); }
+
+/* campos */
+:root[data-tema="claro"] .campo label { color: var(--texto-sub); }
+:root[data-tema="claro"] .campo label b { color: var(--ouro); }
+
+:root[data-tema="claro"] .input-box { background: var(--seletor-bg); border-color: var(--borda); }
+:root[data-tema="claro"] .input-box:focus-within { border-color: var(--ouro); }
+:root[data-tema="claro"] .input-box input { color: var(--texto); }
+:root[data-tema="claro"] .input-box input::placeholder { color: var(--texto-suave); }
+
+:root[data-tema="claro"] .campo select,
+:root[data-tema="claro"] .sobre textarea {
+    background-color: var(--seletor-bg);
+    border-color: var(--borda);
+    color: var(--texto);
+}
+:root[data-tema="claro"] .campo select:focus,
+:root[data-tema="claro"] .sobre textarea:focus { border-color: var(--ouro); }
+:root[data-tema="claro"] .campo select option { background: var(--seletor-opcao); color: var(--texto); }
+:root[data-tema="claro"] .contador { color: var(--texto-suave); }
+
+/* identidade visual */
+:root[data-tema="claro"] .logo-area { border-color: var(--ativo-borda); }
+:root[data-tema="claro"] .logo-area img { filter: brightness(0.45) saturate(1.5); }
+:root[data-tema="claro"] .logo-area button { color: var(--ouro); border-color: var(--ouro); }
+:root[data-tema="claro"] .logo-area button:hover { background: var(--ouro); color: #ffffff; }
+
+:root[data-tema="claro"] .rede > button {
+    background: var(--item);
+    border-color: var(--borda);
+    color: var(--ouro);
+}
+:root[data-tema="claro"] .rede > button:hover { background: var(--hover-bg); border-color: var(--ativo-borda); }
+
+/* documentos */
+:root[data-tema="claro"] .documento { border-bottom-color: var(--borda-item); }
+:root[data-tema="claro"] .documento:hover { background: var(--hover-suave); }
+:root[data-tema="claro"] .documento:hover .seta { color: var(--ouro); }
+:root[data-tema="claro"] .doc-info strong { color: var(--texto-titulo); }
+:root[data-tema="claro"] .doc-info small { color: var(--texto-suave); }
+:root[data-tema="claro"] .documento .status {
+    background: rgba(30, 135, 68, 0.14);
+    color: var(--verde);
+}
+
+:root[data-tema="claro"] .gerenciar { color: var(--ouro); border-color: var(--ouro); }
+:root[data-tema="claro"] .gerenciar:hover { background: var(--ouro); color: #ffffff; }
+
+/* botões de ação (reforçados: ".acoes button" geral pintaria os dois) */
+:root[data-tema="claro"] .acoes .cancelar {
+    background: transparent;
+    border-color: var(--ouro);
+    color: var(--ouro);
+}
+:root[data-tema="claro"] .acoes .cancelar:hover {
+    background: var(--hover-bg);
+    border-color: var(--ouro);
+    color: var(--ouro);
+}
+:root[data-tema="claro"] .acoes .salvar {
+    background: var(--ouro);
+    border-color: var(--ouro);
+    color: #ffffff;
+}
+:root[data-tema="claro"] .acoes .salvar:hover {
+    background: var(--ouro-vivo);
+    border-color: var(--ouro-vivo);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   11) DADOS PESSOAIS (DadosPermissões.html) - versão clara
+   ATENÇÃO: o DadosPermissões.css não foi enviado. Estas regras
+   foram montadas a partir das classes do HTML. Se algo ficar
+   escuro, ajuste aqui.
+========================================================= */
+
+:root[data-tema="claro"] .panel-card {
+    background: var(--card);
+    border-color: var(--borda);
+    box-shadow: 0 2px 8px var(--sombra);
+}
+:root[data-tema="claro"] .panel-card-header { border-bottom-color: var(--borda); }
+:root[data-tema="claro"] .panel-card-header h2 { color: var(--texto); }
+:root[data-tema="claro"] .panel-card-header p { color: var(--texto-suave); }
+
+/* dados da conta */
+:root[data-tema="claro"] .account-information { border-bottom-color: var(--borda-item); }
+:root[data-tema="claro"] .information-title { color: var(--texto-suave); }
+:root[data-tema="claro"] .information-value { color: var(--texto); }
+
+:root[data-tema="claro"] .edit-account { color: var(--ouro); border-color: var(--ouro); }
+:root[data-tema="claro"] .edit-account span { color: var(--ouro); }
+:root[data-tema="claro"] .edit-account:hover { background: rgba(166, 120, 18, 0.12); }
+
+/* gerenciamento de dados */
+:root[data-tema="claro"] .data-row { color: var(--texto-titulo); border-bottom-color: var(--borda-item); }
+:root[data-tema="claro"] .data-row:hover { background: var(--hover-suave); }
+:root[data-tema="claro"] .data-row:hover .seta { color: var(--ouro); }
+:root[data-tema="claro"] .data-row-text h3 { color: var(--texto-titulo); }
+:root[data-tema="claro"] .data-row-text p { color: var(--texto-suave); }
+
+/* direitos sobre os dados */
+:root[data-tema="claro"] .right-item { background: var(--item); border-color: var(--borda); }
+:root[data-tema="claro"] .right-item h3 { color: var(--texto); }
+:root[data-tema="claro"] .right-item p { color: var(--texto-suave); }
