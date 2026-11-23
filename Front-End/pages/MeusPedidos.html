@@ -99,7 +99,8 @@
                 <div class="filtros">
                     <div class="botoes-filtro">
                         <button class="filtro ativo" data-filtro="todos">Todos</button>
-                        <button class="filtro" data-filtro="andamento">Em andamento</button>
+                        <button class="filtro" data-filtro="aguardando">Aguardando pagamento</button>
+                        <button class="filtro" data-filtro="pago">Pagos</button>
                         <button class="filtro" data-filtro="concluido">Concluídos</button>
                         <button class="filtro" data-filtro="cancelado">Cancelados</button>
                     </div>
@@ -112,94 +113,19 @@
                     </label>
                 </div>
 
+                <!-- Os pedidos são carregados do Supabase pelo js/MeusPedidos.js -->
                 <div class="lista-pedidos">
-
-                    <article class="pedido" data-status="andamento">
-                        <div class="icone-pedido">
-                            <svg viewBox="0 0 24 24"><path d="M5 20V8l7-5 7 5v12"></path><path d="M9 20v-6h6v6"></path></svg>
-                        </div>
-                        <div class="info-principal">
-                            <h3>Projeto Arquitetônico Residencial</h3>
-                            <p class="profissional">Carlos Silva <small>Arquiteto</small></p>
-                        </div>
-                        <div class="info-detalhe"><small>Pedido em</small><span>12/06/2025</span></div>
-                        <div class="info-detalhe"><small>Valor</small><span>R$ 2.800,00</span></div>
-                        <span class="status andamento">Em andamento</span>
-                        <a href="DetalhePedido.html" class="btn-detalhes">Ver detalhes</a>
-                    </article>
-
-                    <article class="pedido" data-status="concluido">
-                        <div class="icone-pedido">
-                            <svg viewBox="0 0 24 24"><path d="M5 20V8l7-5 7 5v12"></path><path d="M9 20v-6h6v6"></path></svg>
-                        </div>
-                        <div class="info-principal">
-                            <h3>Reforma e Ampliação</h3>
-                            <p class="profissional">Juliana Martins <small>Engenheira Civil</small></p>
-                        </div>
-                        <div class="info-detalhe"><small>Pedido em</small><span>28/05/2025</span></div>
-                        <div class="info-detalhe"><small>Valor</small><span>R$ 15.600,00</span></div>
-                        <span class="status concluido">Concluído</span>
-                        <a href="DetalhePedido.html" class="btn-detalhes">Ver detalhes</a>
-                    </article>
-
-                    <article class="pedido" data-status="cancelado">
-                        <div class="icone-pedido">
-                            <svg viewBox="0 0 24 24"><path d="M5 20V8l7-5 7 5v12"></path><path d="M9 20v-6h6v6"></path></svg>
-                        </div>
-                        <div class="info-principal">
-                            <h3>Consultoria de Viabilidade</h3>
-                            <p class="profissional">Rafael Costa <small>Especialista em Investimentos Imobiliários</small></p>
-                        </div>
-                        <div class="info-detalhe"><small>Pedido em</small><span>15/05/2025</span></div>
-                        <div class="info-detalhe"><small>Valor</small><span>R$ 950,00</span></div>
-                        <span class="status cancelado">Cancelado</span>
-                        <a href="DetalhePedido.html" class="btn-detalhes">Ver detalhes</a>
-                    </article>
-
-                    <article class="pedido" data-status="concluido">
-                        <div class="icone-pedido">
-                            <svg viewBox="0 0 24 24"><path d="M5 20V8l7-5 7 5v12"></path><path d="M9 20v-6h6v6"></path></svg>
-                        </div>
-                        <div class="info-principal">
-                            <h3>Planta Baixa - Sobrado</h3>
-                            <p class="profissional">Fernanda Lima <small>Arquiteta</small></p>
-                        </div>
-                        <div class="info-detalhe"><small>Pedido em</small><span>03/05/2025</span></div>
-                        <div class="info-detalhe"><small>Valor</small><span>R$ 1.750,00</span></div>
-                        <span class="status concluido">Concluído</span>
-                        <a href="DetalhePedido.html" class="btn-detalhes">Ver detalhes</a>
-                    </article>
-
-                    <article class="pedido" data-status="andamento">
-                        <div class="icone-pedido">
-                            <svg viewBox="0 0 24 24"><path d="M5 20V8l7-5 7 5v12"></path><path d="M9 20v-6h6v6"></path></svg>
-                        </div>
-                        <div class="info-principal">
-                            <h3>Projeto de Interiores</h3>
-                            <p class="profissional">Lucas Pereira <small>Designer de Interiores</small></p>
-                        </div>
-                        <div class="info-detalhe"><small>Pedido em</small><span>20/04/2025</span></div>
-                        <div class="info-detalhe"><small>Valor</small><span>R$ 3.400,00</span></div>
-                        <span class="status andamento">Em andamento</span>
-                        <a href="DetalhePedido.html" class="btn-detalhes">Ver detalhes</a>
-                    </article>
-
+                    <p>Carregando pedidos...</p>
                 </div>
 
-                <!-- Só aparece quando o filtro/busca não encontra nada -->
+                <!-- Aparece quando não há pedidos ou o filtro/busca não encontra nada -->
                 <div class="explorar" id="semPedidos" hidden>
-                    <h2>Nenhum pedido encontrado</h2>
-                    <p>Explore nossos profissionais e encontre o serviço ideal para o seu projeto.</p>
-                    <a href="./Profissionais.html">Explorar profissionais</a>
+                    <h2>Você ainda não fez nenhum pedido</h2>
+                    <p>Explore nossas plantas e encontre o projeto ideal para você.</p>
+                    <a href="./plantas.html">Explorar plantas</a>
                 </div>
 
-                <div class="paginacao">
-                    <button class="pagina seta" aria-label="Página anterior">‹</button>
-                    <button class="pagina selecionada">1</button>
-                    <button class="pagina">2</button>
-                    <button class="pagina">3</button>
-                    <button class="pagina seta" aria-label="Próxima página">›</button>
-                </div>
+                <div class="paginacao" hidden></div>
             </section>
         </section>
     </main>
@@ -214,7 +140,7 @@
     </footer>
 
     <script src="../js/Modais/LegalModais.js"></script>
-    <script src="../js/MeusPedidos.js"></script>
+    <script type="module" src="../js/MeusPedidos.js"></script>
     <script src="../js/Idioma.js"></script>
     <script src="../js/mensagensErros.js"></script>
 </body>

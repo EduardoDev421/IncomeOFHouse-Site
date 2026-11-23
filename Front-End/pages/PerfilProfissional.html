@@ -5,10 +5,17 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+   <link rel="stylesheet" href="../css/mensagensErros.css">
+   <style>html.carregando .conteudo { visibility: hidden; }</style>
+   <script>
+      document.documentElement.classList.add("carregando");
+      setTimeout(function () { document.documentElement.classList.remove("carregando"); }, 3000);
+   </script>
+
    <link rel="stylesheet" href="../css/PerfilProfissional.css">
    <link rel="stylesheet" href="../css/Modais/LegalModal.css">
    <script src="../js/conta.js"></script>
-   <title>Pagina do Perfil do Profissional</title>
+   <title>Perfil do Profissional</title>
 </head>
 
 <body data-conta="profissional">
@@ -87,6 +94,7 @@
                      <span>Configurações</span>
                   </a>
                </li>
+               <!-- "Sair" (último item): o perfilProfissional.js encerra a sessão antes de voltar ao início -->
                <li>
                   <a href="../index.html">
                      <img src="../img/icones/IconeSair.svg" alt="">
@@ -119,7 +127,7 @@
 
             <div class="conteudo-perfil">
 
-               <!-- Cabeçalho do perfil -->
+               <!-- Cabeçalho do perfil (preenchido pelo perfilProfissional.js) -->
                <div class="Perfil">
                   <div class="foto">
                      <div class="foto-placeholder">
@@ -129,41 +137,39 @@
                   </div>
 
                   <div class="dados-usuario">
-                     <h2>João Silva</h2>
-                     <p class="profissao">Arquiteto e Urbanista</p>
+                     <h2>—</h2>
+                     <p class="profissao">—</p>
 
                      <div class="selos">
-                        <span class="selo selo-verificado">Verificado</span>
-                        <span class="selo">São Paulo, SP</span>
-                        <span class="selo">Atende online</span>
+                        <span class="selo selo-verificado">Em análise</span>
+                        <span class="selo">—</span>
                      </div>
 
-                     <p class="avaliacao-topo"><span class="estrelas">★★★★★</span> 4,9 <span class="cinza">(87
-                           avaliações)</span></p>
+                     <p class="avaliacao-topo"><span class="cinza">Ainda sem avaliações</span></p>
                   </div>
 
                   <div class="contato-rapido">
                      <div class="contato-item">
                         <img src="../img/icones/IconeEmail.svg" alt="">
-                        <span>joao.silva@exemplo.com</span>
+                        <span>—</span>
                      </div>
                      <div class="contato-item">
                         <img src="../img/icones/IconeTelefone.svg" alt="">
-                        <span>(11) 98765-4321</span>
+                        <span>—</span>
                      </div>
                      <div class="contato-item">
                         <img src="../img/icones/IconeEndereco.svg" alt="">
-                        <span>Av. Paulista, 1000 - São Paulo</span>
+                        <span>—</span>
                      </div>
                   </div>
                </div>
 
-               <!-- Números do profissional -->
+               <!-- Números do profissional (começam zerados) -->
                <div class="cardsInfo">
                   <div class="cardInfo">
                      <div class="icone"><img src="../img/icones/IconeProjetosConcluidos.svg" alt=""></div>
                      <div>
-                        <p class="valor">156</p>
+                        <p class="valor">0</p>
                         <h3>Projetos concluídos</h3>
                      </div>
                   </div>
@@ -171,7 +177,7 @@
                   <div class="cardInfo">
                      <div class="icone"><img src="../img/icones/IconeAtendidos.svg" alt=""></div>
                      <div>
-                        <p class="valor">98+</p>
+                        <p class="valor">0</p>
                         <h3>Clientes atendidos</h3>
                      </div>
                   </div>
@@ -179,7 +185,7 @@
                   <div class="cardInfo">
                      <div class="icone"><img src="../img/icones/IconeEstrela.svg" alt=""></div>
                      <div>
-                        <p class="valor">4,9</p>
+                        <p class="valor">—</p>
                         <h3>Avaliação média</h3>
                      </div>
                   </div>
@@ -187,7 +193,7 @@
                   <div class="cardInfo">
                      <div class="icone"><img src="../img/icones/IconeTaxaRespostas.svg" alt=""></div>
                      <div>
-                        <p class="valor">98%</p>
+                        <p class="valor">—</p>
                         <h3>Taxa de resposta</h3>
                      </div>
                   </div>
@@ -195,7 +201,7 @@
                   <div class="cardInfo">
                      <div class="icone"><img src="../img/icones/IconeTempo.svg" alt=""></div>
                      <div>
-                        <p class="valor">1h 30m</p>
+                        <p class="valor">—</p>
                         <h3>Tempo médio de resposta</h3>
                      </div>
                   </div>
@@ -204,7 +210,7 @@
                <!-- Duas colunas -->
                <div class="informacoesGerais">
 
-                  <!-- Coluna da esquerda -->
+                  <!-- Coluna da esquerda: o profissional vai preenchendo com o tempo -->
                   <div class="coluna">
 
                      <div class="card Sobre">
@@ -213,9 +219,8 @@
                            <h2>Sobre mim</h2>
                         </div>
                         <div class="card-corpo">
-                           <p>Arquiteto e urbanista com mais de 10 anos de experiência em projetos residenciais e
-                              comerciais. Trabalho com foco em soluções funcionais, sustentáveis e que respeitam o
-                              orçamento de cada cliente, acompanhando o projeto da ideia até a entrega.</p>
+                           <p class="cinza">Você ainda não adicionou uma descrição. Clique em "Editar Perfil" para contar
+                              sobre a sua experiência.</p>
                         </div>
                      </div>
 
@@ -225,14 +230,7 @@
                            <h2>Áreas de atuação</h2>
                         </div>
                         <div class="card-corpo">
-                           <div class="tags">
-                              <span class="tag">Residencial</span>
-                              <span class="tag">Comercial</span>
-                              <span class="tag">Interiores</span>
-                              <span class="tag">Paisagismo</span>
-                              <span class="tag">Reformas</span>
-                              <span class="tag">Projeto 3D</span>
-                           </div>
+                           <p class="cinza">Nenhuma área de atuação adicionada.</p>
                         </div>
                      </div>
 
@@ -241,33 +239,8 @@
                            <img src="../img/icones/IconeServiçosOferecidos.svg" alt="">
                            <h2>Serviços oferecidos</h2>
                         </div>
-                        <div class="servico">
-                           <div>
-                              <h3>Projeto arquitetônico</h3>
-                              <p>Projeto completo com plantas, cortes e fachadas.</p>
-                           </div>
-                           <strong>a partir de R$ 3.500</strong>
-                        </div>
-                        <div class="servico">
-                           <div>
-                              <h3>Planta baixa</h3>
-                              <p>Planta baixa para casas e sobrados.</p>
-                           </div>
-                           <strong>a partir de R$ 980</strong>
-                        </div>
-                        <div class="servico">
-                           <div>
-                              <h3>Projeto de interiores</h3>
-                              <p>Layout, materiais e iluminação dos ambientes.</p>
-                           </div>
-                           <strong>a partir de R$ 2.200</strong>
-                        </div>
-                        <div class="servico">
-                           <div>
-                              <h3>Consultoria técnica</h3>
-                              <p>Acompanhamento de obra e análise de projetos.</p>
-                           </div>
-                           <strong>R$ 250 / hora</strong>
+                        <div class="card-corpo">
+                           <p class="cinza">Nenhum serviço cadastrado.</p>
                         </div>
                      </div>
 
@@ -277,24 +250,8 @@
                            <h2>Portfólio em destaque</h2>
                         </div>
                         <div class="card-corpo">
-                           <div class="portfolio">
-                              <div class="projeto">
-                                 <div class="projeto-img"></div>
-                                 <h3>Casa Moderna</h3>
-                                 <p>Residencial · 240 m²</p>
-                              </div>
-                              <div class="projeto">
-                                 <div class="projeto-img"></div>
-                                 <h3>Sobrado Jardim</h3>
-                                 <p>Residencial · 180 m²</p>
-                              </div>
-                              <div class="projeto">
-                                 <div class="projeto-img"></div>
-                                 <h3>Loja Centro</h3>
-                                 <p>Comercial · 95 m²</p>
-                              </div>
-                           </div>
-                           <a class="link-ver" href="../pages/MeuPortfolio.html">Ver portfólio completo</a>
+                           <p class="cinza">Nenhum projeto no portfólio ainda.</p>
+                           <a class="link-ver" href="../pages/MeuPortfolio.html">Ir para o meu portfólio</a>
                         </div>
                      </div>
 
@@ -303,33 +260,8 @@
                            <img src="../img/icones/IconeEstrela.svg" alt="">
                            <h2>Avaliações recentes</h2>
                         </div>
-                        <div class="avaliacao">
-                           <div class="avaliacao-topo-linha">
-                              <strong>Maria S.</strong>
-                              <span class="cinza">12/05/2025</span>
-                           </div>
-                           <span class="estrelas">★★★★★</span>
-                           <p>Excelente profissional, entregou o projeto antes do prazo e com muito cuidado nos
-                              detalhes.</p>
-                        </div>
-                        <div class="avaliacao">
-                           <div class="avaliacao-topo-linha">
-                              <strong>Carlos P.</strong>
-                              <span class="cinza">28/04/2025</span>
-                           </div>
-                           <span class="estrelas">★★★★★</span>
-                           <p>Muito atencioso e rápido nas respostas. Recomendo para quem quer um projeto sem dor de
-                              cabeça.</p>
-                        </div>
-                        <div class="avaliacao">
-                           <div class="avaliacao-topo-linha">
-                              <strong>Ana L.</strong>
-                              <span class="cinza">15/04/2025</span>
-                           </div>
-                           <span class="estrelas">★★★★☆</span>
-                           <p>Ótimo trabalho na planta da minha casa. Só precisou de um ajuste no layout da cozinha.</p>
-                        </div>
                         <div class="card-corpo">
+                           <p class="cinza">Você ainda não recebeu avaliações.</p>
                            <a class="link-ver" href="../pages/Avaliações.html">Ver todas as avaliações</a>
                         </div>
                      </div>
@@ -346,19 +278,11 @@
                         </div>
                         <div class="info-linha">
                            <span>Membro desde</span>
-                           <strong>Janeiro/2022</strong>
+                           <strong>—</strong>
                         </div>
                         <div class="info-linha">
-                           <span>Plano</span>
-                           <strong>Profissional Premium</strong>
-                        </div>
-                        <div class="info-linha">
-                           <span>Experiência</span>
-                           <strong>10 anos</strong>
-                        </div>
-                        <div class="info-linha">
-                           <span>Idiomas</span>
-                           <strong>Português, Inglês</strong>
+                           <span>Profissão</span>
+                           <strong>—</strong>
                         </div>
                      </div>
 
@@ -368,20 +292,16 @@
                            <h2>Registro profissional</h2>
                         </div>
                         <div class="info-linha">
-                           <span>Conselho</span>
-                           <strong>CAU</strong>
-                        </div>
-                        <div class="info-linha">
                            <span>Número</span>
-                           <strong>A12345-6</strong>
+                           <strong>—</strong>
                         </div>
                         <div class="info-linha">
                            <span>Estado</span>
-                           <strong>São Paulo (SP)</strong>
+                           <strong>—</strong>
                         </div>
                         <div class="info-linha">
                            <span>Situação</span>
-                           <span class="selo selo-verificado">Verificado</span>
+                           <span class="selo selo-verificado">Em análise</span>
                         </div>
                      </div>
 
@@ -390,17 +310,8 @@
                            <img src="../img/icones/IconeTempo.svg" alt="">
                            <h2>Disponibilidade</h2>
                         </div>
-                        <div class="info-linha">
-                           <span>Segunda a sexta</span>
-                           <strong>09h às 18h</strong>
-                        </div>
-                        <div class="info-linha">
-                           <span>Sábado</span>
-                           <strong>09h às 13h</strong>
-                        </div>
-                        <div class="info-linha">
-                           <span>Domingo</span>
-                           <span class="cinza">Indisponível</span>
+                        <div class="card-corpo">
+                           <p class="cinza">Horários ainda não informados.</p>
                         </div>
                      </div>
 
@@ -411,10 +322,7 @@
                         </div>
                         <div class="card-corpo">
                            <div class="tags">
-                              <span class="tag">São Paulo</span>
-                              <span class="tag">Grande São Paulo</span>
-                              <span class="tag">Campinas</span>
-                              <span class="tag">Online (todo o Brasil)</span>
+                              <span class="tag">—</span>
                            </div>
                         </div>
                      </div>
@@ -424,13 +332,8 @@
                            <img src="../img/icones/IconeMoeda.svg" alt="">
                            <h2>Orçamento</h2>
                         </div>
-                        <div class="info-linha">
-                           <span>Valor mínimo de projeto</span>
-                           <strong>R$ 980</strong>
-                        </div>
-                        <div class="info-linha">
-                           <span>Prazo médio de entrega</span>
-                           <strong>15 a 30 dias</strong>
+                        <div class="card-corpo">
+                           <p class="cinza">Valores e prazos ainda não informados.</p>
                         </div>
                      </div>
 
@@ -453,7 +356,21 @@
       </div>
    </footer>
 
+   <!-- Diagnóstico: se depois de 5s o nome ainda estiver "—", o JS não carregou -->
+   <script>
+      setTimeout(function () {
+         var h = document.querySelector(".dados-usuario h2");
+         if (h && h.textContent.trim() === "—") {
+            var d = document.createElement("div");
+            d.style.cssText = "position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:9999;max-width:90%;" +
+               "background:#fbbf24;color:#3b2a00;border-radius:10px;padding:12px 18px;font:600 14px/1.4 sans-serif";
+            d.textContent = "Os dados do perfil não carregaram. Confira se existe js/perfilProfissional.js (aba Network, F12) e veja o console.";
+            document.body.append(d);
+         }
+      }, 5000);
+   </script>
    <script src="../js/Modais/LegalModais.js"></script>
+   <script type="module" src="../js/perfilProfissionai.js"></script>
    <script src="../js/mensagensErros.js"></script>
 </body>
 

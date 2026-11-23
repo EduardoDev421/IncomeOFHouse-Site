@@ -103,79 +103,14 @@
                     </label>
                 </div>
 
+                <!-- Os favoritos são carregados do Supabase pelo js/MeusProfissionais.js -->
                 <div class="cards" id="listaProfissionais">
-
-                    <article class="card">
-                        <button class="btn-remover" aria-label="Remover dos favoritos">
-                            <img src="../img/icones/IconeCoracao.svg" alt="">
-                        </button>
-                        <div class="avatar"><img src="../img/perfil.png" alt=""></div>
-                        <h3>Carlos Silva</h3>
-                        <span class="especialidade">Arquiteto</span>
-                        <p>Projetos residenciais e comerciais com foco em aproveitamento de espaço.</p>
-                        <a href="../pages/DetalheProfissional.html" class="btn-ver">Ver Profissional</a>
-                    </article>
-
-                    <article class="card">
-                        <button class="btn-remover" aria-label="Remover dos favoritos">
-                            <img src="../img/icones/IconeCoracao.svg" alt="">
-                        </button>
-                        <div class="avatar"><img src="../img/perfil.png" alt=""></div>
-                        <h3>Juliana Martins</h3>
-                        <span class="especialidade">Engenheira Civil</span>
-                        <p>Reformas, ampliações e acompanhamento de obras do início ao fim.</p>
-                        <a href="../pages/DetalheProfissional.html" class="btn-ver">Ver Profissional</a>
-                    </article>
-
-                    <article class="card">
-                        <button class="btn-remover" aria-label="Remover dos favoritos">
-                            <img src="../img/icones/IconeCoracao.svg" alt="">
-                        </button>
-                        <div class="avatar"><img src="../img/perfil.png" alt=""></div>
-                        <h3>Rafael Costa</h3>
-                        <span class="especialidade">Investimentos Imobiliários</span>
-                        <p>Consultoria de viabilidade e análise de retorno para renda passiva.</p>
-                        <a href="../pages/DetalheProfissional.html" class="btn-ver">Ver Profissional</a>
-                    </article>
-
-                    <article class="card">
-                        <button class="btn-remover" aria-label="Remover dos favoritos">
-                            <img src="../img/icones/IconeCoracao.svg" alt="">
-                        </button>
-                        <div class="avatar"><img src="../img/perfil.png" alt=""></div>
-                        <h3>Fernanda Lima</h3>
-                        <span class="especialidade">Arquiteta</span>
-                        <p>Plantas baixas de sobrados e casas térreas, do estudo ao projeto final.</p>
-                        <a href="../pages/DetalheProfissional.html" class="btn-ver">Ver Profissional</a>
-                    </article>
-
-                    <article class="card">
-                        <button class="btn-remover" aria-label="Remover dos favoritos">
-                            <img src="../img/icones/IconeCoracao.svg" alt="">
-                        </button>
-                        <div class="avatar"><img src="../img/perfil.png" alt=""></div>
-                        <h3>Lucas Pereira</h3>
-                        <span class="especialidade">Designer de Interiores</span>
-                        <p>Projetos de interiores funcionais para imóveis de locação e moradia.</p>
-                        <a href="../pages/DetalheProfissional.html" class="btn-ver">Ver Profissional</a>
-                    </article>
-
-                    <article class="card">
-                        <button class="btn-remover" aria-label="Remover dos favoritos">
-                            <img src="../img/icones/IconeCoracao.svg" alt="">
-                        </button>
-                        <div class="avatar"><img src="../img/perfil.png" alt=""></div>
-                        <h3>Mariana Rocha</h3>
-                        <span class="especialidade">Paisagista</span>
-                        <p>Áreas externas e jardins que valorizam o imóvel.</p>
-                        <a href="../pages/DetalheProfissional.html" class="btn-ver">Ver Profissional</a>
-                    </article>
-
+                    <p>Carregando profissionais...</p>
                 </div>
 
-                <!-- Só aparece quando não há favoritos ou a busca não encontra nada -->
+                <!-- Aparece quando não há favoritos ou a busca não encontra nada -->
                 <div class="explorar" id="semProfissionais" hidden>
-                    <h2>Nenhum profissional encontrado</h2>
+                    <h2>Você ainda não favoritou nenhum profissional</h2>
                     <p>Explore nossos profissionais e salve os que mais combinam com o seu projeto.</p>
                     <a href="./Profissionais.html">Explorar profissionais</a>
                 </div>
@@ -193,7 +128,7 @@
     </footer>
 
     <script src="../js/Modais/LegalModais.js"></script>
-    <script src="../js/MeusProfissionais.js"></script>
+    <script type="module" src="../js/MeusProfissionais.js"></script>
     <script src="../js/Idioma.js"></script>
     <script src="../js/mensagensErros.js"></script>
 </body>

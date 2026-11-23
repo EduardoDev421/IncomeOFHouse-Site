@@ -1,10 +1,23 @@
+import { supabase } from "./lib/supabaseClient.js";
+
 if (typeof Conta !== "undefined") Conta.renderMenu("agendamentos");
+
+// Ajuste aqui se a tabela de profissionais usar outros nomes
+const PROF = { tabela: "profissionais", nome: "nome" };
 
 const TIPOS = {
     visita: "Visita ao imóvel",
     reuniao: "Reunião",
     entrega: "Entrega de projeto",
     consultoria: "Consultoria"
+};
+
+const STATUS = {
+    pendente: "Pendente",
+    confirmado: "Confirmado",
+    recusado: "Recusado",
+    cancelado: "Cancelado",
+    concluido: "Concluído"
 };
 
 const $ = (id) => document.getElementById(id);
@@ -32,34 +45,79 @@ let selecionado = hojeStr;
 let filtro = "todos";
 let duracao = 30;
 let horaSel = null;
-let proximoId = 100;
+let usuarioId = null;
+let eventos = [];
+let cargaAtual = 0;
 
-// Dados de exemplo (trocar por dados reais da API/banco depois)
-const seed = [
-    [3, "09:00", 60, "Briefing do projeto", "reuniao", "Carlos Silva", "confirmado"],
-    [7, "14:30", 90, "Visita ao terreno", "visita", "Juliana Martins", "confirmado"],
-    [11, "10:00", 60, "Consultoria de viabilidade", "consultoria", "Rafael Costa", "pendente"],
-    [11, "16:00", 60, "Alinhamento de plantas", "reuniao", "Fernanda Lima", "confirmado"],
-    [15, "11:00", 30, "Entrega da planta baixa", "entrega", "Fernanda Lima", "confirmado"],
-    [18, "15:00", 60, "Visita ao imóvel", "visita", "Carlos Silva", "pendente"],
-    [22, "09:30", 60, "Projeto de interiores", "reuniao", "Lucas Pereira", "confirmado"],
-    [22, "13:00", 90, "Vistoria da obra", "visita", "Juliana Martins", "pendente"],
-    [22, "17:00", 60, "Consultoria de retorno", "consultoria", "Rafael Costa", "confirmado"],
-    [27, "10:30", 30, "Entrega do projeto final", "entrega", "Carlos Silva", "pendente"]
-];
+/* ---------- Mensagens ---------- */
+function aviso(texto, erro = false) {
+    const el = $("msgAgendar");
+    el.textContent = texto;
+    el.style.color = erro ? "#c0392b" : "";
+}
 
-let eventos = seed.map(([dia, hora, dur, titulo, tipo, prof, status], i) => ({
-    id: i + 1,
-    data: fmt(new Date(hoje.getFullYear(), hoje.getMonth(), dia)),
-    hora, dur, titulo, tipo, prof, status
-}));
+const textoErro = (error) => error?.message || "Ocorreu um erro inesperado.";
+
+/* ---------- Supabase ---------- */
+async function carregarProfissionais() {
+    const { data, error } = await supabase
+        .from(PROF.tabela)
+        .select(`id, ${PROF.nome}`)
+        .order(PROF.nome);
+
+    const sel = $("fProf");
+    if (error) {
+        sel.innerHTML = `<option value="">Não foi possível carregar</option>`;
+        aviso(textoErro(error), true);
+        return;
+    }
+    sel.innerHTML = `<option value="">Selecione</option>` +
+        (data || []).map((p) => `<option value="${p.id}">${esc(p[PROF.nome] ?? "Sem nome")}</option>`).join("");
+}
+
+async function carregarEventos() {
+    const token = ++cargaAtual;
+    const ano = ref.getFullYear();
+    const mes = ref.getMonth();
+    const primeiro = new Date(ano, mes, 1);
+    const ultimo = new Date(ano, mes + 1, 0);
+    const inicio = fmt(new Date(ano, mes, 1 - primeiro.getDay()));
+    const fim = fmt(new Date(ano, mes + 1, 6 - ultimo.getDay()));
+
+    const { data, error } = await supabase
+        .from("agendamentos")
+        .select(`id, data, hora_inicio, duracao_min, titulo, tipo, status, profissional_id, ${PROF.tabela}(${PROF.nome})`)
+        .gte("data", inicio)
+        .lte("data", fim)
+        .order("data")
+        .order("hora_inicio");
+
+    if (token !== cargaAtual) return; // chegou uma carga mais nova
+    if (error) {
+        aviso(textoErro(error), true);
+        return;
+    }
+
+    eventos = (data || []).map((a) => ({
+        id: a.id,
+        data: a.data,
+        hora: String(a.hora_inicio).slice(0, 5),
+        dur: a.duracao_min,
+        titulo: a.titulo,
+        tipo: a.tipo,
+        status: a.status,
+        prof: a[PROF.tabela]?.[PROF.nome] || ""
+    }));
+    render();
+}
 
 /* ---------- Consultas ---------- */
-const visiveis = () => eventos.filter((e) => filtro === "todos" || e.tipo === filtro);
+const ativos = () => eventos.filter((e) => e.status !== "cancelado" && e.status !== "recusado");
+const visiveis = () => ativos().filter((e) => filtro === "todos" || e.tipo === filtro);
 const doDia = (data) => visiveis().filter((e) => e.data === data).sort((a, b) => a.hora.localeCompare(b.hora));
 
 const ocupado = (data, ini, dur) =>
-    eventos.some((e) => e.data === data &&
+    ativos().some((e) => e.data === data &&
         minutos(e.hora) < minutos(ini) + dur && minutos(ini) < minutos(e.hora) + e.dur);
 
 function passou(data, hora) {
@@ -69,7 +127,7 @@ function passou(data, hora) {
 
 /* ---------- Renderização ---------- */
 function renderResumo() {
-    const mes = eventos.filter((e) => {
+    const mes = ativos().filter((e) => {
         const d = parse(e.data);
         return d.getMonth() === ref.getMonth() && d.getFullYear() === ref.getFullYear();
     });
@@ -121,8 +179,10 @@ function renderLateral() {
                 <span class="hora">${e.hora} – ${fimDe(e.hora, e.dur)}</span>
                 <strong>${esc(e.titulo)}</strong>
                 <small>${TIPOS[e.tipo]}${e.prof ? " · " + esc(e.prof) : ""}</small>
-                <span class="selo ${e.status}">${e.status === "confirmado" ? "Confirmado" : "Pendente"}</span>
-                <button class="btn-remover" data-id="${e.id}" aria-label="Remover agendamento">×</button>
+                <span class="selo ${e.status}">${STATUS[e.status] || esc(e.status)}</span>
+                ${e.status === "pendente"
+                    ? `<button class="btn-remover" data-id="${e.id}" aria-label="Cancelar agendamento">×</button>`
+                    : ""}
             </div>`).join("")
         : `<p class="vazio">Nenhum compromisso neste dia.</p>`;
 }
@@ -155,13 +215,20 @@ function render() {
 }
 
 /* ---------- Eventos ---------- */
-$("mesAnterior").onclick = () => { ref = new Date(ref.getFullYear(), ref.getMonth() - 1, 1); render(); };
-$("mesSeguinte").onclick = () => { ref = new Date(ref.getFullYear(), ref.getMonth() + 1, 1); render(); };
+function mudarMes(delta) {
+    ref = new Date(ref.getFullYear(), ref.getMonth() + delta, 1);
+    render();
+    carregarEventos();
+}
+
+$("mesAnterior").onclick = () => mudarMes(-1);
+$("mesSeguinte").onclick = () => mudarMes(1);
 
 $("btnHoje").onclick = () => {
     ref = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
     selecionado = hojeStr;
     render();
+    carregarEventos();
 };
 
 $("grade").addEventListener("click", (e) => {
@@ -169,9 +236,11 @@ $("grade").addEventListener("click", (e) => {
     if (!dia) return;
     selecionado = dia.dataset.data;
     const d = parse(selecionado);
-    if (d.getMonth() !== ref.getMonth()) ref = new Date(d.getFullYear(), d.getMonth(), 1);
-    $("msgAgendar").textContent = "";
+    const mudouMes = d.getMonth() !== ref.getMonth();
+    if (mudouMes) ref = new Date(d.getFullYear(), d.getMonth(), 1);
+    aviso("");
     render();
+    if (mudouMes) carregarEventos();
 });
 
 $("filtros").addEventListener("click", (e) => {
@@ -183,11 +252,20 @@ $("filtros").addEventListener("click", (e) => {
     render();
 });
 
-$("listaDia").addEventListener("click", (e) => {
+// "×" cancela (apaga) um agendamento pendente do próprio usuário
+$("listaDia").addEventListener("click", async (e) => {
     const b = e.target.closest(".btn-remover");
     if (!b) return;
-    eventos = eventos.filter((ev) => ev.id !== Number(b.dataset.id));
-    render();
+    b.disabled = true;
+
+    const { error } = await supabase.from("agendamentos").delete().eq("id", b.dataset.id);
+    if (error) {
+        b.disabled = false;
+        aviso(textoErro(error), true);
+        return;
+    }
+    aviso("Agendamento cancelado.");
+    await carregarEventos();
 });
 
 $("durMenos").onclick = () => { duracao = Math.max(30, duracao - 30); $("durValor").textContent = duracao; renderSlots(); };
@@ -200,28 +278,56 @@ $("slots").addEventListener("click", (e) => {
     renderSlots();
 });
 
-$("btnAgendar").onclick = () => {
+$("btnAgendar").onclick = async () => {
     if (!horaSel) return;
+
+    const profissionalId = $("fProf").value;
+    if (!profissionalId) {
+        aviso("Selecione um profissional.", true);
+        return;
+    }
+
     const tipo = $("fTipo").value;
     const titulo = $("fTitulo").value.trim() || TIPOS[tipo];
+    const hora = horaSel;
 
-    eventos.push({
-        id: proximoId++,
-        data: selecionado,
-        hora: horaSel,
-        dur: duracao,
+    $("btnAgendar").disabled = true;
+    const { error } = await supabase.from("agendamentos").insert({
+        usuario_id: usuarioId,
+        profissional_id: profissionalId,
         titulo,
         tipo,
-        prof: $("fProf").value.trim(),
+        data: selecionado,
+        hora_inicio: hora,
+        duracao_min: duracao,
         status: "pendente"
     });
 
-    $("msgAgendar").textContent = `Agendado: ${titulo}, das ${horaSel} às ${fimDe(horaSel, duracao)}.`;
+    if (error) {
+        aviso(textoErro(error), true);
+        renderSlots();
+        return;
+    }
+
+    aviso(`Agendado: ${titulo}, das ${hora} às ${fimDe(hora, duracao)}. Aguardando confirmação do profissional.`);
     $("fTitulo").value = "";
     horaSel = null;
     filtro = "todos";
     document.querySelectorAll(".filtro").forEach((x) => x.classList.toggle("ativo", x.dataset.tipo === "todos"));
-    render();
+    await carregarEventos();
 };
 
-render();
+/* ---------- Início ---------- */
+async function iniciar() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+        window.location.href = "./login.html";
+        return;
+    }
+    usuarioId = session.user.id;
+
+    render(); // calendário vazio já aparece enquanto carrega
+    await Promise.all([carregarProfissionais(), carregarEventos()]);
+}
+
+iniciar();

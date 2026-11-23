@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="IncomeofHouses - Redefinir senha">
+   <link rel="stylesheet" href="../css/EsqueceuSenha.css">
+   <link rel="stylesheet" href="../css/RedefinirSenha.css">
+   <link rel="stylesheet" href="../css/Modais/LegalModal.css">
+   <link rel="stylesheet" href="../css/mensagensErros.css">
+   <title>Redefinir senha - Income Of Houses</title>
+</head>
+
+<body>
+   <header class="topo">
+      <div class="logo">
+         <a href="../index.html">
+            <img src="../img/Logo.png" alt="Logo Income of Houses">
+         </a>
+      </div>
+      <nav class="menu">
+         <a href="../index.html">Início</a>
+         <a href="./plantas.html">Plantas</a>
+         <a href="./Profissionais.html">Profissionais</a>
+         <a href="./sobre.html">Sobre Nós</a>
+      </nav>
+   </header>
+
+   <main>
+      <div class="conteudo">
+         <section class="apresentacao">
+            <h1>
+               Crie sua
+               <span>nova senha</span>
+            </h1>
+            <p class="descricao">Escolha uma senha segura para a sua conta.</p>
+         </section>
+
+         <section class="Container-Senha">
+            <div class="bloco-auth">
+               <h2>Redefinir senha</h2>
+
+               <form class="FormSenha" id="formRedefinirSenha" novalidate>
+
+                  <div class="Campo">
+                     <label for="novaSenha">Nova senha</label>
+                     <div class="campo-input">
+                        <input type="password" id="novaSenha" name="novaSenha" placeholder="Mínimo de 6 caracteres"
+                           autocomplete="new-password" required>
+                        <button type="button" class="toggle-senha" data-alvo="novaSenha" aria-label="Mostrar senha">
+                           <svg class="olho" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z" />
+                              <circle cx="12" cy="12" r="3" />
+                              <line class="risco" x1="3" y1="3" x2="21" y2="21" />
+                           </svg>
+                        </button>
+                     </div>
+                     <div class="forca" id="forcaSenha" data-nivel="0">
+                        <div class="forca-barra"><span></span><span></span><span></span><span></span></div>
+                        <small id="forcaTexto"></small>
+                     </div>
+                  </div>
+
+                  <div class="Campo">
+                     <label for="confirmarSenha">Confirmar senha</label>
+                     <div class="campo-input">
+                        <input type="password" id="confirmarSenha" name="confirmarSenha"
+                           placeholder="Repita a nova senha" autocomplete="new-password" required>
+                        <button type="button" class="toggle-senha" data-alvo="confirmarSenha"
+                           aria-label="Mostrar senha">
+                           <svg class="olho" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z" />
+                              <circle cx="12" cy="12" r="3" />
+                              <line class="risco" x1="3" y1="3" x2="21" y2="21" />
+                           </svg>
+                        </button>
+                     </div>
+                  </div>
+
+                  <p class="mensagem-form" id="mensagemForm" role="alert" aria-live="polite"></p>
+
+                  <button type="submit" id="btnRedefinir">Redefinir senha</button>
+               </form>
+
+               <div class="voltar-login">
+                  <p><a href="../pages/login.html"><span>Voltar para o login</span></a></p>
+               </div>
+            </div>
+         </section>
+      </div>
+   </main>
+
+   <footer class="rodape">
+      <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+      <div class="RodapeLinks">
+         <a href="../pages/Modais/TermosUso.html" data-legal="termos">Termos de Uso</a>
+         <span>|</span>
+         <a href="../pages/Modais/PoliticaPrivacidade.html" data-legal="privacidade">Política de Privacidade</a>
+      </div>
+   </footer>
+
+   <script src="../js/Modais/LegalModais.js"></script>
+   <script src="../js/mensagensErros.js"></script>
+   <script type="module" src="../js/RedefinirSenha.js"></script>
+</body>
+
+</html>

@@ -1,5 +1,7 @@
 /* plantas.js
-   Carregue PlantasStorage.js e Favoritos.js ANTES deste arquivo. */
+   Carregue PlantasStorage.js e Favoritos.js (ambos type="module") ANTES deste arquivo. */
+
+const PAGINA_LOGIN = "./Login.html";
 
 const ListaPlantas = document.getElementById("ListaPlantas");
 const mensagem = document.getElementById("mensagemPlantas");
@@ -46,7 +48,7 @@ function correspondeFaixa(valor, filtro) {
     return numero >= minimo && numero < maximo;
 }
 
-// Busca as plantas no servidor.
+// Busca as plantas no banco de dados.
 async function buscarPlantas() {
     if (!ListaPlantas || !mensagem || !paginacao) {
         console.error(
@@ -67,6 +69,8 @@ async function buscarPlantas() {
     paginacao.replaceChildren();
 
     try {
+        if (window.Favoritos?.pronto) await window.Favoritos.pronto;
+
         plantas = await window.PlantasStorage.getPlantas();
 
         aplicarFiltros();
@@ -104,9 +108,13 @@ function aplicarFiltros() {
     paginaAtual = 1;
 
     if (mensagem) {
-        mensagem.textContent = plantasFiltradas.length
-            ? `${plantasFiltradas.length} planta(s) encontrada(s).`
-            : "Nenhuma planta encontrada. Verifique os filtros.";
+        if (!plantas.length) {
+            mensagem.textContent = "Ainda não há plantas publicadas.";
+        } else {
+            mensagem.textContent = plantasFiltradas.length
+                ? `${plantasFiltradas.length} planta(s) encontrada(s).`
+                : "Nenhuma planta encontrada. Verifique os filtros.";
+        }
     }
 
     renderizar();
@@ -123,11 +131,14 @@ function mostrarPlantas() {
         vazio.className = "NenhumaPlanta";
 
         const titulo = document.createElement("h3");
-        titulo.textContent = "Nenhuma planta encontrada.";
+        titulo.textContent = plantas.length
+            ? "Nenhuma planta encontrada."
+            : "Ainda não há plantas publicadas.";
 
         const texto = document.createElement("p");
-        texto.textContent =
-            "Verifique os filtros aplicados ou tente novamente.";
+        texto.textContent = plantas.length
+            ? "Verifique os filtros aplicados ou tente novamente."
+            : "Volte em breve para conferir os novos projetos.";
 
         vazio.append(titulo, texto);
         ListaPlantas.appendChild(vazio);
@@ -179,10 +190,25 @@ function mostrarPlantas() {
             );
         }
 
-        favorito.addEventListener("click", function () {
+        favorito.addEventListener("click", async function () {
             if (!window.Favoritos) return;
-            window.Favoritos.alternar(planta.id);
-            atualizarFavorito();
+
+            favorito.disabled = true;
+
+            try {
+                const resultado = await window.Favoritos.alternar(planta.id);
+
+                if (resultado === null) {
+                    alert("Entre na sua conta para salvar plantas nos favoritos.");
+                    window.location.href = PAGINA_LOGIN;
+                    return;
+                }
+            } catch (erro) {
+                alert(erro.message);
+            } finally {
+                favorito.disabled = false;
+                atualizarFavorito();
+            }
         });
 
         atualizarFavorito();

@@ -102,7 +102,7 @@
 
                     <div class="campo">
                         <label for="titulo">Título da Planta</label>
-                        <input type="text" id="titulo" placeholder="Ex.: Casa Moderna com 3 Quartos" required>
+                        <input type="text" id="titulo" maxlength="150" placeholder="Ex.: Casa Moderna com 3 Quartos" required>
                     </div>
 
                     <div class="campo">
@@ -208,33 +208,33 @@
 
                     <div class="campo">
                         <label for="quartos">Quantidade de Quartos</label>
-                        <input type="number" id="quartos" min="1" required placeholder="Ex.: 3 quartos">
+                        <input type="number" id="quartos" min="0" step="1" required placeholder="Ex.: 3 quartos">
                     </div>
 
                     <div class="campo">
                         <label for="banheiros">Quantidade de Banheiros</label>
-                        <input type="number" id="banheiros" min="1" required placeholder="Ex.: 2 banheiros">
+                        <input type="number" id="banheiros" min="0" step="1" required placeholder="Ex.: 2 banheiros">
                     </div>
 
                     <div class="campo">
                         <label for="garagem">Vagas na Garagem</label>
-                        <input type="number" id="garagem" min="0" required placeholder="Ex.: 2 vagas">
+                        <input type="number" id="garagem" min="0" step="1" required placeholder="Ex.: 2 vagas">
                     </div>
 
                     <div class="campo">
                         <label for="area">Área Construída (m²)</label>
-                        <input type="number" id="area" min="0" required placeholder="Ex.: 120 m²">
+                        <input type="number" id="area" min="0.01" max="100000" step="0.01" required placeholder="Ex.: 120 m²">
                     </div>
 
                     <div class="campo">
                         <label for="preco">Preço (R$)</label>
-                        <input type="number" id="preco" min="0" step="0.01" required placeholder="Ex.: R$ 350.000,00">
+                        <input type="text" id="preco" inputmode="numeric" autocomplete="off" maxlength="20" required placeholder="R$ 0,00">
                     </div>
 
                     <div class="campo">
                         <label for="imagem">Imagem da Planta</label>
-                        <input type="file" id="imagem" accept="image/jpeg,image/png,image/webp" required>
-                        <small class="dica" id="dicaImagem">JPEG, PNG ou WebP, até 5 MB. A imagem é reduzida automaticamente antes do envio.</small>
+                        <input type="file" id="imagem" accept="image/jpeg,image/png,image/webp,.jfif" required>
+                        <small class="dica" id="dicaImagem">JPEG (.jpg, .jfif), PNG ou WebP, até 5 MB. A imagem é reduzida automaticamente antes do envio.</small>
                     </div>
 
                     <button id="botaoPublicar" type="submit">
@@ -256,8 +256,8 @@
 
     <script src="../js/Conta.js"></script>
     <script src="../js/Modais/LegalModais.js"></script>
-    <script src="../js/PlantasStorage.js"></script>
-    <script src="../js/publicarPlanta.js"></script>
+    <script type="module" src="../js/PlantasStorage.js"></script>
+    <script type="module" src="../js/publicarPlanta.js"></script>
     <script src="../js/mensagensErros.js"></script>
 </body>
 

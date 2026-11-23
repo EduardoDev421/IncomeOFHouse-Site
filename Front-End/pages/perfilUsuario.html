@@ -5,10 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+    <style>html.carregando .conteudo { visibility: hidden; }</style>
+    <script>
+        document.documentElement.classList.add("carregando");
+        // segurança: nunca deixa a página escondida se algo falhar
+        setTimeout(function () { document.documentElement.classList.remove("carregando"); }, 3000);
+    </script>
+
     <link rel="stylesheet" href="../css/Tema/Tema.css">
     <link rel="stylesheet" href="../css/perfilusuario.css">
     <link rel="stylesheet" href="../css/Modais/LegalModal.css">
-    <link rel="stylesheet" href="../css/mensagens.css">
+    <link rel="stylesheet" href="../css/mensagensErros.css">
     <script src="../js/Preferencias.js"></script>
     <script src="../js/conta.js"></script>
     <title>Pagina do Perfil do Usuário</title>
@@ -111,35 +118,41 @@
                 <!-- Cabeçalho -->
                 <div class="conteudo-perfil">
                     <div class="foto">
-                        <img src="img/perfil.png">
+                        <img id="fotoPerfil" alt="Foto de perfil" hidden>
+                        <div class="foto-icone" id="fotoIcone" role="img" aria-label="Sem foto de perfil">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="8" r="4"></circle>
+                                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>
+                            </svg>
+                        </div>
                     </div>
 
                     <div class="dados-usuario">
-                        <h2>Nome do Usuário</h2>
+                        <h2></h2>
 
-                        <p>Email do Usuario</p>
+                        <p></p>
                         <div class="membro-desde">
-                            <img src="../img/icones/IconeData.svg">
-                            <p>Membro Desde: Janeiro/2024</p>
+                            <img src="../img/icones/IconeData.svg" alt="">
+                            <p>Membro desde: —</p>
                         </div>
                     </div>
 
                     <div class="cardsInfo">
                         <div class="cardInfo">
-                            <img src="../img/icones/IconeSalvos.svg">
-                            <h2>12</h2>
+                            <img src="../img/icones/IconeSalvos.svg" alt="">
+                            <h2 id="contadorProjetosSalvos">0</h2>
                             <p>Projetos <br>
                                 Salvos</p>
                         </div>
                         <div class="cardInfo">
-                            <img src="../img/icones/IconeEstrela.svg">
-                            <h2>8</h2>
+                            <img src="../img/icones/IconeEstrela.svg" alt="">
+                            <h2 id="contadorProfissionaisFavoritos">0</h2>
                             <p>Profissionais <br>
                                 Favoritos</p>
                         </div>
                         <div class="cardInfo">
-                            <img src="../img/icones/IconePedidosSalvos.svg">
-                            <h2>15</h2>
+                            <img src="../img/icones/IconePedidosSalvos.svg" alt="">
+                            <h2 id="contadorPedidos">0</h2>
                             <p>Pedidos <br>
                                 Realizados</p>
                         </div>
@@ -154,47 +167,47 @@
                         <div class="informacoes">
 
                             <div class="item">
-                                <img src="../img/icones/IconeLogin.svg">
+                                <img src="../img/icones/IconeLogin.svg" alt="">
                                 <div class="item-text">
                                     <span>Nome Completo</span>
-                                    <strong>Nome Sobrenome</strong>
+                                    <strong>—</strong>
                                 </div>
                             </div>
 
                             <div class="item">
-                                <img src="../img/icones/IconeData.svg">
+                                <img src="../img/icones/IconeData.svg" alt="">
                                 <div class="item-text">
                                     <span>Data de Nascimento</span>
-                                    <strong>00/00/0000</strong>
+                                    <strong>—</strong>
                                 </div>
                             </div>
 
                             <div class="item">
-                                <img src="../img/icones/IconeCPF.svg">
+                                <img src="../img/icones/IconeCPF.svg" alt="">
                                 <div class="item-text">
                                     <span>CPF</span>
-                                    <strong>000.000.000-00</strong>
+                                    <strong>—</strong>
                                 </div>
                             </div>
 
                             <div class="item">
-                                <img src="../img/icones/IconeEmail.svg">
+                                <img src="../img/icones/IconeEmail.svg" alt="">
                                 <div class="item-text">
                                     <span>E-mail</span>
-                                    <strong>email@gmail.com</strong>
+                                    <strong>—</strong>
                                 </div>
                             </div>
 
                             <div class="item">
-                                <img src="../img/icones/IconeTelefone.svg">
+                                <img src="../img/icones/IconeTelefone.svg" alt="">
                                 <div class="item-text">
                                     <span>Telefone</span>
-                                    <strong>(00) 00000-0000</strong>
+                                    <strong>—</strong>
                                 </div>
                             </div>
 
                             <div class="item">
-                                <img src="../img/icones/IconePrivacidade.svg">
+                                <img src="../img/icones/IconePrivacidade.svg" alt="">
                                 <div class="item-text">
                                     <span>Senha</span>
                                     <strong>••••••••••</strong>
@@ -211,58 +224,16 @@
 
                     <div class="card-Atividades">
                         <div class="TextAtividades">
-                            <img src="">
                             <h2>Atividades Recentes</h2>
                         </div>
                         <div class="Atividades">
 
-                            <div class="atividade">
-                                <img src="../img/icones/IconeSalvos.svg">
+                            <p class="sem-atividades">Nenhuma atividade recente.</p>
+                            <ul class="lista-atividades"></ul>
 
-                                <div class="AtividadeDetalhe">
-                                    <span>Projeto salvo</span>
-                                    <p>Voce salvou o projeto "Casa Moderna"</p>
-                                </div>
-
-                                <strong>Hoje, 14:30</strong>
-                            </div>
-
-                            <div class="atividade">
-                                <img src="../img/icones/IconeCoracao.svg">
-
-                                <div class="AtividadeDetalhe">
-                                    <span>Profissional favoritado</span>
-                                    <p>Voce favoritou o profissional "Arq. Joao Silva."</p>
-                                </div>
-
-                                <strong>ontem, 10:15</strong>
-                            </div>
-
-                            <div class="atividade">
-                                <img src="../img/icones/IconePedidosSalvos.svg">
-
-                                <div class="AtividadeDetalhe">
-                                    <span>Pedido realizado</span>
-                                    <p>Novo pedido realizado: #1294</p>
-                                </div>
-
-                                <strong>18/05/2025</strong>
-                            </div>
-
-                            <div class="atividade">
-                                <img src="../img/icones/IconeMensagem.svg">
-
-                                <div class="AtividadeDetalhe">
-                                    <span>Mensagem recebida </span>
-                                    <p>Voce recebeu uma nova mensagem.</p>
-                                </div>
-
-                                <strong>17/05/2024</strong>
-                            </div>
                             <div class="BtnAtividadesDetalhes">
                                 <a href="../pages/ConfiguraçõesUsuario.html">
                                     Ver todas as atividades
-                                    <img src="">
                                 </a>
                             </div>
                         </div>
@@ -281,8 +252,7 @@
     </footer>
 
     <script src="../js/Modais/LegalModais.js"></script>
-    <script src="../js/mensagens.js"></script>
-    <script src="../js/perfilUsuario.js"></script>
+    <script type="module" src="../js/perfilUsuario.js"></script>
     <script src="../js/Idioma.js"></script>
     <script src="../js/mensagensErros.js"></script>
 </body>

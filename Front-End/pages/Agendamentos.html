@@ -121,7 +121,7 @@
                         <div class="cal-semana">
                             <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
                         </div>
-                        <div class="cal-grade" id="grade"><p class="aviso-js">O calendário não carregou. Confira se o arquivo js/Agendamentos.js existe e atualize a página com Ctrl+F5.</p></div>
+                        <div class="cal-grade" id="grade"><p class="aviso-js">O calendário não carregou. Abra o Console (F12) para ver o erro e atualize a página com Ctrl+F5.</p></div>
                     </section>
 
                     <!-- DIA SELECIONADO + AGENDAR -->
@@ -163,7 +163,9 @@
                                     </select>
                                 </label>
                                 <label>Profissional
-                                    <input type="text" id="fProf" maxlength="40" placeholder="Nome">
+                                    <select id="fProf">
+                                        <option value="">Carregando...</option>
+                                    </select>
                                 </label>
                             </div>
 
@@ -176,7 +178,7 @@
             </section>
         </section>
     </main>
-    
+
     <footer class="rodape">
         <p>©IncomeOfHouses. Todos os direitos reservados.</p>
         <div class="RodapeLinks">
@@ -188,7 +190,7 @@
 
     <script src="../js/Modais/LegalModais.js"></script>
     <script src="../js/conta.js"></script>
-    <script src="../js/Agendamentos.js"></script>
+    <script type="module" src="../js/Agendamentos.js"></script>
     <script src="../js/Idioma.js"></script>
     <script src="../js/mensagensErros.js"></script>
 </body>

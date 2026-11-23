@@ -1,48 +1,84 @@
-/* Favoritos.js
-   Favoritos guardados só neste navegador (localStorage).
-   Compartilhado por plantas.js e detalhePlanta.js, para a lista e a
-   página de detalhes mostrarem sempre o mesmo estado.
-   Carregue ANTES de plantas.js e detalhePlanta.js. */
+import { supabase } from "./lib/supabaseClient.js";
 
-(function () {
-    const CHAVE = "plantasFavoritas";
+// Mesma tabela usada por MeusProjetosFavoritos.js
+const TABELA = "favoritos";
 
-    function ler() {
-        try {
-            const lista = JSON.parse(localStorage.getItem(CHAVE));
-            return Array.isArray(lista) ? lista.map(String) : [];
-        } catch {
-            return [];
-        }
+let usuarioId = null;
+let ids = new Set();
+
+async function carregar() {
+    try {
+        const { data: { session } } = await supabase.auth.getSession();
+        usuarioId = session?.user?.id || null;
+        ids = new Set();
+        if (!usuarioId) return;
+
+        const { data, error } = await supabase
+            .from(TABELA)
+            .select("planta_id")
+            .eq("usuario_id", usuarioId)
+            .not("planta_id", "is", null);
+
+        if (error) throw error;
+        ids = new Set((data || []).map((l) => String(l.planta_id)));
+    } catch (erro) {
+        console.error("[Favoritos] Não foi possível carregar os favoritos:", erro);
     }
+}
 
-    function salvar(lista) {
-        try {
-            localStorage.setItem(CHAVE, JSON.stringify(lista));
-        } catch {
-            /* sem armazenamento disponível (modo privado, etc.) */
-        }
-    }
+const pronto = carregar();
 
-    function eFavorito(id) {
-        return ler().includes(String(id));
-    }
+function textoErro(erro) {
+    const m = String(erro?.message || "").toLowerCase();
+    if (m.includes("does not exist") || m.includes("schema cache") || erro?.code === "PGRST205")
+        return "A tabela favoritos ainda não existe no Supabase.";
+    if (m.includes("row-level security") || m.includes("permission denied"))
+        return "Sem permissão para salvar o favorito.";
+    if (m.includes("foreign key"))
+        return "Não foi possível favoritar: a tabela favoritos exige uma referência que não existe (" + (erro?.details || erro?.message) + ").";
+    if (m.includes("failed to fetch")) return "Sem conexão com o servidor. Tente novamente.";
+    return `Erro ao salvar o favorito: ${erro?.message || "desconhecido"}${erro?.code ? " (código " + erro.code + ")" : ""}`;
+}
 
-    // Alterna o favorito e devolve o novo estado (true = favoritado).
-    function alternar(id) {
-        const chave = String(id);
-        const lista = ler();
-        const posicao = lista.indexOf(chave);
+function eFavorito(plantaId) {
+    return ids.has(String(plantaId));
+}
 
-        if (posicao >= 0) {
-            lista.splice(posicao, 1);
+function listar() {
+    return [...ids];
+}
+
+async function alternar(plantaId) {
+    await pronto;
+    if (!usuarioId) return null;
+
+    const chave = String(plantaId);
+    const estavaAtivo = ids.has(chave);
+
+    if (estavaAtivo) ids.delete(chave);
+    else ids.add(chave);
+
+    try {
+        if (estavaAtivo) {
+            const { error } = await supabase
+                .from(TABELA)
+                .delete()
+                .eq("usuario_id", usuarioId)
+                .eq("planta_id", plantaId);
+            if (error) throw error;
         } else {
-            lista.push(chave);
+            const { error } = await supabase
+                .from(TABELA)
+                .insert({ usuario_id: usuarioId, planta_id: plantaId });
+            if (error && error.code !== "23505") throw error;
         }
-
-        salvar(lista);
-        return posicao < 0;
+        return !estavaAtivo;
+    } catch (erro) {
+        if (estavaAtivo) ids.add(chave);
+        else ids.delete(chave);
+        console.error("[Favoritos]", erro);
+        throw new Error(textoErro(erro));
     }
+}
 
-    window.Favoritos = { eFavorito, alternar };
-})();
+window.Favoritos = { pronto, eFavorito, alternar, listar };

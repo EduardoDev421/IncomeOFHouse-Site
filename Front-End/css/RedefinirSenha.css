@@ -1,0 +1,124 @@
+.Container-Senha .bloco-auth {
+    padding: 44px 45px 36px;
+}
+
+.Container-Senha .bloco-auth h2 {
+    margin-bottom: 30px;
+}
+
+.FormSenha .Campo + .Campo {
+    margin-top: 6px;
+}
+
+.FormSenha .campo-input {
+    margin-bottom: 10px;
+}
+
+.FormSenha .campo-input .toggle-senha {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    border-radius: 6px;
+    transform: none;
+}
+
+.FormSenha .campo-input .toggle-senha:hover {
+    background: rgba(212, 175, 106, 0.1);
+    transform: none;
+}
+
+.olho {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #d4af6a;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.olho .risco {
+    opacity: 0;
+}
+
+.toggle-senha.visivel .risco {
+    opacity: 1;
+}
+
+.forca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 16px;
+    margin-bottom: 16px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.forca[data-nivel]:not([data-nivel="0"]) {
+    opacity: 1;
+}
+
+.forca-barra {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+}
+
+.forca-barra span {
+    height: 4px;
+    border-radius: 2px;
+    background: #2a2a2a;
+    transition: background 0.2s;
+}
+
+.forca small {
+    min-width: 42px;
+    color: #a3a3a3;
+    font-size: 12px;
+    text-align: right;
+}
+
+.forca[data-nivel="1"] span:nth-child(-n+1) { background: #e5534b; }
+.forca[data-nivel="2"] span:nth-child(-n+2) { background: #e0953a; }
+.forca[data-nivel="3"] span:nth-child(-n+3) { background: #d4af6a; }
+.forca[data-nivel="4"] span:nth-child(-n+4) { background: #5cb85c; }
+
+.campo-input.erro {
+    border-color: #e5534b;
+}
+
+.mensagem-form {
+    min-height: 20px;
+    margin: 4px 0 14px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.mensagem-form.erro {
+    color: #ff6b6b;
+}
+
+.mensagem-form.sucesso {
+    color: #d4af6a;
+}
+
+.FormSenha button[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.Container-Senha .voltar-login {
+    margin-top: 24px;
+}
+
+.Container-Senha .voltar-login a:hover span {
+    color: #e2c07b;
+}

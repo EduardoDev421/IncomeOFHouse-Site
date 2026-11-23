@@ -151,6 +151,8 @@ body {
     border-radius: 12px;
 }
 
+.calendario { min-width: 0; }
+
 /* ----- calendário ----- */
 .cal-topo { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .cal-nav { display: flex; align-items: center; gap: 14px; }
@@ -216,6 +218,9 @@ i.consultoria { background: #b89aea; }
 
 .cal-grade { gap: 6px; grid-auto-rows: minmax(clamp(104px, 14vh, 140px), 1fr); }
 
+/* aviso exibido só se o JS não carregar: ocupa a grade inteira */
+.aviso-js { grid-column: 1 / -1; padding: 16px; color: #e57373; text-align: center; }
+
 .dia {
     display: flex;
     flex-direction: column;
@@ -256,7 +261,9 @@ i.consultoria { background: #b89aea; }
 .lateral {
     position: sticky;
     top: 84px;
+    min-width: 0;
     max-height: calc(100vh - 104px);
+    overflow-x: hidden;
     overflow-y: auto;
 }
 
@@ -280,6 +287,8 @@ i.consultoria { background: #b89aea; }
     border: 1px solid #252729;
     border-left: 3px solid #d4a63a;
     border-radius: 8px;
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .item-evento.reuniao { border-left-color: #6aa7e8; }
@@ -293,6 +302,9 @@ i.consultoria { background: #b89aea; }
 .selo { align-self: flex-start; margin-top: 3px; padding: 2px 10px; border-radius: 20px; font-size: 11px; }
 .selo.confirmado { color: #54db83; background: rgba(30, 135, 68, 0.23); }
 .selo.pendente { color: #f0ca61; background: rgba(174, 137, 43, 0.22); }
+.selo.recusado,
+.selo.cancelado { color: #e57373; background: rgba(198, 40, 40, 0.2); }
+.selo.concluido { color: #6aa7e8; background: rgba(41, 98, 168, 0.22); }
 
 .btn-remover {
     position: absolute;
@@ -309,10 +321,11 @@ i.consultoria { background: #b89aea; }
 }
 
 .btn-remover:hover { color: #d4a63a; background: #302718; }
+.btn-remover:disabled { opacity: 0.4; cursor: wait; }
 .vazio { padding: 14px 4px; color: #999; font-size: 13px; }
 
 /* ----- novo agendamento ----- */
-.novo { margin-top: 20px; padding-top: 4px; border-top: 1px solid #292929; display: flex; flex-direction: column; gap: 12px; }
+.novo { margin-top: 20px; padding-top: 4px; border-top: 1px solid #292929; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .novo-topo { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .novo-topo h3 { margin: 14px 0 0; }
 .novo-topo .duracao { margin-top: 14px; }
@@ -335,7 +348,7 @@ i.consultoria { background: #b89aea; }
 
 .info { color: #999; min-height: 16px; }
 
-.slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; max-height: 150px; overflow-y: auto; }
+.slots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; max-height: 150px; overflow-y: auto; }
 
 .slot {
     height: 32px;
@@ -352,11 +365,13 @@ i.consultoria { background: #b89aea; }
 .slot.sel { background: #d4a63a; border-color: #d4a63a; color: #111; font-weight: 600; }
 .slot:disabled { opacity: 0.3; text-decoration: line-through; cursor: not-allowed; }
 
-.novo label { display: flex; flex-direction: column; gap: 6px; color: #999; font-size: 13px; }
-.linha { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.novo label { display: flex; flex-direction: column; gap: 6px; min-width: 0; color: #999; font-size: 13px; }
+.linha { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
 
 .novo input,
 .novo select {
+    width: 100%;
+    min-width: 0;
     height: 38px;
     padding: 0 12px;
     background: #0d0d0e;
@@ -364,12 +379,15 @@ i.consultoria { background: #b89aea; }
     border-radius: 8px;
     color: #fff;
     font-size: 13px;
+    text-overflow: ellipsis;
 }
+
+.novo select option { background: #0d0d0e; color: #fff; }
 
 .novo input:focus,
 .novo select:focus { outline: none; border-color: #d4a63a; }
 
-.msg { min-height: 16px; color: #54db83; font-size: 12px; }
+.msg { min-height: 16px; color: #54db83; font-size: 12px; overflow-wrap: anywhere; }
 
 .btn-agendar {
     height: 42px;
@@ -406,7 +424,7 @@ i.consultoria { background: #b89aea; }
 
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 1300px) {
-    .agendador { grid-template-columns: 1fr; }
+    .agendador { grid-template-columns: minmax(0, 1fr); }
     .lateral { position: static; max-height: none; }
 }
 
@@ -441,6 +459,6 @@ i.consultoria { background: #b89aea; }
     .cal-grade { grid-auto-rows: minmax(52px, 1fr); }
     .dia { align-items: center; padding: 4px; }
     .dia .evento span, .dia .mais { display: none; }
-    .linha { grid-template-columns: 1fr; }
+    .linha { grid-template-columns: minmax(0, 1fr); }
     .rodape { flex-direction: column; text-align: center; gap: 8px; }
 }

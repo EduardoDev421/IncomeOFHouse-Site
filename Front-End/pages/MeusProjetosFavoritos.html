@@ -127,13 +127,16 @@
 
                 <p class="contagem" id="contagem"></p>
 
-                <div class="grade-projetos" id="grade"></div>
+                <!-- Os favoritos são carregados do Supabase pelo js/MeusProjetosFavoritos.js -->
+                <div class="grade-projetos" id="grade">
+                    <p>Carregando projetos...</p>
+                </div>
 
-                <!-- Só aparece quando não há favoritos ou a busca não encontra nada -->
+                <!-- Aparece quando não há favoritos ou a busca não encontra nada -->
                 <div class="explorar" id="semProjetos" hidden>
-                    <h2>Nenhum projeto encontrado</h2>
-                    <p>Explore as plantas e projetos e favorite os que mais combinam com você.</p>
-                    <a href="./Plantas.html">Explorar projetos</a>
+                    <h2>Você ainda não favoritou nenhum projeto</h2>
+                    <p>Explore as plantas e favorite as que mais combinam com você.</p>
+                    <a href="./plantas.html">Explorar plantas</a>
                 </div>
             </section>
         </section>
@@ -149,7 +152,8 @@
     </footer>
 
     <script src="../js/Modais/LegalModais.js"></script>
-    <script src="../js/MeusProjetosFavoritos.js"></script>
+    <script type="module" src="../js/MeusProjetosFavoritos.js"></script>
+    <script type="module" src="../js/favoritos.js"></script>
     <script src="../js/Idioma.js"></script>
     <script src="../js/mensagensErros.js"></script>
 </body>

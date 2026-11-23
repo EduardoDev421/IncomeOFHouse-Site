@@ -1,122 +1,238 @@
-/* =========================================================
-   PERFIL DO PROFISSIONAL (página pública, ?id=...)
+import { supabase } from "./lib/supabaseClient.js";
 
-   Precisa de:  ../css/mensagens.css  e  ../js/mensagens.js
-   (mensagens.js deve ser carregado ANTES deste arquivo)
-========================================================= */
+const TABELA = "profissionais";
+const COLUNA_ID = "id";
+const PAGINA_LOGIN = "./Login.html";
+const PAGINA_USUARIO = "./perfilUsuario.html";
+const PAGINA_INICIAL = "../index.html";
+const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
-const parametros = new URLSearchParams(window.location.search);
-const id = Number(parametros.get("id"));
+const nomeProfissional = document.querySelector(".dados-usuario h2");
+const botaoEditar = document.querySelector(".editar-perfil");
 
-const areaPerfil = document.querySelector(".perfil-profissional");
+let sessaoUser = null;
+let profissionalAtual = null;
+let motivoBloqueio = "";
 
-// Garantia: se o mensagens.js não foi carregado, cria uma versão mínima aqui
-// (os estilos continuam vindo do mensagens.css)
-if (!window.Mensagem) {
-
-    window.Mensagem = {
-
-        mostrar(container, tipo, texto, opcoes = {}) {
-
-            const card = document.createElement("div");
-
-            card.className = `card-mensagem card-${tipo}`;
-            card.dataset.grupo = opcoes.grupo || "padrao";
-            card.setAttribute("role", tipo === "erro" ? "alert" : "status");
-
-            const conteudo = document.createElement("span");
-
-            conteudo.textContent = texto;
-
-            if (opcoes.link) {
-                const link = document.createElement("a");
-
-                link.href = opcoes.link.href;
-                link.textContent = opcoes.link.texto;
-
-                conteudo.append(" ", link);
-            }
-
-            card.append(conteudo);
-            container.append(card);
-
-            return card;
-        },
-
-        limpar(container, grupo = "padrao") {
-            container?.querySelectorAll(`.card-mensagem[data-grupo="${grupo}"]`)
-                .forEach(card => card.remove());
-        }
-    };
+if (!nomeProfissional) {
+  console.error("[Perfil] Elementos do perfil não encontrados.");
+  liberarPagina();
+} else {
+  iniciar();
 }
 
-// Troca todo o conteúdo da área por um card de erro
-function mostrarErroPerfil(texto) {
+function liberarPagina() {
+  document.documentElement.classList.remove("carregando");
+}
 
-    if (!areaPerfil) {
-        console.error("Área .perfil-profissional não encontrada.");
-        return;
+function exibir(container, tipo, texto, opcoes = {}) {
+  if (!container) return;
+  if (window.Mensagem?.mostrar) return window.Mensagem.mostrar(container, tipo, texto, opcoes);
+
+  const grupo = opcoes.grupo || "padrao";
+  container.querySelectorAll(`.card-mensagem[data-grupo="${grupo}"]`).forEach(c => c.remove());
+
+  const card = document.createElement("div");
+  card.className = `card-mensagem card-${tipo}` + (opcoes.topo ? " card-topo" : "");
+  card.dataset.grupo = grupo;
+  card.setAttribute("role", tipo === "erro" ? "alert" : "status");
+  card.style.cssText = "padding:12px 16px;margin-bottom:16px;border-radius:10px;font:600 14px/1.4 sans-serif;" +
+    (tipo === "erro" ? "background:#f87171;color:#3b0a0a;" : "background:#86efac;color:#052e16;");
+
+  const conteudo = document.createElement("span");
+  conteudo.textContent = texto;
+  if (opcoes.link) {
+    const a = document.createElement("a");
+    a.href = opcoes.link.href;
+    a.textContent = opcoes.link.texto;
+    conteudo.append(" ", a);
+  }
+  card.append(conteudo);
+
+  opcoes.posicao === "inicio" ? container.prepend(card) : container.append(card);
+  if (opcoes.tempo) setTimeout(() => card.remove(), opcoes.tempo);
+  return card;
+}
+
+function mostrarAviso(texto, comLinkLogin = true) {
+  exibir(document.querySelector(".conteudo"), "erro", texto, {
+    grupo: "perfil",
+    posicao: "inicio",
+    topo: true,
+    link: comLinkLogin ? { texto: "Ir para o login", href: PAGINA_LOGIN } : undefined
+  });
+}
+
+async function iniciar() {
+  ligarBotaoEditar();
+  ligarSair();
+
+  try {
+    const { data: { session }, error } = await supabase.auth.getSession();
+    if (error) throw error;
+
+    if (!session) {
+      motivoBloqueio = "Você precisa entrar na sua conta para ver o perfil.";
+      mostrarAviso(motivoBloqueio);
+      return;
     }
 
-    areaPerfil.replaceChildren();
+    sessaoUser = session.user;
+    profissionalAtual = await buscarProfissional(sessaoUser);
 
-    window.Mensagem?.mostrar(areaPerfil, "erro", texto, {
-        grupo: "profissional",
-        link: {
-            texto: "Voltar para os profissionais",
-            href: "./Profissionais.html"
-        }
-    });
+    if (profissionalAtual._semLinha && sessaoUser.user_metadata?.tipo !== "profissional") {
+      window.location.replace(PAGINA_USUARIO);
+      return;
+    }
+
+    renderizar(profissionalAtual);
+
+    if (profissionalAtual._semLinha) {
+      mostrarAviso("Não encontramos seu cadastro na tabela de profissionais. Mostrando os dados do cadastro da conta.", false);
+    }
+  } catch (erro) {
+    console.error("[Perfil]", erro);
+    motivoBloqueio = erro.message || "Não foi possível carregar o perfil.";
+    mostrarAviso(motivoBloqueio);
+  } finally {
+    liberarPagina();
+  }
 }
 
-if (!parametros.get("id") || Number.isNaN(id)) {
+async function buscarProfissional(user) {
+  const { data, error } = await supabase
+    .from(TABELA)
+    .select("*")
+    .eq(COLUNA_ID, user.id)
+    .maybeSingle();
+  if (error) throw error;
 
-    mostrarErroPerfil("Profissional não encontrado.");
+  const meta = user.user_metadata || {};
+  return data || {
+    nome: meta.nome || meta.full_name || "",
+    profissao: meta.profissao || "",
+    cidade: meta.cidade || "",
+    estado: meta.estado || "",
+    registro: meta.registro || "",
+    telefone: meta.telefone || "",
+    email: user.email,
+    verificado: false,
+    criado_em: user.created_at,
+    _semLinha: true
+  };
+}
 
-} else {
+function ligarBotaoEditar() {
+  botaoEditar?.addEventListener("click", () => {
+    if (!profissionalAtual) {
+      mostrarAviso(motivoBloqueio || "Não foi possível carregar o perfil.", true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    mostrarAviso("A edição do perfil profissional ainda não está disponível.", false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
 
-    fetch("../data/profissionais.json")
-        .then(resposta => {
+function texto(el, valor) {
+  if (el) el.textContent = valor || "—";
+}
 
-            if (!resposta.ok) {
-                throw new Error(`Falha ao ler profissionais.json (${resposta.status})`);
-            }
+function setLinha(rotulo, valor) {
+  for (const linha of document.querySelectorAll(".info-linha")) {
+    const r = linha.querySelector("span");
+    if (r && r.textContent.trim() === rotulo) {
+      texto(linha.querySelector("strong"), valor);
+      return;
+    }
+  }
+}
 
-            return resposta.json();
-        })
-        .then(profissionais => {
+function mostrarFoto(url) {
+  const img = document.querySelector(".foto-placeholder img");
+  if (!img) return;
+  if (!url) return;
 
-            const profissional = profissionais.find(p => p.id === id);
+  const original = img.getAttribute("src");
+  img.onerror = () => {
+    img.onerror = null;
+    img.src = original;
+    img.classList.remove("foto-real");
+  };
+  img.src = url;
+  img.classList.add("foto-real");
+}
 
-            if (!profissional) {
+function renderizar(p) {
+  const local = [p.cidade, p.estado].filter(Boolean).join(", ");
 
-                mostrarErroPerfil("Profissional não encontrado.");
+  mostrarFoto(p.foto_url);
+  texto(nomeProfissional, p.nome || "Profissional");
+  texto(document.querySelector(".dados-usuario .profissao"), nomeDaProfissao(p.profissao));
 
-                return;
-            }
+  const selos = document.querySelectorAll(".selos .selo");
+  if (selos[1]) selos[1].textContent = local || "—";
 
-            document.getElementById("imagem").src = profissional.imagem;
-            document.getElementById("imagem").alt = profissional.nome;
+  const contatos = document.querySelectorAll(".contato-rapido .contato-item span");
+  texto(contatos[0], p.email);
+  texto(contatos[1], formatarTelefone(p.telefone));
+  texto(contatos[2], local);
 
-            document.getElementById("nome").textContent = profissional.nome;
-            document.getElementById("profissao").textContent = profissional.profissao;
-            document.getElementById("cidade").textContent = profissional.cidade;
-            document.getElementById("avaliacao").textContent = `⭐ ${profissional.avaliacao}`;
-            document.getElementById("experiencia").textContent = profissional.experiencia;
-            document.getElementById("especialidade").textContent = profissional.especialidade;
-            document.getElementById("descricao").textContent = profissional.descricao;
-            document.getElementById("telefone").textContent = profissional.telefone;
-            document.getElementById("email").textContent = profissional.email;
+  setLinha("Membro desde", membroDesde(p.criado_em));
+  setLinha("Profissão", nomeDaProfissao(p.profissao));
+  setLinha("Número", p.registro);
+  setLinha("Estado", p.estado);
 
-        })
-        .catch(erro => {
+  const tagRegiao = document.querySelector(".coluna:last-child .tags .tag");
+  if (tagRegiao) tagRegiao.textContent = local || "—";
 
-            console.error("Erro ao carregar o profissional:", erro);
+  document.querySelectorAll(".selo-verificado").forEach(s => {
+    s.textContent = p.verificado === true ? "Verificado" : "Em análise";
+  });
 
-            mostrarErroPerfil(
-                "Não foi possível carregar as informações do profissional. Tente novamente mais tarde."
-            );
+  const sobre = document.querySelector(".Sobre .card-corpo p");
+  if (sobre && p.sobre) {
+    sobre.textContent = p.sobre;
+    sobre.classList.remove("cinza");
+  }
 
-        });
+  if (p.nome) document.title = `Perfil de ${p.nome}`;
+}
 
+function nomeDaProfissao(valor) {
+  if (!valor) return "";
+  return String(valor)
+    .split("-")
+    .map(parte => parte.charAt(0).toUpperCase() + parte.slice(1))
+    .join(" ");
+}
+
+function formatarTelefone(valor) {
+  const n = String(valor || "").replace(/\D/g, "").slice(0, 11);
+  if (n.length === 11) return `(${n.slice(0, 2)}) ${n.slice(2, 7)}-${n.slice(7)}`;
+  if (n.length === 10) return `(${n.slice(0, 2)}) ${n.slice(2, 6)}-${n.slice(6)}`;
+  return n;
+}
+
+function membroDesde(valor) {
+  const data = valor ? new Date(valor) : null;
+  if (!data || Number.isNaN(data.getTime())) return "";
+  return `${MESES[data.getMonth()]}/${data.getFullYear()}`;
+}
+
+function ligarSair() {
+  document.querySelectorAll(".menu-lateral a").forEach(link => {
+    if (!link.querySelector('img[src*="IconeSair"]')) return;
+
+    link.addEventListener("click", async event => {
+      event.preventDefault();
+      if (!confirm("Deseja realmente sair da sua conta?")) return;
+      try {
+        await supabase.auth.signOut();
+      } catch (erro) {
+        console.error("[Perfil] Erro ao sair:", erro);
+      }
+      window.location.replace(PAGINA_INICIAL);
+    });
+  });
 }

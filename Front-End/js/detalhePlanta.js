@@ -1,6 +1,3 @@
-/* detalhePlanta.js
-   Carregue PlantasStorage.js e Favoritos.js ANTES deste arquivo. */
-
 const parametros = new URLSearchParams(window.location.search);
 const id = parametros.get("id");
 const secaoDetalhes = document.querySelector(".Detalheplanta");
@@ -10,25 +7,15 @@ const secaoDetalhes = document.querySelector(".Detalheplanta");
 ========================================================= */
 
 function mostrarErro(mensagem) {
-    if (!secaoDetalhes) {
-        console.error(mensagem);
-        return;
-    }
-
-    const caixa = document.createElement("div");
-    caixa.className = "NenhumaPlanta";
-
-    const titulo = document.createElement("h1");
-    titulo.textContent = mensagem;
-
-    const texto = document.createElement("p");
-    texto.textContent = "Volte para a lista de plantas e tente novamente.";
-
-    caixa.append(titulo, texto);
-    secaoDetalhes.replaceChildren(caixa);
+    secaoDetalhes.innerHTML = `
+        <div class="NenhumaPlanta">
+            <h1>${mensagem}</h1>
+            <p>Volte para a lista de plantas e tente novamente.</p>
+        </div>
+    `;
 }
 
-// Escreve um texto no elemento (se ele existir no HTML).
+// escreve um texto no elemento (se ele existir no HTML)
 function definirTexto(idElemento, texto) {
     const elemento = document.getElementById(idElemento);
     if (elemento) elemento.textContent = texto;
@@ -48,15 +35,11 @@ function formatarNumero(valor) {
     return Number.isFinite(numero) ? numero.toLocaleString("pt-BR") : "—";
 }
 
-function criar(tag, classe, texto) {
-    const elemento = document.createElement(tag);
-    if (classe) elemento.className = classe;
-    if (texto !== undefined) elemento.textContent = texto;
-    return elemento;
-}
-
 function criarParagrafo(texto, classe) {
-    return criar("p", classe, texto);
+    const p = document.createElement("p");
+    if (classe) p.className = classe;
+    p.textContent = texto;
+    return p;
 }
 
 /* =========================================================
@@ -149,6 +132,13 @@ function mostrarImagem(planta) {
    planta.avaliacoes   = [{ nome, foto, data, nota, comentario }]
 ========================================================= */
 
+function criar(tag, classe, texto) {
+    const elemento = document.createElement(tag);
+    if (classe) elemento.className = classe;
+    if (texto !== undefined) elemento.textContent = texto;
+    return elemento;
+}
+
 function criarEstrelas(nota) {
     const total = Math.max(0, Math.min(5, Math.round(Number(nota) || 0)));
     const caixa = criar("span", "Estrelas");
@@ -174,10 +164,7 @@ function criarAvatar(foto, nome) {
 }
 
 function formatarNota(nota) {
-    return Number(nota).toLocaleString("pt-BR", {
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 1
-    });
+    return Number(nota).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }
 
 function mostrarProfissional(profissional) {
@@ -210,9 +197,7 @@ function mostrarProfissional(profissional) {
         const linha = criar("div", "LinhaNota");
         linha.appendChild(criarEstrelas(profissional.nota));
 
-        const total = profissional.totalAvaliacoes
-            ? ` (${profissional.totalAvaliacoes} avaliações)`
-            : "";
+        const total = profissional.totalAvaliacoes ? ` (${profissional.totalAvaliacoes} avaliações)` : "";
         linha.appendChild(criar("span", "", `${formatarNota(profissional.nota)}${total}`));
         dados.appendChild(linha);
     }
@@ -271,44 +256,65 @@ function mostrarAvaliacao(avaliacoes) {
 }
 
 /* =========================================================
-   FAVORITOS (guardados só neste navegador, via Favoritos.js)
+   FAVORITOS (Supabase, via Favoritos.js)
 ========================================================= */
 
-function configurarFavorito() {
+const PAGINA_LOGIN = "./Login.html";
+
+async function configurarFavorito() {
     const botao = document.getElementById("botaoFavorito");
 
-    if (!botao || !window.Favoritos) return;
+    if (!botao) return;
 
     const atualizar = () => {
-        const favorito = window.Favoritos.eFavorito(id);
+        const favorito = window.Favoritos ? window.Favoritos.eFavorito(id) : false;
         botao.classList.toggle("ativo", favorito);
         botao.setAttribute("aria-pressed", String(favorito));
         definirTexto("textoFavorito", favorito ? "Salvo nos favoritos" : "Salvar nos favoritos");
     };
 
-    botao.addEventListener("click", () => {
-        window.Favoritos.alternar(id);
-        atualizar();
+    if (!window.Favoritos) {
+        console.error("Favoritos.js não foi carregado. Carregue-o (type=\"module\") antes de detalhePlanta.js.");
+    } else if (window.Favoritos.pronto) {
+        try { await window.Favoritos.pronto; } catch (erro) { console.warn("Favoritos:", erro); }
+    }
+
+    let aviso = document.getElementById("avisoFavorito");
+    if (!aviso) {
+        aviso = criar("p", "AvisoFavorito");
+        aviso.id = "avisoFavorito";
+        aviso.setAttribute("role", "alert");
+        aviso.style.cssText = "margin:8px 0 0;font-size:.9rem;color:#f0b4ab";
+        botao.parentElement.appendChild(aviso);
+    }
+
+    botao.addEventListener("click", async () => {
+        aviso.textContent = "";
+
+        if (!window.Favoritos) {
+            aviso.textContent = "Os favoritos não carregaram. Confira o caminho de js/Favoritos.js e recarregue.";
+            return;
+        }
+
+        botao.disabled = true;
+
+        try {
+            const resultado = await window.Favoritos.alternar(id);
+
+            if (resultado === null) {
+                alert("Entre na sua conta para salvar plantas nos favoritos.");
+                window.location.href = PAGINA_LOGIN;
+                return;
+            }
+        } catch (erro) {
+            aviso.textContent = erro.message;
+        } finally {
+            botao.disabled = false;
+            atualizar();
+        }
     });
 
     atualizar();
-}
-
-/* =========================================================
-   SOLICITAR PROJETO
-   Ainda não existe a tela de solicitação: por enquanto o botão
-   leva o visitante até o profissional responsável.
-========================================================= */
-
-function configurarSolicitar() {
-    const botao = document.getElementById("botaoSolicitar");
-    const alvo = document.querySelector(".Profissional");
-
-    if (!botao || !alvo) return;
-
-    botao.addEventListener("click", () => {
-        alvo.scrollIntoView({ behavior: "smooth", block: "center" });
-    });
 }
 
 /* =========================================================
@@ -321,33 +327,17 @@ async function iniciarDetalhes() {
         return;
     }
 
-    if (!window.PlantasStorage) {
-        console.error("PlantasStorage.js não foi carregado antes do detalhePlanta.js.");
-        mostrarErro("O serviço de plantas não foi carregado.");
-        return;
-    }
-
     try {
-        // CORREÇÃO: getPlanta fica dentro de window.PlantasStorage.
-        let planta = await window.PlantasStorage.getPlanta(id);
+        const planta = await window.PlantasStorage.getPlanta(id);
 
-        // Se a API devolver uma lista com um item, usa o primeiro.
-        if (Array.isArray(planta)) {
-            planta = planta[0];
-        }
+        const preco = formatarMoeda(planta.preco);
 
-        if (!planta) {
-            throw new Error("Planta não encontrada.");
-        }
+        document.title = `${planta.titulo} - Income of Houses`;
 
-        const titulo = planta.titulo || "Planta sem título";
-
-        document.title = `${titulo} - Income of Houses`;
-
-        definirTexto("nomePlanta", titulo);
+        definirTexto("nomePlanta", planta.titulo);
         definirTexto("categoriaPlanta", planta.categoria || "Planta");
         definirTexto("resumoPlanta", planta.descricao || "");
-        definirTexto("precoDestaque", formatarMoeda(planta.preco));
+        definirTexto("precoDestaque", preco);
         definirTexto("areaPlanta", `${formatarNumero(planta.area)} m²`);
         definirTexto("quartosPlanta", formatarNumero(planta.quartos));
         definirTexto("garagemPlanta", formatarNumero(planta.garagem));
@@ -360,16 +350,12 @@ async function iniciarDetalhes() {
         mostrarDistribuicao(planta.distribuicaoAmbientes);
         mostrarProfissional(planta.profissional);
         mostrarAvaliacao(planta.avaliacoes);
-        configurarFavorito();
-        configurarSolicitar();
+        await configurarFavorito();
     } catch (erro) {
         console.error("Erro ao carregar os detalhes da planta:", erro);
-
-        mostrarErro(
-            erro.message === "Planta não encontrada."
-                ? erro.message
-                : "Não foi possível carregar os dados da planta."
-        );
+        mostrarErro(erro.message === "Planta não encontrada."
+            ? erro.message
+            : "Não foi possível carregar os dados da planta.");
     }
 }
 

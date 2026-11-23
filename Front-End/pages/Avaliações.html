@@ -10,7 +10,7 @@
     <title>Avaliações - Income Of Houses</title>
 </head>
 
-<body>
+<body data-conta="profissional">
     <header class="topo">
         <div class="logo">
             <a href="../index.html">
@@ -28,68 +28,68 @@
     <main class="BackGround">
         <section class="container">
             <aside class="menu-lateral">
-            <ul>
-               <li>
-                  <a href="../pages/PerfilProfissional.html">
-                     <img src="../img/icones/IconePerfil.svg" alt="">
-                     <span>Meu Perfil</span>
-                  </a>
-               </li>
-               <li>
-                  <a href="../pages/MeusEndereços.html">
-                     <img src="../img/icones/IconeEndereco.svg" alt="">
-                     <span>Meus Endereços</span>
-                  </a>
-               </li>
-               <li>
-                  <a href="../pages/MeuPortfolio.html">
-                     <img src="../img/icones/iconePortfolio.svg" alt="">
-                     <span>Meu Portfolio</span>
-                  </a>
-               </li>
-               <li>
-                  <a href="../pages/publicarPlanta.html">
-                     <img src="../img/icones/IconePublicarPlantas.svg" alt="">
-                     <span>Publicar Plantas</span>
-                  </a>
-               </li>
-               <li>
-                  <a href="../pages/Projetos.html">
-                     <img src="../img/icones/IconeProjetos.svg" alt="">
-                     <span>Projetos</span>
-                  </a>
-               </li>
-               <li class="ativo">
-                  <a href="../pages/Avaliações.html">
-                     <img src="../img/icones/IconeEstrela.svg" alt="">
-                     <span>Avaliações</span>
-                  </a>
-               </li>
-               <li>
-                  <a href="../pages/Agendamentos.html">
-                     <img src="../img/icones/IconeData.svg" alt="">
-                     <span>Agendamentos</span>
-                  </a>
-               </li>
-               <li>
-                  <a href="../pages/Mensagem.html">
-                     <img src="../img/icones/IconeMensagem.svg" alt="">
-                     <span>Mensagem</span>
-                  </a>
-               </li>
-               <li>
-                  <a href="../pages/ConfiguraçõesProfissionais.html">
-                     <img src="../img/icones/IconeConfiguracao.svg" alt="">
-                     <span>Configurações</span>
-                  </a>
-               </li>
-               <li>
-                  <a href="../index.html">
-                     <img src="../img/icones/IconeSair.svg" alt="">
-                     <span>Sair</span>
-                  </a>
-               </li>
-            </ul>
+                <ul>
+                    <li>
+                        <a href="../pages/PerfilProfissional.html">
+                            <img src="../img/icones/IconePerfil.svg" alt="">
+                            <span>Meu Perfil</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/MeusEndereços.html">
+                            <img src="../img/icones/IconeEndereco.svg" alt="">
+                            <span>Meus Endereços</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/MeuPortfolio.html">
+                            <img src="../img/icones/iconePortfolio.svg" alt="">
+                            <span>Meu Portfolio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/publicarPlanta.html">
+                            <img src="../img/icones/IconePublicarPlantas.svg" alt="">
+                            <span>Publicar Plantas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/Projetos.html">
+                            <img src="../img/icones/IconeProjetos.svg" alt="">
+                            <span>Projetos</span>
+                        </a>
+                    </li>
+                    <li class="ativo">
+                        <a href="../pages/Avaliações.html">
+                            <img src="../img/icones/IconeEstrela.svg" alt="">
+                            <span>Avaliações</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/Agendamentos.html">
+                            <img src="../img/icones/IconeData.svg" alt="">
+                            <span>Agendamentos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/Mensagem.html">
+                            <img src="../img/icones/IconeMensagem.svg" alt="">
+                            <span>Mensagem</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../pages/ConfiguraçõesProfissionais.html">
+                            <img src="../img/icones/IconeConfiguracao.svg" alt="">
+                            <span>Configurações</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../index.html">
+                            <img src="../img/icones/IconeSair.svg" alt="">
+                            <span>Sair</span>
+                        </a>
+                    </li>
+                </ul>
             </aside>
 
             <section class="conteudo">
@@ -100,9 +100,9 @@
 
                 <div class="painel-resumo">
                     <div class="media">
-                        <strong id="mediaNota">0,0</strong>
+                        <strong id="mediaNota">—</strong>
                         <div class="estrelas" id="mediaEstrelas"></div>
-                        <span id="mediaTotal"></span>
+                        <span id="mediaTotal">Ainda sem avaliações</span>
                     </div>
                     <div class="distribuicao" id="distribuicao"></div>
                 </div>
@@ -114,7 +114,9 @@
                         <button class="chip" data-tipo="projeto">Projetos</button>
                     </div>
                     <div class="selects">
-                        <select id="selItem" aria-label="Filtrar por planta ou projeto"></select>
+                        <select id="selItem" aria-label="Filtrar por planta ou projeto">
+                            <option value="todos">Todas as plantas e projetos</option>
+                        </select>
                         <select id="selNota" aria-label="Filtrar por nota">
                             <option value="0">Todas as notas</option>
                             <option value="5">5 estrelas</option>
@@ -134,7 +136,7 @@
                 <p class="contagem" id="contagem"></p>
 
                 <div class="lista-avaliacoes" id="lista">
-                    <p class="aviso-js">As avaliações não carregaram. Confira se o arquivo js/Avaliacoes.js existe e atualize a página com Ctrl+F5.</p>
+                    <p class="vazio">Carregando avaliações...</p>
                 </div>
             </section>
         </section>
@@ -150,7 +152,7 @@
     </footer>
 
     <script src="../js/Modais/LegalModais.js"></script>
-    <script src="../js/Avaliacoes.js"></script>
+    <script type="module" src="../js/Avaliacoes.js"></script>
     <script src="../js/mensagensErros.js"></script>
 </body>
 

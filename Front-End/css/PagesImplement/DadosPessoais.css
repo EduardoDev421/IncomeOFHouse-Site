@@ -42,7 +42,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) 340px;
     gap: 16px;
-    align-items: start;
+    align-items: stretch; /* as duas colunas terminam na mesma altura (sem buraco embaixo) */
 }
 
 .FotoPerfilCard,
@@ -58,6 +58,12 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+/* o último card de cada coluna cresce para preencher o espaço que sobra */
+.DadosPrincipal > .CardDados:last-child,
+.DadosLateral > .CardDados:last-child {
+    flex: 1;
 }
 
 /* ================================================= */
@@ -233,6 +239,12 @@
 
 /* só marca erro depois que a pessoa mexeu no campo */
 .CampoDados input:user-invalid {
+    border-color: #b5483c;
+    box-shadow: 0 0 0 3px rgba(181, 72, 60, 0.12);
+}
+
+/* campo marcado pelo JS quando a validação falha (o form usa novalidate) */
+.CampoDados input[aria-invalid="true"] {
     border-color: #b5483c;
     box-shadow: 0 0 0 3px rgba(181, 72, 60, 0.12);
 }
@@ -439,6 +451,13 @@
     transform: translateY(-1px);
 }
 
+.BotaoSalvar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: none;
+    transform: none;
+}
+
 .BotaoSecundario:focus-visible,
 .BotaoCancelar:focus-visible,
 .BotaoSalvar:focus-visible,
@@ -461,13 +480,16 @@
     line-height: 1.5;
 }
 
-.MensagemDados.sucesso {
+/* classes (quando o mensagens.js está carregado) */
+.MensagemDados.sucesso,
+.MensagemDados[data-tipo="sucesso"] {
     color: #70d09b;
     background: rgba(21, 91, 59, 0.35);
     border-color: #1f7a50;
 }
 
-.MensagemDados.erro {
+.MensagemDados.erro,
+.MensagemDados[data-tipo="erro"] {
     color: #ee9b92;
     background: rgba(181, 72, 60, 0.15);
     border-color: #8f3b32;

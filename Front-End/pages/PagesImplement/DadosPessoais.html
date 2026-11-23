@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="IncomeofHouses - Dados pessoais do profissional">
+    <meta name="description" content="IncomeofHouses - Dados pessoais">
     <!-- 1º: estilo base (cabeçalho, menu lateral, painel) | 2º: estilo desta página -->
     <link rel="stylesheet" href="../../css/ConfiguraçõesProfissional.css">
     <link rel="stylesheet" href="../../css/PagesImplement/DadosPessoais.css">
     <link rel="stylesheet" href="../../css/Modais/LegalModal.css">
+    <link rel="stylesheet" href="../../css/mensagensErros.css">
     <title>Dados Pessoais - Income of Houses</title>
 </head>
 
@@ -64,9 +65,9 @@
     <main class="BackGround">
         <section class="container">
 
-            <!-- Menu lateral -->
+            <!-- Menu lateral (este é o do profissional; o JS troca pelo do usuário quando a conta é de usuário) -->
             <aside class="menu-lateral">
-                <ul>
+                <ul id="menuLateral">
                     <li>
                         <a href="../PerfilProfissional.html">
                             <img src="../../img/icones/IconePerfil.svg" alt="">
@@ -134,9 +135,9 @@
             <section class="conteudo dados-pessoais">
 
                 <h1>Dados Pessoais</h1>
-                <h4>Gerencie as informações pessoais associadas à sua conta profissional.</h4>
+                <h4 id="subtituloDados">Gerencie as informações pessoais da sua conta.</h4>
 
-                <form id="formDadosPessoais">
+                <form id="formDadosPessoais" novalidate>
 
                     <div class="DadosPessoaisContainer">
 
@@ -159,8 +160,8 @@
                                     <svg class="ic IconeAvatar">
                                         <use href="#i-user" />
                                     </svg>
-                                    <img id="previewFoto" src="../../img/Perfil.png" alt="Foto de perfil"
-                                        onload="this.hidden = false" onerror="this.hidden = true">
+                                    <!-- sem src fixo: o JS define a foto a partir do banco -->
+                                    <img id="previewFoto" alt="Foto de perfil" hidden>
                                 </div>
 
                                 <div class="FotoPerfilTexto">
@@ -182,8 +183,12 @@
                                     <input type="file" id="fotoPerfil" class="sr-only"
                                         accept="image/png, image/jpeg, image/webp">
 
+                                    <button type="button" class="BotaoSecundario" id="btnRemoverFoto" hidden>
+                                        Remover foto
+                                    </button>
+
                                     <span class="TextoAjuda">
-                                        Formatos: PNG, JPG ou WEBP.
+                                        Formatos: PNG, JPG ou WEBP, até 2 MB.
                                     </span>
 
                                 </div>
@@ -196,7 +201,7 @@
                         <!-- COLUNA PRINCIPAL -->
                         <div class="DadosPrincipal">
 
-                            <!-- INFORMAÇÕES PESSOAIS -->
+                            <!-- INFORMAÇÕES PESSOAIS (os mesmos dados do cadastro) -->
                             <section class="CardDados">
 
                                 <div class="TituloDados">
@@ -214,24 +219,16 @@
                                     <div class="CampoDados">
                                         <label for="nomeCompleto">Nome completo</label>
                                         <input type="text" id="nomeCompleto" name="nomeCompleto"
-                                            placeholder="Digite seu nome completo" autocomplete="name" maxlength="100"
+                                            placeholder="Digite seu nome completo" autocomplete="name" maxlength="150"
                                             required>
-                                    </div>
-
-                                    <div class="CampoDados">
-                                        <label for="nomeUsuario">Nome de usuário</label>
-                                        <input type="text" id="nomeUsuario" name="nomeUsuario"
-                                            placeholder="Digite seu nome de usuário" autocomplete="username"
-                                            maxlength="30" required>
                                     </div>
 
                                     <div class="CampoDados">
                                         <label for="cpf">CPF</label>
                                         <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00"
-                                            inputmode="numeric" autocomplete="off" maxlength="14"
-                                            pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" required>
+                                            inputmode="numeric" autocomplete="off" maxlength="14" required>
                                         <span class="TextoAjuda">
-                                            Usado para recebimentos e notas fiscais.
+                                            Informe apenas números.
                                         </span>
                                     </div>
 
@@ -269,7 +266,7 @@
                                         <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com"
                                             autocomplete="email" maxlength="254" required>
                                         <span class="TextoAjuda">
-                                            Utilize um endereço de e-mail válido.
+                                            Ao trocar o e-mail, enviaremos um link de confirmação.
                                         </span>
                                     </div>
 
@@ -279,7 +276,7 @@
                                             <span class="CampoOpcional">(opcional)</span>
                                         </label>
                                         <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000"
-                                            autocomplete="tel" maxlength="20">
+                                            autocomplete="tel" maxlength="15">
                                     </div>
 
                                 </div>
@@ -292,7 +289,7 @@
                         <!-- COLUNA LATERAL -->
                         <div class="DadosLateral">
 
-                            <!-- INFORMAÇÕES ADICIONAIS -->
+                            <!-- INFORMAÇÕES DA CONTA (tudo vem do banco / login, nada fixo) -->
                             <section class="CardDados">
 
                                 <div class="TituloDados">
@@ -300,7 +297,7 @@
                                         <span class="IconeDados"><svg class="ic">
                                                 <use href="#i-info" />
                                             </svg></span>
-                                        <h2>Informações adicionais</h2>
+                                        <h2>Informações da conta</h2>
                                     </div>
                                     <p>Informações gerais sobre sua conta.</p>
                                 </div>
@@ -320,12 +317,23 @@
 
                                     <div class="InformacaoItem">
                                         <div>
-                                            <h3>Status da conta</h3>
-                                            <p>Situação atual do seu cadastro.</p>
+                                            <h3>Tipo de conta</h3>
+                                            <p>Como você se cadastrou na plataforma.</p>
                                         </div>
 
-                                        <span class="StatusConta">
-                                            Ativa
+                                        <span class="ValorInformacao" id="tipoConta">
+                                            Não disponível
+                                        </span>
+                                    </div>
+
+                                    <div class="InformacaoItem">
+                                        <div>
+                                            <h3>E-mail confirmado</h3>
+                                            <p>Se o e-mail da conta já foi confirmado.</p>
+                                        </div>
+
+                                        <span class="ValorInformacao" id="emailConfirmado">
+                                            Não disponível
                                         </span>
                                     </div>
 
@@ -369,7 +377,8 @@
                                     </a>
                                 </div>
 
-                                <div class="AtalhoItem">
+                                <!-- só aparece para conta de profissional -->
+                                <div class="AtalhoItem" data-somente="profissional">
                                     <a href="./RegistroProfissional.html">
                                         <img src="../../img/icones/IconeRegistroPessoal.svg" alt="">
                                         <div class="AtalhoTexto">
@@ -438,8 +447,9 @@
     </footer>
 
     <script src="../../js/Modais/LegalModais.js"></script>
-    <script src="../../js/dadosPessoais.js"></script>
-
+    <script src="../../js/mensagensErros.js"></script>
+    <script src="../../js/conta.js"></script>
+    <script type="module" src="../../js/pagesimplement/DadosPessoais.js"></script>
 </body>
 
 </html>

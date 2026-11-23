@@ -1,7 +1,18 @@
+// Front-End/js/cadastro.js  (carregar no HTML com type="module")
+// Mesma tela e mesmas validações do seu cadastro antigo (cards, máscaras, campo em vermelho),
+// mas agora cadastrando no Supabase em vez de chamar http://localhost:3000.
+import { cadastrarUsuario } from "./services/authService.js";
+import { ativarOlhosDeSenha } from "./utils/formUtils.js";
+
+const PAGINA_INICIAL = "../index.html";   // AJUSTE se a página inicial for outra
+const PAGINA_LOGIN = "login.html";
+
 document.addEventListener("DOMContentLoaded", () => {
     const formulario = document.querySelector(".formCadastro");
 
     if (!formulario) return;
+
+    ativarOlhosDeSenha(); // olhinho de mostrar/ocultar nas duas senhas
 
     const nome = document.getElementById("nomeCadastro");
     const email = document.getElementById("emailCadastro");
@@ -24,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         campos.forEach(campo => campo.classList.remove("campo-invalido"));
     }
 
-    function mostrarMensagem(texto, sucesso = false) {
+    function mostrarMensagem(texto, sucesso = false, link = null) {
         formulario.querySelectorAll(".mensagem-cadastro").forEach(
             elemento => elemento.remove()
         );
@@ -34,7 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
         mensagem.setAttribute("role", sucesso ? "status" : "alert");
         mensagem.textContent = texto;
 
-        // Logo abaixo do botão "Cadastrar" (antes ficava no fim do formulário)
+        if (link) {
+            const a = document.createElement("a");
+            a.href = link.href;
+            a.textContent = link.texto;
+            mensagem.append(" ", a);
+        }
+
+        // Logo abaixo do botão "Cadastrar"
         botao.insertAdjacentElement("afterend", mensagem);
     }
 
@@ -153,37 +171,40 @@ document.addEventListener("DOMContentLoaded", () => {
             botao.disabled = true;
             botao.textContent = "Cadastrando...";
 
-            const resposta = await fetch("http://localhost:3000/api/usuarios", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    nome: nomeValor,
-                    email: emailValor,
-                    senha: senhaValor
-                })
+            // Cadastro no Supabase (Auth + perfil em "usuarios", criado pelo gatilho do banco)
+            const resultado = await cadastrarUsuario({
+                nome: nomeValor,
+                email: emailValor,
+                senha: senhaValor,
+                cpf: cpfValor,
+                telefone: telefoneValor,
+                dataNascimento: dataValor
             });
-
-            const dados = await resposta.json().catch(() => ({}));
-
-            if (!resposta.ok) {
-                throw new Error(dados.erro || "Não foi possível realizar o cadastro.");
-            }
 
             formulario.reset();
 
-            mostrarMensagem(
-                "Cadastro realizado com sucesso! Você já pode entrar na sua conta.",
-                true
-            );
+            if (resultado.precisaConfirmarEmail) {
+                // Confirmação de e-mail ligada: ainda não há sessão
+                mostrarMensagem(
+                    "Cadastro realizado! Enviamos um e-mail para confirmar sua conta.",
+                    true,
+                    { texto: "Ir para o login", href: PAGINA_LOGIN }
+                );
+                // Depois de ler o aviso, leva para a tela inicial
+                setTimeout(() => { window.location.href = PAGINA_INICIAL; }, 3000);
+            } else {
+                mostrarMensagem("Cadastro realizado com sucesso! Redirecionando...", true);
+                setTimeout(() => { window.location.href = PAGINA_INICIAL; }, 1200);
+            }
         } catch (erro) {
+            console.error(erro);
+
             if (erro instanceof TypeError) {
                 mostrarMensagem(
-                    "Não foi possível conectar ao servidor. Confira se o Back-End está iniciado."
+                    "Não foi possível conectar ao Supabase. Confira sua internet e tente de novo."
                 );
             } else {
-                mostrarMensagem(erro.message);
+                mostrarMensagem(erro.message || "Não foi possível realizar o cadastro.");
             }
         } finally {
             botao.disabled = false;

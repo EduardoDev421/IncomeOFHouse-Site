@@ -1,39 +1,48 @@
+import { supabase } from "./lib/supabaseClient.js";
+
+const TABELA = "avaliacoes";
+const PAGINA_LOGIN = "./Login.html";
+
 const $ = (id) => document.getElementById(id);
 
 const esc = (t) =>
     String(t ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-// Dados de exemplo (trocar por dados reais da API/banco depois)
-// tipo: "planta" ou "projeto" | nota: 1 a 5 | data: AAAA-MM-DD
-let avaliacoes = [
-    { id: 1, item: "Planta Casa Térrea 3 Quartos", tipo: "planta", autor: "Mariana Souza", nota: 5, data: "2026-10-09", texto: "Planta muito bem pensada, os cômodos têm ótima circulação e coube certinho no meu terreno.", resposta: "Obrigado, Mariana! Fico feliz que tenha servido bem para o seu terreno." },
-    { id: 2, item: "Projeto Residencial Jardim", tipo: "projeto", autor: "Ricardo Alves", nota: 5, data: "2026-10-05", texto: "Entrega no prazo e comunicação excelente durante todo o projeto.", resposta: "" },
-    { id: 3, item: "Planta Sobrado Moderno", tipo: "planta", autor: "Camila Ferreira", nota: 4, data: "2026-09-28", texto: "Layout moderno e bonito. Só senti falta de mais detalhes na parte elétrica.", resposta: "" },
-    { id: 4, item: "Reforma Apartamento Centro", tipo: "projeto", autor: "Paulo Mendes", nota: 3, data: "2026-09-20", texto: "O resultado ficou bom, mas houve atraso na entrega da primeira etapa.", resposta: "Paulo, obrigado pelo retorno. Vamos ajustar o cronograma nos próximos projetos." },
-    { id: 5, item: "Planta Kitnet Compacta", tipo: "planta", autor: "Letícia Gomes", nota: 5, data: "2026-09-14", texto: "Perfeita para investimento em aluguel. Aproveitou muito bem cada metro quadrado.", resposta: "" },
-    { id: 6, item: "Projeto de Interiores Sala", tipo: "projeto", autor: "Fernando Lima", nota: 4, data: "2026-09-02", texto: "Ficou elegante e funcional. Recomendo.", resposta: "" },
-    { id: 7, item: "Planta Casa Térrea 3 Quartos", tipo: "planta", autor: "Juliana Prado", nota: 4, data: "2026-08-25", texto: "Gostei bastante da planta, poderia ter uma opção com garagem dupla.", resposta: "" },
-    { id: 8, item: "Projeto Residencial Jardim", tipo: "projeto", autor: "André Barros", nota: 2, data: "2026-08-11", texto: "Tive dificuldade para receber os arquivos finais e precisei pedir mais de uma vez.", resposta: "" },
-    { id: 9, item: "Planta Sobrado Moderno", tipo: "planta", autor: "Beatriz Nunes", nota: 5, data: "2026-07-30", texto: "Linda! Os ambientes integrados deixaram a casa muito iluminada.", resposta: "Muito obrigado, Beatriz!" },
-    { id: 10, item: "Reforma Apartamento Centro", tipo: "projeto", autor: "Thiago Rocha", nota: 5, data: "2026-07-18", texto: "Transformou o apartamento. Profissional atencioso e muito criativo.", resposta: "" }
-];
-
+let usuarioId = null;
+let avaliacoes = [];
 let filtroTipo = "todos";
 let filtroItem = "todos";
 let filtroNota = 0;
 let ordem = "recentes";
 let respondendoId = null;
+let salvando = false;
+let erroResposta = "";
 
 const estrelas = (n) =>
     `<span class="estrelas" aria-label="${n} de 5 estrelas">${[1, 2, 3, 4, 5]
         .map((i) => `<span class="${i <= n ? "cheia" : ""}">★</span>`).join("")}</span>`;
 
 const virgula = (n) => n.toFixed(1).replace(".", ",");
-const dataBR = (s) => s.split("-").reverse().join("/");
-const iniciais = (nome) => nome.trim().charAt(0).toUpperCase();
+const dataBR = (s) => (s ? s.split("-").reverse().join("/") : "");
+const iniciais = (nome) => (nome || "?").trim().charAt(0).toUpperCase();
 
-/* ---------- Dados filtrados ---------- */
-// Base do resumo: respeita tipo e item, mas não a nota (para a distribuição fazer sentido)
+function doBanco(l) {
+    return {
+        id: l.id,
+        item: l.item_nome || "Sem título",
+        tipo: l.item_tipo === "projeto" ? "projeto" : "planta",
+        autor: l.autor_nome || "Cliente",
+        nota: Number(l.nota) || 0,
+        data: String(l.criado_em || "").slice(0, 10),
+        texto: l.texto || "",
+        resposta: l.resposta || ""
+    };
+}
+
+function mostrarMensagem(html, classe = "aviso-js") {
+    $("lista").innerHTML = `<p class="${classe}">${html}</p>`;
+}
+
 const base = () => avaliacoes.filter((a) =>
     (filtroTipo === "todos" || a.tipo === filtroTipo) && (filtroItem === "todos" || a.item === filtroItem));
 
@@ -47,7 +56,6 @@ function listaFinal() {
     return l.sort(cmp);
 }
 
-/* ---------- Renderização ---------- */
 function renderItens() {
     const itens = [...new Set(avaliacoes
         .filter((a) => filtroTipo === "todos" || a.tipo === filtroTipo)
@@ -63,9 +71,11 @@ function renderResumo() {
     const l = base();
     const media = l.length ? l.reduce((s, a) => s + a.nota, 0) / l.length : 0;
 
-    $("mediaNota").textContent = virgula(media);
+    $("mediaNota").textContent = l.length ? virgula(media) : "—";
     $("mediaEstrelas").innerHTML = estrelas(Math.round(media));
-    $("mediaTotal").textContent = `${l.length} avaliaç${l.length === 1 ? "ão" : "ões"}`;
+    $("mediaTotal").textContent = l.length
+        ? `${l.length} avaliaç${l.length === 1 ? "ão" : "ões"}`
+        : "Ainda sem avaliações";
 
     $("distribuicao").innerHTML = [5, 4, 3, 2, 1].map((n) => {
         const qtd = l.filter((a) => a.nota === n).length;
@@ -75,6 +85,12 @@ function renderResumo() {
 }
 
 function renderLista() {
+    if (!avaliacoes.length) {
+        $("contagem").textContent = "";
+        mostrarMensagem("Você ainda não recebeu avaliações.", "vazio");
+        return;
+    }
+
     const l = listaFinal();
     $("contagem").textContent = `Mostrando ${l.length} de ${avaliacoes.length} avaliações`;
 
@@ -91,8 +107,12 @@ function renderLista() {
                 ${a.resposta ? `<div class="resposta"><small>Sua resposta</small><p>${esc(a.resposta)}</p></div>` : ""}
                 ${respondendoId === a.id
                     ? `<div class="form-resposta">
-                           <textarea id="txtResposta" maxlength="400" placeholder="Escreva sua resposta ao cliente"></textarea>
-                           <div><button data-acao="enviar">Enviar resposta</button><button class="cancelar" data-acao="cancelar">Cancelar</button></div>
+                           <textarea id="txtResposta" maxlength="400" placeholder="Escreva sua resposta ao cliente"${salvando ? " disabled" : ""}></textarea>
+                           ${erroResposta ? `<p class="aviso-js">${esc(erroResposta)}</p>` : ""}
+                           <div>
+                               <button data-acao="enviar"${salvando ? " disabled" : ""}>${salvando ? "Salvando..." : "Enviar resposta"}</button>
+                               <button class="cancelar" data-acao="cancelar"${salvando ? " disabled" : ""}>Cancelar</button>
+                           </div>
                        </div>`
                     : a.resposta ? "" : '<button class="btn-responder" data-acao="responder">Responder</button>'}
             </div>
@@ -103,7 +123,10 @@ function renderLista() {
         </article>`).join("")
         : '<div class="vazio">Nenhuma avaliação encontrada com esses filtros.</div>';
 
-    if (respondendoId) { const t = $("txtResposta"); if (t) t.focus(); }
+    if (respondendoId) {
+        const t = $("txtResposta");
+        if (t) t.focus();
+    }
 }
 
 function render() {
@@ -112,35 +135,113 @@ function render() {
     renderLista();
 }
 
-/* ---------- Eventos ---------- */
-$("chipsTipo").addEventListener("click", (e) => {
-    const b = e.target.closest(".chip");
-    if (!b) return;
-    document.querySelectorAll(".chip").forEach((c) => c.classList.remove("ativo"));
-    b.classList.add("ativo");
-    filtroTipo = b.dataset.tipo;
-    render();
-});
+async function salvarResposta(id, texto) {
+    const { data, error } = await supabase
+        .from(TABELA)
+        .update({ resposta: texto, respondido_em: new Date().toISOString() })
+        .eq("id", id)
+        .eq("profissional_id", usuarioId)
+        .select()
+        .maybeSingle();
 
-$("selItem").onchange = (e) => { filtroItem = e.target.value; render(); };
-$("selNota").onchange = (e) => { filtroNota = Number(e.target.value); renderLista(); };
-$("selOrdem").onchange = (e) => { ordem = e.target.value; renderLista(); };
+    if (error) throw error;
+    if (!data) throw new Error("Não foi possível salvar a resposta.");
+    return doBanco(data);
+}
 
-$("lista").addEventListener("click", (e) => {
-    const b = e.target.closest("[data-acao]");
-    if (!b) return;
-    const id = Number(b.closest(".avaliacao").dataset.id);
+function textoErro(erro) {
+    const m = String(erro?.message || "").toLowerCase();
+    if (m.includes("does not exist") || m.includes("schema cache")) return "A tabela avaliacoes ainda não existe no Supabase.";
+    if (m.includes("row-level security") || m.includes("permission denied")) return "Sem permissão para acessar as avaliações.";
+    if (m.includes("failed to fetch")) return "Sem conexão com o servidor. Tente novamente.";
+    return erro?.message || "Erro ao acessar as avaliações.";
+}
 
-    if (b.dataset.acao === "responder") respondendoId = id;
-    if (b.dataset.acao === "cancelar") respondendoId = null;
+function ligarEventos() {
+    $("chipsTipo").addEventListener("click", (e) => {
+        const b = e.target.closest(".chip");
+        if (!b) return;
+        document.querySelectorAll(".chip").forEach((c) => c.classList.remove("ativo"));
+        b.classList.add("ativo");
+        filtroTipo = b.dataset.tipo;
+        render();
+    });
 
-    if (b.dataset.acao === "enviar") {
-        const texto = $("txtResposta").value.trim();
-        if (!texto) return;
-        avaliacoes.find((a) => a.id === id).resposta = texto;
-        respondendoId = null;
+    $("selItem").onchange = (e) => { filtroItem = e.target.value; render(); };
+    $("selNota").onchange = (e) => { filtroNota = Number(e.target.value); renderLista(); };
+    $("selOrdem").onchange = (e) => { ordem = e.target.value; renderLista(); };
+
+    $("lista").addEventListener("click", async (e) => {
+        const b = e.target.closest("[data-acao]");
+        if (!b || salvando) return;
+        const id = b.closest(".avaliacao").dataset.id;
+
+        if (b.dataset.acao === "responder") {
+            respondendoId = id;
+            erroResposta = "";
+            renderLista();
+            return;
+        }
+
+        if (b.dataset.acao === "cancelar") {
+            respondendoId = null;
+            erroResposta = "";
+            renderLista();
+            return;
+        }
+
+        if (b.dataset.acao === "enviar") {
+            const texto = $("txtResposta").value.trim();
+            if (!texto) return;
+
+            salvando = true;
+            erroResposta = "";
+            renderLista();
+
+            try {
+                const atualizada = await salvarResposta(id, texto);
+                avaliacoes = avaliacoes.map((a) => (a.id === id ? atualizada : a));
+                respondendoId = null;
+            } catch (erro) {
+                console.error("[Avaliacoes]", erro);
+                erroResposta = textoErro(erro);
+            } finally {
+                salvando = false;
+                renderLista();
+            }
+        }
+    });
+}
+
+async function iniciar() {
+    ligarEventos();
+    mostrarMensagem("Carregando avaliações...", "vazio");
+
+    try {
+        const { data: { session }, error: erroSessao } = await supabase.auth.getSession();
+        if (erroSessao) throw erroSessao;
+
+        if (!session) {
+            mostrarMensagem(`Você precisa entrar na sua conta para ver as avaliações. <a href="${PAGINA_LOGIN}">Ir para o login</a>`);
+            return;
+        }
+
+        usuarioId = session.user.id;
+
+        const { data, error } = await supabase
+            .from(TABELA)
+            .select("*")
+            .eq("profissional_id", usuarioId)
+            .order("criado_em", { ascending: false });
+
+        if (error) throw error;
+
+        avaliacoes = (data || []).map(doBanco);
+        render();
+    } catch (erro) {
+        console.error("[Avaliacoes]", erro);
+        mostrarMensagem(esc(textoErro(erro)));
     }
-    renderLista();
-});
+}
 
-render();
+iniciar();

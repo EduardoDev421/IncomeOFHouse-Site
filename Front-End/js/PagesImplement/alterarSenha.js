@@ -1,623 +1,221 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // ============================================================
-    // ELEMENTOS DA PÁGINA
-    // ============================================================
+// Front-End/js/alterarSenha.js
+import { supabase } from "../lib/supabaseClient.js";
 
-    const camposSenha = document.querySelectorAll(
-        '.form-side input[type="password"]'
-    );
+const camposSenha = document.querySelectorAll('.form-side input[type="password"]');
+const botaoAlterar = document.querySelector(".btn-submit");
+const segmentosForca = document.querySelectorAll(".strength-bar .seg");
+const textoForca = document.querySelector(".strength-label");
 
-    const botaoAlterar = document.querySelector(".btn-submit");
+let sessaoUser = null;
 
-    const barraForca = document.querySelector(".strength-bar");
-    const segmentosForca = document.querySelectorAll(
-        ".strength-bar .seg"
-    );
+if (camposSenha.length < 3 || !botaoAlterar) {
+    console.error("[AlterarSenha] Campos ou botão não encontrados na página.");
+} else {
+    iniciar();
+}
 
-    const textoForca = document.querySelector(".strength-label");
+function iniciar() {
+    const [senhaAtual, novaSenha, confirmarSenha] = camposSenha;
 
-    if (camposSenha.length < 3) {
-        console.error(
-            "Os campos de senha não foram encontrados corretamente."
-        );
-        return;
-    }
-
-    if (!botaoAlterar) {
-        console.error(
-            "Botão de alteração de senha não encontrado."
-        );
-        return;
-    }
-
-    // ============================================================
-    // CAMPOS
-    // ============================================================
-
-    const senhaAtual = camposSenha[0];
-    const novaSenha = camposSenha[1];
-    const confirmarSenha = camposSenha[2];
-
-    // ============================================================
-    // CRIAR ÁREA DE MENSAGEM
-    // ============================================================
-
-    let mensagemStatus = document.querySelector(
-        ".mensagem-alterar-senha"
-    );
-
+    /* ---------- Mensagens ---------- */
+    let mensagemStatus = document.querySelector(".mensagem-alterar-senha");
     if (!mensagemStatus) {
         mensagemStatus = document.createElement("div");
-
-        mensagemStatus.className =
-            "mensagem-alterar-senha";
-
+        mensagemStatus.className = "mensagem-alterar-senha";
         const formSide = document.querySelector(".form-side");
-
-        if (formSide) {
-            formSide.insertBefore(
-                mensagemStatus,
-                formSide.firstChild
-            );
-        }
+        formSide?.insertBefore(mensagemStatus, formSide.firstChild);
     }
 
-    // ============================================================
-    // EXIBIR MENSAGEM
-    // ============================================================
-
-    function mostrarMensagem(texto, tipo) {
+    const mostrarMensagem = (texto, tipo) => {
         mensagemStatus.textContent = texto;
-        mensagemStatus.className =
-            `mensagem-alterar-senha ${tipo}`;
-    }
+        mensagemStatus.className = `mensagem-alterar-senha ${tipo}`;
+    };
 
-    // ============================================================
-    // LIMPAR MENSAGEM
-    // ============================================================
-
-    function limparMensagem() {
+    const limparMensagem = () => {
         mensagemStatus.textContent = "";
-        mensagemStatus.className =
-            "mensagem-alterar-senha";
-    }
+        mensagemStatus.className = "mensagem-alterar-senha";
+    };
 
-    // ============================================================
-    // CRITÉRIOS DA SENHA
-    // ============================================================
-
+    /* ---------- Força da senha ---------- */
     function analisarForcaSenha(senha) {
         let pontos = 0;
+        if (senha.length >= 8) pontos++;
+        if (/[a-z]/.test(senha)) pontos++;
+        if (/[A-Z]/.test(senha)) pontos++;
+        if (/[0-9]/.test(senha)) pontos++;
+        if (/[^A-Za-z0-9]/.test(senha)) pontos++;
+        if (senha.length >= 12) pontos++;
 
-        if (senha.length >= 8) {
-            pontos++;
-        }
-
-        if (/[a-z]/.test(senha)) {
-            pontos++;
-        }
-
-        if (/[A-Z]/.test(senha)) {
-            pontos++;
-        }
-
-        if (/[0-9]/.test(senha)) {
-            pontos++;
-        }
-
-        if (/[^A-Za-z0-9]/.test(senha)) {
-            pontos++;
-        }
-
-        if (senha.length >= 12) {
-            pontos++;
-        }
-
-        if (pontos <= 2) {
-            return {
-                nivel: "fraca",
-                quantidade: 1,
-                texto: "Força da senha: fraca"
-            };
-        }
-
-        if (pontos <= 4) {
-            return {
-                nivel: "media",
-                quantidade: 2,
-                texto: "Força da senha: média"
-            };
-        }
-
-        return {
-            nivel: "forte",
-            quantidade: 3,
-            texto: "Força da senha: forte"
-        };
+        if (pontos <= 2) return { nivel: "fraca", quantidade: 1, texto: "Força da senha: fraca" };
+        if (pontos <= 4) return { nivel: "media", quantidade: 2, texto: "Força da senha: média" };
+        return { nivel: "forte", quantidade: 3, texto: "Força da senha: forte" };
     }
-
-    // ============================================================
-    // ATUALIZAR INDICADOR DE FORÇA
-    // ============================================================
 
     function atualizarForcaSenha() {
         const senha = novaSenha.value;
 
-        segmentosForca.forEach((segmento) => {
-            segmento.classList.remove(
-                "forca-fraca",
-                "forca-media",
-                "forca-forte"
-            );
-        });
+        segmentosForca.forEach((seg) => seg.classList.remove("filled", "forca-fraca", "forca-media", "forca-forte"));
 
-        if (senha.length === 0) {
-            if (textoForca) {
-                textoForca.textContent =
-                    "Força da senha";
-            }
-
+        if (!senha) {
+            if (textoForca) textoForca.textContent = "Força da senha";
             return;
         }
 
-        const resultado =
-            analisarForcaSenha(senha);
-
-        for (
-            let i = 0;
-            i < resultado.quantidade;
-            i++
-        ) {
-            if (!segmentosForca[i]) {
-                continue;
-            }
-
-            segmentosForca[i].classList.add(
-                `forca-${resultado.nivel}`
-            );
+        const r = analisarForcaSenha(senha);
+        for (let i = 0; i < r.quantidade; i++) {
+            segmentosForca[i]?.classList.add("filled", `forca-${r.nivel}`);
         }
-
-        if (textoForca) {
-            textoForca.textContent =
-                resultado.texto;
-        }
+        if (textoForca) textoForca.textContent = r.texto;
     }
 
-    novaSenha.addEventListener(
-        "input",
-        atualizarForcaSenha
-    );
+    const senhaValida = (s) =>
+        s.length >= 8 && /[a-z]/.test(s) && /[A-Z]/.test(s) && /[0-9]/.test(s) && /[^A-Za-z0-9]/.test(s);
 
-    // ============================================================
-    // VALIDAR SENHA
-    // ============================================================
+    novaSenha.addEventListener("input", atualizarForcaSenha);
+    camposSenha.forEach((campo) => campo.addEventListener("input", limparMensagem));
 
-    function senhaValida(senha) {
-        return (
-            senha.length >= 8 &&
-            /[a-z]/.test(senha) &&
-            /[A-Z]/.test(senha) &&
-            /[0-9]/.test(senha) &&
-            /[^A-Za-z0-9]/.test(senha)
-        );
-    }
-
-    // ============================================================
-    // BOTÕES DE MOSTRAR/OCULTAR SENHA
-    // ============================================================
-
-    const olhos = document.querySelectorAll(
-        ".eye-ic"
-    );
-
-    olhos.forEach((olho, indice) => {
-
-        if (!camposSenha[indice]) {
-            return;
-        }
+    /* ---------- Mostrar / ocultar senha ---------- */
+    document.querySelectorAll(".eye-ic").forEach((olho, indice) => {
+        const campo = camposSenha[indice];
+        if (!campo) return;
 
         olho.style.cursor = "pointer";
+        olho.style.opacity = "0.6";
+        olho.setAttribute("role", "button");
+        olho.setAttribute("aria-label", "Mostrar senha");
+        olho.tabIndex = 0;
 
-        olho.addEventListener("click", () => {
+        const alternar = () => {
+            const mostrar = campo.type === "password";
+            campo.type = mostrar ? "text" : "password";
+            olho.style.opacity = mostrar ? "1" : "0.6";
+            olho.setAttribute("aria-label", mostrar ? "Ocultar senha" : "Mostrar senha");
+        };
 
-            const campo =
-                camposSenha[indice];
-
-            if (campo.type === "password") {
-                campo.type = "text";
-                olho.textContent = "🙈";
-            } else {
-                campo.type = "password";
-                olho.textContent = "👁";
+        olho.addEventListener("click", alternar);
+        olho.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                alternar();
             }
-
         });
     });
 
-    // ============================================================
-    // LIMPAR ERROS AO DIGITAR
-    // ============================================================
-
-    camposSenha.forEach((campo) => {
-
-        campo.addEventListener(
-            "input",
-            () => {
-                limparMensagem();
-            }
-        );
-
-    });
-
-    // ============================================================
-    // SUBMIT
-    // ============================================================
-
-    botaoAlterar.addEventListener(
-        "click",
-        async (event) => {
-
-            event.preventDefault();
-
-            limparMensagem();
-
-            const senhaAtualValor =
-                senhaAtual.value;
-
-            const novaSenhaValor =
-                novaSenha.value;
-
-            const confirmarSenhaValor =
-                confirmarSenha.value;
-
-            // ----------------------------------------------------
-            // SENHA ATUAL
-            // ----------------------------------------------------
-
-            if (senhaAtualValor.length === 0) {
-
-                mostrarMensagem(
-                    "Digite sua senha atual.",
-                    "erro"
-                );
-
-                senhaAtual.focus();
-
-                return;
-            }
-
-            // ----------------------------------------------------
-            // NOVA SENHA
-            // ----------------------------------------------------
-
-            if (novaSenhaValor.length === 0) {
-
-                mostrarMensagem(
-                    "Digite sua nova senha.",
-                    "erro"
-                );
-
-                novaSenha.focus();
-
-                return;
-            }
-
-            // ----------------------------------------------------
-            // TAMANHO
-            // ----------------------------------------------------
-
-            if (novaSenhaValor.length < 8) {
-
-                mostrarMensagem(
-                    "A nova senha deve possuir pelo menos 8 caracteres.",
-                    "erro"
-                );
-
-                novaSenha.focus();
-
-                return;
-            }
-
-            // ----------------------------------------------------
-            // FORÇA
-            // ----------------------------------------------------
-
-            if (!senhaValida(novaSenhaValor)) {
-
-                mostrarMensagem(
-                    "A nova senha deve conter letras maiúsculas, minúsculas, números e símbolos.",
-                    "erro"
-                );
-
-                novaSenha.focus();
-
-                return;
-            }
-
-            // ----------------------------------------------------
-            // CONFIRMAÇÃO
-            // ----------------------------------------------------
-
-            if (confirmarSenhaValor.length === 0) {
-
-                mostrarMensagem(
-                    "Confirme sua nova senha.",
-                    "erro"
-                );
-
-                confirmarSenha.focus();
-
-                return;
-            }
-
-            // ----------------------------------------------------
-            // SENHAS IGUAIS
-            // ----------------------------------------------------
-
-            if (
-                novaSenhaValor !==
-                confirmarSenhaValor
-            ) {
-
-                mostrarMensagem(
-                    "A confirmação da senha não corresponde à nova senha.",
-                    "erro"
-                );
-
-                confirmarSenha.focus();
-
-                return;
-            }
-
-            // ----------------------------------------------------
-            // NOVA SENHA DIFERENTE DA ATUAL
-            // ----------------------------------------------------
-
-            if (
-                senhaAtualValor ===
-                novaSenhaValor
-            ) {
-
-                mostrarMensagem(
-                    "A nova senha deve ser diferente da senha atual.",
-                    "erro"
-                );
-
-                novaSenha.focus();
-
-                return;
-            }
-
-            // ----------------------------------------------------
-            // USUÁRIO LOGADO
-            // ----------------------------------------------------
-
-            const usuario =
-                obterUsuarioLogado();
-
-            if (!usuario) {
-
-                mostrarMensagem(
-                    "Não foi possível identificar o usuário. Faça login novamente.",
-                    "erro"
-                );
-
-                return;
-            }
-
-            // ----------------------------------------------------
-            // ENVIAR AO SERVIDOR
-            // ----------------------------------------------------
-
-            const textoOriginal =
-                botaoAlterar.textContent;
-
-            try {
-
-                botaoAlterar.disabled = true;
-
-                botaoAlterar.textContent =
-                    "Alterando senha...";
-
-                const resposta =
-                    await fetch(
-                        "http://localhost:3000/api/usuarios/alterar-senha",
-                        {
-                            method: "PUT",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-                                id: usuario.id,
-                                senhaAtual:
-                                    senhaAtualValor,
-                                novaSenha:
-                                    novaSenhaValor
-                            })
-                        }
-                    );
-
-                let resultado = {};
-
-                try {
-                    resultado =
-                        await resposta.json();
-                } catch (erro) {
-                    resultado = {};
-                }
-
-                if (!resposta.ok) {
-
-                    throw new Error(
-                        resultado.erro ||
-                        "Não foi possível alterar a senha."
-                    );
-                }
-
-                // ------------------------------------------------
-                // SUCESSO
-                // ------------------------------------------------
-
-                mostrarMensagem(
-                    resultado.mensagem ||
-                    "Senha alterada com sucesso!",
-                    "sucesso"
-                );
-
-                senhaAtual.value = "";
-                novaSenha.value = "";
-                confirmarSenha.value = "";
-
-                atualizarForcaSenha();
-
-            } catch (erro) {
-
-                console.error(
-                    "Erro ao alterar senha:",
-                    erro
-                );
-
-                if (
-                    erro instanceof TypeError
-                ) {
-
-                    mostrarMensagem(
-                        "Não foi possível conectar ao servidor. Verifique se o Back-End está funcionando.",
-                        "erro"
-                    );
-
-                } else {
-
-                    mostrarMensagem(
-                        erro.message ||
-                        "Ocorreu um erro ao alterar a senha.",
-                        "erro"
-                    );
-                }
-
-            } finally {
-
-                botaoAlterar.disabled = false;
-
-                botaoAlterar.textContent =
-                    textoOriginal;
-            }
-        }
-    );
-
-    // ============================================================
-    // RECUPERAR USUÁRIO LOGADO
-    // ============================================================
-
-    function obterUsuarioLogado() {
-
-        const chaves = [
-            "usuarioLogado",
-            "usuario",
-            "user",
-            "usuarioAtual"
-        ];
-
-        for (const chave of chaves) {
-
-            const dados =
-                localStorage.getItem(chave);
-
-            if (!dados) {
-                continue;
-            }
-
-            try {
-
-                const usuario =
-                    JSON.parse(dados);
-
-                if (
-                    usuario &&
-                    typeof usuario === "object" &&
-                    usuario.id
-                ) {
-                    return usuario;
-                }
-
-            } catch (erro) {
-
-                console.warn(
-                    `Não foi possível ler "${chave}".`
-                );
-
-            }
-        }
-
-        return null;
+    /* ---------- Erros do Supabase em português ---------- */
+    function textoErro(erro) {
+        const m = String(erro?.message || "").toLowerCase();
+        const codigo = erro?.code || "";
+
+        if (codigo === "same_password" || m.includes("different from the old password"))
+            return "A nova senha deve ser diferente da senha atual.";
+        if (codigo === "weak_password" || m.includes("weak"))
+            return "A nova senha é fraca demais. Use letras, números e símbolos.";
+        if (codigo === "over_request_rate_limit" || m.includes("rate limit"))
+            return "Muitas tentativas. Aguarde um pouco e tente novamente.";
+        if (m.includes("failed to fetch"))
+            return "Sem conexão com o servidor. Tente novamente.";
+        return erro?.message || "Ocorreu um erro ao alterar a senha.";
     }
 
-    // ============================================================
-    // BOTÃO SAIR
-    // ============================================================
+    const senhaAtualIncorreta = (erro) =>
+        erro?.code === "invalid_credentials" || /invalid login credentials/i.test(erro?.message || "");
 
-    const linksMenu =
-        document.querySelectorAll(
-            ".sidebar a"
-        );
+    /* ---------- Envio ---------- */
+    async function enviar(evento) {
+        evento?.preventDefault();
+        limparMensagem();
 
-    linksMenu.forEach((link) => {
+        const atual = senhaAtual.value;
+        const nova = novaSenha.value;
+        const confirmar = confirmarSenha.value;
 
-        const texto =
-            link.textContent
-                .trim()
-                .toLowerCase();
+        const recusar = (texto, campo) => {
+            mostrarMensagem(texto, "erro");
+            campo?.focus();
+        };
 
-        if (texto === "sair") {
+        if (!sessaoUser?.email) return recusar("Não foi possível identificar o usuário. Faça login novamente.");
+        if (!atual) return recusar("Digite sua senha atual.", senhaAtual);
+        if (!nova) return recusar("Digite sua nova senha.", novaSenha);
+        if (nova.length < 8) return recusar("A nova senha deve possuir pelo menos 8 caracteres.", novaSenha);
+        if (!senhaValida(nova))
+            return recusar("A nova senha deve conter letras maiúsculas, minúsculas, números e símbolos.", novaSenha);
+        if (!confirmar) return recusar("Confirme sua nova senha.", confirmarSenha);
+        if (nova !== confirmar) return recusar("A confirmação da senha não corresponde à nova senha.", confirmarSenha);
+        if (atual === nova) return recusar("A nova senha deve ser diferente da senha atual.", novaSenha);
 
-            link.addEventListener(
-                "click",
-                (event) => {
+        const textoOriginal = botaoAlterar.textContent;
+        botaoAlterar.disabled = true;
+        botaoAlterar.textContent = "Alterando senha...";
 
-                    event.preventDefault();
+        try {
+            // 1) confirma a senha atual (também renova a sessão, exigência do Supabase para trocar senha)
+            const { error: erroLogin } = await supabase.auth.signInWithPassword({
+                email: sessaoUser.email,
+                password: atual
+            });
+            if (erroLogin) {
+                if (senhaAtualIncorreta(erroLogin)) return recusar("Senha atual incorreta.", senhaAtual);
+                throw erroLogin;
+            }
 
-                    const confirmar =
-                        confirm(
-                            "Deseja realmente sair da sua conta?"
-                        );
+            // 2) troca a senha
+            const { error } = await supabase.auth.updateUser({ password: nova });
+            if (error) throw error;
 
-                    if (!confirmar) {
-                        return;
-                    }
+            // 3) encerra as outras sessões (outros dispositivos), mantendo esta
+            try {
+                await supabase.auth.signOut({ scope: "others" });
+            } catch (e) {
+                console.warn("[AlterarSenha] Não foi possível encerrar as outras sessões:", e);
+            }
 
-                    localStorage.removeItem(
-                        "usuarioLogado"
-                    );
-
-                    localStorage.removeItem(
-                        "usuario"
-                    );
-
-                    localStorage.removeItem(
-                        "user"
-                    );
-
-                    localStorage.removeItem(
-                        "usuarioAtual"
-                    );
-
-                    window.location.href =
-                        "../login.html";
-                }
-            );
+            mostrarMensagem("Senha alterada com sucesso!", "sucesso");
+            camposSenha.forEach((c) => { c.value = ""; });
+            atualizarForcaSenha();
+        } catch (erro) {
+            console.error("[AlterarSenha]", erro);
+            mostrarMensagem(textoErro(erro), "erro");
+        } finally {
+            botaoAlterar.disabled = !sessaoUser;
+            botaoAlterar.textContent = textoOriginal;
         }
+    }
+
+    botaoAlterar.addEventListener("click", enviar);
+    camposSenha.forEach((campo) =>
+        campo.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") enviar(e);
+        })
+    );
+
+    /* ---------- Sair ---------- */
+    document.querySelectorAll(".menu-lateral a").forEach((link) => {
+        const ehSair = link.querySelector('img[src*="IconeSair"]') || link.textContent.trim().toLowerCase() === "sair";
+        if (!ehSair) return;
+
+        link.addEventListener("click", async (e) => {
+            e.preventDefault();
+            if (!confirm("Deseja realmente sair da sua conta?")) return;
+            try {
+                await supabase.auth.signOut();
+            } catch (erro) {
+                console.error("[AlterarSenha] Erro ao sair:", erro);
+            }
+            window.location.replace("../../index.html");
+        });
     });
 
-    // ============================================================
-    // INICIALIZAÇÃO
-    // ============================================================
+    /* ---------- Sessão ---------- */
+    (async () => {
+        atualizarForcaSenha();
 
-    atualizarForcaSenha();
-
-    console.log(
-        "alterarSenha.js carregado com sucesso."
-    );
-});
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error || !session) {
+            botaoAlterar.disabled = true;
+            mostrarMensagem("Você precisa entrar na sua conta para alterar a senha.", "erro");
+            return;
+        }
+        sessaoUser = session.user;
+    })();
+}

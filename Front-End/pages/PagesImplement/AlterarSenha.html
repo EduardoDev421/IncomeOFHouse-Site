@@ -6,7 +6,7 @@
     <meta name="description" content="IncomeofHouses - Alterar Senha">
     <link rel="stylesheet" href="../../css/PagesImplement/AlterarSenha.css">
     <link rel="stylesheet" href="../../css/Modais/LegalModal.css">
-    <script src="../js/Preferencias.js"></script>
+    <script src="../../js/Preferencias.js"></script>
     <title>Alterar Senha · Income of Houses</title>
 </head>
 
@@ -63,7 +63,7 @@
                             <label>Senha atual</label>
                             <div class="input-wrap">
                                 <img class="input-ic" src="../../img/icones/IconeSenha.svg" alt="">
-                                <input type="password" placeholder="Digite sua senha atual">
+                                <input type="password" placeholder="Digite sua senha atual" autocomplete="current-password">
                                 <img class="eye-ic" src="../../img/icones/IconeVisao.svg" alt="">
                             </div>
                         </div>
@@ -72,12 +72,12 @@
                             <label>Nova senha</label>
                             <div class="input-wrap">
                                 <img class="input-ic" src="../../img/icones/IconeSenha.svg" alt="">
-                                <input type="password" placeholder="Digite sua nova senha">
+                                <input type="password" placeholder="Digite sua nova senha" autocomplete="new-password">
                                 <img class="eye-ic" src="../../img/icones/IconeVisao.svg" alt="">
                             </div>
                             <div class="strength-bar">
-                                <span class="seg filled"></span>
-                                <span class="seg filled"></span>
+                                <span class="seg"></span>
+                                <span class="seg"></span>
                                 <span class="seg"></span>
                             </div>
                             <p class="strength-label">Força da senha</p>
@@ -87,7 +87,7 @@
                             <label>Confirmar nova senha</label>
                             <div class="input-wrap">
                                 <img class="input-ic" src="../../img/icones/IconeSenha.svg" alt="">
-                                <input type="password" placeholder="Confirme sua nova senha">
+                                <input type="password" placeholder="Confirme sua nova senha" autocomplete="new-password">
                                 <img class="eye-ic" src="../../img/icones/IconeVisao.svg" alt="">
                             </div>
                         </div>
@@ -114,8 +114,9 @@
     </footer>
 
     <script src="../../js/Conta.js"></script>
-    <script src="../js/Idioma.js"></script>
-    <script src="../../js/modais/LegalModais.js"></script>
+    <script src="../../js/Idioma.js"></script>
+    <script src="../../js/Modais/LegalModais.js"></script>
     <script>Conta.renderMenu("config", 1);</script>
+    <script type="module" src="../../js/PagesImplement/alterarSenha.js"></script>
 </body>
 </html>

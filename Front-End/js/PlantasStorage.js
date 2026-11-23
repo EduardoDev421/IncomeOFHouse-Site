@@ -1,121 +1,139 @@
-/* PlantasStorage.js
-   Responsável pela comunicação com a API de plantas.
-   Carregue este arquivo ANTES de plantas.js, detalhePlanta.js e publicarPlanta.js.
-*/
+import { supabase } from "./lib/supabaseClient.js";
 
-(function () {
-    const API_BASE_URL = (
-        window.PLANTAS_API_URL ||
-        (
-            window.location.protocol === "file:" ||
-            ["localhost", "127.0.0.1"].includes(window.location.hostname)
-                ? "http://localhost:3000"
-                : window.location.origin
-        )
-    ).replace(/\/+$/, "");
+const TABELA = "plantas";
+const BUCKET = "plantas";
 
-    const API_PLANTAS = `${API_BASE_URL}/plantas`;
+const EXTENSOES = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
 
-    // Lê a resposta e informa o erro retornado pelo servidor.
-    async function lerResposta(resposta) {
-        const texto = await resposta.text();
-        let dados = {};
-
-        if (texto) {
-            try {
-                dados = JSON.parse(texto);
-            } catch {
-                dados = {};
-            }
-        }
-
-        if (!resposta.ok) {
-            const mensagem =
-                dados.erro ||
-                dados.mensagem ||
-                (resposta.status === 413
-                    ? "A imagem é grande demais para o servidor (HTTP 413)."
-                    : `Erro do servidor: HTTP ${resposta.status}`);
-
-            throw new Error(mensagem);
-        }
-
-        return dados;
+function traduzirErro(erro) {
+    const m = String(erro?.message || "").toLowerCase();
+    if (m.includes("bucket not found")) return new Error("O armazenamento de imagens ainda não foi criado no Supabase.");
+    if (m.includes("row-level security") || m.includes("not authorized") || m.includes("permission denied")) {
+        return new Error("Sem permissão para publicar. Apenas contas de profissional podem publicar plantas.");
     }
+    if (m.includes("does not exist") || m.includes("schema cache")) return new Error("A tabela plantas ainda não existe no Supabase.");
+    if (m.includes("failed to fetch")) return new Error("Sem conexão com o servidor. Tente novamente.");
+    if (m.includes("exceeded") || m.includes("too large")) return new Error("A imagem é grande demais.");
+    return erro instanceof Error ? erro : new Error(erro?.message || "Erro inesperado.");
+}
 
-    // fetch que explica melhor quando o servidor está fora do ar.
-    async function requisitar(url, opcoes) {
-        try {
-            return await fetch(url, opcoes);
-        } catch {
-            throw new Error(
-                "Não foi possível conectar ao servidor. Verifique se a API está rodando."
-            );
-        }
-    }
-
-    // Busca todas as plantas publicadas (mais novas primeiro).
-    async function getPlantas() {
-        const resposta = await requisitar(API_PLANTAS);
-        const dados = await lerResposta(resposta);
-
-        const lista = Array.isArray(dados) ? dados : dados.plantas;
-
-        if (!Array.isArray(lista)) {
-            throw new Error(
-                "O servidor não retornou uma lista válida de plantas."
-            );
-        }
-
-        // Ordena pelo id (maior = mais nova). Funciona mesmo que o
-        // servidor passe a ordenar sozinho com ORDER BY id DESC.
-        return [...lista].sort((a, b) => Number(b.id) - Number(a.id));
-    }
-
-    // Busca uma planta específica pelo ID.
-    async function getPlanta(id) {
-        if (!id) {
-            throw new Error("O ID da planta não foi informado.");
-        }
-
-        const resposta = await requisitar(
-            `${API_PLANTAS}/${encodeURIComponent(id)}`
-        );
-
-        const dados = await lerResposta(resposta);
-
-        return dados.planta || dados;
-    }
-
-    // Envia uma planta para ser salva no MySQL.
-    async function salvarPlanta(planta) {
-        const resposta = await requisitar(API_PLANTAS, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(planta)
-        });
-
-        return lerResposta(resposta);
-    }
-
-    // Exclui uma planta do banco de dados.
-    async function excluirPlanta(id) {
-        if (!id) {
-            throw new Error("O ID da planta não foi informado.");
-        }
-
-        const resposta = await requisitar(
-            `${API_PLANTAS}/${encodeURIComponent(id)}`,
-            { method: "DELETE" }
-        );
-
-        return lerResposta(resposta);
-    }
-
-    window.PlantasStorage = {
-        getPlantas,
-        getPlanta,
-        salvarPlanta,
-        excluirPlanta
+function normalizar(linha) {
+    return {
+        id: linha.id,
+        profissionalId: linha.profissional_id,
+        titulo: linha.nome,
+        descricao: linha.descricao,
+        categoria: linha.categoria,
+        estilo: linha.estilo || "",
+        quartos: linha.quartos,
+        banheiros: linha.banheiros,
+        garagem: linha.garagem,
+        area: Number(linha.area),
+        preco: Number(linha.preco),
+        imagem: linha.imagem_url,
+        destaques: linha.destaques || [],
+        distribuicaoAmbientes: linha.distribuicao_ambientes || "",
+        status: linha.ativa === false ? "inativa" : "publicada",
+        criadoEm: linha.criado_em
     };
-})();
+}
+
+async function enviarImagem(userId, dataUrl) {
+    const resposta = await fetch(dataUrl);
+    const blob = await resposta.blob();
+    const extensao = EXTENSOES[blob.type];
+    if (!extensao) throw new Error("A imagem deve ser JPEG, PNG ou WebP.");
+
+    const caminho = `${userId}/${crypto.randomUUID()}.${extensao}`;
+    const { error } = await supabase.storage
+        .from(BUCKET)
+        .upload(caminho, blob, { contentType: blob.type, cacheControl: "3600" });
+    if (error) throw error;
+
+    const { data } = supabase.storage.from(BUCKET).getPublicUrl(caminho);
+    return { caminho, url: data.publicUrl };
+}
+
+async function salvarPlanta(planta) {
+    try {
+        const { data: { session }, error: erroSessao } = await supabase.auth.getSession();
+        if (erroSessao) throw erroSessao;
+        if (!session) throw new Error("Você precisa entrar na sua conta para publicar uma planta.");
+
+        const userId = session.user.id;
+        const imagem = await enviarImagem(userId, planta.imagem);
+
+        const { data, error } = await supabase
+            .from(TABELA)
+            .insert({
+                profissional_id: userId,
+                nome: planta.titulo,
+                descricao: planta.descricao,
+                categoria: planta.categoria,
+                estilo: planta.estilo || null,
+                quartos: planta.quartos,
+                banheiros: planta.banheiros,
+                garagem: planta.garagem,
+                area: planta.area,
+                preco: planta.preco,
+                imagem_url: imagem.url,
+                destaques: planta.destaques || [],
+                distribuicao_ambientes: planta.distribuicaoAmbientes || null,
+                ativa: true
+            })
+            .select()
+            .single();
+
+        if (error) {
+            await supabase.storage.from(BUCKET).remove([imagem.caminho]);
+            throw error;
+        }
+
+        return normalizar(data);
+    } catch (erro) {
+        throw traduzirErro(erro);
+    }
+}
+
+async function listarPlantas(opcoes = {}) {
+    try {
+        let consulta = supabase
+            .from(TABELA)
+            .select("*")
+            .eq("ativa", true)
+            .order("criado_em", { ascending: false });
+
+        if (opcoes.profissionalId) consulta = consulta.eq("profissional_id", opcoes.profissionalId);
+        if (opcoes.categoria) consulta = consulta.eq("categoria", opcoes.categoria);
+        if (opcoes.limite) consulta = consulta.limit(opcoes.limite);
+
+        const { data, error } = await consulta;
+        if (error) throw error;
+        return (data || []).map(normalizar);
+    } catch (erro) {
+        throw traduzirErro(erro);
+    }
+}
+
+async function buscarPlanta(id) {
+    try {
+        const { data, error } = await supabase
+            .from(TABELA)
+            .select("*")
+            .eq("id", id)
+            .maybeSingle();
+        if (error) throw error;
+        return data ? normalizar(data) : null;
+    } catch (erro) {
+        throw traduzirErro(erro);
+    }
+}
+
+window.PlantasStorage = {
+    salvarPlanta,
+    listarPlantas,
+    buscarPlanta,
+    getPlantas: listarPlantas,
+    getPlanta: buscarPlanta
+};
+window.dispatchEvent(new Event("plantasstorage:pronto"));
