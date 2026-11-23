@@ -51,15 +51,33 @@
                 const s = document.createElement('script');
                 s.src = url;
                 s.onload = ok;
-                s.onerror = function () { falha(new Error('Não foi possível carregar a biblioteca de leitura. Verifique sua conexão.')); };
+                s.onerror = function () {
+                    // Limpa o cache para permitir nova tentativa depois de uma falha
+                    s.remove();
+                    delete carregados[url];
+                    falha(new Error('Não foi possível carregar a biblioteca de leitura. Verifique sua conexão.'));
+                };
                 document.head.append(s);
             });
         }
         return carregados[url];
     }
 
+    // Igual a carregarScript, mas a falha vira um erro que aparece no relatório
+    async function carregarBiblioteca(url) {
+        try {
+            await carregarScript(url);
+        } catch (e) {
+            throw erroDoArquivo(e.message);
+        }
+        const P = window.PortfolioParser;
+        if (url === LIB_PARSER && !(P && typeof P.interpretar === 'function' && typeof P.diagnosticar === 'function')) {
+            throw erroDoArquivo('O arquivo ' + LIB_PARSER + ' carregou, mas não define PortfolioParser.interpretar/diagnosticar. Confira o caminho e o conteúdo do arquivo.');
+        }
+    }
+
     async function linhasDoPdf(arquivo) {
-        await carregarScript(LIB_PDF);
+        await carregarBiblioteca(LIB_PDF);
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = LIB_PDF_WORKER;
         let pdf;
         try {
@@ -69,36 +87,41 @@
                 ? 'O PDF está protegido por senha. Salve uma cópia sem senha e envie de novo.'
                 : 'Não foi possível abrir o PDF. Ele pode estar corrompido. Tente exportá-lo novamente.');
         }
-        const linhas = [];
-        const total = Math.min(pdf.numPages, 60);
 
-        for (let n = 1; n <= total; n++) {
-            const pagina = await pdf.getPage(n);
-            const conteudo = await pagina.getTextContent();
-            const grupos = [];
+        try {
+            const linhas = [];
+            const total = Math.min(pdf.numPages, 60);
 
-            conteudo.items.forEach(function (it) {
-                if (!it.str) return;
-                const y = Math.round(it.transform[5]);
-                const tam = Math.abs(it.transform[3]) || it.height || 12;
-                let g = grupos.find(function (x) { return Math.abs(x.y - y) <= 2; });
-                if (!g) { g = { y: y, itens: [] }; grupos.push(g); }
-                g.itens.push({ x: it.transform[4], str: it.str, tam: tam });
-            });
+            for (let n = 1; n <= total; n++) {
+                const pagina = await pdf.getPage(n);
+                const conteudo = await pagina.getTextContent();
+                const grupos = [];
 
-            grupos.sort(function (a, b) { return b.y - a.y; });
-            grupos.forEach(function (g) {
-                g.itens.sort(function (a, b) { return a.x - b.x; });
-                const texto = g.itens.map(function (i) { return i.str; }).join('');
-                const maior = g.itens.reduce(function (m, i) { return i.str.length > m.str.length ? i : m; }, g.itens[0]);
-                linhas.push({ texto: texto, tam: maior.tam });
-            });
+                conteudo.items.forEach(function (it) {
+                    if (!it.str) return;
+                    const y = Math.round(it.transform[5]);
+                    const tam = Math.abs(it.transform[3]) || it.height || 12;
+                    let g = grupos.find(function (x) { return Math.abs(x.y - y) <= 2; });
+                    if (!g) { g = { y: y, itens: [] }; grupos.push(g); }
+                    g.itens.push({ x: it.transform[4], str: it.str, tam: tam });
+                });
+
+                grupos.sort(function (a, b) { return b.y - a.y; });
+                grupos.forEach(function (g) {
+                    g.itens.sort(function (a, b) { return a.x - b.x; });
+                    const texto = g.itens.map(function (i) { return i.str; }).join('');
+                    const maior = g.itens.reduce(function (m, i) { return i.str.length > m.str.length ? i : m; }, g.itens[0]);
+                    linhas.push({ texto: texto, tam: maior.tam });
+                });
+            }
+            return linhas;
+        } finally {
+            pdf.destroy();
         }
-        return linhas;
     }
 
     async function linhasDoWord(arquivo) {
-        await carregarScript(LIB_WORD);
+        await carregarBiblioteca(LIB_WORD);
         let r;
         try {
             r = await window.mammoth.convertToHtml({ arrayBuffer: await arquivo.arrayBuffer() });
@@ -110,8 +133,20 @@
         const linhas = [];
 
         doc.body.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li').forEach(function (el) {
-            const texto = el.textContent.trim();
+            // O texto de um <p> dentro de <li> já entra pelo próprio <li>
+            if (el.tagName === 'P' && el.closest('li')) return;
+
+            let texto;
+            if (el.tagName === 'LI') {
+                // Ignora sublistas: cada item aninhado é lido na sua vez
+                const copia = el.cloneNode(true);
+                copia.querySelectorAll('ul,ol').forEach(function (n) { n.remove(); });
+                texto = copia.textContent.trim();
+            } else {
+                texto = el.textContent.trim();
+            }
             if (!texto) return;
+
             if (tamanhos[el.tagName]) { linhas.push({ texto: texto, tam: tamanhos[el.tagName] }); return; }
             const forte = el.firstElementChild;
             const todoNegrito = forte && forte.tagName === 'STRONG' && el.children.length === 1 &&
@@ -136,7 +171,7 @@
 
         const ext = arquivo.name.split('.').pop().toLowerCase();
         aoMudarEtapa('Lendo o arquivo...');
-        await carregarScript(LIB_PARSER);
+        await carregarBiblioteca(LIB_PARSER);
         const linhas = ext === 'pdf' ? await linhasDoPdf(arquivo) : await linhasDoWord(arquivo);
 
         if (linhas.length < 3) {
@@ -194,20 +229,26 @@
         desenharRelatorio($('relatorio'), 'Confira o que foi lido em cada parte do seu portfólio:', diag);
     }
 
+    function rotuloEstado(estado) {
+        if (estado === 'ok') return 'Encontrado';
+        if (estado === 'erro') return 'Erro';
+        return 'Faltando';
+    }
+
     // Lista cada parte do portfólio com o que foi encontrado ou o que faltou
     function desenharRelatorio(el, titulo, diag) {
         el.replaceChildren();
         el.append(criar('strong', '', titulo));
 
         const lista = criar('ul', 'relatorio-lista');
-        diag.itens.forEach(function (i) {
+        (diag.itens || []).forEach(function (i) {
             const li = criar('li', 'rel-item rel-' + i.estado);
             li.append(criar('span', 'rel-parte', i.parte));
-            li.append(criar('span', 'rel-status', i.estado === 'ok' ? 'Encontrado' : 'Faltando'));
+            li.append(criar('span', 'rel-status', rotuloEstado(i.estado)));
             li.append(criar('span', 'rel-msg', i.msg));
             lista.append(li);
         });
-        diag.projetos.forEach(function (p) {
+        (diag.projetos || []).forEach(function (p) {
             const li = criar('li', 'rel-item rel-aviso');
             li.append(criar('span', 'rel-parte', 'Projeto'));
             li.append(criar('span', 'rel-status', 'Incompleto'));
@@ -219,7 +260,7 @@
 
     function renderProjetos(projetos, diag) {
         const faltas = {};
-        diag.projetos.forEach(function (x) { faltas[x.titulo] = x.faltando; });
+        (diag.projetos || []).forEach(function (x) { faltas[x.titulo] = x.faltando; });
         const lista = $('listaProjetos');
         const filtros = $('filtros');
         lista.replaceChildren();
@@ -280,7 +321,10 @@
             b.setAttribute('aria-pressed', b === botao);
         });
         document.querySelectorAll('#listaProjetos .projeto').forEach(function (p) {
-            p.hidden = !(filtro === 'todos' || p.dataset.categoria === filtro);
+            // style.display funciona mesmo que o CSS defina display em .projeto
+            // (nesse caso o atributo "hidden" sozinho não esconde o card)
+            const visivel = filtro === 'todos' || p.dataset.categoria === filtro;
+            p.style.display = visivel ? '' : 'none';
         });
     });
 
@@ -307,17 +351,23 @@
         return '';
     }
 
+    let analisando = false;
+
     async function processar(arquivo) {
+        if (analisando) return;
+
         const problema = validar(arquivo);
         if (problema) { erro(problema); return; }
 
         erro('');
         $('nomeArquivo').textContent = arquivo.name;
+        analisando = true;
         mostrar('analisando');
 
         try {
             const dados = await analisarArquivo(arquivo, function (etapa) { $('etapaAnalise').textContent = etapa; });
-            await carregarScript(LIB_PARSER);
+            dados.projetos = Array.isArray(dados.projetos) ? dados.projetos : [];
+            await carregarBiblioteca(LIB_PARSER);
             const diag = window.PortfolioParser.diagnosticar(dados);
 
             if (!dados.projetos.length) {
@@ -328,7 +378,12 @@
         } catch (e) {
             mostrar('vazio');
             if (e instanceof ErroLeitura) erroDetalhado(e.message, e.detalhes);
-            else erro('Algo deu errado ao analisar o arquivo. Tente novamente ou envie outro arquivo.');
+            else {
+                console.error('Erro ao analisar o portfólio:', e);
+                erro('Algo deu errado ao analisar o arquivo. Tente novamente ou envie outro arquivo. (Detalhe técnico: ' + (e && e.message ? e.message : e) + ')');
+            }
+        } finally {
+            analisando = false;
         }
     }
 
@@ -342,6 +397,11 @@
     input.addEventListener('change', function () {
         if (input.files[0]) processar(input.files[0]);
         input.value = '';
+    });
+
+    // Evita que o navegador abra o arquivo (e saia da página) se ele for solto fora da zona
+    ['dragover', 'drop'].forEach(function (ev) {
+        window.addEventListener(ev, function (e) { e.preventDefault(); });
     });
 
     ['dragenter', 'dragover'].forEach(function (ev) {

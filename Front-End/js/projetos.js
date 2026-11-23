@@ -3,7 +3,8 @@ import { supabase } from "./lib/supabaseClient.js";
 const TABELA = "plantas";
 const COLUNA_DONO = "profissional_id";
 const PAGINA_LOGIN = "./Login.html";
-const PAGINA_DETALHE = "./DetalhePlanta.html";
+// Página do profissional (avaliações + projeto publicado). A página pública é DetalhePlanta.html.
+const PAGINA_DETALHE = "./DetalheProjeto.html";
 
 const $ = (id) => document.getElementById(id);
 

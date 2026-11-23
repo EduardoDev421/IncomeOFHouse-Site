@@ -12,6 +12,11 @@ export { supabase };
 // Cadastre esse endereço em Supabase > Authentication > URL Configuration > Redirect URLs.
 const PAGINA_REDEFINIR_SENHA = "RedefinirSenha.html";
 
+// TEMPORÁRIO (desenvolvimento): deixe false enquanto "Confirm email" estiver DESLIGADO
+// no painel do Supabase (Authentication > Providers > Email).
+// Antes de publicar: ligue "Confirm email" no painel e mude esta constante para true.
+const CONFIRMAR_EMAIL = false;
+
 /* ---------------- validações ---------------- */
 const soNumeros = (v) => String(v || "").replace(/\D/g, "");
 const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) && v.length <= 254;
@@ -113,7 +118,19 @@ async function criarConta(tipo, d, extra = {}) {
     },
   });
   if (error) throw new Error(traduzirErro(error));
-  // Com confirmação de e-mail ligada, não há sessão ainda.
+
+  // Modo desenvolvimento (sem confirmação de e-mail): a sessão já vem pronta.
+  if (!CONFIRMAR_EMAIL) {
+    if (!data.session) {
+      // O painel ainda está com "Confirm email" ligado, então não houve sessão.
+      throw new Error(
+        'A confirmação de e-mail ainda está ativa no Supabase. Desligue "Confirm email" em Authentication > Providers > Email.'
+      );
+    }
+    return { precisaConfirmarEmail: false, usuario: data.user };
+  }
+
+  // Modo produção (com confirmação de e-mail): ainda não há sessão.
   return { precisaConfirmarEmail: !data.session, usuario: data.user };
 }
 

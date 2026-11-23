@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="IncomeofHouses - Detalhes do meu projeto">
+    <link rel="stylesheet" href="../css/Tema/Tema.css">
+    <link rel="stylesheet" href="../css/DetalheProjeto.css">
+    <link rel="stylesheet" href="../css/Modais/LegalModal.css">
+    <script src="../js/Preferencias.js"></script>
+    <title>Meu projeto - Income Of Houses</title>
+</head>
+
+<body>
+    <header class="topo">
+        <div class="logo">
+            <a href="../index.html">
+                <img src="../img/Logo.png" alt="Logo Income of Houses">
+            </a>
+        </div>
+        <nav class="menu">
+            <a href="../index.html">Início</a>
+            <a href="./plantas.html">Plantas</a>
+            <a href="./Profissionais.html">Profissionais</a>
+            <a href="./sobre.html">Sobre Nós</a>
+        </nav>
+    </header>
+
+    <main class="BackGround">
+        <div class="dp">
+            <p id="dpEstado" class="dp-erro" role="alert">Verificando acesso...</p>
+
+            <!-- Só aparece depois que o JS confirmar que a planta é do profissional logado -->
+            <div id="dpConteudo" class="dp-conteudo" hidden>
+                <section class="dp-topo" aria-label="Resumo do projeto">
+                    <figure class="dp-planta">
+                        <img id="dpImagem" alt="Planta do projeto" hidden>
+                        <span id="dpSemImagem">Sem imagem da planta</span>
+                    </figure>
+                    <div class="dp-resumo">
+                        <div class="dp-selos">
+                            <span id="dpStatus" class="dp-status"></span>
+                            <span id="dpTipo" class="dp-tipo" hidden></span>
+                        </div>
+                        <h1 id="dpTitulo"></h1>
+                        <p id="dpDescricao" class="dp-descricao"></p>
+                        <p id="dpValor" class="dp-valor"></p>
+                        <ul id="dpInfo" class="dp-info"></ul>
+                        <div class="dp-acoes">
+                            <a id="btnEditar" class="btn-ouro dp-botao" href="#">Editar planta</a>
+                            <a class="btn-link dp-botao" href="./Projetos.html">Voltar para projetos</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dp-grade">
+                    <article class="dp-card">
+                        <h2>Sobre o projeto</h2>
+                        <p id="dpSobre"></p>
+                        <div id="dpDistribuicao" class="dp-distribuicao" hidden></div>
+                    </article>
+
+                    <article class="dp-card">
+                        <h2>Destaques do projeto</h2>
+                        <ul id="dpDestaques" class="dp-destaques"></ul>
+                    </article>
+
+                    <article class="dp-card">
+                        <h2>Resultados da publicação</h2>
+                        <ul class="dp-info dp-pub">
+                            <li><span>Status</span><strong id="pubStatus">—</strong></li>
+                            <li><span>Publicada em</span><strong id="pubData">—</strong></li>
+                            <li><span>Avaliações</span><strong id="pubAval">—</strong></li>
+                            <li><span>Comentários</span><strong id="pubCom">—</strong></li>
+                        </ul>
+                        <div class="dp-avaliacoes">
+                            <h3>Avaliações do cliente</h3>
+                            <div id="dpAvaliacoes">Carregando avaliações...</div>
+                        </div>
+                    </article>
+                </section>
+
+                <section id="dpComentarios" class="dp-card dp-coment">
+                    <div class="dp-linha">
+                        <h2>Comentários <span id="qtdComentarios" class="dp-contador">0</span></h2>
+                    </div>
+                    <div id="dpListaComentarios">Carregando comentários...</div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+        <div class="RodapeLinks">
+            <a href="../pages/Modais/TermosUso.html" data-legal="termos">Termos de Uso</a>
+            <span>|</span>
+            <a href="../pages/Modais/PoliticaPrivacidade.html" data-legal="privacidade">Política de Privacidade</a>
+        </div>
+    </footer>
+
+    <script src="../js/Modais/LegalModais.js"></script>
+    <script type="module" src="../js/DetalheProjeto.js"></script>
+    <script src="../js/Idioma.js"></script>
+    <script src="../js/mensagensErros.js"></script>
+</body>
+
+</html>
