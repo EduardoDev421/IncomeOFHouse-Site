@@ -471,7 +471,28 @@ app.post("/profissionais", rota(async (req, res) => {
     });
 }));
 
+app.get("/profissionais/:id", rota(async (req, res) => {
+    if (!supabaseAdmin) return res.json([]);
+
+    const { data, error } = await supabaseAdmin
+        .from("profissionais")
+        .select("id, nome, registro, cidade, estado, profissao, foto_url, sobre, verificado, criado_em")
+        .eq("id", req.params.id)
+        .maybeSingle();
+
+    if (error) return erroSupabase(res, error);
+    if (!data) return res.status(404).json({ erro: "Profissional não encontrado." });
+
+    return res.json({
+        ...data,
+        registroProfissional: data.registro,
+        criadoEm: data.criado_em
+    });
+}));
+
 app.get("/profissionais", rota(async (req, res) => {
+    if (!supabaseAdmin) return res.json([]);
+
     const { data, error } = await supabaseAdmin
         .from("profissionais")
         .select("id, nome, registro, cidade, estado, profissao, foto_url, verificado, criado_em")
@@ -592,9 +613,13 @@ async function iniciarServidor() {
     const secretKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 
     if (!url || !publishableKey || !secretKey) {
-        throw new Error(
-            "Configure SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY e SUPABASE_SECRET_KEY no .env do Back-End."
-        );
+        console.warn("Supabase não configurado. O site e o módulo de mensagens serão iniciados em modo limitado.");
+        app.listen(PORT, () => {
+            console.log(`Servidor rodando em http://localhost:${PORT}`);
+            console.log(`Site: http://localhost:${PORT}`);
+            console.log(`Mensagens: http://localhost:${PORT}/pages/Mensagem.html`);
+        });
+        return;
     }
 
     // Import dinâmico mantém este server.js no padrão CommonJS já usado pelo projeto.

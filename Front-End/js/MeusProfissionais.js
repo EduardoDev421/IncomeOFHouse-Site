@@ -122,7 +122,7 @@ function renderCard(f) {
             <h3>${esc(f.nome)}</h3>
             ${f.especialidade ? `<span class="especialidade">${esc(f.especialidade)}</span>` : ""}
             ${f.descricao ? `<p>${esc(f.descricao)}</p>` : ""}
-            <a href="../pages/DetalheProfissional.html?id=${encodeURIComponent(f.profId)}" class="btn-ver">Ver Profissional</a>
+            <a href="../pages/DetalhesProfissional.html?id=${encodeURIComponent(f.profId)}" class="btn-ver">Ver Profissional</a>
         </article>`;
 }
 

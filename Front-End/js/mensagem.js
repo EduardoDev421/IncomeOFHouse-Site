@@ -4,16 +4,59 @@ const esc = (t) =>
     String(t ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 /* ---------- Quem está usando a página? ---------- */
-const TIPO = typeof Conta !== "undefined" ? Conta.tipo() : "usuario"; // "usuario" ou "profissional"
-const OUTRO = TIPO === "usuario" ? "profissional" : "usuario";
-if (typeof Conta !== "undefined") Conta.renderMenu("mensagem");
+let TIPO = typeof Conta !== "undefined" ? Conta.tipo() : "usuario"; // "usuario" ou "profissional"
+let OUTRO = TIPO === "usuario" ? "profissional" : "usuario";
 
-/* TROCAR pelos dados reais do login quando existir */
 const PESSOAS = {
     usuario: { id: "u1", nome: "Cliente" },
-    profissional: { id: "p1", nome: "João Silva" }
+    profissional: { id: "p1", nome: "Profissional" }
 };
-const EU = PESSOAS[TIPO];
+let EU = PESSOAS[TIPO];
+
+async function carregarIdentidade() {
+    try {
+        const { supabase } = await import("./lib/supabaseClient.js");
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error) throw error;
+
+        if (session?.user) {
+            const user = session.user;
+            const metadata = user.user_metadata || {};
+            const tipoSession = metadata.tipo === "profissional" ? "profissional"
+                : metadata.tipo === "usuario" ? "usuario" : null;
+
+            let tipo = tipoSession;
+            if (!tipo) {
+                const { data: profissional } = await supabase
+                    .from("profissionais")
+                    .select("id")
+                    .eq("id", user.id)
+                    .maybeSingle();
+                tipo = profissional ? "profissional" : "usuario";
+            }
+
+            const tabela = tipo === "profissional" ? "profissionais" : "usuarios";
+            const { data: perfil } = await supabase
+                .from(tabela)
+                .select("id,nome")
+                .eq("id", user.id)
+                .maybeSingle();
+
+            TIPO = tipo;
+            OUTRO = tipo === "usuario" ? "profissional" : "usuario";
+            EU = {
+                id: user.id,
+                nome: perfil?.nome || metadata.nome || metadata.full_name || user.email || PESSOAS[tipo].nome
+            };
+
+            if (typeof Conta !== "undefined") Conta.definir(tipo);
+        }
+    } catch (e) {
+        console.warn("Não foi possível usar a identidade da sessão; usando o modo de teste.", e);
+    }
+
+    if (typeof Conta !== "undefined") Conta.renderMenu("mensagem");
+}
 
 const TEXTOS = {
     usuario: {
@@ -28,8 +71,10 @@ const TEXTOS = {
     }
 };
 
-$("subtitulo").textContent = TEXTOS[TIPO].subtitulo;
-$("busca").placeholder = TEXTOS[TIPO].busca;
+function configurarTextos() {
+    $("subtitulo").textContent = TEXTOS[TIPO].subtitulo;
+    $("busca").placeholder = TEXTOS[TIPO].busca;
+}
 
 /* =========================================================
    SERVIDOR (Back-End/server/mensagens.js, montado no server.js)
@@ -331,7 +376,7 @@ async function garantirConversa() {
     if (TIPO !== "usuario" || !com || !nomeCom) return null;
 
     const c = await api("/conversas", "POST", {
-        usuario: PESSOAS.usuario,
+        usuario: EU,
         profissional: { id: String(com), nome: nomeCom }
     });
     return c.id;
@@ -399,6 +444,8 @@ $("texto").addEventListener("keydown", (e) => {
 /* ---------- Início ---------- */
 async function iniciar() {
     try {
+        await carregarIdentidade();
+        configurarTextos();
         const idInicial = await garantirConversa();
         await carregar();
         ouvirServidor();
@@ -409,7 +456,7 @@ async function iniciar() {
     } catch (e) {
         conexao(false, e.status ? e.message : undefined);
         atualizarLista('<p class="sem-resultado">Não foi possível carregar as conversas.</p>');
-        setTimeout(iniciar, 4000);                // tenta de novo até o servidor responder
+        setTimeout(iniciar, 4000);
     }
 }
 

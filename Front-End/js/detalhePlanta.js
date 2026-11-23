@@ -15,7 +15,6 @@ function mostrarErro(mensagem) {
     `;
 }
 
-// escreve um texto no elemento (se ele existir no HTML)
 function definirTexto(idElemento, texto) {
     const elemento = document.getElementById(idElemento);
     if (elemento) elemento.textContent = texto;
@@ -23,15 +22,12 @@ function definirTexto(idElemento, texto) {
 
 function formatarMoeda(valor) {
     const numero = Number(valor);
-
     if (!Number.isFinite(numero)) return "—";
-
     return numero.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
 function formatarNumero(valor) {
     const numero = Number(valor);
-
     return Number.isFinite(numero) ? numero.toLocaleString("pt-BR") : "—";
 }
 
@@ -44,13 +40,10 @@ function criarParagrafo(texto, classe) {
 
 /* =========================================================
    DESTAQUES
-   (salvos pelo publicarPlanta.js como lista de textos)
 ========================================================= */
 
 function normalizarDestaques(valor) {
-    if (Array.isArray(valor)) {
-        return valor;
-    }
+    if (Array.isArray(valor)) return valor;
 
     if (typeof valor === "string" && valor.trim()) {
         try {
@@ -66,7 +59,6 @@ function normalizarDestaques(valor) {
 
 function mostrarDestaques(valor) {
     const bloco = document.getElementById("destaquesPlanta");
-
     if (!bloco) return;
 
     bloco.replaceChildren();
@@ -108,12 +100,10 @@ function mostrarDistribuicao(texto) {
 
 /* =========================================================
    IMAGEM
-   (o publicarPlanta.js salva uma única imagem em base64)
 ========================================================= */
 
 function mostrarImagem(planta) {
     const imagem = document.getElementById("imagemPlanta");
-
     if (!imagem) return;
 
     if (planta.imagem) {
@@ -127,9 +117,6 @@ function mostrarImagem(planta) {
 
 /* =========================================================
    PROFISSIONAL RESPONSÁVEL E AVALIAÇÕES
-   Campos opcionais que vêm do backend:
-   planta.profissional = { id, nome, cargo, foto, nota, totalAvaliacoes, bio }
-   planta.avaliacoes   = [{ nome, foto, data, nota, comentario }]
 ========================================================= */
 
 function criar(tag, classe, texto) {
@@ -164,24 +151,61 @@ function criarAvatar(foto, nome) {
 }
 
 function formatarNota(nota) {
-    return Number(nota).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    return Number(nota).toLocaleString("pt-BR", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1
+    });
 }
+
+/* =========================================================
+   ADICIONAR PROFISSIONAL AOS CONTATOS
+========================================================= */
+
+function criarBotaoAdicionarContato(profissional) {
+    const botao = criar("button", "BtnAdicionarContato", "Adicionar aos contatos");
+    botao.type = "button";
+
+    botao.addEventListener("click", () => {
+        if (!profissional.id) {
+            alert("Não foi possível identificar o profissional.");
+            return;
+        }
+
+        const parametros = new URLSearchParams({
+            com: profissional.id,
+            nome: profissional.nome
+        });
+
+        window.location.href = `./Mensagem.html?${parametros.toString()}`;
+    });
+
+    return botao;
+}
+
+/* =========================================================
+   MOSTRAR PROFISSIONAL
+========================================================= */
 
 function mostrarProfissional(profissional) {
     const bloco = document.getElementById("profissionalPlanta");
-
     if (!bloco) return;
 
     bloco.replaceChildren();
 
     if (!profissional || !profissional.nome) {
-        bloco.appendChild(criar("p", "SemInfo", "O profissional responsável por este projeto ainda não foi informado."));
+        bloco.appendChild(criar(
+            "p",
+            "SemInfo",
+            "O profissional responsável por este projeto ainda não foi informado."
+        ));
 
         const verTodos = criar("a", "BtnPerfil", "Ver profissionais →");
         verTodos.href = "./Profissionais.html";
         bloco.appendChild(verTodos);
         return;
     }
+
+    const card = criar("div", "CardProfissional");
 
     const topo = criar("div", "ProfissionalTopo");
     topo.appendChild(criarAvatar(profissional.foto, profissional.nome));
@@ -197,28 +221,41 @@ function mostrarProfissional(profissional) {
         const linha = criar("div", "LinhaNota");
         linha.appendChild(criarEstrelas(profissional.nota));
 
-        const total = profissional.totalAvaliacoes ? ` (${profissional.totalAvaliacoes} avaliações)` : "";
+        const total = profissional.totalAvaliacoes
+            ? ` (${profissional.totalAvaliacoes} avaliações)`
+            : "";
+
         linha.appendChild(criar("span", "", `${formatarNota(profissional.nota)}${total}`));
         dados.appendChild(linha);
     }
 
     topo.appendChild(dados);
-    bloco.appendChild(topo);
+    card.appendChild(topo);
 
     if (profissional.bio) {
-        bloco.appendChild(criar("p", "ProfissionalBio", profissional.bio));
+        card.appendChild(criar("p", "ProfissionalBio", profissional.bio));
     }
 
-    const perfil = criar("a", "BtnPerfil", "Ver perfil do profissional →");
+    const acoes = criar("div", "ProfissionalAcoes");
+
+    const perfil = criar("a", "BtnPerfil", "Ver perfil");
     perfil.href = profissional.id
         ? `./Profissionais.html?id=${encodeURIComponent(profissional.id)}`
         : "./Profissionais.html";
-    bloco.appendChild(perfil);
+
+    acoes.appendChild(perfil);
+    acoes.appendChild(criarBotaoAdicionarContato(profissional));
+    card.appendChild(acoes);
+
+    bloco.appendChild(card);
 }
+
+/* =========================================================
+   AVALIAÇÕES
+========================================================= */
 
 function mostrarAvaliacao(avaliacoes) {
     const bloco = document.getElementById("avaliacaoPlanta");
-
     if (!bloco) return;
 
     bloco.replaceChildren();
@@ -256,14 +293,13 @@ function mostrarAvaliacao(avaliacoes) {
 }
 
 /* =========================================================
-   FAVORITOS (Supabase, via Favoritos.js)
+   FAVORITOS (SUPABASE)
 ========================================================= */
 
 const PAGINA_LOGIN = "./Login.html";
 
 async function configurarFavorito() {
     const botao = document.getElementById("botaoFavorito");
-
     if (!botao) return;
 
     const atualizar = () => {
@@ -274,12 +310,17 @@ async function configurarFavorito() {
     };
 
     if (!window.Favoritos) {
-        console.error("Favoritos.js não foi carregado. Carregue-o (type=\"module\") antes de detalhePlanta.js.");
+        console.error("Favoritos.js não foi carregado.");
     } else if (window.Favoritos.pronto) {
-        try { await window.Favoritos.pronto; } catch (erro) { console.warn("Favoritos:", erro); }
+        try {
+            await window.Favoritos.pronto;
+        } catch (erro) {
+            console.warn("Favoritos:", erro);
+        }
     }
 
     let aviso = document.getElementById("avisoFavorito");
+
     if (!aviso) {
         aviso = criar("p", "AvisoFavorito");
         aviso.id = "avisoFavorito";
@@ -350,12 +391,17 @@ async function iniciarDetalhes() {
         mostrarDistribuicao(planta.distribuicaoAmbientes);
         mostrarProfissional(planta.profissional);
         mostrarAvaliacao(planta.avaliacoes);
+
         await configurarFavorito();
+
     } catch (erro) {
         console.error("Erro ao carregar os detalhes da planta:", erro);
-        mostrarErro(erro.message === "Planta não encontrada."
-            ? erro.message
-            : "Não foi possível carregar os dados da planta.");
+
+        mostrarErro(
+            erro.message === "Planta não encontrada."
+                ? erro.message
+                : "Não foi possível carregar os dados da planta."
+        );
     }
 }
 

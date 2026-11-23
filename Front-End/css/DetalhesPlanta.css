@@ -613,25 +613,26 @@ body {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 .ProfissionalTopo .Avatar {
-    width: 72px;
-    height: 72px;
+    width: 76px;
+    height: 76px;
     flex-shrink: 0;
     font-size: 26px;
 }
 
 .ProfissionalDados h3 {
-    font-size: 16px;
+    margin-bottom: 2px;
+    font-size: 17px;
     font-weight: 600;
     color: #fff;
 }
 
 .ProfissionalDados .Cargo {
     display: block;
-    margin: 3px 0 5px;
+    margin: 2px 0 6px;
     font-size: 12px;
     color: #aaa;
 }
@@ -658,7 +659,8 @@ body {
 }
 
 .ProfissionalBio {
-    margin-bottom: 14px;
+    min-height: 42px;
+    margin: 0 0 18px;
     color: #cfcfcf;
     font-size: 13px;
     line-height: 1.6;
@@ -681,6 +683,47 @@ body {
     background: #d9af52;
     color: #111;
     box-shadow: 0 8px 20px rgba(218, 174, 82, 0.2);
+}
+
+.ProfissionalAcoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.ProfissionalAcoes .BtnPerfil,
+.ProfissionalAcoes .BtnAdicionarContato {
+    width: 100%;
+    min-height: 42px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border: 1px solid rgba(218, 174, 82, 0.72);
+    border-radius: 8px;
+    background: #111;
+    color: #e4b64f;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.ProfissionalAcoes .BtnAdicionarContato {
+    border-color: #d9af52;
+    background: #d9af52;
+    color: #111;
+}
+
+.ProfissionalAcoes .BtnPerfil:hover {
+    background: #d9af52;
+    color: #111;
+}
+
+.ProfissionalAcoes .BtnAdicionarContato:hover {
+    background: #edc768;
+    border-color: #edc768;
+    text-decoration: none;
 }
 
 .SemInfo {
@@ -1047,4 +1090,85 @@ body {
         transition: none !important;
         scroll-behavior: auto !important;
     }
+}
+
+/* =====================================================
+   NOVOS ESTILOS
+===================================================== */
+
+.CardProfissional {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.ProfissionalTopo {
+    margin-bottom: 16px;
+}
+
+.ProfissionalTopo .Avatar {
+    width: 76px;
+    height: 76px;
+}
+
+.ProfissionalDados h3 {
+    margin-bottom: 2px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.ProfissionalDados .Cargo {
+    margin: 2px 0 6px;
+}
+
+.ProfissionalBio {
+    min-height: 42px;
+    margin: 0 0 18px;
+    color: #cfcfcf;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.ProfissionalAcoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.ProfissionalAcoes .BtnPerfil,
+.ProfissionalAcoes .BtnAdicionarContato {
+    width: 100%;
+    min-height: 42px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border: 1px solid rgba(218, 174, 82, 0.72);
+    border-radius: 8px;
+    background: #111;
+    color: #e4b64f;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.ProfissionalAcoes .BtnAdicionarContato {
+    border-color: #d9af52;
+    background: #d9af52;
+    color: #111;
+}
+
+.ProfissionalAcoes .BtnPerfil:hover {
+    background: #d9af52;
+    color: #111;
+}
+
+.ProfissionalAcoes .BtnAdicionarContato:hover {
+    background: #edc768;
+    border-color: #edc768;
+    text-decoration: none;
 }
