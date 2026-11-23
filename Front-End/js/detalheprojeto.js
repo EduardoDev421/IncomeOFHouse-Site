@@ -32,6 +32,25 @@ const moeda = (n) => Number(n || 0).toLocaleString("pt-BR", { style: "currency",
 const dataBR = (s) => { const x = new Date(s); return isNaN(x) ? "" : x.toLocaleDateString("pt-BR"); };
 const lista = (v) => Array.isArray(v) ? v.map(String) : String(v ?? "").split(/\r?\n|,/).map((t) => t.trim()).filter(Boolean);
 
+const iniciais = (nome) => {
+    const p = String(nome || "?").trim().split(/\s+/).filter(Boolean);
+    return ((p[0]?.[0] || "?") + (p.length > 1 ? p[p.length - 1][0] : "")).toUpperCase();
+};
+
+// Linha de avaliação/comentário: avatar com iniciais, nome, nota, data e texto
+function itemPessoa(nome, quando, texto, nota) {
+    const item = criar("div", "dp-item dp-pessoa");
+    const corpo = criar("div", "dp-corpo");
+    const cab = criar("div", "dp-cab");
+    cab.append(criar("strong", "", nome));
+    if (nota) cab.append(criar("span", "dp-nota", "★".repeat(Math.round(nota))));
+    if (quando) cab.append(criar("small", "", quando));
+    corpo.append(cab);
+    if (texto) corpo.append(criar("p", "", texto));
+    item.append(criar("span", "dp-avatar", iniciais(nome)), corpo);
+    return item;
+}
+
 const STATUS = {
     publicada: { rotulo: "Publicada", classe: "st-publicada" },
     rascunho: { rotulo: "Rascunho", classe: "st-rascunho" },
@@ -135,11 +154,7 @@ async function carregarAvaliacoes() {
         const media = data.reduce((s, a) => s + Number(a.nota || 0), 0) / data.length;
         $("pubAval").textContent = `★ ${media.toFixed(1).replace(".", ",")} (${data.length})`;
         data.slice(0, 5).forEach((a) => {
-            const item = criar("div", "dp-item");
-            item.append(criar("strong", "", `${a.autor ?? a.nome ?? "Cliente"} · ${"★".repeat(Math.round(a.nota || 0))}`));
-            const texto = a.comentario ?? a.texto;
-            if (texto) item.append(criar("small", "", texto));
-            box.append(item);
+            box.append(itemPessoa(a.autor ?? a.nome ?? "Cliente", dataBR(a.criado_em ?? a.created_at), a.comentario ?? a.texto, a.nota));
         });
     } catch (erro) {
         console.error("[Avaliações]", erro);
@@ -160,12 +175,7 @@ async function carregarComentarios() {
         if (!itens.length) { box.append(criar("p", "dp-vazio", "Ainda não há comentários neste projeto.")); return; }
 
         itens.forEach((c) => {
-            const item = criar("div", "dp-item");
-            item.append(criar("strong", "", c.autor ?? c.nome ?? "Visitante"));
-            const quando = dataBR(c.criado_em ?? c.created_at);
-            if (quando) item.append(criar("small", "", quando));
-            item.append(criar("span", "", c.texto ?? c.comentario ?? ""));
-            box.append(item);
+            box.append(itemPessoa(c.autor ?? c.nome ?? "Visitante", dataBR(c.criado_em ?? c.created_at), c.texto ?? c.comentario));
         });
     } catch (erro) {
         console.error("[Comentários]", erro);
@@ -202,6 +212,7 @@ async function iniciar() {
         if (error) throw error;
         if (!data) { bloquear("Projeto não encontrado ou você não tem acesso a ele.", voltar); return; }
 
+        $("dpEstado").hidden = true;
         $("dpConteudo").hidden = false;
         preencher(doBanco(data));
         carregarAvaliacoes();
