@@ -123,7 +123,41 @@ async function buscarPlanta(id) {
             .eq("id", id)
             .maybeSingle();
         if (error) throw error;
-        return data ? normalizar(data) : null;
+        if (!data) return null;
+
+        const planta = normalizar(data);
+
+        if (data.profissional_id) {
+            const { data: profissional, error: erroProfissional } = await supabase
+                .from("profissionais")
+                .select("id,nome,foto_url,profissao,sobre")
+                .eq("id", data.profissional_id)
+                .maybeSingle();
+
+            if (!erroProfissional && profissional) {
+                planta.profissional = {
+                    id: profissional.id,
+                    nome: profissional.nome || "Profissional",
+                    cargo: profissional.profissao || "",
+                    foto: profissional.foto_url || null,
+                    bio: profissional.sobre || "",
+                    nota: null,
+                    totalAvaliacoes: 0
+                };
+            } else {
+                planta.profissional = {
+                    id: data.profissional_id,
+                    nome: "Profissional",
+                    cargo: "",
+                    foto: null,
+                    bio: "",
+                    nota: null,
+                    totalAvaliacoes: 0
+                };
+            }
+        }
+
+        return planta;
     } catch (erro) {
         throw traduzirErro(erro);
     }
