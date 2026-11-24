@@ -119,6 +119,7 @@ const Conta = (() => {
 
 /* Proteção de páginas: a Home, autenticação e recuperação de senha continuam públicas. */
 (async () => {
+    const scriptUrl = document.currentScript?.src || new URL("../js/conta.js", location.href).href;
     const pagina = location.pathname.toLowerCase().split("/").pop();
     const publicas = new Set([
         "index.html", "login.html", "cadastro.html",
@@ -134,7 +135,8 @@ const Conta = (() => {
         : "../pages/login.html";
     const urlLogin = new URL(caminhoLogin, location.href).href;
     try {
-        const { obterSessao } = await import("./services/authService.js");
+        const moduloAuth = new URL("services/authService.js", scriptUrl).href;
+        const { obterSessao } = await import(moduloAuth);
         const sessao = await obterSessao();
         if (!sessao) {
             window.location.replace(urlLogin);

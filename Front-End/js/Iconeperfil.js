@@ -4,6 +4,31 @@
 //   certo (usuário -> perfilUsuario.html, profissional -> PerfilProfissional.html).
 import { supabase, obterSessao, tipoDaConta } from "./services/authService.js";
 
+// Protege as páginas internas. Home, login, cadastro e recuperação continuam públicas.
+const paginaAtual = location.pathname.toLowerCase().split("/").pop();
+const paginasPublicas = new Set([
+  "index.html", "login.html", "cadastro.html",
+  "esquecersenha.html", "redefinirsenha.html",
+  "termosuso.html", "politicaprivacidade.html"
+]);
+const ehHome = /\/front-end\/index\.html$/.test(location.pathname.toLowerCase());
+
+if (!ehHome && !paginasPublicas.has(paginaAtual)) {
+  document.documentElement.style.visibility = "hidden";
+  try {
+    const sessaoInicial = await obterSessao();
+    if (!sessaoInicial) {
+      window.location.replace(new URL("../pages/login.html", import.meta.url).href);
+    } else {
+      document.documentElement.style.visibility = "";
+    }
+  } catch (erro) {
+    console.error("Falha ao validar a sessão:", erro);
+    window.location.replace(new URL("../pages/login.html", import.meta.url).href);
+  }
+}
+
+
 // AJUSTE se precisar: seletor do ícone de perfil/login do cabeçalho.
 // Se o seu ícone tiver um id ou classe própria, coloque aqui na frente.
 const SELETOR_ICONE = [
