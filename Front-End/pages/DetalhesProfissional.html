@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="IncomeofHouses - Quem somos">
+   <meta name="description" content="IncomeofHouses - Detalhes do profissional">
    <link rel="stylesheet" href="../css/DetalhesProfissionais.css">
    <link rel="stylesheet" href="../css/Modais/LegalModal.css">
    <title>Detalhes de Profissional - Income of Houses</title>
@@ -18,12 +18,12 @@
         <nav class="menu">
             <a href="../index.html">Início</a>
             <a href="./plantas.html">Plantas</a>
-            <a href="./Profissionais.html">Profissionais</a>
+            <a href="./Profissionais.html" class="ativo">Profissionais</a>
             <a href="./sobre.html">Sobre Nós</a>
         </nav>
     </header>
     <main class="BackGround">
-        <section class="detalhes-profissional">
+        <section class="detalhes-profissional" id="detalhesProfissional">
 
             <!-- =========================
                 PERFIL
@@ -31,89 +31,57 @@
 
             <section class="perfil-profissional">
 
-
                 <!-- FOTO -->
-                <div class="imagem-profissional">
-
-                    <img
-                        src="../img/profissional.jpg"
-                        alt="Foto do profissional"
-                    >
-
+                <div class="imagem-profissional" id="areaFotoProfissional">
+                    <img id="fotoProfissional" src="" alt="Foto do profissional">
                 </div>
-
 
                 <!-- INFORMAÇÕES -->
                 <div class="informacoes-profissional">
 
-                    <h1>
-                        Nome do
-                        <span>Profissional</span>
-                    </h1>
+                    <h1 id="nomeProfissional">Carregando...</h1>
 
-
-                    <h2 class="profissao">
-                        Arquiteto
-                    </h2>
-
+                    <h2 class="profissao" id="profissaoProfissional"></h2>
 
                     <!-- AVALIAÇÃO -->
-                    <div class="avaliacao">
-
-                        <span class="estrela">
-                            ★
-                        </span>
-
-                        <strong>
-                            0,0
-                        </strong>
-
-                        <small>
-                            (000 avaliações)
-                        </small>
-
+                    <div class="avaliacao" id="blocoNota">
+                        <span class="estrela">★</span>
+                        <strong id="notaProfissional">—</strong>
+                        <small id="totalAvaliacoesProfissional"></small>
                     </div>
-
 
                     <!-- DADOS -->
                     <div class="dados">
 
-                        <div class="dado">
-
-                            <h3>
-                                Cidade
-                            </h3>
-
-                            <p>
-                                Brasília - DF
-                            </p>
-
+                        <div class="dado" id="dadoCidade" style="display:none">
+                            <h3>Cidade</h3>
+                            <p></p>
                         </div>
 
+                        <div class="dado" id="dadoRegistro" style="display:none">
+                            <h3>Registro profissional</h3>
+                            <p></p>
+                        </div>
 
-                        <div class="dado">
+                        <div class="dado" id="dadoAreas" style="display:none">
+                            <h3>Áreas de atuação</h3>
+                            <p></p>
+                        </div>
 
-                            <h3>
-                                Tempo de Experiência
-                            </h3>
+                        <div class="dado" id="dadoServicos" style="display:none">
+                            <h3>Serviços</h3>
+                            <p></p>
+                        </div>
 
-                            <p>
-                                8 anos
-                            </p>
-
+                        <div class="dado" id="dadoRegioes" style="display:none">
+                            <h3>Atende em</h3>
+                            <p></p>
                         </div>
 
                     </div>
 
-
                     <!-- DESCRIÇÃO -->
-                    <p class="descricao">
-                        Profissional especializado em projetos
-                        arquitetônicos modernos e residenciais.
-                        Trabalha com soluções personalizadas,
-                        buscando unir sofisticação, funcionalidade
-                        e qualidade em cada projeto.
-                    </p>
+                    <p class="descricao" id="descricaoProfissional" style="display:none"></p>
 
                 </div>
 
@@ -126,33 +94,22 @@
 
             <section class="informacoes">
 
-
                 <!-- =========================
                     AVALIAÇÕES
                 ========================== -->
 
                 <article class="card-avaliacoes">
 
-                    <!-- CABEÇALHO -->
                     <div class="titulo-avaliacao">
-
                         <span class="icone-avaliacao">★</span>
-
-                        <h2>
-                            Avaliações do Cliente
-                        </h2>
-
+                        <h2>Avaliações do Cliente</h2>
                     </div>
-
 
                     <!-- NOTA GERAL -->
                     <div class="nota-geral">
+                        <strong id="notaGeral">—</strong>
 
-                        <strong>
-                            0,0
-                        </strong>
-
-                        <div class="estrelas">
+                        <div class="estrelas" id="estrelasGeral">
                             <span>★</span>
                             <span>★</span>
                             <span>★</span>
@@ -160,75 +117,11 @@
                             <span>★</span>
                         </div>
 
-                        <small>
-                            0 avaliações
-                        </small>
-
+                        <small id="totalGeral"></small>
                     </div>
 
-
-                    <!-- AVALIAÇÃO DE DESTAQUE -->
-                    <div class="comentario-destaque">
-
-                        <!-- CLIENTE -->
-                        <div class="cliente">
-
-                            <img
-                                src="../img/usuario.png"
-                                alt="Foto do cliente"
-                            >
-
-                            <div class="cliente-info">
-
-                                <h4>
-                                    Nome do Cliente
-                                </h4>
-
-                                <span>
-                                    Há 1 ano
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- ESTRELAS DO CLIENTE -->
-                        <div class="estrelas-comentario">
-
-                            <span>★</span>
-                            <span>★</span>
-                            <span>★</span>
-                            <span>★</span>
-                            <span>★</span>
-
-                        </div>
-
-
-                        <!-- COMENTÁRIO -->
-                        <p class="texto-comentario">
-
-                            Excelente profissional! Muito atencioso,
-                            responsável e comprometido com o projeto.
-                            Fiquei muito satisfeito com o resultado.
-
-                        </p>
-
-                    </div>
-
-
-                    <!-- BOTÃO -->
-                    <div class="container-btn-avaliacoes">
-
-                        <a
-                            href="Comentarios.html"
-                            class="ver-avaliacoes"
-                        >
-                            Ver mais avaliações
-                            <span>→</span>
-                        </a>
-
-                    </div>
+                    <!-- AVALIAÇÕES (preenchidas pelo JS) -->
+                    <div id="listaAvaliacoes"></div>
 
                 </article>
 
@@ -238,69 +131,42 @@
                 ========================== -->
                 <aside class="card-orcamento">
 
-                    <!-- TÍTULO -->
-                    <h2>
-                        Solicitar Orçamento
-                    </h2>
+                    <h2>Solicitar Orçamento</h2>
 
-                    <!-- DESCRIÇÃO -->
                     <p class="texto-orcamento">
                         Descreva seu projeto e receba um orçamento
                         personalizado.
                     </p>
 
-
-                    <!-- INFORMAÇÕES DO ORÇAMENTO -->
                     <div class="info-orcamento">
 
-                        <div class="item-orcamento">
+                        <div class="item-orcamento" id="itemInvestimento" style="display:none">
                             <span class="icone">R$</span>
-
                             <div>
                                 <h4>Investimento inicial</h4>
-                                <p>A partir de <strong>R$ 2.500</strong></p>
+                                <p></p>
                             </div>
                         </div>
 
-
-                        <div class="item-orcamento">
+                        <div class="item-orcamento" id="itemPrazo" style="display:none">
                             <span class="icone">⏱</span>
-
                             <div>
                                 <h4>Prazo estimado</h4>
-                                <p>5 a 10 dias úteis</p>
+                                <p></p>
                             </div>
                         </div>
 
-
-                        <div class="item-orcamento">
-                            <span class="icone">⌖</span>
-
+                        <div class="item-orcamento" id="itemDisponibilidade" style="display:none">
+                            <span class="icone">📅</span>
                             <div>
-                                <h4>Atendimento</h4>
-                                <p>Presencial e online</p>
+                                <h4>Disponibilidade</h4>
+                                <p></p>
                             </div>
                         </div>
 
                     </div>
 
-
-                    <!-- PAGAMENTO -->
-                    <div class="pagamento-orcamento">
-
-                        <h3>
-                            Formas de Pagamento
-                        </h3>
-
-                        <p>
-                            PIX, Boleto e Cartão de Crédito
-                        </p>
-
-                    </div>
-
-
-                    <!-- BOTÃO -->
-                    <button type="button" class="btn-orcamento">
+                    <button type="button" class="btn-orcamento" id="botaoOrcamento">
                         Solicitar Orçamento
                     </button>
 
@@ -320,5 +186,7 @@
 
     <script src="../js/Modais/LegalModais.js"></script>
     <script src="../js/mensagensErros.js"></script>
+    <script type="module" src="../js/detalheProfissional.js"></script>
+    <script type="module" src="../js/Iconeperfil.js"></script>
 </body>
 </html>

@@ -1,3 +1,6 @@
+import { supabase } from "./lib/supabaseClient.js";
+import { solicitarProjeto } from "./solicitarProjeto.js";
+
 const parametros = new URLSearchParams(window.location.search);
 const id = parametros.get("id");
 const secaoDetalhes = document.querySelector(".Detalheplanta");
@@ -238,9 +241,10 @@ function mostrarProfissional(profissional) {
 
     const acoes = criar("div", "ProfissionalAcoes");
 
+    // "Ver perfil" abre o perfil do profissional responsável pela planta
     const perfil = criar("a", "BtnPerfil", "Ver perfil");
     perfil.href = profissional.id
-        ? `./Profissionais.html?id=${encodeURIComponent(profissional.id)}`
+        ? `./PerfilProfissional.html?id=${encodeURIComponent(profissional.id)}`
         : "./Profissionais.html";
 
     acoes.appendChild(perfil);
@@ -263,7 +267,7 @@ function mostrarAvaliacao(avaliacoes) {
     const avaliacao = Array.isArray(avaliacoes) ? avaliacoes[0] : null;
 
     if (!avaliacao) {
-        bloco.appendChild(criar("p", "SemInfo", "Ainda não há avaliações para este projeto."));
+        bloco.appendChild(criar("p", "SemInfo", "Este profissional ainda não recebeu avaliações."));
         return;
     }
 
@@ -359,6 +363,180 @@ async function configurarFavorito() {
 }
 
 /* =========================================================
+   SOLICITAR PROJETO (cria o pedido e abre Meus Pedidos)
+========================================================= */
+
+function configurarSolicitar(planta, profissionalId) {
+    const botao = document.getElementById("botaoSolicitar");
+    if (!botao) return;
+
+    botao.addEventListener("click", async () => {
+        botao.disabled = true;
+
+        try {
+            await solicitarProjeto({ plantaId: id, preco: planta.preco, profissionalId });
+        } catch (erro) {
+            console.error("[Solicitar]", erro.code, erro.message, erro.details, erro.hint);
+            alert(erro.message || "Não foi possível solicitar o projeto.");
+            botao.disabled = false;
+        }
+    });
+}
+
+/* =========================================================
+   PROFISSIONAL QUE PUBLICOU A PLANTA + AVALIAÇÕES DELE
+========================================================= */
+
+const MESES_CURTOS = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+
+function nomeDaProfissao(valor) {
+    if (!valor) return "";
+    const pequenas = new Set(["de", "da", "do", "e"]);
+    return String(valor)
+        .split("-")
+        .map((parte, i) => (i > 0 && pequenas.has(parte) ? parte : parte.charAt(0).toUpperCase() + parte.slice(1)))
+        .join(" ");
+}
+
+function primeiroValor(linha, chaves) {
+    const chave = chaves.find((c) => linha && linha[c] !== undefined && linha[c] !== null && linha[c] !== "");
+    return chave ? linha[chave] : "";
+}
+
+function formatarData(valor) {
+    const data = valor ? new Date(valor) : null;
+    if (!data || Number.isNaN(data.getTime())) return "";
+    return `${MESES_CURTOS[data.getMonth()]} de ${data.getFullYear()}`;
+}
+
+// O PlantasStorage pode devolver profissionalId ou profissional_id.
+// Se nenhum dos dois vier, lê direto da tabela plantas.
+async function descobrirProfissionalId(planta) {
+    const direto = planta.profissionalId || planta.profissional_id;
+    if (direto) return direto;
+
+    console.warn(
+        "[Detalhes] A planta devolvida pelo PlantasStorage veio sem profissionalId/profissional_id. Campos recebidos:",
+        Object.keys(planta)
+    );
+
+    try {
+        const { data, error } = await supabase
+            .from("plantas")
+            .select("profissional_id")
+            .eq("id", id)
+            .maybeSingle();
+        if (error) throw error;
+
+        if (!data) {
+            console.warn("[Detalhes] Nenhuma linha de plantas com id =", id, "(ou a RLS de plantas bloqueou a leitura).");
+            return null;
+        }
+
+        if (!data.profissional_id) {
+            console.warn("[Detalhes] A planta", id, "está com profissional_id vazio no banco.");
+            return null;
+        }
+
+        return data.profissional_id;
+    } catch (erro) {
+        console.warn("[Detalhes] profissional_id direto da tabela plantas:", erro?.message || erro);
+        return null;
+    }
+}
+
+async function buscarProfissional(profissionalId) {
+    if (!profissionalId) return null;
+    try {
+        const { data, error } = await supabase
+            .from("profissionais")
+            .select("*")
+            .eq("id", profissionalId)
+            .maybeSingle();
+        if (error) throw error;
+
+        if (!data) {
+            console.warn(
+                "[Detalhes] Nenhum registro em profissionais com id =",
+                profissionalId,
+                "— o id não existe nessa tabela ou a RLS bloqueou a leitura."
+            );
+            return null;
+        }
+
+        return data;
+    } catch (erro) {
+        console.warn("[Detalhes] profissional:", erro?.message || erro);
+        return null;
+    }
+}
+
+async function buscarAvaliacoes(profissionalId) {
+    if (!profissionalId) return [];
+    try {
+        const { data, error } = await supabase
+            .from("avaliacoes")
+            .select("*")
+            .eq("profissional_id", profissionalId);
+        if (error) throw error;
+        return (data || []).sort((a, b) => new Date(b.criado_em || 0) - new Date(a.criado_em || 0));
+    } catch (erro) {
+        console.warn("[Detalhes] avaliações do profissional:", erro?.message || erro);
+        return [];
+    }
+}
+
+function montarProfissional(linha, avaliacoes, profissionalId) {
+    if (!linha) return null;
+
+    const nome = primeiroValor(linha, ["nome", "nome_completo", "nome_profissional"]);
+    if (!nome) {
+        console.warn("[Detalhes] O registro do profissional veio sem nome. Colunas recebidas:", Object.keys(linha));
+        return null;
+    }
+
+    const notas = avaliacoes
+        .map((a) => Number(primeiroValor(a, ["nota", "estrelas", "avaliacao"])))
+        .filter((n) => Number.isFinite(n) && n > 0);
+    const media = notas.length ? notas.reduce((s, n) => s + n, 0) / notas.length : null;
+
+    const local = [linha.cidade, linha.estado].filter(Boolean).join(", ");
+    const cargo = [nomeDaProfissao(linha.profissao), local].filter(Boolean).join(" · ");
+
+    return {
+        id: profissionalId,
+        nome,
+        cargo,
+        foto: linha.foto_url || "",
+        nota: media,
+        totalAvaliacoes: notas.length,
+        bio: linha.sobre || linha.portfolio?.sobre || ""
+    };
+}
+
+function montarAvaliacoes(avaliacoes) {
+    return avaliacoes.map((a) => ({
+        nome: primeiroValor(a, ["cliente_nome", "nome_cliente", "autor_nome", "nome"]) || "Cliente",
+        foto: primeiroValor(a, ["cliente_foto", "foto_url", "foto"]),
+        data: formatarData(a.criado_em),
+        nota: Number(primeiroValor(a, ["nota", "estrelas", "avaliacao"])) || null,
+        comentario: primeiroValor(a, ["comentario", "texto", "descricao", "mensagem"])
+    }));
+}
+
+function configurarLinks(profissionalId) {
+    const comentarios = document.getElementById("linkComentarios");
+    if (comentarios && id) comentarios.href = `./Comentarios.html?id=${encodeURIComponent(id)}`;
+
+    const avaliacoes = document.querySelector(".AvaliacaoTopo a");
+    if (avaliacoes) {
+        avaliacoes.href = profissionalId
+            ? `./Profissionais.html?id=${encodeURIComponent(profissionalId)}`
+            : "./Profissionais.html";
+    }
+}
+
+/* =========================================================
    INÍCIO
 ========================================================= */
 
@@ -389,8 +567,18 @@ async function iniciarDetalhes() {
         mostrarImagem(planta);
         mostrarDestaques(planta.destaques);
         mostrarDistribuicao(planta.distribuicaoAmbientes);
-        mostrarProfissional(planta.profissional);
-        mostrarAvaliacao(planta.avaliacoes);
+
+        const profissionalId = await descobrirProfissionalId(planta);
+
+        const [linhaProfissional, linhasAvaliacoes] = await Promise.all([
+            buscarProfissional(profissionalId),
+            buscarAvaliacoes(profissionalId)
+        ]);
+
+        mostrarProfissional(montarProfissional(linhaProfissional, linhasAvaliacoes, profissionalId));
+        mostrarAvaliacao(montarAvaliacoes(linhasAvaliacoes));
+        configurarLinks(profissionalId);
+        configurarSolicitar(planta, profissionalId);
 
         await configurarFavorito();
 

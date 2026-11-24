@@ -374,7 +374,10 @@
                 throw new ErroLeitura('Não encontramos nenhum projeto no arquivo. Veja o que foi lido em cada parte:', diag);
             }
             preencher(dados, diag);
+            $('relatorio').hidden = false;
             mostrar('preenchido');
+            // Quem guarda o portfólio na conta do profissional escuta este evento
+            window.dispatchEvent(new CustomEvent('portfolio:analisado', { detail: { dados: dados } }));
         } catch (e) {
             mostrar('vazio');
             if (e instanceof ErroLeitura) erroDetalhado(e.message, e.detalhes);
@@ -415,6 +418,20 @@
     });
 
     $('btnTrocar').addEventListener('click', function () { erro(''); mostrar('vazio'); });
+
+    // Usado ao abrir a página: mostra o portfólio que já está salvo na conta
+    window.MeuPortfolio = {
+        mostrarSalvo: async function (dados) {
+            dados.projetos = Array.isArray(dados.projetos) ? dados.projetos : [];
+            await carregarBiblioteca(LIB_PARSER);
+            const diag = window.PortfolioParser.diagnosticar(dados);
+            diag.projetos = [];
+            preencher(dados, diag);
+            $('relatorio').replaceChildren();
+            $('relatorio').hidden = true;
+            mostrar('preenchido');
+        }
+    };
 
     mostrar('vazio');
 })();

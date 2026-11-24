@@ -7,6 +7,8 @@
    <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
    <link rel="stylesheet" href="../../css/Tema/Tema.css">
    <link rel="stylesheet" href="../../css/Pagamentos/Checkout.css">
+   <!-- CSS do pop-up (.sm-overlay, .sm-card...). Ajuste o nome se o seu arquivo for outro. -->
+   <link rel="stylesheet" href="../../css/Pagamentos/StatusPagamento.css">
    <link rel="stylesheet" href="../../css/Modais/LegalModal.css">
    <script src="../../js/Preferencias.js"></script>
    <title>Checkout</title>
@@ -107,12 +109,13 @@
                         <h2>Resumo do Pedido</h2>
                      </div>
 
+                     <!-- Preenchido pelo Checkout.js a partir de ?pedido=<id> -->
                      <div class="ItemPedido">
-                        <img src="../../img/plantas/CasaModernaTerrea.png" alt="Casa Moderna Térrea">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Planta">
                         <div class="ItemPedidoText">
-                           <h3>Casa Moderna Térrea</h3>
-                           <span class="ItemAutor">por Arquiteto Silva</span>
-                           <p>Planta completa com 3 quartos, sala integrada e garagem.</p>
+                           <h3>Carregando...</h3>
+                           <span class="ItemAutor"></span>
+                           <p></p>
                         </div>
                      </div>
 
@@ -123,7 +126,7 @@
                               <circle cx="8" cy="8" r="1.5"></circle>
                            </svg>
                            <span class="LinhaRotulo">Valor da Planta:</span>
-                           <strong id="valorPlanta">R$ 89,90</strong>
+                           <strong id="valorPlanta">R$ 0,00</strong>
                         </div>
 
                         <div class="LinhaValor">
@@ -139,7 +142,7 @@
                         <div class="LinhaTotal">
                            <span class="IconeTotal" aria-hidden="true">$</span>
                            <span class="LinhaRotulo">Total:</span>
-                           <strong id="valorTotal">R$ 89,90</strong>
+                           <strong id="valorTotal">R$ 0,00</strong>
                         </div>
                      </div>
                   </div>
@@ -312,7 +315,9 @@
 
    <script src="../../js/Conta.js"></script>
    <script src="../../js/Modais/LegalModais.js"></script>
-   <script src="../../js/Pagamentos/Checkout.js"></script>
+   <!-- StatusPagamento (clássico) ANTES do Checkout (module) -->
+   <script src="../../js/Pagamentos/StatusPagamento.js"></script>
+   <script type="module" src="../../js/Pagamentos/Checkout.js"></script>
    <script src="../../js/Idioma.js"></script>
 </body>
 

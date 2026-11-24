@@ -1,528 +1,485 @@
-document.addEventListener("DOMContentLoaded", () => {
+import { supabase } from "./lib/supabaseClient.js";
 
-    // ============================================================
-    // CONFIGURAÇÕES
-    // ============================================================
+// ============================================================
+// CONFIGURAÇÕES
+// ============================================================
+const TABELA = "profissionais";
+const COLUNA_ID = "id";
+const PAGINA_LOGIN = "../Login.html";
+const PAGINA_INICIAL = "../../index.html";
+const ICONE_LOGO_VAZIO = "../../img/icones/IconeEmpresa.svg";
 
-    const CHAVE_PERMISSOES = "dadosPermissoes";
+const TIPOS_EMPRESA = [
+  "Construtora", "Incorporadora", "Imobiliária", "Arquitetura", "Engenharia Civil",
+  "Engenharia Elétrica", "Engenharia Estrutural", "Design de Interiores", "Paisagismo",
+  "Urbanismo", "Topografia", "Reformas e Manutenção", "Marcenaria e Móveis Planejados",
+  "Gestão de Obras", "Consultoria e Projetos", "Outros"
+];
 
-    // ============================================================
-    // ELEMENTOS
-    // ============================================================
+const ESTADOS = [
+  ["AC", "Acre"], ["AL", "Alagoas"], ["AP", "Amapá"], ["AM", "Amazonas"], ["BA", "Bahia"],
+  ["CE", "Ceará"], ["DF", "Distrito Federal"], ["ES", "Espírito Santo"], ["GO", "Goiás"],
+  ["MA", "Maranhão"], ["MT", "Mato Grosso"], ["MS", "Mato Grosso do Sul"], ["MG", "Minas Gerais"],
+  ["PA", "Pará"], ["PB", "Paraíba"], ["PR", "Paraná"], ["PE", "Pernambuco"], ["PI", "Piauí"],
+  ["RJ", "Rio de Janeiro"], ["RN", "Rio Grande do Norte"], ["RS", "Rio Grande do Sul"],
+  ["RO", "Rondônia"], ["RR", "Roraima"], ["SC", "Santa Catarina"], ["SP", "São Paulo"],
+  ["SE", "Sergipe"], ["TO", "Tocantins"]
+];
 
-    const toggles = document.querySelectorAll(".toggle");
+// Usado só se a lista de cidades (IBGE) não carregar
+const CAPITAIS = {
+  AC: "Rio Branco", AL: "Maceió", AP: "Macapá", AM: "Manaus", BA: "Salvador", CE: "Fortaleza",
+  DF: "Brasília", ES: "Vitória", GO: "Goiânia", MA: "São Luís", MT: "Cuiabá", MS: "Campo Grande",
+  MG: "Belo Horizonte", PA: "Belém", PB: "João Pessoa", PR: "Curitiba", PE: "Recife", PI: "Teresina",
+  RJ: "Rio de Janeiro", RN: "Natal", RS: "Porto Alegre", RO: "Porto Velho", RR: "Boa Vista",
+  SC: "Florianópolis", SP: "São Paulo", SE: "Aracaju", TO: "Palmas"
+};
 
-    const botoesEditar =
-        document.querySelectorAll(".edit-account");
+const PLACEHOLDERS = {
+  nomeEmpresa: "Ex.: Silva Construções Ltda.",
+  cnpj: "00.000.000/0000-00",
+  telefone: "(00) 00000-0000",
+  email: "contato@suaempresa.com.br",
+  cep: "00000-000",
+  logradouro: "Rua, avenida, travessa...",
+  numero: "Ex.: 120",
+  complemento: "Sala, andar, bloco...",
+  bairro: "Ex.: Centro",
+  site: "www.suaempresa.com.br",
+  redes: "@suaempresa"
+};
 
-    const informacoesConta =
-        document.querySelectorAll(".account-information");
+const cacheCidades = {};
 
-    const linkSair =
-        Array.from(
-            document.querySelectorAll(".sidebar-link")
-        ).find(link =>
-            link.textContent
-                .trim()
-                .toLowerCase()
-                .includes("sair")
-        );
+/*
+  Nome das colunas na tabela "profissionais".
+  - Colunas que já existem no seu perfil: telefone, email, cidade, estado, sobre, foto_url.
+  - As que estão como null AINDA NÃO existem na tabela: o campo fica vazio
+    e NÃO é salvo. Quando criar a coluna no Supabase, é só colocar o nome aqui.
+*/
+const COLUNAS = {
+  nomeEmpresa: null,   // ex.: "empresa"  (enquanto null, usa o nome do profissional)
+  cnpj: null,          // ex.: "cnpj"
+  tipoEmpresa: null,   // ex.: "tipo_empresa"
+  telefone: "telefone",
+  email: "email",
+  cep: null,           // ex.: "cep"
+  logradouro: null,    // ex.: "logradouro"
+  numero: null,        // ex.: "numero"
+  complemento: null,   // ex.: "complemento"
+  bairro: null,        // ex.: "bairro"
+  cidade: "cidade",
+  estado: "estado",
+  sobre: "sobre",
+  logo: "foto_url",
+  site: null,          // ex.: "site"
+  redes: null          // ex.: "redes_sociais"
+};
 
-    // ============================================================
-    // VERIFICAÇÃO
-    // ============================================================
+// Campos que o usuário pode editar e salvar (email fica só de leitura)
+const SALVAVEIS = [
+  "nomeEmpresa", "cnpj", "tipoEmpresa", "telefone", "cep", "logradouro", "numero",
+  "complemento", "bairro", "cidade", "estado", "sobre", "site", "redes"
+];
 
-    if (!toggles.length) {
+// Texto do <label> de cada campo (sem o asterisco)
+const ROTULOS = {
+  nomeEmpresa: "Nome da empresa",
+  cnpj: "CNPJ",
+  tipoEmpresa: "Tipo de empresa",
+  telefone: "Telefone",
+  email: "E-mail corporativo",
+  cep: "CEP",
+  logradouro: "Logradouro",
+  numero: "Número",
+  complemento: "Complemento",
+  bairro: "Bairro",
+  cidade: "Cidade",
+  estado: "Estado",
+  site: "Site",
+  redes: "Redes sociais"
+};
 
-        console.error(
-            "Nenhum botão de permissão foi encontrado."
-        );
+// ============================================================
+// ELEMENTOS
+// ============================================================
+const conteudo = document.querySelector(".conteudo");
+const textarea = document.querySelector(".sobre textarea");
+const contador = document.querySelector(".contador");
+const botaoSalvar = document.querySelector(".acoes .salvar");
+const botaoCancelar = document.querySelector(".acoes .cancelar");
 
-        return;
+let sessaoUser = null;
+let profissionalAtual = null;
+
+// ============================================================
+// UTILIDADES
+// ============================================================
+function achar(chave) {
+  const alvo = ROTULOS[chave].toLowerCase();
+  for (const campo of document.querySelectorAll(".campo")) {
+    const label = campo.querySelector("label");
+    if (!label) continue;
+    const t = label.textContent.replace("*", "").trim().toLowerCase();
+    if (t.startsWith(alvo)) return campo.querySelector("input, select");
+  }
+  return null;
+}
+
+function aviso(tipo, texto, tempo = 5000) {
+  if (!conteudo) return;
+  conteudo.querySelectorAll(".aviso-empresa").forEach(a => a.remove());
+
+  const card = document.createElement("div");
+  card.className = "aviso-empresa";
+  card.setAttribute("role", tipo === "erro" ? "alert" : "status");
+  card.style.cssText =
+    "padding:12px 16px;margin-bottom:16px;border-radius:10px;font:600 14px/1.4 sans-serif;" +
+    (tipo === "erro" ? "background:#f87171;color:#3b0a0a;" : "background:#86efac;color:#052e16;");
+  card.textContent = texto;
+
+  if (tipo === "erro" && texto.includes("entrar")) {
+    const a = document.createElement("a");
+    a.href = PAGINA_LOGIN;
+    a.textContent = "Ir para o login";
+    card.append(" ", a);
+  }
+
+  conteudo.prepend(card);
+  if (tempo) setTimeout(() => card.remove(), tempo);
+}
+
+function formatarTelefone(valor) {
+  const n = String(valor || "").replace(/\D/g, "").slice(0, 11);
+  if (n.length === 11) return `(${n.slice(0, 2)}) ${n.slice(2, 7)}-${n.slice(7)}`;
+  if (n.length === 10) return `(${n.slice(0, 2)}) ${n.slice(2, 6)}-${n.slice(6)}`;
+  return n;
+}
+
+function formatarCNPJ(valor) {
+  const n = String(valor || "").replace(/\D/g, "").slice(0, 14);
+  return n
+    .replace(/^(\d{2})(\d)/, "$1.$2")
+    .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+    .replace(/\.(\d{3})(\d)/, ".$1/$2")
+    .replace(/(\d{4})(\d)/, "$1-$2");
+}
+
+function formatarCEP(valor) {
+  const n = String(valor || "").replace(/\D/g, "").slice(0, 8);
+  return n.length > 5 ? `${n.slice(0, 5)}-${n.slice(5)}` : n;
+}
+
+// ============================================================
+// LIMPAR FORMULÁRIO (tudo começa vazio)
+// ============================================================
+function limparFormulario() {
+  document.querySelectorAll(".card input[type='text'], .card input[type='email']").forEach(i => {
+    i.value = "";
+  });
+
+  prepararSelects();
+
+  if (textarea) textarea.value = "";
+  atualizarContador();
+
+  // Logo: sem imagem da empresa até existir uma
+  const logo = document.querySelector(".logo-area img");
+  if (logo) {
+    logo.src = ICONE_LOGO_VAZIO;
+    logo.alt = "Logo da empresa";
+  }
+
+  // Documentos: nenhum enviado ainda
+  const docs = document.querySelectorAll(".documentos .documento");
+  docs.forEach(d => d.remove());
+  const cardDocs = document.querySelector(".documentos");
+  if (cardDocs && !cardDocs.querySelector(".sem-documentos")) {
+    const p = document.createElement("p");
+    p.className = "sem-documentos";
+    p.style.cssText = "color:#6b7280;font-size:14px;margin:12px 0;";
+    p.textContent = "Nenhum documento enviado ainda.";
+    const botao = cardDocs.querySelector(".gerenciar");
+    botao ? cardDocs.insertBefore(p, botao) : cardDocs.append(p);
+  }
+}
+
+function montarSelect(select, itens, placeholder) {
+  if (!select) return;
+  select.innerHTML = "";
+  const vazio = document.createElement("option");
+  vazio.value = "";
+  vazio.textContent = placeholder;
+  select.append(vazio);
+  itens.forEach(([valor, rotulo]) => {
+    const op = document.createElement("option");
+    op.value = valor;
+    op.textContent = rotulo;
+    select.append(op);
+  });
+  select.value = "";
+}
+
+function prepararSelects() {
+  montarSelect(achar("tipoEmpresa"), TIPOS_EMPRESA.map(t => [t, t]), "Selecione o tipo de empresa");
+  montarSelect(achar("estado"), ESTADOS.map(([uf, nome]) => [uf, `${uf} - ${nome}`]), "Selecione o estado");
+  montarSelect(achar("cidade"), [], "Selecione o estado primeiro");
+  const cidade = achar("cidade");
+  if (cidade) cidade.disabled = true;
+
+  Object.entries(PLACEHOLDERS).forEach(([chave, texto]) => {
+    const el = achar(chave);
+    if (el && el.tagName === "INPUT") el.placeholder = texto;
+  });
+  if (textarea) textarea.placeholder = "Conte um pouco sobre a sua empresa, serviços e diferenciais.";
+}
+
+async function carregarCidades(uf) {
+  const sel = achar("cidade");
+  if (!sel) return;
+
+  if (!uf) {
+    montarSelect(sel, [], "Selecione o estado primeiro");
+    sel.disabled = true;
+    return;
+  }
+
+  sel.disabled = true;
+  montarSelect(sel, [], "Carregando cidades...");
+
+  let nomes = cacheCidades[uf];
+  if (!nomes) {
+    try {
+      const resp = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`);
+      if (!resp.ok) throw new Error("IBGE indisponível");
+      nomes = (await resp.json()).map(m => m.nome);
+      cacheCidades[uf] = nomes;
+    } catch (erro) {
+      console.warn("[DadosEmpresa] Usando lista reduzida de cidades:", erro);
+      nomes = [CAPITAIS[uf]].filter(Boolean);
     }
+  }
 
-    // ============================================================
-    // RECUPERAR USUÁRIO LOGADO
-    // ============================================================
+  montarSelect(sel, nomes.map(n => [n, n]), "Selecione a cidade");
+  sel.disabled = false;
+}
 
-    function obterUsuarioLogado() {
+function normalizarUF(valor) {
+  const v = String(valor || "").trim().toLowerCase();
+  if (!v) return "";
+  const achado = ESTADOS.find(([uf, nome]) => uf.toLowerCase() === v || nome.toLowerCase() === v);
+  return achado ? achado[0] : "";
+}
 
-        const chaves = [
-            "usuarioLogado",
-            "usuario",
-            "user",
-            "usuarioAtual"
-        ];
-
-        for (const chave of chaves) {
-
-            const dados =
-                localStorage.getItem(chave);
-
-            if (!dados) {
-                continue;
-            }
-
-            try {
-
-                const usuario =
-                    JSON.parse(dados);
-
-                if (
-                    usuario &&
-                    typeof usuario === "object"
-                ) {
-                    return usuario;
-                }
-
-            } catch (erro) {
-
-                console.warn(
-                    `Não foi possível interpretar ${chave}.`
-                );
-            }
-        }
-
-        return null;
+async function buscarCEP(cep) {
+  try {
+    const resp = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    const d = await resp.json();
+    if (d.erro) {
+      aviso("erro", "CEP não encontrado.");
+      return;
     }
+    definir("logradouro", d.logradouro);
+    definir("bairro", d.bairro);
+    definir("estado", d.uf);
+    await carregarCidades(d.uf);
+    definir("cidade", d.localidade);
+  } catch (erro) {
+    console.warn("[DadosEmpresa] Erro ao buscar CEP:", erro);
+  }
+}
 
-    // ============================================================
-    // MOSTRAR DADOS DA CONTA
-    // ============================================================
+function ligarMascaras() {
+  achar("cnpj")?.addEventListener("input", e => { e.target.value = formatarCNPJ(e.target.value); });
+  achar("telefone")?.addEventListener("input", e => { e.target.value = formatarTelefone(e.target.value); });
+  achar("cep")?.addEventListener("input", e => {
+    e.target.value = formatarCEP(e.target.value);
+    if (e.target.value.length === 9) buscarCEP(e.target.value.replace("-", ""));
+  });
+  achar("estado")?.addEventListener("change", e => carregarCidades(e.target.value));
+}
 
-    function atualizarDadosConta() {
+function atualizarContador() {
+  if (textarea && contador) {
+    contador.textContent = `${textarea.value.length}/${textarea.getAttribute("maxlength") || 500}`;
+  }
+}
 
-        const usuario =
-            obterUsuarioLogado();
+// ============================================================
+// PREENCHER COM OS DADOS DO PERFIL PROFISSIONAL
+// ============================================================
+function definir(chave, valor) {
+  const el = achar(chave);
+  if (!el || valor === undefined || valor === null || valor === "") return;
 
-        if (!usuario || !informacoesConta.length) {
-            return;
-        }
-
-        const valores = [
-            usuario.nome || "Não informado",
-            usuario.email || "Não informado",
-            usuario.telefone || "Não informado",
-            usuario.tipoConta ||
-            usuario.tipo ||
-            "Cliente"
-        ];
-
-        informacoesConta.forEach(
-            (informacao, indice) => {
-
-                const elemento =
-                    informacao.querySelector(
-                        ".information-value"
-                    );
-
-                if (!elemento) {
-                    return;
-                }
-
-                if (valores[indice]) {
-                    elemento.textContent =
-                        valores[indice];
-                }
-            }
-        );
+  if (el.tagName === "SELECT") {
+    const existe = Array.from(el.options).some(o => o.value === String(valor) || o.textContent === String(valor));
+    if (!existe) {
+      const op = document.createElement("option");
+      op.value = op.textContent = String(valor);
+      el.append(op);
     }
+    const op = Array.from(el.options).find(o => o.value === String(valor) || o.textContent === String(valor));
+    el.value = op.value;
+  } else {
+    el.value = valor;
+  }
+}
 
-    // ============================================================
-    // DEFINIÇÃO DOS MÓDULOS
-    // ============================================================
+function ler(p, chave) {
+  const coluna = COLUNAS[chave];
+  return coluna ? p[coluna] : undefined;
+}
 
-    function obterNomeModulo(toggle) {
+async function preencher(p) {
+  definir("nomeEmpresa", ler(p, "nomeEmpresa") || p.nome);
+  definir("cnpj", formatarCNPJ(ler(p, "cnpj")));
+  definir("tipoEmpresa", ler(p, "tipoEmpresa"));
+  definir("telefone", formatarTelefone(ler(p, "telefone")));
+  definir("email", ler(p, "email") || p.email);
+  definir("cep", formatarCEP(ler(p, "cep")));
+  definir("logradouro", ler(p, "logradouro"));
+  definir("numero", ler(p, "numero"));
+  definir("complemento", ler(p, "complemento"));
+  definir("bairro", ler(p, "bairro"));
+  const uf = normalizarUF(ler(p, "estado"));
+  definir("estado", uf);
+  await carregarCidades(uf);
+  definir("cidade", ler(p, "cidade"));
+  definir("site", ler(p, "site"));
+  definir("redes", ler(p, "redes"));
 
-        const linha =
-            toggle.closest(".permission-row");
+  const sobre = ler(p, "sobre");
+  if (textarea && sobre) textarea.value = sobre;
+  atualizarContador();
 
-        if (!linha) {
-            return null;
-        }
+  const urlLogo = ler(p, "logo");
+  const logo = document.querySelector(".logo-area img");
+  if (logo && urlLogo) {
+    logo.onerror = () => {
+      logo.onerror = null;
+      logo.src = ICONE_LOGO_VAZIO;
+    };
+    logo.src = urlLogo;
+  }
+}
 
-        const titulo =
-            linha.querySelector(
-                ".module-information h3"
-            );
+// ============================================================
+// BUSCAR PROFISSIONAL
+// ============================================================
+async function buscarProfissional(user) {
+  const { data, error } = await supabase
+    .from(TABELA)
+    .select("*")
+    .eq(COLUNA_ID, user.id)
+    .maybeSingle();
+  if (error) throw error;
 
-        if (!titulo) {
-            return null;
-        }
+  const meta = user.user_metadata || {};
+  return data || {
+    nome: meta.nome || meta.full_name || "",
+    telefone: meta.telefone || "",
+    cidade: meta.cidade || "",
+    estado: meta.estado || "",
+    email: user.email,
+    _semLinha: true
+  };
+}
 
-        return titulo.textContent.trim();
-    }
+// ============================================================
+// SALVAR
+// ============================================================
+async function salvar() {
+  if (!profissionalAtual || !sessaoUser) {
+    aviso("erro", "Você precisa entrar na sua conta para salvar.", 0);
+    return;
+  }
 
-    // ============================================================
-    // DEFINIÇÃO DAS PERMISSÕES
-    // ============================================================
+  const dados = {};
+  for (const chave of SALVAVEIS) {
+    const coluna = COLUNAS[chave];
+    if (!coluna) continue;
+    const el = achar(chave);
+    if (!el) continue;
+    dados[coluna] = chave === "sobre" ? (textarea?.value ?? "") : el.value.trim();
+  }
 
-    function obterNomePermissao(indice) {
+  if (!Object.keys(dados).length) {
+    aviso("erro", "Nenhuma coluna está configurada para salvar.");
+    return;
+  }
 
-        const cabecalho =
-            document.querySelector(
-                ".permissions-header"
-            );
+  botaoSalvar.disabled = true;
+  try {
+    const { error } = await supabase
+      .from(TABELA)
+      .update(dados)
+      .eq(COLUNA_ID, sessaoUser.id);
+    if (error) throw error;
 
-        if (!cabecalho) {
-            return `permissao_${indice + 1}`;
-        }
+    profissionalAtual = { ...profissionalAtual, ...dados };
+    aviso("sucesso", "Alterações salvas com sucesso!");
+  } catch (erro) {
+    console.error("[DadosEmpresa] Erro ao salvar:", erro);
+    aviso("erro", erro.message || "Não foi possível salvar as alterações.");
+  } finally {
+    botaoSalvar.disabled = false;
+  }
+}
 
-        const colunas =
-            cabecalho.children;
+function cancelar() {
+  limparFormulario();
+  if (profissionalAtual) preencher(profissionalAtual);
+}
 
-        /*
-            A primeira coluna é o nome do módulo.
-            As próximas representam as permissões.
-        */
+// ============================================================
+// SAIR
+// ============================================================
+function ligarSair() {
+  document.querySelectorAll(".menu-lateral a").forEach(link => {
+    if (!link.querySelector('img[src*="IconeSair"]')) return;
 
-        const coluna =
-            colunas[indice + 1];
-
-        if (!coluna) {
-            return `permissao_${indice + 1}`;
-        }
-
-        return coluna.textContent
-            .trim()
-            .toLowerCase()
-            .replace(/\s+/g, "_");
-    }
-
-    // ============================================================
-    // RECUPERAR PERMISSÕES
-    // ============================================================
-
-    function carregarPermissoes() {
-
-        const dadosSalvos =
-            localStorage.getItem(
-                CHAVE_PERMISSOES
-            );
-
-        if (!dadosSalvos) {
-            return;
-        }
-
-        try {
-
-            const permissoes =
-                JSON.parse(dadosSalvos);
-
-            toggles.forEach(
-                (toggle) => {
-
-                    const linha =
-                        toggle.closest(
-                            ".permission-row"
-                        );
-
-                    if (!linha) {
-                        return;
-                    }
-
-                    const modulo =
-                        obterNomeModulo(toggle);
-
-                    if (!modulo) {
-                        return;
-                    }
-
-                    const botoesDaLinha =
-                        linha.querySelectorAll(
-                            ".toggle"
-                        );
-
-                    const indice =
-                        Array.from(
-                            botoesDaLinha
-                        ).indexOf(toggle);
-
-                    const permissao =
-                        obterNomePermissao(
-                            indice
-                        );
-
-                    if (
-                        permissoes[modulo] &&
-                        typeof permissoes[modulo][permissao] !==
-                        "undefined"
-                    ) {
-
-                        const ativo =
-                            permissoes[modulo][permissao];
-
-                        toggle.classList.toggle(
-                            "toggle-on",
-                            ativo
-                        );
-                    }
-                }
-            );
-
-        } catch (erro) {
-
-            console.error(
-                "Erro ao carregar permissões:",
-                erro
-            );
-        }
-    }
-
-    // ============================================================
-    // CAPTURAR PERMISSÕES ATUAIS
-    // ============================================================
-
-    function capturarPermissoes() {
-
-        const permissoes = {};
-
-        document
-            .querySelectorAll(
-                ".permission-row"
-            )
-            .forEach(linha => {
-
-                const titulo =
-                    linha.querySelector(
-                        ".module-information h3"
-                    );
-
-                if (!titulo) {
-                    return;
-                }
-
-                const modulo =
-                    titulo.textContent.trim();
-
-                permissoes[modulo] = {};
-
-                const botoes =
-                    linha.querySelectorAll(
-                        ".toggle"
-                    );
-
-                botoes.forEach(
-                    (toggle, indice) => {
-
-                        const permissao =
-                            obterNomePermissao(
-                                indice
-                            );
-
-                        permissoes[modulo][permissao] =
-                            toggle.classList.contains(
-                                "toggle-on"
-                            );
-                    }
-                );
-            });
-
-        return permissoes;
-    }
-
-    // ============================================================
-    // SALVAR PERMISSÕES
-    // ============================================================
-
-    function salvarPermissoes() {
-
-        const permissoes =
-            capturarPermissoes();
-
-        try {
-
-            localStorage.setItem(
-                CHAVE_PERMISSOES,
-                JSON.stringify(permissoes)
-            );
-
-            console.log(
-                "Permissões salvas:",
-                permissoes
-            );
-
-        } catch (erro) {
-
-            console.error(
-                "Erro ao salvar permissões:",
-                erro
-            );
-        }
-    }
-
-    // ============================================================
-    // EVENTO DOS TOGGLES
-    // ============================================================
-
-    toggles.forEach(toggle => {
-
-        toggle.addEventListener(
-            "click",
-            () => {
-
-                toggle.classList.toggle(
-                    "toggle-on"
-                );
-
-                salvarPermissoes();
-            }
-        );
-
+    link.addEventListener("click", async event => {
+      event.preventDefault();
+      if (!confirm("Deseja realmente sair da sua conta?")) return;
+      try {
+        await supabase.auth.signOut();
+      } catch (erro) {
+        console.error("[DadosEmpresa] Erro ao sair:", erro);
+      }
+      window.location.replace(PAGINA_INICIAL);
     });
+  });
+}
 
-    // ============================================================
-    // EDITAR DADOS DA CONTA
-    // ============================================================
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
+async function iniciar() {
+  limparFormulario();
+  ligarMascaras();
+  ligarSair();
 
-    botoesEditar.forEach(botao => {
+  textarea?.addEventListener("input", atualizarContador);
+  botaoSalvar?.addEventListener("click", salvar);
+  botaoCancelar?.addEventListener("click", cancelar);
 
-        botao.addEventListener(
-            "click",
-            () => {
+  try {
+    const { data: { session }, error } = await supabase.auth.getSession();
+    if (error) throw error;
 
-                /*
-                    A página de edição de dados do usuário
-                    é responsável por alterar os dados.
-                */
-
-                const usuario =
-                    obterUsuarioLogado();
-
-                if (!usuario) {
-
-                    alert(
-                        "Nenhum usuário conectado."
-                    );
-
-                    return;
-                }
-
-                /*
-                    Se existir uma página de perfil,
-                    encaminha para ela.
-                */
-
-                const caminhos = [
-                    "PerfilUsuario.html",
-                    "../PerfilUsuario.html",
-                    "Perfil.html"
-                ];
-
-                /*
-                    Usamos a primeira opção como destino
-                    padrão do projeto.
-                */
-
-                window.location.href =
-                    "PerfilUsuario.html";
-            }
-        );
-
-    });
-
-    // ============================================================
-    // BOTÃO DO USUÁRIO NO TOPO
-    // ============================================================
-
-    const botaoUsuario =
-        document.querySelector(".top-user");
-
-    if (botaoUsuario) {
-
-        botaoUsuario.addEventListener(
-            "click",
-            () => {
-
-                const usuario =
-                    obterUsuarioLogado();
-
-                if (!usuario) {
-
-                    alert(
-                        "Nenhum usuário conectado."
-                    );
-
-                    return;
-                }
-
-                window.location.href =
-                    "PerfilUsuario.html";
-            }
-        );
+    if (!session) {
+      aviso("erro", "Você precisa entrar na sua conta para ver os dados da empresa.", 0);
+      return;
     }
 
-    // ============================================================
-    // SAIR
-    // ============================================================
+    sessaoUser = session.user;
+    profissionalAtual = await buscarProfissional(sessaoUser);
+    preencher(profissionalAtual);
+  } catch (erro) {
+    console.error("[DadosEmpresa]", erro);
+    aviso("erro", erro.message || "Não foi possível carregar os dados.", 0);
+  }
+}
 
-    if (linkSair) {
-
-        linkSair.addEventListener(
-            "click",
-            event => {
-
-                event.preventDefault();
-
-                const confirmar =
-                    confirm(
-                        "Deseja realmente sair da sua conta?"
-                    );
-
-                if (!confirmar) {
-                    return;
-                }
-
-                // ----------------------------------------------
-                // REMOVER DADOS DA SESSÃO
-                // ----------------------------------------------
-
-                localStorage.removeItem(
-                    "usuarioLogado"
-                );
-
-                localStorage.removeItem(
-                    "usuario"
-                );
-
-                localStorage.removeItem(
-                    "user"
-                );
-
-                localStorage.removeItem(
-                    "usuarioAtual"
-                );
-
-                // ----------------------------------------------
-                // REDIRECIONAR
-                // ----------------------------------------------
-
-                window.location.href =
-                    "../../index.html";
-            }
-        );
-    }
-
-    // ============================================================
-    // INICIALIZAÇÃO
-    // ============================================================
-
-    atualizarDadosConta();
-
-    carregarPermissoes();
-
-    // ============================================================
-    // LUCIDE ICONS
-    // ============================================================
-
-    if (
-        typeof lucide !== "undefined"
-    ) {
-
-        lucide.createIcons();
-    }
-
-    console.log(
-        "dadosPermissoes.js carregado com sucesso."
-    );
-});
+iniciar();

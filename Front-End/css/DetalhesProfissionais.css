@@ -41,9 +41,6 @@ body {
     backdrop-filter: blur(8px);
 }
 
-
-/* ---------- Logo ---------- */
-
 .logo {
     width: 100%;
     background: transparent;
@@ -60,9 +57,6 @@ body {
     height: auto;
     margin-left: 30px;
 }
-
-
-/* ---------- Menu ---------- */
 
 .menu {
     position: absolute;
@@ -102,6 +96,8 @@ body {
     background-position: center;
     z-index: 0;
 }
+
+
 /* =====================================================
    CONTAINER
 ===================================================== */
@@ -117,26 +113,13 @@ body {
 ===================================================== */
 
 .perfil-profissional {
-
     display: grid;
-
-    grid-template-columns: 430px 1fr;
-
-    min-height: 480px;
-
+    grid-template-columns: 400px 1fr;
+    min-height: 420px;
     overflow: hidden;
-
     border-radius: 22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(29, 29, 29, 0.98),
-            rgba(12, 12, 12, 0.98)
-        );
-
+    background: linear-gradient(145deg, rgba(29, 29, 29, 0.98), rgba(12, 12, 12, 0.98));
     border: 1px solid rgba(218, 174, 82, 0.38);
-
     box-shadow:
         0 25px 70px rgba(0, 0, 0, 0.55),
         0 0 45px rgba(218, 174, 82, 0.05);
@@ -149,51 +132,57 @@ body {
 
 .imagem-profissional {
     position: relative;
-
-    min-height: 480px;
-
+    min-height: 420px;
     overflow: hidden;
-
     background: #161616;
 }
 
-
 .imagem-profissional img {
-
     width: 100%;
     height: 100%;
-
     display: block;
-
     object-fit: cover;
-
     transition: transform 0.5s ease;
 }
-
 
 .imagem-profissional:hover img {
     transform: scale(1.03);
 }
 
-
-/* degradê sobre a foto */
-
 .imagem-profissional::after {
-
     content: "";
-
     position: absolute;
-
     inset: 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0.05),
-            rgba(0, 0, 0, 0.15)
-        );
-
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.15));
     pointer-events: none;
+}
+
+/* Sem foto: círculo dourado com a inicial */
+.foto-vazia {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 50% 45%, rgba(218, 174, 82, 0.16), transparent 62%),
+        #161616;
+}
+
+.foto-vazia-inicial {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(218, 174, 82, 0.55);
+    border-radius: 50%;
+    background: rgba(218, 174, 82, 0.06);
+    color: #d9ad52;
+    font-size: 64px;
+    font-weight: 300;
+    box-shadow: 0 0 40px rgba(218, 174, 82, 0.12);
 }
 
 
@@ -202,13 +191,9 @@ body {
 ===================================================== */
 
 .informacoes-profissional {
-
-    padding: 55px 50px;
-
+    padding: 50px 50px;
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
 }
 
@@ -218,23 +203,15 @@ body {
 ===================================================== */
 
 .informacoes-profissional h1 {
-
     font-size: 36px;
-
     line-height: 1.15;
-
     font-weight: 600;
-
     color: #fff;
-
     margin-bottom: 10px;
 }
 
-
 .informacoes-profissional h1 span {
-
     display: block;
-
     color: #d9ad52;
 }
 
@@ -244,14 +221,10 @@ body {
 ===================================================== */
 
 .profissao {
-
     font-size: 16px;
-
     font-weight: 400;
-
     color: #aaa;
-
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 }
 
 
@@ -260,38 +233,29 @@ body {
 ===================================================== */
 
 .avaliacao {
-
     display: flex;
-
     align-items: center;
-
     gap: 9px;
-
-    margin-bottom: 30px;
+    margin-bottom: 26px;
 }
 
-
 .avaliacao .estrela {
-
     color: #e3b957;
-
     font-size: 22px;
 }
 
-
 .avaliacao strong {
-
     color: #fff;
-
     font-size: 16px;
 }
 
-
 .avaliacao small {
-
     color: #777;
-
     font-size: 12px;
+}
+
+.avaliacao.sem-nota .estrela {
+    opacity: 0.3;
 }
 
 
@@ -300,61 +264,62 @@ body {
 ===================================================== */
 
 .dados {
-
     display: grid;
-
     grid-template-columns: 1fr 1fr;
-
     gap: 14px;
-
-    margin-bottom: 28px;
+    margin-bottom: 26px;
 }
 
+#dadoAreas,
+#dadoServicos,
+#dadoRegioes {
+    grid-column: 1 / -1;
+}
 
 .dado {
-
-    padding: 17px;
-
+    padding: 15px 17px;
     border-radius: 12px;
-
     border: 1px solid rgba(255, 255, 255, 0.08);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(40, 40, 40, 0.65),
-            rgba(20, 20, 20, 0.65)
-        );
-
+    background: linear-gradient(145deg, rgba(40, 40, 40, 0.65), rgba(20, 20, 20, 0.65));
     transition: 0.3s ease;
 }
 
-
 .dado:hover {
-
     border-color: rgba(218, 174, 82, 0.4);
-
     transform: translateY(-2px);
 }
 
-
 .dado h3 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #8f8f8f;
+    margin-bottom: 8px;
+}
 
-    font-size: 12px;
-
-    font-weight: 500;
-
-    color: #999;
-
-    margin-bottom: 6px;
+.dado p {
+    font-size: 14px;
+    color: #d9ad52;
 }
 
 
-.dado p {
+/* Etiquetas (áreas de atuação, serviços e regiões) */
 
-    font-size: 14px;
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
 
-    color: #d9ad52;
+.chip {
+    padding: 5px 13px;
+    border: 1px solid rgba(218, 174, 82, 0.4);
+    border-radius: 999px;
+    background: rgba(218, 174, 82, 0.07);
+    color: #e6c06a;
+    font-size: 12px;
+    line-height: 1.3;
 }
 
 
@@ -363,13 +328,9 @@ body {
 ===================================================== */
 
 .descricao {
-
     color: #aaa;
-
     font-size: 13px;
-
     line-height: 1.8;
-
     max-width: 620px;
 }
 
@@ -379,13 +340,9 @@ body {
 ===================================================== */
 
 .informacoes {
-
     display: grid;
-
     grid-template-columns: 1.35fr 0.85fr;
-
     gap: 18px;
-
     margin-top: 18px;
 }
 
@@ -395,58 +352,36 @@ body {
 ===================================================== */
 
 .card-avaliacoes {
-    padding: 30px 40px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(24, 24, 24, 0.98),
-            rgba(10, 10, 10, 0.98)
-        );
-
-    border: 1px solid rgba(218, 174, 82, 0.35);
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.35);
-
     position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px;
+    background: linear-gradient(145deg, rgba(24, 24, 24, 0.98), rgba(10, 10, 10, 0.98));
+    border: 1px solid rgba(218, 174, 82, 0.35);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 }
-
-
-/* =========================================================
-   TÍTULO
-========================================================= */
 
 .titulo-avaliacao {
     display: flex;
     align-items: center;
     gap: 14px;
-
     margin-bottom: 15px;
 }
 
 .icone-avaliacao {
     width: 5px;
     height: 30px;
-
     display: block;
-
     background: #dfb454;
-
     border-radius: 5px;
-
     color: transparent;
-
     box-shadow: 0 0 10px rgba(223, 180, 84, 0.25);
 }
 
 .titulo-avaliacao h2 {
     margin: 0 !important;
-
     color: #fff;
-
     font-size: 22px;
     font-weight: 700;
 }
@@ -456,23 +391,18 @@ body {
 }
 
 
-/* =========================================================
-   NOTA GERAL
-========================================================= */
+/* ---------- Nota geral ---------- */
 
 .nota-geral {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-
     gap: 12px;
-
-    margin-bottom: 24px;
+    margin-bottom: 22px;
 }
 
 .nota-geral strong {
     color: #fff;
-
     font-size: 31px;
     font-weight: 500;
 }
@@ -484,144 +414,154 @@ body {
 
 .nota-geral .estrelas span {
     color: #dfb454;
-
     font-size: 18px;
-
     line-height: 1;
 }
 
 .nota-geral small {
     color: #777;
-
     font-size: 12px;
 }
 
+.nota-geral .estrelas span.vazia,
+.estrelas-comentario span.vazia {
+    opacity: 0.25;
+}
 
-/* =========================================================
-   COMENTÁRIO DE DESTAQUE
-========================================================= */
+
+/* ---------- Lista de avaliações ---------- */
+
+#listaAvaliacoes {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 14px;
+}
 
 .comentario-destaque {
     padding: 18px 20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.035),
-            rgba(255, 255, 255, 0.012)
-        );
-
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012));
     border: 1px solid rgba(255, 255, 255, 0.10);
-
     border-radius: 15px;
-
     transition: 0.3s ease;
 }
 
 .comentario-destaque:hover {
     border-color: rgba(218, 174, 82, 0.35);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(218, 174, 82, 0.06),
-            rgba(255, 255, 255, 0.015)
-        );
+    background: linear-gradient(145deg, rgba(218, 174, 82, 0.06), rgba(255, 255, 255, 0.015));
 }
-
-
-/* =========================================================
-   CLIENTE
-========================================================= */
 
 .cliente {
     display: flex;
     align-items: center;
-
     gap: 14px;
-
     margin-bottom: 10px;
 }
 
-.cliente img {
+.cliente img,
+.avatar-inicial {
     width: 48px;
     height: 48px;
-
-    object-fit: cover;
-
+    min-width: 48px;
     border-radius: 50%;
-
     border: 1px solid #dfb454;
-
     background: #222;
+}
+
+.cliente img {
+    object-fit: cover;
+}
+
+.avatar-inicial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #dfb454;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .cliente-info {
     display: flex;
     flex-direction: column;
-
     gap: 4px;
 }
 
 .cliente-info h4 {
     margin: 0;
-
     color: #fff;
-
     font-size: 14px;
     font-weight: 600;
 }
 
 .cliente-info span {
     color: #777;
-
     font-size: 11px;
 }
-
-
-/* =========================================================
-   ESTRELAS DO COMENTÁRIO
-========================================================= */
 
 .estrelas-comentario {
     display: flex;
     gap: 4px;
-
     margin-bottom: 10px;
 }
 
 .estrelas-comentario span {
     color: #dfb454;
-
     font-size: 16px;
-
     line-height: 1;
 }
 
-
-/* =========================================================
-   TEXTO DO COMENTÁRIO
-========================================================= */
-
 .texto-comentario {
     margin: 0;
-
     color: #b7b7b7;
-
     font-size: 12px;
-
     line-height: 1.7;
 }
 
 
-/* =========================================================
-   BOTÃO VER AVALIAÇÕES
-========================================================= */
+/* ---------- Sem avaliações ---------- */
+
+.sem-avaliacoes {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 180px;
+    padding: 32px 20px;
+    text-align: center;
+    border: 1px dashed rgba(218, 174, 82, 0.28);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.015);
+}
+
+.sem-avaliacoes-icone {
+    color: #dfb454;
+    font-size: 30px;
+    line-height: 1;
+    opacity: 0.45;
+}
+
+.sem-avaliacoes h4 {
+    margin: 0;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.sem-avaliacoes p {
+    margin: 0;
+    color: #888;
+    font-size: 12px;
+}
+
+
+/* ---------- Botão ver avaliações (também usado na tela de erro) ---------- */
 
 .container-btn-avaliacoes {
     display: flex;
     align-items: center;
-
     margin-top: 25px;
 }
 
@@ -629,42 +569,28 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     gap: 12px;
-
     padding: 13px 25px;
-
     background: transparent;
-
     border: 1px solid #d4a943;
-
     border-radius: 12px;
-
     color: #dfb454;
-
     text-decoration: none;
-
     font-size: 13px;
     font-weight: 500;
-
     transition: 0.3s ease;
 }
 
 .ver-avaliacoes span {
     font-size: 17px;
-
     transition: 0.3s ease;
 }
 
 .ver-avaliacoes:hover {
     color: #111;
-
     background: #dfb454;
-
     transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 25px rgba(218, 174, 82, 0.20);
+    box-shadow: 0 8px 25px rgba(218, 174, 82, 0.20);
 }
 
 .ver-avaliacoes:hover span {
@@ -677,297 +603,145 @@ body {
 ===================================================== */
 
 .card-orcamento {
-
     padding: 32px;
-
     border-radius: 18px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(35, 30, 21, 0.98),
-            rgba(15, 15, 15, 0.98)
-        );
-
+    background: linear-gradient(145deg, rgba(35, 30, 21, 0.98), rgba(15, 15, 15, 0.98));
     border: 1px solid rgba(218, 174, 82, 0.30);
 }
 
-
-/* descrição */
+.card-orcamento h2 {
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+}
 
 .texto-orcamento {
-
-    color: #aaa;
-
-    font-size: 13px;
-
-    line-height: 1.7;
-
-    margin-bottom: 25px;
-}
-
-
-/* formas pagamento */
-
-.card-orcamento h3 {
-
-    font-size: 13px;
-
-    font-weight: 500;
-
-    color: #fff;
-
     margin-bottom: 8px;
-}
-
-
-.card-orcamento > p:last-of-type {
-
-    color: #d0a94f;
-
-    font-size: 12px;
-
-    margin-bottom: 25px;
-}
-
-
-/* =====================================================
-   BOTÃO SOLICITAR
-===================================================== */
-
-.card-orcamento button {
-
-    width: 100%;
-
-    padding: 14px 20px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f1cc79,
-            #c99537
-        );
-
-    color: #151515;
-
-    font-family: inherit;
-
+    color: #aaa;
     font-size: 13px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: 0.3s ease;
-
-    box-shadow:
-        0 8px 25px rgba(218, 174, 82, 0.15);
+    line-height: 1.7;
 }
-
-
-.card-orcamento button::after {
-
-    content: " →";
-
-    font-size: 16px;
-}
-
-
-.card-orcamento button:hover {
-
-    transform: translateY(-2px);
-
-    filter: brightness(1.08);
-
-    box-shadow:
-        0 12px 30px rgba(218, 174, 82, 0.28);
-}
-/* =========================================================
-   INFORMAÇÕES EXTRAS DO ORÇAMENTO
-========================================================= */
 
 .info-orcamento {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-
-    margin: 25px 0;
+    gap: 12px;
+    margin: 20px 0 26px;
 }
-
-
-/* ITEM */
 
 .item-orcamento {
     display: flex;
     align-items: center;
-
     gap: 14px;
-
     padding: 13px 14px;
-
     border: 1px solid rgba(255, 255, 255, 0.07);
-
     border-radius: 12px;
-
     background: rgba(255, 255, 255, 0.025);
-
     transition: 0.3s ease;
 }
 
 .item-orcamento:hover {
     border-color: rgba(218, 174, 82, 0.30);
-
     background: rgba(218, 174, 82, 0.035);
 }
 
-
-/* ÍCONE */
-
 .item-orcamento .icone {
-    width: 38px;
-    height: 38px;
-
-    min-width: 38px;
-
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-
     border-radius: 50%;
-
     border: 1px solid rgba(218, 174, 82, 0.55);
-
     color: #dfb454;
-
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
-
     background: rgba(218, 174, 82, 0.05);
 }
 
-
-/* TEXTO */
-
 .item-orcamento h4 {
     margin: 0 0 4px;
-
     color: #fff;
-
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
 }
 
 .item-orcamento p {
     margin: 0;
-
-    color: #888;
-
-    font-size: 11px;
+    color: #a0a0a0;
+    font-size: 12px;
+    line-height: 1.4;
 }
 
 .item-orcamento strong {
     color: #dfb454;
-
     font-weight: 500;
 }
 
 
-/* =========================================================
-   PAGAMENTO
-========================================================= */
-
-.pagamento-orcamento {
-    padding-top: 20px;
-
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
-
-    margin-bottom: 25px;
-}
-
-.pagamento-orcamento h3 {
-    margin: 0 0 7px;
-
-    color: #fff;
-
-    font-size: 13px;
-}
-
-.pagamento-orcamento p {
-    margin: 0;
-
-    color: #dfb454;
-
-    font-size: 12px;
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   BOTÃO
-========================================================= */
+/* =====================================================
+   BOTÃO SOLICITAR ORÇAMENTO
+===================================================== */
 
 .btn-orcamento {
     width: 100%;
-
     min-height: 52px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     gap: 12px;
-
     border: none;
-
     border-radius: 11px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f0c76a,
-            #d39f32
-        );
-
+    background: linear-gradient(135deg, #f0c76a, #d39f32);
     color: #111;
-
+    font-family: inherit;
     font-size: 13px;
     font-weight: 600;
-
     cursor: pointer;
-
     transition: 0.3s ease;
-
-    box-shadow:
-        0 10px 28px rgba(218, 174, 82, 0.18);
+    box-shadow: 0 10px 28px rgba(218, 174, 82, 0.18);
 }
 
-.btn-orcamento span {
+.btn-orcamento::after {
+    content: "→";
     font-size: 18px;
-
     transition: 0.3s ease;
 }
 
 .btn-orcamento:hover {
     transform: translateY(-2px);
-
-    background:
-        linear-gradient(
-            135deg,
-            #f5d17d,
-            #e0ad43
-        );
-
-    box-shadow:
-        0 14px 35px rgba(218, 174, 82, 0.28);
+    background: linear-gradient(135deg, #f5d17d, #e0ad43);
+    box-shadow: 0 14px 35px rgba(218, 174, 82, 0.28);
 }
 
-.btn-orcamento:hover span {
+.btn-orcamento:hover::after {
     transform: translateX(5px);
 }
+
+
+/* =====================================================
+   PROFISSIONAL NÃO ENCONTRADO
+===================================================== */
+
+.pagina-erro {
+    padding: 140px 20px;
+    text-align: center;
+}
+
+.pagina-erro h1 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.pagina-erro p {
+    margin: 12px 0 24px;
+    color: #aaa;
+    font-size: 14px;
+}
+
 
 /* ================================================= */
 /* Rodapé */
@@ -1001,4 +775,54 @@ body {
 
 .rodape a:hover {
     color: #e2c07b;
+}
+
+
+/* =====================================================
+   TELAS MENORES
+===================================================== */
+
+@media (max-width: 900px) {
+    .perfil-profissional {
+        grid-template-columns: 1fr;
+    }
+
+    .imagem-profissional,
+    .foto-vazia {
+        min-height: 280px;
+    }
+
+    .informacoes-profissional {
+        padding: 34px 26px;
+    }
+
+    .informacoes {
+        grid-template-columns: 1fr;
+    }
+
+    .card-avaliacoes {
+        padding: 26px 24px;
+    }
+
+    .menu {
+        gap: 4px;
+    }
+
+    .menu a {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 560px) {
+    .dados {
+        grid-template-columns: 1fr;
+    }
+
+    .informacoes-profissional h1 {
+        font-size: 30px;
+    }
+
+    .card-orcamento {
+        padding: 26px 22px;
+    }
 }

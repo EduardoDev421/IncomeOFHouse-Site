@@ -41,9 +41,12 @@
                         <span id="dpSemImagem">Sem imagem da planta</span>
                     </figure>
                     <div class="dp-resumo">
-                        <div class="dp-selos">
-                            <span id="dpStatus" class="dp-status"></span>
-                            <span id="dpTipo" class="dp-tipo" hidden></span>
+                        <div class="dp-linha-topo">
+                            <div class="dp-selos">
+                                <span id="dpStatus" class="dp-status"></span>
+                                <span id="dpTipo" class="dp-tipo" hidden></span>
+                            </div>
+                            <a class="dp-voltar" href="./Projetos.html">&larr; Voltar para projetos</a>
                         </div>
                         <h1 id="dpTitulo"></h1>
                         <p id="dpDescricao" class="dp-descricao"></p>
@@ -51,7 +54,7 @@
                         <ul id="dpInfo" class="dp-info"></ul>
                         <div class="dp-acoes">
                             <a id="btnEditar" class="btn-ouro dp-botao" href="#">Editar planta</a>
-                            <a class="btn-link dp-botao" href="./Projetos.html">Voltar para projetos</a>
+                            <button type="button" id="btnApagar" class="btn-perigo dp-botao">Apagar planta</button>
                         </div>
                     </div>
                 </section>
@@ -105,8 +108,9 @@
 
     <script src="../js/Modais/LegalModais.js"></script>
     <script type="module" src="../js/DetalheProjeto.js"></script>
+    <script type="module" src="../js/Iconeperfil.js"></script>
     <script src="../js/Idioma.js"></script>
     <script src="../js/mensagensErros.js"></script>
 </body>
 
-</html>
+</html>ww

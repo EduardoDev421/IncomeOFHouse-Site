@@ -1,691 +1,88 @@
-/* =========================================================
-    STATUS DO PAGAMENTO - serve para as 3 páginas
-
-        PagamentoAprovado.html  ->  <section class="CardStatus status-aprovado">
-        PagamentoPendente.html  ->  <section class="CardStatus status-pendente">
-        PagamentoRecusado.html  ->  <section class="CardStatus status-recusado">
-
-    A cor do selo, das linhas e do destaque do título muda sozinha
-    conforme a classe status-... do card (verde, amarelo ou vermelho).
-
-    As cores padrão ficam em :where() (especificidade zero): se o
-    Tema.css definir a mesma variável, ele vence; se não carregar,
-    estas cores garantem o visual.
-    ========================================================= */
-
-    /* ================================================= */
-    /* CORES */
-
-    :where(:root) {
-        --fundo-pagina: #0a0a0a;
-        --veu-topo: rgba(0, 0, 0, 0.80);
-        --veu-base: rgba(0, 0, 0, 0.93);
-
-        --topo: rgba(10, 10, 10, 0.94);
-        --topo-borda: rgba(200, 158, 38, 0.75);
-
-        --item: #171717;
-        --card: #121212;
-        --borda: #2c2c2c;
-        --borda-item: #232323;
-        --sombra: rgba(0, 0, 0, 0.5);
-        --hover-suave: rgba(255, 255, 255, 0.06);
-        --ativo-bg: rgba(200, 158, 38, 0.12);
-        --ativo-borda: rgba(200, 158, 38, 0.45);
-
-        --texto: #ffffff;
-        --texto-titulo: #ffffff;
-        --texto-menu: #e8e8e8;
-        --texto-sub: #b8b8b8;
-        --texto-suave: #a9a9a9;
-
-        --ouro: #d4a82e;
-        --ouro-vivo: #efc23f;
-
-        --verde: #2fd45f;
-        --amarelo: #f2b632;
-        --vermelho: #f0524a;
-    }
-
-    :where([data-tema="claro"], [data-theme="light"], .claro, .tema-claro) {
-        --fundo-pagina: #f4f4f1;
-        --veu-topo: rgba(255, 255, 255, 0.88);
-        --veu-base: rgba(255, 255, 255, 0.95);
-
-        --topo: rgba(255, 255, 255, 0.95);
-        --topo-borda: rgba(200, 158, 38, 0.8);
-
-        --item: #f6f6f2;
-        --card: #ffffff;
-        --borda: #dcdcd5;
-        --borda-item: #e8e8e2;
-        --sombra: rgba(0, 0, 0, 0.08);
-        --hover-suave: rgba(0, 0, 0, 0.04);
-        --ativo-bg: rgba(200, 158, 38, 0.14);
-        --ativo-borda: rgba(200, 158, 38, 0.55);
-
-        --texto: #141414;
-        --texto-titulo: #141414;
-        --texto-menu: #2a2a2a;
-        --texto-sub: #5c5c5c;
-        --texto-suave: #6b6b6b;
-
-        --ouro: #a97f12;
-        --ouro-vivo: #b98a10;
-
-        --verde: #1f9d3a;
-        --amarelo: #b98a10;
-        --vermelho: #d63a32;
-    }
-
-    /* Cor do status: é só trocar a classe do card */
-
-    .status-aprovado {
-        --cor-status: var(--verde);
-        --cor-status-rgb: 47, 212, 95;
-        --traco-icone: 3.2;
-    }
-
-    .status-pendente {
-        --cor-status: var(--amarelo);
-        --cor-status-rgb: 242, 182, 50;
-        --traco-icone: 3.4;
-    }
-
-    .status-recusado {
-        --cor-status: var(--vermelho);
-        --cor-status-rgb: 240, 82, 74;
-        --traco-icone: 3;
-    }
-
-    /* ================================================= */
-    /* BASE */
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        width: 100%;
-        min-height: 100vh;
-        font-family: Arial, Helvetica, sans-serif;
-        background: var(--fundo-pagina);
-        color: var(--texto-menu);
-    }
-
-    /* ================================================= */
-    /* CABEÇALHO (fixo) */
-
-    .topo {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        z-index: 20;
-        height: 64px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 3%;
-        background: var(--topo);
-        border-bottom: 1px solid var(--topo-borda);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-    }
-
-    .logo {
-        display: flex;
-        align-items: center;
-    }
-
-    .logo a {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-    }
-
-    .logo img {
-        width: 58px;
-        height: auto;
-        object-fit: contain;
-    }
-
-    .menu {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .menu a {
-        color: var(--texto-menu);
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-        padding: 10px 18px;
-        border-radius: 7px;
-        transition: 0.3s ease;
-    }
-
-    .menu a:hover {
-        background: var(--hover-suave);
-        color: var(--ouro);
-    }
-
-    .menu a.ativo {
-        color: var(--ouro);
-        border: 1px solid var(--ativo-borda);
-        background: var(--ativo-bg);
-    }
-
-    /* Carrinho e perfil (opcionais: só aparecem se o HTML tiver .acoes-topo) */
-
-    .acoes-topo {
-        display: flex;
-        align-items: center;
-        gap: 22px;
-    }
-
-    .carrinho,
-    .iconelogin {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--texto-menu);
-        text-decoration: none;
-        transition: 0.25s ease;
-    }
-
-    .carrinho:hover,
-    .iconelogin:hover {
-        color: var(--ouro);
-    }
-
-    .carrinho svg {
-        width: 26px;
-        height: 26px;
-    }
-
-    .iconelogin {
-        width: 38px;
-        height: 38px;
-        border: 1px solid var(--borda);
-        border-radius: 50%;
-        background: var(--item);
-    }
-
-    .iconelogin svg {
-        width: 20px;
-        height: 20px;
-    }
-
-    .carrinho svg,
-    .iconelogin svg {
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 1.8;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-
-    .carrinho-qtd {
-        position: absolute;
-        top: -9px;
-        right: -10px;
-        min-width: 18px;
-        height: 18px;
-        padding: 0 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #c89e26, #efd04f);
-        color: #1a1405;
-        border-radius: 9px;
-        font-size: 11px;
-        font-weight: 700;
-    }
-
-    /* ================================================= */
-    /* FUNDO (card centralizado na tela) */
-
-    .BackGround {
-        width: 100%;
-        min-height: 100vh;
-        padding: 64px 20px 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background:
-            linear-gradient(var(--veu-topo), var(--veu-base)),
-            url("../../img/BackgroundFundo.png");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
-
-    /* ================================================= */
-    /* CARD */
-
-    .CardStatus {
-        width: 100%;
-        max-width: 940px;
-        margin: 24px 0;
-        padding: 30px 26px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        background: var(--card);
-        border: 1px solid var(--borda);
-        border-radius: 14px;
-        box-shadow: 0 10px 30px var(--sombra);
-    }
-
-    /* Selo com linhas laterais */
-
-    .SeloStatus {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .SeloStatus .linha {
-        flex: 1;
-        max-width: 300px;
-        height: 2px;
-    }
-
-    .SeloStatus .linha:first-child {
-        background: linear-gradient(90deg, transparent, var(--cor-status));
-    }
-
-    .SeloStatus .linha:last-child {
-        background: linear-gradient(270deg, transparent, var(--cor-status));
-    }
-
-    .CirculoStatus {
-        width: 116px;
-        height: 116px;
-        margin: 0 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        border: 4px solid var(--cor-status);
-        border-radius: 50%;
-        box-shadow:
-            0 0 28px rgba(var(--cor-status-rgb), 0.35),
-            inset 0 0 18px rgba(var(--cor-status-rgb), 0.12);
-    }
-
-    .CirculoStatus svg {
-        width: 62px;
-        height: 62px;
-        fill: none;
-        stroke: var(--cor-status);
-        stroke-width: var(--traco-icone);
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-
-    /* Título e mensagem */
-
-    .CardStatus h1 {
-        margin-top: 18px;
-        color: var(--texto);
-        font-size: 44px;
-        font-weight: 700;
-        line-height: 1.1;
-    }
-
-    .CardStatus h1 span {
-        color: var(--cor-status);
-    }
-
-    .MensagemStatus {
-        margin-top: 14px;
-        color: var(--texto-sub);
-        font-size: 18px;
-        line-height: 1.55;
-    }
-
-    /* ================================================= */
-    /* CAIXAS DE INFORMAÇÃO (aviso, detalhes do pedido, comprovante) */
-
-    .AvisoStatus,
-    .DetalhesPedido,
-    .Comprovante {
-        width: 100%;
-        margin-top: 16px;
-        display: flex;
-        gap: 18px;
-        text-align: left;
-        background: var(--item);
-        border: 1px solid var(--borda-item);
-        border-radius: 10px;
-    }
-
-    .MensagemStatus + .AvisoStatus,
-    .MensagemStatus + .DetalhesPedido,
-    .MensagemStatus + .Comprovante {
-        margin-top: 24px;
-    }
-
-    /* Aviso (pendente e recusado) */
-
-    .AvisoStatus {
-        padding: 16px 24px;
-        align-items: center;
-    }
-
-    .AvisoStatus svg {
-        width: 32px;
-        height: 32px;
-        flex-shrink: 0;
-        fill: none;
-        stroke: var(--cor-status);
-        stroke-width: 1.8;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-
-    .AvisoStatus p {
-        color: var(--texto-titulo);
-        font-size: 16px;
-        line-height: 1.4;
-    }
-
-    /* Detalhes do pedido (pendente e recusado) */
-
-    .DetalhesPedido {
-        padding: 14px 24px 16px;
-        align-items: flex-start;
-    }
-
-    .DetalhesConteudo {
-        flex: 1;
-        min-width: 0;
-    }
-
-    .DetalhesConteudo h3 {
-        padding-bottom: 8px;
-        color: var(--texto-titulo);
-        font-size: 17px;
-        font-weight: 600;
-        border-bottom: 1px solid var(--borda-item);
-    }
-
-    .DetalhesLinha {
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-    }
-
-    .DetalhesLinha span {
-        color: var(--texto-sub);
-        font-size: 17px;
-        overflow-wrap: anywhere;
-    }
-
-    .DetalhesLinha strong {
-        color: var(--texto-titulo);
-        font-size: 20px;
-        font-weight: 700;
-        white-space: nowrap;
-    }
-
-    /* Comprovante (aprovado) */
-
-    .Comprovante {
-        padding: 16px 24px;
-        align-items: center;
-    }
-
-    .ComprovanteText {
-        flex: 1;
-        min-width: 0;
-    }
-
-    .ComprovanteText h3 {
-        margin-bottom: 5px;
-        color: var(--texto-titulo);
-        font-size: 17px;
-        font-weight: 600;
-    }
-
-    .ComprovanteText p {
-        color: var(--texto-suave);
-        font-size: 14px;
-        line-height: 1.4;
-    }
-
-    /* Ícone dourado das caixas (documento) */
-
-    .IconeDetalhes,
-    .IconeComprovante {
-        width: 40px;
-        height: 40px;
-        flex-shrink: 0;
-        fill: none;
-        stroke: var(--ouro);
-        stroke-width: 1.8;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-
-    .DetalhesPedido .IconeDetalhes {
-        width: 34px;
-        height: 34px;
-    }
-
-    /* ================================================= */
-    /* BOTÕES */
-
-    .BotaoPrincipal {
-        margin-top: 24px;
-        width: 100%;
-        max-width: 492px;
-        height: 64px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        color: #1a1405;
-        background: linear-gradient(135deg, #c89e26, #efd04f);
-        border: none;
-        border-radius: 8px;
-        text-decoration: none;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 18px;
-        font-weight: 700;
-        cursor: pointer;
-        box-shadow: 0 6px 18px var(--sombra);
-        transition: transform 0.2s ease, filter 0.2s ease;
-    }
-
-    .BotaoPrincipal:hover {
-        filter: brightness(1.08);
-        transform: translateY(-1px);
-    }
-
-    .BotaoPrincipal:disabled {
-        opacity: 0.7;
-        cursor: wait;
-        transform: none;
-    }
-
-    .BotaoPrincipal svg {
-        width: 24px;
-        height: 24px;
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 2.4;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-
-    .BotaoPrincipal svg .preenchido {
-        fill: currentColor;
-        stroke-width: 1;
-    }
-
-    /* Ícone girando enquanto verifica o status (pendente) */
-
-    .BotaoPrincipal.verificando svg {
-        animation: girar 0.9s linear infinite;
-    }
-
-    @keyframes girar {
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .BotaoPrincipal.verificando svg {
-            animation: none;
-        }
-    }
-
-    /* Botão com contorno (baixar comprovante) */
-
-    .BotaoSecundario {
-        display: inline-flex;
-        align-items: center;
-        gap: 9px;
-        height: 46px;
-        padding: 0 20px;
-        flex-shrink: 0;
-        color: var(--ouro);
-        background: transparent;
-        border: 1px solid var(--ouro);
-        border-radius: 8px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: 0.2s ease;
-    }
-
-    .BotaoSecundario:hover {
-        color: #1a1405;
-        background: linear-gradient(135deg, #c89e26, #efd04f);
-        border-color: transparent;
-    }
-
-    .BotaoSecundario svg {
-        width: 18px;
-        height: 18px;
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 2.4;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-
-    /* Link simples (voltar para o início) */
-
-    .LinkVoltar {
-        margin-top: 16px;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--texto-menu);
-        text-decoration: none;
-        font-size: 16px;
-        transition: color 0.2s ease;
-    }
-
-    .LinkVoltar:hover {
-        color: var(--ouro);
-    }
-
-    .LinkVoltar svg {
-        width: 20px;
-        height: 20px;
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 2;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-
-    .BotaoPrincipal:focus-visible,
-    .BotaoSecundario:focus-visible,
-    .LinkVoltar:focus-visible {
-        outline: 2px solid var(--ouro-vivo);
-        outline-offset: 3px;
-    }
-
-    /* ================================================= */
-    /* RESPONSIVIDADE */
-
-    @media (max-width: 850px) {
-
-        .menu {
-            display: none;
-        }
-
-        .CardStatus h1 {
-            font-size: 34px;
-        }
-
-    }
-
-    @media (max-width: 600px) {
-
-        .CardStatus {
-            padding: 24px 16px;
-        }
-
-        .CirculoStatus {
-            width: 94px;
-            height: 94px;
-        }
-
-        .CirculoStatus svg {
-            width: 50px;
-            height: 50px;
-        }
-
-        .CardStatus h1 {
-            font-size: 28px;
-        }
-
-        .MensagemStatus {
-            font-size: 15px;
-        }
-
-        .AvisoStatus,
-        .DetalhesPedido,
-        .Comprovante {
-            padding: 14px 16px;
-        }
-
-        .AvisoStatus p,
-        .DetalhesLinha span {
-            font-size: 14px;
-        }
-
-        .Comprovante {
-            flex-wrap: wrap;
-        }
-
-        .BotaoSecundario {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .BotaoPrincipal {
-            font-size: 16px;
-        }
-
-    }
+/* Pop-up de status do pagamento (StatusPagamento.js): pendente e recusado.
+   Se você já tem um CSS com .sm-overlay / .sm-card, use o seu e ignore este. */
+
+body.sm-aberto { overflow: hidden; }
+
+.sm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, .75);
+}
+.sm-overlay[hidden] { display: none; }
+
+.sm-card {
+    --sm-cor: #d4a63a;                 /* pendente */
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    max-height: 92vh;
+    overflow-y: auto;
+    padding: 28px 24px;
+    border-radius: 14px;
+    border: 1px solid rgba(212, 166, 58, .35);
+    background: #141414;
+    color: #f5f5f5;
+    text-align: center;
+    font-family: inherit;
+    outline: none;
+}
+.sm-card.sm-recusado { --sm-cor: #e5584f; }
+
+.sm-card svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.sm-fechar {
+    position: absolute; top: 12px; right: 12px;
+    width: 32px; height: 32px; padding: 6px;
+    border: 0; border-radius: 8px; background: transparent; color: inherit; cursor: pointer;
+}
+.sm-fechar[hidden] { display: none; }
+
+.sm-selo { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 14px; }
+.sm-linha { flex: 1; height: 1px; background: var(--sm-cor); opacity: .5; }
+.sm-circulo {
+    width: 64px; height: 64px; padding: 16px;
+    border-radius: 50%; border: 2px solid var(--sm-cor); color: var(--sm-cor);
+}
+
+.sm-titulo { margin: 0 0 8px; font-size: 1.5rem; }
+.sm-titulo span { color: var(--sm-cor); }
+.sm-mensagem { margin: 0 0 16px; opacity: .85; line-height: 1.5; }
+
+.sm-aviso {
+    display: flex; align-items: center; gap: 10px; text-align: left;
+    margin-bottom: 14px; padding: 10px 12px; border-radius: 10px;
+    border: 1px solid var(--sm-cor); font-size: .85rem;
+}
+.sm-aviso svg { flex: 0 0 20px; width: 20px; height: 20px; color: var(--sm-cor); }
+.sm-aviso p { margin: 0; }
+
+.sm-detalhes {
+    display: flex; align-items: center; gap: 12px; text-align: left;
+    margin-bottom: 16px; padding: 12px; border-radius: 10px; background: #1d1d1d;
+}
+.sm-detalhes > svg { flex: 0 0 24px; width: 24px; height: 24px; color: var(--sm-cor); }
+.sm-detalhes-corpo { flex: 1; min-width: 0; }
+.sm-detalhes-corpo h3 { margin: 0 0 4px; font-size: .9rem; }
+.sm-detalhe-linha { display: flex; justify-content: space-between; gap: 8px; font-size: .9rem; }
+
+.sm-principal {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 12px; border: 0; border-radius: 10px;
+    background: var(--sm-cor); color: #111; font-weight: 700; font-size: 1rem; cursor: pointer;
+}
+.sm-principal svg { width: 18px; height: 18px; }
+.sm-principal:disabled { opacity: .65; cursor: default; }
+.sm-principal.sm-verificando svg { animation: sm-girar 1s linear infinite; }
+
+.sm-voltar {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+    color: inherit; opacity: .8; text-decoration: none; font-size: .9rem;
+}
+.sm-voltar svg { width: 16px; height: 16px; }
+
+@keyframes sm-girar { to { transform: rotate(360deg); } }

@@ -6,10 +6,11 @@
     <meta name="description" content="IncomeofHouses - Dados da Empresa">
     <link rel="stylesheet" href="../../css/PagesImplement/DadosEmpresa.css">
     <link rel="stylesheet" href="../../css/Modais/LegalModal.css">
+    <script src="../../js/conta.js"></script>
     <title>Dados da Empresa | Income Of Houses</title>
 </head>
 
-<body>
+<body data-conta="profissional">
     <header class="topo">
         <a class="logo" href="../../index.html">
             <img src="../../img/Logo.png" alt="Income of Houses">
@@ -24,14 +25,15 @@
 
     <main class="BackGround">
         <section class="container">
-            <!-- Menu lateral -->
+            <!-- Menu lateral (profissional) -->
             <aside class="menu-lateral">
                 <ul>
                     <li><a href="../PerfilProfissional.html"><img src="../../img/icones/IconePerfil.svg" alt=""><span>Meu Perfil</span></a></li>
                     <li><a href="../MeusEndereços.html"><img src="../../img/icones/IconeEndereco.svg" alt=""><span>Meus Endereços</span></a></li>
-                    <li><a href="../MeusPedidos.html"><img src="../../img/icones/IconeProjetos.svg" alt=""><span>Meus Pedidos</span></a></li>
-                    <li><a href="../MeusProfissionais.html"><img src="../../img/icones/IconeEstrela.svg" alt=""><span>Meus Profissionais Favoritos</span></a></li>
-                    <li><a href="../ProjetosSalvos.html"><img src="../../img/icones/IconeSalvos.svg" alt=""><span>Projetos Salvos</span></a></li>
+                    <li><a href="../MeuPortfolio.html"><img src="../../img/icones/iconePortfolio.svg" alt=""><span>Meu Portfolio</span></a></li>
+                    <li><a href="../publicarPlanta.html"><img src="../../img/icones/IconePublicarPlantas.svg" alt=""><span>Publicar Plantas</span></a></li>
+                    <li><a href="../Projetos.html"><img src="../../img/icones/IconeProjetos.svg" alt=""><span>Projetos</span></a></li>
+                    <li><a href="../Avaliações.html"><img src="../../img/icones/IconeEstrela.svg" alt=""><span>Avaliações</span></a></li>
                     <li><a href="../Agendamentos.html"><img src="../../img/icones/IconeData.svg" alt=""><span>Agendamentos</span></a></li>
                     <li><a href="../Mensagem.html"><img src="../../img/icones/IconeMensagem.svg" alt=""><span>Mensagem</span></a></li>
                     <li class="ativo"><a href="../ConfiguraçõesProfissionais.html"><img src="../../img/icones/IconeConfiguracao.svg" alt=""><span>Configurações</span></a></li>
@@ -60,32 +62,41 @@
                         <div class="form-grid">
                             <div class="campo">
                                 <label>Nome da empresa <b>*</b></label>
-                                <div class="input-box"><img src="../../img/icones/IconeEmpresa.svg" alt=""><input type="text" value="Income Of Houses"></div>
+                                <div class="input-box"><img src="../../img/icones/IconeEmpresa.svg" alt=""><input type="text" placeholder="Ex.: Silva Construções Ltda."></div>
                             </div>
-
                             <div class="campo">
                                 <label>CNPJ <b>*</b></label>
-                                <div class="input-box"><img src="../../img/icones/IconeCPF.svg" alt=""><input type="text" value="12.345.678/0001-90"></div>
+                                <div class="input-box"><img src="../../img/icones/IconeCPF.svg" alt=""><input type="text" placeholder="00.000.000/0000-00"></div>
                             </div>
-
                             <div class="campo">
                                 <label>Tipo de empresa <b>*</b></label>
                                 <select>
-                                    <option>Construtora</option>
-                                    <option>Imobiliária</option>
-                                    <option>Arquitetura</option>
-                                    <option>Engenharia</option>
+                                    <option value="">Selecione o tipo de empresa</option>
+                                    <option value="Construtora">Construtora</option>
+                                    <option value="Incorporadora">Incorporadora</option>
+                                    <option value="Imobiliária">Imobiliária</option>
+                                    <option value="Arquitetura">Arquitetura</option>
+                                    <option value="Engenharia Civil">Engenharia Civil</option>
+                                    <option value="Engenharia Elétrica">Engenharia Elétrica</option>
+                                    <option value="Engenharia Estrutural">Engenharia Estrutural</option>
+                                    <option value="Design de Interiores">Design de Interiores</option>
+                                    <option value="Paisagismo">Paisagismo</option>
+                                    <option value="Urbanismo">Urbanismo</option>
+                                    <option value="Topografia">Topografia</option>
+                                    <option value="Reformas e Manutenção">Reformas e Manutenção</option>
+                                    <option value="Marcenaria e Móveis Planejados">Marcenaria e Móveis Planejados</option>
+                                    <option value="Gestão de Obras">Gestão de Obras</option>
+                                    <option value="Consultoria e Projetos">Consultoria e Projetos</option>
+                                    <option value="Outros">Outros</option>
                                 </select>
                             </div>
-
                             <div class="campo">
                                 <label>Telefone <b>*</b></label>
-                                <div class="input-box"><img src="../../img/icones/IconeTelefone.svg" alt=""><input type="text" value="(11) 98765-4321"></div>
+                                <div class="input-box"><img src="../../img/icones/IconeTelefone.svg" alt=""><input type="text" placeholder="(00) 00000-0000"></div>
                             </div>
-
                             <div class="campo campo-completo">
                                 <label>E-mail corporativo <b>*</b></label>
-                                <div class="input-box"><img src="../../img/icones/IconeEmail.svg" alt=""><input type="email" value="contato@incomeofhouses.com"></div>
+                                <div class="input-box"><img src="../../img/icones/IconeEmail.svg" alt=""><input type="email" placeholder="contato@suaempresa.com.br"></div>
                             </div>
                         </div>
                     </div>
@@ -103,44 +114,62 @@
                         <div class="form-grid">
                             <div class="campo">
                                 <label>CEP <b>*</b></label>
-                                <div class="input-box"><input type="text" value="01310-100"></div>
+                                <div class="input-box"><input type="text" placeholder="00000-000"></div>
                             </div>
-
                             <div class="campo">
                                 <label>Logradouro <b>*</b></label>
-                                <div class="input-box"><input type="text" value="Av. Paulista"></div>
+                                <div class="input-box"><input type="text" placeholder="Rua, avenida, travessa..."></div>
                             </div>
-
                             <div class="campo">
                                 <label>Número <b>*</b></label>
-                                <div class="input-box"><input type="text" value="1000"></div>
+                                <div class="input-box"><input type="text" placeholder="Ex.: 120"></div>
                             </div>
-
                             <div class="campo">
                                 <label>Complemento</label>
-                                <div class="input-box"><input type="text" value="Conjunto 501"></div>
+                                <div class="input-box"><input type="text" placeholder="Sala, andar, bloco..."></div>
                             </div>
-
                             <div class="campo">
                                 <label>Bairro <b>*</b></label>
-                                <div class="input-box"><input type="text" value="Bela Vista"></div>
+                                <div class="input-box"><input type="text" placeholder="Ex.: Centro"></div>
                             </div>
-
                             <div class="campo">
                                 <label>Cidade <b>*</b></label>
                                 <select>
-                                    <option>São Paulo</option>
-                                    <option>Brasília</option>
-                                    <option>Rio de Janeiro</option>
+                                    <option value="">Selecione o estado primeiro</option>
                                 </select>
                             </div>
 
                             <div class="campo">
                                 <label>Estado <b>*</b></label>
                                 <select>
-                                    <option>SP</option>
-                                    <option>DF</option>
-                                    <option>RJ</option>
+                                    <option value="">Selecione o estado</option>
+                                    <option value="AC">AC - Acre</option>
+                                    <option value="AL">AL - Alagoas</option>
+                                    <option value="AP">AP - Amapá</option>
+                                    <option value="AM">AM - Amazonas</option>
+                                    <option value="BA">BA - Bahia</option>
+                                    <option value="CE">CE - Ceará</option>
+                                    <option value="DF">DF - Distrito Federal</option>
+                                    <option value="ES">ES - Espírito Santo</option>
+                                    <option value="GO">GO - Goiás</option>
+                                    <option value="MA">MA - Maranhão</option>
+                                    <option value="MT">MT - Mato Grosso</option>
+                                    <option value="MS">MS - Mato Grosso do Sul</option>
+                                    <option value="MG">MG - Minas Gerais</option>
+                                    <option value="PA">PA - Pará</option>
+                                    <option value="PB">PB - Paraíba</option>
+                                    <option value="PR">PR - Paraná</option>
+                                    <option value="PE">PE - Pernambuco</option>
+                                    <option value="PI">PI - Piauí</option>
+                                    <option value="RJ">RJ - Rio de Janeiro</option>
+                                    <option value="RN">RN - Rio Grande do Norte</option>
+                                    <option value="RS">RS - Rio Grande do Sul</option>
+                                    <option value="RO">RO - Rondônia</option>
+                                    <option value="RR">RR - Roraima</option>
+                                    <option value="SC">SC - Santa Catarina</option>
+                                    <option value="SP">SP - São Paulo</option>
+                                    <option value="SE">SE - Sergipe</option>
+                                    <option value="TO">TO - Tocantins</option>
                                 </select>
                             </div>
                         </div>
@@ -160,8 +189,8 @@
                             </div>
                         </div>
 
-                        <textarea maxlength="500">Somos uma plataforma que conecta pessoas e profissionais da área de arquitetura e construção, facilitando a realização de projetos únicos e personalizados.</textarea>
-                        <div class="contador">142/500</div>
+                        <textarea maxlength="500" placeholder="Conte um pouco sobre a sua empresa, serviços e diferenciais."></textarea>
+                        <div class="contador">0/500</div>
                     </div>
 
                     <!-- Identidade visual -->
@@ -176,20 +205,20 @@
 
                         <div class="identidade-conteudo">
                             <div class="logo-area">
-                                <img src="../../img/Logo.png" alt="Logo Income Of Houses">
+                                <img src="../../img/icones/IconeEmpresa.svg" alt="Logo da empresa">
                                 <button type="button">Alterar logo</button>
                             </div>
 
                             <div class="dados-visuais">
                                 <div class="campo">
                                     <label>Site (opcional)</label>
-                                    <div class="input-box"><input type="text" value="www.incomeofhouses.com"></div>
+                                    <div class="input-box"><input type="text" placeholder="www.suaempresa.com.br"></div>
                                 </div>
 
                                 <div class="campo">
                                     <label>Redes sociais (opcional)</label>
                                     <div class="rede">
-                                        <div class="input-box"><input type="text" value="@incomeofhouses"></div>
+                                        <div class="input-box"><input type="text" placeholder="@suaempresa"></div>
                                         <button type="button">+</button>
                                     </div>
                                 </div>
@@ -207,26 +236,7 @@
                             </div>
                         </div>
 
-                        <div class="documento">
-                            <img src="../../img/icones/IconeNotaFiscal.svg" alt="">
-                            <div class="doc-info"><strong>Contrato Social</strong><small>Enviado em 15/04/2025</small></div>
-                            <span class="status">Ativo</span>
-                            <span class="seta">></span>
-                        </div>
-
-                        <div class="documento">
-                            <img src="../../img/icones/IconeNotaFiscal.svg" alt="">
-                            <div class="doc-info"><strong>Comprovante de Endereço</strong><small>Enviado em 10/04/2025</small></div>
-                            <span class="status">Ativo</span>
-                            <span class="seta">></span>
-                        </div>
-
-                        <div class="documento">
-                            <img src="../../img/icones/IconeNotaFiscal.svg" alt="">
-                            <div class="doc-info"><strong>Certidão Negativa de Débitos</strong><small>Enviado em 08/04/2025</small></div>
-                            <span class="status">Ativo</span>
-                            <span class="seta">></span>
-                        </div>
+                        <p class="sem-documentos" style="color:#6b7280;font-size:14px;margin:12px 0;">Nenhum documento enviado ainda.</p>
 
                         <button class="gerenciar" type="button">Gerenciar documentos</button>
                     </div>
@@ -251,5 +261,6 @@
     </footer>
 
     <script src="../../js/modais/LegalModais.js"></script>
+    <script type="module" src="../../js/dadosEmpresa.js"></script>
 </body>
 </html>

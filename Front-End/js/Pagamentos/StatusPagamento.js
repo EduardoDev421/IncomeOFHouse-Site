@@ -7,12 +7,15 @@
 //   StatusPagamento.mostrar("pendente", {
 //       numero: "INH-...",
 //       valor: "R$ 89,90",
+//       pix: { copiaCola: "000201...", qrBase64: "iVBOR..." },   // opcional (Pix)
+//       destinoAprovado: "./PagAprovado.html?numero=...",        // opcional
+//       aoTentarNovamente: function () { ... },                  // opcional (recusado)
 //       consultar: function () { return Promise.resolve("pendente"); } // "aprovado" | "recusado" | "pendente"
 //   });
 //   StatusPagamento.retomar({ consultar: ... });   // reabre o pendente após recarregar a página
 //   StatusPagamento.fechar();
 //
-// Aprovado continua sendo uma página (PagamentoAprovado.html).
+// Aprovado continua sendo uma página (PagAprovado.html).
 // =========================================================
 
 (function () {
@@ -45,6 +48,17 @@
         '<path d="M20 11a8 8 0 0 0-14.3-4.5L4 8.5"></path><path d="M4 4v4.5h4.5"></path>' +
         '<path d="M4 13a8 8 0 0 0 14.3 4.5L20 15.5"></path><path d="M20 20v-4.5h-4.5"></path>';
 
+    // Estilo do bloco do Pix (injetado uma vez; usa as cores do tema quando existirem)
+    var ESTILO_PIX =
+        '.sm-pix{margin:14px 0;padding:14px;border:1px solid var(--cor-destaque,#d4a63a);border-radius:10px;text-align:center}' +
+        '.sm-pix[hidden]{display:none}' +
+        '.sm-pix-titulo{margin:0 0 10px;font-size:.9rem;font-weight:600}' +
+        '.sm-pix-qr{display:block;width:180px;height:180px;margin:0 auto 10px;background:#fff;padding:6px;border-radius:8px}' +
+        '.sm-pix-qr[hidden]{display:none}' +
+        '.sm-pix-linha{display:flex;gap:8px}' +
+        '.sm-pix-codigo{flex:1;min-width:0;padding:8px;border-radius:6px;border:1px solid rgba(128,128,128,.5);background:transparent;color:inherit;font-size:.75rem}' +
+        '.sm-pix-copiar{padding:8px 12px;border-radius:6px;border:1px solid var(--cor-destaque,#d4a63a);background:transparent;color:inherit;cursor:pointer;font-weight:600}';
+
     var overlay = null;
     var card = null;
     var estado = { status: null, dados: {} };
@@ -57,6 +71,13 @@
     // ---------------------------------------------------------
 
     function construir() {
+        if (!document.getElementById("sm-pix-estilo")) {
+            var estilo = document.createElement("style");
+            estilo.id = "sm-pix-estilo";
+            estilo.textContent = ESTILO_PIX;
+            document.head.appendChild(estilo);
+        }
+
         overlay = document.createElement("div");
         overlay.className = "sm-overlay";
         overlay.hidden = true;
@@ -76,6 +97,14 @@
                 '<div class="sm-aviso" role="status" aria-live="polite">' +
                     '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"></circle><path d="M12 11v6M12 7.5v.5"></path></svg>' +
                     '<p></p>' +
+                '</div>' +
+                '<div class="sm-pix" hidden>' +
+                    '<p class="sm-pix-titulo">Pague com Pix: escaneie o QR Code ou copie o código</p>' +
+                    '<img class="sm-pix-qr" alt="QR Code do Pix" hidden>' +
+                    '<div class="sm-pix-linha">' +
+                        '<input type="text" class="sm-pix-codigo" readonly aria-label="Código Pix copia e cola">' +
+                        '<button type="button" class="sm-pix-copiar">Copiar</button>' +
+                    '</div>' +
                 '</div>' +
                 '<div class="sm-detalhes">' +
                     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"></path><path d="M14.5 3v4.5H19"></path><path d="M9 11.5h7M9 15h7M9 18.5h4"></path></svg>' +
@@ -98,6 +127,7 @@
 
         overlay.querySelector(".sm-fechar").addEventListener("click", fechar);
         overlay.querySelector(".sm-principal").addEventListener("click", aoClicarPrincipal);
+        overlay.querySelector(".sm-pix-copiar").addEventListener("click", copiarPix);
         overlay.querySelector(".sm-voltar").addEventListener("click", function () {
             // quem sai da página pelo link não precisa mais ser avisado
             pararConsulta();
@@ -112,6 +142,33 @@
 
         document.addEventListener("keydown", aoTeclar);
         document.body.appendChild(overlay);
+    }
+
+    // ---------------------------------------------------------
+    // Pix: copiar o código
+    // ---------------------------------------------------------
+
+    function copiarPix() {
+        var campo = card.querySelector(".sm-pix-codigo");
+        var botao = card.querySelector(".sm-pix-copiar");
+        var texto = campo.value;
+
+        function feito() {
+            botao.textContent = "Copiado!";
+            setTimeout(function () { botao.textContent = "Copiar"; }, 2000);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(texto).then(feito).catch(function () {
+                campo.select();
+                document.execCommand("copy");
+                feito();
+            });
+        } else {
+            campo.select();
+            document.execCommand("copy");
+            feito();
+        }
     }
 
     // ---------------------------------------------------------
@@ -131,6 +188,22 @@
         card.querySelector(".sm-numero").textContent = dados.numero ? "Pedido #" + dados.numero : "";
         card.querySelector(".sm-valor").textContent = dados.valor || "";
         card.querySelector(".sm-voltar").setAttribute("href", dados.voltarHref || "../../index.html");
+
+        // Bloco do Pix: só no pendente e só quando há código
+        var blocoPix = card.querySelector(".sm-pix");
+        var temPix = status === "pendente" && dados.pix && dados.pix.copiaCola;
+        blocoPix.hidden = !temPix;
+        if (temPix) {
+            var imagem = blocoPix.querySelector(".sm-pix-qr");
+            if (dados.pix.qrBase64) {
+                imagem.src = "data:image/png;base64," + dados.pix.qrBase64;
+                imagem.hidden = false;
+            } else {
+                imagem.removeAttribute("src");
+                imagem.hidden = true;
+            }
+            blocoPix.querySelector(".sm-pix-codigo").value = dados.pix.copiaCola;
+        }
 
         var botao = card.querySelector(".sm-principal");
         botao.disabled = false;
@@ -213,7 +286,7 @@
     // ---------------------------------------------------------
 
     function consultarPadrao() {
-        // Troque pela chamada real ao back-end quando existir.
+        // Sem função "consultar" informada: considera pendente.
         return Promise.resolve("pendente");
     }
 
@@ -299,7 +372,8 @@
         try {
             sessionStorage.setItem(CHAVE_PENDENTE, JSON.stringify({
                 numero: dados.numero || "",
-                valor: dados.valor || ""
+                valor: dados.valor || "",
+                pix: dados.pix || null
             }));
         } catch (erro) {
             // sessionStorage indisponível: segue sem guardar
@@ -357,14 +431,21 @@
             return;
         }
 
-        var focaveis = card.querySelectorAll("button:not([disabled]):not([hidden]), a[href]");
-        if (!focaveis.length) {
+        var focaveis = card.querySelectorAll("button:not([disabled]):not([hidden]), a[href], input:not([hidden])");
+        var visiveis = [];
+        for (var i = 0; i < focaveis.length; i++) {
+            if (!focaveis[i].closest("[hidden]")) {
+                visiveis.push(focaveis[i]);
+            }
+        }
+
+        if (!visiveis.length) {
             evento.preventDefault();
             return;
         }
 
-        var primeiro = focaveis[0];
-        var ultimo = focaveis[focaveis.length - 1];
+        var primeiro = visiveis[0];
+        var ultimo = visiveis[visiveis.length - 1];
 
         if (evento.shiftKey && document.activeElement === primeiro) {
             evento.preventDefault();

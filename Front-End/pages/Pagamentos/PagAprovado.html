@@ -25,15 +25,13 @@
          <a href=".././sobre.html">Sobre Nós</a>
       </nav>
 
-      <!-- Carrinho e perfil (como no print do Aprovado). Apague este bloco se não quiser os ícones. -->
       <div class="acoes-topo">
-         <a href="../Carrinho.html" class="carrinho" aria-label="Carrinho (1 item)">
+         <a href="../Carrinho.html" class="carrinho" aria-label="Carrinho">
             <svg viewBox="0 0 24 24" aria-hidden="true">
                <circle cx="9" cy="20" r="1.5"></circle>
                <circle cx="18" cy="20" r="1.5"></circle>
                <path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 7H6"></path>
             </svg>
-            <span class="carrinho-qtd">1</span>
          </a>
          <a href="../perfilUsuario.html" class="iconelogin" aria-label="Meu perfil">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -71,15 +69,17 @@
             </svg>
             <div class="ComprovanteText">
                <h3>Comprovante da Compra</h3>
-               <p>Enviamos um e-mail com os detalhes da sua compra.</p>
+               <p id="numeroPedido">Confirmando seu pagamento...</p>
             </div>
-            <button type="button" class="BotaoSecundario" id="btnBaixar">
+            <button type="button" class="BotaoSecundario" id="btnBaixar" disabled>
                <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 4v11M7 11l5 5 5-5M5 20h14"></path>
                </svg>
                Baixar Comprovante
             </button>
          </div>
+
+         <a href="../MeusPedidos.html" class="BotaoSecundario" id="linkPedido" style="display:block;text-align:center;margin-bottom:12px">Ver meu pedido</a>
 
          <a href="../../index.html" class="BotaoPrincipal">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -94,7 +94,7 @@
    </main>
 
    <script src="../../js/Conta.js"></script>
-   <script src="../../js/PagamentoAprovado.js"></script>
+   <script type="module" src="../../js/Pagamentos/PagamentoAprovado.js"></script>
    <script src="../../js/Idioma.js"></script>
 </body>
 

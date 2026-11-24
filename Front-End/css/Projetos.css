@@ -372,3 +372,43 @@ body {
     .controles select { flex: 1 1 140px; }
     .rodape { flex-direction: column; text-align: center; gap: 8px; }
 }
+/* ===== BOTÃO APAGAR (cards) ===== */
+.rodape-card .btn-apagar {
+    -webkit-appearance: none;
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    background: rgba(229, 138, 138, 0.06);
+    border: 1px solid rgba(229, 138, 138, 0.55);
+    border-radius: 8px;
+    color: #e58a8a;
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.rodape-card .btn-apagar svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.rodape-card .btn-apagar:hover {
+    background: #c0392b;
+    border-color: #c0392b;
+    color: #fff;
+}
+
+.rodape-card .btn-apagar:focus-visible {
+    outline: 2px solid #e58a8a;
+    outline-offset: 2px;
+}

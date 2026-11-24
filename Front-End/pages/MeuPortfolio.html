@@ -187,7 +187,110 @@
    <script src="../js/Modais/LegalModais.js"></script>
    <script src="../js/config.js"></script>
    <script src="../js/MeuPortfolio.js"></script>
+   <script type="module">
+import { supabase } from "../js/lib/supabaseClient.js";
+
+/* Salva o portfólio lido do arquivo na conta do profissional (tabela profissionais,
+   coluna portfolio) e o mostra de novo quando a página é aberta. */
+const TABELA = "profissionais";
+let usuario = null;
+let aviso = null;
+
+function status(texto, tipo = "ok") {
+    if (!aviso) {
+        aviso = document.createElement("p");
+        aviso.setAttribute("role", "status");
+        aviso.setAttribute("aria-live", "polite");
+        aviso.style.cssText = "margin:0 0 14px;padding:10px 14px;border-radius:10px;font-size:.92rem;border:1px solid";
+        const topo = document.querySelector(".conteudo .Inicio");
+        topo ? topo.after(aviso) : document.querySelector(".conteudo")?.prepend(aviso);
+    }
+    const cores = { ok: ["#70d09b", "#10281c"], erro: ["#f0b4ab", "#2a1512"], aviso: ["#f0ca4c", "#29231a"] }[tipo];
+    aviso.style.color = cores[0];
+    aviso.style.borderColor = cores[0];
+    aviso.style.background = cores[1];
+    aviso.textContent = texto;
+    aviso.hidden = !texto;
+}
+
+const txt = (v, max) => String(v ?? "").trim().slice(0, max);
+
+function limpar(d) {
+    return {
+        nome: txt(d.nome, 120),
+        profissao: txt(d.profissao, 120),
+        localizacao: txt(d.localizacao, 120),
+        sobre: txt(d.sobre, 5000),
+        areas: (Array.isArray(d.areas) ? d.areas : []).map((a) => txt(a, 60)).filter(Boolean).slice(0, 30),
+        projetos: (Array.isArray(d.projetos) ? d.projetos : []).slice(0, 50).map((p) => ({
+            titulo: txt(p.titulo, 160),
+            categoria: txt(p.categoria, 60),
+            descricao: txt(p.descricao, 1000),
+            area: txt(p.area, 40),
+            ano: txt(p.ano, 20),
+            local: txt(p.local, 80),
+            // imagens em base64 muito grandes não vão para o banco
+            imagem: typeof p.imagem === "string" && (!p.imagem.startsWith("data:") || p.imagem.length < 150000) ? p.imagem : ""
+        })),
+        atualizadoEm: new Date().toISOString()
+    };
+}
+
+function textoErro(e) {
+    const m = String(e?.message || "").toLowerCase();
+    if (m.includes("column") && (m.includes("does not exist") || m.includes("schema cache")))
+        return "falta a coluna portfolio na tabela profissionais. Rode o arquivo portfolio.sql no Supabase.";
+    if (m.includes("row-level security") || m.includes("permission denied"))
+        return "sem permissão para salvar. Confira as políticas da tabela profissionais.";
+    if (m.includes("failed to fetch")) return "sem conexão com o servidor.";
+    return e?.message || "erro desconhecido.";
+}
+
+async function salvar(dados) {
+    if (!usuario) {
+        status("Portfólio lido, mas não salvo: entre na sua conta para guardá-lo no seu perfil.", "aviso");
+        return;
+    }
+    status("Salvando o portfólio na sua conta…", "aviso");
+    try {
+        const portfolio = limpar(dados);
+        const r = await supabase.from(TABELA).update({ portfolio }).eq("id", usuario.id).select("id");
+        if (r.error) throw r.error;
+        if (!r.data || !r.data.length) {
+            const meta = usuario.user_metadata || {};
+            const ins = await supabase.from(TABELA).insert({ id: usuario.id, nome: meta.nome || meta.full_name || portfolio.nome || null, email: usuario.email, portfolio });
+            if (ins.error) throw ins.error;
+        }
+        status("Portfólio salvo na sua conta. Ele já aparece no seu Perfil.", "ok");
+    } catch (e) {
+        console.error("[Portfólio]", e);
+        status("Não foi possível salvar o portfólio: " + textoErro(e), "erro");
+    }
+}
+
+async function carregarSalvo() {
+    try {
+        const { data: { session } } = await supabase.auth.getSession();
+        usuario = session?.user || null;
+        if (!usuario) return;
+        const { data, error } = await supabase.from(TABELA).select("portfolio").eq("id", usuario.id).maybeSingle();
+        if (error) throw error;
+        const p = data?.portfolio;
+        if (p && Array.isArray(p.projetos) && p.projetos.length && window.MeuPortfolio) {
+            await window.MeuPortfolio.mostrarSalvo(p);
+            status("Este é o portfólio salvo na sua conta. Envie outro arquivo para substituí-lo.", "ok");
+        }
+    } catch (e) {
+        console.warn("[Portfólio] não foi possível carregar o salvo:", e?.message || e);
+    }
+}
+
+window.addEventListener("portfolio:analisado", (ev) => salvar(ev.detail.dados));
+carregarSalvo();
+
+   </script>
    <script src="../js/mensagensErros.js"></script>
+   <script type="module" src="../js/Iconeperfil.js"></script>
 </body>
 
 </html>

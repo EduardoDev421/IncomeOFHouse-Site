@@ -6,7 +6,63 @@
     <meta name="description" content="IncomeofHouses - Configuração de Profissionais">
     <link rel="stylesheet" href="../../css/PagesImplement/ÁreaConfigProfissionais.css">
     <link rel="stylesheet" href="../../css/Modais/LegalModal.css">
-    <title>Configuração de Profissionais</title>
+    <title>Configurações Profissionais - Income of Houses</title>
+    <style>
+        .cfg-largo { grid-column: 1 / -1; }
+        .cfg-corpo { padding: 16px 18px 18px; border-top: 1px solid #292929; display: grid; gap: 14px; }
+        .cfg-campo { display: grid; gap: 6px; min-width: 0; }
+        .cfg-rotulo { font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; color: #a89a7a; }
+        .cfg-duas { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .cfg-corpo input[type=text], .cfg-corpo input[type=tel], .cfg-corpo input[type=time], .cfg-corpo select {
+            width: 100%; min-width: 0; padding: 11px 12px; border: 1px solid #292929; border-radius: 10px;
+            background: #0e0e0e; color: #fff; font: inherit; font-size: .95rem; color-scheme: dark;
+        }
+        .cfg-corpo input:focus-visible, .cfg-corpo select:focus-visible, .cfg-btn:focus-visible, .cfg-chip:focus-visible {
+            outline: 2px solid #f0ca4c; outline-offset: 2px; border-color: #d4a63a;
+        }
+        .cfg-input { display: flex; align-items: center; gap: 8px; padding: 0 12px; border: 1px solid #292929; border-radius: 10px; background: #0e0e0e; }
+        .cfg-input:focus-within { border-color: #d4a63a; box-shadow: 0 0 0 3px rgba(212,166,58,.18); }
+        .cfg-input input[type=text] { border: 0 !important; background: transparent !important; padding-left: 0 !important; outline: 0 !important; box-shadow: none !important; }
+        .cfg-rs { color: #d4a63a; font-weight: 600; }
+        .cfg-chips, .cfg-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .cfg-chip { padding: 8px 14px; border-radius: 999px; border: 1px solid #59431f; background: #1a1610; color: #e7d9b6; font: inherit; font-size: .88rem; cursor: pointer; }
+        .cfg-chip:hover { background: #29231a; }
+        .cfg-chip[aria-pressed=true] { background: #d4a63a; border-color: #d4a63a; color: #111; font-weight: 600; }
+        .cfg-tag { display: inline-flex; align-items: center; gap: 6px; padding: 6px 6px 6px 12px; border-radius: 999px; background: #29231a; border: 1px solid #59431f; color: #f0ca4c; font-size: .88rem; }
+        .cfg-tag-x { width: 22px; height: 22px; border-radius: 50%; border: 0; background: #3a2f1a; color: #f0ca4c; cursor: pointer; line-height: 1; font-size: 1rem; }
+        .cfg-tag-x:hover { background: #59431f; }
+        .cfg-adicionar { display: flex; gap: 8px; }
+        .cfg-adicionar input { flex: 1; }
+        .cfg-btn { padding: 10px 16px; border-radius: 10px; border: 1px solid #59431f; background: #1d1d1d; color: #fff; font: inherit; font-size: .9rem; cursor: pointer; white-space: nowrap; }
+        .cfg-btn:hover:not(:disabled) { background: #29231a; border-color: #d4a63a; }
+        .cfg-btn:disabled { opacity: .5; cursor: not-allowed; }
+        .cfg-btn-principal { background: #d4a63a; border-color: #d4a63a; color: #111; font-weight: 600; }
+        .cfg-btn-principal:hover:not(:disabled) { background: #f0ca4c; }
+        .cfg-servicos { display: grid; gap: 10px; }
+        .cfg-servico { display: grid; grid-template-columns: 1fr 240px auto; gap: 10px; align-items: center; }
+        .cfg-remover { padding: 9px 12px; border-radius: 10px; border: 1px solid #4a2a26; background: transparent; color: #f0b4ab; font: inherit; font-size: .85rem; cursor: pointer; }
+        .cfg-remover:hover { background: #2a1512; }
+        .cfg-vazio { margin: 0; color: #8d8470; font-size: .9rem; }
+        .cfg-dias { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 24px; }
+        .cfg-dia { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid #1f1f1f; }
+        .cfg-dia-nome { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: .95rem; }
+        .cfg-dia-nome input { accent-color: #d4a63a; width: 18px; height: 18px; }
+        .cfg-horas { display: flex; align-items: center; gap: 8px; }
+        .cfg-horas input { width: 112px !important; padding: 8px 10px !important; }
+        .cfg-horas.desligado { opacity: .45; }
+        .cfg-corpo input:disabled { background: #0e0e0e !important; color: #6b6b6b !important; cursor: not-allowed; }
+        .cfg-ate { color: #8d8470; font-size: .85rem; }
+        .cfg-salvar { display: flex; align-items: center; justify-content: space-between; gap: 16px; grid-column: 1 / -1; }
+        .cfg-status { margin: 0; font-size: .92rem; }
+        .cfg-status[data-tipo=ok] { color: #70d09b; }
+        .cfg-status[data-tipo=erro] { color: #f0b4ab; }
+        .cfg-status[data-tipo=aviso] { color: #f0ca4c; }
+        @media (max-width: 760px) {
+            .cfg-duas, .cfg-dias { grid-template-columns: 1fr; }
+            .cfg-servico { grid-template-columns: 1fr; }
+            .cfg-salvar { flex-direction: column; align-items: stretch; }
+        }
+    </style>
 </head>
 
 <body>
@@ -42,193 +98,175 @@
             </aside>
 
             <section class="conteudo">
-                <h1>Configuração de Profissionais</h1>
-                <h4>Gerencie as configurações relacionadas aos profissionais da sua conta.</h4>
+                <h1>Configurações Profissionais</h1>
+                <h4>Tudo o que você preencher aqui aparece automaticamente no seu Perfil.</h4>
 
                 <div class="Config">
 
-                    <!-- Preferências de contratação -->
+                    <!-- Dados profissionais -->
                     <div class="painel">
                         <div class="TituloPainel">
-                            <img src="../../img/icones/IconeConfigProfissional.svg" alt="">
+                            <img src="../../img/icones/IconeResumoProfissional.svg" alt="">
                             <div>
-                                <h2>Preferências de Contratação</h2>
-                                <p>Defina como você deseja encontrar e contratar profissionais.</p>
+                                <h2>Dados Profissionais</h2>
+                                <p>Profissão, registro e contato.</p>
                             </div>
                         </div>
+                        <div class="cfg-corpo">
+                            <label class="cfg-campo"><span class="cfg-rotulo">Profissão</span>
+                                <select id="campoProfissao"></select></label>
+                            <label class="cfg-campo"><span class="cfg-rotulo">Número do registro (CREA, CAU…)</span>
+                                <input type="text" id="campoRegistro" maxlength="30" autocomplete="off" placeholder="Ex.: 000000-0"></label>
+                            <label class="cfg-campo"><span class="cfg-rotulo">Telefone</span>
+                                <input type="tel" id="campoTelefone" inputmode="numeric" autocomplete="tel" placeholder="(00) 00000-0000"></label>
+                        </div>
+                    </div>
 
-                        <div class="opcao">
+                    <!-- Áreas de atuação -->
+                    <div class="painel">
+                        <div class="TituloPainel">
                             <img src="../../img/icones/IconeAtuação.svg" alt="">
-                            <div class="texto-opcao">
-                                <strong>Tipos de profissionais</strong>
-                                <small>Selecione quais áreas deseja receber indicações.</small>
+                            <div>
+                                <h2>Áreas de Atuação</h2>
+                                <p>Escolha onde você atua. Pode adicionar outras.</p>
                             </div>
-                            <button type="button" class="seletor" data-config="tipos">
-                                <span class="seletor-texto">4 selecionados</span><b>›</b>
-                            </button>
                         </div>
-
-                        <div class="opcao">
-                            <img src="../../img/icones/IconeMoeda.svg" alt="">
-                            <div class="texto-opcao">
-                                <strong>Faixa de preço</strong>
-                                <small>Defina o valor que está disposto a investir nos projetos.</small>
+                        <div class="cfg-corpo">
+                            <div class="cfg-chips" id="chipsAreas" role="group" aria-label="Áreas de atuação"></div>
+                            <div class="cfg-adicionar">
+                                <input type="text" id="novaArea" maxlength="40" placeholder="Outra área de atuação" aria-label="Outra área de atuação">
+                                <button type="button" class="cfg-btn" id="btnNovaArea">Adicionar</button>
                             </div>
-                            <button type="button" class="seletor" data-config="preco">
-                                <span class="seletor-texto">R$ 5.000 — R$ 50.000</span><b>›</b>
-                            </button>
                         </div>
+                    </div>
 
-                        <div class="opcao">
+                    <!-- Região -->
+                    <div class="painel">
+                        <div class="TituloPainel">
                             <img src="../../img/icones/IconeEndereco.svg" alt="">
-                            <div class="texto-opcao">
-                                <strong>Região de atuação</strong>
-                                <small>Escolha as regiões onde deseja encontrar profissionais.</small>
+                            <div>
+                                <h2>Região de Atendimento</h2>
+                                <p>Onde você atende. O estado também vale para o registro.</p>
                             </div>
-                            <button type="button" class="seletor" data-config="regiao">
-                                <span class="seletor-texto">Todas as regiões</span><b>›</b>
-                            </button>
                         </div>
-
-                        <div class="opcao">
-                            <img src="../../img/icones/IconeMensagem.svg" alt="">
-                            <div class="texto-opcao">
-                                <strong>Forma de contato preferida</strong>
-                                <small>Defina como prefere ser contatado pelos profissionais.</small>
+                        <div class="cfg-corpo">
+                            <div class="cfg-duas">
+                                <label class="cfg-campo"><span class="cfg-rotulo">Cidade</span>
+                                    <input type="text" id="campoCidade" maxlength="60" autocomplete="address-level2" placeholder="Sua cidade"></label>
+                                <label class="cfg-campo"><span class="cfg-rotulo">Estado</span>
+                                    <select id="campoEstado"></select></label>
                             </div>
-                            <button type="button" class="seletor" data-config="contato">
-                                <span class="seletor-texto">E-mail e WhatsApp</span><b>›</b>
-                            </button>
+                            <div class="cfg-campo">
+                                <span class="cfg-rotulo">Outras cidades ou regiões atendidas</span>
+                                <div class="cfg-tags" id="listaRegioes"></div>
+                                <div class="cfg-adicionar">
+                                    <input type="text" id="novaRegiao" maxlength="40" placeholder="Ex.: Região metropolitana" aria-label="Outra região atendida">
+                                    <button type="button" class="cfg-btn" id="btnNovaRegiao">Adicionar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orçamento -->
+                    <div class="painel">
+                        <div class="TituloPainel">
+                            <img src="../../img/icones/IconeMoeda.svg" alt="">
+                            <div>
+                                <h2>Orçamento</h2>
+                                <p>Valores e prazo que você pratica.</p>
+                            </div>
+                        </div>
+                        <div class="cfg-corpo">
+                            <div class="cfg-duas">
+                                <label class="cfg-campo"><span class="cfg-rotulo">Valor mínimo por projeto</span>
+                                    <div class="cfg-input"><span class="cfg-rs">R$</span>
+                                        <input type="text" id="orcMinimo" inputmode="numeric" autocomplete="off" placeholder="0"></div></label>
+                                <label class="cfg-campo"><span class="cfg-rotulo">Valor máximo (opcional)</span>
+                                    <div class="cfg-input"><span class="cfg-rs">R$</span>
+                                        <input type="text" id="orcMaximo" inputmode="numeric" autocomplete="off" placeholder="0"></div></label>
+                            </div>
+                            <label class="cfg-campo"><span class="cfg-rotulo">Prazo médio de entrega</span>
+                                <select id="orcPrazo"></select></label>
+                        </div>
+                    </div>
+
+                    <!-- Serviços -->
+                    <div class="painel cfg-largo">
+                        <div class="TituloPainel">
+                            <img src="../../img/icones/IconeServiçosOferecidos.svg" alt="">
+                            <div>
+                                <h2>Serviços Oferecidos</h2>
+                                <p>Liste o que você faz e, se quiser, o preço inicial.</p>
+                            </div>
+                        </div>
+                        <div class="cfg-corpo">
+                            <div id="listaServicos" class="cfg-servicos"></div>
+                            <div><button type="button" class="cfg-btn" id="btnNovoServico">+ Adicionar serviço</button></div>
+                        </div>
+                    </div>
+
+                    <!-- Disponibilidade -->
+                    <div class="painel cfg-largo">
+                        <div class="TituloPainel">
+                            <img src="../../img/icones/IconeTempo.svg" alt="">
+                            <div>
+                                <h2>Disponibilidade</h2>
+                                <p>Marque os dias em que atende e o horário.</p>
+                            </div>
+                        </div>
+                        <div class="cfg-corpo">
+                            <div id="listaDias" class="cfg-dias"></div>
                         </div>
                     </div>
 
                     <!-- Notificações -->
-                    <div class="painel">
+                    <div class="painel cfg-largo">
                         <div class="TituloPainel">
                             <img src="../../img/icones/Iconenotificação.svg" alt="">
                             <div>
-                                <h2>Notificações de Profissionais</h2>
-                                <p>Escolha quais notificações deseja receber.</p>
+                                <h2>Notificações</h2>
+                                <p>Escolha quais avisos deseja receber.</p>
                             </div>
                         </div>
 
                         <div class="opcao">
-                            <img src="../../img/icones/IconeLogin.svg" alt="">
+                            <img src="../../img/icones/IconeProjetos.svg" alt="">
                             <div class="texto-opcao">
-                                <strong>Novos profissionais recomendados</strong>
-                                <small>Receber sugestões de profissionais com base no seu perfil.</small>
+                                <strong>Novas solicitações</strong>
+                                <small>Aviso quando um cliente pedir um projeto ou orçamento.</small>
                             </div>
-                            <label class="switch"><input type="checkbox" checked><span></span></label>
+                            <label class="switch"><input type="checkbox" data-config="notif-solicitacoes" aria-label="Novas solicitações" checked><span></span></label>
                         </div>
-
                         <div class="opcao">
                             <img src="../../img/icones/IconeMensagem.svg" alt="">
                             <div class="texto-opcao">
-                                <strong>Mensagens de profissionais</strong>
-                                <small>Receber novas mensagens de profissionais interessados.</small>
+                                <strong>Mensagens</strong>
+                                <small>Receber novas mensagens de clientes.</small>
                             </div>
-                            <label class="switch"><input type="checkbox" checked><span></span></label>
+                            <label class="switch"><input type="checkbox" data-config="notif-mensagens" aria-label="Mensagens" checked><span></span></label>
                         </div>
-
                         <div class="opcao">
-                            <img src="../../img/icones/IconeProjetosConcluidos.svg" alt="">
+                            <img src="../../img/icones/IconeEstrela.svg" alt="">
                             <div class="texto-opcao">
-                                <strong>Atualizações de projetos</strong>
-                                <small>Notificações sobre o andamento dos seus projetos.</small>
+                                <strong>Novas avaliações</strong>
+                                <small>Aviso quando você receber uma avaliação.</small>
                             </div>
-                            <label class="switch"><input type="checkbox" checked><span></span></label>
+                            <label class="switch"><input type="checkbox" data-config="notif-avaliacoes" aria-label="Novas avaliações" checked><span></span></label>
                         </div>
-
                         <div class="opcao">
                             <img src="../../img/icones/IconeEmail.svg" alt="">
                             <div class="texto-opcao">
-                                <strong>Promoções e novidades</strong>
-                                <small>Receber ofertas especiais e novidades da plataforma.</small>
+                                <strong>Novidades da plataforma</strong>
+                                <small>Receber ofertas e novidades.</small>
                             </div>
-                            <label class="switch"><input type="checkbox" checked><span></span></label>
+                            <label class="switch"><input type="checkbox" data-config="notif-novidades" aria-label="Novidades da plataforma" checked><span></span></label>
                         </div>
                     </div>
 
-                    <!-- Avaliação e feedback -->
-                    <div class="painel">
-                        <div class="TituloPainel">
-                            <img src="../../img/icones/IconeEstrela.svg" alt="">
-                            <div>
-                                <h2>Avaliação e Feedback</h2>
-                                <p>Configure como deseja avaliar os profissionais.</p>
-                            </div>
-                        </div>
-
-                        <div class="opcao">
-                            <img src="../../img/icones/IconeEstrela.svg" alt="">
-                            <div class="texto-opcao">
-                                <strong>Exigir avaliações</strong>
-                                <small>Avalie o profissional após cada serviço.</small>
-                            </div>
-                            <label class="switch"><input type="checkbox" checked><span></span></label>
-                        </div>
-
-                        <div class="opcao">
-                            <img src="../../img/icones/IconeVisao.svg" alt="">
-                            <div class="texto-opcao">
-                                <strong>Mostrar avaliações públicas</strong>
-                                <small>Permita que suas avaliações sejam visíveis para outros usuários.</small>
-                            </div>
-                            <label class="switch"><input type="checkbox" checked><span></span></label>
-                        </div>
-
-                        <div class="opcao">
-                            <img src="../../img/icones/Iconenotificação.svg" alt="">
-                            <div class="texto-opcao">
-                                <strong>Notificar sobre novas avaliações</strong>
-                                <small>Receba alertas sobre novas avaliações dos seus profissionais.</small>
-                            </div>
-                            <label class="switch"><input type="checkbox" checked><span></span></label>
-                        </div>
-                    </div>
-
-                    <!-- Documentos e verificações -->
-                    <div class="painel">
-                        <div class="TituloPainel">
-                            <img src="../../img/icones/IconeSegurança.svg" alt="">
-                            <div>
-                                <h2>Documentos e Verificações</h2>
-                                <p>Gerencie as verificações dos profissionais.</p>
-                            </div>
-                        </div>
-
-                        <div class="opcao">
-                            <img src="../../img/icones/IconeRegistro.svg" alt="">
-                            <div class="texto-opcao">
-                                <strong>Verificar documentação</strong>
-                                <small>Exigir comprovação de documentos dos profissionais.</small>
-                            </div>
-                            <label class="switch"><input type="checkbox" checked><span></span></label>
-                        </div>
-
-                        <div class="opcao">
-                            <img src="../../img/icones/iconePortfolio.svg" alt="">
-                            <div class="texto-opcao">
-                                <strong>Verificar portfólio</strong>
-                                <small>Solicitar portfólio de projetos anteriores.</small>
-                            </div>
-                            <label class="switch"><input type="checkbox" checked><span></span></label>
-                        </div>
-
-                        <div class="opcao">
-                            <img src="../../img/icones/IconeRegistroPessoal.svg" alt="">
-                            <div class="texto-opcao">
-                                <strong>Verificar certificações</strong>
-                                <small>Confirmar certificações e especializações.</small>
-                            </div>
-                            <label class="switch"><input type="checkbox" checked><span></span></label>
-                        </div>
-                    </div>
-
-                    <!-- Dica -->
-                    <div class="aviso">
-                        <span class="icone-aviso">ⓘ</span>
-                        <p><strong>Dica:</strong> Manter suas preferências atualizadas ajuda a encontrar os profissionais ideais para o seu projeto, com mais agilidade e segurança.</p>
+                    <!-- Barra de salvar -->
+                    <div class="aviso cfg-salvar">
+                        <p id="statusSalvar" class="cfg-status" role="status" aria-live="polite"></p>
+                        <button type="button" class="cfg-btn cfg-btn-principal" id="btnSalvar">Salvar agora</button>
                     </div>
 
                 </div>
@@ -245,21 +283,407 @@
         </div>
     </footer>
 
-    <!-- MODAL DE SELEÇÃO (preenchido pelo JS) -->
-    <div class="modal-fundo" id="modalConfig" hidden>
-        <div class="modal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
-            <span class="modal-alca"></span>
-            <h3 id="modalTitulo"></h3>
-            <div class="modal-lista" id="modalLista"></div>
-            <p class="modal-erro" id="modalErro" hidden></p>
-            <div class="modal-botoes">
-                <button type="button" class="btn-cancelar">Cancelar</button>
-                <button type="button" class="btn-confirmar">Confirmar</button>
-            </div>
-        </div>
-    </div>
+    <script src="../../js/Modais/LegalModais.js"></script>
+    <script type="module">
+import { supabase } from "../../js/lib/supabaseClient.js";
 
-    <script src="../../js/modais/LegalModais.js"></script>
-    <script src="../../js/areaConfigProfissionais.js"></script>
+/* ============================================================
+   Configurações do profissional -> salvas na tabela "profissionais"
+   (a mesma que o Perfil lê). Sem login ou sem as colunas novas,
+   guarda neste navegador e o Perfil também lê de lá.
+============================================================ */
+const TABELA = "profissionais";
+const CHAVE_LOCAL = "perfilProfissionalDados";
+
+const PROFISSOES = [
+    ["arquiteto", "Arquiteto"], ["engenheiro-civil", "Engenheiro civil"], ["designer-de-interiores", "Designer de interiores"],
+    ["paisagista", "Paisagista"], ["empreiteiro", "Empreiteiro"], ["eletricista", "Eletricista"],
+    ["encanador", "Encanador"], ["pintor", "Pintor"], ["outro", "Outro"]
+];
+const AREAS = ["Residencial", "Comercial", "Reformas", "Projetos de interiores", "Paisagismo", "Projeto estrutural",
+    "Instalações elétricas", "Instalações hidráulicas", "Regularização", "Consultoria"];
+const UFS = ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"];
+const DIAS = [["seg", "Segunda-feira"], ["ter", "Terça-feira"], ["qua", "Quarta-feira"], ["qui", "Quinta-feira"], ["sex", "Sexta-feira"], ["sab", "Sábado"], ["dom", "Domingo"]];
+const PRAZOS = ["Até 15 dias", "15 a 30 dias", "1 a 3 meses", "3 a 6 meses", "Mais de 6 meses"];
+const MAX_SERVICOS = 20;
+
+const padrao = () => ({
+    profissao: "", registro: "", telefone: "", cidade: "", estado: "",
+    areas: [], servicos: [], regioes: [],
+    disponibilidade: Object.fromEntries(DIAS.map(([k]) => [k, { ativo: false, de: "08:00", ate: "18:00" }])),
+    orcamento: { minimo: null, maximo: null, prazo: "" },
+    preferencias: { "notif-solicitacoes": true, "notif-mensagens": true, "notif-avaliacoes": true, "notif-novidades": true }
+});
+
+let dados = padrao();
+let usuario = null;
+let linhaExiste = false;
+let timer = null;
+let salvando = false;
+let pendente = false;
+
+const $ = (s, r = document) => r.querySelector(s);
+const soDigitos = (t, max = 15) => String(t ?? "").replace(/\D/g, "").slice(0, max);
+const fmtNumero = (n) => (n === null || n === "" || n === undefined ? "" : Number(n).toLocaleString("pt-BR"));
+const arr = (v) => (Array.isArray(v) ? v : []);
+const obj = (v) => (v && typeof v === "object" && !Array.isArray(v) ? v : {});
+
+function criar(tag, classe, texto) {
+    const e = document.createElement(tag);
+    if (classe) e.className = classe;
+    if (texto !== undefined) e.textContent = texto;
+    return e;
+}
+
+function formatarTelefone(v) {
+    const n = soDigitos(v, 11);
+    if (n.length > 10) return `(${n.slice(0, 2)}) ${n.slice(2, 7)}-${n.slice(7)}`;
+    if (n.length > 6) return `(${n.slice(0, 2)}) ${n.slice(2, 6)}-${n.slice(6)}`;
+    if (n.length > 2) return `(${n.slice(0, 2)}) ${n.slice(2)}`;
+    return n;
+}
+
+/* ---------- Status ---------- */
+const statusEl = $("#statusSalvar");
+function status(texto, tipo = "") {
+    if (!statusEl) return;
+    statusEl.textContent = texto;
+    statusEl.dataset.tipo = tipo;
+}
+
+/* ---------- Dados <-> banco ---------- */
+function deLinha(l, user) {
+    const d = padrao();
+    const meta = user?.user_metadata || {};
+    d.profissao = l?.profissao || meta.profissao || "";
+    d.registro = l?.registro || meta.registro || "";
+    d.telefone = soDigitos(l?.telefone || meta.telefone, 11);
+    d.cidade = l?.cidade || meta.cidade || "";
+    d.estado = l?.estado || meta.estado || "";
+    if (arr(l?.areas_atuacao).length) d.areas = l.areas_atuacao.map(String);
+    if (arr(l?.servicos).length) d.servicos = l.servicos.map((s) => ({ nome: String(s.nome || ""), preco: s.preco ?? null }));
+    if (arr(l?.regioes_atendimento).length) d.regioes = l.regioes_atendimento.map(String);
+    const disp = obj(l?.disponibilidade);
+    for (const [k] of DIAS) if (disp[k]) d.disponibilidade[k] = { ...d.disponibilidade[k], ...disp[k] };
+    Object.assign(d.orcamento, obj(l?.orcamento));
+    Object.assign(d.preferencias, obj(l?.preferencias));
+    return d;
+}
+
+function mesclarLocal(d) {
+    let loc;
+    try { loc = JSON.parse(localStorage.getItem(CHAVE_LOCAL)); } catch { loc = null; }
+    if (!loc || typeof loc !== "object") return d;
+    // O que veio do banco tem prioridade; o local completa o que estiver vazio
+    for (const k of ["profissao", "registro", "telefone", "cidade", "estado"]) if (!d[k] && loc[k]) d[k] = loc[k];
+    for (const k of ["areas", "servicos", "regioes"]) if (!d[k].length && arr(loc[k]).length) d[k] = loc[k];
+    if (loc.disponibilidade && !Object.values(d.disponibilidade).some((x) => x.ativo)) {
+        for (const [k] of DIAS) if (loc.disponibilidade[k]) d.disponibilidade[k] = { ...d.disponibilidade[k], ...loc.disponibilidade[k] };
+    }
+    if (d.orcamento.minimo === null && loc.orcamento) d.orcamento = { ...d.orcamento, ...loc.orcamento };
+    if (loc.preferencias) d.preferencias = { ...d.preferencias, ...loc.preferencias };
+    return d;
+}
+
+function servicosValidos() {
+    return dados.servicos
+        .map((s) => ({ nome: s.nome.trim(), preco: s.preco ? Number(s.preco) : null }))
+        .filter((s) => s.nome);
+}
+
+function paraLinha() {
+    return {
+        profissao: dados.profissao || null,
+        registro: dados.registro.trim() || null,
+        telefone: soDigitos(dados.telefone, 11) || null,
+        cidade: dados.cidade.trim() || null,
+        estado: dados.estado || null,
+        areas_atuacao: dados.areas,
+        servicos: servicosValidos(),
+        regioes_atendimento: dados.regioes,
+        disponibilidade: dados.disponibilidade,
+        orcamento: dados.orcamento,
+        preferencias: dados.preferencias
+    };
+}
+
+function validar() {
+    const o = dados.orcamento;
+    if (o.minimo !== null && o.maximo !== null && o.minimo > o.maximo) return "No orçamento, o valor mínimo não pode ser maior que o máximo.";
+    for (const [k, nome] of DIAS) {
+        const d = dados.disponibilidade[k];
+        if (d.ativo && (!d.de || !d.ate || d.de >= d.ate)) return `${nome}: o horário final precisa ser depois do inicial.`;
+    }
+    return "";
+}
+
+function textoErro(e) {
+    const m = String(e?.message || "").toLowerCase();
+    if (m.includes("column") && (m.includes("does not exist") || m.includes("schema cache")))
+        return "Faltam colunas na tabela profissionais. Rode o arquivo profissionais_perfil.sql no Supabase.";
+    if (m.includes("row-level security") || m.includes("permission denied"))
+        return "Sem permissão para salvar. Confira as políticas da tabela profissionais.";
+    if (m.includes("failed to fetch")) return "Sem conexão com o servidor.";
+    return e?.message || "Erro ao salvar.";
+}
+
+async function carregar() {
+    try {
+        const { data: { session } } = await supabase.auth.getSession();
+        usuario = session?.user || null;
+        if (!usuario) { dados = mesclarLocal(padrao()); status("Você não está logado: as alterações ficam só neste navegador.", "aviso"); return; }
+        const { data, error } = await supabase.from(TABELA).select("*").eq("id", usuario.id).maybeSingle();
+        if (error) throw error;
+        linhaExiste = !!data;
+        dados = mesclarLocal(deLinha(data, usuario));
+    } catch (e) {
+        console.warn("[Config profissional]", e?.message || e);
+        dados = mesclarLocal(padrao());
+        status("Não foi possível carregar do servidor. Usando dados deste navegador.", "aviso");
+    }
+}
+
+async function salvar() {
+    clearTimeout(timer);
+    timer = null;
+    if (salvando) { pendente = true; return; }
+
+    const erro = validar();
+    if (erro) { status(erro, "erro"); return; }
+
+    try { localStorage.setItem(CHAVE_LOCAL, JSON.stringify({ ...dados, servicos: servicosValidos() })); } catch { /* sem armazenamento */ }
+
+    if (!usuario) { status("Salvo neste navegador. Entre na sua conta para enviar ao Perfil.", "aviso"); return; }
+
+    salvando = true;
+    status("Salvando…");
+    try {
+        const linha = paraLinha();
+        let r;
+        if (linhaExiste) r = await supabase.from(TABELA).update(linha).eq("id", usuario.id);
+        else {
+            const meta = usuario.user_metadata || {};
+            r = await supabase.from(TABELA).insert({ id: usuario.id, nome: meta.nome || meta.full_name || null, email: usuario.email, ...linha });
+            if (!r.error) linhaExiste = true;
+        }
+        if (r.error) throw r.error;
+        status("Tudo salvo. Já aparece no seu Perfil.", "ok");
+    } catch (e) {
+        console.error("[Config profissional]", e);
+        status("Salvo só neste navegador: " + textoErro(e), "erro");
+    } finally {
+        salvando = false;
+        if (pendente) { pendente = false; salvar(); }
+    }
+}
+
+function alterou() {
+    status("Alterações não salvas…");
+    clearTimeout(timer);
+    timer = setTimeout(salvar, 900);
+}
+
+/* ---------- Tela: campos simples ---------- */
+function opcoes(select, lista, vazio) {
+    select.replaceChildren(new Option(vazio, ""));
+    lista.forEach((i) => select.add(Array.isArray(i) ? new Option(i[1], i[0]) : new Option(i, i)));
+}
+
+function ligarTexto(id, chave, mascara) {
+    const el = $(id);
+    if (!el) return;
+    el.value = mascara === "tel" ? formatarTelefone(dados[chave]) : dados[chave] || "";
+    el.addEventListener("input", () => {
+        if (mascara === "tel") el.value = formatarTelefone(el.value);
+        dados[chave] = el.value;
+        alterou();
+    });
+}
+
+function ligarMoeda(id, chave) {
+    const el = $(id);
+    el.value = fmtNumero(dados.orcamento[chave]);
+    el.addEventListener("input", () => {
+        const d = soDigitos(el.value, 9);
+        el.value = d ? fmtNumero(d) : "";
+        dados.orcamento[chave] = d ? Number(d) : null;
+        alterou();
+    });
+}
+
+/* ---------- Tela: chips de áreas ---------- */
+function desenharAreas() {
+    const box = $("#chipsAreas");
+    box.replaceChildren();
+    const todas = [...AREAS, ...dados.areas.filter((a) => !AREAS.includes(a))];
+    todas.forEach((nome) => {
+        const b = criar("button", "cfg-chip", nome);
+        b.type = "button";
+        b.setAttribute("aria-pressed", String(dados.areas.includes(nome)));
+        b.addEventListener("click", () => {
+            dados.areas = dados.areas.includes(nome) ? dados.areas.filter((a) => a !== nome) : [...dados.areas, nome];
+            desenharAreas();
+            alterou();
+        });
+        box.appendChild(b);
+    });
+}
+
+function ligarAdicionar(inputId, botaoId, lista, aoAdicionar) {
+    const i = $(inputId), b = $(botaoId);
+    const add = () => {
+        const v = i.value.trim().replace(/\s+/g, " ");
+        if (!v) return;
+        if (v.length > 40) { status("Use no máximo 40 caracteres.", "erro"); return; }
+        if (!lista().some((x) => x.toLowerCase() === v.toLowerCase())) aoAdicionar(v);
+        i.value = "";
+        alterou();
+    };
+    b.addEventListener("click", add);
+    i.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); add(); } });
+}
+
+/* ---------- Tela: regiões (tags removíveis) ---------- */
+function desenharRegioes() {
+    const box = $("#listaRegioes");
+    box.replaceChildren();
+    dados.regioes.forEach((nome) => {
+        const t = criar("span", "cfg-tag", nome);
+        const x = criar("button", "cfg-tag-x", "×");
+        x.type = "button";
+        x.setAttribute("aria-label", `Remover ${nome}`);
+        x.addEventListener("click", () => { dados.regioes = dados.regioes.filter((r) => r !== nome); desenharRegioes(); alterou(); });
+        t.appendChild(x);
+        box.appendChild(t);
+    });
+}
+
+/* ---------- Tela: serviços ---------- */
+function desenharServicos() {
+    const box = $("#listaServicos");
+    box.replaceChildren();
+    dados.servicos.forEach((s, i) => {
+        const linha = criar("div", "cfg-servico");
+
+        const nome = criar("input");
+        nome.type = "text"; nome.maxLength = 60; nome.placeholder = "Nome do serviço"; nome.value = s.nome;
+        nome.setAttribute("aria-label", `Nome do serviço ${i + 1}`);
+        nome.addEventListener("input", () => { s.nome = nome.value; alterou(); });
+
+        const preco = criar("div", "cfg-input cfg-input-preco");
+        preco.append(criar("span", "cfg-rs", "R$"));
+        const p = criar("input");
+        p.type = "text"; p.inputMode = "numeric"; p.placeholder = "A partir de (opcional)"; p.value = fmtNumero(s.preco);
+        p.setAttribute("aria-label", `Preço do serviço ${i + 1}`);
+        p.addEventListener("input", () => {
+            const d = soDigitos(p.value, 9);
+            p.value = d ? fmtNumero(d) : "";
+            s.preco = d ? Number(d) : null;
+            alterou();
+        });
+        preco.appendChild(p);
+
+        const rem = criar("button", "cfg-remover", "Remover");
+        rem.type = "button";
+        rem.setAttribute("aria-label", `Remover serviço ${i + 1}`);
+        rem.addEventListener("click", () => { dados.servicos.splice(i, 1); desenharServicos(); alterou(); });
+
+        linha.append(nome, preco, rem);
+        box.appendChild(linha);
+    });
+    if (!dados.servicos.length) box.appendChild(criar("p", "cfg-vazio", "Nenhum serviço adicionado ainda."));
+    $("#btnNovoServico").disabled = dados.servicos.length >= MAX_SERVICOS;
+}
+
+/* ---------- Tela: disponibilidade ---------- */
+function desenharDias() {
+    const box = $("#listaDias");
+    box.replaceChildren();
+    DIAS.forEach(([k, nome]) => {
+        const d = dados.disponibilidade[k];
+        const linha = criar("div", "cfg-dia");
+
+        const rot = criar("label", "cfg-dia-nome");
+        const c = criar("input");
+        c.type = "checkbox"; c.checked = d.ativo;
+        rot.append(c, document.createTextNode(nome));
+
+        const de = criar("input"); de.type = "time"; de.value = d.de; de.setAttribute("aria-label", `${nome}: início`);
+        const ate = criar("input"); ate.type = "time"; ate.value = d.ate; ate.setAttribute("aria-label", `${nome}: fim`);
+        const ate_txt = criar("span", "cfg-ate", "até");
+        const horas = criar("div", "cfg-horas");
+        horas.append(de, ate_txt, ate);
+
+        const aplicar = () => { horas.classList.toggle("desligado", !d.ativo); de.disabled = ate.disabled = !d.ativo; };
+        aplicar();
+
+        c.addEventListener("change", () => { d.ativo = c.checked; aplicar(); alterou(); });
+        de.addEventListener("input", () => { d.de = de.value; alterou(); });
+        ate.addEventListener("input", () => { d.ate = ate.value; alterou(); });
+
+        linha.append(rot, horas);
+        box.appendChild(linha);
+    });
+}
+
+/* ---------- Iniciar ---------- */
+async function iniciar() {
+    opcoes($("#campoProfissao"), PROFISSOES, "Selecione");
+    opcoes($("#campoEstado"), UFS, "UF");
+    opcoes($("#orcPrazo"), PRAZOS, "Selecione");
+
+    await carregar();
+
+    // Profissão pode vir de um valor que não está na lista
+    const selP = $("#campoProfissao");
+    if (dados.profissao && ![...selP.options].some((o) => o.value === dados.profissao)) selP.add(new Option(dados.profissao, dados.profissao));
+    selP.value = dados.profissao;
+    selP.addEventListener("change", () => { dados.profissao = selP.value; alterou(); });
+
+    ligarTexto("#campoRegistro", "registro");
+    ligarTexto("#campoTelefone", "telefone", "tel");
+    ligarTexto("#campoCidade", "cidade");
+
+    const selE = $("#campoEstado");
+    selE.value = dados.estado;
+    selE.addEventListener("change", () => { dados.estado = selE.value; alterou(); });
+
+    desenharAreas();
+    ligarAdicionar("#novaArea", "#btnNovaArea", () => [...AREAS, ...dados.areas], (v) => { dados.areas.push(v); desenharAreas(); });
+
+    desenharRegioes();
+    ligarAdicionar("#novaRegiao", "#btnNovaRegiao", () => dados.regioes, (v) => { dados.regioes.push(v); desenharRegioes(); });
+
+    ligarMoeda("#orcMinimo", "minimo");
+    ligarMoeda("#orcMaximo", "maximo");
+    const selPz = $("#orcPrazo");
+    if (dados.orcamento.prazo && ![...selPz.options].some((o) => o.value === dados.orcamento.prazo)) selPz.add(new Option(dados.orcamento.prazo, dados.orcamento.prazo));
+    selPz.value = dados.orcamento.prazo || "";
+    selPz.addEventListener("change", () => { dados.orcamento.prazo = selPz.value; alterou(); });
+
+    desenharServicos();
+    $("#btnNovoServico").addEventListener("click", () => {
+        if (dados.servicos.length >= MAX_SERVICOS) return;
+        dados.servicos.push({ nome: "", preco: null });
+        desenharServicos();
+        const campos = document.querySelectorAll("#listaServicos .cfg-servico input[type=text]");
+        campos[campos.length - 2]?.focus();
+    });
+
+    desenharDias();
+
+    document.querySelectorAll('input[type="checkbox"][data-config]').forEach((c) => {
+        c.checked = dados.preferencias[c.dataset.config] !== false;
+        c.addEventListener("change", () => { dados.preferencias[c.dataset.config] = c.checked; alterou(); });
+    });
+
+    $("#btnSalvar").addEventListener("click", salvar);
+    window.addEventListener("beforeunload", () => { if (timer) salvar(); });
+    if (!statusEl.textContent) status("As alterações são salvas automaticamente.");
+}
+
+iniciar();
+
+    </script>
 </body>
 </html>

@@ -1,0 +1,106 @@
+/* Complemento de publicarPlanta.css para a tela de edição.
+   Carregue DEPOIS de publicarPlanta.css. */
+
+[hidden] {
+    display: none !important;
+}
+
+/* mensagem de carregando / erro */
+.estado-edicao {
+    margin-bottom: 18px;
+    padding: 14px 18px;
+    border: 1px solid var(--borda-dourada-suave);
+    border-radius: 10px;
+    background: rgba(212, 166, 58, 0.06);
+    color: var(--cor-texto-campo);
+    font-size: 14px;
+}
+
+.estado-edicao.erro {
+    border-color: #5a2a2a;
+    background: rgba(229, 138, 138, 0.08);
+    color: #e58a8a;
+}
+
+.PublicarPlanta > p.estado-edicao {
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--borda-dourada-suave);
+}
+
+/* imagem atual */
+.imagem-atual {
+    position: relative;
+    height: 190px;
+    overflow: hidden;
+    border: 1.5px solid rgba(218, 174, 82, 0.6);
+    border-radius: var(--raio-campo);
+    background: var(--cor-campo);
+}
+
+.imagem-atual img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.imagem-atual figcaption {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    padding: 4px 12px;
+    border: 1px solid rgba(218, 174, 82, 0.6);
+    border-radius: 999px;
+    background: rgba(8, 8, 8, 0.8);
+    color: #e4b64f;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* botões lado a lado */
+.acoes-form {
+    grid-column: 1 / -1;
+    order: 6;
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    margin-top: 8px;
+}
+
+.acoes-form button[type="submit"] {
+    flex: 1.6;
+    width: auto;
+    margin-top: 0;
+}
+
+.btn-cancelar {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    border: 1px solid var(--cor-dourado);
+    border-radius: var(--raio-campo);
+    background: transparent;
+    color: var(--cor-dourado);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.btn-cancelar:hover {
+    background: var(--cor-dourado);
+    color: #111111;
+}
+
+.btn-cancelar:focus-visible {
+    outline: 2px solid var(--cor-dourado);
+    outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+    .acoes-form {
+        flex-direction: column-reverse;
+    }
+}
