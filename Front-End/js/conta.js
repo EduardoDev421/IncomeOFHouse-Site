@@ -130,9 +130,10 @@ const Conta = (() => {
     if (home || publicas.has(pagina)) return;
 
     document.documentElement.style.visibility = "hidden";
-    const caminhoLogin = /\\/pages\\/(pagesimplement|pagamentos)\\//i.test(location.pathname)
-        ? "../../pages/login.html"
-        : "../pages/login.html";
+    const caminhoLogin = (
+        location.pathname.toLowerCase().includes("/pages/pagesimplement/") ||
+        location.pathname.toLowerCase().includes("/pages/pagamentos/")
+    ) ? "../../pages/login.html" : "../pages/login.html";
     const urlLogin = new URL(caminhoLogin, location.href).href;
     try {
         const moduloAuth = new URL("services/authService.js", scriptUrl).href;
