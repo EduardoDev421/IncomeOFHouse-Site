@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,20 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="IncomeofHouses - Site de renda passiva com imóveis">
+
     <link rel="stylesheet" href="../css/Tema/Tema.css">
     <link rel="stylesheet" href="../css/Projetos.css">
     <link rel="stylesheet" href="../css/Modais/LegalModal.css">
+
     <script src="../js/Preferencias.js"></script>
+
     <title>Projetos - Income Of Houses</title>
 </head>
 
 <body>
+
     <header class="topo">
         <div class="logo">
             <a href="../index.html">
                 <img src="../img/Logo.png" alt="Logo Income of Houses">
             </a>
         </div>
+
         <nav class="menu">
             <a href="../index.html">Início</a>
             <a href="./plantas.html">Plantas</a>
@@ -28,7 +34,9 @@
     </header>
 
     <main class="BackGround">
+
         <section class="container">
+
             <aside class="menu-lateral">
                 <ul>
                     <li>
@@ -37,54 +45,63 @@
                             <span>Meu Perfil</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="../pages/MeusEndereços.html">
                             <img src="../img/icones/IconeEndereco.svg" alt="">
                             <span>Meus Endereços</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="../pages/MeuPortfolio.html">
                             <img src="../img/icones/iconePortfolio.svg" alt="">
                             <span>Meu Portfolio</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="../pages/publicarPlanta.html">
                             <img src="../img/icones/IconePublicarPlantas.svg" alt="">
                             <span>Publicar Plantas</span>
                         </a>
                     </li>
+
                     <li class="ativo">
                         <a href="../pages/Projetos.html">
                             <img src="../img/icones/IconeProjetos.svg" alt="">
                             <span>Projetos</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="../pages/Avaliações.html">
                             <img src="../img/icones/IconeEstrela.svg" alt="">
                             <span>Avaliações</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="../pages/Agendamentos.html">
                             <img src="../img/icones/IconeData.svg" alt="">
                             <span>Agendamentos</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="../pages/Mensagem.html">
                             <img src="../img/icones/IconeMensagem.svg" alt="">
                             <span>Mensagem</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="../pages/ConfiguraçõesProfissionais.html">
                             <img src="../img/icones/IconeConfiguracao.svg" alt="">
                             <span>Configurações</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="../index.html">
                             <img src="../img/icones/IconeSair.svg" alt="">
@@ -95,43 +112,75 @@
             </aside>
 
             <section class="conteudo">
+
                 <div class="Inicio">
                     <h1>Projetos</h1>
                     <p>Todas as plantas que você já publicou.</p>
                 </div>
 
                 <div class="cards-resumo">
-                    <div class="card-resumo"><span>Total de plantas</span><strong id="resTotal">0</strong></div>
-                    <div class="card-resumo"><span>Publicadas</span><strong id="resConc">0</strong></div>
-                    <div class="card-resumo"><span>Rascunhos</span><strong id="resAnd">0</strong></div>
-                    <div class="card-resumo"><span>Valor das publicadas</span><strong id="resValor">R$ 0,00</strong></div>
+
+                    <div class="card-resumo">
+                        <span>Total de plantas</span>
+                        <strong id="resTotal">0</strong>
+                    </div>
+
+                    <div class="card-resumo">
+                        <span>Publicadas</span>
+                        <strong id="resConc">0</strong>
+                    </div>
+
+                    <div class="card-resumo">
+                        <span>Rascunhos</span>
+                        <strong id="resAnd">0</strong>
+                    </div>
+
+                    <div class="card-resumo">
+                        <span>Valor das publicadas</span>
+                        <strong id="resValor">R$ 0,00</strong>
+                    </div>
+
                 </div>
 
                 <div class="filtros">
+
                     <div class="chips" id="chips">
                         <button class="chip ativo" data-status="todos">Todas</button>
                         <button class="chip" data-status="publicada">Publicadas</button>
                         <button class="chip" data-status="rascunho">Rascunhos</button>
                         <button class="chip" data-status="inativa">Inativas</button>
                     </div>
+
                     <div class="controles">
+
                         <label class="campo-busca">
+
                             <svg viewBox="0 0 24 24">
                                 <circle cx="11" cy="11" r="6"></circle>
                                 <path d="M16 16l5 5"></path>
                             </svg>
-                            <input type="text" id="busca" placeholder="Buscar pelo nome da planta">
+
+                            <input
+                                type="text"
+                                id="busca"
+                                placeholder="Buscar pelo nome da planta"
+                            >
+
                         </label>
+
                         <select id="selTipo" aria-label="Filtrar por tipo">
                             <option value="todos">Todos os tipos</option>
                         </select>
+
                         <select id="selOrdem" aria-label="Ordenar">
                             <option value="recentes">Mais recentes</option>
                             <option value="antigos">Mais antigas</option>
                             <option value="valor">Maior valor</option>
                             <option value="nome">Nome (A-Z)</option>
                         </select>
+
                     </div>
+
                 </div>
 
                 <p class="contagem" id="contagem"></p>
@@ -139,25 +188,39 @@
                 <div class="grade-projetos" id="grade">
                     <p class="vazio">Carregando plantas...</p>
                 </div>
+
             </section>
+
         </section>
+
     </main>
 
     <footer class="rodape">
+
         <p>©IncomeOfHouses. Todos os direitos reservados.</p>
+
         <div class="RodapeLinks">
-            <a href="../pages/Modais/TermosUso.html" data-legal="termos">Termos de Uso</a>
+            <a href="../pages/Modais/TermosUso.html" data-legal="termos">
+                Termos de Uso
+            </a>
+
             <span>|</span>
-            <a href="../pages/Modais/PoliticaPrivacidade.html" data-legal="privacidade">Política de Privacidade</a>
+
+            <a href="../pages/Modais/PoliticaPrivacidade.html" data-legal="privacidade">
+                Política de Privacidade
+            </a>
         </div>
+
     </footer>
 
     <script src="../js/Modais/LegalModais.js"></script>
+
     <script type="module" src="../js/Projetos.js"></script>
     <script type="module" src="../js/PlantasStorage.js"></script>
     <script type="module" src="../js/Iconeperfil.js"></script>
+
     <script src="../js/Idioma.js"></script>
     <script src="../js/mensagensErros.js"></script>
-</body>
 
+</body>
 </html>

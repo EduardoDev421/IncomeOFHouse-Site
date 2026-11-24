@@ -68,7 +68,9 @@
         try {
             await carregarScript(url);
         } catch (e) {
-            throw erroDoArquivo(e.message);
+            throw erroDoArquivo(url === LIB_PARSER
+                ? 'Não foi possível carregar ' + url + '. Confira se o arquivo existe em Front-End/js/ e se o nome está idêntico.'
+                : e.message);
         }
         const P = window.PortfolioParser;
         if (url === LIB_PARSER && !(P && typeof P.interpretar === 'function' && typeof P.diagnosticar === 'function')) {

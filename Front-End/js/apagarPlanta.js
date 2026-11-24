@@ -1,10 +1,16 @@
 /* apagarPlanta.js
    Módulo compartilhado (Projetos e Detalhe do projeto).
    Abre uma confirmação e apaga a planta no Supabase, só se for do profissional logado.
+   Se a planta já estiver em algum pedido (itens_pedido), o banco não deixa apagar:
+   nesse caso ela é marcada como inativa (ativa = false) e o histórico de compras é mantido.
 
    Uso:
      import { apagarPlanta } from "./apagarPlanta.js";
-     apagarPlanta({ id, titulo, aoApagar: () => { ... } });
+     apagarPlanta({ id, titulo, aoApagar: (resultado) => { ... } });
+     // resultado: "apagada" | "inativada"
+
+   SQL necessário (rode uma vez no Supabase):
+     alter table public.plantas add column if not exists ativa boolean not null default true;
 */
 import { supabase } from "./lib/supabaseClient.js";
 
@@ -23,6 +29,7 @@ function injetarEstilos() {
 .apagar-caixa h3{margin:0 0 8px;font-size:20px;color:#fff}
 .apagar-caixa p{margin:0 0 22px;font-size:15px;line-height:1.5;color:#cfcfcf;overflow-wrap:anywhere}
 .apagar-caixa p.apagar-erro{color:#f87171;font-size:14px}
+.apagar-caixa p.apagar-info{color:#d4af6a}
 .apagar-acoes{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .apagar-botao{flex:1 1 140px;padding:11px 18px;border-radius:10px;border:1px solid #d4af6a;background:transparent;color:#d4af6a;font-weight:600;font-size:15px;cursor:pointer;font-family:inherit}
 .apagar-botao.perigo{background:#c0392b;border-color:#c0392b;color:#fff}
@@ -40,15 +47,22 @@ function textoErro(erro) {
     const baixo = m.toLowerCase();
 
     if (erro?.code === "23503" || baixo.includes("foreign key")) {
-        return "Esta planta tem avaliações, comentários ou outros registros ligados a ela e o banco não permite apagar. Veja o SQL no fim do arquivo apagarPlanta.js.";
+        return "Esta planta tem registros ligados a ela e o banco não permite apagar.";
     }
     if (baixo.includes("row-level security") || baixo.includes("permission denied")) {
-        return "Sem permissão para apagar. Falta a regra de DELETE no Supabase (veja o SQL no fim do arquivo).";
+        return "Sem permissão para apagar. Falta a regra de DELETE no Supabase.";
+    }
+    if (baixo.includes("column") && baixo.includes("ativa")) {
+        return "A coluna \"ativa\" não existe na tabela plantas. Rode: alter table public.plantas add column if not exists ativa boolean not null default true;";
     }
     if (baixo.includes("failed to fetch")) return "Sem conexão com o servidor.";
     return m || "Erro desconhecido.";
 }
 
+/**
+ * Tenta apagar. Se a planta já foi vendida (está em itens_pedido), inativa em vez de apagar.
+ * Retorna "apagada" ou "inativada".
+ */
 async function excluir(id) {
     const { data: { session }, error: erroSessao } = await supabase.auth.getSession();
     if (erroSessao) throw erroSessao;
@@ -60,11 +74,30 @@ async function excluir(id) {
         .eq(COLUNA_DONO, session.user.id)
         .select("id");
 
-    if (error) throw error;
+    if (error) {
+        const detalhe = `${error.message || ""} ${error.details || ""}`;
+
+        // Planta já vendida: não pode ser apagada, então vira "inativa".
+        if (error.code === "23503" && detalhe.includes("itens_pedido")) {
+            const { data: alterada, error: erroInativar } = await supabase.from(TABELA)
+                .update({ ativa: false })
+                .eq("id", id)
+                .eq(COLUNA_DONO, session.user.id)
+                .select("id");
+
+            if (erroInativar) throw erroInativar;
+            if (!alterada || !alterada.length) {
+                throw new Error("Não foi possível inativar a planta. Falta a regra de UPDATE no Supabase.");
+            }
+            return "inativada";
+        }
+        throw error;
+    }
 
     if (!data || !data.length) {
-        throw new Error("Nada foi apagado. A planta não é sua ou falta a regra de DELETE no Supabase (veja o SQL no fim do arquivo).");
+        throw new Error("Nada foi apagado. A planta não é sua ou falta a regra de DELETE no Supabase.");
     }
+    return "apagada";
 }
 
 export function apagarPlanta({ id, titulo, aoApagar }) {
@@ -92,7 +125,7 @@ export function apagarPlanta({ id, titulo, aoApagar }) {
     h3.textContent = "Apagar planta?";
 
     const texto = document.createElement("p");
-    texto.textContent = `"${titulo || "Esta planta"}" será apagada de forma permanente, junto com o que estiver ligado a ela. Essa ação não pode ser desfeita.`;
+    texto.textContent = `"${titulo || "Esta planta"}" será apagada de forma permanente. Se já tiver sido vendida, ela será apenas inativada para manter o histórico dos pedidos.`;
 
     const acoes = document.createElement("div");
     acoes.className = "apagar-acoes";
@@ -136,9 +169,12 @@ export function apagarPlanta({ id, titulo, aoApagar }) {
         texto.className = "";
 
         try {
-            await excluir(id);
+            const resultado = await excluir(id);
             fechar();
-            if (aoApagar) aoApagar();
+            if (resultado === "inativada") {
+                alert("Essa planta já foi vendida em um pedido, então não pode ser apagada. Ela foi marcada como inativa.");
+            }
+            if (aoApagar) aoApagar(resultado);
         } catch (erro) {
             console.error("[Apagar planta]", erro);
             ocupado = false;
