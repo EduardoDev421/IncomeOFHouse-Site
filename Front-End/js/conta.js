@@ -116,3 +116,30 @@ const Conta = (() => {
 
     return { tipo, definir, limpar, exigir, renderMenu };
 })();
+
+/* Proteção de páginas: a Home, autenticação e recuperação de senha continuam públicas. */
+(async () => {
+    const pagina = location.pathname.toLowerCase().split("/").pop();
+    const publicas = new Set([
+        "index.html", "login.html", "cadastro.html",
+        "esquecersenha.html", "redefinirsenha.html",
+        "termosuso.html", "politicaprivacidade.html"
+    ]);
+    const home = /\/front-end\/index\.html$/.test(location.pathname.toLowerCase());
+    if (home || publicas.has(pagina)) return;
+
+    document.documentElement.style.visibility = "hidden";
+    try {
+        const { obterSessao } = await import("./services/authService.js");
+        const sessao = await obterSessao();
+        if (!sessao) {
+            const login = new URL("../pages/login.html", document.currentScript?.src || location.href);
+            window.location.replace(login.href);
+            return;
+        }
+        document.documentElement.style.visibility = "";
+    } catch (erro) {
+        console.error("Não foi possível validar a sessão:", erro);
+        window.location.replace(new URL("../pages/login.html", location.href).href);
+    }
+})();
