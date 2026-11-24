@@ -129,17 +129,20 @@ const Conta = (() => {
     if (home || publicas.has(pagina)) return;
 
     document.documentElement.style.visibility = "hidden";
+    const caminhoLogin = /\\/pages\\/(pagesimplement|pagamentos)\\//i.test(location.pathname)
+        ? "../../pages/login.html"
+        : "../pages/login.html";
+    const urlLogin = new URL(caminhoLogin, location.href).href;
     try {
         const { obterSessao } = await import("./services/authService.js");
         const sessao = await obterSessao();
         if (!sessao) {
-            const login = new URL("../pages/login.html", document.currentScript?.src || location.href);
-            window.location.replace(login.href);
+            window.location.replace(urlLogin);
             return;
         }
         document.documentElement.style.visibility = "";
     } catch (erro) {
         console.error("Não foi possível validar a sessão:", erro);
-        window.location.replace(new URL("../pages/login.html", location.href).href);
+        window.location.replace(urlLogin);
     }
 })();
